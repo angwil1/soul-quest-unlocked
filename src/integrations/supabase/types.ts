@@ -1132,6 +1132,10 @@ export type Database = {
         Args: { p_user_id: string; p_matched_user_id: string }
         Returns: string
       }
+      create_signup_event_for_user: {
+        Args: { p_user_id: string }
+        Returns: undefined
+      }
       example_function: {
         Args: { param1: string; param2: number }
         Returns: string

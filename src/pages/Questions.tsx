@@ -2,8 +2,12 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Label } from '@/components/ui/label';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/hooks/useAuth';
+import { useEmailJourneys } from '@/hooks/useEmailJourneys';
+import { useToast } from '@/hooks/use-toast';
 
 interface Question {
   id: number;
@@ -13,8 +17,12 @@ interface Question {
 const Questions = () => {
   const { user, loading } = useAuth();
   const navigate = useNavigate();
+  const { trackQuizCompletion } = useEmailJourneys();
+  const { toast } = useToast();
   const [questions, setQuestions] = useState<Question[]>([]);
   const [loadingQuestions, setLoadingQuestions] = useState(true);
+  const [answers, setAnswers] = useState<Record<number, string>>({});
+  const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
     if (!loading && !user) {
@@ -43,6 +51,51 @@ const Questions = () => {
       console.error('Error:', error);
     } finally {
       setLoadingQuestions(false);
+    }
+  };
+
+  const handleAnswerChange = (questionId: number, value: string) => {
+    setAnswers(prev => ({
+      ...prev,
+      [questionId]: value
+    }));
+  };
+
+  const handleSubmitQuiz = async () => {
+    if (!user) return;
+
+    const answeredQuestions = Object.keys(answers).length;
+    if (answeredQuestions < questions.length) {
+      toast({
+        title: "Please answer all questions",
+        description: `You've answered ${answeredQuestions} out of ${questions.length} questions.`,
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setSubmitting(true);
+    
+    try {
+      // Track quiz completion for email journeys
+      await trackQuizCompletion();
+
+      toast({
+        title: "Quiz completed! 🎉",
+        description: "Your compatibility profile is being generated. You'll receive an email with your results!",
+      });
+
+      // Navigate to profile or dashboard
+      navigate('/profile');
+    } catch (error) {
+      console.error('Error submitting quiz:', error);
+      toast({
+        title: "Error submitting quiz",
+        description: "Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -90,12 +143,32 @@ const Questions = () => {
                   <CardTitle>Question {index + 1}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-lg mb-4">{question.Text}</p>
-                  <div className="space-y-2">
-                    <Button variant="outline" className="w-full justify-start">
-                      Your answer here...
-                    </Button>
-                  </div>
+                  <p className="text-lg mb-6">{question.Text}</p>
+                  <RadioGroup 
+                    value={answers[question.id] || ""} 
+                    onValueChange={(value) => handleAnswerChange(question.id, value)}
+                  >
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="strongly_disagree" id={`${question.id}_1`} />
+                      <Label htmlFor={`${question.id}_1`}>Strongly Disagree</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="disagree" id={`${question.id}_2`} />
+                      <Label htmlFor={`${question.id}_2`}>Disagree</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="neutral" id={`${question.id}_3`} />
+                      <Label htmlFor={`${question.id}_3`}>Neutral</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="agree" id={`${question.id}_4`} />
+                      <Label htmlFor={`${question.id}_4`}>Agree</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="strongly_agree" id={`${question.id}_5`} />
+                      <Label htmlFor={`${question.id}_5`}>Strongly Agree</Label>
+                    </div>
+                  </RadioGroup>
                 </CardContent>
               </Card>
             ))
@@ -104,8 +177,12 @@ const Questions = () => {
 
         {questions.length > 0 && (
           <div className="mt-8 text-center">
-            <Button size="lg">
-              Submit Quiz
+            <Button 
+              size="lg" 
+              onClick={handleSubmitQuiz}
+              disabled={submitting}
+            >
+              {submitting ? 'Submitting...' : 'Submit Quiz'}
             </Button>
           </div>
         )}
