@@ -33,19 +33,62 @@ const Index = () => {
       <div className="max-w-4xl mx-auto">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-bold">Welcome to GetUnlocked</h1>
-          <Button onClick={signOut} variant="outline">
-            Sign Out
-          </Button>
+          <div className="flex gap-2">
+            <Button onClick={() => navigate('/profile')} variant="outline">
+              My Profile
+            </Button>
+            <Button onClick={signOut} variant="outline">
+              Sign Out
+            </Button>
+          </div>
         </div>
         
-        <Card>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <Card>
+            <CardHeader>
+              <CardTitle>Profile</CardTitle>
+              <CardDescription>Manage your dating profile</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Button onClick={() => navigate('/profile')} className="w-full">
+                View Profile
+              </Button>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Discover</CardTitle>
+              <CardDescription>Find your perfect match</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Button disabled className="w-full">
+                Coming Soon
+              </Button>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Messages</CardTitle>
+              <CardDescription>Chat with your matches</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Button disabled className="w-full">
+                Coming Soon
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
+
+        <Card className="mt-8">
           <CardHeader>
-            <CardTitle>Dashboard</CardTitle>
+            <CardTitle>Welcome, {user.email}!</CardTitle>
             <CardDescription>Your secure dating app dashboard</CardDescription>
           </CardHeader>
           <CardContent>
             <p className="text-muted-foreground">
-              Welcome, {user.email}! Your account is now secure with proper authentication and data protection.
+              Your account is now secure with proper authentication and data protection. Start by setting up your profile to begin connecting with others!
             </p>
           </CardContent>
         </Card>

@@ -649,49 +649,82 @@ export type Database = {
       profiles: {
         Row: {
           age: number | null
+          age_preference_max: number | null
+          age_preference_min: number | null
+          avatar_url: string | null
           bio: string | null
           communication_style: string | null
           created_at: string | null
+          date_of_birth: string | null
+          distance_preference: number | null
+          education: string | null
           gender: string | null
+          height: number | null
           id: string
           interests: string[] | null
           is_premium: boolean | null
           last_online: string | null
           location: string | null
+          looking_for: string | null
           match_score: number | null
+          name: string | null
+          occupation: string | null
           personality_type: string | null
+          photos: string[] | null
           relationship_goals: string | null
           updated_at: string | null
         }
         Insert: {
           age?: number | null
+          age_preference_max?: number | null
+          age_preference_min?: number | null
+          avatar_url?: string | null
           bio?: string | null
           communication_style?: string | null
           created_at?: string | null
+          date_of_birth?: string | null
+          distance_preference?: number | null
+          education?: string | null
           gender?: string | null
+          height?: number | null
           id?: string
           interests?: string[] | null
           is_premium?: boolean | null
           last_online?: string | null
           location?: string | null
+          looking_for?: string | null
           match_score?: number | null
+          name?: string | null
+          occupation?: string | null
           personality_type?: string | null
+          photos?: string[] | null
           relationship_goals?: string | null
           updated_at?: string | null
         }
         Update: {
           age?: number | null
+          age_preference_max?: number | null
+          age_preference_min?: number | null
+          avatar_url?: string | null
           bio?: string | null
           communication_style?: string | null
           created_at?: string | null
+          date_of_birth?: string | null
+          distance_preference?: number | null
+          education?: string | null
           gender?: string | null
+          height?: number | null
           id?: string
           interests?: string[] | null
           is_premium?: boolean | null
           last_online?: string | null
           location?: string | null
+          looking_for?: string | null
           match_score?: number | null
+          name?: string | null
+          occupation?: string | null
           personality_type?: string | null
+          photos?: string[] | null
           relationship_goals?: string | null
           updated_at?: string | null
         }
