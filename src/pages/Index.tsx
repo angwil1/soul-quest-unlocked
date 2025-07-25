@@ -35,7 +35,7 @@ const Index = () => {
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold mb-6">Dating with depth, powered by trust.</h1>
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Built by someone who met her husband online — because real connection isn't rare, it's just waiting for the right space.
+            Because real connection isn't rare, it's just waiting for the right space.
           </p>
           <Button 
             onClick={() => navigate('/questions')} 
