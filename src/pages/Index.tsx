@@ -31,8 +31,23 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background p-4">
       <div className="max-w-4xl mx-auto">
+        {/* Hero Section */}
+        <div className="text-center mb-12">
+          <h1 className="text-5xl font-bold mb-6">Dating with depth, powered by trust.</h1>
+          <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+            Built by someone who met her husband online — because real connection isn't rare, it's just waiting for the right space.
+          </p>
+          <Button 
+            onClick={() => navigate('/questions')} 
+            size="lg"
+            className="text-lg px-8 py-6"
+          >
+            Take the Compatibility Quiz
+          </Button>
+        </div>
+
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold">Welcome to GetUnlocked</h1>
+          <h2 className="text-3xl font-bold">Welcome to GetUnlocked</h2>
           <div className="flex gap-2">
             <Button onClick={() => navigate('/profile')} variant="outline">
               My Profile
