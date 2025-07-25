@@ -3,10 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useAuth } from '@/hooks/useAuth';
+import { useSubscription } from '@/hooks/useSubscription';
 import { supabase } from '@/integrations/supabase/client';
 
 const Index = () => {
   const { user, loading, signOut } = useAuth();
+  const { subscription, loading: subscriptionLoading } = useSubscription();
   const navigate = useNavigate();
   const [faqs, setFaqs] = useState<Array<{id: number; question: string; answer: string}>>([]);
 
@@ -164,9 +166,29 @@ const Index = () => {
           </div>
           
           <div className="text-center mt-8">
-            <Button size="lg" className="text-lg px-8 py-6">
-              Upgrade to Premium
-            </Button>
+            {subscription?.subscribed ? (
+              <div className="space-y-4">
+                <p className="text-lg font-medium text-green-600">
+                  You're subscribed to {subscription.subscription_tier}!
+                </p>
+                <Button 
+                  size="lg" 
+                  className="text-lg px-8 py-6"
+                  onClick={() => navigate('/pricing')}
+                  variant="outline"
+                >
+                  Manage Subscription
+                </Button>
+              </div>
+            ) : (
+              <Button 
+                size="lg" 
+                className="text-lg px-8 py-6"
+                onClick={() => navigate('/pricing')}
+              >
+                View Pricing Plans
+              </Button>
+            )}
           </div>
         </div>
 

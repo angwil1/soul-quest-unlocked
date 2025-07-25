@@ -6,11 +6,13 @@ import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useAuth } from '@/hooks/useAuth';
 import { useProfile } from '@/hooks/useProfile';
+import { useSubscription } from '@/hooks/useSubscription';
 import { ArrowLeft, Edit, MapPin, Briefcase, GraduationCap, Heart, Settings } from 'lucide-react';
 
 const Profile = () => {
   const { user } = useAuth();
   const { profile, loading } = useProfile();
+  const { subscription, loading: subscriptionLoading, manageBilling } = useSubscription();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -186,6 +188,60 @@ const Profile = () => {
                 </CardContent>
               </Card>
             )}
+
+            {/* Subscription Status */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Settings className="h-5 w-5" />
+                  Subscription
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {!subscriptionLoading && subscription ? (
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-muted-foreground">Status:</span>
+                      <Badge variant={subscription.subscribed ? "default" : "secondary"}>
+                        {subscription.subscribed ? "Active" : "Free"}
+                      </Badge>
+                    </div>
+                    
+                    {subscription.subscribed && subscription.subscription_tier && (
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-muted-foreground">Plan:</span>
+                        <span className="font-medium">{subscription.subscription_tier}</span>
+                      </div>
+                    )}
+                    
+                    {subscription.subscribed && subscription.subscription_end && (
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-muted-foreground">Renews:</span>
+                        <span className="text-sm">
+                          {new Date(subscription.subscription_end).toLocaleDateString()}
+                        </span>
+                      </div>
+                    )}
+                    
+                    <div className="flex gap-2">
+                      {subscription.subscribed ? (
+                        <Button onClick={manageBilling} variant="outline" size="sm">
+                          Manage Billing
+                        </Button>
+                      ) : (
+                        <Button onClick={() => navigate('/pricing')} size="sm">
+                          Upgrade Plan
+                        </Button>
+                      )}
+                    </div>
+                  </div>
+                ) : (
+                  <div className="text-center py-4">
+                    <span className="text-muted-foreground">Loading subscription...</span>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
 
             {/* Preferences */}
             <Card>
