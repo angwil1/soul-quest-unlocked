@@ -1,17 +1,34 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useAuth } from '@/hooks/useAuth';
+import { supabase } from '@/integrations/supabase/client';
 
 const Index = () => {
   const { user, loading, signOut } = useAuth();
   const navigate = useNavigate();
+  const [faqs, setFaqs] = useState<Array<{id: number; question: string; answer: string}>>([]);
 
   useEffect(() => {
     if (!loading && !user) {
       navigate('/auth');
     }
+    
+    // Fetch FAQs for the "What Makes Us Different" section
+    const fetchFaqs = async () => {
+      const { data } = await supabase
+        .from('faqs')
+        .select('*')
+        .in('id', [3, 6, 10]) // AI matchmaking, data deletion, privacy
+        .order('id');
+      
+      if (data) {
+        setFaqs(data);
+      }
+    };
+    
+    fetchFaqs();
   }, [user, loading, navigate]);
 
   if (loading) {
@@ -94,6 +111,23 @@ const Index = () => {
               </Button>
             </CardContent>
           </Card>
+        </div>
+
+        {/* What Makes Us Different Section */}
+        <div className="mt-16">
+          <h2 className="text-3xl font-bold text-center mb-12">What Makes Us Different</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {faqs.map((faq) => (
+              <Card key={faq.id} className="h-full">
+                <CardHeader>
+                  <CardTitle className="text-lg">{faq.question}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
 
         <Card className="mt-8">
