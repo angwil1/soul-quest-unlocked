@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { User, Session } from '@supabase/supabase-js';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+import { emailSchema, passwordSchema } from '@/lib/validation';
+import { z } from 'zod';
 
 export const useAuth = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -31,11 +33,15 @@ export const useAuth = () => {
 
   const signUp = async (email: string, password: string) => {
     try {
+      // Validate input data
+      const validEmail = emailSchema.parse(email);
+      const validPassword = passwordSchema.parse(password);
+      
       const redirectUrl = `${window.location.origin}/`;
       
       const { error } = await supabase.auth.signUp({
-        email,
-        password,
+        email: validEmail,
+        password: validPassword,
         options: {
           emailRedirectTo: redirectUrl
         }
@@ -69,9 +75,14 @@ export const useAuth = () => {
 
   const signIn = async (email: string, password: string) => {
     try {
+      // Validate input data
+      const validEmail = emailSchema.parse(email);
+      // Password validation on sign-in is less strict (existing users)
+      const validPassword = z.string().min(1, "Password is required").parse(password);
+      
       const { error } = await supabase.auth.signInWithPassword({
-        email,
-        password
+        email: validEmail,
+        password: validPassword
       });
 
       if (error) {
