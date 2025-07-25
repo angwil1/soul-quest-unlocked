@@ -83,6 +83,30 @@ export type Database = {
         }
         Relationships: []
       }
+      failed_login_attempts: {
+        Row: {
+          attempt_time: string | null
+          email: string
+          id: number
+          ip_address: unknown | null
+          user_agent: string | null
+        }
+        Insert: {
+          attempt_time?: string | null
+          email: string
+          id?: number
+          ip_address?: unknown | null
+          user_agent?: string | null
+        }
+        Update: {
+          attempt_time?: string | null
+          email?: string
+          id?: number
+          ip_address?: unknown | null
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
       faqs: {
         Row: {
           answer: string | null
@@ -766,6 +790,66 @@ export type Database = {
         }
         Relationships: []
       }
+      rate_limits: {
+        Row: {
+          created_at: string | null
+          endpoint: string
+          id: number
+          ip_address: unknown | null
+          request_count: number | null
+          user_id: string | null
+          window_start: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          endpoint: string
+          id?: number
+          ip_address?: unknown | null
+          request_count?: number | null
+          user_id?: string | null
+          window_start?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          endpoint?: string
+          id?: number
+          ip_address?: unknown | null
+          request_count?: number | null
+          user_id?: string | null
+          window_start?: string | null
+        }
+        Relationships: []
+      }
+      security_audit_log: {
+        Row: {
+          created_at: string | null
+          event_details: Json | null
+          event_type: string
+          id: number
+          ip_address: unknown | null
+          user_agent: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          event_details?: Json | null
+          event_type: string
+          id?: number
+          ip_address?: unknown | null
+          user_agent?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          event_details?: Json | null
+          event_type?: string
+          id?: number
+          ip_address?: unknown | null
+          user_agent?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       security_events: {
         Row: {
           created_at: string | null
@@ -921,6 +1005,15 @@ export type Database = {
           is_premium_preview: boolean
         }[]
       }
+      check_rate_limit: {
+        Args: {
+          p_endpoint: string
+          p_ip_address: unknown
+          p_max_requests?: number
+          p_window_minutes?: number
+        }
+        Returns: boolean
+      }
       check_security_event_access: {
         Args: { p_user_id: string }
         Returns: boolean
@@ -1033,6 +1126,15 @@ export type Database = {
           embedding: string
         }[]
       }
+      log_security_event: {
+        Args: {
+          p_event_type: string
+          p_event_details?: Json
+          p_ip_address?: unknown
+          p_user_agent?: string
+        }
+        Returns: undefined
+      }
       perform_sensitive_action: {
         Args: { p_action_details: Json }
         Returns: boolean
@@ -1048,6 +1150,10 @@ export type Database = {
       secure_generate_ai_match_new: {
         Args: Record<PropertyKey, never>
         Returns: undefined
+      }
+      track_failed_login: {
+        Args: { p_email: string; p_ip_address?: unknown; p_user_agent?: string }
+        Returns: boolean
       }
       uid: {
         Args: Record<PropertyKey, never>
