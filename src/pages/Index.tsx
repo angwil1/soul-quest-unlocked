@@ -113,6 +113,63 @@ const Index = () => {
           </Card>
         </div>
 
+        {/* Premium Features Section */}
+        <div className="mt-16">
+          <h2 className="text-3xl font-bold text-center mb-4">Unlock Premium Features</h2>
+          <p className="text-center text-muted-foreground mb-12 text-lg">
+            Take your dating experience to the next level
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <Card className="border-primary/20 bg-gradient-to-br from-primary/5 to-background">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <span className="text-2xl">🚀</span>
+                  Visibility Boost
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground">
+                  Get shown to more compatible matches and increase your profile visibility by up to 10x.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="border-primary/20 bg-gradient-to-br from-primary/5 to-background">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <span className="text-2xl">🤖</span>
+                  AI Digest Summaries
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground">
+                  Receive personalized daily summaries of your best matches with AI-powered compatibility insights.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="border-primary/20 bg-gradient-to-br from-primary/5 to-background">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <span className="text-2xl">✓</span>
+                  Read Receipts
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground">
+                  Know when your messages have been read and never wonder about your conversation status again.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+          
+          <div className="text-center mt-8">
+            <Button size="lg" className="text-lg px-8 py-6">
+              Upgrade to Premium
+            </Button>
+          </div>
+        </div>
+
         {/* What Makes Us Different Section */}
         <div className="mt-16">
           <h2 className="text-3xl font-bold text-center mb-12">What Makes Us Different</h2>
