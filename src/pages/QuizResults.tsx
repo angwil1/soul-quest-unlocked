@@ -103,21 +103,49 @@ const QuizResults = () => {
           </p>
         </div>
 
-        {/* Compatibility Score */}
-        <Card className="mb-8 border-primary/20 bg-gradient-to-r from-primary/5 to-secondary/5">
-          <CardHeader className="text-center">
+        {/* Connection Profile Sneak Peek */}
+        <Card className="mb-8 border-primary/20 bg-gradient-to-r from-primary/5 to-secondary/5 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-background/90 to-secondary/10 backdrop-blur-sm z-10"></div>
+          <CardHeader className="text-center relative z-20">
             <CardTitle className="flex items-center justify-center gap-2">
               <Sparkles className="h-5 w-5 text-primary" />
-              Your Compatibility Score
+              Your Connection Profile
             </CardTitle>
-            <CardDescription>Based on your quiz responses</CardDescription>
+            <CardDescription>Get ready for deeper insights</CardDescription>
           </CardHeader>
-          <CardContent>
-            <div className="text-center mb-4">
-              <div className="text-5xl font-bold text-primary mb-2">92%</div>
-              <p className="text-muted-foreground">Excellent compatibility potential!</p>
+          <CardContent className="relative z-20">
+            <div className="text-center space-y-4">
+              <div className="space-y-2">
+                <p className="text-muted-foreground">Your Connection Profile will include:</p>
+                <div className="space-y-1 text-sm">
+                  <div className="flex items-center justify-center gap-2">
+                    <Heart className="h-4 w-4 text-red-500" />
+                    <span className="blur-sm">Compatibility score</span>
+                  </div>
+                  <div className="flex items-center justify-center gap-2">
+                    <Sparkles className="h-4 w-4 text-primary" />
+                    <span className="blur-sm">Vibe signals</span>
+                  </div>
+                  <div className="flex items-center justify-center gap-2">
+                    <Eye className="h-4 w-4 text-blue-500" />
+                    <span className="blur-sm">A unique insight about how you connect</span>
+                  </div>
+                </div>
+              </div>
+              <div className="p-4 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-950/20 dark:to-orange-950/20 rounded-lg border border-amber-200">
+                <p className="text-sm font-medium text-amber-700 dark:text-amber-300 mb-2">
+                  Want early access to deeper insights?
+                </p>
+                <Button 
+                  onClick={handleUpgradeToPremium}
+                  variant="outline"
+                  className="border-amber-300 text-amber-700 hover:bg-amber-100 dark:text-amber-300 dark:hover:bg-amber-950/30"
+                >
+                  <Crown className="h-4 w-4 mr-2" />
+                  Upgrade to Unlocked+
+                </Button>
+              </div>
             </div>
-            <Progress value={92} className="h-3" />
           </CardContent>
         </Card>
 
