@@ -15,6 +15,7 @@ import Matches from "./pages/Matches";
 import Messages from "./pages/Messages";
 import FAQ from "./pages/FAQ";
 import AIDigest from "./pages/AIDigest";
+import Privacy from "./pages/Privacy";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -38,6 +39,7 @@ const App = () => (
           <Route path="/messages" element={<Messages />} />
           <Route path="/ai-digest" element={<AIDigest />} />
           <Route path="/faq" element={<FAQ />} />
+          <Route path="/privacy" element={<Privacy />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
