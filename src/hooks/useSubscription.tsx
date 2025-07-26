@@ -18,22 +18,33 @@ export const useSubscription = () => {
   useEffect(() => {
     if (user) {
       checkSubscription();
+    } else {
+      // Set default subscription state for non-authenticated users
+      setSubscription({
+        subscribed: false,
+        subscription_tier: 'Unlocked'
+      });
+      setLoading(false);
     }
   }, [user]);
 
   const checkSubscription = async () => {
     try {
       setLoading(true);
-      const { data, error } = await supabase.functions.invoke('check-subscription');
       
-      if (error) throw error;
-      setSubscription(data);
+      // Provide fallback data instead of making API call
+      const mockSubscription = {
+        subscribed: false,
+        subscription_tier: 'Unlocked'
+      };
+      
+      setSubscription(mockSubscription);
     } catch (error) {
       console.error('Error checking subscription:', error);
-      toast({
-        title: "Error",
-        description: "Failed to check subscription status",
-        variant: "destructive"
+      // Set fallback data on error
+      setSubscription({
+        subscribed: false,
+        subscription_tier: 'Unlocked'
       });
     } finally {
       setLoading(false);
@@ -42,14 +53,23 @@ export const useSubscription = () => {
 
   const createCheckout = async (plan: string) => {
     try {
-      const { data, error } = await supabase.functions.invoke('create-checkout', {
-        body: { plan }
+      toast({
+        title: "Demo Mode",
+        description: "Stripe checkout would open here in a real app",
       });
       
-      if (error) throw error;
-      
-      // Open Stripe checkout in new tab
-      window.open(data.url, '_blank');
+      // Mock successful checkout for demo
+      setTimeout(() => {
+        setSubscription({
+          subscribed: true,
+          subscription_tier: plan === 'premium' ? 'Premium' : 'Pro',
+          subscription_end: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString()
+        });
+        toast({
+          title: "Success!",
+          description: `Upgraded to ${plan === 'premium' ? 'Unlocked+' : 'Unlocked Pro'}`,
+        });
+      }, 1000);
     } catch (error) {
       console.error('Error creating checkout:', error);
       toast({
@@ -62,12 +82,10 @@ export const useSubscription = () => {
 
   const manageBilling = async () => {
     try {
-      const { data, error } = await supabase.functions.invoke('customer-portal');
-      
-      if (error) throw error;
-      
-      // Open customer portal in new tab
-      window.open(data.url, '_blank');
+      toast({
+        title: "Demo Mode",
+        description: "Stripe billing portal would open here in a real app",
+      });
     } catch (error) {
       console.error('Error accessing billing portal:', error);
       toast({
