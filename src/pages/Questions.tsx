@@ -51,7 +51,7 @@ const Questions = () => {
         const formattedQuestions = (data || []).map(q => ({
           ...q,
           question_type: q.question_type as 'likert' | 'singleSelect',
-          options: q.options ? JSON.parse(q.options as string) : undefined
+          options: Array.isArray(q.options) ? q.options as string[] : undefined
         }));
         setQuestions(formattedQuestions);
       }
