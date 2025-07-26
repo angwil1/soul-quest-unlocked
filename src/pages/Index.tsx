@@ -152,6 +152,22 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background p-4">
       <div className="max-w-4xl mx-auto">
+        {/* User Status Bar */}
+        <div className="flex justify-between items-center mb-8 p-4 bg-primary/5 rounded-lg border border-primary/20">
+          <div>
+            <h2 className="text-2xl font-bold text-primary">Welcome back!</h2>
+            <p className="text-muted-foreground">You're successfully logged in as {user.email}</p>
+          </div>
+          <div className="flex gap-2">
+            <Button onClick={() => navigate('/profile')} variant="outline">
+              My Profile
+            </Button>
+            <Button onClick={signOut} variant="outline">
+              Sign Out
+            </Button>
+          </div>
+        </div>
+
         {/* Hero Section */}
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold mb-6">Dating with depth, powered by trust.</h1>
@@ -165,18 +181,6 @@ const Index = () => {
           >
             Take the Compatibility Quiz
           </Button>
-        </div>
-
-        <div className="flex justify-between items-center mb-8">
-          <h2 className="text-3xl font-bold">Welcome to GetUnlocked</h2>
-          <div className="flex gap-2">
-            <Button onClick={() => navigate('/profile')} variant="outline">
-              My Profile
-            </Button>
-            <Button onClick={signOut} variant="outline">
-              Sign Out
-            </Button>
-          </div>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
