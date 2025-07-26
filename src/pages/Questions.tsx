@@ -12,6 +12,8 @@ import { useToast } from '@/hooks/use-toast';
 interface Question {
   id: number;
   Text: string;
+  question_type: 'likert' | 'singleSelect';
+  options?: string[];
 }
 
 const Questions = () => {
@@ -45,7 +47,12 @@ const Questions = () => {
       if (error) {
         console.error('Error fetching questions:', error);
       } else {
-        setQuestions(data || []);
+        const formattedQuestions = (data || []).map(q => ({
+          ...q,
+          question_type: q.question_type as 'likert' | 'singleSelect',
+          options: q.options ? JSON.parse(q.options as string) : undefined
+        }));
+        setQuestions(formattedQuestions);
       }
     } catch (error) {
       console.error('Error:', error);
@@ -148,26 +155,44 @@ const Questions = () => {
                     value={answers[question.id] || ""} 
                     onValueChange={(value) => handleAnswerChange(question.id, value)}
                   >
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="strongly_disagree" id={`${question.id}_1`} />
-                      <Label htmlFor={`${question.id}_1`}>Strongly Disagree</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="disagree" id={`${question.id}_2`} />
-                      <Label htmlFor={`${question.id}_2`}>Disagree</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="neutral" id={`${question.id}_3`} />
-                      <Label htmlFor={`${question.id}_3`}>Neutral</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="agree" id={`${question.id}_4`} />
-                      <Label htmlFor={`${question.id}_4`}>Agree</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="strongly_agree" id={`${question.id}_5`} />
-                      <Label htmlFor={`${question.id}_5`}>Strongly Agree</Label>
-                    </div>
+                    {question.question_type === 'likert' ? (
+                      // Likert scale options
+                      <>
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem value="strongly_disagree" id={`${question.id}_1`} />
+                          <Label htmlFor={`${question.id}_1`}>Strongly Disagree</Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem value="disagree" id={`${question.id}_2`} />
+                          <Label htmlFor={`${question.id}_2`}>Disagree</Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem value="neutral" id={`${question.id}_3`} />
+                          <Label htmlFor={`${question.id}_3`}>Neutral</Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem value="agree" id={`${question.id}_4`} />
+                          <Label htmlFor={`${question.id}_4`}>Agree</Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem value="strongly_agree" id={`${question.id}_5`} />
+                          <Label htmlFor={`${question.id}_5`}>Strongly Agree</Label>
+                        </div>
+                      </>
+                    ) : (
+                      // Multiple choice options
+                      question.options?.map((option, optionIndex) => (
+                        <div key={optionIndex} className="flex items-center space-x-2">
+                          <RadioGroupItem 
+                            value={option} 
+                            id={`${question.id}_${optionIndex}`} 
+                          />
+                          <Label htmlFor={`${question.id}_${optionIndex}`}>
+                            {option}
+                          </Label>
+                        </div>
+                      ))
+                    )}
                   </RadioGroup>
                 </CardContent>
               </Card>

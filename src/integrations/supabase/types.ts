@@ -809,16 +809,22 @@ export type Database = {
         Row: {
           created_at: string
           id: number
+          options: Json | null
+          question_type: string | null
           Text: string | null
         }
         Insert: {
           created_at?: string
           id?: number
+          options?: Json | null
+          question_type?: string | null
           Text?: string | null
         }
         Update: {
           created_at?: string
           id?: number
+          options?: Json | null
+          question_type?: string | null
           Text?: string | null
         }
         Relationships: []
