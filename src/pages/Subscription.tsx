@@ -18,13 +18,8 @@ const Subscription = () => {
   const [upgrading, setUpgrading] = useState(false);
 
   useEffect(() => {
-    if (!user) {
-      navigate('/auth');
-      return;
-    }
-    
     checkSubscription();
-  }, [user, navigate, checkSubscription]);
+  }, [checkSubscription]);
 
   const currentTier = subscription?.subscription_tier || 'Unlocked';
   const isSubscribed = subscription?.subscribed || false;
