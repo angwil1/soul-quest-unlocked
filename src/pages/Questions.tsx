@@ -93,8 +93,8 @@ const Questions = () => {
         description: "Your compatibility profile is being generated. You'll receive an email with your results!",
       });
 
-      // Navigate to profile or dashboard
-      navigate('/profile');
+      // Navigate to quiz results page
+      navigate('/quiz-results');
     } catch (error) {
       console.error('Error submitting quiz:', error);
       toast({
