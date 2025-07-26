@@ -7,6 +7,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { useSubscription } from '@/hooks/useSubscription';
 import { supabase } from '@/integrations/supabase/client';
 import { Navbar } from '@/components/Navbar';
+import { Footer } from '@/components/Footer';
 import { FloatingQuizButton } from '@/components/FloatingQuizButton';
 
 const Index = () => {
@@ -151,6 +152,7 @@ const Index = () => {
           </div>
         </div>
         </div>
+        <Footer />
       </div>
     );
   }
@@ -403,6 +405,7 @@ const Index = () => {
         </Card>
       </div>
       </div>
+      <Footer />
     </div>
   );
 };
