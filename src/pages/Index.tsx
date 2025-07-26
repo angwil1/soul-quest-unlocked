@@ -96,8 +96,8 @@ const Index = () => {
               <CardDescription>Find your perfect match</CardDescription>
             </CardHeader>
             <CardContent>
-              <Button disabled className="w-full">
-                Coming Soon
+              <Button onClick={() => navigate('/matches')} className="w-full">
+                Start Matching
               </Button>
             </CardContent>
           </Card>
