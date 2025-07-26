@@ -5,6 +5,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { useAuth } from '@/hooks/useAuth';
 import { useSubscription } from '@/hooks/useSubscription';
 import { supabase } from '@/integrations/supabase/client';
+import { Navbar } from '@/components/Navbar';
+import { FloatingQuizButton } from '@/components/FloatingQuizButton';
 
 const Index = () => {
   const { user, loading, signOut } = useAuth();
@@ -43,7 +45,9 @@ const Index = () => {
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-background p-4">
+      <div className="min-h-screen bg-background">
+        <Navbar />
+        <div className="p-4">
         <div className="max-w-4xl mx-auto">
           {/* Hero Section for non-logged in users */}
           <div className="text-center mb-12 mt-16">
@@ -145,12 +149,16 @@ const Index = () => {
             </div>
           </div>
         </div>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-background p-4">
+    <div className="min-h-screen bg-background">
+      <Navbar />
+      <FloatingQuizButton />
+      <div className="p-4">
       <div className="max-w-4xl mx-auto">
         {/* User Status Bar */}
         <div className="flex justify-between items-center mb-8 p-4 bg-primary/5 rounded-lg border border-primary/20">
@@ -385,6 +393,7 @@ const Index = () => {
             </p>
           </CardContent>
         </Card>
+      </div>
       </div>
     </div>
   );

@@ -10,6 +10,7 @@ import ProfileEdit from "./pages/ProfileEdit";
 import Questions from "./pages/Questions";
 import Pricing from "./pages/Pricing";
 import Matches from "./pages/Matches";
+import FAQ from "./pages/FAQ";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +29,7 @@ const App = () => (
           <Route path="/questions" element={<Questions />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/matches" element={<Matches />} />
+          <Route path="/faq" element={<FAQ />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -8,6 +8,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/hooks/useAuth';
 import { useEmailJourneys } from '@/hooks/useEmailJourneys';
 import { useToast } from '@/hooks/use-toast';
+import { Navbar } from '@/components/Navbar';
 
 interface Question {
   id: number;
@@ -121,7 +122,9 @@ const Questions = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background p-4">
+    <div className="min-h-screen bg-background">
+      <Navbar />
+      <div className="p-4 pt-8">
       <div className="max-w-4xl mx-auto">
         <div className="flex justify-between items-center mb-8">
           <Button onClick={() => navigate('/')} variant="outline">
@@ -211,6 +214,7 @@ const Questions = () => {
             </Button>
           </div>
         )}
+      </div>
       </div>
     </div>
   );
