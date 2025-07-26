@@ -21,6 +21,9 @@ const Pricing = () => {
         "View matches", 
         "Limited messaging"
       ],
+      restrictedFeatures: [
+        "Video chat"
+      ],
       buttonText: "Current Plan",
       plan: null,
       popular: false
@@ -31,6 +34,7 @@ const Pricing = () => {
       period: "/month",
       description: "Supporting something meaningful",
       features: [
+        "Video chat with matches",
         "Read receipts",
         "Undo delete", 
         "Visibility boost",
@@ -46,6 +50,7 @@ const Pricing = () => {
       period: "/month", 
       description: "Investment in better connections",
       features: [
+        "Video chat with matches",
         "AI Digest summaries",
         "Priority matching",
         "All Unlocked features"
@@ -60,6 +65,7 @@ const Pricing = () => {
       period: "/year",
       description: "Join our community",
       features: [
+        "Video chat with matches",
         "Lifetime Unlocked+ access",
         "Personal welcome note from founder",
         "Early tool access"
@@ -139,6 +145,12 @@ const Pricing = () => {
                       <li key={feature} className="flex items-center gap-2">
                         <span className="text-green-500">✓</span>
                         <span className="text-sm">{feature}</span>
+                      </li>
+                    ))}
+                    {plan.restrictedFeatures?.map((feature) => (
+                      <li key={feature} className="flex items-center gap-2">
+                        <span className="text-red-500">✗</span>
+                        <span className="text-sm text-muted-foreground line-through">{feature}</span>
                       </li>
                     ))}
                   </ul>
