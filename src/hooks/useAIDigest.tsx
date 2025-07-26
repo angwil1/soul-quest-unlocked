@@ -114,7 +114,11 @@ export const useAIDigest = () => {
         // Refresh the digest list
         await loadTodayDigest();
       } else {
-        throw new Error(data?.error || 'Failed to generate digest');
+        const errorMessage = data?.error || error?.message || 'Failed to generate digest';
+        if (errorMessage.includes('Premium subscription required')) {
+          throw new Error('Premium subscription required. Please upgrade to Unlocked+ to access AI digest summaries.');
+        }
+        throw new Error(errorMessage);
       }
     } catch (error) {
       console.error('Error generating AI digest:', error);

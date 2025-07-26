@@ -28,6 +28,24 @@ const handler = async (req: Request): Promise<Response> => {
     
     const supabase = createClient(supabaseUrl, supabaseKey);
 
+    // Check if user has premium subscription
+    const { data: subscription } = await supabase
+      .from('subscribers')
+      .select('subscribed, subscription_tier')
+      .eq('user_id', userId)
+      .single();
+
+    if (!subscription?.subscribed) {
+      console.log('User does not have active subscription');
+      return new Response(JSON.stringify({
+        error: 'Premium subscription required',
+        details: 'AI digest summaries are only available for Unlocked+ members'
+      }), {
+        status: 403,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
     // Get user's profile and recent matches
     const { data: userProfile } = await supabase
       .from('profiles')

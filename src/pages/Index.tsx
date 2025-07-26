@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 import { useAuth } from '@/hooks/useAuth';
 import { useSubscription } from '@/hooks/useSubscription';
 import { supabase } from '@/integrations/supabase/client';
@@ -210,7 +211,10 @@ const Index = () => {
 
           <Card>
             <CardHeader>
-              <CardTitle>AI Digest</CardTitle>
+              <CardTitle className="flex items-center gap-2">
+                AI Digest
+                <Badge variant="secondary" className="text-xs">Premium</Badge>
+              </CardTitle>
               <CardDescription>Personalized insights</CardDescription>
             </CardHeader>
             <CardContent>

@@ -7,11 +7,13 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Separator } from '@/components/ui/separator';
 import { useAIDigest } from '@/hooks/useAIDigest';
 import { useAuth } from '@/hooks/useAuth';
-import { Clock, Sparkles, MessageCircle, TrendingUp, Calendar, Users } from 'lucide-react';
+import { useSubscription } from '@/hooks/useSubscription';
+import { Clock, Sparkles, MessageCircle, TrendingUp, Calendar, Users, Crown, Lock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const AIDigest = () => {
   const { user } = useAuth();
+  const { subscription, loading: subscriptionLoading } = useSubscription();
   const { 
     digest, 
     digests, 
@@ -56,14 +58,83 @@ const AIDigest = () => {
     );
   }
 
+  // Premium feature check
+  if (!subscription?.subscribed) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Navbar />
+        <div className="p-4 max-w-4xl mx-auto">
+          <div className="mb-8">
+            <h1 className="text-3xl font-bold flex items-center gap-3 mb-2">
+              <Crown className="h-8 w-8 text-primary" />
+              AI Digest Summaries
+            </h1>
+            <p className="text-muted-foreground text-lg">
+              Personalized insights and compatibility analysis powered by AI
+            </p>
+          </div>
+
+          <Card className="border-primary/20 bg-gradient-to-br from-primary/5 to-background">
+            <CardHeader className="text-center">
+              <Lock className="h-16 w-16 text-primary mx-auto mb-4" />
+              <CardTitle className="text-2xl">Premium Feature</CardTitle>
+              <CardDescription className="text-lg">
+                AI Digest Summaries are exclusive to Unlocked+ members
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="text-center space-y-6">
+              <div className="space-y-4">
+                <div className="flex items-center gap-3 justify-center">
+                  <Sparkles className="h-5 w-5 text-primary" />
+                  <span>Personalized daily compatibility insights</span>
+                </div>
+                <div className="flex items-center gap-3 justify-center">
+                  <MessageCircle className="h-5 w-5 text-primary" />
+                  <span>AI-generated conversation starters</span>
+                </div>
+                <div className="flex items-center gap-3 justify-center">
+                  <TrendingUp className="h-5 w-5 text-primary" />
+                  <span>Match analysis and behavioral patterns</span>
+                </div>
+                <div className="flex items-center gap-3 justify-center">
+                  <Calendar className="h-5 w-5 text-primary" />
+                  <span>Historical digest tracking</span>
+                </div>
+              </div>
+              
+              <Separator />
+              
+              <div className="space-y-4">
+                <p className="text-muted-foreground">
+                  Upgrade to Unlocked+ to unlock AI-powered insights that help you understand your dating patterns and improve your connections.
+                </p>
+                <Button 
+                  onClick={() => navigate('/pricing')} 
+                  size="lg"
+                  className="min-w-[200px]"
+                >
+                  Upgrade to Unlocked+
+                </Button>
+                <p className="text-sm text-muted-foreground">
+                  Starting at just $5/month
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
       <div className="p-4 max-w-4xl mx-auto">
         <div className="mb-8">
           <h1 className="text-3xl font-bold flex items-center gap-3 mb-2">
-            <Sparkles className="h-8 w-8 text-primary" />
+            <Crown className="h-8 w-8 text-primary" />
             AI Digest Summaries
+            <Badge variant="secondary" className="ml-2">Premium</Badge>
           </h1>
           <p className="text-muted-foreground text-lg">
             Personalized insights and compatibility analysis powered by AI
