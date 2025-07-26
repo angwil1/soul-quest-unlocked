@@ -32,16 +32,23 @@ export const useSubscription = () => {
     try {
       setLoading(true);
       
-      // Provide fallback data instead of making API call
-      const mockSubscription = {
+      const { data, error } = await supabase.functions.invoke('check-subscription');
+      
+      if (error) {
+        console.error('Error checking subscription:', error);
+        setSubscription({
+          subscribed: false,
+          subscription_tier: 'Unlocked'
+        });
+        return;
+      }
+      
+      setSubscription(data || {
         subscribed: false,
         subscription_tier: 'Unlocked'
-      };
-      
-      setSubscription(mockSubscription);
+      });
     } catch (error) {
       console.error('Error checking subscription:', error);
-      // Set fallback data on error
       setSubscription({
         subscribed: false,
         subscription_tier: 'Unlocked'
@@ -53,23 +60,33 @@ export const useSubscription = () => {
 
   const createCheckout = async (plan: string) => {
     try {
-      toast({
-        title: "Demo Mode",
-        description: "Stripe checkout would open here in a real app",
+      if (!user) {
+        toast({
+          title: "Authentication Required",
+          description: "Please sign in to subscribe",
+          variant: "destructive"
+        });
+        return;
+      }
+
+      const { data, error } = await supabase.functions.invoke('create-checkout', {
+        body: { plan }
       });
       
-      // Mock successful checkout for demo
-      setTimeout(() => {
-        setSubscription({
-          subscribed: true,
-          subscription_tier: plan === 'premium' ? 'Premium' : 'Pro',
-          subscription_end: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString()
-        });
+      if (error) {
+        console.error('Error creating checkout:', error);
         toast({
-          title: "Success!",
-          description: `Upgraded to ${plan === 'premium' ? 'Unlocked+' : 'Unlocked Pro'}`,
+          title: "Error",
+          description: "Failed to create checkout session",
+          variant: "destructive"
         });
-      }, 1000);
+        return;
+      }
+      
+      if (data?.url) {
+        // Open Stripe checkout in a new tab
+        window.open(data.url, '_blank');
+      }
     } catch (error) {
       console.error('Error creating checkout:', error);
       toast({
@@ -82,10 +99,31 @@ export const useSubscription = () => {
 
   const manageBilling = async () => {
     try {
-      toast({
-        title: "Demo Mode",
-        description: "Stripe billing portal would open here in a real app",
-      });
+      if (!user) {
+        toast({
+          title: "Authentication Required",
+          description: "Please sign in to manage billing",
+          variant: "destructive"
+        });
+        return;
+      }
+
+      const { data, error } = await supabase.functions.invoke('customer-portal');
+      
+      if (error) {
+        console.error('Error accessing billing portal:', error);
+        toast({
+          title: "Error",
+          description: "Failed to access billing portal",
+          variant: "destructive"
+        });
+        return;
+      }
+      
+      if (data?.url) {
+        // Open Stripe customer portal in a new tab
+        window.open(data.url, '_blank');
+      }
     } catch (error) {
       console.error('Error accessing billing portal:', error);
       toast({
