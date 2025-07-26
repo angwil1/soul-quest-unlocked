@@ -56,6 +56,7 @@ export type Database = {
       compatibility_digests: {
         Row: {
           ai_conversation_starters: Json | null
+          digest_content: Json | null
           digest_date: string | null
           generated_at: string | null
           id: number
@@ -65,6 +66,7 @@ export type Database = {
         }
         Insert: {
           ai_conversation_starters?: Json | null
+          digest_content?: Json | null
           digest_date?: string | null
           generated_at?: string | null
           id?: never
@@ -74,6 +76,7 @@ export type Database = {
         }
         Update: {
           ai_conversation_starters?: Json | null
+          digest_content?: Json | null
           digest_date?: string | null
           generated_at?: string | null
           id?: never
@@ -1170,6 +1173,7 @@ export type Database = {
         Args: { p_user_id: string }
         Returns: {
           ai_conversation_starters: Json | null
+          digest_content: Json | null
           digest_date: string | null
           generated_at: string | null
           id: number
