@@ -43,83 +43,40 @@ const QuizResults = () => {
 
   const loadMatchPreviews = async () => {
     try {
-      // First try to get actual matches
-      const { data: matches, error: matchError } = await supabase
-        .from('matches')
-        .select('user2_id, score')
-        .eq('user1_id', user?.id)
-        .order('score', { ascending: false })
-        .limit(3);
-
-      let matchPreviews: MatchPreview[] = [];
-
-      if (matches && matches.length > 0) {
-        // Get profile data for matched users
-        const matchIds = matches.map(m => m.user2_id);
-        const { data: profiles } = await supabase
-          .from('profiles')
-          .select('id, name, age, interests, avatar_url')
-          .in('id', matchIds);
-
-        if (profiles) {
-          matchPreviews = matches.map(match => {
-            const profile = profiles.find(p => p.id === match.user2_id);
-            return {
-              id: match.user2_id,
-              name: profile?.name || 'Mystery Match',
-              age: profile?.age || 25,
-              compatibility: Math.round((match.score || 0) * 100),
-              commonInterests: (profile?.interests || []).slice(0, 2),
-              blurredPhoto: profile?.avatar_url
-            };
-          });
+      // Create engaging placeholder profiles with different types
+      const placeholderPreviews: MatchPreview[] = [
+        // Sample Match - builds trust with full details
+        {
+          id: 'sample-1',
+          name: 'Alex',
+          age: 28,
+          compatibility: 94,
+          commonInterests: ['Photography', 'Hiking'],
+          blurredPhoto: 'https://images.unsplash.com/photo-1581092795360-fd1ca04f0952'
+        },
+        // Mystery Match - creates intrigue
+        {
+          id: 'mystery-1', 
+          name: 'SoulQuest Explorer',
+          age: 26,
+          compatibility: 89,
+          commonInterests: ['Adventure', 'Art'],
+          blurredPhoto: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e'
+        },
+        // Blurred Preview - teases insights
+        {
+          id: 'blurred-1',
+          name: 'Creative Spirit',
+          age: 30,
+          compatibility: 92,
+          commonInterests: ['Music', 'Travel'],
+          blurredPhoto: 'https://images.unsplash.com/photo-1500673922987-e212871c6c22'
         }
-      }
+      ];
 
-      // If no matches or need more, fill with potential profiles
-      if (matchPreviews.length < 3) {
-        const { data: profiles } = await supabase
-          .from('profiles')
-          .select('id, name, age, interests, avatar_url')
-          .neq('id', user?.id)
-          .limit(3 - matchPreviews.length);
-
-        if (profiles) {
-          const additionalPreviews = profiles.map(profile => ({
-            id: profile.id,
-            name: profile.name || 'Anonymous',
-            age: profile.age || 25,
-            compatibility: Math.floor(Math.random() * 30) + 70,
-            commonInterests: (profile.interests || []).slice(0, 2),
-            blurredPhoto: profile.avatar_url
-          }));
-          
-          matchPreviews = [...matchPreviews, ...additionalPreviews];
-        }
-      }
-
-      setMatchPreviews(matchPreviews);
+      setMatchPreviews(placeholderPreviews);
     } catch (error) {
       console.error('Error loading match previews:', error);
-      
-      // Fallback to showing sample profiles
-      const { data: profiles } = await supabase
-        .from('profiles')
-        .select('id, name, age, interests, avatar_url')
-        .neq('id', user?.id)
-        .limit(3);
-
-      if (profiles) {
-        const previews: MatchPreview[] = profiles.map(profile => ({
-          id: profile.id,
-          name: profile.name || 'Anonymous',
-          age: profile.age || 25,
-          compatibility: Math.floor(Math.random() * 30) + 70,
-          commonInterests: (profile.interests || []).slice(0, 2),
-          blurredPhoto: profile.avatar_url
-        }));
-        setMatchPreviews(previews);
-      }
     } finally {
       setLoading(false);
     }
@@ -274,36 +231,66 @@ const QuizResults = () => {
                     )}
                   </div>
                   
-                  <div className="text-center">
-                    <h3 className="font-semibold">{index === 0 ? match.name : '•••••'}</h3>
-                    <p className="text-sm text-muted-foreground">Age: {index === 0 ? match.age : '••'}</p>
-                    
-                    <div className="my-3">
-                      <div className="flex items-center justify-center gap-1 mb-1">
-                        <Heart className="h-4 w-4 text-red-500" />
-                        <span className="text-sm font-medium">{match.compatibility}% Match</span>
-                      </div>
-                      <Progress value={match.compatibility} className="h-2" />
-                    </div>
-
-                    {index === 0 && match.commonInterests.length > 0 && (
-                      <div className="flex flex-wrap gap-1 justify-center">
-                        {match.commonInterests.map((interest) => (
-                          <Badge key={interest} variant="outline" className="text-xs">
-                            {interest}
-                          </Badge>
-                        ))}
-                      </div>
-                    )}
-
-                    {index > 0 && (
-                      <div className="mt-2 p-2 bg-muted/50 rounded-lg">
-                        <p className="text-xs text-muted-foreground">
-                          Unlock with Premium
-                        </p>
-                      </div>
-                    )}
-                  </div>
+                   <div className="text-center">
+                     {/* Different display logic for each placeholder type */}
+                     {index === 0 ? (
+                       // Sample Match - Full details shown
+                       <>
+                         <h3 className="font-semibold">{match.name}</h3>
+                         <p className="text-sm text-muted-foreground">Age: {match.age}</p>
+                         <div className="my-3">
+                           <div className="flex items-center justify-center gap-1 mb-1">
+                             <Heart className="h-4 w-4 text-red-500" />
+                             <span className="text-sm font-medium">{match.compatibility}% Match</span>
+                           </div>
+                           <Progress value={match.compatibility} className="h-2" />
+                         </div>
+                         <div className="flex flex-wrap gap-1 justify-center">
+                           {match.commonInterests.map((interest) => (
+                             <Badge key={interest} variant="outline" className="text-xs">
+                               {interest}
+                             </Badge>
+                           ))}
+                         </div>
+                       </>
+                     ) : index === 1 ? (
+                       // Mystery Match - Narrative style
+                       <>
+                         <h3 className="font-semibold text-primary">Meet {match.name}</h3>
+                         <p className="text-xs text-muted-foreground italic">Age: ••</p>
+                         <div className="my-3">
+                           <div className="flex items-center justify-center gap-1 mb-1">
+                             <Sparkles className="h-4 w-4 text-primary" />
+                             <span className="text-sm font-medium">{match.compatibility}% Match</span>
+                           </div>
+                           <Progress value={match.compatibility} className="h-2" />
+                         </div>
+                         <div className="mt-2 p-2 bg-primary/5 rounded-lg border border-primary/20">
+                           <p className="text-xs text-primary font-medium">
+                             🔮 Unlock their story
+                           </p>
+                         </div>
+                       </>
+                     ) : (
+                       // Blurred Preview - Teases insights
+                       <>
+                         <h3 className="font-semibold blur-sm">{match.name}</h3>
+                         <p className="text-sm text-muted-foreground">Age: ••</p>
+                         <div className="my-3">
+                           <div className="flex items-center justify-center gap-1 mb-1">
+                             <Heart className="h-4 w-4 text-red-500" />
+                             <span className="text-sm font-medium">{match.compatibility}% Match</span>
+                           </div>
+                           <Progress value={match.compatibility} className="h-2" />
+                         </div>
+                         <div className="mt-2 p-2 bg-muted/50 rounded-lg">
+                           <p className="text-xs text-muted-foreground">
+                             💫 Deep compatibility insights await
+                           </p>
+                         </div>
+                       </>
+                     )}
+                   </div>
                 </CardContent>
               </Card>
             ))}
