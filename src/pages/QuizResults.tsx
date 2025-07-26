@@ -353,39 +353,6 @@ const QuizResults = () => {
           </CardContent>
         </Card>
 
-        {/* Email Status */}
-        <Card className="mb-8 border-blue-200 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950/20 dark:to-indigo-950/20">
-          <CardContent className="p-6">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <Mail className="h-5 w-5 text-blue-600" />
-              <h3 className="font-semibold text-blue-800 dark:text-blue-200">
-                Check Your Email!
-              </h3>
-            </div>
-            <p className="text-center text-sm text-blue-700 dark:text-blue-300 mb-4">
-              Your full compatibility results have been sent to your inbox.
-            </p>
-            <div className="text-center">
-              <p className="text-sm text-muted-foreground mb-3">
-                Didn't get it yet? Tap here to resend, or check your spam folder — subject line: 'Your GetUnlocked Compatibility Results'.
-              </p>
-              <Button 
-                onClick={handleResendEmail}
-                variant="outline"
-                size="sm"
-                disabled={resending}
-                className="border-blue-300 text-blue-700 hover:bg-blue-100 dark:text-blue-300 dark:hover:bg-blue-950/30"
-              >
-                {resending ? (
-                  <RefreshCw className="h-4 w-4 mr-2 animate-spin" />
-                ) : (
-                  <Mail className="h-4 w-4 mr-2" />
-                )}
-                {resending ? 'Resending...' : 'Resend Email'}
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
 
         {/* Action Buttons */}
         <div className="flex gap-4 justify-center mb-8">
