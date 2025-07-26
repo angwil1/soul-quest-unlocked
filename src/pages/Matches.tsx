@@ -6,8 +6,9 @@ import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useAuth } from '@/hooks/useAuth';
 import { useSubscription } from '@/hooks/useSubscription';
+import { useAIMatching } from '@/hooks/useAIMatching';
 import { supabase } from '@/integrations/supabase/client';
-import { ArrowLeft, Heart, X, MapPin, Briefcase, GraduationCap, Users, Video } from 'lucide-react';
+import { ArrowLeft, Heart, X, MapPin, Briefcase, GraduationCap, Users, Video, Sparkles, MessageCircle } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import VideoCallModal from '@/components/VideoCallModal';
 
@@ -36,10 +37,26 @@ const Matches = () => {
   const [currentMatchIndex, setCurrentMatchIndex] = useState(0);
   const [isVideoCallOpen, setIsVideoCallOpen] = useState(false);
   const [hasLikedCurrent, setHasLikedCurrent] = useState(false);
+  const [aiMatches, setAIMatches] = useState<any[]>([]);
+  const [showAIInsights, setShowAIInsights] = useState(false);
+  const { matches: aiMatchData, loading: aiLoading, generateAIMatches } = useAIMatching();
 
   useEffect(() => {
     fetchMatches();
   }, []);
+
+  useEffect(() => {
+    if (aiMatchData.length > 0) {
+      setAIMatches(aiMatchData);
+      // Convert AI matches to MatchProfile format
+      const convertedMatches = aiMatchData.map(aiMatch => ({
+        ...aiMatch.profile,
+        compatibility_score: aiMatch.compatibility_score,
+        distance: Math.floor(Math.random() * 30) + 5 // Mock distance
+      }));
+      setMatches(convertedMatches);
+    }
+  }, [aiMatchData]);
 
   const fetchMatches = async () => {
     try {
@@ -345,16 +362,75 @@ const Matches = () => {
       </div>
 
       <div className="max-w-2xl mx-auto px-4 py-8">
+        {/* AI Matching Controls */}
+        {user && (
+          <Card className="mb-6 bg-gradient-to-r from-primary/5 to-secondary/5">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <Sparkles className="h-6 w-6 text-primary" />
+                  <div>
+                    <h3 className="font-semibold">AI-Powered Matching</h3>
+                    <p className="text-sm text-muted-foreground">
+                      Get personalized matches using advanced AI analysis
+                    </p>
+                  </div>
+                </div>
+                <Button
+                  onClick={generateAIMatches}
+                  disabled={aiLoading}
+                  className="bg-gradient-to-r from-primary to-secondary"
+                >
+                  {aiLoading ? (
+                    <>
+                      <div className="animate-spin h-4 w-4 mr-2 border-2 border-white border-t-transparent rounded-full" />
+                      Analyzing...
+                    </>
+                  ) : (
+                    <>
+                      <Sparkles className="h-4 w-4 mr-2" />
+                      Generate AI Matches
+                    </>
+                  )}
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
         {matches.length === 0 ? (
           <Card className="text-center">
             <CardContent className="p-12">
-              <h2 className="text-2xl font-bold mb-4">No matches found</h2>
+              <h2 className="text-2xl font-bold mb-4">Ready to find your perfect match?</h2>
               <p className="text-muted-foreground mb-6">
-                Complete your profile to start discovering amazing people!
+                {user ? 
+                  "Click 'Generate AI Matches' above to discover personalized connections using AI analysis!" :
+                  "Complete your profile to start discovering amazing people!"
+                }
               </p>
-              <Button onClick={() => navigate('/profile/edit')}>
-                Complete Profile
-              </Button>
+              {user ? (
+                <Button 
+                  onClick={generateAIMatches}
+                  disabled={aiLoading}
+                  className="bg-gradient-to-r from-primary to-secondary"
+                >
+                  {aiLoading ? (
+                    <>
+                      <div className="animate-spin h-4 w-4 mr-2 border-2 border-white border-t-transparent rounded-full" />
+                      Analyzing Compatibility...
+                    </>
+                  ) : (
+                    <>
+                      <Sparkles className="h-4 w-4 mr-2" />
+                      Generate Your First AI Matches
+                    </>
+                  )}
+                </Button>
+              ) : (
+                <Button onClick={() => navigate('/profile/edit')}>
+                  Complete Profile
+                </Button>
+              )}
             </CardContent>
           </Card>
         ) : currentMatchIndex >= matches.length ? (
@@ -472,6 +548,52 @@ const Matches = () => {
                       )}
                     </div>
                   </div>
+                )}
+
+                {/* AI Insights */}
+                {aiMatches.length > 0 && aiMatches[currentMatchIndex] && (
+                  <Card className="mb-6 bg-gradient-to-br from-blue-50 to-purple-50 border-blue-200">
+                    <CardContent className="p-4">
+                      <div className="flex items-start gap-3">
+                        <div className="bg-gradient-to-r from-blue-500 to-purple-500 rounded-full p-2">
+                          <Sparkles className="h-4 w-4 text-white" />
+                        </div>
+                        <div className="flex-1">
+                          <h4 className="font-semibold text-blue-900 mb-2">AI Compatibility Insights</h4>
+                          <p className="text-sm text-blue-800 mb-3 leading-relaxed">
+                            {aiMatches[currentMatchIndex].explanation}
+                          </p>
+                          
+                          {aiMatches[currentMatchIndex].shared_interests?.length > 0 && (
+                            <div className="mb-3">
+                              <p className="text-xs font-medium text-blue-900 mb-1">Shared Interests:</p>
+                              <div className="flex flex-wrap gap-1">
+                                {aiMatches[currentMatchIndex].shared_interests.map((interest: string, index: number) => (
+                                  <Badge key={index} className="text-xs bg-blue-100 text-blue-800 border-blue-200">
+                                    {interest}
+                                  </Badge>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                          
+                          {aiMatches[currentMatchIndex].conversation_starters?.length > 0 && (
+                            <div>
+                              <p className="text-xs font-medium text-blue-900 mb-2">Conversation Starters:</p>
+                              <div className="space-y-1">
+                                {aiMatches[currentMatchIndex].conversation_starters.slice(0, 2).map((starter: string, index: number) => (
+                                  <div key={index} className="flex items-start gap-2">
+                                    <MessageCircle className="h-3 w-3 mt-0.5 text-blue-600 flex-shrink-0" />
+                                    <p className="text-xs text-blue-700">{starter}</p>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
                 )}
 
                 {/* Video Call Feature for Mutual Matches */}
