@@ -10,6 +10,7 @@ import ProfileEdit from "./pages/ProfileEdit";
 import Questions from "./pages/Questions";
 import QuizResults from "./pages/QuizResults";
 import Pricing from "./pages/Pricing";
+import Subscription from "./pages/Subscription";
 import Matches from "./pages/Matches";
 import Messages from "./pages/Messages";
 import FAQ from "./pages/FAQ";
@@ -31,6 +32,7 @@ const App = () => (
           <Route path="/questions" element={<Questions />} />
           <Route path="/quiz-results" element={<QuizResults />} />
           <Route path="/pricing" element={<Pricing />} />
+          <Route path="/subscription" element={<Subscription />} />
           <Route path="/matches" element={<Matches />} />
           <Route path="/messages" element={<Messages />} />
           <Route path="/faq" element={<FAQ />} />
