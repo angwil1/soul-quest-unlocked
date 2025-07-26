@@ -71,8 +71,8 @@ serve(async (req) => {
         },
       ],
       mode: "subscription",
-      success_url: `${req.headers.get("origin")}/profile?success=true`,
-      cancel_url: `${req.headers.get("origin")}/profile?canceled=true`,
+      success_url: `https://getunlockedapp.com/profile?success=true`,
+      cancel_url: `https://getunlockedapp.com/profile?canceled=true`,
     });
 
     logStep("Checkout session created", { sessionId: session.id });
