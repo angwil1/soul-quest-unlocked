@@ -45,11 +45,65 @@ const Matches = () => {
     try {
       setLoading(true);
       
+      // Don't fetch if user is not available
+      if (!user?.id) {
+        console.log('No user ID available, showing placeholder matches');
+        // Show placeholder matches for demo
+        const placeholderMatches = [
+          {
+            id: 'demo-1',
+            name: 'Alex',
+            age: 28,
+            bio: 'Adventure seeker and coffee enthusiast. Love hiking, photography, and exploring new places.',
+            location: 'San Francisco, CA',
+            occupation: 'Product Designer',
+            education: 'UC Berkeley',
+            interests: ['Photography', 'Hiking', 'Coffee', 'Travel'],
+            avatar_url: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400',
+            photos: ['https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400'],
+            compatibility_score: 94,
+            distance: 12
+          },
+          {
+            id: 'demo-2', 
+            name: 'Jordan',
+            age: 26,
+            bio: 'Tech enthusiast by day, musician by night. Always up for trying new restaurants!',
+            location: 'Oakland, CA',
+            occupation: 'Software Engineer',
+            education: 'Stanford University',
+            interests: ['Music', 'Technology', 'Food', 'Art'],
+            avatar_url: 'https://images.unsplash.com/photo-1535268647677-300dbf3d78d1?w=400',
+            photos: ['https://images.unsplash.com/photo-1535268647677-300dbf3d78d1?w=400'],
+            compatibility_score: 89,
+            distance: 8
+          },
+          {
+            id: 'demo-3',
+            name: 'Casey',
+            age: 30,
+            bio: 'Yoga instructor and nature lover. Seeking genuine connections and meaningful conversations.',
+            location: 'Palo Alto, CA',
+            occupation: 'Yoga Instructor',
+            education: 'UC Santa Barbara',
+            interests: ['Yoga', 'Nature', 'Meditation', 'Reading'],
+            avatar_url: 'https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?w=400',
+            photos: ['https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?w=400'],
+            compatibility_score: 92,
+            distance: 15
+          }
+        ];
+        
+        setMatches(placeholderMatches);
+        setLoading(false);
+        return;
+      }
+      
       // Fetch potential matches (other users excluding current user)
       const { data, error } = await supabase
         .from('profiles')
         .select('*')
-        .neq('id', user?.id)
+        .neq('id', user.id)
         .limit(20);
 
       if (error) {
