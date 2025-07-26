@@ -41,7 +41,66 @@ const QuizResults = () => {
 
   const loadMatchPreviews = async () => {
     try {
-      // Fetch a few potential matches to show as previews
+      // First try to get actual matches
+      const { data: matches, error: matchError } = await supabase
+        .from('matches')
+        .select('user2_id, score')
+        .eq('user1_id', user?.id)
+        .order('score', { ascending: false })
+        .limit(3);
+
+      let matchPreviews: MatchPreview[] = [];
+
+      if (matches && matches.length > 0) {
+        // Get profile data for matched users
+        const matchIds = matches.map(m => m.user2_id);
+        const { data: profiles } = await supabase
+          .from('profiles')
+          .select('id, name, age, interests, avatar_url')
+          .in('id', matchIds);
+
+        if (profiles) {
+          matchPreviews = matches.map(match => {
+            const profile = profiles.find(p => p.id === match.user2_id);
+            return {
+              id: match.user2_id,
+              name: profile?.name || 'Mystery Match',
+              age: profile?.age || 25,
+              compatibility: Math.round((match.score || 0) * 100),
+              commonInterests: (profile?.interests || []).slice(0, 2),
+              blurredPhoto: profile?.avatar_url
+            };
+          });
+        }
+      }
+
+      // If no matches or need more, fill with potential profiles
+      if (matchPreviews.length < 3) {
+        const { data: profiles } = await supabase
+          .from('profiles')
+          .select('id, name, age, interests, avatar_url')
+          .neq('id', user?.id)
+          .limit(3 - matchPreviews.length);
+
+        if (profiles) {
+          const additionalPreviews = profiles.map(profile => ({
+            id: profile.id,
+            name: profile.name || 'Anonymous',
+            age: profile.age || 25,
+            compatibility: Math.floor(Math.random() * 30) + 70,
+            commonInterests: (profile.interests || []).slice(0, 2),
+            blurredPhoto: profile.avatar_url
+          }));
+          
+          matchPreviews = [...matchPreviews, ...additionalPreviews];
+        }
+      }
+
+      setMatchPreviews(matchPreviews);
+    } catch (error) {
+      console.error('Error loading match previews:', error);
+      
+      // Fallback to showing sample profiles
       const { data: profiles } = await supabase
         .from('profiles')
         .select('id, name, age, interests, avatar_url')
@@ -53,15 +112,12 @@ const QuizResults = () => {
           id: profile.id,
           name: profile.name || 'Anonymous',
           age: profile.age || 25,
-          compatibility: Math.floor(Math.random() * 30) + 70, // Mock compatibility score
+          compatibility: Math.floor(Math.random() * 30) + 70,
           commonInterests: (profile.interests || []).slice(0, 2),
           blurredPhoto: profile.avatar_url
         }));
-        
         setMatchPreviews(previews);
       }
-    } catch (error) {
-      console.error('Error loading match previews:', error);
     } finally {
       setLoading(false);
     }
