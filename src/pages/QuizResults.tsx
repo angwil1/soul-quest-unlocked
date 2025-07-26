@@ -148,7 +148,7 @@ const QuizResults = () => {
         </div>
 
         {/* Connection Profile Sneak Peek */}
-        <Card className="mb-8 border-emerald-200 bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-950/20 dark:to-teal-950/20 relative overflow-hidden">
+        <Card className="mb-8 border-primary/20 bg-gradient-secondary relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-background/90 to-secondary/10 backdrop-blur-sm z-10"></div>
           <CardHeader className="text-center relative z-20">
             <CardTitle className="flex items-center justify-center gap-2">
@@ -176,14 +176,14 @@ const QuizResults = () => {
                   </div>
                 </div>
               </div>
-              <div className="p-4 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-950/20 dark:to-orange-950/20 rounded-lg border border-amber-200">
-                <p className="text-sm font-medium text-amber-700 dark:text-amber-300 mb-2">
+               <div className="p-4 bg-accent/30 rounded-lg border border-accent/40">
+                <p className="text-sm font-medium text-accent-foreground mb-2">
                   Want early access to deeper insights?
                 </p>
                 <Button 
                   onClick={handleUpgradeToPremium}
                   variant="outline"
-                  className="border-amber-300 text-amber-700 hover:bg-amber-100 dark:text-amber-300 dark:hover:bg-amber-950/30"
+                  className="border-accent text-accent-foreground hover:bg-accent/50"
                 >
                   <Crown className="h-4 w-4 mr-2" />
                   Upgrade to Unlocked+
@@ -298,9 +298,9 @@ const QuizResults = () => {
         </div>
 
         {/* Premium Upgrade Prompt */}
-        <Card className="mb-8 border-amber-200 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-950/20 dark:to-orange-950/20">
+        <Card className="mb-8 border-accent/40 bg-accent/20">
           <CardHeader className="text-center">
-            <CardTitle className="flex items-center justify-center gap-2 text-amber-700 dark:text-amber-300">
+            <CardTitle className="flex items-center justify-center gap-2 text-accent-foreground">
               <Crown className="h-5 w-5" />
               Unlock Your Full Potential
             </CardTitle>
@@ -327,7 +327,7 @@ const QuizResults = () => {
             </div>
             <Button 
               onClick={handleUpgradeToPremium}
-              className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white shadow-lg hover:shadow-xl transition-all duration-300"
+              className="w-full bg-gradient-primary hover:opacity-90 text-primary-foreground shadow-primary hover:shadow-xl transition-all duration-300"
             >
               <Sparkles className="h-4 w-4 mr-2" />
               ✨ Unlock Deeper Connections
