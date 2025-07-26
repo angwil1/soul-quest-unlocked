@@ -57,7 +57,7 @@ const Auth = () => {
     try {
       const { supabase } = await import('@/integrations/supabase/client');
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${window.location.origin}/auth`,
+        redirectTo: `https://getunlockedapp.com/auth`,
       });
 
       if (error) {
