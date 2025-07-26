@@ -12,6 +12,7 @@ export const Navbar = () => {
   const navigation = [
     { name: "Home", href: "/" },
     { name: "Quiz", href: "/questions" },
+    { name: "AI Digest", href: "/ai-digest" },
     { name: "Upgrade", href: "/pricing" },
     { name: "FAQ", href: "/faq" },
   ];

@@ -14,6 +14,7 @@ import Subscription from "./pages/Subscription";
 import Matches from "./pages/Matches";
 import Messages from "./pages/Messages";
 import FAQ from "./pages/FAQ";
+import AIDigest from "./pages/AIDigest";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -35,6 +36,7 @@ const App = () => (
           <Route path="/subscription" element={<Subscription />} />
           <Route path="/matches" element={<Matches />} />
           <Route path="/messages" element={<Messages />} />
+          <Route path="/ai-digest" element={<AIDigest />} />
           <Route path="/faq" element={<FAQ />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

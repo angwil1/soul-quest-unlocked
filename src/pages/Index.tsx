@@ -183,7 +183,7 @@ const Index = () => {
           </Button>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <Card>
             <CardHeader>
               <CardTitle>Profile</CardTitle>
@@ -204,6 +204,18 @@ const Index = () => {
             <CardContent>
               <Button onClick={() => navigate('/matches')} className="w-full">
                 Start Matching
+              </Button>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>AI Digest</CardTitle>
+              <CardDescription>Personalized insights</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Button onClick={() => navigate('/ai-digest')} className="w-full">
+                View Digest
               </Button>
             </CardContent>
           </Card>

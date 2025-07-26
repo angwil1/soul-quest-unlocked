@@ -71,3 +71,6 @@ verify_jwt = true
 
 [functions.ai-matching]
 verify_jwt = true
+
+[functions.generate-ai-digest]
+verify_jwt = true
