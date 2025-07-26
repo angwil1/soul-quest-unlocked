@@ -159,9 +159,118 @@ const Matches = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-background">
-        <div className="text-center">
-          <h2 className="text-xl">Finding your perfect matches...</h2>
+      <div className="min-h-screen bg-background">
+        {/* Header */}
+        <div className="bg-card border-b">
+          <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
+            <Button variant="ghost" onClick={() => navigate('/')}>
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              Back to Dashboard
+            </Button>
+            <div className="flex items-center gap-2">
+              <Users className="h-5 w-5 text-primary" />
+              <span className="font-medium">Discover Matches</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="max-w-2xl mx-auto px-4 py-8">
+          <div className="text-center space-y-8">
+            {/* Main anticipation message */}
+            <div className="space-y-4">
+              <h2 className="text-2xl font-semibold text-foreground">
+                Your matches will appear here
+              </h2>
+              <p className="text-muted-foreground">
+                Real connection takes a moment.
+              </p>
+            </div>
+
+            {/* Animated loading element */}
+            <div className="flex flex-col items-center space-y-4">
+              <div className="relative">
+                <div className="animate-pulse bg-gradient-to-r from-primary/20 to-secondary/20 rounded-full h-16 w-16 flex items-center justify-center">
+                  <Heart className="h-8 w-8 text-primary animate-bounce" />
+                </div>
+                <div className="absolute -top-1 -left-1 h-18 w-18 border-2 border-primary/30 rounded-full animate-spin" style={{ animationDuration: '3s' }} />
+              </div>
+              <p className="text-sm text-primary font-medium animate-fade-in">
+                We're tuning your Connection DNA…
+              </p>
+            </div>
+
+            {/* Mini founder's note */}
+            <div className="bg-card/50 border border-border/50 rounded-lg p-6 text-center">
+              <p className="text-sm text-muted-foreground italic">
+                "While we search for your people, know this: you're already enough."
+              </p>
+            </div>
+
+            {/* Visual placeholder cards */}
+            <div className="space-y-4">
+              <h3 className="text-lg font-medium">Coming soon...</h3>
+              <div className="grid gap-4">
+                {/* Placeholder card 1 */}
+                <Card className="overflow-hidden">
+                  <div className="relative h-32 bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center">
+                    <div className="text-center space-y-2">
+                      <div className="w-16 h-16 bg-muted rounded-full mx-auto animate-pulse" />
+                      <p className="text-sm text-muted-foreground font-medium">Coming soon…</p>
+                    </div>
+                  </div>
+                </Card>
+
+                {/* Placeholder card 2 */}
+                <Card className="overflow-hidden">
+                  <div className="relative h-32 bg-gradient-to-br from-secondary/10 to-accent/10 flex items-center justify-center">
+                    <div className="text-center space-y-2">
+                      <div className="w-16 h-16 bg-muted rounded-full mx-auto animate-pulse" style={{ animationDelay: '0.5s' }} />
+                      <p className="text-sm text-muted-foreground font-medium">
+                        {subscription?.subscribed ? "Your vibe attracts your tribe" : "Unlock deeper matches with Unlocked+"}
+                      </p>
+                    </div>
+                  </div>
+                </Card>
+
+                {/* Placeholder card 3 */}
+                <Card className="overflow-hidden">
+                  <div className="relative h-32 bg-gradient-to-br from-accent/10 to-primary/10 flex items-center justify-center">
+                    <div className="text-center space-y-2">
+                      <div className="w-16 h-16 bg-muted rounded-full mx-auto animate-pulse" style={{ animationDelay: '1s' }} />
+                      <p className="text-sm text-muted-foreground font-medium">Your vibe attracts your tribe</p>
+                    </div>
+                  </div>
+                </Card>
+              </div>
+            </div>
+
+            {/* Quiz completion badge */}
+            <div className="flex justify-center">
+              <Badge className="bg-green-500/10 text-green-700 border-green-500/20 px-4 py-2">
+                ✅ Quiz complete — Compatibility in progress…
+              </Badge>
+            </div>
+
+            {/* Upgrade teaser for free tier */}
+            {!subscription?.subscribed && (
+              <Card className="bg-gradient-to-r from-primary/5 to-secondary/5 border-primary/20">
+                <CardContent className="p-6 text-center">
+                  <h3 className="font-medium mb-2">Want priority matching?</h3>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    Upgrade to Unlocked+ for deeper connection.
+                  </p>
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    onClick={() => navigate('/pricing')}
+                    className="border-primary/30 hover:bg-primary/10"
+                  >
+                    Explore Unlocked+
+                  </Button>
+                </CardContent>
+              </Card>
+            )}
+          </div>
         </div>
       </div>
     );
