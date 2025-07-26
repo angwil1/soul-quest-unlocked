@@ -54,54 +54,52 @@ const Subscription = () => {
   const tiers = [
     {
       name: 'Unlocked',
-      price: 'Free',
-      description: 'Basic matching to get you started',
+      price: '$5/month',
+      description: 'Supporting something meaningful',
       features: [
-        'Basic compatibility matching',
-        '3 matches per day',
-        'Limited messaging',
-        'Basic profile customization'
+        'Video chat with matches',
+        'Read receipts',
+        'Undo delete',
+        'Visibility boost',
+        'All Free features'
       ],
       icon: Heart,
-      current: currentTier === 'Unlocked' || !isSubscribed,
-      buttonText: 'Current Plan',
-      disabled: true
+      current: currentTier === 'Unlocked' && isSubscribed,
+      buttonText: currentTier === 'Unlocked' && isSubscribed ? 'Current Plan' : 'Get Unlocked',
+      disabled: currentTier === 'Unlocked' && isSubscribed,
+      plan: 'unlocked'
     },
     {
       name: 'Unlocked+',
-      price: '$9.99/month',
-      description: 'Deeper connections and premium features',
+      price: '$12/month',
+      description: 'Investment in better connections',
       features: [
-        'Advanced AI compatibility analysis',
-        'Unlimited matches and messaging',
-        'See who liked you',
-        'Priority profile visibility',
-        'Video chat capabilities',
-        'Premium profile themes'
+        'Video chat with matches',
+        'AI Digest summaries',
+        'Priority matching',
+        'All Unlocked features'
       ],
       icon: Crown,
       current: currentTier === 'Premium' && isSubscribed,
-      buttonText: currentTier === 'Premium' && isSubscribed ? 'Current Plan' : 'Upgrade to Unlocked+',
+      buttonText: currentTier === 'Premium' && isSubscribed ? 'Current Plan' : 'Get Unlocked+',
       disabled: currentTier === 'Premium' && isSubscribed,
-      plan: 'premium'
+      plan: 'unlocked-plus'
     },
     {
-      name: 'Unlocked Pro',
-      price: '$19.99/month',
-      description: 'Everything you need for serious connections',
+      name: "Founder's Circle",
+      price: '$39/year',
+      description: 'Join our community',
       features: [
-        'Everything in Unlocked+',
-        'Relationship coaching insights',
-        'Advanced compatibility reports',
-        'Priority customer support',
-        'Exclusive events access',
-        'Match boost features'
+        'Video chat with matches',
+        'Lifetime Unlocked+ access',
+        'Personal welcome note from founder',
+        'Early tool access'
       ],
       icon: Star,
       current: currentTier === 'Pro' && isSubscribed,
-      buttonText: currentTier === 'Pro' && isSubscribed ? 'Current Plan' : 'Upgrade to Pro',
+      buttonText: currentTier === 'Pro' && isSubscribed ? 'Current Plan' : "Join Founder's Circle",
       disabled: currentTier === 'Pro' && isSubscribed,
-      plan: 'pro'
+      plan: 'founders-circle'
     }
   ];
 
