@@ -37,7 +37,14 @@ const QuizResults = () => {
     }
     
     loadMatchPreviews();
-  }, [user, navigate]);
+    
+    // Show success toast when results are ready
+    toast({
+      title: "✨ Your results are ready!",
+      description: "Discover your personalized compatibility matches below",
+      duration: 4000,
+    });
+  }, [user, navigate, toast]);
 
   const loadMatchPreviews = async () => {
     try {
@@ -189,7 +196,7 @@ const QuizResults = () => {
         </div>
 
         {/* Connection Profile Sneak Peek */}
-        <Card className="mb-8 border-primary/20 bg-gradient-to-r from-primary/5 to-secondary/5 relative overflow-hidden">
+        <Card className="mb-8 border-emerald-200 bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-950/20 dark:to-teal-950/20 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-background/90 to-secondary/10 backdrop-blur-sm z-10"></div>
           <CardHeader className="text-center relative z-20">
             <CardTitle className="flex items-center justify-center gap-2">
@@ -241,14 +248,29 @@ const QuizResults = () => {
             {matchPreviews.map((match, index) => (
               <Card key={match.id} className="relative overflow-hidden hover:shadow-lg transition-all duration-300 border-primary/10">
                 <CardContent className="p-4">
-                  <div className="relative mb-3">
-                    <div className="w-20 h-20 rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 mx-auto flex items-center justify-center">
-                      {index === 0 ? (
-                        <Eye className="h-8 w-8 text-primary/60" />
-                      ) : (
-                        <EyeOff className="h-8 w-8 text-muted-foreground/40" />
-                      )}
-                    </div>
+                   <div className="relative mb-3">
+                     {/* Avatar with beautiful gradient background */}
+                     <div className="w-20 h-20 rounded-full mx-auto relative overflow-hidden">
+                       {match.blurredPhoto ? (
+                         <img 
+                           src={match.blurredPhoto} 
+                           alt={match.name} 
+                           className={`w-full h-full object-cover ${index > 0 ? 'blur-sm' : ''}`}
+                         />
+                       ) : (
+                         <div className={`w-full h-full flex items-center justify-center text-white font-bold text-2xl
+                           ${index === 0 ? 'bg-gradient-to-br from-purple-500 to-pink-500' : 
+                             index === 1 ? 'bg-gradient-to-br from-blue-500 to-cyan-500' : 
+                             'bg-gradient-to-br from-green-500 to-emerald-500'}`}>
+                           {match.name.charAt(0)}
+                         </div>
+                       )}
+                       {index > 0 && (
+                         <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
+                           <EyeOff className="h-6 w-6 text-white" />
+                         </div>
+                       )}
+                     </div>
                     {index === 0 && (
                       <Badge variant="secondary" className="absolute -top-2 -right-2">
                         <Crown className="h-3 w-3 mr-1" />
@@ -323,10 +345,10 @@ const QuizResults = () => {
             </div>
             <Button 
               onClick={handleUpgradeToPremium}
-              className="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600"
+              className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white shadow-lg hover:shadow-xl transition-all duration-300"
             >
-              <Crown className="h-4 w-4 mr-2" />
-              Upgrade to Premium
+              <Sparkles className="h-4 w-4 mr-2" />
+              ✨ Unlock Deeper Connections
             </Button>
           </CardContent>
         </Card>
@@ -366,7 +388,7 @@ const QuizResults = () => {
         </Card>
 
         {/* Action Buttons */}
-        <div className="flex gap-4 justify-center">
+        <div className="flex gap-4 justify-center mb-8">
           <Button onClick={handleViewMatches} size="lg" className="flex-1 max-w-xs">
             <Heart className="h-4 w-4 mr-2" />
             View Matches
@@ -374,6 +396,13 @@ const QuizResults = () => {
           <Button onClick={handleViewProfile} variant="outline" size="lg" className="flex-1 max-w-xs">
             Complete Profile
           </Button>
+        </div>
+
+        {/* Founder Note */}
+        <div className="text-center py-8 border-t border-muted-foreground/10">
+          <p className="text-sm text-muted-foreground italic">
+            Built with care, designed for real connection ✨
+          </p>
         </div>
       </div>
     </div>
