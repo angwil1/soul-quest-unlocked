@@ -5,9 +5,11 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useAuth } from '@/hooks/useAuth';
+import { useSubscription } from '@/hooks/useSubscription';
 import { supabase } from '@/integrations/supabase/client';
-import { ArrowLeft, Heart, X, MapPin, Briefcase, GraduationCap, Users } from 'lucide-react';
+import { ArrowLeft, Heart, X, MapPin, Briefcase, GraduationCap, Users, Video } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import VideoCallModal from '@/components/VideoCallModal';
 
 interface MatchProfile {
   id: string;
@@ -26,11 +28,14 @@ interface MatchProfile {
 
 const Matches = () => {
   const { user } = useAuth();
+  const { subscription } = useSubscription();
   const navigate = useNavigate();
   const { toast } = useToast();
   const [matches, setMatches] = useState<MatchProfile[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentMatchIndex, setCurrentMatchIndex] = useState(0);
+  const [isVideoCallOpen, setIsVideoCallOpen] = useState(false);
+  const [hasLikedCurrent, setHasLikedCurrent] = useState(false);
 
   useEffect(() => {
     if (!user) {
@@ -97,12 +102,33 @@ const Matches = () => {
   };
 
   const handleLike = async () => {
+    setHasLikedCurrent(true);
+    
+    // Simulate mutual match (in real app, this would check if they also liked you)
+    const isMutualMatch = Math.random() > 0.5; // 50% chance for demo
+    
+    if (isMutualMatch) {
+      toast({
+        title: "💖 Mutual Match!",
+        description: "You both liked each other! Video chat is now available.",
+      });
+    } else {
+      toast({
+        title: "💙 Profile liked",
+        description: "Keep exploring to find more connections!",
+      });
+      
+      if (currentMatchIndex < matches.length - 1) {
+        setCurrentMatchIndex(currentMatchIndex + 1);
+        setHasLikedCurrent(false);
+      }
+    }
+  };
+
+  const handlePass = () => {
+    setHasLikedCurrent(false);
     if (currentMatchIndex < matches.length - 1) {
       setCurrentMatchIndex(currentMatchIndex + 1);
-      toast({
-        title: "💖 It's a match!",
-        description: "You've liked this profile. Keep exploring!",
-      });
     } else {
       toast({
         title: "🎉 You've seen all matches!",
@@ -111,16 +137,25 @@ const Matches = () => {
     }
   };
 
-  const handlePass = () => {
-    if (currentMatchIndex < matches.length - 1) {
-      setCurrentMatchIndex(currentMatchIndex + 1);
-    } else {
+  const handleVideoCall = () => {
+    if (!subscription?.subscribed || 
+        (subscription.subscription_tier !== 'unlocked-plus' && 
+         subscription.subscription_tier !== 'founders-circle')) {
       toast({
-        title: "🎉 You've seen all matches!",
-        description: "Check back later for more potential connections.",
+        title: "Premium feature",
+        description: "Video calls are available for Unlocked+ and Founder's Circle members",
+        variant: "destructive"
       });
+      navigate('/pricing');
+      return;
     }
+    
+    setIsVideoCallOpen(true);
   };
+
+  const isPremiumUser = subscription?.subscribed && 
+    (subscription.subscription_tier === 'unlocked-plus' || 
+     subscription.subscription_tier === 'founders-circle');
 
   if (loading) {
     return (
@@ -280,6 +315,45 @@ const Matches = () => {
                   </div>
                 )}
 
+                {/* Video Call Feature for Mutual Matches */}
+                {hasLikedCurrent && (
+                  <div className="mb-6 p-4 bg-gradient-to-r from-primary/10 to-secondary/10 border border-primary/20 rounded-lg">
+                    <div className="text-center space-y-3">
+                      <Badge className="bg-green-500 text-white">
+                        ✨ Mutual Match!
+                      </Badge>
+                      <h3 className="font-semibold">Ready for a deeper connection?</h3>
+                      <p className="text-sm text-muted-foreground">
+                        Start a video chat in a safe, blurred environment
+                      </p>
+                      
+                      {isPremiumUser ? (
+                        <Button 
+                          onClick={handleVideoCall}
+                          className="bg-gradient-to-r from-primary to-secondary hover:opacity-90"
+                        >
+                          <Video className="h-4 w-4 mr-2" />
+                          Start Video Chat
+                        </Button>
+                      ) : (
+                        <div className="space-y-2">
+                          <p className="text-xs text-muted-foreground">
+                            Video chat available for Unlocked+ and Founder's Circle members
+                          </p>
+                          <Button 
+                            variant="outline" 
+                            onClick={() => navigate('/pricing')}
+                            size="sm"
+                          >
+                            <Video className="h-4 w-4 mr-2" />
+                            Upgrade to Chat
+                          </Button>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
+
                 {/* Action Buttons */}
                 <div className="flex gap-4 justify-center pt-4">
                   <Button
@@ -287,6 +361,7 @@ const Matches = () => {
                     size="lg"
                     onClick={handlePass}
                     className="flex-1 max-w-32"
+                    disabled={hasLikedCurrent}
                   >
                     <X className="h-5 w-5 mr-2" />
                     Pass
@@ -296,9 +371,10 @@ const Matches = () => {
                     size="lg"
                     onClick={handleLike}
                     className="flex-1 max-w-32 bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600"
+                    disabled={hasLikedCurrent}
                   >
                     <Heart className="h-5 w-5 mr-2" />
-                    Like
+                    {hasLikedCurrent ? "Matched!" : "Like"}
                   </Button>
                 </div>
               </CardContent>
@@ -306,6 +382,13 @@ const Matches = () => {
           </div>
         )}
       </div>
+
+      {/* Video Call Modal */}
+      <VideoCallModal
+        isOpen={isVideoCallOpen}
+        onClose={() => setIsVideoCallOpen(false)}
+        matchName={currentMatch?.name || 'Your match'}
+      />
     </div>
   );
 };
