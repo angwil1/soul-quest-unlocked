@@ -12,6 +12,7 @@ const Auth = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [resetLoading, setResetLoading] = useState(false);
   const { signIn, signUp, user } = useAuth();
   const navigate = useNavigate();
 
@@ -42,6 +43,32 @@ const Auth = () => {
     await signUp(email, password);
     
     setIsLoading(false);
+  };
+
+  const handlePasswordReset = async () => {
+    if (!email) {
+      alert('Please enter your email address first');
+      return;
+    }
+
+    setResetLoading(true);
+    
+    try {
+      const { supabase } = await import('@/integrations/supabase/client');
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/auth`,
+      });
+
+      if (error) {
+        alert('Error sending reset email: ' + error.message);
+      } else {
+        alert('Password reset email sent! Check your inbox.');
+      }
+    } catch (error) {
+      alert('Error sending reset email');
+    } finally {
+      setResetLoading(false);
+    }
   };
 
   return (
@@ -89,6 +116,18 @@ const Auth = () => {
                 >
                   {isLoading ? 'Signing in...' : 'Sign In'}
                 </Button>
+                
+                <div className="text-center">
+                  <Button 
+                    type="button"
+                    variant="link" 
+                    onClick={handlePasswordReset}
+                    disabled={resetLoading}
+                    className="text-sm"
+                  >
+                    {resetLoading ? 'Sending...' : 'Forgot Password?'}
+                  </Button>
+                </div>
               </form>
             </TabsContent>
             
