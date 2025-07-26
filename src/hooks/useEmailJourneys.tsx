@@ -10,7 +10,8 @@ export const useEmailJourneys = () => {
     if (!user) return;
 
     try {
-      const { error } = await supabase
+      // Track the event in the database
+      const { error: eventError } = await supabase
         .from('user_events')
         .insert({
           user_id: user.id,
@@ -20,11 +21,30 @@ export const useEmailJourneys = () => {
           }
         });
 
-      if (error) {
-        console.error('Error tracking quiz completion:', error);
+      if (eventError) {
+        console.error('Error tracking quiz completion:', eventError);
+        return;
+      }
+
+      // Send the email notification
+      const { error: emailError } = await supabase.functions.invoke('send-journey-email', {
+        body: {
+          userId: user.id,
+          email: user.email,
+          eventType: 'quiz_completed',
+          userData: {
+            name: user.user_metadata?.name || user.email?.split('@')[0]
+          }
+        }
+      });
+
+      if (emailError) {
+        console.error('Error sending quiz completion email:', emailError);
+      } else {
+        console.log('Quiz completion email sent successfully');
       }
     } catch (error) {
-      console.error('Error tracking quiz completion:', error);
+      console.error('Error in trackQuizCompletion:', error);
     }
   };
 
