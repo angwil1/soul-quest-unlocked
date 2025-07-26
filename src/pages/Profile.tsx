@@ -15,11 +15,7 @@ const Profile = () => {
   const { subscription, loading: subscriptionLoading, manageBilling } = useSubscription();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!user) {
-      navigate('/auth');
-    }
-  }, [user, navigate]);
+  // Remove auth redirect for demo purposes
 
   if (loading) {
     return (

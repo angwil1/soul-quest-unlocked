@@ -21,11 +21,7 @@ const ProfileEdit = () => {
   const [newInterest, setNewInterest] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  useEffect(() => {
-    if (!user) {
-      navigate('/auth');
-    }
-  }, [user, navigate]);
+  // Remove auth redirect for demo purposes
 
   useEffect(() => {
     if (profile) {
