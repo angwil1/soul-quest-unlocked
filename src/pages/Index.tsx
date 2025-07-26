@@ -195,17 +195,76 @@ const Index = () => {
         {/* What Makes Us Different Section */}
         <div className="mt-16">
           <h2 className="text-3xl font-bold text-center mb-12">What Makes Us Different</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {faqs.map((faq) => (
-              <Card key={faq.id} className="h-full">
-                <CardHeader>
-                  <CardTitle className="text-lg">{faq.question}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
-                </CardContent>
-              </Card>
-            ))}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <Card className="border-primary/20 bg-gradient-to-br from-primary/5 to-background">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-3">
+                  <span className="text-2xl">🔐</span>
+                  Privacy First, Always
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground leading-relaxed">
+                  No ads. No tracking. No selling your data. You're here to connect — not to be commodified. We never compromise on user trust.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="border-primary/20 bg-gradient-to-br from-primary/5 to-background">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-3">
+                  <span className="text-2xl">🤖</span>
+                  AI That Respects You
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground leading-relaxed">
+                  Our matchmaking uses AI to spark real compatibility — not swipe fatigue. You'll receive digestible insights designed to help you reflect, not react.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="border-primary/20 bg-gradient-to-br from-primary/5 to-background">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-3">
+                  <span className="text-2xl">💬</span>
+                  Designed for Conversation
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground leading-relaxed">
+                  Read receipts, undo deletes, visibility boosts — these aren't gimmicks. They're tools to support meaningful dialogue, not manipulate behavior.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="border-primary/20 bg-gradient-to-br from-primary/5 to-background">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-3">
+                  <span className="text-2xl">🎁</span>
+                  Pricing That Feels Human
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground leading-relaxed">
+                  $5/month for premium access isn't a paywall — it's a support signal. We keep things gentle, clear, and optional. Because love should never feel like a transaction.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="border-primary/20 bg-gradient-to-br from-primary/5 to-background md:col-span-2">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-3">
+                  <span className="text-2xl">🌱</span>
+                  Built by Someone Who Gets It
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground leading-relaxed">
+                  GetUnlocked isn't VC-backed or mass-produced. It's handcrafted by someone who's lived this — and who believes technology can nurture deeper connection.
+                </p>
+              </CardContent>
+            </Card>
           </div>
         </div>
 
