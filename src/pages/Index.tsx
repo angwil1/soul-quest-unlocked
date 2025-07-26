@@ -214,8 +214,8 @@ const Index = () => {
               <CardDescription>Chat with your matches</CardDescription>
             </CardHeader>
             <CardContent>
-              <Button disabled className="w-full">
-                Coming Soon
+              <Button onClick={() => navigate('/messages')} className="w-full">
+                View Messages
               </Button>
             </CardContent>
           </Card>
