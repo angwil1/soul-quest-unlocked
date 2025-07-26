@@ -31,11 +31,6 @@ const QuizResults = () => {
   const [resending, setResending] = useState(false);
 
   useEffect(() => {
-    if (!user) {
-      navigate('/auth');
-      return;
-    }
-    
     loadMatchPreviews();
     
     // Show success toast when results are ready
@@ -44,7 +39,7 @@ const QuizResults = () => {
       description: "Discover your personalized compatibility matches below",
       duration: 4000,
     });
-  }, [user, navigate, toast]);
+  }, [toast]);
 
   const loadMatchPreviews = async () => {
     try {
