@@ -54,20 +54,19 @@ const Subscription = () => {
   const tiers = [
     {
       name: 'Unlocked',
-      price: '$5/month',
-      description: 'Supporting something meaningful',
+      price: 'Free',
+      description: 'AI-powered matching to get you started',
       features: [
-        'Video chat with matches',
-        'Read receipts',
-        'Undo delete',
-        'Visibility boost',
-        'All Free features'
+        'AI compatibility matching',
+        '5 matches per day',
+        'Basic messaging',
+        'Smart matching algorithm'
       ],
       icon: Heart,
-      current: currentTier === 'Unlocked' && isSubscribed,
-      buttonText: currentTier === 'Unlocked' && isSubscribed ? 'Current Plan' : 'Get Unlocked',
-      disabled: currentTier === 'Unlocked' && isSubscribed,
-      plan: 'unlocked'
+      current: !isSubscribed,
+      buttonText: 'Current Plan',
+      disabled: true,
+      plan: 'free'
     },
     {
       name: 'Unlocked+',
