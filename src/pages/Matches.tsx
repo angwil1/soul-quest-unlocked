@@ -38,12 +38,8 @@ const Matches = () => {
   const [hasLikedCurrent, setHasLikedCurrent] = useState(false);
 
   useEffect(() => {
-    if (!user) {
-      navigate('/auth');
-      return;
-    }
     fetchMatches();
-  }, [user, navigate]);
+  }, []);
 
   const fetchMatches = async () => {
     try {

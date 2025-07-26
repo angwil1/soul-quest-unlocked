@@ -44,14 +44,11 @@ const Messages = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!user) {
-      navigate('/auth');
-      return;
-    }
-    
     loadMatches();
     
-    // Set up realtime subscription for new messages
+    // Set up realtime subscription for new messages (only if user exists)
+    if (!user) return;
+    
     const channel = supabase
       .channel('messages-changes')
       .on(
@@ -74,7 +71,7 @@ const Messages = () => {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [user, navigate]);
+  }, [user]);
 
   const loadMatches = async () => {
     if (!user) return;
