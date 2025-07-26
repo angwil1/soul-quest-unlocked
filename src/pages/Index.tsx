@@ -211,7 +211,7 @@ const Index = () => {
 
         <Card className="mt-8">
           <CardHeader>
-            <CardTitle>Welcome, {user.email}!</CardTitle>
+            <CardTitle>Welcome to GetUnlocked!</CardTitle>
             <CardDescription>Your secure dating app dashboard</CardDescription>
           </CardHeader>
           <CardContent>

@@ -61,7 +61,7 @@ const Pricing = () => {
       description: "Join our community",
       features: [
         "Lifetime Unlocked+ access",
-        "Personal welcome note from Angela",
+        "Personal welcome note from founder",
         "Early tool access"
       ],
       buttonText: "Join Founder's Circle",
