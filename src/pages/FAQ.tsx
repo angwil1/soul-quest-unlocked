@@ -7,6 +7,14 @@ import { Navbar } from "@/components/Navbar";
 const FAQ = () => {
   const faqs = [
     {
+      question: "What's included in each tier?",
+      answer: "Free: A quiet start. You get access to basic matching, public prompts, and core connection tools—with no pressure.\n\nUnlocked+: Everything in Free, plus deeper compatibility quizzes, private Match Memory, and early access to new features. You're signaling you're ready for more emotional texture.\n\nUnlocked Beyond: A full emotional toolkit. Includes everything above—plus Memory Vault to save connection moments, Connection DNA for deep emotional mirroring, and poetic onboarding overlays for when you need a fresh start."
+    },
+    {
+      question: "What is Unlocked Echo, and who can use it?",
+      answer: "Echo is a creative expression add-on—featuring TikTok-style profiles, emotional soundtracks, vibe galleries, and optional Echo badges.\n\nAdd Unlocked Echo to any plan, or purchase on its own. Expression isn't reserved for premium—it's available to all.\n\n• Monthly ($4/mo) or one-time ($12) pricing\n• Echo is not required for matching—it's for emotional self-presentation\n• You can hide Echo features at any time—privacy always comes first"
+    },
+    {
       question: "How does DateSync work?",
       answer: "DateSync uses advanced AI matching algorithms to connect you with compatible partners based on your personality, interests, and values. Complete our comprehensive quiz to get started."
     },
