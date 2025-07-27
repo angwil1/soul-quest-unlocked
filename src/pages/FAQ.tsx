@@ -51,6 +51,18 @@ const FAQ = () => {
       answer: "Try updating your profile with more photos and information, retaking the personality quiz, or upgrading to a premium plan for visibility boosts and priority matching."
     },
     {
+      question: "Do I have to reveal everything about myself to use GetUnlocked?",
+      answer: "Nope. Vulnerability is earned, not demanded. You can start light, get your footing, and choose what to share when you're ready. Privacy-first means you control the pace."
+    },
+    {
+      question: "What does \"emotionally intelligent matchmaking\" actually mean?",
+      answer: "It means we don't just sort you by location or age—we pay attention to emotional patterns, compatibility signals, and storytelling layers. Your inner world matters here."
+    },
+    {
+      question: "What's the difference between Free and Unlocked Beyond emotionally?",
+      answer: "Free is like browsing poetry in a bookstore. Unlocked Beyond lets you write in the margins, remember what moved you, and take the book home. One is nice; the other is deeply yours."
+    },
+    {
       question: "How does the video chat feature work?",
       answer: "Video chat is available for premium subscribers. Once you match with someone, you can initiate a video call directly through the app for safe, secure conversations."
     }
