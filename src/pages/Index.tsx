@@ -198,32 +198,32 @@ const Index = () => {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
               <div className="relative group">
                 <img 
-                  src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
-                  alt="Happy couple" 
+                  src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
+                  alt="Happy couple embracing" 
                   className="w-full h-48 object-cover rounded-lg transition-transform group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-primary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"></div>
               </div>
               <div className="relative group">
                 <img 
-                  src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
-                  alt="Couple connecting" 
+                  src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
+                  alt="Couple laughing together" 
                   className="w-full h-48 object-cover rounded-lg transition-transform group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-primary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"></div>
               </div>
               <div className="relative group">
                 <img 
-                  src="https://images.unsplash.com/photo-1485833077593-4278bba3f11f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
-                  alt="Peaceful connection" 
+                  src="https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
+                  alt="Romantic couple walking" 
                   className="w-full h-48 object-cover rounded-lg transition-transform group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-primary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"></div>
               </div>
               <div className="relative group">
                 <img 
-                  src="https://images.unsplash.com/photo-1441057206919-63d19fac2369?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
-                  alt="Together in nature" 
+                  src="https://images.unsplash.com/photo-1544963150-6a0e00b36b99?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
+                  alt="Couple in love outdoors" 
                   className="w-full h-48 object-cover rounded-lg transition-transform group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-primary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"></div>
@@ -385,32 +385,32 @@ const Index = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
             <div className="relative group">
               <img 
-                src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
-                alt="Happy couple" 
+                src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
+                alt="Happy couple embracing" 
                 className="w-full h-48 object-cover rounded-lg transition-transform group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-primary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"></div>
             </div>
             <div className="relative group">
               <img 
-                src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
-                alt="Couple connecting" 
+                src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
+                alt="Couple laughing together" 
                 className="w-full h-48 object-cover rounded-lg transition-transform group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-primary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"></div>
             </div>
             <div className="relative group">
               <img 
-                src="https://images.unsplash.com/photo-1485833077593-4278bba3f11f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
-                alt="Peaceful connection" 
+                src="https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
+                alt="Romantic couple walking" 
                 className="w-full h-48 object-cover rounded-lg transition-transform group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-primary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"></div>
             </div>
             <div className="relative group">
               <img 
-                src="https://images.unsplash.com/photo-1441057206919-63d19fac2369?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
-                alt="Together in nature" 
+                src="https://images.unsplash.com/photo-1544963150-6a0e00b36b99?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
+                alt="Couple in love outdoors" 
                 className="w-full h-48 object-cover rounded-lg transition-transform group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-primary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"></div>
