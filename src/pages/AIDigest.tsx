@@ -116,7 +116,7 @@ const AIDigest = () => {
                   Upgrade to Unlocked+
                 </Button>
                 <p className="text-sm text-muted-foreground">
-                  Starting at just $5/month
+                  Starting at just $12/month
                 </p>
               </div>
             </CardContent>
