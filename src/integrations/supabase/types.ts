@@ -86,6 +86,36 @@ export type Database = {
         }
         Relationships: []
       }
+      echo_subscriptions: {
+        Row: {
+          created_at: string
+          expires_at: string | null
+          id: string
+          is_active: boolean
+          subscription_type: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          expires_at?: string | null
+          id?: string
+          is_active?: boolean
+          subscription_type: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          expires_at?: string | null
+          id?: string
+          is_active?: boolean
+          subscription_type?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       email_journeys: {
         Row: {
           created_at: string
@@ -717,7 +747,9 @@ export type Database = {
           created_at: string | null
           date_of_birth: string | null
           distance_preference: number | null
+          echo_badge_enabled: boolean | null
           education: string | null
+          emotional_soundtrack: string | null
           gender: string | null
           height: number | null
           id: string
@@ -732,7 +764,9 @@ export type Database = {
           personality_type: string | null
           photos: string[] | null
           relationship_goals: string | null
+          tiktok_embed_url: string | null
           updated_at: string | null
+          vibe_gallery: Json | null
         }
         Insert: {
           age?: number | null
@@ -744,7 +778,9 @@ export type Database = {
           created_at?: string | null
           date_of_birth?: string | null
           distance_preference?: number | null
+          echo_badge_enabled?: boolean | null
           education?: string | null
+          emotional_soundtrack?: string | null
           gender?: string | null
           height?: number | null
           id?: string
@@ -759,7 +795,9 @@ export type Database = {
           personality_type?: string | null
           photos?: string[] | null
           relationship_goals?: string | null
+          tiktok_embed_url?: string | null
           updated_at?: string | null
+          vibe_gallery?: Json | null
         }
         Update: {
           age?: number | null
@@ -771,7 +809,9 @@ export type Database = {
           created_at?: string | null
           date_of_birth?: string | null
           distance_preference?: number | null
+          echo_badge_enabled?: boolean | null
           education?: string | null
+          emotional_soundtrack?: string | null
           gender?: string | null
           height?: number | null
           id?: string
@@ -786,7 +826,9 @@ export type Database = {
           personality_type?: string | null
           photos?: string[] | null
           relationship_goals?: string | null
+          tiktok_embed_url?: string | null
           updated_at?: string | null
+          vibe_gallery?: Json | null
         }
         Relationships: []
       }
@@ -1087,6 +1129,39 @@ export type Database = {
           email?: string | null
           id?: never
           name?: string
+        }
+        Relationships: []
+      }
+      vibe_gallery_items: {
+        Row: {
+          caption: string | null
+          content_type: string
+          created_at: string
+          file_url: string
+          id: string
+          is_public: boolean | null
+          mood_tags: Json | null
+          user_id: string
+        }
+        Insert: {
+          caption?: string | null
+          content_type: string
+          created_at?: string
+          file_url: string
+          id?: string
+          is_public?: boolean | null
+          mood_tags?: Json | null
+          user_id: string
+        }
+        Update: {
+          caption?: string | null
+          content_type?: string
+          created_at?: string
+          file_url?: string
+          id?: string
+          is_public?: boolean | null
+          mood_tags?: Json | null
+          user_id?: string
         }
         Relationships: []
       }

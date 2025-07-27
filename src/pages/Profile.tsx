@@ -7,6 +7,9 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useAuth } from '@/hooks/useAuth';
 import { useProfile } from '@/hooks/useProfile';
 import { useSubscription } from '@/hooks/useSubscription';
+import { TikTokProfileEmbed } from '@/components/TikTokProfileEmbed';
+import { VibeGallery } from '@/components/VibeGallery';
+import { EchoBadgeToggle } from '@/components/EchoBadgeToggle';
 import { ArrowLeft, Edit, MapPin, Briefcase, GraduationCap, Heart, Settings } from 'lucide-react';
 
 const Profile = () => {
@@ -119,6 +122,11 @@ const Profile = () => {
                 <CardTitle className="flex items-center gap-2">
                   {profile.name || 'Anonymous'}
                   {age && <span className="text-muted-foreground">, {age}</span>}
+                  {profile?.echo_badge_enabled && (
+                    <Badge className="bg-purple-500 text-white">
+                      <span className="text-xs">✨ Echo</span>
+                    </Badge>
+                  )}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -259,6 +267,25 @@ const Profile = () => {
                 )}
               </CardContent>
             </Card>
+
+            {/* Echo Features */}
+            {profile?.echo_badge_enabled && (
+              <>
+                <div className="space-y-6">
+                  <h3 className="text-xl font-semibold flex items-center gap-2">
+                    <span className="text-2xl">✨</span>
+                    Echo Features
+                  </h3>
+                  
+                  <TikTokProfileEmbed isEditMode={true} />
+                  
+                  <VibeGallery isOwnProfile={true} userId={user?.id} />
+                </div>
+              </>
+            )}
+
+            {/* Echo Settings */}
+            <EchoBadgeToggle />
           </div>
         </div>
       </div>

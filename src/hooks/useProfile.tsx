@@ -23,6 +23,11 @@ export interface Profile {
   age_preference_max: number | null;
   created_at: string;
   updated_at: string | null;
+  // Echo features
+  echo_badge_enabled?: boolean;
+  tiktok_embed_url?: string;
+  vibe_gallery?: any[];
+  emotional_soundtrack?: string;
 }
 
 export const useProfile = () => {
@@ -47,7 +52,7 @@ export const useProfile = () => {
         .single();
 
       if (error) throw error;
-      setProfile(data);
+      setProfile(data as Profile);
     } catch (error) {
       console.error('Error fetching profile:', error);
       toast({
@@ -133,6 +138,10 @@ export const useProfile = () => {
     await updateProfile({ avatar_url: photoUrl });
   };
 
+  const refreshProfile = async () => {
+    await fetchProfile();
+  };
+
   return {
     profile,
     loading,
@@ -141,6 +150,7 @@ export const useProfile = () => {
     addPhoto,
     removePhoto,
     setAsAvatar,
-    refetch: fetchProfile
+    refetch: fetchProfile,
+    refreshProfile
   };
 };
