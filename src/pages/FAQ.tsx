@@ -63,6 +63,18 @@ const FAQ = () => {
       answer: "Free is like browsing poetry in a bookstore. Unlocked Beyond lets you write in the margins, remember what moved you, and take the book home. One is nice; the other is deeply yours."
     },
     {
+      question: "🛠️ Will GetUnlocked keep changing over time?",
+      answer: "Yes—and that's the point. We're building this with you. Features will evolve based on emotional feedback, not market trends. Early users help steer the ship."
+    },
+    {
+      question: "🎁 Can I gift a subscription or Echo add-on to someone?",
+      answer: "Not yet—but this is on our radar. We believe generosity should be built-in, and we're exploring \"Matchlight Gifts\" as a future feature. Stay tuned."
+    },
+    {
+      question: "📷 Can I turn off Echo features once I've activated them?",
+      answer: "Always. Expressiveness should never feel performative. You can toggle badges, hide media, or mute your soundtrack any time. Echo adapts to your comfort."
+    },
+    {
       question: "How does the video chat feature work?",
       answer: "Video chat is available for premium subscribers. Once you match with someone, you can initiate a video call directly through the app for safe, secure conversations."
     }
