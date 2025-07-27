@@ -363,7 +363,7 @@ const Index = () => {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 AI Digest
-                <Badge variant="secondary" className="text-xs">Premium</Badge>
+                <Badge variant="secondary" className="text-xs">$12/mo</Badge>
               </CardTitle>
               <CardDescription>Personalized insights</CardDescription>
             </CardHeader>

@@ -78,7 +78,7 @@ const Subscription = () => {
         'Video chat with matches',
         'AI Digest summaries',
         'Priority matching',
-        'All Unlocked features'
+        'All free features'
       ],
       current: currentTier === 'Premium' && isSubscribed,
       buttonText: currentTier === 'Premium' && isSubscribed ? 'Current Plan' : 'Get Unlocked+',
@@ -101,6 +101,28 @@ const Subscription = () => {
       buttonText: currentTier === 'Pro' && isSubscribed ? 'Current Plan' : 'Get Unlocked Beyond',
       disabled: currentTier === 'Pro' && isSubscribed,
       plan: 'unlocked-beyond'
+    },
+    {
+      name: 'Unlocked Echo',
+      icon: '💫',
+      price: '$4/month',
+      description: 'Expressive upgrade for creative visibility',
+      features: [
+        'TikTok-style profile embed (optional)',
+        'Emotional soundtrack prompts',
+        'Discoverability via vibe gallery',
+        'Echo badge toggle'
+      ],
+      current: false,
+      buttonText: 'Get Echo Monthly',
+      disabled: false,
+      plan: 'unlocked-echo-monthly',
+      isAddOn: true,
+      alternativeOption: {
+        price: '$12 one-time',
+        buttonText: 'Unlock Echo Forever',
+        plan: 'unlocked-echo-lifetime'
+      }
     }
   ];
 
@@ -165,7 +187,7 @@ const Subscription = () => {
         </Card>
 
         {/* Pricing Tiers */}
-        <div className="grid gap-6 md:grid-cols-3 mb-8">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-8">
           {tiers.map((tier) => {
             return (
               <Card 
@@ -197,21 +219,46 @@ const Subscription = () => {
                     ))}
                   </ul>
                   
-                  <Button 
-                    className="w-full" 
-                    variant={tier.current ? "secondary" : "default"}
-                    disabled={tier.disabled || upgrading}
-                    onClick={() => tier.plan && handleUpgrade(tier.plan)}
-                  >
-                    {upgrading && tier.plan ? (
-                      <div className="flex items-center gap-2">
-                        <div className="animate-spin h-4 w-4 border-2 border-current border-t-transparent rounded-full"></div>
-                        Processing...
+                  {tier.isAddOn && tier.alternativeOption ? (
+                    <div className="space-y-2">
+                      <Button 
+                        className="w-full"
+                        variant="outline"
+                        disabled={tier.disabled || upgrading}
+                        onClick={() => tier.plan && handleUpgrade(tier.plan)}
+                      >
+                        {tier.buttonText}
+                      </Button>
+                      <div className="text-center text-xs text-muted-foreground">or</div>
+                      <Button 
+                        className="w-full"
+                        variant="default"
+                        disabled={tier.disabled || upgrading}
+                        onClick={() => tier.alternativeOption.plan && handleUpgrade(tier.alternativeOption.plan)}
+                      >
+                        {tier.alternativeOption.buttonText}
+                      </Button>
+                      <div className="text-center text-xs text-muted-foreground">
+                        {tier.alternativeOption.price}
                       </div>
-                    ) : (
-                      tier.buttonText
-                    )}
-                  </Button>
+                    </div>
+                  ) : (
+                    <Button 
+                      className="w-full" 
+                      variant={tier.current ? "secondary" : "default"}
+                      disabled={tier.disabled || upgrading}
+                      onClick={() => tier.plan && handleUpgrade(tier.plan)}
+                    >
+                      {upgrading && tier.plan ? (
+                        <div className="flex items-center gap-2">
+                          <div className="animate-spin h-4 w-4 border-2 border-current border-t-transparent rounded-full"></div>
+                          Processing...
+                        </div>
+                      ) : (
+                        tier.buttonText
+                      )}
+                    </Button>
+                  )}
                 </CardContent>
               </Card>
             );

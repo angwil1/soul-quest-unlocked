@@ -41,7 +41,7 @@ const Pricing = () => {
         "Video chat with matches",
         "AI Digest summaries",
         "Priority matching",
-        "All Unlocked features"
+        "All free features"
       ],
       buttonText: "Get Unlocked+",
       plan: "unlocked-plus",
