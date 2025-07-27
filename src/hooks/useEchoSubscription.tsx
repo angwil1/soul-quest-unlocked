@@ -110,6 +110,7 @@ export const useEchoSubscription = () => {
     return {
       tiktokEmbed: isEchoActive(),
       emotionalSoundtrack: isEchoActive(),
+      emotionalSoundtrackPrompting: isEchoActive(),
       vibeGallery: isEchoActive(),
       echoBadge: isEchoActive(),
     };

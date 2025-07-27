@@ -3,10 +3,11 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
-import { Play, Pause, Volume2, VolumeX, Edit } from 'lucide-react';
+import { Play, Pause, Volume2, VolumeX, Edit, Sparkles } from 'lucide-react';
 import { useProfile } from '@/hooks/useProfile';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+import { EmotionalSoundtrackPrompt } from './EmotionalSoundtrackPrompt';
 
 interface TikTokProfileEmbedProps {
   isEditMode?: boolean;
@@ -20,6 +21,7 @@ export const TikTokProfileEmbed = ({ isEditMode = false }: TikTokProfileEmbedPro
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
+  const [showSoundtrackPrompt, setShowSoundtrackPrompt] = useState(false);
   const [tiktokUrl, setTiktokUrl] = useState(profile?.tiktok_embed_url || '');
   const [emotionalSoundtrack, setEmotionalSoundtrack] = useState(profile?.emotional_soundtrack || '');
 
@@ -70,6 +72,17 @@ export const TikTokProfileEmbed = ({ isEditMode = false }: TikTokProfileEmbedPro
     }
   };
 
+  const handleSoundtrackSelect = (title: string, artist: string, tiktokUrl: string, mood: string) => {
+    setTiktokUrl(tiktokUrl);
+    setEmotionalSoundtrack(`${mood} vibes: ${title} by ${artist}`);
+    setShowSoundtrackPrompt(false);
+    
+    toast({
+      title: "Soundtrack selected!",
+      description: `Your vibe is now set to ${title} by ${artist}`,
+    });
+  };
+
   // Extract TikTok video ID from URL for embedding
   const getTikTokVideoId = (url: string) => {
     const match = url.match(/\/video\/(\d+)/);
@@ -77,6 +90,25 @@ export const TikTokProfileEmbed = ({ isEditMode = false }: TikTokProfileEmbedPro
   };
 
   const videoId = tiktokUrl ? getTikTokVideoId(tiktokUrl) : null;
+
+  // Show soundtrack prompt modal if active
+  if (showSoundtrackPrompt) {
+    return (
+      <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
+        <div className="bg-background rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+          <div className="p-4 border-b flex items-center justify-between">
+            <h2 className="text-lg font-semibold">Emotional Soundtrack Prompting</h2>
+            <Button variant="ghost" onClick={() => setShowSoundtrackPrompt(false)}>
+              ✕
+            </Button>
+          </div>
+          <div className="p-4">
+            <EmotionalSoundtrackPrompt onSoundtrackSelect={handleSoundtrackSelect} />
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (isEditMode || isEditing) {
     return (
@@ -89,6 +121,24 @@ export const TikTokProfileEmbed = ({ isEditMode = false }: TikTokProfileEmbedPro
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
+          {/* AI Soundtrack Prompting */}
+          <div className="p-4 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg border border-purple-200">
+            <div className="flex items-center gap-2 mb-2">
+              <Sparkles className="h-5 w-5 text-purple-600" />
+              <span className="font-medium text-purple-800">Echo Enhancement</span>
+            </div>
+            <p className="text-sm text-purple-700 mb-3">
+              Let AI curate the perfect soundtrack based on your mood
+            </p>
+            <Button
+              onClick={() => setShowSoundtrackPrompt(true)}
+              className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
+            >
+              <Sparkles className="h-4 w-4 mr-2" />
+              Find My Soundtrack
+            </Button>
+          </div>
+
           <div>
             <label className="text-sm font-medium">TikTok Video URL</label>
             <Input
