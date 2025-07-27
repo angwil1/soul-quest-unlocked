@@ -91,6 +91,10 @@ const FAQ = () => {
       answer: "Nope. Memory Vault is fully private. It's your archive of emotional moments—not a public signal."
     },
     {
+      question: "🔍 Do you have any verification or moderation?",
+      answer: "Not yet—but we're exploring consent-based, privacy-first options. We want safety without surveillance."
+    },
+    {
       question: "How does the video chat feature work?",
       answer: "Video chat is available for premium subscribers. Once you match with someone, you can initiate a video call directly through the app for safe, secure conversations."
     }
