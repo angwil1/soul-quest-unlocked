@@ -167,6 +167,61 @@ const FAQ = () => {
             </CardContent>
           </Card>
 
+          <Card className="mb-8">
+            <CardHeader>
+              <CardTitle>Why Dating Tips Work</CardTitle>
+              <CardDescription>
+                Creating meaningful connections through thoughtful guidance
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="grid md:grid-cols-3 gap-6">
+                <div className="space-y-2">
+                  <h3 className="font-semibold text-primary">Build Trust</h3>
+                  <p className="text-sm text-muted-foreground">
+                    You&apos;re not just selling features—you&apos;re guiding users through an emotional journey. Tips show care.
+                  </p>
+                </div>
+                <div className="space-y-2">
+                  <h3 className="font-semibold text-primary">Reduce Anxiety</h3>
+                  <p className="text-sm text-muted-foreground">
+                    New users often feel unsure how to start conversations or present themselves. A gentle nudge goes a long way.
+                  </p>
+                </div>
+                <div className="space-y-2">
+                  <h3 className="font-semibold text-primary">Set the Tone</h3>
+                  <p className="text-sm text-muted-foreground">
+                    You&apos;re shaping culture. Your platform isn&apos;t hookup-centric or transactional—it&apos;s about meaningful connection.
+                  </p>
+                </div>
+              </div>
+              
+              <div className="border-t pt-6">
+                <h3 className="font-semibold mb-4 flex items-center gap-2">
+                  <span className="text-green-500">🌿</span>
+                  Connection Tips
+                </h3>
+                <div className="grid md:grid-cols-2 gap-4 text-sm">
+                  <div className="p-4 rounded-lg bg-muted/30 border border-muted">
+                    &quot;Start with a story—not a résumé. Let them feel who you are.&quot;
+                  </div>
+                  <div className="p-4 rounded-lg bg-muted/30 border border-muted">
+                    &quot;If you&apos;re nervous, say so. Vulnerability builds bridges.&quot;
+                  </div>
+                  <div className="p-4 rounded-lg bg-muted/30 border border-muted">
+                    &quot;Don&apos;t rush past silence. Emotional resonance often blooms there.&quot;
+                  </div>
+                  <div className="p-4 rounded-lg bg-muted/30 border border-muted">
+                    &quot;Curate your Echo. Your soundtrack says a lot.&quot;
+                  </div>
+                  <div className="p-4 rounded-lg bg-muted/30 border border-muted md:col-span-2">
+                    &quot;Ask before sharing deeper layers. Consent is sexy.&quot;
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
           <Card>
             <CardHeader>
               <CardTitle>Common Questions</CardTitle>
