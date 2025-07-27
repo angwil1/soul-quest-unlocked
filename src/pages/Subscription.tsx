@@ -53,52 +53,54 @@ const Subscription = () => {
 
   const tiers = [
     {
-      name: 'Unlocked',
+      name: 'Free',
+      icon: '🌱',
       price: 'Free',
-      description: 'AI-powered matching to get you started',
+      description: 'Opens curiosity, perfect for getting started',
       features: [
-        'AI compatibility matching',
-        '5 matches per day',
-        'Basic messaging',
-        'Smart matching algorithm'
+        'Take the compatibility quiz',
+        'View matches',
+        'Limited messaging',
+        'Explore onboarding questions and sample prompts',
+        'Feel the brand before committing'
       ],
-      icon: Heart,
       current: !isSubscribed,
       buttonText: 'Current Plan',
       disabled: true,
-      plan: 'free'
+      plan: null
     },
     {
       name: 'Unlocked+',
+      icon: '💬',
       price: '$12/month',
-      description: 'Investment in better connections',
+      description: 'Offers the upgrade logic for better connections',
       features: [
         'Video chat with matches',
         'AI Digest summaries',
         'Priority matching',
         'All Unlocked features'
       ],
-      icon: Crown,
       current: currentTier === 'Premium' && isSubscribed,
       buttonText: currentTier === 'Premium' && isSubscribed ? 'Current Plan' : 'Get Unlocked+',
       disabled: currentTier === 'Premium' && isSubscribed,
       plan: 'unlocked-plus'
     },
     {
-      name: "Founder's Circle",
+      name: 'Unlocked Beyond',
+      icon: '🔮',
       price: '$39/year',
-      description: 'Join our community',
+      description: 'An invitation to co-create our community',
       features: [
-        'Video chat with matches',
-        'Lifetime Unlocked+ access',
-        'Personal welcome note from founder',
-        'Early tool access'
+        'Lifetime access to all Unlocked+ features',
+        '"Unlocked Beyond" badge on profile (optional)',
+        'Unlocked Mode: values-first compatibility journeys',
+        'Memory Vault: revisit favorite moments, prompts, and saved matches',
+        'Connection DNA: evolving emotional intelligence for deeper match potential'
       ],
-      icon: Star,
       current: currentTier === 'Pro' && isSubscribed,
-      buttonText: currentTier === 'Pro' && isSubscribed ? 'Current Plan' : "Join Founder's Circle",
+      buttonText: currentTier === 'Pro' && isSubscribed ? 'Current Plan' : 'Get Unlocked Beyond',
       disabled: currentTier === 'Pro' && isSubscribed,
-      plan: 'founders-circle'
+      plan: 'unlocked-beyond'
     }
   ];
 
@@ -165,7 +167,6 @@ const Subscription = () => {
         {/* Pricing Tiers */}
         <div className="grid gap-6 md:grid-cols-3 mb-8">
           {tiers.map((tier) => {
-            const IconComponent = tier.icon;
             return (
               <Card 
                 key={tier.name} 
@@ -179,7 +180,7 @@ const Subscription = () => {
                 
                 <CardHeader className="text-center">
                   <div className="flex justify-center mb-2">
-                    <IconComponent className="h-8 w-8 text-primary" />
+                    <span className="text-4xl">{tier.icon}</span>
                   </div>
                   <CardTitle className="text-2xl">{tier.name}</CardTitle>
                   <CardDescription>{tier.description}</CardDescription>
