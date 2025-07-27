@@ -86,6 +86,231 @@ export type Database = {
         }
         Relationships: []
       }
+      connection_dna_compatibility: {
+        Row: {
+          analysis_confidence: number | null
+          communication_compatibility: number | null
+          conflict_harmony_score: number | null
+          conversation_starters: Json | null
+          created_at: string
+          date_ideas: Json | null
+          detailed_analysis: Json | null
+          emotional_sync_score: number | null
+          growth_areas: Json | null
+          growth_potential_score: number | null
+          id: string
+          last_analyzed_at: string | null
+          overall_compatibility_score: number
+          personality_match_score: number | null
+          shared_values_score: number | null
+          strengths: Json | null
+          updated_at: string
+          user_id_1: string
+          user_id_2: string
+        }
+        Insert: {
+          analysis_confidence?: number | null
+          communication_compatibility?: number | null
+          conflict_harmony_score?: number | null
+          conversation_starters?: Json | null
+          created_at?: string
+          date_ideas?: Json | null
+          detailed_analysis?: Json | null
+          emotional_sync_score?: number | null
+          growth_areas?: Json | null
+          growth_potential_score?: number | null
+          id?: string
+          last_analyzed_at?: string | null
+          overall_compatibility_score: number
+          personality_match_score?: number | null
+          shared_values_score?: number | null
+          strengths?: Json | null
+          updated_at?: string
+          user_id_1: string
+          user_id_2: string
+        }
+        Update: {
+          analysis_confidence?: number | null
+          communication_compatibility?: number | null
+          conflict_harmony_score?: number | null
+          conversation_starters?: Json | null
+          created_at?: string
+          date_ideas?: Json | null
+          detailed_analysis?: Json | null
+          emotional_sync_score?: number | null
+          growth_areas?: Json | null
+          growth_potential_score?: number | null
+          id?: string
+          last_analyzed_at?: string | null
+          overall_compatibility_score?: number
+          personality_match_score?: number | null
+          shared_values_score?: number | null
+          strengths?: Json | null
+          updated_at?: string
+          user_id_1?: string
+          user_id_2?: string
+        }
+        Relationships: []
+      }
+      connection_dna_insights: {
+        Row: {
+          actionable_steps: Json | null
+          category: string | null
+          confidence_level: number | null
+          created_at: string
+          description: string
+          expires_at: string | null
+          id: string
+          insight_type: string
+          is_dismissed: boolean | null
+          is_read: boolean | null
+          priority_level: string | null
+          title: string
+          user_id: string
+        }
+        Insert: {
+          actionable_steps?: Json | null
+          category?: string | null
+          confidence_level?: number | null
+          created_at?: string
+          description: string
+          expires_at?: string | null
+          id?: string
+          insight_type: string
+          is_dismissed?: boolean | null
+          is_read?: boolean | null
+          priority_level?: string | null
+          title: string
+          user_id: string
+        }
+        Update: {
+          actionable_steps?: Json | null
+          category?: string | null
+          confidence_level?: number | null
+          created_at?: string
+          description?: string
+          expires_at?: string | null
+          id?: string
+          insight_type?: string
+          is_dismissed?: boolean | null
+          is_read?: boolean | null
+          priority_level?: string | null
+          title?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      connection_dna_interactions: {
+        Row: {
+          analyzed_at: string | null
+          created_at: string
+          emotional_markers: Json | null
+          empathy_indicators: Json | null
+          engagement_score: number | null
+          id: string
+          interaction_data: Json
+          interaction_type: string
+          message_length: number | null
+          other_user_id: string | null
+          response_time_seconds: number | null
+          sentiment_score: number | null
+          user_id: string
+          vulnerability_level: number | null
+        }
+        Insert: {
+          analyzed_at?: string | null
+          created_at?: string
+          emotional_markers?: Json | null
+          empathy_indicators?: Json | null
+          engagement_score?: number | null
+          id?: string
+          interaction_data: Json
+          interaction_type: string
+          message_length?: number | null
+          other_user_id?: string | null
+          response_time_seconds?: number | null
+          sentiment_score?: number | null
+          user_id: string
+          vulnerability_level?: number | null
+        }
+        Update: {
+          analyzed_at?: string | null
+          created_at?: string
+          emotional_markers?: Json | null
+          empathy_indicators?: Json | null
+          engagement_score?: number | null
+          id?: string
+          interaction_data?: Json
+          interaction_type?: string
+          message_length?: number | null
+          other_user_id?: string | null
+          response_time_seconds?: number | null
+          sentiment_score?: number | null
+          user_id?: string
+          vulnerability_level?: number | null
+        }
+        Relationships: []
+      }
+      connection_dna_profiles: {
+        Row: {
+          communication_style: Json | null
+          compatibility_insights: Json | null
+          conflict_resolution_style: string | null
+          created_at: string
+          emotional_intelligence_score: number | null
+          emotional_patterns: Json | null
+          empathy_score: number | null
+          growth_metrics: Json | null
+          id: string
+          interaction_quality_score: number | null
+          last_analysis_at: string | null
+          love_language_primary: string | null
+          love_language_secondary: string | null
+          personality_markers: Json | null
+          updated_at: string
+          user_id: string
+          vulnerability_comfort: number | null
+        }
+        Insert: {
+          communication_style?: Json | null
+          compatibility_insights?: Json | null
+          conflict_resolution_style?: string | null
+          created_at?: string
+          emotional_intelligence_score?: number | null
+          emotional_patterns?: Json | null
+          empathy_score?: number | null
+          growth_metrics?: Json | null
+          id?: string
+          interaction_quality_score?: number | null
+          last_analysis_at?: string | null
+          love_language_primary?: string | null
+          love_language_secondary?: string | null
+          personality_markers?: Json | null
+          updated_at?: string
+          user_id: string
+          vulnerability_comfort?: number | null
+        }
+        Update: {
+          communication_style?: Json | null
+          compatibility_insights?: Json | null
+          conflict_resolution_style?: string | null
+          created_at?: string
+          emotional_intelligence_score?: number | null
+          emotional_patterns?: Json | null
+          empathy_score?: number | null
+          growth_metrics?: Json | null
+          id?: string
+          interaction_quality_score?: number | null
+          last_analysis_at?: string | null
+          love_language_primary?: string | null
+          love_language_secondary?: string | null
+          personality_markers?: Json | null
+          updated_at?: string
+          user_id?: string
+          vulnerability_comfort?: number | null
+        }
+        Relationships: []
+      }
       echo_subscriptions: {
         Row: {
           created_at: string

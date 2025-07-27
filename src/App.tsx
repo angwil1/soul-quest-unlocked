@@ -15,6 +15,7 @@ import Matches from "./pages/Matches";
 import Messages from "./pages/Messages";
 import FAQ from "./pages/FAQ";
 import AIDigest from "./pages/AIDigest";
+import ConnectionDNA from "./pages/ConnectionDNA";
 import MemoryVault from "./pages/MemoryVault";
 import Privacy from "./pages/Privacy";
 import TermsOfService from "./pages/TermsOfService";
@@ -40,6 +41,7 @@ const App = () => (
           <Route path="/matches" element={<Matches />} />
           <Route path="/messages" element={<Messages />} />
           <Route path="/ai-digest" element={<AIDigest />} />
+          <Route path="/connection-dna" element={<ConnectionDNA />} />
           <Route path="/memory-vault" element={<MemoryVault />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/privacy" element={<Privacy />} />
