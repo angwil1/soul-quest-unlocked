@@ -95,6 +95,18 @@ const FAQ = () => {
       answer: "Not yet—but we're exploring consent-based, privacy-first options. We want safety without surveillance."
     },
     {
+      question: "Can I use GetUnlocked for friendship, not dating?",
+      answer: "Yes. Connection doesn't always mean romance. We're exploring an Intent overlay that lets you define what you're here for—softness, curiosity, co-thought."
+    },
+    {
+      question: "👥 Will people know what tier I'm on?",
+      answer: "Only if you want them to. Badges like Echo or Unlocked Beyond are toggleable. You choose what you signal."
+    },
+    {
+      question: "🎨 Can I change my profile vibe or soundtrack later?",
+      answer: "Yes, whenever you want. Your emotional palette can evolve—and Echo lets you reflect that freely."
+    },
+    {
       question: "How does the video chat feature work?",
       answer: "Video chat is available for premium subscribers. Once you match with someone, you can initiate a video call directly through the app for safe, secure conversations."
     }
