@@ -47,30 +47,44 @@ serve(async (req) => {
 
     // Define pricing
     const pricingMap = {
-      unlocked: { amount: 500, interval: "month" as const, name: "Unlocked" }, // $5/month
-      "unlocked-plus": { amount: 1200, interval: "month" as const, name: "Unlocked+" }, // $12/month  
-      "founders-circle": { amount: 3900, interval: "year" as const, name: "Founder's Circle" }, // $39/year
+      unlocked: { amount: 500, interval: "month" as const, name: "Unlocked", mode: "subscription" as const }, // $5/month
+      "unlocked-plus": { amount: 1200, interval: "month" as const, name: "Unlocked+", mode: "subscription" as const }, // $12/month  
+      "founders-circle": { amount: 3900, interval: "year" as const, name: "Founder's Circle", mode: "subscription" as const }, // $39/year
+      "unlocked-echo-monthly": { amount: 400, interval: "month" as const, name: "Unlocked Echo Monthly", mode: "subscription" as const }, // $4/month
+      "unlocked-echo-lifetime": { amount: 1200, name: "Unlocked Echo Lifetime", mode: "payment" as const }, // $12 one-time
     };
 
     const pricing = pricingMap[plan as keyof typeof pricingMap];
     if (!pricing) throw new Error("Invalid plan selected");
     logStep("Pricing configured", { pricing });
 
+    // Create line items based on plan type
+    const lineItems = pricing.mode === "subscription" ? [
+      {
+        price_data: {
+          currency: "usd",
+          product_data: { name: pricing.name },
+          unit_amount: pricing.amount,
+          recurring: { interval: pricing.interval },
+        },
+        quantity: 1,
+      },
+    ] : [
+      {
+        price_data: {
+          currency: "usd",
+          product_data: { name: pricing.name },
+          unit_amount: pricing.amount,
+        },
+        quantity: 1,
+      },
+    ];
+
     const session = await stripe.checkout.sessions.create({
       customer: customerId,
       customer_email: customerId ? undefined : user.email,
-      line_items: [
-        {
-          price_data: {
-            currency: "usd",
-            product_data: { name: pricing.name },
-            unit_amount: pricing.amount,
-            recurring: { interval: pricing.interval },
-          },
-          quantity: 1,
-        },
-      ],
-      mode: "subscription",
+      line_items: lineItems,
+      mode: pricing.mode,
       success_url: `https://getunlockedapp.com/profile?success=true`,
       cancel_url: `https://getunlockedapp.com/profile?canceled=true`,
     });
