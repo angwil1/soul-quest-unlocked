@@ -115,6 +115,10 @@ const FAQ = () => {
       answer: "No. That's not its job. The AI observes patterns and emotional cues—it doesn't make promises. Connection requires curiosity, presence, and trust. We just help you notice more."
     },
     {
+      question: "Does the AI guarantee romantic results?",
+      answer: "GetUnlocked doesn't promise romantic destiny. It offers emotional clarity, gentle insight, and space to reflect on what truly resonates."
+    },
+    {
       question: "How does the video chat feature work?",
       answer: "Video chat is available for premium subscribers. Once you match with someone, you can initiate a video call directly through the app for safe, secure conversations."
     }
