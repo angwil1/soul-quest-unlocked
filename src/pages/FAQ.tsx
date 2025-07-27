@@ -39,6 +39,14 @@ const FAQ = () => {
       answer: "You can delete your account through your profile settings. This action is permanent and will remove all your data from our servers."
     },
     {
+      question: "💾 What is the Memory Vault?",
+      answer: "Memory Vault lives inside Unlocked Beyond. It lets you save favorite matches, prompts, and connection moments. It's your emotional archive—a way to revisit the sparks that matter."
+    },
+    {
+      question: "🔐 Is my data safe here?",
+      answer: "Yes. We do not sell or share your data. We believe privacy is the foundation of trust. You're not the product—you're the protagonist."
+    },
+    {
       question: "What if I'm not getting matches?",
       answer: "Try updating your profile with more photos and information, retaking the personality quiz, or upgrading to a premium plan for visibility boosts and priority matching."
     },
