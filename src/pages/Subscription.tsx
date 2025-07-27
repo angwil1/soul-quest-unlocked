@@ -150,8 +150,11 @@ const Subscription = () => {
           <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-2">
             Your Subscription
           </h1>
-          <p className="text-xl text-muted-foreground">
+          <p className="text-xl text-muted-foreground mb-2">
             You're currently in <span className="font-semibold text-primary">'{currentTier}'</span> — explore deeper connections with our premium tiers.
+          </p>
+          <p className="text-lg text-muted-foreground">
+            Add Unlocked Echo to any plan, or purchase on its own. Expression isn't reserved for premium—it's available to all.
           </p>
         </div>
 
