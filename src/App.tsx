@@ -19,6 +19,7 @@ import ConnectionDNA from "./pages/ConnectionDNA";
 import MemoryVault from "./pages/MemoryVault";
 import Privacy from "./pages/Privacy";
 import TermsOfService from "./pages/TermsOfService";
+import Mission from "./pages/Mission";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -44,6 +45,7 @@ const App = () => (
           <Route path="/connection-dna" element={<ConnectionDNA />} />
           <Route path="/memory-vault" element={<MemoryVault />} />
           <Route path="/faq" element={<FAQ />} />
+          <Route path="/mission" element={<Mission />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<TermsOfService />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
