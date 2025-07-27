@@ -107,6 +107,10 @@ const FAQ = () => {
       answer: "Yes, whenever you want. Your emotional palette can evolve—and Echo lets you reflect that freely."
     },
     {
+      question: "🛬 I signed up, but nothing's happening. Did I do something wrong?",
+      answer: "Not at all. Sometimes emotional resonance takes time. If you've filled out your profile and nothing appears yet, trust the quiet. It's a feature, not a bug."
+    },
+    {
       question: "How does the video chat feature work?",
       answer: "Video chat is available for premium subscribers. Once you match with someone, you can initiate a video call directly through the app for safe, secure conversations."
     }
