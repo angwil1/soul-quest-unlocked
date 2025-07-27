@@ -19,7 +19,9 @@ const Pricing = () => {
       features: [
         "Take the compatibility quiz",
         "View matches", 
-        "Limited messaging"
+        "Limited messaging",
+        "Explore onboarding questions and sample prompts",
+        "Feel the brand before committing"
       ],
       restrictedFeatures: [
         "Video chat"
