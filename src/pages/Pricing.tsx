@@ -13,9 +13,10 @@ const Pricing = () => {
   const plans = [
     {
       name: "Free",
+      icon: "🌱",
       price: "$0",
       period: "/month",
-      description: "Perfect for getting started",
+      description: "Opens curiosity, perfect for getting started",
       features: [
         "Take the compatibility quiz",
         "View matches", 
@@ -32,9 +33,10 @@ const Pricing = () => {
     },
     {
       name: "Unlocked+",
+      icon: "💬",
       price: "$12",
       period: "/month", 
-      description: "Investment in better connections",
+      description: "Offers the upgrade logic for better connections",
       features: [
         "Video chat with matches",
         "AI Digest summaries",
@@ -47,9 +49,10 @@ const Pricing = () => {
     },
     {
       name: "Unlocked Beyond",
+      icon: "🔮",
       price: "$39",
       period: "/year",
-      description: "Join our community",
+      description: "An invitation to co-create our community",
       features: [
         "Lifetime access to all Unlocked+ features",
         "\"Unlocked Beyond\" badge on profile (optional)",
@@ -59,7 +62,11 @@ const Pricing = () => {
       ],
       buttonText: "Get Unlocked Beyond",
       plan: "unlocked-beyond",
-      popular: false
+      popular: false,
+      hoverTexts: {
+        "Unlocked Mode: values-first compatibility journeys": "Find clarity in Unlocked Mode",
+        "Memory Vault: revisit favorite moments, prompts, and saved matches": "Your vault of remembered connections"
+      }
     }
   ];
 
@@ -85,9 +92,12 @@ const Pricing = () => {
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold mb-4">GetUnlocked Pricing Plans</h1>
           <p className="text-lg text-muted-foreground mb-2">Gentler Edition</p>
-          <p className="text-muted-foreground">
+          <p className="text-muted-foreground mb-4">
             Choose the plan that feels right for your journey
           </p>
+          <div className="inline-block bg-muted/50 rounded-lg px-4 py-2 text-sm text-muted-foreground">
+            💡 Spend $12/month or unlock everything for just $39/year—a soft emotional nudge
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -116,7 +126,10 @@ const Pricing = () => {
                 )}
                 
                 <CardHeader className="text-center pb-4">
-                  <CardTitle className="text-xl font-bold">{plan.name}</CardTitle>
+                  <CardTitle className="text-xl font-bold flex items-center justify-center gap-2">
+                    <span className="text-2xl">{plan.icon}</span>
+                    {plan.name}
+                  </CardTitle>
                   <div className="flex items-baseline justify-center gap-1">
                     <span className="text-3xl font-bold">{plan.price}</span>
                     <span className="text-muted-foreground">{plan.period}</span>
