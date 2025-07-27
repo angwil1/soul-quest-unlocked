@@ -9,6 +9,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { FloatingQuizButton } from '@/components/FloatingQuizButton';
+import datingBackground from '@/assets/dating-background.jpg';
 
 const Index = () => {
   const { user, loading, signOut } = useAuth();
@@ -52,26 +53,37 @@ const Index = () => {
         <div className="p-4">
         <div className="max-w-4xl mx-auto">
           {/* Hero Section for non-logged in users */}
-          <div className="text-center mb-12 mt-16">
-            <h1 className="text-5xl font-bold mb-6">Dating with depth, powered by trust.</h1>
-            <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Because real connection isn't rare, it's just waiting for the right space.
-            </p>
-            <div className="flex gap-4 justify-center">
-              <Button 
-                onClick={() => navigate('/auth')} 
-                size="lg"
-                className="bg-gradient-to-r from-primary to-secondary hover:opacity-90"
-              >
-                Get Started
-              </Button>
-              <Button 
-                onClick={() => navigate('/auth')} 
-                variant="outline" 
-                size="lg"
-              >
-                Sign In
-              </Button>
+          <div 
+            className="text-center mb-12 mt-16 relative rounded-2xl overflow-hidden"
+            style={{
+              backgroundImage: `url(${datingBackground})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundRepeat: 'no-repeat'
+            }}
+          >
+            <div className="absolute inset-0 bg-background/80 backdrop-blur-sm"></div>
+            <div className="relative z-10 py-20 px-8">
+              <h1 className="text-5xl font-bold mb-6">Dating with depth, powered by trust.</h1>
+              <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+                Because real connection isn't rare, it's just waiting for the right space.
+              </p>
+              <div className="flex gap-4 justify-center">
+                <Button 
+                  onClick={() => navigate('/auth')} 
+                  size="lg"
+                  className="bg-gradient-to-r from-primary to-secondary hover:opacity-90"
+                >
+                  Get Started
+                </Button>
+                <Button 
+                  onClick={() => navigate('/auth')} 
+                  variant="outline" 
+                  size="lg"
+                >
+                  Sign In
+                </Button>
+              </div>
             </div>
           </div>
 
@@ -172,18 +184,29 @@ const Index = () => {
         </div>
 
         {/* Hero Section */}
-        <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold mb-6">Dating with depth, powered by trust.</h1>
-          <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Because real connection isn't rare, it's just waiting for the right space.
-          </p>
-          <Button 
-            onClick={() => navigate('/questions')} 
-            size="lg"
-            className="text-lg px-8 py-6"
-          >
-            Take the Compatibility Quiz
-          </Button>
+        <div 
+          className="text-center mb-12 relative rounded-2xl overflow-hidden"
+          style={{
+            backgroundImage: `url(${datingBackground})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat'
+          }}
+        >
+          <div className="absolute inset-0 bg-background/80 backdrop-blur-sm"></div>
+          <div className="relative z-10 py-16 px-8">
+            <h1 className="text-5xl font-bold mb-6">Dating with depth, powered by trust.</h1>
+            <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+              Because real connection isn't rare, it's just waiting for the right space.
+            </p>
+            <Button 
+              onClick={() => navigate('/questions')} 
+              size="lg"
+              className="text-lg px-8 py-6"
+            >
+              Take the Compatibility Quiz
+            </Button>
+          </div>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
