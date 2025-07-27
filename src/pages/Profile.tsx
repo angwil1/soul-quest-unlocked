@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useAuth } from '@/hooks/useAuth';
 import { useProfile } from '@/hooks/useProfile';
+import { useEchoSubscription } from '@/hooks/useEchoSubscription';
 import { useSubscription } from '@/hooks/useSubscription';
 import { TikTokProfileEmbed } from '@/components/TikTokProfileEmbed';
 import { VibeGallery } from '@/components/VibeGallery';
@@ -16,6 +17,7 @@ const Profile = () => {
   const { user } = useAuth();
   const { profile, loading } = useProfile();
   const { subscription, loading: subscriptionLoading, manageBilling } = useSubscription();
+  const { isEchoActive } = useEchoSubscription();
   const navigate = useNavigate();
 
   // Remove auth redirect for demo purposes
@@ -119,11 +121,26 @@ const Profile = () => {
             {/* Basic Info */}
             <Card>
               <CardHeader>
-                <CardTitle className="flex items-center gap-2">
+                <CardTitle className="flex items-center gap-2 flex-wrap">
                   {profile.name || 'Anonymous'}
                   {age && <span className="text-muted-foreground">, {age}</span>}
-                  {profile?.echo_badge_enabled && (
-                    <Badge className="bg-purple-500 text-white">
+                  
+                  {/* Subscription Tier Badge */}
+                  {subscription?.subscribed && subscription.subscription_tier === 'Pro' && (
+                    <Badge className="bg-gradient-to-r from-purple-500 to-indigo-500 text-white">
+                      <span className="text-xs">🔮 Unlocked Beyond</span>
+                    </Badge>
+                  )}
+                  
+                  {subscription?.subscribed && subscription.subscription_tier === 'Premium' && (
+                    <Badge className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white">
+                      <span className="text-xs">💬 Unlocked+</span>
+                    </Badge>
+                  )}
+                  
+                  {/* Echo Badge */}
+                  {profile?.echo_badge_enabled && isEchoActive && (
+                    <Badge className="bg-gradient-to-r from-purple-600 to-pink-500 text-white">
                       <span className="text-xs">✨ Echo</span>
                     </Badge>
                   )}
@@ -214,7 +231,31 @@ const Profile = () => {
                     {subscription.subscribed && subscription.subscription_tier && (
                       <div className="flex items-center justify-between">
                         <span className="text-sm text-muted-foreground">Plan:</span>
-                        <span className="font-medium">{subscription.subscription_tier}</span>
+                        <div className="flex items-center gap-2">
+                          {subscription.subscription_tier === 'Pro' && (
+                            <Badge className="bg-gradient-to-r from-purple-500 to-indigo-500 text-white">
+                              🔮 Unlocked Beyond
+                            </Badge>
+                          )}
+                          {subscription.subscription_tier === 'Premium' && (
+                            <Badge className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white">
+                              💬 Unlocked+
+                            </Badge>
+                          )}
+                          {!subscription.subscription_tier.includes('Pro') && !subscription.subscription_tier.includes('Premium') && (
+                            <span className="font-medium">{subscription.subscription_tier}</span>
+                          )}
+                        </div>
+                      </div>
+                    )}
+                    
+                    {/* Echo Subscription Status */}
+                    {isEchoActive && (
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-muted-foreground">Add-on:</span>
+                        <Badge className="bg-gradient-to-r from-purple-600 to-pink-500 text-white">
+                          ✨ Echo Active
+                        </Badge>
                       </div>
                     )}
                     
