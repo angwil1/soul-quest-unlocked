@@ -51,8 +51,8 @@ const Pricing = () => {
       period: "/year",
       description: "Join our community",
       features: [
-        "Lifetime access to all Unlocked features",
-        "\"Unlocked Beyond\" badge on profile",
+        "Lifetime access to all Unlocked+ features",
+        "\"Unlocked Beyond\" badge on profile (optional)",
         "Unlocked Mode: values-first compatibility journeys",
         "Memory Vault: revisit favorite moments, prompts, and saved matches",
         "Connection DNA: evolving emotional intelligence for deeper match potential"
