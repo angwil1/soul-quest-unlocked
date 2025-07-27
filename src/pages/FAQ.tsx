@@ -111,6 +111,10 @@ const FAQ = () => {
       answer: "Not at all. Sometimes emotional resonance takes time. If you've filled out your profile and nothing appears yet, trust the quiet. It's a feature, not a bug."
     },
     {
+      question: "Does the AI guarantee love or perfect matches?",
+      answer: "No. That's not its job. The AI observes patterns and emotional cues—it doesn't make promises. Connection requires curiosity, presence, and trust. We just help you notice more."
+    },
+    {
       question: "How does the video chat feature work?",
       answer: "Video chat is available for premium subscribers. Once you match with someone, you can initiate a video call directly through the app for safe, secure conversations."
     }
