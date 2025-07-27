@@ -75,6 +75,22 @@ const FAQ = () => {
       answer: "Always. Expressiveness should never feel performative. You can toggle badges, hide media, or mute your soundtrack any time. Echo adapts to your comfort."
     },
     {
+      question: "What if I want to delete my account or data?",
+      answer: "You can fully delete your account and associated data in just a few taps. No hoops, no guilt trips. We'll miss you, but you won't leave footprints."
+    },
+    {
+      question: "⏳ Do I have to wait for matches to appear?",
+      answer: "You might see quiet spells, especially early on. That's intentional. We focus on quality and emotional fit—not flooding your inbox. Sometimes the best connections bloom slowly."
+    },
+    {
+      question: "🧠 How does the AI matchmaking work?",
+      answer: "It learns from emotional cues—not just age or location. Over time, it maps your responses, vibe tags, and story layers to surface real resonance."
+    },
+    {
+      question: "🚫 Will people see when I've saved them in Memory Vault?",
+      answer: "Nope. Memory Vault is fully private. It's your archive of emotional moments—not a public signal."
+    },
+    {
       question: "How does the video chat feature work?",
       answer: "Video chat is available for premium subscribers. Once you match with someone, you can initiate a video call directly through the app for safe, secure conversations."
     }
