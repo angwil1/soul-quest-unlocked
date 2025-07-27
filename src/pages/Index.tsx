@@ -92,6 +92,100 @@ const Index = () => {
                   Sign In
                 </Button>
               </div>
+          </div>
+        </div>
+
+          {/* Manifesto Section */}
+          <div className="mb-16 scroll-smooth">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                Why We Built GetUnlocked
+              </h2>
+              <p className="text-xl text-muted-foreground italic">Dating with AI, Done Differently</p>
+            </div>
+            
+            <div className="max-w-3xl mx-auto space-y-12">
+              {/* Opening Statement */}
+              <div className="text-center p-8 bg-gradient-to-br from-primary/5 to-secondary/5 rounded-2xl border border-primary/20">
+                <h3 className="text-2xl font-bold mb-4">We're not here to play games. We're here to unlock something real.</h3>
+                <p className="text-lg text-muted-foreground leading-relaxed">
+                  This isn't swipe culture. It's soul culture.<br />
+                  A dating experience rooted in emotional clarity, intentional design, and AI that listens to your vibe—not your metadata.
+                </p>
+              </div>
+
+              {/* What We Stand For */}
+              <div className="p-8 bg-card rounded-2xl border">
+                <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
+                  <span className="text-3xl">💡</span>
+                  What GetUnlocked Stands For
+                </h3>
+                <p className="text-lg mb-6 text-muted-foreground">
+                  We don't track your heart like data. We help you reflect, connect, and remember—on your own terms.
+                </p>
+                <ul className="space-y-3 text-muted-foreground">
+                  <li className="flex items-center gap-3">
+                    <span className="w-2 h-2 bg-primary rounded-full"></span>
+                    Private by design
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <span className="w-2 h-2 bg-primary rounded-full"></span>
+                    Emotionally intelligent AI, not manipulative matchmaking
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <span className="w-2 h-2 bg-primary rounded-full"></span>
+                    Rituals over features: Compatibility Quiz, Memory Vault, Connection DNA
+                  </li>
+                </ul>
+                <p className="text-lg mt-6 font-medium text-foreground">
+                  Your reflections, your vibe fingerprint, your emotional moments—they belong to you.
+                </p>
+              </div>
+
+              {/* Why We Exist */}
+              <div className="p-8 bg-card rounded-2xl border">
+                <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
+                  <span className="text-3xl">✨</span>
+                  Why GetUnlocked Exists
+                </h3>
+                <p className="text-lg mb-6 text-muted-foreground font-medium">
+                  Dating apps felt chaotic. So we built a compass.
+                </p>
+                <div className="space-y-4 text-muted-foreground">
+                  <p>We started with lived questions, not A/B tests.</p>
+                  <p>What if AI could help you understand your patterns before pushing connections?</p>
+                  <p>What if onboarding felt poetic—not performative?</p>
+                  <p>What if your emotional weather could guide your discovery—not just what shows up?</p>
+                </div>
+                <p className="text-lg mt-6 font-medium text-foreground">
+                  GetUnlocked is that vision, made real.<br />
+                  For the quiet ones, the intentional ones, the ones who never felt seen—we built this for you.
+                </p>
+              </div>
+
+              {/* Invitation */}
+              <div className="p-8 bg-gradient-to-br from-secondary/5 to-primary/5 rounded-2xl border border-secondary/20 text-center">
+                <h3 className="text-2xl font-bold mb-6 flex items-center justify-center gap-3">
+                  <span className="text-3xl">🌱</span>
+                  An Invitation to Join
+                </h3>
+                <p className="text-lg mb-6 text-muted-foreground">
+                  This space is still forming. You're early, and that's beautiful.
+                </p>
+                <div className="space-y-3 text-muted-foreground mb-6">
+                  <p>Begin with curiosity.</p>
+                  <p>Match with intention.</p>
+                  <p>Reflect with honesty.</p>
+                  <p>Help shape a dating experience that learns from you—without ever exploiting you.</p>
+                </div>
+                <Button 
+                  onClick={() => navigate('/auth')} 
+                  size="lg"
+                  className="bg-gradient-to-r from-primary to-secondary hover:opacity-90"
+                >
+                  Join the Movement
+                </Button>
+              </div>
             </div>
           </div>
 
