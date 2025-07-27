@@ -437,6 +437,132 @@ export type Database = {
         }
         Relationships: []
       }
+      memory_vault_matches: {
+        Row: {
+          created_at: string
+          id: string
+          match_id: string | null
+          matched_user_id: string
+          notes: string | null
+          saved_at: string
+          tags: string[] | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          match_id?: string | null
+          matched_user_id: string
+          notes?: string | null
+          saved_at?: string
+          tags?: string[] | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          match_id?: string | null
+          matched_user_id?: string
+          notes?: string | null
+          saved_at?: string
+          tags?: string[] | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      memory_vault_moments: {
+        Row: {
+          content: Json | null
+          created_at: string
+          description: string | null
+          id: string
+          is_favorite: boolean | null
+          moment_date: string | null
+          moment_type: string
+          notes: string | null
+          related_user_id: string | null
+          saved_at: string
+          tags: string[] | null
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          content?: Json | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_favorite?: boolean | null
+          moment_date?: string | null
+          moment_type: string
+          notes?: string | null
+          related_user_id?: string | null
+          saved_at?: string
+          tags?: string[] | null
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          content?: Json | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_favorite?: boolean | null
+          moment_date?: string | null
+          moment_type?: string
+          notes?: string | null
+          related_user_id?: string | null
+          saved_at?: string
+          tags?: string[] | null
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      memory_vault_prompts: {
+        Row: {
+          created_at: string
+          id: string
+          notes: string | null
+          prompt_source: string | null
+          prompt_text: string
+          response_text: string | null
+          saved_at: string
+          tags: string[] | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          notes?: string | null
+          prompt_source?: string | null
+          prompt_text: string
+          response_text?: string | null
+          saved_at?: string
+          tags?: string[] | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          notes?: string | null
+          prompt_source?: string | null
+          prompt_text?: string
+          response_text?: string | null
+          saved_at?: string
+          tags?: string[] | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       messages: {
         Row: {
           created_at: string | null
