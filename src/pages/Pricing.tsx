@@ -67,6 +67,29 @@ const Pricing = () => {
         "Unlocked Mode: values-first compatibility journeys": "Find clarity in Unlocked Mode",
         "Memory Vault: revisit favorite moments, prompts, and saved matches": "Your vault of remembered connections"
       }
+    },
+    {
+      name: "Unlocked Echo",
+      icon: "💫",
+      price: "$4",
+      period: "/month",
+      description: "Expressive upgrade for creative visibility",
+      features: [
+        "TikTok-style profile embed (optional)",
+        "Emotional soundtrack prompts",
+        "Discoverability via vibe gallery",
+        "Echo badge toggle"
+      ],
+      buttonText: "Get Echo Monthly",
+      plan: "unlocked-echo-monthly",
+      popular: false,
+      isAddOn: true,
+      alternativeOption: {
+        price: "$12",
+        period: "one-time",
+        buttonText: "Unlock Echo Forever",
+        plan: "unlocked-echo-lifetime"
+      }
     }
   ];
 
@@ -119,6 +142,11 @@ const Pricing = () => {
                     Most Popular
                   </Badge>
                 )}
+                {plan.isAddOn && (
+                  <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-purple-500">
+                    Add-On
+                  </Badge>
+                )}
                 {isCurrentPlan && (
                   <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-green-500">
                     Current Plan
@@ -155,14 +183,39 @@ const Pricing = () => {
                     ))}
                   </ul>
 
-                  <Button 
-                    className="w-full mt-6"
-                    variant={plan.popular ? "default" : "outline"}
-                    disabled={loading || isCurrentPlan || isFree}
-                    onClick={() => handleSubscribe(plan.plan)}
-                  >
-                    {isCurrentPlan ? "Current Plan" : plan.buttonText}
-                  </Button>
+                  {plan.isAddOn && plan.alternativeOption ? (
+                    <div className="space-y-2">
+                      <Button 
+                        className="w-full"
+                        variant="outline"
+                        disabled={loading || isCurrentPlan}
+                        onClick={() => handleSubscribe(plan.plan)}
+                      >
+                        {plan.buttonText}
+                      </Button>
+                      <div className="text-center text-xs text-muted-foreground">or</div>
+                      <Button 
+                        className="w-full"
+                        variant="default"
+                        disabled={loading || isCurrentPlan}
+                        onClick={() => handleSubscribe(plan.alternativeOption.plan)}
+                      >
+                        {plan.alternativeOption.buttonText}
+                      </Button>
+                      <div className="text-center text-xs text-muted-foreground">
+                        {plan.alternativeOption.price} {plan.alternativeOption.period}
+                      </div>
+                    </div>
+                  ) : (
+                    <Button 
+                      className="w-full mt-6"
+                      variant={plan.popular ? "default" : "outline"}
+                      disabled={loading || isCurrentPlan || isFree}
+                      onClick={() => handleSubscribe(plan.plan)}
+                    >
+                      {isCurrentPlan ? "Current Plan" : plan.buttonText}
+                    </Button>
+                  )}
                 </CardContent>
               </Card>
             );
