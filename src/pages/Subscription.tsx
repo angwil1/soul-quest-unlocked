@@ -194,11 +194,15 @@ const Subscription = () => {
                 key={tier.name} 
                 className={`relative ${tier.current ? 'border-primary ring-2 ring-primary/20' : 'border-border'} hover:shadow-lg transition-all duration-300`}
               >
-                {tier.current && (
+                {tier.current ? (
                   <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-primary">
                     Current Plan
                   </Badge>
-                )}
+                ) : tier.isAddOn ? (
+                  <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-purple-500">
+                    Add-On
+                  </Badge>
+                ) : null}
                 
                 <CardHeader className="text-center">
                   <div className="flex justify-center mb-2">
