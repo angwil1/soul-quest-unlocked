@@ -9,6 +9,8 @@ import { supabase } from '@/integrations/supabase/client';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { FloatingQuizButton } from '@/components/FloatingQuizButton';
+import { FirstLightModal } from '@/components/FirstLightModal';
+import { InviteKindredSoul } from '@/components/InviteKindredSoul';
 import datingBackground from '@/assets/dating-background.jpg';
 
 const Index = () => {
@@ -16,10 +18,10 @@ const Index = () => {
   const { subscription, loading: subscriptionLoading } = useSubscription();
   const navigate = useNavigate();
   const [faqs, setFaqs] = useState<Array<{id: number; question: string; answer: string}>>([]);
+  const [showFirstLightModal, setShowFirstLightModal] = useState(false);
+  const [isNewUser, setIsNewUser] = useState(false);
 
   useEffect(() => {
-    // Remove automatic redirect - let users see the landing page with login buttons
-    
     // Fetch FAQs for the "What Makes Us Different" section
     const fetchFaqs = async () => {
       const { data } = await supabase
@@ -34,6 +36,12 @@ const Index = () => {
     };
     
     fetchFaqs();
+    
+    // Show First Light Modal for authenticated users on first visit
+    if (user && !localStorage.getItem('hasSeenFirstLight')) {
+      setIsNewUser(true);
+      setShowFirstLightModal(true);
+    }
   }, [user, loading, navigate]);
 
   if (loading) {
@@ -52,9 +60,9 @@ const Index = () => {
         <Navbar />
         <div className="p-4">
         <div className="max-w-4xl mx-auto">
-          {/* Hero Section for non-logged in users */}
+          {/* Section 1: Emotional Intro */}
           <div 
-            className="text-center mb-12 mt-16 relative rounded-2xl overflow-hidden"
+            className="text-center mb-16 mt-16 relative rounded-2xl overflow-hidden"
             style={{
               backgroundImage: `url(${datingBackground})`,
               backgroundSize: 'cover',
@@ -64,9 +72,9 @@ const Index = () => {
           >
             <div className="absolute inset-0 bg-background/80 backdrop-blur-sm"></div>
             <div className="relative z-10 py-20 px-8">
-              <h1 className="text-5xl font-bold mb-6">Dating with depth, powered by trust.</h1>
+              <h1 className="text-5xl font-bold mb-6">🪞 Not just a dating app—this is emotional clarity, made tangible.</h1>
               <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-                Because real connection isn't rare, it's just waiting for the right space.
+                Discover your emotional fingerprint, take our Compatibility Quiz, and feel the brand before anyone else arrives.
               </p>
               <div className="flex gap-4 justify-center">
                 <Button 
@@ -74,7 +82,7 @@ const Index = () => {
                   size="lg"
                   className="bg-gradient-to-r from-primary to-secondary hover:opacity-90"
                 >
-                  Get Started
+                  Begin with Curiosity
                 </Button>
                 <Button 
                   onClick={() => navigate('/auth')} 
@@ -84,6 +92,17 @@ const Index = () => {
                   Sign In
                 </Button>
               </div>
+            </div>
+          </div>
+
+          {/* Section 3: Invite a Kindred Soul */}
+          <div className="mb-16">
+            <h2 className="text-3xl font-bold text-center mb-8">Every story begins with a second heartbeat</h2>
+            <p className="text-center text-muted-foreground mb-8 text-lg">
+              Invite someone whose soul quests mirror your own.
+            </p>
+            <div className="max-w-md mx-auto">
+              <InviteKindredSoul />
             </div>
           </div>
 
@@ -169,10 +188,22 @@ const Index = () => {
     );
   }
 
+  const handleCloseFirstLightModal = () => {
+    setShowFirstLightModal(false);
+    localStorage.setItem('hasSeenFirstLight', 'true');
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
       <FloatingQuizButton />
+      
+      {/* First Light Modal */}
+      <FirstLightModal 
+        isOpen={showFirstLightModal} 
+        onClose={handleCloseFirstLightModal} 
+      />
+      
       <div className="p-4">
       <div className="max-w-4xl mx-auto">
         {/* User Status Bar */}
