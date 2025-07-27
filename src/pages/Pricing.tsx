@@ -137,21 +137,19 @@ const Pricing = () => {
                     : "border-border"
                 } ${isCurrentPlan ? "border-green-500 bg-green-50 dark:bg-green-950" : ""}`}
               >
-                {plan.popular && (
-                  <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-primary">
-                    Most Popular
-                  </Badge>
-                )}
-                {plan.isAddOn && (
-                  <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-purple-500">
-                    Add-On
-                  </Badge>
-                )}
-                {isCurrentPlan && (
+                {isCurrentPlan ? (
                   <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-green-500">
                     Current Plan
                   </Badge>
-                )}
+                ) : plan.popular ? (
+                  <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-primary">
+                    Most Popular
+                  </Badge>
+                ) : plan.isAddOn ? (
+                  <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-purple-500">
+                    Add-On
+                  </Badge>
+                ) : null}
                 
                 <CardHeader className="text-center pb-4">
                   <CardTitle className="text-xl font-bold flex items-center justify-center gap-2">
