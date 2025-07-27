@@ -31,22 +31,6 @@ const Pricing = () => {
       popular: false
     },
     {
-      name: "Unlocked",
-      price: "$5",
-      period: "/month",
-      description: "Supporting something meaningful",
-      features: [
-        "Video chat with matches",
-        "Read receipts",
-        "Undo delete", 
-        "Visibility boost",
-        "All Free features"
-      ],
-      buttonText: "Get Unlocked",
-      plan: "unlocked",
-      popular: true
-    },
-    {
       name: "Unlocked+",
       price: "$12",
       period: "/month", 
