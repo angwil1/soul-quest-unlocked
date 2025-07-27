@@ -46,18 +46,19 @@ const Pricing = () => {
       popular: false
     },
     {
-      name: "Founder's Circle",
+      name: "Unlocked Beyond",
       price: "$39",
       period: "/year",
       description: "Join our community",
       features: [
-        "Video chat with matches",
-        "Lifetime Unlocked+ access",
-        "Personal welcome note from founder",
-        "Early tool access"
+        "Lifetime access to all Unlocked features",
+        "\"Unlocked Beyond\" badge on profile",
+        "Unlocked Mode: values-first compatibility journeys",
+        "Memory Vault: revisit favorite moments, prompts, and saved matches",
+        "Connection DNA: evolving emotional intelligence for deeper match potential"
       ],
-      buttonText: "Join Founder's Circle",
-      plan: "founders-circle",
+      buttonText: "Get Unlocked Beyond",
+      plan: "unlocked-beyond",
       popular: false
     }
   ];
