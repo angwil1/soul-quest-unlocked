@@ -355,41 +355,15 @@ const Index = () => {
           <p className="text-center text-muted-foreground mb-12 text-lg">
             Real connections, found through emotional clarity
           </p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
-            <div className="relative group">
-              <img 
-                src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
-                alt="Happy couple laughing together" 
-                className="w-full h-48 object-cover rounded-lg transition-transform group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-primary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"></div>
-            </div>
-            <div className="relative group">
-              <img 
-                src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
-                alt="Couple enjoying coffee together" 
-                className="w-full h-48 object-cover rounded-lg transition-transform group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-primary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"></div>
-            </div>
-            <div className="relative group">
-              <img 
-                src="https://images.unsplash.com/photo-1522038195505-5f7265c1815a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
-                alt="Couple walking hand in hand" 
-                className="w-full h-48 object-cover rounded-lg transition-transform group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-primary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"></div>
-            </div>
-            <div className="relative group">
-              <img 
-                src="https://images.unsplash.com/photo-1518611012118-696072aa579a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
-                alt="Couple embracing outdoors" 
-                className="w-full h-48 object-cover rounded-lg transition-transform group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-primary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"></div>
-            </div>
+          <div className="max-w-4xl mx-auto mb-12">
+            <img 
+              src="/lovable-uploads/ca0ac62b-2f4a-43d8-aafa-8a00c169e4b7.png" 
+              alt="Happy couples enjoying beautiful moments together - love stories in progress" 
+              className="w-full rounded-2xl shadow-lg transition-transform hover:scale-[1.02]"
+            />
           </div>
         </div>
+        
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <Card>
