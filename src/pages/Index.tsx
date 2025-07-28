@@ -348,6 +348,21 @@ const Index = () => {
             </Button>
           </div>
         </div>
+
+        {/* Happy Couples Section */}
+        <div className="mb-16">
+          <h2 className="text-3xl font-bold text-center mb-8">Love Stories in Progress</h2>
+          <p className="text-center text-muted-foreground mb-12 text-lg">
+            Real connections, found through emotional clarity
+          </p>
+          <div className="max-w-4xl mx-auto mb-12">
+            <img 
+              src="/lovable-uploads/ca0ac62b-2f4a-43d8-aafa-8a00c169e4b7.png" 
+              alt="Happy couples enjoying beautiful moments together - love stories in progress" 
+              className="w-full rounded-2xl shadow-lg transition-transform hover:scale-[1.02]"
+            />
+          </div>
+        </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <Card>
