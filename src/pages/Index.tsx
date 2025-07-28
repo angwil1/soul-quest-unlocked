@@ -355,11 +355,11 @@ const Index = () => {
           <p className="text-center text-muted-foreground mb-12 text-lg">
             Real connections, found through emotional clarity
           </p>
-          <div className="max-w-4xl mx-auto mb-12">
+          <div className="max-w-2xl mx-auto mb-12">
             <img 
               src="/lovable-uploads/ca0ac62b-2f4a-43d8-aafa-8a00c169e4b7.png" 
               alt="Happy couples enjoying beautiful moments together - love stories in progress" 
-              className="w-full rounded-2xl shadow-lg transition-transform hover:scale-[1.02]"
+              className="w-full rounded-xl shadow-md transition-transform hover:scale-[1.02]"
             />
           </div>
         </div>
