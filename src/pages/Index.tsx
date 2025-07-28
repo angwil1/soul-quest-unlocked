@@ -198,32 +198,32 @@ const Index = () => {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
               <div className="relative group">
                 <img 
-                  src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
-                  alt="Happy couple embracing" 
+                  src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
+                  alt="Couple on romantic date" 
                   className="w-full h-48 object-cover rounded-lg transition-transform group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-primary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"></div>
               </div>
               <div className="relative group">
                 <img 
-                  src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
-                  alt="Couple laughing together" 
+                  src="https://images.unsplash.com/photo-1518568814500-bf0f8d125f46?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
+                  alt="Romantic dinner date" 
                   className="w-full h-48 object-cover rounded-lg transition-transform group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-primary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"></div>
               </div>
               <div className="relative group">
                 <img 
-                  src="https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
-                  alt="Romantic couple walking" 
+                  src="https://images.unsplash.com/photo-1511895426328-dc8714191300?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
+                  alt="First date coffee meeting" 
                   className="w-full h-48 object-cover rounded-lg transition-transform group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-primary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"></div>
               </div>
               <div className="relative group">
                 <img 
-                  src="https://images.unsplash.com/photo-1544963150-6a0e00b36b99?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
-                  alt="Couple in love outdoors" 
+                  src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
+                  alt="Dating app conversation" 
                   className="w-full h-48 object-cover rounded-lg transition-transform group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-primary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"></div>
