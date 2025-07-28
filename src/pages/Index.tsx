@@ -333,7 +333,7 @@ const Index = () => {
             backgroundRepeat: 'no-repeat'
           }}
         >
-          <div className="absolute inset-0 bg-background/80 backdrop-blur-sm"></div>
+          <div className="absolute inset-0 bg-background/60 backdrop-blur-sm"></div>
           <div className="relative z-10 py-16 px-8">
             <h1 className="text-5xl font-bold mb-6">Dating with depth, powered by trust.</h1>
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
