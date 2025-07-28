@@ -195,39 +195,12 @@ const Index = () => {
             <p className="text-center text-muted-foreground mb-12 text-lg">
               Real connections, found through emotional clarity
             </p>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-              <div className="relative group">
-                <img 
-                  src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
-                  alt="Happy couple" 
-                  className="w-full h-48 object-cover rounded-lg transition-transform group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-primary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"></div>
-              </div>
-              <div className="relative group">
-                <img 
-                  src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
-                  alt="Couple connecting" 
-                  className="w-full h-48 object-cover rounded-lg transition-transform group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-primary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"></div>
-              </div>
-              <div className="relative group">
-                <img 
-                  src="https://images.unsplash.com/photo-1485833077593-4278bba3f11f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
-                  alt="Peaceful connection" 
-                  className="w-full h-48 object-cover rounded-lg transition-transform group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-primary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"></div>
-              </div>
-              <div className="relative group">
-                <img 
-                  src="https://images.unsplash.com/photo-1441057206919-63d19fac2369?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" 
-                  alt="Together in nature" 
-                  className="w-full h-48 object-cover rounded-lg transition-transform group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-primary/20 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"></div>
-              </div>
+            <div className="max-w-4xl mx-auto mb-12">
+              <img 
+                src="/lovable-uploads/ca0ac62b-2f4a-43d8-aafa-8a00c169e4b7.png" 
+                alt="Happy couples enjoying beautiful moments together - love stories in progress" 
+                className="w-full rounded-2xl shadow-lg transition-transform hover:scale-[1.02]"
+              />
             </div>
           </div>
 
