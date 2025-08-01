@@ -70,25 +70,6 @@ const Subscription = () => {
       plan: null
     },
     {
-      name: 'Unlocked Echo',
-      icon: '',
-      price: '$12/month',
-      description: 'Want your vibe seen first? Add Echo anytime—no full upgrade needed.',
-      features: [
-        'TikTok-style profile embed (optional)',
-        'Emotional soundtrack prompts',
-        'Discoverability via vibe gallery',
-        'Echo badge toggle',
-        'All free features included'
-      ],
-      current: false,
-      buttonText: 'Add Echo Now',
-      disabled: false,
-      plan: 'unlocked-echo-monthly',
-      isEcho: true,
-      highlight: true
-    },
-    {
       name: 'Unlocked+',
       icon: '',
       price: '$12/month',
@@ -120,6 +101,25 @@ const Subscription = () => {
       buttonText: currentTier === 'Pro' && isSubscribed ? 'Current Plan' : 'Get Unlocked Beyond',
       disabled: currentTier === 'Pro' && isSubscribed,
       plan: 'unlocked-beyond'
+    },
+    {
+      name: 'Unlocked Echo',
+      icon: '',
+      price: '$12/month',
+      description: 'Want your vibe seen first? Add Echo anytime—no full upgrade needed.',
+      features: [
+        'TikTok-style profile embed (optional)',
+        'Emotional soundtrack prompts',
+        'Discoverability via vibe gallery',
+        'Echo badge toggle',
+        'All free features included'
+      ],
+      current: false,
+      buttonText: 'Add Echo Now',
+      disabled: false,
+      plan: 'unlocked-echo-monthly',
+      isEcho: true,
+      highlight: true
     }
   ];
 
