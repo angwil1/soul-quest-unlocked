@@ -21,7 +21,7 @@ const Subscription = () => {
     checkSubscription();
   }, [checkSubscription]);
 
-  const currentTier = subscription?.subscription_tier || 'Unlocked';
+  const currentTier = 'Unlocked';
   const isSubscribed = subscription?.subscribed || false;
 
   const handleUpgrade = async (plan: string) => {
@@ -80,9 +80,9 @@ const Subscription = () => {
         'Priority matching',
         'All free features'
       ],
-      current: currentTier === 'Premium' && isSubscribed,
-      buttonText: currentTier === 'Premium' && isSubscribed ? 'Current Plan' : 'Get Unlocked+',
-      disabled: currentTier === 'Premium' && isSubscribed,
+      current: subscription?.subscription_tier === 'Premium' && isSubscribed,
+      buttonText: subscription?.subscription_tier === 'Premium' && isSubscribed ? 'Current Plan' : 'Get Unlocked+',
+      disabled: subscription?.subscription_tier === 'Premium' && isSubscribed,
       plan: 'unlocked-plus'
     },
     {
@@ -97,9 +97,9 @@ const Subscription = () => {
         'Memory Vault: revisit favorite moments, prompts, and saved matches',
         'Connection DNA: evolving emotional intelligence for deeper match potential'
       ],
-      current: currentTier === 'Pro' && isSubscribed,
-      buttonText: currentTier === 'Pro' && isSubscribed ? 'Current Plan' : 'Get Unlocked Beyond',
-      disabled: currentTier === 'Pro' && isSubscribed,
+      current: subscription?.subscription_tier === 'Pro' && isSubscribed,
+      buttonText: subscription?.subscription_tier === 'Pro' && isSubscribed ? 'Current Plan' : 'Get Unlocked Beyond',
+      disabled: subscription?.subscription_tier === 'Pro' && isSubscribed,
       plan: 'unlocked-beyond'
     },
     {
