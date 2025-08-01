@@ -54,61 +54,61 @@ export const ProfileSetupModal: React.FC<ProfileSetupModalProps> = ({ isOpen, on
   return (
     <Dialog open={isOpen} onOpenChange={() => {}}>
       <DialogContent 
-        className="sm:max-w-lg rounded-2xl shadow-2xl border-0 bg-background/95 backdrop-blur-sm" 
+        className="sm:max-w-md rounded-xl shadow-lg border-0 bg-background/95 backdrop-blur-sm" 
         onPointerDownOutside={(e) => e.preventDefault()}
       >
-        <DialogHeader className="text-center space-y-4 pb-2">
+        <DialogHeader className="text-center space-y-2 pb-2">
           <div className="flex justify-center">
-            <div className="p-3 rounded-full bg-primary/10">
-              <Heart className="h-8 w-8 text-primary" />
+            <div className="p-2 rounded-full bg-primary/10">
+              <Heart className="h-5 w-5 text-primary" />
             </div>
           </div>
-          <DialogTitle className="text-2xl font-bold text-foreground leading-relaxed">
+          <DialogTitle className="text-lg font-bold text-foreground leading-tight">
             Let's get you started—who are you hoping to meet?
           </DialogTitle>
-          <p className="text-muted-foreground text-sm">
+          <p className="text-muted-foreground text-xs">
             Just a few quick details to find your perfect connections
           </p>
         </DialogHeader>
         
-        <div className="space-y-6 py-6 px-2">
+        <div className="space-y-4 py-3 px-1">
           {/* Gender Selection */}
-          <div className="space-y-3">
-            <Label className="text-sm font-medium text-foreground">I am a...</Label>
+          <div className="space-y-2">
+            <Label className="text-xs font-medium text-foreground">I am a...</Label>
             <Select value={gender} onValueChange={setGender}>
-              <SelectTrigger className="w-full h-12 rounded-xl border-2 border-border hover:border-primary/50 transition-colors">
+              <SelectTrigger className="w-full h-9 rounded-lg border border-border hover:border-primary/50 transition-colors">
                 <SelectValue placeholder="Select your gender" />
               </SelectTrigger>
-              <SelectContent className="rounded-xl">
-                <SelectItem value="man" className="rounded-lg">Man</SelectItem>
-                <SelectItem value="woman" className="rounded-lg">Woman</SelectItem>
-                <SelectItem value="nonbinary" className="rounded-lg">Nonbinary</SelectItem>
+              <SelectContent className="rounded-lg">
+                <SelectItem value="man" className="rounded-md">Man</SelectItem>
+                <SelectItem value="woman" className="rounded-md">Woman</SelectItem>
+                <SelectItem value="nonbinary" className="rounded-md">Nonbinary</SelectItem>
               </SelectContent>
             </Select>
           </div>
 
           {/* Looking For Selection */}
-          <div className="space-y-3">
-            <Label className="text-sm font-medium text-foreground">Looking for a...</Label>
+          <div className="space-y-2">
+            <Label className="text-xs font-medium text-foreground">Looking for a...</Label>
             <Select value={lookingFor} onValueChange={setLookingFor}>
-              <SelectTrigger className="w-full h-12 rounded-xl border-2 border-border hover:border-primary/50 transition-colors">
+              <SelectTrigger className="w-full h-9 rounded-lg border border-border hover:border-primary/50 transition-colors">
                 <SelectValue placeholder="Who are you looking for?" />
               </SelectTrigger>
-              <SelectContent className="rounded-xl">
-                <SelectItem value="woman" className="rounded-lg">Woman</SelectItem>
-                <SelectItem value="man" className="rounded-lg">Man</SelectItem>
-                <SelectItem value="nonbinary" className="rounded-lg">Nonbinary</SelectItem>
-                <SelectItem value="anyone" className="rounded-lg">Open to anyone</SelectItem>
+              <SelectContent className="rounded-lg">
+                <SelectItem value="woman" className="rounded-md">Woman</SelectItem>
+                <SelectItem value="man" className="rounded-md">Man</SelectItem>
+                <SelectItem value="nonbinary" className="rounded-md">Nonbinary</SelectItem>
+                <SelectItem value="anyone" className="rounded-md">Open to anyone</SelectItem>
               </SelectContent>
             </Select>
           </div>
 
           {/* Age Range Preference */}
-          <div className="space-y-4">
-            <Label className="text-sm font-medium text-foreground">
+          <div className="space-y-2">
+            <Label className="text-xs font-medium text-foreground">
               Age Range: {ageRange[0]} - {ageRange[1]} years old
             </Label>
-            <div className="px-2">
+            <div className="px-1">
               <Slider
                 value={ageRange}
                 onValueChange={setAgeRange}
@@ -121,14 +121,14 @@ export const ProfileSetupModal: React.FC<ProfileSetupModalProps> = ({ isOpen, on
           </div>
 
           {/* Location */}
-          <div className="space-y-3">
-            <Label className="text-sm font-medium text-foreground">Location</Label>
+          <div className="space-y-2">
+            <Label className="text-xs font-medium text-foreground">Location</Label>
             <Input
               type="text"
               placeholder="Enter your zip code or city"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              className="w-full h-12 rounded-xl border-2 border-border hover:border-primary/50 focus:border-primary transition-colors"
+              className="w-full h-9 rounded-lg border border-border hover:border-primary/50 focus:border-primary transition-colors"
             />
           </div>
 
