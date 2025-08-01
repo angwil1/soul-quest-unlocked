@@ -5,8 +5,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
+import { Calendar } from "@/components/ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { useProfile } from "@/hooks/useProfile";
 import { useNavigate } from "react-router-dom";
+import { format, differenceInYears } from "date-fns";
+import { CalendarIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface ProfileSetupModalProps {
   isOpen: boolean;
@@ -16,7 +21,9 @@ interface ProfileSetupModalProps {
 export const ProfileSetupModal: React.FC<ProfileSetupModalProps> = ({ isOpen, onComplete }) => {
   const [gender, setGender] = useState<string>("");
   const [lookingFor, setLookingFor] = useState<string>("");
-  const [ageRange, setAgeRange] = useState<number[]>([25, 45]);
+  const [ageRange, setAgeRange] = useState<number[]>([18, 35]);
+  const [dateOfBirth, setDateOfBirth] = useState<Date>();
+  const [email, setEmail] = useState<string>("");
   const [location, setLocation] = useState<string>("");
   const [loading, setLoading] = useState(false);
   
@@ -24,7 +31,13 @@ export const ProfileSetupModal: React.FC<ProfileSetupModalProps> = ({ isOpen, on
   const navigate = useNavigate();
 
   const handleComplete = async () => {
-    if (!gender || !lookingFor || !location) {
+    if (!gender || !lookingFor || !location || !dateOfBirth || !email) {
+      return;
+    }
+
+    const userAge = differenceInYears(new Date(), dateOfBirth);
+    if (userAge < 18) {
+      alert("You must be 18 or older to use this app.");
       return;
     }
 
@@ -37,6 +50,8 @@ export const ProfileSetupModal: React.FC<ProfileSetupModalProps> = ({ isOpen, on
         age_preference_min: ageRange[0],
         age_preference_max: ageRange[1],
         location,
+        age: userAge,
+        date_of_birth: format(dateOfBirth, 'yyyy-MM-dd'),
       });
       
       onComplete();
@@ -48,7 +63,8 @@ export const ProfileSetupModal: React.FC<ProfileSetupModalProps> = ({ isOpen, on
     }
   };
 
-  const isComplete = gender && lookingFor && location;
+  const isComplete = gender && lookingFor && location && dateOfBirth && email;
+  const userAge = dateOfBirth ? differenceInYears(new Date(), dateOfBirth) : 0;
 
   return (
     <Dialog open={isOpen} onOpenChange={() => {}}>
@@ -91,10 +107,56 @@ export const ProfileSetupModal: React.FC<ProfileSetupModalProps> = ({ isOpen, on
             </Select>
           </div>
 
-          {/* Age Range */}
+          {/* Date of Birth */}
+          <div className="space-y-3">
+            <Label className="text-sm font-medium text-foreground">Date of Birth</Label>
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  variant="outline"
+                  className={cn(
+                    "w-full justify-start text-left font-normal",
+                    !dateOfBirth && "text-muted-foreground"
+                  )}
+                >
+                  <CalendarIcon className="mr-2 h-4 w-4" />
+                  {dateOfBirth ? format(dateOfBirth, "PPP") : <span>Pick your date of birth</span>}
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0" align="start">
+                <Calendar
+                  mode="single"
+                  selected={dateOfBirth}
+                  onSelect={setDateOfBirth}
+                  disabled={(date) =>
+                    date > new Date() || date < new Date("1900-01-01")
+                  }
+                  initialFocus
+                  className={cn("p-3 pointer-events-auto")}
+                />
+              </PopoverContent>
+            </Popover>
+            {dateOfBirth && userAge < 18 && (
+              <p className="text-sm text-destructive">You must be 18 or older to use this app</p>
+            )}
+          </div>
+
+          {/* Email */}
+          <div className="space-y-3">
+            <Label className="text-sm font-medium text-foreground">Email</Label>
+            <Input
+              type="email"
+              placeholder="Enter your email address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full"
+            />
+          </div>
+
+          {/* Age Range Preference */}
           <div className="space-y-3">
             <Label className="text-sm font-medium text-foreground">
-              Age Range: {ageRange[0]} - {ageRange[1]}
+              Age Range Preference: {ageRange[0]} - {ageRange[1]}
             </Label>
             <Slider
               value={ageRange}
