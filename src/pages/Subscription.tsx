@@ -55,14 +55,14 @@ const Subscription = () => {
     {
       name: 'Free',
       icon: '',
-      price: 'Free',
-      description: 'Opens curiosity. Perfect for getting started.',
+      price: '$0/month',
+      description: 'Opens curiosity, perfect for getting started',
       features: [
-        'Take the Compatibility Quiz',
-        'View three curated matches based on emotional resonance',
-        'Limited messaging access (read or send one message per match)',
-        'Explore onboarding questions & poetic prompts',
-        'Feel the brand before committing—Echo is optional'
+        'Take the compatibility quiz',
+        'View matches',
+        'Limited messaging',
+        'Explore onboarding questions and sample prompts',
+        'Feel the brand before committing'
       ],
       current: !isSubscribed,
       buttonText: 'Current Plan',
@@ -106,16 +106,15 @@ const Subscription = () => {
       name: 'Unlocked Echo',
       icon: '',
       price: '$4/month',
-      description: 'Want your vibe seen first? Add Echo anytime—no full upgrade needed.',
+      description: 'Expressive upgrade for creative visibility',
       features: [
         'TikTok-style profile embed (optional)',
         'Emotional soundtrack prompts',
         'Discoverability via vibe gallery',
-        'Echo badge toggle',
-        'All free features included'
+        'Echo badge toggle'
       ],
       current: false,
-      buttonText: 'Add Echo Now',
+      buttonText: 'Get Echo Monthly',
       disabled: false,
       plan: 'unlocked-echo-monthly',
       isEcho: true,
