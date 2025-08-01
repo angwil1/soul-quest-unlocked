@@ -43,7 +43,7 @@ const Matches = () => {
       location: 'Palo Alto, CA',
       occupation: 'Yoga Instructor',
       interests: ['Yoga', 'Nature', 'Meditation', 'Reading'],
-      avatar_url: 'https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?w=400',
+      avatar_url: 'https://images.unsplash.com/photo-1473091534298-04dcbce3278c?w=400',
       compatibility_score: 92,
       distance: 15
     }
