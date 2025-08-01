@@ -4,7 +4,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ArrowLeft, Heart, X, MapPin, Users } from 'lucide-react';
-import caseyProfile from '@/assets/casey-profile.jpg';
+import caseyProfile from '@/assets/casey-profile-realistic.jpg';
 
 const Matches = () => {
   const navigate = useNavigate();
