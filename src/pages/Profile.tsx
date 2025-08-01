@@ -14,15 +14,22 @@ import { EchoBadgeToggle } from '@/components/EchoBadgeToggle';
 import { ArrowLeft, Edit, MapPin, Briefcase, GraduationCap, Heart, Settings } from 'lucide-react';
 
 const Profile = () => {
-  const { user } = useAuth();
+  const { user, loading: authLoading } = useAuth();
   const { profile, loading } = useProfile();
   const { subscription, loading: subscriptionLoading, manageBilling } = useSubscription();
   const { isEchoActive } = useEchoSubscription();
   const navigate = useNavigate();
 
-  // Remove auth redirect for demo purposes
+  console.log('Profile page - authLoading:', authLoading, 'user:', user, 'profile:', profile, 'loading:', loading);
 
-  if (loading) {
+  // Temporarily return a simple test render
+  return (
+    <div className="min-h-screen bg-red-500 flex items-center justify-center">
+      <div className="text-white text-2xl">Profile Page Test - Are you seeing this?</div>
+    </div>
+  );
+
+  if (authLoading || loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-center">
