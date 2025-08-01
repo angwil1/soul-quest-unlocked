@@ -7,7 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Slider } from "@/components/ui/slider";
 import { useProfile } from "@/hooks/useProfile";
 import { useNavigate } from "react-router-dom";
-import { Heart } from "lucide-react";
+import { Heart, X } from "lucide-react";
 
 interface ProfileSetupModalProps {
   isOpen: boolean;
@@ -52,104 +52,96 @@ export const ProfileSetupModal: React.FC<ProfileSetupModalProps> = ({ isOpen, on
   const isComplete = gender && lookingFor && location;
 
   return (
-    <Dialog open={isOpen} onOpenChange={() => {}}>
+    <Dialog open={isOpen} onOpenChange={(open) => !open && onComplete()}>
       <DialogContent 
-        className="sm:max-w-md rounded-xl shadow-lg border-0 bg-background/95 backdrop-blur-sm" 
-        onPointerDownOutside={(e) => e.preventDefault()}
+        className="sm:max-w-sm rounded-lg shadow-md border bg-background" 
       >
-        <DialogHeader className="text-center space-y-2 pb-2">
-          <div className="flex justify-center">
-            <div className="p-2 rounded-full bg-primary/10">
-              <Heart className="h-5 w-5 text-primary" />
-            </div>
-          </div>
-          <DialogTitle className="text-lg font-bold text-foreground leading-tight">
-            Let's get you started—who are you hoping to meet?
+        {/* Close button */}
+        <Button
+          variant="ghost"
+          size="icon"
+          className="absolute right-2 top-2 h-6 w-6 rounded-full"
+          onClick={onComplete}
+        >
+          <X className="h-3 w-3" />
+        </Button>
+
+        <DialogHeader className="text-center space-y-1 pb-1">
+          <DialogTitle className="text-base font-semibold text-foreground leading-tight">
+            Quick setup
           </DialogTitle>
           <p className="text-muted-foreground text-xs">
-            Just a few quick details to find your perfect connections
+            Help us find your matches
           </p>
         </DialogHeader>
         
-        <div className="space-y-4 py-3 px-1">
+        <div className="space-y-3 py-2">
           {/* Gender Selection */}
-          <div className="space-y-2">
-            <Label className="text-xs font-medium text-foreground">I am a...</Label>
+          <div className="space-y-1">
+            <Label className="text-xs font-medium text-foreground">I am</Label>
             <Select value={gender} onValueChange={setGender}>
-              <SelectTrigger className="w-full h-9 rounded-lg border border-border hover:border-primary/50 transition-colors">
-                <SelectValue placeholder="Select your gender" />
+              <SelectTrigger className="w-full h-8 rounded-md border border-border text-xs">
+                <SelectValue placeholder="Gender" />
               </SelectTrigger>
-              <SelectContent className="rounded-lg">
-                <SelectItem value="man" className="rounded-md">Man</SelectItem>
-                <SelectItem value="woman" className="rounded-md">Woman</SelectItem>
-                <SelectItem value="nonbinary" className="rounded-md">Nonbinary</SelectItem>
+              <SelectContent className="rounded-md">
+                <SelectItem value="man">Man</SelectItem>
+                <SelectItem value="woman">Woman</SelectItem>
+                <SelectItem value="nonbinary">Nonbinary</SelectItem>
               </SelectContent>
             </Select>
           </div>
 
           {/* Looking For Selection */}
-          <div className="space-y-2">
-            <Label className="text-xs font-medium text-foreground">Looking for a...</Label>
+          <div className="space-y-1">
+            <Label className="text-xs font-medium text-foreground">Looking for</Label>
             <Select value={lookingFor} onValueChange={setLookingFor}>
-              <SelectTrigger className="w-full h-9 rounded-lg border border-border hover:border-primary/50 transition-colors">
-                <SelectValue placeholder="Who are you looking for?" />
+              <SelectTrigger className="w-full h-8 rounded-md border border-border text-xs">
+                <SelectValue placeholder="Looking for" />
               </SelectTrigger>
-              <SelectContent className="rounded-lg">
-                <SelectItem value="woman" className="rounded-md">Woman</SelectItem>
-                <SelectItem value="man" className="rounded-md">Man</SelectItem>
-                <SelectItem value="nonbinary" className="rounded-md">Nonbinary</SelectItem>
-                <SelectItem value="anyone" className="rounded-md">Open to anyone</SelectItem>
+              <SelectContent className="rounded-md">
+                <SelectItem value="woman">Woman</SelectItem>
+                <SelectItem value="man">Man</SelectItem>
+                <SelectItem value="nonbinary">Nonbinary</SelectItem>
+                <SelectItem value="anyone">Anyone</SelectItem>
               </SelectContent>
             </Select>
           </div>
 
           {/* Age Range Preference */}
-          <div className="space-y-2">
+          <div className="space-y-1">
             <Label className="text-xs font-medium text-foreground">
-              Age Range: {ageRange[0]} - {ageRange[1]} years old
+              Age: {ageRange[0]}-{ageRange[1]}
             </Label>
-            <div className="px-1">
-              <Slider
-                value={ageRange}
-                onValueChange={setAgeRange}
-                min={18}
-                max={80}
-                step={1}
-                className="w-full"
-              />
-            </div>
+            <Slider
+              value={ageRange}
+              onValueChange={setAgeRange}
+              min={18}
+              max={80}
+              step={1}
+              className="w-full"
+            />
           </div>
 
           {/* Location */}
-          <div className="space-y-2">
+          <div className="space-y-1">
             <Label className="text-xs font-medium text-foreground">Location</Label>
             <Input
               type="text"
-              placeholder="Enter your zip code or city"
+              placeholder="Zip or city"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              className="w-full h-9 rounded-lg border border-border hover:border-primary/50 focus:border-primary transition-colors"
+              className="w-full h-8 rounded-md border border-border text-xs"
             />
           </div>
 
           {/* Submit Button */}
-          <div className="pt-4">
+          <div className="pt-2">
             <Button
               onClick={handleComplete}
               disabled={!isComplete || loading}
-              className="w-full h-10 bg-primary hover:bg-primary/90 text-primary-foreground font-medium rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full h-8 bg-primary hover:bg-primary/90 text-primary-foreground text-xs font-medium rounded-md"
             >
-              {loading ? (
-                <div className="flex items-center gap-2">
-                  <div className="h-3 w-3 animate-spin rounded-full border-2 border-primary-foreground border-t-transparent"></div>
-                  Setting up...
-                </div>
-              ) : (
-                <div className="flex items-center gap-2">
-                  <Heart className="h-3 w-3" />
-                  Begin Your Echo
-                </div>
-              )}
+              {loading ? "Setting up..." : "Start Matching"}
             </Button>
           </div>
         </div>
