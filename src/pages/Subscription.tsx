@@ -54,15 +54,15 @@ const Subscription = () => {
   const tiers = [
     {
       name: 'Free',
-      icon: '🌱',
+      icon: '',
       price: 'Free',
       description: 'Opens curiosity. Perfect for getting started.',
       features: [
-        '🧠 Take the Compatibility Quiz',
-        '🫂 View three curated matches based on emotional resonance',
-        '📬 Limited messaging access (read or send one message per match)',
-        '🌀 Explore onboarding questions & poetic prompts',
-        '🌸 Feel the brand before committing—Echo is optional'
+        'Take the Compatibility Quiz',
+        'View three curated matches based on emotional resonance',
+        'Limited messaging access (read or send one message per match)',
+        'Explore onboarding questions & poetic prompts',
+        'Feel the brand before committing—Echo is optional'
       ],
       current: !isSubscribed,
       buttonText: 'Current Plan',
@@ -71,15 +71,15 @@ const Subscription = () => {
     },
     {
       name: 'Unlocked Echo',
-      icon: '💫',
+      icon: '',
       price: '$12/month',
       description: 'Want your vibe seen first? Add Echo anytime—no full upgrade needed.',
       features: [
-        '✨ TikTok-style profile embed (optional)',
-        '🎵 Emotional soundtrack prompts',
-        '🌈 Discoverability via vibe gallery',
-        '🔔 Echo badge toggle',
-        '🌟 All free features included'
+        'TikTok-style profile embed (optional)',
+        'Emotional soundtrack prompts',
+        'Discoverability via vibe gallery',
+        'Echo badge toggle',
+        'All free features included'
       ],
       current: false,
       buttonText: 'Add Echo Now',
@@ -90,7 +90,7 @@ const Subscription = () => {
     },
     {
       name: 'Unlocked+',
-      icon: '💬',
+      icon: '',
       price: '$12/month',
       description: 'Offers the upgrade logic for better connections',
       features: [
@@ -106,7 +106,7 @@ const Subscription = () => {
     },
     {
       name: 'Unlocked Beyond',
-      icon: '🔮',
+      icon: '',
       price: '$39/year',
       description: 'An invitation to co-create our community',
       features: [

@@ -14,7 +14,7 @@ const Pricing = () => {
   const plans = [
     {
       name: "Free",
-      icon: "🌱",
+      icon: "",
       price: "$0",
       period: "/month",
       description: "Opens curiosity, perfect for getting started",
@@ -34,7 +34,7 @@ const Pricing = () => {
     },
     {
       name: "Unlocked+",
-      icon: "💬",
+      icon: "",
       price: "$12",
       period: "/month", 
       description: "Offers the upgrade logic for better connections",
@@ -50,7 +50,7 @@ const Pricing = () => {
     },
     {
       name: "Unlocked Beyond",
-      icon: "🔮",
+      icon: "",
       price: "$39",
       period: "/year",
       description: "An invitation to co-create our community",
@@ -71,7 +71,7 @@ const Pricing = () => {
     },
     {
       name: "Unlocked Echo",
-      icon: "💫",
+      icon: "",
       price: "$4",
       period: "/month",
       description: "Expressive upgrade for creative visibility",
