@@ -128,9 +128,8 @@ const Matches = () => {
                 className="w-full h-full object-cover"
               />
               
-              {/* Compatibility Score */}
               <div className="absolute top-4 right-4">
-                <Badge className="bg-green-500 text-white">
+                <Badge className="bg-primary text-primary-foreground">
                   {currentMatch.compatibility_score}% Match
                 </Badge>
               </div>
@@ -179,7 +178,7 @@ const Matches = () => {
                 Pass
               </Button>
               <Button 
-                className="flex-1 bg-pink-500 hover:bg-pink-600" 
+                className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground" 
                 onClick={handleLike}
               >
                 <Heart className="h-5 w-5 mr-2" />

@@ -57,7 +57,7 @@ export const EchoBadgeToggle = () => {
             <div className="flex items-center gap-2">
               <span className="font-medium">Show Echo Badge</span>
               {profile?.echo_badge_enabled ? (
-                <Badge className="bg-purple-500 text-white">
+                <Badge className="bg-primary text-primary-foreground">
                   <Sparkles className="h-3 w-3 mr-1" />
                   Echo
                 </Badge>
@@ -87,7 +87,7 @@ export const EchoBadgeToggle = () => {
           <div className="flex items-center gap-2">
             <span className="text-sm">Your Profile</span>
             {profile?.echo_badge_enabled && (
-              <Badge className="bg-purple-500 text-white text-xs">
+              <Badge className="bg-primary text-primary-foreground text-xs">
                 <Sparkles className="h-3 w-3 mr-1" />
                 Echo
               </Badge>

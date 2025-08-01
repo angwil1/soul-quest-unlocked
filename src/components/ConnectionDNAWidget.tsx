@@ -123,7 +123,7 @@ export const ConnectionDNAWidget = () => {
               <CardDescription>
                 Overall EQ: {averageScore}/100
                 {insights.length > 0 && (
-                  <Badge className="ml-2 bg-orange-500 text-white">
+                  <Badge className="ml-2 bg-destructive text-destructive-foreground">
                     {insights.length} new insight{insights.length !== 1 ? 's' : ''}
                   </Badge>
                 )}

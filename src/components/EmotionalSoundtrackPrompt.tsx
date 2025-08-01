@@ -126,7 +126,7 @@ export const EmotionalSoundtrackPrompt = ({ onSoundtrackSelect }: EmotionalSound
         <CardTitle className="flex items-center gap-2">
           <Music className="h-6 w-6 text-purple-600" />
           What feeling are you echoing today?
-          <Badge className="bg-purple-500 text-white">Echo</Badge>
+          <Badge className="bg-primary text-primary-foreground">Echo</Badge>
         </CardTitle>
         <p className="text-muted-foreground">
           Select your vibe and get 5 curated soundtrack suggestions
@@ -140,7 +140,7 @@ export const EmotionalSoundtrackPrompt = ({ onSoundtrackSelect }: EmotionalSound
               key={mood.mood}
               variant={selectedMood === mood.mood ? "default" : "outline"}
               className={`p-4 h-auto flex flex-col items-center gap-2 ${
-                selectedMood === mood.mood ? 'bg-purple-600 hover:bg-purple-700' : ''
+                selectedMood === mood.mood ? 'bg-primary hover:bg-primary/90' : ''
               }`}
               onClick={() => handleMoodSelect(mood.mood)}
             >
@@ -185,7 +185,7 @@ export const EmotionalSoundtrackPrompt = ({ onSoundtrackSelect }: EmotionalSound
               {suggestions.map((suggestion, index) => (
                 <Card
                   key={index}
-                  className="p-4 cursor-pointer hover:bg-muted/50 transition-colors border-l-4 border-l-purple-500"
+                  className="p-4 cursor-pointer hover:bg-muted/50 transition-colors border-l-4 border-l-primary"
                   onClick={() => handleSoundtrackClick(suggestion)}
                 >
                   <div className="flex items-center justify-between">
