@@ -140,7 +140,7 @@ const SampleProfiles = () => {
           {/* Profile List */}
           <div className="lg:col-span-1">
             <div className="space-y-2">
-              <h3 className="font-semibold text-lg mb-4">Sample Profiles</h3>
+              <h3 className="font-semibold text-lg mb-4">Profiles</h3>
               {founderCuratedProfiles.map((profile) => (
                 <Card 
                   key={profile.id}
