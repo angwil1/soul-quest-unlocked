@@ -9,6 +9,8 @@ import { Separator } from '@/components/ui/separator';
 import { Crown, Heart, MessageCircle, Eye, Sparkles, Star, Zap, Check } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { Navbar } from '@/components/Navbar';
+import { UnlockedBeyondBadgeToggle } from '@/components/UnlockedBeyondBadgeToggle';
+import { UnlockedMode } from '@/components/UnlockedMode';
 
 const Subscription = () => {
   const { user } = useAuth();
@@ -249,6 +251,18 @@ const Subscription = () => {
             );
           })}
         </div>
+
+        {/* Unlocked Mode Feature */}
+        <div className="mb-8">
+          <UnlockedMode />
+        </div>
+
+        {/* Badge Settings for Unlocked Beyond subscribers */}
+        {subscription?.subscription_tier === 'Pro' && subscription?.subscribed && (
+          <div className="mb-8">
+            <UnlockedBeyondBadgeToggle />
+          </div>
+        )}
 
         {/* Benefits Section */}
         <Card className="border-amber-200 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-950/20 dark:to-orange-950/20">

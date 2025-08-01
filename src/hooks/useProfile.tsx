@@ -25,6 +25,7 @@ export interface Profile {
   updated_at: string | null;
   // Echo features
   echo_badge_enabled?: boolean;
+  unlocked_beyond_badge_enabled?: boolean;
   tiktok_embed_url?: string;
   vibe_gallery?: any[];
   emotional_soundtrack?: string;

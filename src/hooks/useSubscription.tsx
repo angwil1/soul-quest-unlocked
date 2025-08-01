@@ -134,11 +134,14 @@ export const useSubscription = () => {
     }
   };
 
+  const isUnlockedBeyond = subscription?.subscription_tier === 'Pro' && subscription?.subscribed;
+
   return {
     subscription,
     loading,
     checkSubscription,
     createCheckout,
-    manageBilling
+    manageBilling,
+    isUnlockedBeyond
   };
 };

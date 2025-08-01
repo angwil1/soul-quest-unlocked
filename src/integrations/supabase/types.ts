@@ -1116,6 +1116,7 @@ export type Database = {
           photos: string[] | null
           relationship_goals: string | null
           tiktok_embed_url: string | null
+          unlocked_beyond_badge_enabled: boolean | null
           updated_at: string | null
           vibe_gallery: Json | null
         }
@@ -1147,6 +1148,7 @@ export type Database = {
           photos?: string[] | null
           relationship_goals?: string | null
           tiktok_embed_url?: string | null
+          unlocked_beyond_badge_enabled?: boolean | null
           updated_at?: string | null
           vibe_gallery?: Json | null
         }
@@ -1178,6 +1180,7 @@ export type Database = {
           photos?: string[] | null
           relationship_goals?: string | null
           tiktok_embed_url?: string | null
+          unlocked_beyond_badge_enabled?: boolean | null
           updated_at?: string | null
           vibe_gallery?: Json | null
         }
