@@ -45,6 +45,9 @@ const SampleProfiles = () => {
             <p className="text-sm text-muted-foreground">
               Poetic demos crafted to spark your authentic Echo
             </p>
+            <p className="text-xs text-muted-foreground mt-2 max-w-2xl mx-auto">
+              These are not real users. They're poetic examples curated by the founder to help you imagine connection beyond the scroll.
+            </p>
           </div>
           <Dialog open={showInspiration} onOpenChange={setShowInspiration}>
             <DialogTrigger asChild>
