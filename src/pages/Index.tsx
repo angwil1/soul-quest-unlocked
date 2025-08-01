@@ -44,7 +44,10 @@ const Index = () => {
     }
   }, [user, loading, navigate]);
 
+  console.log("Index component loading state:", loading, "user:", user ? "exists" : "null");
+
   if (loading) {
+    console.log("Showing loading screen");
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-center">

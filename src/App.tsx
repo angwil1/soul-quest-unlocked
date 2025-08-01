@@ -34,9 +34,12 @@ const AppContent = () => {
   const [showProfileSetup, setShowProfileSetup] = useState(false);
 
   useEffect(() => {
+    console.log("App useEffect - authLoading:", authLoading, "profileLoading:", profileLoading, "user:", user ? "exists" : "null", "profile:", profile ? "exists" : "null");
+    
     if (!authLoading && !profileLoading && user && profile) {
       // Show profile setup if user is logged in but hasn't completed basic profile info
       const needsProfileSetup = !profile.gender || !profile.looking_for || !profile.location;
+      console.log("Profile setup needed:", needsProfileSetup, "gender:", profile.gender, "looking_for:", profile.looking_for, "location:", profile.location);
       setShowProfileSetup(needsProfileSetup);
     } else {
       setShowProfileSetup(false);
