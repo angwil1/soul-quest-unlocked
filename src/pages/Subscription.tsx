@@ -105,7 +105,7 @@ const Subscription = () => {
     {
       name: 'Unlocked Echo',
       icon: '',
-      price: '$12/month',
+      price: '$4/month',
       description: 'Want your vibe seen first? Add Echo anytime—no full upgrade needed.',
       features: [
         'TikTok-style profile embed (optional)',
