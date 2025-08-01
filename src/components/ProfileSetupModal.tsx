@@ -5,13 +5,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
-import { Calendar } from "@/components/ui/calendar";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { useProfile } from "@/hooks/useProfile";
 import { useNavigate } from "react-router-dom";
-import { format, differenceInYears } from "date-fns";
-import { CalendarIcon } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { Heart } from "lucide-react";
 
 interface ProfileSetupModalProps {
   isOpen: boolean;
@@ -22,8 +18,6 @@ export const ProfileSetupModal: React.FC<ProfileSetupModalProps> = ({ isOpen, on
   const [gender, setGender] = useState<string>("");
   const [lookingFor, setLookingFor] = useState<string>("");
   const [ageRange, setAgeRange] = useState<number[]>([18, 35]);
-  const [dateOfBirth, setDateOfBirth] = useState<Date>();
-  const [email, setEmail] = useState<string>("");
   const [location, setLocation] = useState<string>("");
   const [loading, setLoading] = useState(false);
   
@@ -31,13 +25,7 @@ export const ProfileSetupModal: React.FC<ProfileSetupModalProps> = ({ isOpen, on
   const navigate = useNavigate();
 
   const handleComplete = async () => {
-    if (!gender || !lookingFor || !location || !dateOfBirth || !email) {
-      return;
-    }
-
-    const userAge = differenceInYears(new Date(), dateOfBirth);
-    if (userAge < 18) {
-      alert("You must be 18 or older to use this app.");
+    if (!gender || !lookingFor || !location) {
       return;
     }
 
@@ -50,8 +38,6 @@ export const ProfileSetupModal: React.FC<ProfileSetupModalProps> = ({ isOpen, on
         age_preference_min: ageRange[0],
         age_preference_max: ageRange[1],
         location,
-        age: userAge,
-        date_of_birth: format(dateOfBirth, 'yyyy-MM-dd'),
       });
       
       onComplete();
@@ -63,30 +49,40 @@ export const ProfileSetupModal: React.FC<ProfileSetupModalProps> = ({ isOpen, on
     }
   };
 
-  const isComplete = gender && lookingFor && location && dateOfBirth && email;
-  const userAge = dateOfBirth ? differenceInYears(new Date(), dateOfBirth) : 0;
+  const isComplete = gender && lookingFor && location;
 
   return (
     <Dialog open={isOpen} onOpenChange={() => {}}>
-      <DialogContent className="sm:max-w-md" onPointerDownOutside={(e) => e.preventDefault()}>
-        <DialogHeader className="text-center">
-          <DialogTitle className="text-2xl font-bold text-foreground mb-2">
+      <DialogContent 
+        className="sm:max-w-lg rounded-2xl shadow-2xl border-0 bg-background/95 backdrop-blur-sm" 
+        onPointerDownOutside={(e) => e.preventDefault()}
+      >
+        <DialogHeader className="text-center space-y-4 pb-2">
+          <div className="flex justify-center">
+            <div className="p-3 rounded-full bg-primary/10">
+              <Heart className="h-8 w-8 text-primary" />
+            </div>
+          </div>
+          <DialogTitle className="text-2xl font-bold text-foreground leading-relaxed">
             Let's get you started—who are you hoping to meet?
           </DialogTitle>
+          <p className="text-muted-foreground text-sm">
+            Just a few quick details to find your perfect connections
+          </p>
         </DialogHeader>
         
-        <div className="space-y-6 py-4">
+        <div className="space-y-6 py-6 px-2">
           {/* Gender Selection */}
           <div className="space-y-3">
             <Label className="text-sm font-medium text-foreground">I am a...</Label>
             <Select value={gender} onValueChange={setGender}>
-              <SelectTrigger className="w-full">
+              <SelectTrigger className="w-full h-12 rounded-xl border-2 border-border hover:border-primary/50 transition-colors">
                 <SelectValue placeholder="Select your gender" />
               </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="man">Man</SelectItem>
-                <SelectItem value="woman">Woman</SelectItem>
-                <SelectItem value="nonbinary">Nonbinary</SelectItem>
+              <SelectContent className="rounded-xl">
+                <SelectItem value="man" className="rounded-lg">Man</SelectItem>
+                <SelectItem value="woman" className="rounded-lg">Woman</SelectItem>
+                <SelectItem value="nonbinary" className="rounded-lg">Nonbinary</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -95,77 +91,33 @@ export const ProfileSetupModal: React.FC<ProfileSetupModalProps> = ({ isOpen, on
           <div className="space-y-3">
             <Label className="text-sm font-medium text-foreground">Looking for a...</Label>
             <Select value={lookingFor} onValueChange={setLookingFor}>
-              <SelectTrigger className="w-full">
+              <SelectTrigger className="w-full h-12 rounded-xl border-2 border-border hover:border-primary/50 transition-colors">
                 <SelectValue placeholder="Who are you looking for?" />
               </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="woman">Woman</SelectItem>
-                <SelectItem value="man">Man</SelectItem>
-                <SelectItem value="nonbinary">Nonbinary</SelectItem>
-                <SelectItem value="anyone">Open to anyone</SelectItem>
+              <SelectContent className="rounded-xl">
+                <SelectItem value="woman" className="rounded-lg">Woman</SelectItem>
+                <SelectItem value="man" className="rounded-lg">Man</SelectItem>
+                <SelectItem value="nonbinary" className="rounded-lg">Nonbinary</SelectItem>
+                <SelectItem value="anyone" className="rounded-lg">Open to anyone</SelectItem>
               </SelectContent>
             </Select>
           </div>
 
-          {/* Date of Birth */}
-          <div className="space-y-3">
-            <Label className="text-sm font-medium text-foreground">Date of Birth</Label>
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  variant="outline"
-                  className={cn(
-                    "w-full justify-start text-left font-normal",
-                    !dateOfBirth && "text-muted-foreground"
-                  )}
-                >
-                  <CalendarIcon className="mr-2 h-4 w-4" />
-                  {dateOfBirth ? format(dateOfBirth, "PPP") : <span>Pick your date of birth</span>}
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0" align="start">
-                <Calendar
-                  mode="single"
-                  selected={dateOfBirth}
-                  onSelect={setDateOfBirth}
-                  disabled={(date) =>
-                    date > new Date() || date < new Date("1900-01-01")
-                  }
-                  initialFocus
-                  className={cn("p-3 pointer-events-auto")}
-                />
-              </PopoverContent>
-            </Popover>
-            {dateOfBirth && userAge < 18 && (
-              <p className="text-sm text-destructive">You must be 18 or older to use this app</p>
-            )}
-          </div>
-
-          {/* Email */}
-          <div className="space-y-3">
-            <Label className="text-sm font-medium text-foreground">Email</Label>
-            <Input
-              type="email"
-              placeholder="Enter your email address"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full"
-            />
-          </div>
-
           {/* Age Range Preference */}
-          <div className="space-y-3">
+          <div className="space-y-4">
             <Label className="text-sm font-medium text-foreground">
-              Age Range Preference: {ageRange[0]} - {ageRange[1]}
+              Age Range: {ageRange[0]} - {ageRange[1]} years old
             </Label>
-            <Slider
-              value={ageRange}
-              onValueChange={setAgeRange}
-              min={18}
-              max={80}
-              step={1}
-              className="w-full"
-            />
+            <div className="px-2">
+              <Slider
+                value={ageRange}
+                onValueChange={setAgeRange}
+                min={18}
+                max={80}
+                step={1}
+                className="w-full"
+              />
+            </div>
           </div>
 
           {/* Location */}
@@ -176,18 +128,30 @@ export const ProfileSetupModal: React.FC<ProfileSetupModalProps> = ({ isOpen, on
               placeholder="Enter your zip code or city"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              className="w-full"
+              className="w-full h-12 rounded-xl border-2 border-border hover:border-primary/50 focus:border-primary transition-colors"
             />
           </div>
 
           {/* Submit Button */}
-          <Button
-            onClick={handleComplete}
-            disabled={!isComplete || loading}
-            className="w-full mt-6 bg-primary hover:bg-primary/90 text-primary-foreground font-medium py-2 px-4 rounded-lg transition-colors"
-          >
-            {loading ? "Setting up..." : "See Matches"}
-          </Button>
+          <div className="pt-4">
+            <Button
+              onClick={handleComplete}
+              disabled={!isComplete || loading}
+              className="w-full h-12 bg-primary hover:bg-primary/90 text-primary-foreground font-medium rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {loading ? (
+                <div className="flex items-center gap-2">
+                  <div className="h-4 w-4 animate-spin rounded-full border-2 border-primary-foreground border-t-transparent"></div>
+                  Setting up your profile...
+                </div>
+              ) : (
+                <div className="flex items-center gap-2">
+                  <Heart className="h-4 w-4" />
+                  Begin Your Echo
+                </div>
+              )}
+            </Button>
+          </div>
         </div>
       </DialogContent>
     </Dialog>
