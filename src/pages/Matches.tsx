@@ -4,6 +4,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ArrowLeft, Heart, X, MapPin, Users } from 'lucide-react';
+import caseyProfile from '@/assets/casey-profile.jpg';
 
 const Matches = () => {
   const navigate = useNavigate();
@@ -43,7 +44,7 @@ const Matches = () => {
       location: 'Palo Alto, CA',
       occupation: 'Yoga Instructor',
       interests: ['Yoga', 'Nature', 'Meditation', 'Reading'],
-      avatar_url: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=400',
+      avatar_url: caseyProfile,
       compatibility_score: 92,
       distance: 15
     }
