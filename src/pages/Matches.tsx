@@ -28,7 +28,7 @@ interface MatchProfile {
 }
 
 const Matches = () => {
-  const { user } = useAuth();
+  const { user, loading: authLoading } = useAuth();
   const { subscription } = useSubscription();
   const navigate = useNavigate();
   const { toast } = useToast();
@@ -42,8 +42,11 @@ const Matches = () => {
   const { matches: aiMatchData, loading: aiLoading, generateAIMatches } = useAIMatching();
 
   useEffect(() => {
-    fetchMatches();
-  }, []);
+    console.log('Matches useEffect triggered, authLoading:', authLoading, 'user:', user);
+    if (!authLoading) {
+      fetchMatches();
+    }
+  }, [authLoading, user]);
 
   useEffect(() => {
     if (aiMatchData.length > 0) {
@@ -60,6 +63,7 @@ const Matches = () => {
 
   const fetchMatches = async () => {
     try {
+      console.log('fetchMatches called, user:', user);
       setLoading(true);
       
       // Don't fetch if user is not available
@@ -224,7 +228,7 @@ const Matches = () => {
     (subscription.subscription_tier === 'unlocked-plus' || 
      subscription.subscription_tier === 'founders-circle');
 
-  if (loading) {
+  if (authLoading || loading) {
     return (
       <div className="min-h-screen bg-background">
         {/* Header */}
