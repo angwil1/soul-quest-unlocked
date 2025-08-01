@@ -33,7 +33,7 @@ const Pricing = () => {
       popular: false
     },
     {
-      name: "Unlocked+",
+      name: "Unlocked+ 🔓",
       icon: "",
       price: "$12",
       period: "/month", 
@@ -49,7 +49,7 @@ const Pricing = () => {
       popular: false
     },
     {
-      name: "Unlocked Beyond",
+      name: "Unlocked Beyond 🔓",
       icon: "",
       price: "$39",
       period: "/year",
@@ -70,7 +70,7 @@ const Pricing = () => {
       }
     },
     {
-      name: "Unlocked Echo",
+      name: "Unlocked Echo 🔓",
       icon: "",
       price: "$4",
       period: "/month",
