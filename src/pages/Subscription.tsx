@@ -70,7 +70,7 @@ const Subscription = () => {
       plan: null
     },
     {
-      name: 'Unlocked+',
+      name: '🔓 Unlocked+',
       icon: '',
       price: '$12/month',
       description: 'Offers the upgrade logic for better connections',
@@ -86,7 +86,7 @@ const Subscription = () => {
       plan: 'unlocked-plus'
     },
     {
-      name: 'Unlocked Beyond',
+      name: '🔓 Unlocked Beyond',
       icon: '',
       price: '$39/year',
       description: 'An invitation to co-create our community',
@@ -103,7 +103,7 @@ const Subscription = () => {
       plan: 'unlocked-beyond'
     },
     {
-      name: 'Unlocked Echo',
+      name: '🔓 Unlocked Echo',
       icon: '',
       price: '$4/month',
       description: 'Expressive upgrade for creative visibility',
