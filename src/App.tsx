@@ -24,6 +24,7 @@ import MemoryVault from "./pages/MemoryVault";
 import Privacy from "./pages/Privacy";
 import TermsOfService from "./pages/TermsOfService";
 import Mission from "./pages/Mission";
+import SampleProfiles from "./pages/SampleProfiles";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -65,6 +66,7 @@ const AppContent = () => {
         <Route path="/memory-vault" element={<MemoryVault />} />
         <Route path="/faq" element={<FAQ />} />
         <Route path="/mission" element={<Mission />} />
+        <Route path="/sample-profiles" element={<SampleProfiles />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/terms" element={<TermsOfService />} />
         <Route path="*" element={<NotFound />} />
