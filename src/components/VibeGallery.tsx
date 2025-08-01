@@ -229,10 +229,17 @@ export const VibeGallery = ({ isOwnProfile = false, userId }: VibeGalleryProps) 
           <p className="text-sm text-muted-foreground mb-3">
             Available with Unlocked Echo subscription
           </p>
-          <Button size="sm" className="w-full" onClick={() => window.location.href = '/pricing'}>
-            <Plus className="h-4 w-4 mr-2" />
-            Upgrade to Echo
-          </Button>
+          <div className="space-y-2">
+            <Button size="sm" className="w-full" variant="outline" onClick={() => window.location.href = '/pricing'}>
+              <Plus className="h-4 w-4 mr-2" />
+              Get Echo Monthly ($4/mo)
+            </Button>
+            <div className="text-center text-xs text-muted-foreground">or</div>
+            <Button size="sm" className="w-full" onClick={() => window.location.href = '/pricing'}>
+              <Plus className="h-4 w-4 mr-2" />
+              Unlock Echo Forever ($12)
+            </Button>
+          </div>
         </CardContent>
       </Card>
     );
