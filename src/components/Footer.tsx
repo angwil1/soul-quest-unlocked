@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Instagram, Twitter, Facebook, Youtube } from "lucide-react";
 
 export const Footer = () => {
   return (
@@ -32,10 +33,26 @@ export const Footer = () => {
           </div>
         </div>
         
-        <div className="border-t border-border mt-8 pt-6 text-center">
-          <p className="text-sm text-muted-foreground">
-            © 2025 GetUnlocked. All rights reserved.
-          </p>
+        <div className="border-t border-border mt-8 pt-6">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p className="text-sm text-muted-foreground">
+              © 2025 GetUnlocked. All rights reserved.
+            </p>
+            <div className="flex items-center gap-4">
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                <Instagram size={20} />
+              </a>
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                <Twitter size={20} />
+              </a>
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                <Facebook size={20} />
+              </a>
+              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                <Youtube size={20} />
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
