@@ -7,6 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Plus, Heart, MessageCircle, Share, Play } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
+import { useEchoSubscription } from '@/hooks/useEchoSubscription';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 
@@ -29,6 +30,7 @@ interface VibeGalleryProps {
 
 export const VibeGallery = ({ isOwnProfile = false, userId }: VibeGalleryProps) => {
   const { user } = useAuth();
+  const { isEchoActive } = useEchoSubscription();
   const { toast } = useToast();
   const [items, setItems] = useState<VibeGalleryItem[]>([]);
   const [loading, setLoading] = useState(true);
@@ -206,6 +208,36 @@ export const VibeGallery = ({ isOwnProfile = false, userId }: VibeGalleryProps) 
     );
   }
 
+  if (!isEchoActive && isOwnProfile) {
+    return (
+      <Card className="border-purple-200 bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-950/20 dark:to-pink-950/20">
+        <CardHeader>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <span className="text-3xl">✨</span>
+              <CardTitle className="text-lg">Vibe Gallery</CardTitle>
+            </div>
+            <Badge variant="secondary" className="bg-purple-100 text-purple-800">
+              Echo
+            </Badge>
+          </div>
+          <p className="text-muted-foreground">
+            Express your authentic self through creative vibes
+          </p>
+        </CardHeader>
+        <CardContent>
+          <p className="text-sm text-muted-foreground mb-3">
+            Available with Unlocked Echo subscription
+          </p>
+          <Button size="sm" className="w-full" onClick={() => window.location.href = '/pricing'}>
+            <Plus className="h-4 w-4 mr-2" />
+            Upgrade to Echo
+          </Button>
+        </CardContent>
+      </Card>
+    );
+  }
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -220,7 +252,7 @@ export const VibeGallery = ({ isOwnProfile = false, userId }: VibeGalleryProps) 
           </p>
         </div>
         
-        {isOwnProfile && (
+        {isOwnProfile && isEchoActive && (
           <Dialog open={isAddingItem} onOpenChange={setIsAddingItem}>
             <DialogTrigger asChild>
               <Button>
