@@ -56,18 +56,37 @@ const Subscription = () => {
       name: 'Free',
       icon: '🌱',
       price: 'Free',
-      description: 'Opens curiosity, perfect for getting started',
+      description: 'Opens curiosity. Perfect for getting started.',
       features: [
-        'Take the compatibility quiz',
-        'View matches',
-        'Limited messaging',
-        'Explore onboarding questions and sample prompts',
-        'Feel the brand before committing'
+        '🧠 Take the Compatibility Quiz',
+        '🫂 View three curated matches based on emotional resonance',
+        '📬 Limited messaging access (read or send one message per match)',
+        '🌀 Explore onboarding questions & poetic prompts',
+        '🌸 Feel the brand before committing—Echo is optional'
       ],
       current: !isSubscribed,
       buttonText: 'Current Plan',
       disabled: true,
       plan: null
+    },
+    {
+      name: 'Unlocked Echo',
+      icon: '💫',
+      price: '$12/month',
+      description: 'Want your vibe seen first? Add Echo anytime—no full upgrade needed.',
+      features: [
+        '✨ TikTok-style profile embed (optional)',
+        '🎵 Emotional soundtrack prompts',
+        '🌈 Discoverability via vibe gallery',
+        '🔔 Echo badge toggle',
+        '🌟 All free features included'
+      ],
+      current: false,
+      buttonText: 'Add Echo Now',
+      disabled: false,
+      plan: 'unlocked-echo-monthly',
+      isEcho: true,
+      highlight: true
     },
     {
       name: 'Unlocked+',
@@ -101,28 +120,6 @@ const Subscription = () => {
       buttonText: currentTier === 'Pro' && isSubscribed ? 'Current Plan' : 'Get Unlocked Beyond',
       disabled: currentTier === 'Pro' && isSubscribed,
       plan: 'unlocked-beyond'
-    },
-    {
-      name: 'Unlocked Echo',
-      icon: '💫',
-      price: '$4/month',
-      description: 'Expressive upgrade for creative visibility',
-      features: [
-        'TikTok-style profile embed (optional)',
-        'Emotional soundtrack prompts',
-        'Discoverability via vibe gallery',
-        'Echo badge toggle'
-      ],
-      current: false,
-      buttonText: 'Get Echo Monthly',
-      disabled: false,
-      plan: 'unlocked-echo-monthly',
-      isAddOn: true,
-      alternativeOption: {
-        price: '$12 one-time',
-        buttonText: 'Unlock Echo Forever',
-        plan: 'unlocked-echo-lifetime'
-      }
     }
   ];
 
@@ -192,17 +189,24 @@ const Subscription = () => {
         {/* Pricing Tiers */}
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-8">
           {tiers.map((tier) => {
+            const isEcho = 'isEcho' in tier && tier.isEcho;
+            const isHighlight = 'highlight' in tier && tier.highlight;
+            
             return (
               <Card 
                 key={tier.name} 
-                className={`relative ${tier.current ? 'border-primary ring-2 ring-primary/20' : 'border-border'} hover:shadow-lg transition-all duration-300`}
+                className={`relative ${
+                  tier.current ? 'border-primary ring-2 ring-primary/20' : 
+                  isHighlight ? 'border-purple-300 ring-2 ring-purple-200 shadow-lg' :
+                  'border-border'
+                } hover:shadow-lg transition-all duration-300`}
               >
                 {tier.current ? (
                   <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-primary">
                     Current Plan
                   </Badge>
-                ) : tier.isAddOn ? (
-                  <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-purple-500">
+                ) : isEcho ? (
+                  <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-purple-500 text-white">
                     Add-On
                   </Badge>
                 ) : null}
@@ -226,46 +230,21 @@ const Subscription = () => {
                     ))}
                   </ul>
                   
-                  {tier.isAddOn && tier.alternativeOption ? (
-                    <div className="space-y-2">
-                      <Button 
-                        className="w-full"
-                        variant="outline"
-                        disabled={tier.disabled || upgrading}
-                        onClick={() => tier.plan && handleUpgrade(tier.plan)}
-                      >
-                        {tier.buttonText}
-                      </Button>
-                      <div className="text-center text-xs text-muted-foreground">or</div>
-                      <Button 
-                        className="w-full"
-                        variant="default"
-                        disabled={tier.disabled || upgrading}
-                        onClick={() => tier.alternativeOption.plan && handleUpgrade(tier.alternativeOption.plan)}
-                      >
-                        {tier.alternativeOption.buttonText}
-                      </Button>
-                      <div className="text-center text-xs text-muted-foreground">
-                        {tier.alternativeOption.price}
+                  <Button 
+                    className={`w-full ${isEcho ? 'bg-purple-600 hover:bg-purple-700 text-white' : ''}`}
+                    variant={tier.current ? "secondary" : "default"}
+                    disabled={tier.disabled || upgrading}
+                    onClick={() => tier.plan && handleUpgrade(tier.plan)}
+                  >
+                    {upgrading && tier.plan ? (
+                      <div className="flex items-center gap-2">
+                        <div className="animate-spin h-4 w-4 border-2 border-current border-t-transparent rounded-full"></div>
+                        Processing...
                       </div>
-                    </div>
-                  ) : (
-                    <Button 
-                      className="w-full" 
-                      variant={tier.current ? "secondary" : "default"}
-                      disabled={tier.disabled || upgrading}
-                      onClick={() => tier.plan && handleUpgrade(tier.plan)}
-                    >
-                      {upgrading && tier.plan ? (
-                        <div className="flex items-center gap-2">
-                          <div className="animate-spin h-4 w-4 border-2 border-current border-t-transparent rounded-full"></div>
-                          Processing...
-                        </div>
-                      ) : (
-                        tier.buttonText
-                      )}
-                    </Button>
-                  )}
+                    ) : (
+                      tier.buttonText
+                    )}
+                  </Button>
                 </CardContent>
               </Card>
             );
