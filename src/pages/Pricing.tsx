@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { useSubscription } from "@/hooks/useSubscription";
 import { useAuth } from "@/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import { Footer } from "@/components/Footer";
 
 const Pricing = () => {
   const { subscription, loading, createCheckout } = useSubscription();
@@ -226,6 +227,7 @@ const Pricing = () => {
           </p>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
