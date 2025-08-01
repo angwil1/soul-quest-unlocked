@@ -11,6 +11,8 @@ import { Footer } from '@/components/Footer';
 import { FloatingQuizButton } from '@/components/FloatingQuizButton';
 import { FirstLightModal } from '@/components/FirstLightModal';
 import { InviteKindredSoul } from '@/components/InviteKindredSoul';
+import { PriorityMatchingWidget } from '@/components/PriorityMatchingWidget';
+import { VideoCallButton } from '@/components/VideoCallButton';
 import datingBackground from '@/assets/dating-background.jpg';
 
 const Index = () => {
@@ -410,6 +412,34 @@ const Index = () => {
               <Button onClick={() => navigate('/messages')} className="w-full">
                 View Messages
               </Button>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Priority Matching Widget */}
+        <div className="mb-8">
+          <PriorityMatchingWidget />
+        </div>
+
+        {/* Video Call Demo */}
+        <div className="mb-8">
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                Video Chat with Matches
+                <Badge variant="secondary" className="text-xs">Premium</Badge>
+              </CardTitle>
+              <CardDescription>
+                Connect face-to-face with your compatible matches
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="flex gap-4">
+                <VideoCallButton matchName="Demo Match" variant="outline" />
+                <p className="text-sm text-muted-foreground flex items-center">
+                  Premium feature available with Unlocked+ subscription
+                </p>
+              </div>
             </CardContent>
           </Card>
         </div>

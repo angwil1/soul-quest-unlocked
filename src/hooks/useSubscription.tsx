@@ -135,6 +135,7 @@ export const useSubscription = () => {
   };
 
   const isUnlockedBeyond = subscription?.subscription_tier === 'Pro' && subscription?.subscribed;
+  const isUnlockedPlus = subscription?.subscription_tier === 'Premium' && subscription?.subscribed;
 
   return {
     subscription,
@@ -142,6 +143,7 @@ export const useSubscription = () => {
     checkSubscription,
     createCheckout,
     manageBilling,
-    isUnlockedBeyond
+    isUnlockedBeyond,
+    isUnlockedPlus
   };
 };
