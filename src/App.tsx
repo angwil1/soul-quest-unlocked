@@ -29,6 +29,16 @@ import NotFound from "./pages/NotFound";
 const queryClient = new QueryClient();
 
 const AppContent = () => {
+  console.log("AppContent component rendering");
+  
+  // Simplified test render
+  return (
+    <div style={{ backgroundColor: 'red', color: 'white', padding: '20px', minHeight: '100vh' }}>
+      <h1>TEST: App is working!</h1>
+      <p>If you can see this, React is rendering properly.</p>
+    </div>
+  );
+
   const { user, loading: authLoading } = useAuth();
   const { profile, loading: profileLoading } = useProfile();
   const [showProfileSetup, setShowProfileSetup] = useState(false);
