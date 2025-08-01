@@ -120,7 +120,13 @@ const Subscription = () => {
       disabled: false,
       plan: 'unlocked-echo-monthly',
       isEcho: true,
-      highlight: true
+      highlight: true,
+      alternativeOption: {
+        price: '$12',
+        period: 'one-time',
+        buttonText: 'Unlock Echo Forever',
+        plan: 'unlocked-echo-lifetime'
+      }
     }
   ];
 
@@ -231,21 +237,60 @@ const Subscription = () => {
                     ))}
                   </ul>
                   
-                  <Button 
-                    className={`w-full ${isEcho ? 'bg-purple-600 hover:bg-purple-700 text-white' : ''}`}
-                    variant={tier.current ? "secondary" : "default"}
-                    disabled={tier.disabled || upgrading}
-                    onClick={() => tier.plan && handleUpgrade(tier.plan)}
-                  >
-                    {upgrading && tier.plan ? (
-                      <div className="flex items-center gap-2">
-                        <div className="animate-spin h-4 w-4 border-2 border-current border-t-transparent rounded-full"></div>
-                        Processing...
+                  {(tier as any).alternativeOption ? (
+                    <div className="space-y-2">
+                      <Button 
+                        className={`w-full ${isEcho ? 'bg-purple-600 hover:bg-purple-700 text-white' : ''}`}
+                        variant="outline"
+                        disabled={tier.disabled || upgrading}
+                        onClick={() => tier.plan && handleUpgrade(tier.plan)}
+                      >
+                        {upgrading && tier.plan ? (
+                          <div className="flex items-center gap-2">
+                            <div className="animate-spin h-4 w-4 border-2 border-current border-t-transparent rounded-full"></div>
+                            Processing...
+                          </div>
+                        ) : (
+                          tier.buttonText
+                        )}
+                      </Button>
+                      <div className="text-center text-xs text-muted-foreground">or</div>
+                      <Button 
+                        className={`w-full ${isEcho ? 'bg-purple-600 hover:bg-purple-700 text-white' : ''}`}
+                        variant="default"
+                        disabled={tier.disabled || upgrading}
+                        onClick={() => (tier as any).alternativeOption.plan && handleUpgrade((tier as any).alternativeOption.plan)}
+                      >
+                        {upgrading && (tier as any).alternativeOption.plan ? (
+                          <div className="flex items-center gap-2">
+                            <div className="animate-spin h-4 w-4 border-2 border-current border-t-transparent rounded-full"></div>
+                            Processing...
+                          </div>
+                        ) : (
+                          (tier as any).alternativeOption.buttonText
+                        )}
+                      </Button>
+                      <div className="text-center text-xs text-muted-foreground">
+                        {(tier as any).alternativeOption.price} {(tier as any).alternativeOption.period}
                       </div>
-                    ) : (
-                      tier.buttonText
-                    )}
-                  </Button>
+                    </div>
+                  ) : (
+                    <Button 
+                      className={`w-full ${isEcho ? 'bg-purple-600 hover:bg-purple-700 text-white' : ''}`}
+                      variant={tier.current ? "secondary" : "default"}
+                      disabled={tier.disabled || upgrading}
+                      onClick={() => tier.plan && handleUpgrade(tier.plan)}
+                    >
+                      {upgrading && tier.plan ? (
+                        <div className="flex items-center gap-2">
+                          <div className="animate-spin h-4 w-4 border-2 border-current border-t-transparent rounded-full"></div>
+                          Processing...
+                        </div>
+                      ) : (
+                        tier.buttonText
+                      )}
+                    </Button>
+                  )}
                 </CardContent>
               </Card>
             );
