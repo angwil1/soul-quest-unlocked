@@ -20,15 +20,6 @@ const Profile = () => {
   const { isEchoActive } = useEchoSubscription();
   const navigate = useNavigate();
 
-  console.log('Profile page - authLoading:', authLoading, 'user:', user, 'profile:', profile, 'loading:', loading);
-
-  // Temporarily return a simple test render
-  return (
-    <div className="min-h-screen bg-red-500 flex items-center justify-center">
-      <div className="text-white text-2xl">Profile Page Test - Are you seeing this?</div>
-    </div>
-  );
-
   if (authLoading || loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
