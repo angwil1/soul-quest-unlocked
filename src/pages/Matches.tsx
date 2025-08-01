@@ -43,10 +43,9 @@ const Matches = () => {
 
   useEffect(() => {
     console.log('Matches useEffect triggered, authLoading:', authLoading, 'user:', user);
-    if (!authLoading) {
-      fetchMatches();
-    }
-  }, [authLoading, user]);
+    // Always call fetchMatches regardless of auth state for demo
+    fetchMatches();
+  }, []);
 
   useEffect(() => {
     if (aiMatchData.length > 0) {
@@ -228,7 +227,7 @@ const Matches = () => {
     (subscription.subscription_tier === 'unlocked-plus' || 
      subscription.subscription_tier === 'founders-circle');
 
-  if (authLoading || loading) {
+  if (loading) {
     return (
       <div className="min-h-screen bg-background">
         {/* Header */}
