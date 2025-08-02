@@ -130,9 +130,9 @@ const PremiumDashboard = () => {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="flex flex-col sm:flex-row gap-4 items-start">
-                <VideoCallButton matchName="Demo Match" variant="outline" size="sm" />
-                <p className="text-xs sm:text-sm text-muted-foreground flex items-center">
+              <div className="space-y-4">
+                <VideoCallButton matchName="Demo Match" variant="default" size="lg" className="w-full sm:w-auto" />
+                <p className="text-sm text-muted-foreground">
                   Premium feature available with Unlocked+ subscription
                 </p>
               </div>
