@@ -137,7 +137,12 @@ const PremiumDashboard = () => {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                <VideoCallButton matchName="Demo Match" variant="default" size="lg" className="w-full sm:w-auto" />
+                <VideoCallButton 
+                  matchName="Demo Match" 
+                  variant="default" 
+                  size="lg" 
+                  className="w-full sm:w-auto bg-primary text-primary-foreground"
+                />
                 <p className="text-sm text-muted-foreground">
                   Premium feature available with Unlocked+ subscription
                 </p>
