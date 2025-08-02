@@ -61,9 +61,9 @@ export const PriorityMatchingWidget = () => {
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 gap-4">
           <div className="flex items-start gap-3 p-3 rounded-lg bg-background/60">
-            <Target className="h-5 w-5 text-primary mt-1" />
+            <Target className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
             <div>
               <h4 className="font-medium text-sm">Higher Visibility</h4>
               <p className="text-xs text-muted-foreground">Your profile appears first in discovery</p>
@@ -71,7 +71,7 @@ export const PriorityMatchingWidget = () => {
           </div>
           
           <div className="flex items-start gap-3 p-3 rounded-lg bg-background/60">
-            <Users className="h-5 w-5 text-primary mt-1" />
+            <Users className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
             <div>
               <h4 className="font-medium text-sm">More Matches</h4>
               <p className="text-xs text-muted-foreground">3x more likely to be seen and matched</p>
@@ -79,7 +79,7 @@ export const PriorityMatchingWidget = () => {
           </div>
           
           <div className="flex items-start gap-3 p-3 rounded-lg bg-background/60">
-            <TrendingUp className="h-5 w-5 text-primary mt-1" />
+            <TrendingUp className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
             <div>
               <h4 className="font-medium text-sm">Boost Algorithm</h4>
               <p className="text-xs text-muted-foreground">AI prioritizes your profile in matching</p>

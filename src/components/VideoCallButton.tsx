@@ -61,8 +61,10 @@ export const VideoCallButton = ({
         className={`${className} ${!hasVideoAccess ? 'opacity-75' : ''}`}
         onClick={handleVideoCallClick}
       >
-        <Video className="h-4 w-4 mr-2" />
-        {hasVideoAccess ? "Video Chat" : "Video Chat (Premium)"}
+        <Video className="h-4 w-4 mr-1 sm:mr-2" />
+        <span className="text-xs sm:text-sm">
+          {hasVideoAccess ? "Video Chat" : "Video Chat (Premium)"}
+        </span>
         {!hasVideoAccess && <Crown className="h-3 w-3 ml-1" />}
       </Button>
 

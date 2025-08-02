@@ -425,18 +425,18 @@ const Index = () => {
         <div className="mb-8">
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
+              <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
                 Video Chat with Matches
                 <Badge variant="secondary" className="text-xs">Premium</Badge>
               </CardTitle>
-              <CardDescription>
+              <CardDescription className="text-sm">
                 Connect face-to-face with your compatible matches
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="flex gap-4">
-                <VideoCallButton matchName="Demo Match" variant="outline" />
-                <p className="text-sm text-muted-foreground flex items-center">
+              <div className="flex flex-col sm:flex-row gap-4 items-start">
+                <VideoCallButton matchName="Demo Match" variant="outline" size="sm" />
+                <p className="text-xs sm:text-sm text-muted-foreground flex items-center">
                   Premium feature available with Unlocked+ subscription
                 </p>
               </div>
