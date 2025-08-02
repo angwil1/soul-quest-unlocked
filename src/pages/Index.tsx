@@ -11,8 +11,6 @@ import { Footer } from '@/components/Footer';
 import { FloatingQuizButton } from '@/components/FloatingQuizButton';
 import { FirstLightModal } from '@/components/FirstLightModal';
 import { InviteKindredSoul } from '@/components/InviteKindredSoul';
-import { PriorityMatchingWidget } from '@/components/PriorityMatchingWidget';
-import { VideoCallButton } from '@/components/VideoCallButton';
 import datingBackground from '@/assets/dating-background.jpg';
 
 const Index = () => {
@@ -416,30 +414,27 @@ const Index = () => {
           </Card>
         </div>
 
-        {/* Priority Matching Widget */}
-        <div className="mb-8">
-          <PriorityMatchingWidget />
-        </div>
 
-        {/* Video Call Demo */}
+        {/* Premium Features CTA */}
         <div className="mb-8">
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
-                Video Chat with Matches
-                <Badge variant="secondary" className="text-xs">Premium</Badge>
+          <Card className="border-primary/20 bg-gradient-to-r from-primary/5 to-secondary/5">
+            <CardHeader className="text-center">
+              <CardTitle className="flex items-center justify-center gap-2">
+                <span className="text-2xl">🚀</span>
+                Premium Features
               </CardTitle>
-              <CardDescription className="text-sm">
-                Connect face-to-face with your compatible matches
+              <CardDescription>
+                Enhance your dating experience with priority matching, video chat, and AI insights
               </CardDescription>
             </CardHeader>
-            <CardContent>
-              <div className="flex flex-col sm:flex-row gap-4 items-start">
-                <VideoCallButton matchName="Demo Match" variant="outline" size="sm" />
-                <p className="text-xs sm:text-sm text-muted-foreground flex items-center">
-                  Premium feature available with Unlocked+ subscription
-                </p>
-              </div>
+            <CardContent className="text-center">
+              <Button 
+                onClick={() => navigate('/premium')} 
+                size="lg"
+                className="bg-gradient-to-r from-primary to-secondary hover:opacity-90"
+              >
+                View Premium Dashboard
+              </Button>
             </CardContent>
           </Card>
         </div>

@@ -14,6 +14,7 @@ import QuizResults from "./pages/QuizResults";
 import SampleProfiles from "./pages/SampleProfiles";
 import Pricing from "./pages/Pricing";
 import Subscription from "./pages/Subscription";
+import PremiumDashboard from "./pages/PremiumDashboard";
 import ConnectionDNA from "./pages/ConnectionDNA";
 import MemoryVault from "./pages/MemoryVault";
 import AIDigest from "./pages/AIDigest";
@@ -43,6 +44,7 @@ const App = () => (
             <Route path="/sample-profiles" element={<SampleProfiles />} />
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/subscription" element={<Subscription />} />
+            <Route path="/premium" element={<PremiumDashboard />} />
             <Route path="/connection-dna" element={<ConnectionDNA />} />
             <Route path="/memory-vault" element={<MemoryVault />} />
             <Route path="/ai-digest" element={<AIDigest />} />

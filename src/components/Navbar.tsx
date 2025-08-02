@@ -13,6 +13,7 @@ export const Navbar = () => {
     { name: "Home", href: "/" },
     { name: "Quiz", href: "/questions" },
     { name: "Sample Profiles", href: "/sample-profiles" },
+    { name: "Premium", href: "/premium" },
     { name: "AI Digest", href: "/ai-digest" },
     { name: "Connection DNA", href: "/connection-dna" },
     { name: "Memory Vault", href: "/memory-vault" },
