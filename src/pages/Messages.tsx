@@ -213,7 +213,7 @@ const Messages = () => {
               matchName="Your Match" 
               variant="default" 
               size="lg"
-              className="bg-primary text-primary-foreground font-semibold"
+              className="bg-primary text-primary-foreground font-semibold px-6 py-3 text-lg min-h-[52px]"
             />
           </div>
         </div>
