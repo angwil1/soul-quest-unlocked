@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { useToast } from '@/hooks/use-toast';
 import { Navbar } from '@/components/Navbar';
+import { VideoCallButton } from '@/components/VideoCallButton';
 import { ArrowLeft, Send } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
@@ -200,11 +201,21 @@ const Messages = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       <div className="container mx-auto p-4 max-w-6xl">
-        <div className="flex items-center gap-4 mb-6">
-          <Button variant="ghost" onClick={() => navigate('/')}>
-            <ArrowLeft className="h-4 w-4" />
-          </Button>
-          <h1 className="text-3xl font-bold">Messages</h1>
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center gap-4">
+            <Button variant="ghost" onClick={() => navigate('/')}>
+              <ArrowLeft className="h-4 w-4" />
+            </Button>
+            <h1 className="text-3xl font-bold">Messages</h1>
+          </div>
+          <div className="flex items-center gap-4">
+            <VideoCallButton 
+              matchName="Your Match" 
+              variant="default" 
+              size="lg"
+              className="bg-primary text-primary-foreground font-semibold"
+            />
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 h-[600px]">
