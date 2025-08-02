@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { useSubscription } from '@/hooks/useSubscription';
 import { Button } from '@/components/ui/button';
@@ -15,6 +16,12 @@ const PremiumDashboard = () => {
   const navigate = useNavigate();
   const { subscription, loading } = useSubscription();
 
+  useEffect(() => {
+    if (!loading && !user) {
+      navigate('/auth');
+    }
+  }, [user, loading, navigate]);
+
   if (loading) {
     return (
       <div className="min-h-screen bg-background">
@@ -30,7 +37,6 @@ const PremiumDashboard = () => {
   }
 
   if (!user) {
-    navigate('/auth');
     return null;
   }
 
