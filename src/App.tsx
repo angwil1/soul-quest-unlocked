@@ -44,7 +44,7 @@ const App = () => (
             <Route path="/sample-profiles" element={<SampleProfiles />} />
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/subscription" element={<Subscription />} />
-            <Route path="/premium" element={<PremiumDashboard />} />
+            <Route path="/premium-dashboard" element={<PremiumDashboard />} />
             <Route path="/connection-dna" element={<ConnectionDNA />} />
             <Route path="/memory-vault" element={<MemoryVault />} />
             <Route path="/ai-digest" element={<AIDigest />} />
