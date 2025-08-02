@@ -429,7 +429,10 @@ const Index = () => {
             </CardHeader>
             <CardContent className="text-center">
               <Button 
-                onClick={() => navigate('/premium-dashboard')} 
+                onClick={() => {
+                  console.log("Premium Dashboard button clicked, navigating to /premium-dashboard");
+                  navigate('/premium-dashboard');
+                }} 
                 size="lg"
                 className="bg-gradient-to-r from-primary to-secondary hover:opacity-90"
               >
