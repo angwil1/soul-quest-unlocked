@@ -151,13 +151,13 @@ const Subscription = () => {
       <div className="container mx-auto px-4 pt-20 pb-8 max-w-6xl">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-2">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-2">
             Your Subscription
           </h1>
-          <p className="text-xl text-muted-foreground mb-2">
+          <p className="text-lg sm:text-xl text-muted-foreground mb-2">
             You're currently in <span className="font-semibold text-primary">'{currentTier}'</span> — explore deeper connections with our premium tiers.
           </p>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-base sm:text-lg text-muted-foreground">
             Add Unlocked Echo to any plan, or purchase on its own. Expression isn't reserved for premium—it's available to all.
           </p>
         </div>
@@ -194,7 +194,7 @@ const Subscription = () => {
         </Card>
 
         {/* Pricing Tiers */}
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-8">
+        <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mb-8">
           {tiers.map((tier) => {
             const isEcho = 'isEcho' in tier && tier.isEcho;
             const isHighlight = 'highlight' in tier && tier.highlight;
@@ -218,21 +218,21 @@ const Subscription = () => {
                   </Badge>
                 ) : null}
                 
-                <CardHeader className="text-center">
+                <CardHeader className="text-center px-4 py-4">
                   <div className="flex justify-center mb-2">
-                    <span className="text-4xl">{tier.icon}</span>
+                    <span className="text-3xl sm:text-4xl">{tier.icon}</span>
                   </div>
-                  <CardTitle className="text-2xl">{tier.name}</CardTitle>
-                  <CardDescription>{tier.description}</CardDescription>
-                  <div className="text-3xl font-bold text-primary mt-2">{tier.price}</div>
+                  <CardTitle className="text-xl sm:text-2xl">{tier.name}</CardTitle>
+                  <CardDescription className="text-sm sm:text-base">{tier.description}</CardDescription>
+                  <div className="text-2xl sm:text-3xl font-bold text-primary mt-2">{tier.price}</div>
                 </CardHeader>
                 
-                <CardContent>
+                <CardContent className="px-4 pb-4">
                   <ul className="space-y-2 mb-6">
                     {tier.features.map((feature, index) => (
-                      <li key={index} className="flex items-center gap-2 text-sm">
-                        <Check className="h-4 w-4 text-green-500 flex-shrink-0" />
-                        <span>{feature}</span>
+                      <li key={index} className="flex items-start gap-2 text-xs sm:text-sm">
+                        <Check className="h-4 w-4 text-green-500 flex-shrink-0 mt-0.5" />
+                        <span className="leading-tight">{feature}</span>
                       </li>
                     ))}
                   </ul>
@@ -319,7 +319,7 @@ const Subscription = () => {
             <CardDescription>Premium members experience 3x more meaningful connections</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               <div className="text-center">
                 <Eye className="h-8 w-8 text-blue-500 mx-auto mb-2" />
                 <h3 className="font-semibold mb-1">See Who Likes You</h3>
