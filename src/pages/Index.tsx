@@ -211,7 +211,7 @@ const Index = () => {
           <div className="mb-16">
             <h2 className="text-3xl font-bold text-center mb-8">Every story begins with a second heartbeat</h2>
             <p className="text-center text-muted-foreground mb-8 text-lg">
-              Invite someone whose soul quests mirror your own.
+              Invite someone whose journey to find their perfect match mirrors your own.
             </p>
             <div className="max-w-md mx-auto">
               <InviteKindredSoul />

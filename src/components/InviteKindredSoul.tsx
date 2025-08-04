@@ -60,7 +60,7 @@ export const InviteKindredSoul = () => {
           Every story begins with a second heartbeat.
         </p>
         <p className="text-muted-foreground text-center text-sm">
-          Invite someone whose soul quests mirror your own.
+          Invite someone whose journey to find their perfect match mirrors your own.
         </p>
         
         <div className="space-y-3">
