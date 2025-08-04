@@ -118,14 +118,14 @@ const handler = async (req: Request): Promise<Response> => {
               <p style="color: #0369a1; margin: 0 0 15px 0; font-size: 14px;">
                 Unlock your complete compatibility profile with deeper insights, conversation starters, and unlimited matches.
               </p>
-              <a href="https://65aad2fc-5b33-4030-8f73-3783f744043f.lovableproject.com/pricing" 
+              <a href="https://aicompleteme.com/pricing" 
                  style="background: #0ea5e9; color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: 600; display: inline-block; font-size: 14px;">
                 Upgrade to Premium
               </a>
             </div>
 
             <div style="text-align: center; margin: 30px 0;">
-              <a href="https://65aad2fc-5b33-4030-8f73-3783f744043f.lovableproject.com/quiz-results" 
+              <a href="https://aicompleteme.com/quiz-results" 
                  style="background: #6366f1; color: white; padding: 15px 30px; border-radius: 8px; text-decoration: none; font-weight: 600; display: inline-block;">
                 View All Results
               </a>
