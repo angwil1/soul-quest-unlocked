@@ -13,7 +13,7 @@ import { FloatingQuizButton } from '@/components/FloatingQuizButton';
 import { FirstLightModal } from '@/components/FirstLightModal';
 import { InviteKindredSoul } from '@/components/InviteKindredSoul';
 import SearchFilters from '@/components/SearchFilters';
-import { Search } from 'lucide-react';
+import { Search, Crown, ArrowRight } from 'lucide-react';
 import datingBackground from '@/assets/dating-background.jpg';
 
 const Index = () => {
@@ -24,12 +24,29 @@ const Index = () => {
   const [showFirstLightModal, setShowFirstLightModal] = useState(false);
   const [isNewUser, setIsNewUser] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
+  const [showSearchUpgradePrompt, setShowSearchUpgradePrompt] = useState(false);
+
+  // Check if user has Echo Amplified (premium tier)
+  const isEchoActive = subscription?.subscribed && subscription?.subscription_tier === 'Pro';
 
   const handleUpgradePrompt = () => {
     navigate('/subscription');
   };
 
+  const handleFiltersChange = (filters: string[]) => {
+    setSelectedFilters(filters);
+    // Hide search upgrade prompt when filters change
+    setShowSearchUpgradePrompt(false);
+  };
+
   const handleSearch = () => {
+    // Check if free user has reached limit and is trying to search
+    if (!isEchoActive && selectedFilters.length >= 3) {
+      setShowSearchUpgradePrompt(true);
+      return;
+    }
+
     if (searchQuery.trim()) {
       // Navigate to matches page with search query
       navigate(`/matches?search=${encodeURIComponent(searchQuery.trim())}`);
@@ -371,6 +388,32 @@ const Index = () => {
                 Search
               </Button>
             </div>
+            
+            {/* Search Upgrade Prompt */}
+            {showSearchUpgradePrompt && !isEchoActive && (
+              <Card className="mt-4 border-primary/20 bg-gradient-to-r from-primary/5 to-secondary/5">
+                <CardContent className="p-4">
+                  <div className="flex items-start gap-3">
+                    <div className="text-2xl">💫</div>
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-sm mb-1">Want to explore more?</h3>
+                      <p className="text-sm text-muted-foreground mb-3">
+                        Echo Amplified 🪞 adds emotional nuance, letting you match by vibe, depth, and expressive presence—not just identity.
+                      </p>
+                      <Button 
+                        size="sm" 
+                        onClick={handleUpgradePrompt}
+                        className="text-xs h-8"
+                      >
+                        <Crown className="h-3 w-3 mr-1" />
+                        Add Echo Amplified to deepen your search
+                        <ArrowRight className="h-3 w-3 ml-1" />
+                      </Button>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            )}
           </div>
         </div>
 
@@ -415,6 +458,7 @@ const Index = () => {
             Start with intentional identity filtering to find meaningful connections
           </p>
           <SearchFilters 
+            onFiltersChange={handleFiltersChange}
             onUpgradePrompt={handleUpgradePrompt}
           />
         </div>
