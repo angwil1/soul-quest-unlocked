@@ -15,7 +15,7 @@ const Privacy = () => {
           </CardHeader>
           <CardContent className="prose prose-slate dark:prose-invert max-w-none space-y-6">
             <p>
-              GetUnlocked ("we," "us," or "our") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and protect your personal information when you use our services via www.getunlockedapp.com (the "Site") and related platforms.
+              AI Complete Me ("we," "us," or "our") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and protect your personal information when you use our services via www.aicompleteme.com (the "Site") and related platforms.
             </p>
 
             <section>
@@ -61,7 +61,7 @@ const Privacy = () => {
                 <li><strong>Feedback Submission:</strong> Journaling and polls can be anonymous</li>
               </ul>
               <p>
-                You may request data deletion or export by contacting us at: support@getunlockedapp.com
+                You may request data deletion or export by contacting us at: support@aicompleteme.com
               </p>
             </section>
 
@@ -85,8 +85,8 @@ const Privacy = () => {
               <h2 className="text-xl font-semibold mb-3">7. Contact Us</h2>
               <p>
                 For questions or privacy requests:<br />
-                📧 support@getunlockedapp.com<br />
-                🌐 www.getunlockedapp.com/privacy
+                📧 support@aicompleteme.com<br />
+                🌐 www.aicompleteme.com/privacy
               </p>
             </section>
           </CardContent>
