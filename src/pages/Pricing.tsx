@@ -49,19 +49,19 @@ const Pricing = () => {
       popular: false
     },
     {
-      name: "Unlocked Beyond 🔓",
+      name: "Complete Beyond 🌌",
       icon: "",
       price: "$39",
       period: "/year",
       description: "An invitation to co-create our community",
       features: [
-        "Lifetime access to all Unlocked+ features",
-        "\"Unlocked Beyond\" badge on profile (optional)",
+        "Lifetime access to all Complete Plus features",
+        "\"Complete Beyond\" badge on profile (optional)",
         "Unlocked Mode: values-first compatibility journeys",
         "Memory Vault: revisit favorite moments, prompts, and saved matches",
         "Connection DNA: evolving emotional intelligence for deeper match potential"
       ],
-      buttonText: "Get Unlocked Beyond",
+      buttonText: "Get Complete Beyond",
       plan: "unlocked-beyond",
       popular: false,
       hoverTexts: {

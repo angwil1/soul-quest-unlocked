@@ -88,19 +88,19 @@ const Subscription = () => {
       plan: 'unlocked-plus'
     },
     {
-      name: '🔓 Unlocked Beyond',
+      name: '🌌 Complete Beyond',
       icon: '',
       price: '$39/year',
       description: 'An invitation to co-create our community',
       features: [
-        'Lifetime access to all Unlocked+ features',
-        '"Unlocked Beyond" badge on profile (optional)',
+        'Lifetime access to all Complete Plus features',
+        '"Complete Beyond" badge on profile (optional)',
         'Unlocked Mode: values-first compatibility journeys',
         'Memory Vault: revisit favorite moments, prompts, and saved matches',
         'Connection DNA: evolving emotional intelligence for deeper match potential'
       ],
       current: subscription?.subscription_tier === 'Pro' && isSubscribed,
-      buttonText: subscription?.subscription_tier === 'Pro' && isSubscribed ? 'Current Plan' : 'Get Unlocked Beyond',
+      buttonText: subscription?.subscription_tier === 'Pro' && isSubscribed ? 'Current Plan' : 'Get Complete Beyond',
       disabled: subscription?.subscription_tier === 'Pro' && isSubscribed,
       plan: 'unlocked-beyond'
     },
