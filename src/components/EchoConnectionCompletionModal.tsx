@@ -39,10 +39,10 @@ export const EchoConnectionCompletionModal = ({
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <Sparkles className="h-5 w-5 text-purple-500" />
-            Complete Your Echo Connection
+            Continue Echoing or Deepen
           </DialogTitle>
           <DialogDescription>
-            You've shared 7 days of gentle whispers. Ready to deepen this connection?
+            Echo honors contemplation. You may continue whispers indefinitely, or transition to deeper connection when ready.
           </DialogDescription>
         </DialogHeader>
 
@@ -53,9 +53,9 @@ export const EchoConnectionCompletionModal = ({
               <ArrowRight className="h-6 w-6 text-muted-foreground" />
               <div className="text-2xl">💖</div>
             </div>
-            <h3 className="font-semibold mb-2">From Ambient to Intentional</h3>
+            <h3 className="font-semibold mb-2">Echo Continues or Deepens</h3>
             <p className="text-sm text-muted-foreground">
-              Transition from Echo's poetic whispers into deeper, more active emotional connection
+              Your whispers may flow forever in Echo's space, or transition to active connection
             </p>
           </div>
 
@@ -107,7 +107,7 @@ export const EchoConnectionCompletionModal = ({
 
           <div className="text-center">
             <p className="text-sm text-muted-foreground mb-3">
-              Or continue with your current plan and complete the connection
+              Or let Echo continue its gentle flow—no pressure, pure contemplation
             </p>
             <Button 
               variant="outline" 
@@ -115,7 +115,7 @@ export const EchoConnectionCompletionModal = ({
               disabled={completing}
               className="min-w-32"
             >
-              {completing ? 'Completing...' : 'Complete Connection'}
+              {completing ? 'Continuing...' : 'Continue Echo'}
             </Button>
           </div>
         </div>

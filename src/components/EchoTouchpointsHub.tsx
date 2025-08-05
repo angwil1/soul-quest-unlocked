@@ -215,7 +215,7 @@ export const EchoTouchpointsHub = () => {
                           </div>
                           {chat.can_complete_connection && (
                             <div className="text-xs text-purple-600 dark:text-purple-400 mt-1">
-                              ✨ 7 days of gentle whispers complete. Ready for deeper connection?
+                              ✨ Contemplation phase complete. Echo continues, or deepen when ready.
                             </div>
                           )}
                         </div>
@@ -227,9 +227,10 @@ export const EchoTouchpointsHub = () => {
                             <Button 
                               size="sm" 
                               onClick={() => handleCompleteConnection(chat)}
-                              className="bg-gradient-to-r from-pink-600 to-purple-500 hover:from-pink-700 hover:to-purple-600"
+                              variant="outline"
+                              className="text-purple-600 border-purple-200 hover:bg-purple-50 dark:text-purple-400 dark:border-purple-800 dark:hover:bg-purple-950/20"
                             >
-                              Complete Connection
+                              Deepen Connection
                             </Button>
                           )}
                         </div>

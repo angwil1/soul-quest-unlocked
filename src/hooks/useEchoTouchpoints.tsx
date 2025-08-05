@@ -320,8 +320,8 @@ export const useEchoTouchpoints = () => {
       await loadLimitedChats();
       
       toast({
-        title: "Connection Completed ✨",
-        description: "You've completed your Echo journey. Time to explore deeper connections!",
+        title: "Echo Continues ✨",
+        description: "Your contemplative space flows on. Whispers remain, pressure dissolves.",
       });
     } catch (error) {
       console.error('Error completing connection:', error);
