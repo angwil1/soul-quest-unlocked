@@ -79,8 +79,7 @@ const Pricing = () => {
         "TikTok-style profile embed (optional)",
         "Emotional soundtrack prompts",
         "Discoverability via vibe gallery",
-        "Echo badge toggle",
-        "7-day Echo completion arc with gentle flois"
+        "Echo badge toggle"
       ],
       buttonText: "Get Echo Monthly",
       plan: "unlocked-echo-monthly",
