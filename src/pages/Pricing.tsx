@@ -33,7 +33,7 @@ const Pricing = () => {
       popular: false
     },
     {
-      name: "Unlocked+ 🔓",
+      name: "Complete Plus 💖",
       icon: "",
       price: "$12",
       period: "/month", 
@@ -44,7 +44,7 @@ const Pricing = () => {
         "Priority matching",
         "All free features"
       ],
-      buttonText: "Get Unlocked+",
+      buttonText: "Get Complete Plus",
       plan: "unlocked-plus",
       popular: false
     },

@@ -72,7 +72,7 @@ const Subscription = () => {
       plan: null
     },
     {
-      name: '🔓 Unlocked+',
+      name: '💖 Complete Plus',
       icon: '',
       price: '$12/month',
       description: 'Offers the upgrade logic for better connections',
@@ -83,7 +83,7 @@ const Subscription = () => {
         'All free features'
       ],
       current: subscription?.subscription_tier === 'Premium' && isSubscribed,
-      buttonText: subscription?.subscription_tier === 'Premium' && isSubscribed ? 'Current Plan' : 'Get Unlocked+',
+      buttonText: subscription?.subscription_tier === 'Premium' && isSubscribed ? 'Current Plan' : 'Get Complete Plus',
       disabled: subscription?.subscription_tier === 'Premium' && isSubscribed,
       plan: 'unlocked-plus'
     },
