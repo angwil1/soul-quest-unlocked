@@ -183,18 +183,15 @@ const Subscription = () => {
       
       <div className="container mx-auto px-4 pt-20 pb-8 max-w-6xl">
         {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-4">
+        <div className="text-center mb-6">
+          <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-3">
             Your Subscription
           </h1>
-          <p className="text-xl sm:text-2xl text-muted-foreground mb-4 font-medium">
-            You're currently in <span className="font-bold text-primary text-2xl">AI Complete Me - Free</span> — begin your journey of reflection and gentle resonance.
+          <p className="text-base sm:text-lg text-muted-foreground mb-2">
+            You're currently in <span className="font-semibold text-primary">AI Complete Me - Free</span>
           </p>
-          <p className="text-lg sm:text-xl text-muted-foreground mb-4 font-medium">
-            Upgrade to 💖 <span className="font-bold text-xl">Complete Plus</span> or 🌌 <span className="font-bold text-xl">Complete Beyond</span> to explore deeper emotional connection and matching clarity.
-          </p>
-          <p className="text-lg sm:text-xl text-muted-foreground font-medium">
-            🪞 <span className="font-bold text-xl">Echo Amplified</span> can be added to any plan, or purchased on its own. Expression isn't reserved for premium—it's available to all who seek it.
+          <p className="text-sm sm:text-base text-muted-foreground">
+            Upgrade to 💖 <span className="font-semibold">Complete Plus</span> or 🌌 <span className="font-semibold">Complete Beyond</span> for deeper connections.
           </p>
         </div>
 
