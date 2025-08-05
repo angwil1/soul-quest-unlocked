@@ -184,35 +184,35 @@ const Subscription = () => {
       <div className="container mx-auto px-4 pt-20 pb-8 max-w-6xl">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-2">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-4">
             Your Subscription
           </h1>
-          <p className="text-lg sm:text-xl text-muted-foreground mb-2">
-            You're currently in <span className="font-semibold text-primary">AI Complete Me - Free</span> — begin your journey of reflection and gentle resonance.
+          <p className="text-xl sm:text-2xl text-muted-foreground mb-4 font-medium">
+            You're currently in <span className="font-bold text-primary text-2xl">AI Complete Me - Free</span> — begin your journey of reflection and gentle resonance.
           </p>
-          <p className="text-base sm:text-lg text-muted-foreground">
-            Upgrade to 💖 <span className="font-semibold">Complete Plus</span> or 🌌 <span className="font-semibold">Complete Beyond</span> to explore deeper emotional connection and matching clarity.
+          <p className="text-lg sm:text-xl text-muted-foreground mb-4 font-medium">
+            Upgrade to 💖 <span className="font-bold text-xl">Complete Plus</span> or 🌌 <span className="font-bold text-xl">Complete Beyond</span> to explore deeper emotional connection and matching clarity.
           </p>
-          <p className="text-base sm:text-lg text-muted-foreground">
-            🪞 <span className="font-semibold">Echo Amplified</span> can be added to any plan, or purchased on its own. Expression isn't reserved for premium—it's available to all who seek it.
+          <p className="text-lg sm:text-xl text-muted-foreground font-medium">
+            🪞 <span className="font-bold text-xl">Echo Amplified</span> can be added to any plan, or purchased on its own. Expression isn't reserved for premium—it's available to all who seek it.
           </p>
         </div>
 
         {/* Current Status Card */}
         <Card className="mb-8 border-primary/20 bg-gradient-to-r from-primary/5 to-secondary/5">
           <CardHeader className="text-center">
-            <CardTitle className="flex items-center justify-center gap-2">
-              <Crown className="h-5 w-5 text-primary" />
+            <CardTitle className="flex items-center justify-center gap-2 text-xl font-bold">
+              <Crown className="h-6 w-6 text-primary" />
               Current Status
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-center space-y-2">
-              <Badge variant={isSubscribed ? "default" : "secondary"} className="text-lg px-4 py-1">
+              <Badge variant={isSubscribed ? "default" : "secondary"} className="text-xl px-6 py-2 font-bold">
                 {currentTier}
               </Badge>
               {isSubscribed && subscription?.subscription_end && (
-                <p className="text-sm text-muted-foreground">
+                <p className="text-base text-muted-foreground font-medium">
                   Renews on {new Date(subscription.subscription_end).toLocaleDateString()}
                 </p>
               )}
@@ -258,17 +258,17 @@ const Subscription = () => {
                   <div className="flex justify-center mb-2">
                     <span className="text-3xl sm:text-4xl">{tier.icon}</span>
                   </div>
-                  <CardTitle className="text-xl sm:text-2xl">{tier.name}</CardTitle>
-                  <CardDescription className="text-sm sm:text-base">{tier.description}</CardDescription>
-                  <div className="text-2xl sm:text-3xl font-bold text-primary mt-2">{tier.price}</div>
+                  <CardTitle className="text-2xl sm:text-3xl font-bold">{tier.name}</CardTitle>
+                  <CardDescription className="text-base sm:text-lg font-medium">{tier.description}</CardDescription>
+                  <div className="text-3xl sm:text-4xl font-bold text-primary mt-3">{tier.price}</div>
                 </CardHeader>
                 
                 <CardContent className="px-4 pb-4">
                   <ul className="space-y-2 mb-6">
                     {tier.features.map((feature, index) => (
-                      <li key={index} className="flex items-start gap-2 text-xs sm:text-sm">
-                        <Check className="h-4 w-4 text-green-500 flex-shrink-0 mt-0.5" />
-                        <span className="leading-tight">{feature}</span>
+                      <li key={index} className="flex items-start gap-3 text-sm sm:text-base font-medium">
+                        <Check className="h-5 w-5 text-green-500 flex-shrink-0 mt-0.5" />
+                        <span className="leading-relaxed">{feature}</span>
                       </li>
                     ))}
                   </ul>
@@ -367,33 +367,33 @@ const Subscription = () => {
         {/* Benefits Section */}
         <Card className="border-amber-200 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-950/20 dark:to-orange-950/20">
           <CardHeader className="text-center">
-            <CardTitle className="flex items-center justify-center gap-2 text-amber-700 dark:text-amber-300">
-              <Sparkles className="h-5 w-5" />
+            <CardTitle className="flex items-center justify-center gap-2 text-amber-700 dark:text-amber-300 text-2xl font-bold">
+              <Sparkles className="h-6 w-6" />
               Why Upgrade?
             </CardTitle>
-            <CardDescription>Premium members experience 3x more meaningful connections</CardDescription>
+            <CardDescription className="text-lg font-medium">Premium members experience 3x more meaningful connections</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               <div className="text-center">
-                <Eye className="h-8 w-8 text-blue-500 mx-auto mb-2" />
-                <h3 className="font-semibold mb-1">See Who Likes You</h3>
-                <p className="text-sm text-muted-foreground">No more guessing games</p>
+                <Eye className="h-10 w-10 text-blue-500 mx-auto mb-3" />
+                <h3 className="font-bold text-lg mb-2">See Who Likes You</h3>
+                <p className="text-base text-muted-foreground font-medium">No more guessing games</p>
               </div>
               <div className="text-center">
-                <MessageCircle className="h-8 w-8 text-green-500 mx-auto mb-2" />
-                <h3 className="font-semibold mb-1">Unlimited Messaging</h3>
-                <p className="text-sm text-muted-foreground">Chat without limits</p>
+                <MessageCircle className="h-10 w-10 text-green-500 mx-auto mb-3" />
+                <h3 className="font-bold text-lg mb-2">Unlimited Messaging</h3>
+                <p className="text-base text-muted-foreground font-medium">Chat without limits</p>
               </div>
               <div className="text-center">
-                <Zap className="h-8 w-8 text-purple-500 mx-auto mb-2" />
-                <h3 className="font-semibold mb-1">Priority Visibility</h3>
-                <p className="text-sm text-muted-foreground">Get seen by more people</p>
+                <Zap className="h-10 w-10 text-purple-500 mx-auto mb-3" />
+                <h3 className="font-bold text-lg mb-2">Priority Visibility</h3>
+                <p className="text-base text-muted-foreground font-medium">Get seen by more people</p>
               </div>
               <div className="text-center">
-                <Star className="h-8 w-8 text-amber-500 mx-auto mb-2" />
-                <h3 className="font-semibold mb-1">Premium Features</h3>
-                <p className="text-sm text-muted-foreground">Advanced matching & more</p>
+                <Star className="h-10 w-10 text-amber-500 mx-auto mb-3" />
+                <h3 className="font-bold text-lg mb-2">Premium Features</h3>
+                <p className="text-base text-muted-foreground font-medium">Advanced matching & more</p>
               </div>
             </div>
           </CardContent>
