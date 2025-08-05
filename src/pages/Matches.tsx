@@ -189,7 +189,7 @@ const Matches = () => {
         {/* Match Card */}
         <Card className="overflow-hidden max-w-md mx-auto">
           <div className="relative">
-            <div className="aspect-[4/3] bg-gradient-to-br from-primary/10 to-secondary/10">
+            <div className="aspect-[4/3] bg-gray-100">
               <img 
                 src={currentMatch.avatar_url} 
                 alt={currentMatch.name} 
@@ -203,7 +203,7 @@ const Matches = () => {
               </div>
               
               {/* Basic Info Overlay */}
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 text-white">
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-6 text-white">
                 <h2 className="text-2xl font-bold mb-1">
                   {currentMatch.name}, {currentMatch.age}
                 </h2>
