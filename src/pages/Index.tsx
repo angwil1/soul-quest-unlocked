@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Input } from '@/components/ui/input';
 import { useAuth } from '@/hooks/useAuth';
 import { useSubscription } from '@/hooks/useSubscription';
 import { supabase } from '@/integrations/supabase/client';
@@ -12,6 +13,7 @@ import { FloatingQuizButton } from '@/components/FloatingQuizButton';
 import { FirstLightModal } from '@/components/FirstLightModal';
 import { InviteKindredSoul } from '@/components/InviteKindredSoul';
 import SearchFilters from '@/components/SearchFilters';
+import { Search } from 'lucide-react';
 import datingBackground from '@/assets/dating-background.jpg';
 
 const Index = () => {
@@ -21,9 +23,20 @@ const Index = () => {
   const [faqs, setFaqs] = useState<Array<{id: number; question: string; answer: string}>>([]);
   const [showFirstLightModal, setShowFirstLightModal] = useState(false);
   const [isNewUser, setIsNewUser] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const handleUpgradePrompt = () => {
     navigate('/subscription');
+  };
+
+  const handleSearch = () => {
+    if (searchQuery.trim()) {
+      // Navigate to matches page with search query
+      navigate(`/matches?search=${encodeURIComponent(searchQuery.trim())}`);
+    } else {
+      // Navigate to matches page without search
+      navigate('/matches');
+    }
   };
 
   useEffect(() => {
@@ -328,6 +341,36 @@ const Index = () => {
           <div>
             <h2 className="text-2xl font-bold text-primary">Welcome back!</h2>
             <p className="text-muted-foreground">You're successfully logged in as {user.email}</p>
+          </div>
+        </div>
+
+        {/* Search Section */}
+        <div className="mb-12">
+          <div className="max-w-2xl mx-auto">
+            <h2 className="text-3xl font-bold text-center mb-6">Find Your Perfect Match</h2>
+            <p className="text-center text-muted-foreground mb-8 text-lg">
+              Search for connections that resonate with your soul
+            </p>
+            <div className="flex gap-2">
+              <div className="relative flex-1">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+                <Input
+                  type="text"
+                  placeholder="Search by interests, location, or keywords..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
+                  className="pl-10 text-lg py-6"
+                />
+              </div>
+              <Button 
+                onClick={handleSearch}
+                size="lg"
+                className="px-8 py-6 text-lg"
+              >
+                Search
+              </Button>
+            </div>
           </div>
         </div>
 
