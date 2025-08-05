@@ -16,6 +16,15 @@ export const useSubscription = () => {
   const { toast } = useToast();
 
   const checkSubscription = useCallback(async () => {
+    if (!user) {
+      setSubscription({
+        subscribed: false,
+        subscription_tier: null
+      });
+      setLoading(false);
+      return;
+    }
+
     try {
       setLoading(true);
       
@@ -44,7 +53,7 @@ export const useSubscription = () => {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     if (user) {
