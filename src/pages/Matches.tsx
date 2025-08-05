@@ -27,7 +27,7 @@ const Matches = () => {
       location: 'Portland, OR',
       occupation: 'Marketing Coordinator',
       interests: ['Brunch', 'Farmers markets', 'Yoga', 'Travel'],
-      avatar_url: alexProfileMain,
+      avatar_url: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
       compatibility_score: 94,
       distance: 12
     },
@@ -39,7 +39,7 @@ const Matches = () => {
       location: 'Austin, TX',
       occupation: 'Software Engineer',
       interests: ['Guitar', 'Cooking', 'Craft beer', 'Hiking'],
-      avatar_url: jordanProfileRealistic,
+      avatar_url: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&h=400&fit=crop&crop=face",
       compatibility_score: 89,
       distance: 8
     },
@@ -51,7 +51,7 @@ const Matches = () => {
       location: 'Seattle, WA',
       occupation: 'Elementary School Teacher',
       interests: ['Reading', 'Coffee', 'Hiking', 'Restaurants'],
-      avatar_url: caseyProfile,
+      avatar_url: "https://images.unsplash.com/photo-1494790108755-2616b612b47c?w=400&h=400&fit=crop&crop=face",
       compatibility_score: 92,
       distance: 15
     },
@@ -63,7 +63,7 @@ const Matches = () => {
       location: 'Denver, CO',
       occupation: 'Registered Nurse',
       interests: ['Fitness', 'Wine tasting', 'Running', 'Movies'],
-      avatar_url: alexProfilePhotography,
+      avatar_url: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face",
       compatibility_score: 88,
       distance: 22
     },
@@ -75,7 +75,7 @@ const Matches = () => {
       location: 'Asheville, NC',
       occupation: 'Graphic Designer',
       interests: ['Design', 'Board games', 'Concerts', 'Food'],
-      avatar_url: jordanProfileMain,
+      avatar_url: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
       compatibility_score: 91,
       distance: 18
     },
@@ -87,7 +87,7 @@ const Matches = () => {
       location: 'Santa Fe, NM',
       occupation: 'Physical Therapist',
       interests: ['Rock climbing', 'Netflix', 'Camping', 'Dogs'],
-      avatar_url: caseyProfileAlt,
+      avatar_url: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&crop=face",
       compatibility_score: 85,
       distance: 25
     },
@@ -99,7 +99,7 @@ const Matches = () => {
       location: 'San Diego, CA',
       occupation: 'Accountant',
       interests: ['Beach volleyball', 'Craft beer', 'Surfing', 'BBQ'],
-      avatar_url: alexProfileHiking,
+      avatar_url: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face",
       compatibility_score: 93,
       distance: 14
     },
@@ -111,7 +111,7 @@ const Matches = () => {
       location: 'Nashville, TN',
       occupation: 'High School Teacher',
       interests: ['Live music', 'Reading', 'Coffee', 'Museums'],
-      avatar_url: alexProfileRealistic,
+      avatar_url: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=400&h=400&fit=crop&crop=face",
       compatibility_score: 87,
       distance: 19
     }
