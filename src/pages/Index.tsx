@@ -19,7 +19,7 @@ import datingBackground from '@/assets/dating-background.jpg';
 
 const Index = () => {
   const { user, loading, signOut } = useAuth();
-  const { subscription, loading: subscriptionLoading, isUnlockedPlus } = useSubscription();
+  const { subscription, loading: subscriptionLoading, isUnlockedPlus, isUnlockedBeyond } = useSubscription();
   const { toast } = useToast();
   const navigate = useNavigate();
   const [faqs, setFaqs] = useState<Array<{id: number; question: string; answer: string}>>([]);
@@ -43,10 +43,15 @@ const Index = () => {
   };
 
   const handleSearch = () => {
-    // Show special message for Complete Plus users
+    // Show special messages for premium users
     if (isUnlockedPlus) {
       toast({
         title: "💖 You're not just searching. You're showing up—with heart.",
+        duration: 3000,
+      });
+    } else if (isUnlockedBeyond) {
+      toast({
+        title: "🌌 You're not just matching. You're discovering what's waiting beyond the scroll.",
         duration: 3000,
       });
     }
