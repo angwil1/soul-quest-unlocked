@@ -28,15 +28,9 @@ const Questions = () => {
   const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
-    if (!loading && !user) {
-      navigate('/auth');
-      return;
-    }
-
-    if (user) {
-      fetchQuestions();
-    }
-  }, [user, loading, navigate]);
+    // Always fetch questions - allow both authenticated and unauthenticated access
+    fetchQuestions();
+  }, []);
 
   const fetchQuestions = async () => {
     try {
@@ -70,7 +64,15 @@ const Questions = () => {
   };
 
   const handleSubmitQuiz = async () => {
-    if (!user) return;
+    if (!user) {
+      toast({
+        title: "Sign in required",
+        description: "Please sign in to save your quiz results.",
+        variant: "destructive",
+      });
+      navigate('/auth');
+      return;
+    }
 
     const answeredQuestions = Object.keys(answers).length;
     if (answeredQuestions < questions.length) {
@@ -117,9 +119,7 @@ const Questions = () => {
     );
   }
 
-  if (!user) {
-    return null;
-  }
+  // Allow unauthenticated access to view questions
 
   return (
     <div className="min-h-screen bg-background">
