@@ -42,11 +42,16 @@ const Index = () => {
 
   const handleSearch = () => {
     // Check if free user has reached limit and is trying to search
+    // Premium users (Echo Amplified) can search without restrictions
     if (!isEchoActive && selectedFilters.length >= 3) {
       setShowSearchUpgradePrompt(true);
       return;
     }
 
+    // Allow search for:
+    // 1. Premium users (any filter count)
+    // 2. Free users with less than 3 filters
+    // 3. Any user with search query (regardless of filters)
     if (searchQuery.trim()) {
       // Navigate to matches page with search query
       navigate(`/matches?search=${encodeURIComponent(searchQuery.trim())}`);
