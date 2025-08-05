@@ -11,6 +11,7 @@ import { Footer } from '@/components/Footer';
 import { FloatingQuizButton } from '@/components/FloatingQuizButton';
 import { FirstLightModal } from '@/components/FirstLightModal';
 import { InviteKindredSoul } from '@/components/InviteKindredSoul';
+import SearchFilters from '@/components/SearchFilters';
 import datingBackground from '@/assets/dating-background.jpg';
 
 const Index = () => {
@@ -20,6 +21,10 @@ const Index = () => {
   const [faqs, setFaqs] = useState<Array<{id: number; question: string; answer: string}>>([]);
   const [showFirstLightModal, setShowFirstLightModal] = useState(false);
   const [isNewUser, setIsNewUser] = useState(false);
+
+  const handleUpgradePrompt = () => {
+    navigate('/subscription');
+  };
 
   useEffect(() => {
     // Fetch FAQs for the "What Makes Us Different" section
@@ -358,6 +363,17 @@ const Index = () => {
           <p className="text-center text-muted-foreground mb-12 text-lg">
             Real connections, found through emotional clarity
           </p>
+        </div>
+        
+        {/* Identity Filters Section */}
+        <div className="mb-16">
+          <h2 className="text-3xl font-bold text-center mb-8">Choose Your Connection Path</h2>
+          <p className="text-center text-muted-foreground mb-8 text-lg">
+            Start with intentional identity filtering to find meaningful connections
+          </p>
+          <SearchFilters 
+            onUpgradePrompt={handleUpgradePrompt}
+          />
         </div>
         
         
