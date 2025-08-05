@@ -15,7 +15,7 @@ const TermsOfService = () => {
           </CardHeader>
           <CardContent className="prose prose-slate dark:prose-invert max-w-none space-y-6">
             <p>
-              Welcome to GetUnlocked ("we," "us," or "our"). These Terms of Service ("Terms") govern your use of our dating platform accessible at www.getunlockedapp.com (the "Service").
+              Welcome to AI Complete Me ("we," "us," or "our"). These Terms of Service ("Terms") govern your use of our dating platform accessible at www.aicompleteme.com (the "Service").
             </p>
 
             <section>
@@ -28,7 +28,7 @@ const TermsOfService = () => {
             <section>
               <h2 className="text-xl font-semibold mb-3">2. Eligibility</h2>
               <ul className="list-disc pl-6 space-y-2">
-                <li>You must be at least 18 years old to use GetUnlocked</li>
+                <li>You must be at least 18 years old to use AI Complete Me</li>
                 <li>You must provide accurate and truthful information</li>
                 <li>You must not have been previously banned from the platform</li>
                 <li>You represent that you have the legal capacity to enter into these Terms</li>
@@ -76,7 +76,7 @@ const TermsOfService = () => {
             <section>
               <h2 className="text-xl font-semibold mb-3">6. Content and Intellectual Property</h2>
               <p>
-                You retain ownership of content you upload but grant us a license to use, display, and distribute it for Service operation. All platform content, features, and functionality are owned by GetUnlocked and protected by intellectual property laws.
+                You retain ownership of content you upload but grant us a license to use, display, and distribute it for Service operation. All platform content, features, and functionality are owned by AI Complete Me and protected by intellectual property laws.
               </p>
             </section>
 
@@ -104,14 +104,14 @@ const TermsOfService = () => {
             <section>
               <h2 className="text-xl font-semibold mb-3">10. Limitation of Liability</h2>
               <p>
-                To the maximum extent permitted by law, GetUnlocked shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of the Service.
+                To the maximum extent permitted by law, AI Complete Me shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of the Service.
               </p>
             </section>
 
             <section>
               <h2 className="text-xl font-semibold mb-3">11. Governing Law</h2>
               <p>
-                These Terms shall be governed by and construed in accordance with the laws of the jurisdiction where GetUnlocked is incorporated, without regard to conflict of law principles.
+                These Terms shall be governed by and construed in accordance with the laws of the jurisdiction where AI Complete Me is incorporated, without regard to conflict of law principles.
               </p>
             </section>
 
@@ -126,8 +126,8 @@ const TermsOfService = () => {
               <h2 className="text-xl font-semibold mb-3">13. Contact Information</h2>
               <p>
                 If you have any questions about these Terms, please contact us at:<br />
-                📧 support@getunlockedapp.com<br />
-                🌐 www.getunlockedapp.com/terms
+                📧 support@aicompleteme.com<br />
+                🌐 www.aicompleteme.com/terms
               </p>
             </section>
           </CardContent>
