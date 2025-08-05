@@ -66,11 +66,10 @@ const Questions = () => {
   const handleSubmitQuiz = async () => {
     if (!user) {
       toast({
-        title: "Sign in required",
-        description: "Please sign in to save your quiz results.",
-        variant: "destructive",
+        title: "Demo Mode",
+        description: "Quiz submitted successfully! In the real app, you'd sign in to save results.",
       });
-      navigate('/auth');
+      navigate('/quiz-results');
       return;
     }
 

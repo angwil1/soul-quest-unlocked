@@ -21,12 +21,7 @@ const ProfileEdit = () => {
   const [newInterest, setNewInterest] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  useEffect(() => {
-    if (!user) {
-      navigate('/auth');
-      return;
-    }
-  }, [user, navigate]);
+  // Demo mode - allow viewing without authentication
 
   useEffect(() => {
     if (profile) {
