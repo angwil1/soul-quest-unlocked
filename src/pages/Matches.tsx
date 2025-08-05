@@ -5,8 +5,13 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ArrowLeft, Heart, X, MapPin, Users } from 'lucide-react';
 import caseyProfile from '@/assets/casey-profile-realistic.jpg';
+import caseyProfileAlt from '@/assets/casey-profile.jpg';
 import alexProfileRealistic from '@/assets/alex-profile-realistic.jpg';
+import alexProfileMain from '@/assets/alex-profile-main.jpg';
+import alexProfileHiking from '@/assets/alex-profile-hiking.jpg';
+import alexProfilePhotography from '@/assets/alex-profile-photography.jpg';
 import jordanProfileRealistic from '@/assets/jordan-profile-realistic.jpg';
+import jordanProfileMain from '@/assets/jordan-profile-main.jpg';
 
 const Matches = () => {
   const navigate = useNavigate();
@@ -22,7 +27,7 @@ const Matches = () => {
       location: 'Portland, OR',
       occupation: 'Literary Editor & Weekend Poet',
       interests: ['Vintage bookstores', 'Rainy day photography', 'Handwritten letters', 'Vinyl collecting'],
-      avatar_url: alexProfileRealistic,
+      avatar_url: alexProfileMain,
       compatibility_score: 94,
       distance: 12
     },
@@ -58,7 +63,7 @@ const Matches = () => {
       location: 'Denver, CO',
       occupation: 'Trauma-Informed Life Coach',
       interests: ['Boundary setting', 'Expressive art therapy', 'Mountain meditation', 'Conscious communication'],
-      avatar_url: alexProfileRealistic,
+      avatar_url: alexProfilePhotography,
       compatibility_score: 88,
       distance: 22
     },
@@ -70,7 +75,7 @@ const Matches = () => {
       location: 'Asheville, NC',
       occupation: 'Podcast Producer & Weekend Farmer',
       interests: ['Slow living', 'Philosophy podcasts', 'Sourdough bread', 'Stargazing'],
-      avatar_url: jordanProfileRealistic,
+      avatar_url: jordanProfileMain,
       compatibility_score: 91,
       distance: 18
     },
@@ -82,7 +87,7 @@ const Matches = () => {
       location: 'Santa Fe, NM',
       occupation: 'Holistic Wellness Practitioner',
       interests: ['Crystal healing', 'Moon rituals', 'Herbal medicine', 'Sacred geometry'],
-      avatar_url: caseyProfile,
+      avatar_url: caseyProfileAlt,
       compatibility_score: 85,
       distance: 25
     },
@@ -94,7 +99,7 @@ const Matches = () => {
       location: 'San Diego, CA',
       occupation: 'Marine Conservation Photographer',
       interests: ['Ocean conservation', 'Surf photography', 'Beach cleanups', 'Whale watching'],
-      avatar_url: alexProfileRealistic,
+      avatar_url: alexProfileHiking,
       compatibility_score: 93,
       distance: 14
     },
@@ -106,7 +111,7 @@ const Matches = () => {
       location: 'Nashville, TN',
       occupation: 'Singer-Songwriter & Creative Writing Teacher',
       interests: ['Songwriting', 'Poetry slams', 'Vintage vinyl', 'Late night coffee shops'],
-      avatar_url: caseyProfile,
+      avatar_url: alexProfileRealistic,
       compatibility_score: 87,
       distance: 19
     }
