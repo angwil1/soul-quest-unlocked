@@ -102,9 +102,9 @@ const Index = () => {
           <div className="mb-16 scroll-smooth">
             <div className="text-center mb-12">
               <h2 className="text-4xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                Why We Built GetUnlocked
+                AI Complete Me
               </h2>
-              <p className="text-xl text-muted-foreground italic">Dating with AI, Done Differently</p>
+              <p className="text-xl text-muted-foreground italic">AI Complete Me</p>
             </div>
             
             <div className="max-w-3xl mx-auto space-y-12">
