@@ -70,7 +70,7 @@ const Pricing = () => {
       }
     },
     {
-      name: "Unlocked Echo 🔓",
+      name: "Echo Amplified 🪞",
       icon: "",
       price: "$4",
       period: "/month",

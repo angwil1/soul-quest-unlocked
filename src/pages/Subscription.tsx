@@ -105,7 +105,7 @@ const Subscription = () => {
       plan: 'unlocked-beyond'
     },
     {
-      name: '🔓 Unlocked Echo',
+      name: '🪞 Echo Amplified',
       icon: '',
       price: '$4/month',
       description: 'Expressive upgrade for creative visibility',
