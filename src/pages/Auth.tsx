@@ -78,7 +78,7 @@ const Auth = () => {
       <div className="flex items-center justify-center p-4 pt-20">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <CardTitle className="text-2xl font-bold">Welcome to GetUnlocked</CardTitle>
+          <CardTitle className="text-2xl font-bold">Welcome to AI Complete Me</CardTitle>
           <CardDescription>Sign in to your account or create a new one</CardDescription>
         </CardHeader>
         <CardContent>
