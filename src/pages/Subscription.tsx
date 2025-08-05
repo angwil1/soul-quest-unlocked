@@ -23,7 +23,7 @@ const Subscription = () => {
     checkSubscription();
   }, [checkSubscription]);
 
-  const currentTier = 'Unlocked';
+  const currentTier = 'AI Complete Me - Free';
   const isSubscribed = subscription?.subscribed || false;
 
   const handleUpgrade = async (plan: string) => {
@@ -94,8 +94,8 @@ const Subscription = () => {
       description: 'An invitation to co-create our community',
       features: [
         'Lifetime access to all Complete Plus features',
-        '"Complete Beyond" badge on profile (optional)',
-        'Unlocked Mode: values-first compatibility journeys',
+        '"Complete Beyond" badge on profile (optional)', 
+        'AI Complete Me Mode: values-first compatibility journeys',
         'Memory Vault: revisit favorite moments, prompts, and saved matches',
         'Connection DNA: evolving emotional intelligence for deeper match potential'
       ],
@@ -155,7 +155,7 @@ const Subscription = () => {
             Your Subscription
           </h1>
           <p className="text-lg sm:text-xl text-muted-foreground mb-2">
-            You're currently in <span className="font-semibold text-primary">Starter Echo</span> — begin your journey of reflection and gentle resonance.
+            You're currently in <span className="font-semibold text-primary">AI Complete Me - Free</span> — begin your journey of reflection and gentle resonance.
           </p>
           <p className="text-base sm:text-lg text-muted-foreground">
             Upgrade to 💖 <span className="font-semibold">Complete Plus</span> or 🌌 <span className="font-semibold">Complete Beyond</span> to explore deeper emotional connection and matching clarity.
