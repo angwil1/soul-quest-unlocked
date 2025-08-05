@@ -112,12 +112,13 @@ const Subscription = () => {
       name: '🪞 Echo Amplified',
       icon: '',
       price: '$4/month',
-      description: 'Expressive upgrade for creative visibility',
+      description: 'Every Echo holds its own rhythm—quiet reflection for 3 days, and the option to complete after 7.',
       features: [
         'TikTok-style profile embed (optional)',
         'Emotional soundtrack prompts',
         'Discoverability via vibe gallery',
-        'Echo badge toggle'
+        'Echo badge toggle',
+        '7-day Echo completion arc with gentle flow'
       ],
       current: false,
       buttonText: 'Get Echo Monthly',

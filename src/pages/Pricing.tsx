@@ -74,7 +74,7 @@ const Pricing = () => {
       icon: "",
       price: "$4",
       period: "/month",
-      description: "Every Echo holds its own rhythm—quiet reflection for 3 days, and the option to complete after 7. Clarity without clutter.",
+      description: "Every Echo holds its own rhythm—quiet reflection for 3 days, and the option to complete after 7.",
       features: [
         "TikTok-style profile embed (optional)",
         "Emotional soundtrack prompts",
