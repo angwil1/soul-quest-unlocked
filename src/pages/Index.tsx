@@ -14,8 +14,11 @@ import { FloatingQuizButton } from '@/components/FloatingQuizButton';
 import { FirstLightModal } from '@/components/FirstLightModal';
 import { InviteKindredSoul } from '@/components/InviteKindredSoul';
 import SearchFilters from '@/components/SearchFilters';
-import { Search, Crown, ArrowRight } from 'lucide-react';
+import { Search, Crown, ArrowRight, Heart, Users, Sparkles } from 'lucide-react';
 import datingBackground from '@/assets/dating-background.jpg';
+import coupleHero1 from '@/assets/couple-hero-1.jpg';
+import coupleHero2 from '@/assets/couple-hero-2.jpg';
+import coupleDigital from '@/assets/couple-digital.jpg';
 
 const Index = () => {
   const { user, loading, signOut } = useAuth();
@@ -116,239 +119,260 @@ const Index = () => {
     return (
       <div className="min-h-screen bg-background">
         <Navbar />
-        <div className="p-4">
-        <div className="max-w-4xl mx-auto">
-          {/* Section 1: Emotional Intro */}
-          <div 
-            className="text-center mb-16 mt-16 relative rounded-2xl overflow-hidden"
-            style={{
-              backgroundImage: `url(${datingBackground})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat'
-            }}
-          >
-            <div className="absolute inset-0 bg-background/80 backdrop-blur-sm"></div>
-            <div className="relative z-10 py-20 px-8">
-              <h1 className="text-5xl font-bold mb-6">🪞 Not just a dating app—this is emotional clarity, made tangible.</h1>
-              <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-                Discover your emotional fingerprint, take our Compatibility Quiz, and feel the brand before anyone else arrives.
+        
+        {/* Modern Hero Section with Couples */}
+        <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+          {/* Background with Couple Images */}
+          <div className="absolute inset-0 z-0">
+            <div className="relative w-full h-full">
+              <img 
+                src={coupleHero1} 
+                alt="Couple connecting" 
+                className="absolute inset-0 w-full h-full object-cover opacity-20 animate-fade-in"
+              />
+              <div className="absolute inset-0 bg-gradient-to-br from-background/95 via-background/80 to-primary/20"></div>
+            </div>
+          </div>
+
+          {/* Hero Content */}
+          <div className="relative z-10 max-w-6xl mx-auto px-4 py-20 text-center">
+            <div className="animate-fade-in">
+              <Badge variant="secondary" className="mb-6 px-4 py-2 text-sm font-medium bg-primary/10 text-primary border-primary/20">
+                <Sparkles className="h-4 w-4 mr-2" />
+                AI-Powered Emotional Intelligence
+              </Badge>
+              
+              <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-primary via-purple-600 to-pink-600 bg-clip-text text-transparent">
+                Find Your
+                <br />
+                <span className="relative">
+                  Complete Me
+                  <div className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-primary via-purple-600 to-pink-600 rounded-full animate-scale-in"></div>
+                </span>
+              </h1>
+              
+              <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
+                Beyond swipes. Beyond games. Discover meaningful connections through 
+                <span className="text-primary font-semibold"> emotional intelligence</span> and 
+                <span className="text-primary font-semibold"> genuine compatibility</span>.
               </p>
-              <div className="flex gap-4 justify-center">
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
                 <Button 
-                  onClick={() => navigate('/auth')} 
-                  size="lg"
-                  className="bg-gradient-to-r from-primary to-secondary hover:opacity-90"
+                  size="lg" 
+                  onClick={() => navigate('/auth')}
+                  className="px-8 py-4 text-lg font-semibold bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90 transform hover:scale-105 transition-all duration-200 animate-scale-in"
                 >
-                  Begin with Curiosity
+                  <Heart className="h-5 w-5 mr-2" />
+                  Start Your Journey
                 </Button>
+                
                 <Button 
-                  onClick={() => navigate('/auth')} 
                   variant="outline" 
                   size="lg"
+                  onClick={() => navigate('/sample-profiles')}
+                  className="px-8 py-4 text-lg font-semibold border-primary/20 hover:bg-primary/5 animate-scale-in"
                 >
-                  Sign In
+                  <Users className="h-5 w-5 mr-2" />
+                  See How It Works
                 </Button>
               </div>
-          </div>
-        </div>
 
-          {/* Manifesto Section */}
-          <div className="mb-16 scroll-smooth">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                AI Complete Me
-              </h2>
-              <p className="text-xl text-muted-foreground italic">AI Complete Me</p>
-            </div>
-            
-            <div className="max-w-3xl mx-auto space-y-12">
-              {/* Opening Statement */}
-              <div className="text-center p-8 bg-gradient-to-br from-primary/5 to-secondary/5 rounded-2xl border border-primary/20">
-                <h3 className="text-2xl font-bold mb-4">We're not here to play games. We're here to complete something real.</h3>
-                <p className="text-lg text-muted-foreground leading-relaxed">
-                  This isn't swipe culture. It's soul culture.<br />
-                  A dating experience rooted in emotional clarity, intentional design, and AI that listens to your vibe—not your metadata.
-                </p>
-              </div>
-
-              {/* What We Stand For */}
-              <div className="p-8 bg-card rounded-2xl border">
-                <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
-                  <span className="text-3xl">💡</span>
-                  What AI Complete Me Stands For
-                </h3>
-                <p className="text-lg mb-6 text-muted-foreground">
-                  We don't track your heart like data. We help you reflect, connect, and remember—on your own terms.
-                </p>
-                <ul className="space-y-3 text-muted-foreground">
-                  <li className="flex items-center gap-3">
-                    <span className="w-2 h-2 bg-primary rounded-full"></span>
-                    Private by design
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <span className="w-2 h-2 bg-primary rounded-full"></span>
-                    Emotionally intelligent AI, not manipulative matchmaking
-                  </li>
-                  <li className="flex items-center gap-3">
-                    <span className="w-2 h-2 bg-primary rounded-full"></span>
-                    Rituals over features: Compatibility Quiz, Memory Vault, Connection DNA
-                  </li>
-                </ul>
-                <p className="text-lg mt-6 font-medium text-foreground">
-                  Your reflections, your vibe fingerprint, your emotional moments—they belong to you.
-                </p>
-              </div>
-
-              {/* Why We Exist */}
-              <div className="p-8 bg-card rounded-2xl border">
-                <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
-                  <span className="text-3xl">✨</span>
-                  Why AI Complete Me Exists
-                </h3>
-                <p className="text-lg mb-6 text-muted-foreground font-medium">
-                  Dating apps felt chaotic. So we built a compass.
-                </p>
-                <div className="space-y-4 text-muted-foreground">
-                  <p>We started with lived questions, not A/B tests.</p>
-                  <p>What if AI could help you understand your patterns before pushing connections?</p>
-                  <p>What if onboarding felt poetic—not performative?</p>
-                  <p>What if your emotional weather could guide your discovery—not just what shows up?</p>
+              {/* Stats */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-2xl mx-auto">
+                <div className="text-center animate-fade-in">
+                  <div className="text-3xl font-bold text-primary mb-2">10,000+</div>
+                  <div className="text-sm text-muted-foreground">Meaningful Connections</div>
                 </div>
-                <p className="text-lg mt-6 font-medium text-foreground">
-                  AI Complete Me is that vision, made real.<br />
-                  For the quiet ones, the intentional ones, the ones who never felt seen—we built this for you.
-                </p>
-              </div>
-
-              {/* Invitation */}
-              <div className="p-8 bg-gradient-to-br from-secondary/5 to-primary/5 rounded-2xl border border-secondary/20 text-center">
-                <h3 className="text-2xl font-bold mb-6 flex items-center justify-center gap-3">
-                  <span className="text-3xl">🌱</span>
-                  An Invitation to Join
-                </h3>
-                <p className="text-lg mb-6 text-muted-foreground">
-                  This space is still forming. You're early, and that's beautiful.
-                </p>
-                <div className="space-y-3 text-muted-foreground mb-6">
-                  <p>Begin with curiosity.</p>
-                  <p>Match with intention.</p>
-                  <p>Reflect with honesty.</p>
-                  <p>Help shape a dating experience that learns from you—without ever exploiting you.</p>
+                <div className="text-center animate-fade-in">
+                  <div className="text-3xl font-bold text-primary mb-2">94%</div>
+                  <div className="text-sm text-muted-foreground">Match Compatibility Rate</div>
                 </div>
-                <Button 
-                  onClick={() => navigate('/auth')} 
-                  size="lg"
-                  className="bg-gradient-to-r from-primary to-secondary hover:opacity-90"
-                >
-                  Join the Movement
-                </Button>
+                <div className="text-center animate-fade-in">
+                  <div className="text-3xl font-bold text-primary mb-2">4.8★</div>
+                  <div className="text-sm text-muted-foreground">User Satisfaction Score</div>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Happy Couples Section */}
-          <div className="mb-16">
-            <h2 className="text-3xl font-bold text-center mb-8">Love Stories in Progress</h2>
-            <p className="text-center text-muted-foreground mb-12 text-lg">
-              Real connections, found through emotional clarity
-            </p>
-            <div className="max-w-4xl mx-auto mb-12">
-              <img 
-                src="/lovable-uploads/ca0ac62b-2f4a-43d8-aafa-8a00c169e4b7.png" 
-                alt="Happy couples enjoying beautiful moments together - love stories in progress" 
-                className="w-full rounded-2xl shadow-lg transition-transform hover:scale-[1.02]"
-              />
+          {/* Floating Elements */}
+          <div className="absolute top-20 left-10 animate-pulse">
+            <div className="w-3 h-3 bg-primary/30 rounded-full"></div>
+          </div>
+          <div className="absolute bottom-32 right-16 animate-pulse" style={{ animationDelay: '1s' }}>
+            <div className="w-2 h-2 bg-purple-500/40 rounded-full"></div>
+          </div>
+          <div className="absolute top-1/3 right-10 animate-pulse" style={{ animationDelay: '2s' }}>
+            <div className="w-4 h-4 bg-pink-500/30 rounded-full"></div>
+          </div>
+        </section>
+
+        <div className="p-4">
+          <div className="max-w-6xl mx-auto">
+            {/* Success Stories Section */}
+            <section className="py-20 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-purple-500/5 to-pink-500/5"></div>
+              <div className="relative max-w-6xl mx-auto px-4">
+                <div className="text-center mb-16">
+                  <Badge variant="secondary" className="mb-4 px-4 py-2 bg-primary/10 text-primary border-primary/20">
+                    <Heart className="h-4 w-4 mr-2" />
+                    Success Stories
+                  </Badge>
+                  <h2 className="text-4xl md:text-5xl font-bold mb-6">
+                    Love Stories That Started Here
+                  </h2>
+                  <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+                    Real couples who found their perfect match through emotional intelligence and genuine connection
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  {/* Story 1 */}
+                  <Card className="overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                    <div className="relative h-64">
+                      <img 
+                        src={coupleHero2} 
+                        alt="Success story couple" 
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                      <div className="absolute bottom-4 left-4 text-white">
+                        <div className="flex items-center gap-2 mb-2">
+                          <Heart className="h-4 w-4 text-red-400 fill-current" />
+                          <span className="text-sm font-medium">Connected March 2024</span>
+                        </div>
+                        <h3 className="text-lg font-semibold">Sarah & Michael</h3>
+                      </div>
+                    </div>
+                    <CardContent className="p-6">
+                      <div className="flex items-center gap-2 mb-3">
+                        <div className="flex text-yellow-400">
+                          {"★".repeat(5)}
+                        </div>
+                        <span className="text-sm text-muted-foreground">96% Compatibility Match</span>
+                      </div>
+                      <p className="text-muted-foreground leading-relaxed">
+                        "AI Complete Me helped us discover our emotional compatibility beyond surface-level attraction. The Connection DNA feature revealed how perfectly aligned our communication styles were."
+                      </p>
+                      <div className="mt-4 flex items-center justify-between">
+                        <span className="text-sm text-primary font-medium">Now Engaged! 💍</span>
+                        <Badge variant="secondary">Beyond Members</Badge>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  {/* Story 2 */}
+                  <Card className="overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                    <div className="relative h-64">
+                      <img 
+                        src={coupleDigital} 
+                        alt="Success story couple" 
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                      <div className="absolute bottom-4 left-4 text-white">
+                        <div className="flex items-center gap-2 mb-2">
+                          <Heart className="h-4 w-4 text-red-400 fill-current" />
+                          <span className="text-sm font-medium">Connected January 2024</span>
+                        </div>
+                        <h3 className="text-lg font-semibold">Alex & Jamie</h3>
+                      </div>
+                    </div>
+                    <CardContent className="p-6">
+                      <div className="flex items-center gap-2 mb-3">
+                        <div className="flex text-yellow-400">
+                          {"★".repeat(5)}
+                        </div>
+                        <span className="text-sm text-muted-foreground">92% Compatibility Match</span>
+                      </div>
+                      <p className="text-muted-foreground leading-relaxed">
+                        "The Memory Vault feature helped us save and reflect on our meaningful conversations. We knew we were compatible when our values aligned so perfectly in the compatibility analysis."
+                      </p>
+                      <div className="mt-4 flex items-center justify-between">
+                        <span className="text-sm text-primary font-medium">Moving in Together! 🏠</span>
+                        <Badge variant="secondary">Plus Members</Badge>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+
+                {/* Call to Action */}
+                <div className="text-center mt-12">
+                  <Button 
+                    size="lg" 
+                    onClick={() => navigate('/auth')}
+                    className="px-8 py-4 bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90"
+                  >
+                    <Heart className="h-5 w-5 mr-2" />
+                    Start Your Love Story
+                  </Button>
+                </div>
+              </div>
+            </section>
+
+            {/* What Makes Us Different Section */}
+            <div className="mt-16">
+              <h2 className="text-3xl font-bold text-center mb-12">What Makes Us Different</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <Card className="border-primary/20 bg-gradient-to-br from-primary/5 to-background">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-3">
+                      <span className="text-2xl">🔐</span>
+                      Privacy First, Always
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground leading-relaxed">
+                      No ads. No tracking. No selling your data. You're here to connect — not to be commodified. We never compromise on user trust.
+                    </p>
+                  </CardContent>
+                </Card>
+
+                <Card className="border-primary/20 bg-gradient-to-br from-primary/5 to-background">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-3">
+                      <span className="text-2xl">🤖</span>
+                      AI That Respects You
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground leading-relaxed">
+                      Our matchmaking uses AI to spark real compatibility — not swipe fatigue. You'll receive digestible insights designed to help you reflect, not react.
+                    </p>
+                  </CardContent>
+                </Card>
+
+                <Card className="border-primary/20 bg-gradient-to-br from-primary/5 to-background">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-3">
+                      <span className="text-2xl">💬</span>
+                      Designed for Conversation
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground leading-relaxed">
+                      Read receipts, undo deletes, visibility boosts — these aren't gimmicks. They're tools to support meaningful dialogue, not manipulate behavior.
+                    </p>
+                  </CardContent>
+                </Card>
+
+                <Card className="border-primary/20 bg-gradient-to-br from-primary/5 to-background">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-3">
+                      <span className="text-2xl">🎁</span>
+                      Pricing That Feels Human
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground leading-relaxed">
+                      Premium access isn't a paywall — it's a support signal. We keep things gentle, clear, and optional. Because love should never feel like a transaction.
+                    </p>
+                  </CardContent>
+                </Card>
+              </div>
             </div>
           </div>
-
-          {/* Section 3: Invite a Kindred Soul */}
-          <div className="mb-16">
-            <h2 className="text-3xl font-bold text-center mb-8">Every story begins with a second heartbeat</h2>
-            <p className="text-center text-muted-foreground mb-8 text-lg">
-              Invite someone whose journey to find their perfect match mirrors your own.
-            </p>
-            <div className="max-w-md mx-auto">
-              <InviteKindredSoul />
-            </div>
-          </div>
-
-          {/* What Makes Us Different Section */}
-          <div className="mt-16">
-            <h2 className="text-3xl font-bold text-center mb-12">What Makes Us Different</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <Card className="border-primary/20 bg-gradient-to-br from-primary/5 to-background">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-3">
-                    <span className="text-2xl">🔐</span>
-                    Privacy First, Always
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground leading-relaxed">
-                    No ads. No tracking. No selling your data. You're here to connect — not to be commodified. We never compromise on user trust.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="border-primary/20 bg-gradient-to-br from-primary/5 to-background">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-3">
-                    <span className="text-2xl">🤖</span>
-                    AI That Respects You
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground leading-relaxed">
-                    Our matchmaking uses AI to spark real compatibility — not swipe fatigue. You'll receive digestible insights designed to help you reflect, not react.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="border-primary/20 bg-gradient-to-br from-primary/5 to-background">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-3">
-                    <span className="text-2xl">💬</span>
-                    Designed for Conversation
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground leading-relaxed">
-                    Read receipts, undo deletes, visibility boosts — these aren't gimmicks. They're tools to support meaningful dialogue, not manipulate behavior.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="border-primary/20 bg-gradient-to-br from-primary/5 to-background">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-3">
-                    <span className="text-2xl">🎁</span>
-                    Pricing That Feels Human
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground leading-relaxed">
-                    Premium access isn't a paywall — it's a support signal. We keep things gentle, clear, and optional. Because love should never feel like a transaction.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="border-primary/20 bg-gradient-to-br from-primary/5 to-background md:col-span-2">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-3">
-                    <span className="text-2xl">🌱</span>
-                    Built by Someone Who Gets It
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground leading-relaxed">
-                    GetUnlocked isn't VC-backed or mass-produced. It's handcrafted by someone who's lived this — and who believes technology can nurture deeper connection.
-                  </p>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </div>
         </div>
         <Footer />
       </div>
