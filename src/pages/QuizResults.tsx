@@ -102,7 +102,7 @@ const QuizResults = () => {
       await trackQuizCompletion();
       toast({
         title: "Email resent! 📧",
-        description: "Check your inbox and spam folder for 'Your GetUnlocked Compatibility Results'",
+        description: "Check your inbox and spam folder for 'Your AI Complete Me Compatibility Results'",
       });
       setEmailSent(true);
     } catch (error) {
@@ -186,7 +186,7 @@ const QuizResults = () => {
                   className="border-accent text-accent-foreground hover:bg-accent/50"
                 >
                   <Crown className="h-4 w-4 mr-2" />
-                  Upgrade to Unlocked+
+                  Complete Plus+
                 </Button>
               </div>
             </div>
@@ -267,7 +267,7 @@ const QuizResults = () => {
                          </div>
                          <div className="mt-2 p-2 bg-primary/5 rounded-lg border border-primary/20">
                            <p className="text-xs text-primary font-medium">
-                             🔮 Unlock their story
+                             🔮 Complete their story
                            </p>
                          </div>
                        </>
@@ -302,7 +302,7 @@ const QuizResults = () => {
           <CardHeader className="text-center">
             <CardTitle className="flex items-center justify-center gap-2 text-accent-foreground">
               <Crown className="h-5 w-5" />
-              Unlock Your Full Potential
+              Complete Your Full Potential
             </CardTitle>
             <CardDescription>Premium members get 3x more matches and exclusive features</CardDescription>
           </CardHeader>
@@ -330,7 +330,7 @@ const QuizResults = () => {
               className="w-full bg-gradient-primary hover:opacity-90 text-primary-foreground shadow-primary hover:shadow-xl transition-all duration-300"
             >
               <Sparkles className="h-4 w-4 mr-2" />
-              ✨ Unlock Deeper Connections
+              ✨ Complete Deeper Connections
             </Button>
           </CardContent>
         </Card>
