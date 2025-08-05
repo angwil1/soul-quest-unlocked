@@ -12,7 +12,7 @@ const FAQ = () => {
     },
     {
       question: "What is Echo Amplified, and who can use it?",
-      answer: "Echo is a creative expression add-on—featuring TikTok-style profiles, emotional soundtracks, vibe galleries, and optional Echo badges.\n\nAdd Echo Amplified to any plan, or purchase on its own. Expression isn't reserved for premium—it's available to all.\n\n• Monthly ($4/mo) or one-time ($12) pricing\n• Echo is not required for matching—it's for emotional self-presentation\n• You can hide Echo features at any time—privacy always comes first"
+      answer: "Every Echo holds its own rhythm—quiet reflection for 3 days, and the option to complete after 7.\n\nEcho Amplified is available for $4/month and includes:\n• TikTok-style profile embed (optional)\n• Emotional soundtrack prompts\n• Discoverability via vibe gallery\n• Echo badge toggle\n• 7-day Echo completion arc with gentle flows\n\nEcho is a creative expression add-on that can be added to any plan, or purchased on its own. Expression isn't reserved for premium—it's available to all.\n\n• Monthly ($4/mo) or one-time ($12) pricing\n• Echo is not required for matching—it's for emotional self-presentation\n• You can hide Echo features at any time—privacy always comes first"
     },
     {
       question: "How does AI Complete Me work?",
