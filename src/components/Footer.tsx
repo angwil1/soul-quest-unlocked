@@ -7,9 +7,9 @@ export const Footer = () => {
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="md:col-span-2">
-            <h3 className="text-lg font-semibold mb-4">GetUnlocked</h3>
+            <h3 className="text-lg font-semibold mb-4">AI Complete Me</h3>
             <p className="text-muted-foreground text-sm leading-relaxed">
-              Dating with depth, powered by trust. Because real connection isn't rare, it's just waiting for the right space.
+              Dating with depth, powered by trust. Because real connection isn't rare—it's just waiting for the right space.
             </p>
           </div>
           
@@ -36,7 +36,7 @@ export const Footer = () => {
         <div className="border-t border-border mt-8 pt-6">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-sm text-muted-foreground">
-              © 2025 GetUnlocked. All rights reserved.
+              © 2025 AI Complete Me. All rights reserved.
             </p>
             <div className="flex items-center gap-4">
               <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
