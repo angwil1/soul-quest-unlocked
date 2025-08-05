@@ -85,13 +85,13 @@ serve(async (req) => {
       
       // Map to AI Complete Me subscription tiers
       if (amount === 1200 && interval === "month") {
-        subscriptionTier = "Premium"; // Complete Plus $12/month
+        subscriptionTier = "Complete Plus"; // Complete Plus $12/month
       } else if (amount === 3900 && interval === "year") {
-        subscriptionTier = "Pro"; // Complete Beyond $39/year
+        subscriptionTier = "Complete Beyond"; // Complete Beyond $39/year
       } else if (amount === 400 && interval === "month") {
-        subscriptionTier = "Echo"; // Echo Amplified Monthly $4/month
+        subscriptionTier = "Echo Amplified"; // Echo Amplified Monthly $4/month
       } else if (amount === 1200 && !interval) {
-        subscriptionTier = "Echo_Lifetime"; // Echo Amplified Lifetime $12 one-time
+        subscriptionTier = "Echo Amplified Lifetime"; // Echo Amplified Lifetime $12 one-time
       } else {
         subscriptionTier = "Basic";
       }

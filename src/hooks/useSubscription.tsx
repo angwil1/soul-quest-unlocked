@@ -140,8 +140,8 @@ export const useSubscription = () => {
     }
   };
 
-  const isUnlockedBeyond = subscription?.subscription_tier === 'Pro' && subscription?.subscribed;
-  const isUnlockedPlus = subscription?.subscription_tier === 'Premium' && subscription?.subscribed;
+  const isUnlockedBeyond = subscription?.subscription_tier === 'Complete Beyond' && subscription?.subscribed;
+  const isUnlockedPlus = subscription?.subscription_tier === 'Complete Plus' && subscription?.subscribed;
 
   return {
     subscription,

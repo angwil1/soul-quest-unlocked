@@ -127,7 +127,7 @@ const Pricing = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {plans.map((plan) => {
-            const isCurrentPlan = getCurrentPlan() === plan.name;
+            const isCurrentPlan = getCurrentPlan() === plan.name.replace(" 💖", "").replace(" 🌌", "").replace(" 🪞", "");
             const isFree = plan.name === "Free";
             
             return (
