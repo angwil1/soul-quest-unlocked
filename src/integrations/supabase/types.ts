@@ -313,35 +313,56 @@ export type Database = {
       }
       echo_limited_chats: {
         Row: {
+          can_complete_connection: boolean | null
+          character_limit: number | null
+          connection_completion_available_at: string | null
           created_at: string
           daily_message_limit: number | null
           expires_at: string
           id: string
           last_message_date: string | null
           message_count: number | null
+          message_pace_hours: number | null
           response_invite_id: string
+          silence_mode_enabled: boolean | null
+          single_thread_enforced: boolean | null
+          tone_guidance_enabled: boolean | null
           user1_id: string
           user2_id: string
         }
         Insert: {
+          can_complete_connection?: boolean | null
+          character_limit?: number | null
+          connection_completion_available_at?: string | null
           created_at?: string
           daily_message_limit?: number | null
           expires_at?: string
           id?: string
           last_message_date?: string | null
           message_count?: number | null
+          message_pace_hours?: number | null
           response_invite_id: string
+          silence_mode_enabled?: boolean | null
+          single_thread_enforced?: boolean | null
+          tone_guidance_enabled?: boolean | null
           user1_id: string
           user2_id: string
         }
         Update: {
+          can_complete_connection?: boolean | null
+          character_limit?: number | null
+          connection_completion_available_at?: string | null
           created_at?: string
           daily_message_limit?: number | null
           expires_at?: string
           id?: string
           last_message_date?: string | null
           message_count?: number | null
+          message_pace_hours?: number | null
           response_invite_id?: string
+          silence_mode_enabled?: boolean | null
+          single_thread_enforced?: boolean | null
+          tone_guidance_enabled?: boolean | null
           user1_id?: string
           user2_id?: string
         }
@@ -357,6 +378,7 @@ export type Database = {
       }
       echo_limited_messages: {
         Row: {
+          character_count: number | null
           chat_id: string
           created_at: string
           id: string
@@ -365,6 +387,7 @@ export type Database = {
           sender_id: string
         }
         Insert: {
+          character_count?: number | null
           chat_id: string
           created_at?: string
           id?: string
@@ -373,6 +396,7 @@ export type Database = {
           sender_id: string
         }
         Update: {
+          character_count?: number | null
           chat_id?: string
           created_at?: string
           id?: string
@@ -1249,6 +1273,7 @@ export type Database = {
           date_of_birth: string | null
           distance_preference: number | null
           echo_badge_enabled: boolean | null
+          echo_silence_mode: boolean | null
           echo_visibility_level: string | null
           education: string | null
           emotional_soundtrack: string | null
@@ -1283,6 +1308,7 @@ export type Database = {
           date_of_birth?: string | null
           distance_preference?: number | null
           echo_badge_enabled?: boolean | null
+          echo_silence_mode?: boolean | null
           echo_visibility_level?: string | null
           education?: string | null
           emotional_soundtrack?: string | null
@@ -1317,6 +1343,7 @@ export type Database = {
           date_of_birth?: string | null
           distance_preference?: number | null
           echo_badge_enabled?: boolean | null
+          echo_silence_mode?: boolean | null
           echo_visibility_level?: string | null
           education?: string | null
           emotional_soundtrack?: string | null
@@ -1712,6 +1739,14 @@ export type Database = {
       check_user_security_level: {
         Args: Record<PropertyKey, never>
         Returns: boolean
+      }
+      check_whisper_window_constraints: {
+        Args: {
+          chat_id_param: string
+          sender_id_param: string
+          message_text_param: string
+        }
+        Returns: Json
       }
       compute_interaction_risk: {
         Args: { p_user_id: string }
