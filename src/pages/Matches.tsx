@@ -51,7 +51,7 @@ const Matches = () => {
       location: 'Seattle, WA',
       occupation: 'Elementary School Teacher',
       interests: ['Reading', 'Coffee', 'Hiking', 'Restaurants'],
-      avatar_url: "https://images.unsplash.com/photo-1494790108755-2616b612b47c?w=400&h=400&fit=crop&crop=face",
+      avatar_url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop&crop=face",
       compatibility_score: 92,
       distance: 15
     },
@@ -75,7 +75,7 @@ const Matches = () => {
       location: 'Asheville, NC',
       occupation: 'Graphic Designer',
       interests: ['Design', 'Board games', 'Concerts', 'Food'],
-      avatar_url: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
+      avatar_url: "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=400&h=400&fit=crop&crop=face",
       compatibility_score: 91,
       distance: 18
     },
@@ -99,7 +99,7 @@ const Matches = () => {
       location: 'San Diego, CA',
       occupation: 'Accountant',
       interests: ['Beach volleyball', 'Craft beer', 'Surfing', 'BBQ'],
-      avatar_url: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face",
+      avatar_url: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop&crop=face",
       compatibility_score: 93,
       distance: 14
     },
