@@ -189,7 +189,7 @@ const Matches = () => {
         {/* Match Card */}
         <Card className="overflow-hidden max-w-md mx-auto">
           <div className="relative">
-            <div className="aspect-[3/4] bg-gradient-to-br from-primary/10 to-secondary/10">
+            <div className="aspect-[4/3] bg-gradient-to-br from-primary/10 to-secondary/10">
               <img 
                 src={currentMatch.avatar_url} 
                 alt={currentMatch.name} 
