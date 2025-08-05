@@ -110,7 +110,7 @@ const Index = () => {
             <div className="max-w-3xl mx-auto space-y-12">
               {/* Opening Statement */}
               <div className="text-center p-8 bg-gradient-to-br from-primary/5 to-secondary/5 rounded-2xl border border-primary/20">
-                <h3 className="text-2xl font-bold mb-4">We're not here to play games. We're here to unlock something real.</h3>
+                <h3 className="text-2xl font-bold mb-4">We're not here to play games. We're here to complete something real.</h3>
                 <p className="text-lg text-muted-foreground leading-relaxed">
                   This isn't swipe culture. It's soul culture.<br />
                   A dating experience rooted in emotional clarity, intentional design, and AI that listens to your vibe—not your metadata.
