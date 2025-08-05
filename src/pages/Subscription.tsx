@@ -145,7 +145,8 @@ const Subscription = () => {
         'TikTok-style profile embed (optional)',
         'Emotional soundtrack prompts',
         'Discoverability via vibe gallery',
-        'Echo badge toggle'
+        'Echo badge toggle',
+        '7-day Echo completion'
       ],
       current: false,
       buttonText: 'Get Echo Monthly',
