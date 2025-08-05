@@ -34,6 +34,7 @@ export interface EchoLimitedChat {
   last_message_date: string | null;
   created_at: string;
   expires_at: string;
+  can_complete_connection?: boolean;
 }
 
 export interface EchoLimitedMessage {
@@ -305,6 +306,33 @@ export const useEchoTouchpoints = () => {
     }
   }, [user]);
 
+  const completeConnection = async (chatId: string) => {
+    try {
+      const { error } = await supabase
+        .from('echo_limited_chats')
+        .update({ can_complete_connection: true })
+        .eq('id', chatId)
+        .eq('user1_id', user!.id)
+        .or(`user2_id.eq.${user!.id}`);
+
+      if (error) throw error;
+
+      await loadLimitedChats();
+      
+      toast({
+        title: "Connection Completed ✨",
+        description: "You've completed your Echo journey. Time to explore deeper connections!",
+      });
+    } catch (error) {
+      console.error('Error completing connection:', error);
+      toast({
+        title: "Error",
+        description: "Failed to complete connection",
+        variant: "destructive"
+      });
+    }
+  };
+
   return {
     quietNotes,
     responseInvites,
@@ -315,6 +343,7 @@ export const useEchoTouchpoints = () => {
     acceptResponseInvite,
     sendLimitedMessage,
     markQuietNoteAsRead,
+    completeConnection,
     loadQuietNotes,
     loadResponseInvites,
     loadLimitedChats

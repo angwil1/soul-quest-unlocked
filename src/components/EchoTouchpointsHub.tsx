@@ -3,9 +3,10 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Sparkles, Heart, MessageCircle, Clock, User } from 'lucide-react';
+import { Sparkles, Heart, MessageCircle, Clock, User, ArrowUp } from 'lucide-react';
 import { useEchoTouchpoints } from '@/hooks/useEchoTouchpoints';
 import { EchoResponseInviteModal } from './EchoResponseInviteModal';
+import { EchoConnectionCompletionModal } from './EchoConnectionCompletionModal';
 import { formatDistanceToNow } from 'date-fns';
 
 export const EchoTouchpointsHub = () => {
@@ -15,15 +16,27 @@ export const EchoTouchpointsHub = () => {
     limitedChats, 
     loading,
     markQuietNoteAsRead,
-    acceptResponseInvite
+    acceptResponseInvite,
+    completeConnection
   } = useEchoTouchpoints();
 
   const [selectedNote, setSelectedNote] = useState<any>(null);
   const [showResponseModal, setShowResponseModal] = useState(false);
+  const [selectedChat, setSelectedChat] = useState<any>(null);
+  const [showCompletionModal, setShowCompletionModal] = useState(false);
 
   const handleRespondToNote = (note: any) => {
     setSelectedNote(note);
     setShowResponseModal(true);
+  };
+
+  const handleCompleteConnection = (chat: any) => {
+    setSelectedChat(chat);
+    setShowCompletionModal(true);
+  };
+
+  const onConnectionComplete = async (chatId: string) => {
+    await completeConnection(chatId);
   };
 
   const unreadNotesCount = quietNotes.filter(note => !note.is_read).length;
@@ -185,19 +198,41 @@ export const EchoTouchpointsHub = () => {
                   <Card key={chat.id}>
                     <CardContent className="p-4">
                       <div className="flex items-center justify-between">
-                        <div>
+                        <div className="flex-1">
                           <div className="flex items-center gap-2 mb-1">
                             <MessageCircle className="h-4 w-4 text-blue-500" />
                             <span className="text-sm font-medium">Limited Resonance Chat</span>
+                            {chat.can_complete_connection && (
+                              <Badge variant="secondary" className="text-xs">
+                                <ArrowUp className="h-3 w-3 mr-1" />
+                                Ready to Complete
+                              </Badge>
+                            )}
                           </div>
                           <div className="text-xs text-muted-foreground">
                             Daily limit: {chat.daily_message_limit} messages • 
                             Expires {formatDistanceToNow(new Date(chat.expires_at), { addSuffix: true })}
                           </div>
+                          {chat.can_complete_connection && (
+                            <div className="text-xs text-purple-600 dark:text-purple-400 mt-1">
+                              ✨ 7 days of gentle whispers complete. Ready for deeper connection?
+                            </div>
+                          )}
                         </div>
-                        <Button size="sm" variant="outline">
-                          Open Chat
-                        </Button>
+                        <div className="flex gap-2">
+                          <Button size="sm" variant="outline">
+                            Open Chat
+                          </Button>
+                          {chat.can_complete_connection && (
+                            <Button 
+                              size="sm" 
+                              onClick={() => handleCompleteConnection(chat)}
+                              className="bg-gradient-to-r from-pink-600 to-purple-500 hover:from-pink-700 hover:to-purple-600"
+                            >
+                              Complete Connection
+                            </Button>
+                          )}
+                        </div>
                       </div>
                     </CardContent>
                   </Card>
@@ -218,6 +253,18 @@ export const EchoTouchpointsHub = () => {
           quietNoteId={selectedNote.id}
           recipientId={selectedNote.sender_id}
           originalNote={selectedNote.note_text}
+        />
+      )}
+
+      {selectedChat && (
+        <EchoConnectionCompletionModal
+          isOpen={showCompletionModal}
+          onClose={() => {
+            setShowCompletionModal(false);
+            setSelectedChat(null);
+          }}
+          chatId={selectedChat.id}
+          onComplete={onConnectionComplete}
         />
       )}
     </>
