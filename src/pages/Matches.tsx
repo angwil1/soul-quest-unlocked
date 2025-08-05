@@ -12,43 +12,103 @@ const Matches = () => {
   const navigate = useNavigate();
   const [currentMatchIndex, setCurrentMatchIndex] = useState(0);
 
-  // Demo matches data
+  // Demo matches data with more diverse profiles
   const matches = [
     {
       id: 'demo-1',
-      name: 'Alex',
-      age: 28,
-      bio: 'Adventure seeker and coffee enthusiast. Love hiking, photography, and exploring new places.',
-      location: 'San Francisco, CA',
-      occupation: 'Product Designer',
-      interests: ['Photography', 'Hiking', 'Coffee', 'Travel'],
+      name: 'Luna Celestine',
+      age: 26,
+      bio: 'I find poetry in Tuesday afternoons and magic in mundane moments. My heart speaks in metaphors, my soul dances to rainfall symphonies.',
+      location: 'Portland, OR',
+      occupation: 'Literary Editor & Weekend Poet',
+      interests: ['Vintage bookstores', 'Rainy day photography', 'Handwritten letters', 'Vinyl collecting'],
       avatar_url: alexProfileRealistic,
       compatibility_score: 94,
       distance: 12
     },
     {
       id: 'demo-2', 
-      name: 'Jordan',
-      age: 26,
-      bio: 'Tech enthusiast by day, musician by night. Always up for trying new restaurants!',
-      location: 'Oakland, CA',
-      occupation: 'Software Engineer',
-      interests: ['Music', 'Technology', 'Food', 'Art'],
+      name: 'River Ashford',
+      age: 29,
+      bio: 'I speak fluent sunrise and find God in guitar strings. Building bridges between broken hearts and forgotten dreams.',
+      location: 'Austin, TX',
+      occupation: 'Music Therapist & Session Musician',
+      interests: ['Therapy research', 'Open mic nights', 'Emotional archaeology', 'Sacred activism'],
       avatar_url: jordanProfileRealistic,
       compatibility_score: 89,
       distance: 8
     },
     {
       id: 'demo-3',
-      name: 'Casey',
-      age: 30,
-      bio: 'Yoga instructor and nature lover. Seeking genuine connections and meaningful conversations.',
-      location: 'Palo Alto, CA',
-      occupation: 'Yoga Instructor',
-      interests: ['Yoga', 'Nature', 'Meditation', 'Reading'],
+      name: 'Sage Wildwater',
+      age: 24,
+      bio: 'Forest child with city dreams. I collect stories like seashells and believe in love letters written on napkins.',
+      location: 'Seattle, WA',
+      occupation: 'Environmental Artist & Weekend Barista',
+      interests: ['Forest bathing', 'Climate art', 'Pressed flower journals', 'Thrift store treasures'],
       avatar_url: caseyProfile,
       compatibility_score: 92,
       distance: 15
+    },
+    {
+      id: 'demo-4',
+      name: 'Phoenix Merritt',
+      age: 31,
+      bio: 'Reformed people-pleaser learning to love my own voice. I write thank-you notes to my mistakes and paint with my tears.',
+      location: 'Denver, CO',
+      occupation: 'Trauma-Informed Life Coach',
+      interests: ['Boundary setting', 'Expressive art therapy', 'Mountain meditation', 'Conscious communication'],
+      avatar_url: alexProfileRealistic,
+      compatibility_score: 88,
+      distance: 22
+    },
+    {
+      id: 'demo-5',
+      name: 'Atlas Driftwood',
+      age: 27,
+      bio: 'Professional question-asker, amateur philosopher. I find God in good coffee and deep conversations.',
+      location: 'Asheville, NC',
+      occupation: 'Podcast Producer & Weekend Farmer',
+      interests: ['Slow living', 'Philosophy podcasts', 'Sourdough bread', 'Stargazing'],
+      avatar_url: jordanProfileRealistic,
+      compatibility_score: 91,
+      distance: 18
+    },
+    {
+      id: 'demo-6',
+      name: 'Iris Moonchild',
+      age: 25,
+      bio: 'Cosmic romantic with earthbound dreams. I read tarot for my houseplants and believe in love that feels like magic.',
+      location: 'Santa Fe, NM',
+      occupation: 'Holistic Wellness Practitioner',
+      interests: ['Crystal healing', 'Moon rituals', 'Herbal medicine', 'Sacred geometry'],
+      avatar_url: caseyProfile,
+      compatibility_score: 85,
+      distance: 25
+    },
+    {
+      id: 'demo-7',
+      name: 'Ocean Clearwater',
+      age: 28,
+      bio: 'Salt-water soul with wanderlust bones. I collect sunrise photos and believe in love letters written in the sand.',
+      location: 'San Diego, CA',
+      occupation: 'Marine Conservation Photographer',
+      interests: ['Ocean conservation', 'Surf photography', 'Beach cleanups', 'Whale watching'],
+      avatar_url: alexProfileRealistic,
+      compatibility_score: 93,
+      distance: 14
+    },
+    {
+      id: 'demo-8',
+      name: 'Ember Nightingale',
+      age: 30,
+      bio: 'Midnight poet with morning coffee rituals. I write love songs for broken hearts and find beauty in the spaces between words.',
+      location: 'Nashville, TN',
+      occupation: 'Singer-Songwriter & Creative Writing Teacher',
+      interests: ['Songwriting', 'Poetry slams', 'Vintage vinyl', 'Late night coffee shops'],
+      avatar_url: caseyProfile,
+      compatibility_score: 87,
+      distance: 19
     }
   ];
 
