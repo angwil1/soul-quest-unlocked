@@ -155,10 +155,13 @@ const Subscription = () => {
             Your Subscription
           </h1>
           <p className="text-lg sm:text-xl text-muted-foreground mb-2">
-            You're currently in <span className="font-semibold text-primary">'{currentTier}'</span> — explore deeper connections with our premium tiers.
+            You're currently in <span className="font-semibold text-primary">Starter Echo</span> — begin your journey of reflection and gentle resonance.
           </p>
           <p className="text-base sm:text-lg text-muted-foreground">
-            Add Unlocked Echo to any plan, or purchase on its own. Expression isn't reserved for premium—it's available to all.
+            Upgrade to 💖 <span className="font-semibold">Complete Plus</span> or 🌌 <span className="font-semibold">Complete Beyond</span> to explore deeper emotional connection and matching clarity.
+          </p>
+          <p className="text-base sm:text-lg text-muted-foreground">
+            🪞 <span className="font-semibold">Echo Amplified</span> can be added to any plan, or purchased on its own. Expression isn't reserved for premium—it's available to all who seek it.
           </p>
         </div>
 
