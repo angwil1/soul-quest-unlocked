@@ -19,6 +19,7 @@ export const Navbar = () => {
     { name: "Memory Vault", href: "/memory-vault" },
     { name: "Upgrade", href: "/pricing" },
     { name: "FAQ", href: "/faq" },
+    { name: "Feature Test", href: "/feature-test" },
   ];
 
   const isActive = (path: string) => location.pathname === path;
