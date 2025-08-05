@@ -114,13 +114,13 @@ const Pricing = () => {
     <div className="min-h-screen bg-background py-12 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-4">GetUnlocked Pricing Plans</h1>
-          <p className="text-lg text-muted-foreground mb-2">Gentler Edition</p>
+          <h1 className="text-4xl font-bold mb-4">AI Complete Me Pricing Plans</h1>
+          <p className="text-lg text-muted-foreground mb-2">Gentle by design. Emotionally intelligent by intention.</p>
           <p className="text-muted-foreground mb-4">
-            Choose the plan that feels right for your journey
+            Choose the plan that resonates with your journey toward deeper connection.
           </p>
           <div className="inline-block bg-muted/50 rounded-lg px-4 py-2 text-sm text-muted-foreground">
-            💡 Spend $12/month or unlock everything for just $39/year—a soft emotional nudge
+            💡 Spend $12/month or unlock everything for just $39/year—a quiet nudge toward completeness.
           </div>
         </div>
 
