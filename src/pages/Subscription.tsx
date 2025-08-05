@@ -11,12 +11,16 @@ import { useToast } from '@/hooks/use-toast';
 import { Navbar } from '@/components/Navbar';
 import { UnlockedBeyondBadgeToggle } from '@/components/UnlockedBeyondBadgeToggle';
 import { UnlockedMode } from '@/components/UnlockedMode';
+import { EchoConnectionToggle } from '@/components/EchoConnectionToggle';
+import { EchoTouchpointsHub } from '@/components/EchoTouchpointsHub';
+import { useEchoSubscription } from '@/hooks/useEchoSubscription';
 
 const Subscription = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
   const { subscription, loading, checkSubscription, createCheckout, manageBilling } = useSubscription();
+  const { echoSubscription, isEchoActive } = useEchoSubscription();
   const [upgrading, setUpgrading] = useState(false);
 
   useEffect(() => {
@@ -309,6 +313,25 @@ const Subscription = () => {
         {subscription?.subscription_tier === 'Pro' && subscription?.subscribed && (
           <div className="mb-8">
             <UnlockedBeyondBadgeToggle />
+          </div>
+        )}
+
+        {/* Echo Amplified Features */}
+        {isEchoActive && (
+          <div className="space-y-6 mb-8">
+            <div className="text-center">
+              <h2 className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent mb-2">
+                🪞 Echo Amplified — Enhanced by Emotionally Intelligent Touchpoints
+              </h2>
+              <p className="text-muted-foreground">
+                Experience deeper, more meaningful connections through gentle resonance
+              </p>
+            </div>
+            
+            <div className="grid gap-6 md:grid-cols-2">
+              <EchoConnectionToggle />
+              <EchoTouchpointsHub />
+            </div>
           </div>
         )}
 

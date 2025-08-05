@@ -29,6 +29,9 @@ export interface Profile {
   tiktok_embed_url?: string;
   vibe_gallery?: any[];
   emotional_soundtrack?: string;
+  // Echo Amplified features
+  open_to_connection_invites?: boolean;
+  echo_visibility_level?: string;
 }
 
 export const useProfile = () => {

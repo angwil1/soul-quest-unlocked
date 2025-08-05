@@ -311,6 +311,156 @@ export type Database = {
         }
         Relationships: []
       }
+      echo_limited_chats: {
+        Row: {
+          created_at: string
+          daily_message_limit: number | null
+          expires_at: string
+          id: string
+          last_message_date: string | null
+          message_count: number | null
+          response_invite_id: string
+          user1_id: string
+          user2_id: string
+        }
+        Insert: {
+          created_at?: string
+          daily_message_limit?: number | null
+          expires_at?: string
+          id?: string
+          last_message_date?: string | null
+          message_count?: number | null
+          response_invite_id: string
+          user1_id: string
+          user2_id: string
+        }
+        Update: {
+          created_at?: string
+          daily_message_limit?: number | null
+          expires_at?: string
+          id?: string
+          last_message_date?: string | null
+          message_count?: number | null
+          response_invite_id?: string
+          user1_id?: string
+          user2_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "echo_limited_chats_response_invite_id_fkey"
+            columns: ["response_invite_id"]
+            isOneToOne: false
+            referencedRelation: "echo_response_invites"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      echo_limited_messages: {
+        Row: {
+          chat_id: string
+          created_at: string
+          id: string
+          is_read: boolean | null
+          message_text: string
+          sender_id: string
+        }
+        Insert: {
+          chat_id: string
+          created_at?: string
+          id?: string
+          is_read?: boolean | null
+          message_text: string
+          sender_id: string
+        }
+        Update: {
+          chat_id?: string
+          created_at?: string
+          id?: string
+          is_read?: boolean | null
+          message_text?: string
+          sender_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "echo_limited_messages_chat_id_fkey"
+            columns: ["chat_id"]
+            isOneToOne: false
+            referencedRelation: "echo_limited_chats"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      echo_quiet_notes: {
+        Row: {
+          created_at: string
+          id: string
+          is_read: boolean | null
+          note_text: string
+          recipient_id: string
+          response_invite_sent: boolean | null
+          sender_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_read?: boolean | null
+          note_text: string
+          recipient_id: string
+          response_invite_sent?: boolean | null
+          sender_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_read?: boolean | null
+          note_text?: string
+          recipient_id?: string
+          response_invite_sent?: boolean | null
+          sender_id?: string
+        }
+        Relationships: []
+      }
+      echo_response_invites: {
+        Row: {
+          created_at: string
+          expires_at: string
+          id: string
+          invite_message: string
+          quiet_note_id: string
+          recipient_id: string
+          sender_id: string
+          status: string
+        }
+        Insert: {
+          created_at?: string
+          expires_at?: string
+          id?: string
+          invite_message: string
+          quiet_note_id: string
+          recipient_id: string
+          sender_id: string
+          status?: string
+        }
+        Update: {
+          created_at?: string
+          expires_at?: string
+          id?: string
+          invite_message?: string
+          quiet_note_id?: string
+          recipient_id?: string
+          sender_id?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "echo_response_invites_quiet_note_id_fkey"
+            columns: ["quiet_note_id"]
+            isOneToOne: false
+            referencedRelation: "echo_quiet_notes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       echo_subscriptions: {
         Row: {
           created_at: string
@@ -1099,6 +1249,7 @@ export type Database = {
           date_of_birth: string | null
           distance_preference: number | null
           echo_badge_enabled: boolean | null
+          echo_visibility_level: string | null
           education: string | null
           emotional_soundtrack: string | null
           gender: string | null
@@ -1112,6 +1263,7 @@ export type Database = {
           match_score: number | null
           name: string | null
           occupation: string | null
+          open_to_connection_invites: boolean | null
           personality_type: string | null
           photos: string[] | null
           relationship_goals: string | null
@@ -1131,6 +1283,7 @@ export type Database = {
           date_of_birth?: string | null
           distance_preference?: number | null
           echo_badge_enabled?: boolean | null
+          echo_visibility_level?: string | null
           education?: string | null
           emotional_soundtrack?: string | null
           gender?: string | null
@@ -1144,6 +1297,7 @@ export type Database = {
           match_score?: number | null
           name?: string | null
           occupation?: string | null
+          open_to_connection_invites?: boolean | null
           personality_type?: string | null
           photos?: string[] | null
           relationship_goals?: string | null
@@ -1163,6 +1317,7 @@ export type Database = {
           date_of_birth?: string | null
           distance_preference?: number | null
           echo_badge_enabled?: boolean | null
+          echo_visibility_level?: string | null
           education?: string | null
           emotional_soundtrack?: string | null
           gender?: string | null
@@ -1176,6 +1331,7 @@ export type Database = {
           match_score?: number | null
           name?: string | null
           occupation?: string | null
+          open_to_connection_invites?: boolean | null
           personality_type?: string | null
           photos?: string[] | null
           relationship_goals?: string | null
@@ -1535,6 +1691,10 @@ export type Database = {
           compatibility_score: number
           is_premium_preview: boolean
         }[]
+      }
+      check_daily_message_limit: {
+        Args: { chat_id_param: string; sender_id_param: string }
+        Returns: boolean
       }
       check_rate_limit: {
         Args: {
