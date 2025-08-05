@@ -121,7 +121,7 @@ const Index = () => {
               <div className="p-8 bg-card rounded-2xl border">
                 <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
                   <span className="text-3xl">💡</span>
-                  What GetUnlocked Stands For
+                  What AI Complete Me Stands For
                 </h3>
                 <p className="text-lg mb-6 text-muted-foreground">
                   We don't track your heart like data. We help you reflect, connect, and remember—on your own terms.
