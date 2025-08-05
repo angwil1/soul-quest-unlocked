@@ -99,7 +99,7 @@ const Matches = () => {
       location: 'San Diego, CA',
       occupation: 'Accountant',
       interests: ['Beach volleyball', 'Craft beer', 'Surfing', 'BBQ'],
-      avatar_url: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop&crop=face",
+      avatar_url: "https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?w=400&h=400&fit=crop&crop=face",
       compatibility_score: 93,
       distance: 14
     },
