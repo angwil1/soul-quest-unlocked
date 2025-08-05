@@ -28,7 +28,7 @@ const FAQ = () => {
     },
     {
       question: "How much does AI Complete Me cost?",
-      answer: "We offer a free tier with basic features, and paid plans starting at $9.99/month for advanced features like video chat, read receipts, and priority matching."
+      answer: "We offer a free tier with basic features, and paid plans starting at $12/month for advanced features like video chat, read receipts, and priority matching."
     },
     {
       question: "Can I cancel my subscription anytime?",
