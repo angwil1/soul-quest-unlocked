@@ -3,23 +3,32 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Navbar } from "@/components/Navbar";
 import { Heart, Users, Brain, Sparkles } from "lucide-react";
+import coupleHero1 from "@/assets/couple-hero-1.jpg";
 
 const Mission = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted">
+    <div className="min-h-screen bg-background">
       <Navbar />
       
+      {/* Hero Section with Couple Overlay */}
+      <div className="relative min-h-[60vh] overflow-hidden">
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${coupleHero1})` }}
+        />
+        <div className="absolute inset-0 bg-black/40" />
+        <div className="relative z-10 container mx-auto px-4 py-24 text-center text-white">
+          <h1 className="text-5xl font-bold mb-6 animate-fade-in">
+            Our Mission
+          </h1>
+          <p className="text-xl max-w-3xl mx-auto leading-relaxed animate-fade-in">
+            AI Complete Me doesn't promise romantic destiny. It offers emotional clarity, gentle insight, and space to reflect on what truly resonates.
+          </p>
+        </div>
+      </div>
+
       <div className="container mx-auto px-4 py-12">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold text-foreground mb-4">
-              Our Mission
-            </h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              AI Complete Me doesn't promise romantic destiny. It offers emotional clarity, gentle insight, and space to reflect on what truly resonates.
-            </p>
-          </div>
-
           <div className="grid md:grid-cols-2 gap-8 mb-12">
             <Card>
               <CardHeader>
