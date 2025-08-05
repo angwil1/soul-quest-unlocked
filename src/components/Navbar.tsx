@@ -18,6 +18,7 @@ export const Navbar = () => {
     { name: "Connection DNA", href: "/connection-dna" },
     { name: "Memory Vault", href: "/memory-vault" },
     { name: "Upgrade", href: "/pricing" },
+    { name: "Safety", href: "/safety" },
     { name: "FAQ", href: "/faq" },
     { name: "Feature Test", href: "/feature-test" },
   ];

@@ -24,6 +24,8 @@ import Privacy from "./pages/Privacy";
 import TermsOfService from "./pages/TermsOfService";
 import StripeTest from "./pages/StripeTest";
 import FeatureTest from "./pages/FeatureTest";
+import SafetyCenter from "./pages/SafetyCenter";
+import SampleUserProfile from "./pages/SampleUserProfile";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -56,6 +58,8 @@ const App = () => (
             <Route path="/terms" element={<TermsOfService />} />
             <Route path="/stripe-test" element={<StripeTest />} />
             <Route path="/feature-test" element={<FeatureTest />} />
+            <Route path="/safety" element={<SafetyCenter />} />
+            <Route path="/sample-user" element={<SampleUserProfile />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AppWrapper>

@@ -14,6 +14,36 @@ export type Database = {
   }
   public: {
     Tables: {
+      age_verifications: {
+        Row: {
+          created_at: string
+          date_of_birth: string
+          id: string
+          is_verified: boolean
+          user_id: string
+          verification_method: string | null
+          verified_at: string | null
+        }
+        Insert: {
+          created_at?: string
+          date_of_birth: string
+          id?: string
+          is_verified?: boolean
+          user_id: string
+          verification_method?: string | null
+          verified_at?: string | null
+        }
+        Update: {
+          created_at?: string
+          date_of_birth?: string
+          id?: string
+          is_verified?: boolean
+          user_id?: string
+          verification_method?: string | null
+          verified_at?: string | null
+        }
+        Relationships: []
+      }
       ai_matches_archive: {
         Row: {
           archive_reason: string | null
@@ -1441,6 +1471,42 @@ export type Database = {
         }
         Relationships: []
       }
+      safety_settings: {
+        Row: {
+          allow_messages_from_new_matches: boolean
+          block_explicit_content: boolean
+          created_at: string
+          id: string
+          location_sharing_enabled: boolean
+          profile_visibility: string
+          require_age_verification: boolean
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          allow_messages_from_new_matches?: boolean
+          block_explicit_content?: boolean
+          created_at?: string
+          id?: string
+          location_sharing_enabled?: boolean
+          profile_visibility?: string
+          require_age_verification?: boolean
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          allow_messages_from_new_matches?: boolean
+          block_explicit_content?: boolean
+          created_at?: string
+          id?: string
+          location_sharing_enabled?: boolean
+          profile_visibility?: string
+          require_age_verification?: boolean
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       security_audit_log: {
         Row: {
           created_at: string | null
@@ -1576,6 +1642,27 @@ export type Database = {
         }
         Relationships: []
       }
+      user_blocks: {
+        Row: {
+          blocked_user_id: string
+          blocker_id: string
+          created_at: string
+          id: string
+        }
+        Insert: {
+          blocked_user_id: string
+          blocker_id: string
+          created_at?: string
+          id?: string
+        }
+        Update: {
+          blocked_user_id?: string
+          blocker_id?: string
+          created_at?: string
+          id?: string
+        }
+        Relationships: []
+      }
       user_events: {
         Row: {
           created_at: string
@@ -1645,6 +1732,42 @@ export type Database = {
           location?: string
           location_timestamp?: string | null
           user_id?: string
+        }
+        Relationships: []
+      }
+      user_reports: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          reason: Database["public"]["Enums"]["report_reason"]
+          reported_user_id: string
+          reporter_id: string
+          reviewed_at: string | null
+          reviewed_by: string | null
+          status: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          reason: Database["public"]["Enums"]["report_reason"]
+          reported_user_id: string
+          reporter_id: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          reason?: Database["public"]["Enums"]["report_reason"]
+          reported_user_id?: string
+          reporter_id?: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: string
         }
         Relationships: []
       }
@@ -1857,6 +1980,10 @@ export type Database = {
           embedding: string
         }[]
       }
+      is_user_adult: {
+        Args: { user_birth_date: string }
+        Returns: boolean
+      }
       log_security_event: {
         Args: {
           p_event_type: string
@@ -1909,7 +2036,13 @@ export type Database = {
       }
     }
     Enums: {
-      [_ in never]: never
+      report_reason:
+        | "inappropriate_content"
+        | "harassment"
+        | "spam"
+        | "fake_profile"
+        | "underage"
+        | "other"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -2036,6 +2169,15 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      report_reason: [
+        "inappropriate_content",
+        "harassment",
+        "spam",
+        "fake_profile",
+        "underage",
+        "other",
+      ],
+    },
   },
 } as const

@@ -27,6 +27,7 @@ export const Footer = () => {
             <h4 className="font-semibold mb-4">Legal</h4>
             <ul className="space-y-2 text-sm">
               <li><Link to="/privacy" className="text-muted-foreground hover:text-primary">Privacy Policy</Link></li>
+              <li><Link to="/safety" className="text-muted-foreground hover:text-primary">Safety Center</Link></li>
               <li><Link to="/terms" className="text-muted-foreground hover:text-primary">Terms of Service</Link></li>
               <li><a href="mailto:support@getunlockedapp.com" className="text-muted-foreground hover:text-primary">Contact</a></li>
             </ul>

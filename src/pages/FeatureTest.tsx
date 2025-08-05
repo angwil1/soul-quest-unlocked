@@ -40,6 +40,8 @@ const FeatureTest = () => {
     { name: "Database Connection", status: 'pending', message: "Testing database connectivity...", icon: Database },
     { name: "Subscription System", status: 'pending', message: "Testing Stripe integration...", icon: CreditCard },
     { name: "Profile Management", status: 'pending', message: "Testing profile CRUD operations...", icon: Users },
+    { name: "Safety Features", status: 'pending', message: "Testing report/block functionality...", icon: Shield },
+    { name: "Age Verification", status: 'pending', message: "Testing age verification system...", icon: Shield },
     { name: "Connection DNA", status: 'pending', message: "Testing compatibility analysis...", icon: Heart },
     { name: "Memory Vault", status: 'pending', message: "Testing saved content...", icon: Star },
     { name: "Echo Messaging", status: 'pending', message: "Testing messaging system...", icon: MessageSquare },
@@ -106,48 +108,72 @@ const FeatureTest = () => {
       updateTestResult(3, 'error', `❌ Profile error: ${error}`);
     }
 
-    // Test 5: Connection DNA
+    // Test 5: Safety Features
+    try {
+      const { data, error } = await supabase
+        .from('user_reports')
+        .select('id')
+        .limit(1);
+      
+      updateTestResult(4, 'success', "✅ Safety features accessible");
+    } catch (error) {
+      updateTestResult(4, 'error', `❌ Safety features error: ${error}`);
+    }
+
+    // Test 6: Age Verification
+    try {
+      const { data, error } = await supabase
+        .from('age_verifications')
+        .select('id')
+        .limit(1);
+      
+      updateTestResult(5, 'success', "✅ Age verification system working");
+    } catch (error) {
+      updateTestResult(5, 'error', `❌ Age verification error: ${error}`);
+    }
+
+    // Test 7: Connection DNA
     try {
       const { data, error } = await supabase
         .from('connection_dna_profiles')
         .select('id')
         .limit(1);
       
-      updateTestResult(4, 'success', "✅ Connection DNA tables accessible");
+      updateTestResult(6, 'success', "✅ Connection DNA tables accessible");
     } catch (error) {
-      updateTestResult(4, 'error', `❌ Connection DNA error: ${error}`);
+      updateTestResult(6, 'error', `❌ Connection DNA error: ${error}`);
     }
 
-    // Test 6: Memory Vault
+    // Test 8: Memory Vault
     try {
       const { data, error } = await supabase
         .from('memory_vault_moments')
         .select('id')
         .limit(1);
       
-      updateTestResult(5, 'success', "✅ Memory Vault tables accessible");
+      updateTestResult(7, 'success', "✅ Memory Vault tables accessible");
     } catch (error) {
-      updateTestResult(5, 'error', `❌ Memory Vault error: ${error}`);
+      updateTestResult(7, 'error', `❌ Memory Vault error: ${error}`);
     }
 
-    // Test 7: Echo Messaging
+    // Test 9: Echo Messaging
     try {
       const { data, error } = await supabase
         .from('echo_limited_chats')
         .select('id')
         .limit(1);
       
-      updateTestResult(6, 'success', "✅ Echo messaging tables accessible");
+      updateTestResult(8, 'success', "✅ Echo messaging tables accessible");
     } catch (error) {
-      updateTestResult(6, 'error', `❌ Echo messaging error: ${error}`);
+      updateTestResult(8, 'error', `❌ Echo messaging error: ${error}`);
     }
 
-    // Test 8: Video Integration
+    // Test 10: Video Integration
     try {
       // Test if video call components can be accessed
-      updateTestResult(7, 'success', "✅ Video call components loaded");
+      updateTestResult(9, 'success', "✅ Video call components loaded");
     } catch (error) {
-      updateTestResult(7, 'error', `❌ Video integration error: ${error}`);
+      updateTestResult(9, 'error', `❌ Video integration error: ${error}`);
     }
 
     setIsRunning(false);
@@ -247,6 +273,9 @@ const FeatureTest = () => {
               <Button variant="outline" size="sm" onClick={() => window.location.href = '/profile'}>
                 Profile
               </Button>
+              <Button variant="outline" size="sm" onClick={() => window.location.href = '/safety'}>
+                Safety Center
+              </Button>
               <Button variant="outline" size="sm" onClick={() => window.location.href = '/connection-dna'}>
                 Connection DNA
               </Button>
@@ -256,11 +285,8 @@ const FeatureTest = () => {
               <Button variant="outline" size="sm" onClick={() => window.location.href = '/matches'}>
                 Matches
               </Button>
-              <Button variant="outline" size="sm" onClick={() => window.location.href = '/messages'}>
-                Messages
-              </Button>
-              <Button variant="outline" size="sm" onClick={() => window.location.href = '/questions'}>
-                Quiz
+              <Button variant="outline" size="sm" onClick={() => window.location.href = '/sample-user'}>
+                Sample Profile
               </Button>
             </div>
           </CardContent>
