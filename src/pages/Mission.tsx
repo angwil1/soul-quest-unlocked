@@ -16,7 +16,7 @@ const Mission = () => {
               Our Mission
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              GetUnlocked doesn't promise romantic destiny. It offers emotional clarity, gentle insight, and space to reflect on what truly resonates.
+              AI Complete Me doesn't promise romantic destiny. It offers emotional clarity, gentle insight, and space to reflect on what truly resonates.
             </p>
           </div>
 
