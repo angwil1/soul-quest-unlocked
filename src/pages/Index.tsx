@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { useAuth } from '@/hooks/useAuth';
 import { useSubscription } from '@/hooks/useSubscription';
+import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
@@ -18,7 +19,8 @@ import datingBackground from '@/assets/dating-background.jpg';
 
 const Index = () => {
   const { user, loading, signOut } = useAuth();
-  const { subscription, loading: subscriptionLoading } = useSubscription();
+  const { subscription, loading: subscriptionLoading, isUnlockedPlus } = useSubscription();
+  const { toast } = useToast();
   const navigate = useNavigate();
   const [faqs, setFaqs] = useState<Array<{id: number; question: string; answer: string}>>([]);
   const [showFirstLightModal, setShowFirstLightModal] = useState(false);
@@ -41,6 +43,14 @@ const Index = () => {
   };
 
   const handleSearch = () => {
+    // Show special message for Complete Plus users
+    if (isUnlockedPlus) {
+      toast({
+        title: "💖 You're not just searching. You're showing up—with heart.",
+        duration: 3000,
+      });
+    }
+
     // Check if free user has reached limit and is trying to search
     // Premium users (Echo Amplified) can search without restrictions
     if (!isEchoActive && selectedFilters.length >= 3) {
