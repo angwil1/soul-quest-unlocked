@@ -8,26 +8,26 @@ const FAQ = () => {
   const faqs = [
     {
       question: "What's included in each tier?",
-      answer: "Free: A quiet start. You get access to basic matching, public prompts, and core connection tools—with no pressure.\n\nUnlocked+: Everything in Free, plus deeper compatibility quizzes, private Match Memory, and early access to new features. You're signaling you're ready for more emotional texture.\n\nUnlocked Beyond: A full emotional toolkit. Includes everything above—plus Memory Vault to save connection moments, Connection DNA for deep emotional mirroring, and poetic onboarding overlays for when you need a fresh start."
+      answer: "Free: A quiet start. You get access to basic matching, public prompts, and core connection tools—with no pressure.\n\nComplete Plus: Everything in Free, plus deeper compatibility quizzes, private Match Memory, and early access to new features. You're signaling you're ready for more emotional texture.\n\nComplete Beyond: A full emotional toolkit. Includes everything above—plus Memory Vault to save connection moments, Connection DNA for deep emotional mirroring, and poetic onboarding overlays for when you need a fresh start."
     },
     {
-      question: "What is Unlocked Echo, and who can use it?",
-      answer: "Echo is a creative expression add-on—featuring TikTok-style profiles, emotional soundtracks, vibe galleries, and optional Echo badges.\n\nAdd Unlocked Echo to any plan, or purchase on its own. Expression isn't reserved for premium—it's available to all.\n\n• Monthly ($4/mo) or one-time ($12) pricing\n• Echo is not required for matching—it's for emotional self-presentation\n• You can hide Echo features at any time—privacy always comes first"
+      question: "What is Echo Amplified, and who can use it?",
+      answer: "Echo is a creative expression add-on—featuring TikTok-style profiles, emotional soundtracks, vibe galleries, and optional Echo badges.\n\nAdd Echo Amplified to any plan, or purchase on its own. Expression isn't reserved for premium—it's available to all.\n\n• Monthly ($4/mo) or one-time ($12) pricing\n• Echo is not required for matching—it's for emotional self-presentation\n• You can hide Echo features at any time—privacy always comes first"
     },
     {
-      question: "How does DateSync work?",
-      answer: "DateSync uses advanced AI matching algorithms to connect you with compatible partners based on your personality, interests, and values. Complete our comprehensive quiz to get started."
+      question: "How does AI Complete Me work?",
+      answer: "AI Complete Me uses advanced AI matching algorithms to connect you with compatible partners based on your personality, interests, and values. Complete our comprehensive quiz to get started."
     },
     {
       question: "Is my data secure?",
       answer: "Yes, we take privacy seriously. All personal data is encrypted and we never share your information with third parties without your explicit consent."
     },
     {
-      question: "What makes DateSync different from other dating apps?",
+      question: "What makes AI Complete Me different from other dating apps?",
       answer: "We focus on meaningful connections through deep personality analysis, AI-powered matching, and features like video chat to help you build authentic relationships."
     },
     {
-      question: "How much does DateSync cost?",
+      question: "How much does AI Complete Me cost?",
       answer: "We offer a free tier with basic features, and paid plans starting at $9.99/month for advanced features like video chat, read receipts, and priority matching."
     },
     {
@@ -40,7 +40,7 @@ const FAQ = () => {
     },
     {
       question: "💾 What is the Memory Vault?",
-      answer: "Memory Vault lives inside Unlocked Beyond. It lets you save favorite matches, prompts, and connection moments. It's your emotional archive—a way to revisit the sparks that matter."
+      answer: "Memory Vault lives inside Complete Beyond. It lets you save favorite matches, prompts, and connection moments. It's your emotional archive—a way to revisit the sparks that matter."
     },
     {
       question: "🔐 Is my data safe here?",
@@ -51,7 +51,7 @@ const FAQ = () => {
       answer: "Try updating your profile with more photos and information, retaking the personality quiz, or upgrading to a premium plan for visibility boosts and priority matching."
     },
     {
-      question: "Do I have to reveal everything about myself to use GetUnlocked?",
+      question: "Do I have to reveal everything about myself to use AI Complete Me?",
       answer: "Nope. Vulnerability is earned, not demanded. You can start light, get your footing, and choose what to share when you're ready. Privacy-first means you control the pace."
     },
     {
@@ -59,11 +59,11 @@ const FAQ = () => {
       answer: "It means we don't just sort you by location or age—we pay attention to emotional patterns, compatibility signals, and storytelling layers. Your inner world matters here."
     },
     {
-      question: "What's the difference between Free and Unlocked Beyond emotionally?",
-      answer: "Free is like browsing poetry in a bookstore. Unlocked Beyond lets you write in the margins, remember what moved you, and take the book home. One is nice; the other is deeply yours."
+      question: "What's the difference between Free and Complete Beyond emotionally?",
+      answer: "Free is like browsing poetry in a bookstore. Complete Beyond lets you write in the margins, remember what moved you, and take the book home. One is nice; the other is deeply yours."
     },
     {
-      question: "🛠️ Will GetUnlocked keep changing over time?",
+      question: "🛠️ Will AI Complete Me keep changing over time?",
       answer: "Yes—and that's the point. We're building this with you. Features will evolve based on emotional feedback, not market trends. Early users help steer the ship."
     },
     {
@@ -95,12 +95,12 @@ const FAQ = () => {
       answer: "Not yet—but we're exploring consent-based, privacy-first options. We want safety without surveillance."
     },
     {
-      question: "Can I use GetUnlocked for friendship, not dating?",
+      question: "Can I use AI Complete Me for friendship, not dating?",
       answer: "Yes. Connection doesn't always mean romance. We're exploring an Intent overlay that lets you define what you're here for—softness, curiosity, co-thought."
     },
     {
       question: "👥 Will people know what tier I'm on?",
-      answer: "Only if you want them to. Badges like Echo or Unlocked Beyond are toggleable. You choose what you signal."
+      answer: "Only if you want them to. Badges like Echo or Complete Beyond are toggleable. You choose what you signal."
     },
     {
       question: "🎨 Can I change my profile vibe or soundtrack later?",
@@ -116,7 +116,7 @@ const FAQ = () => {
     },
     {
       question: "Does the AI guarantee romantic results?",
-      answer: "GetUnlocked doesn't promise romantic destiny. It offers emotional clarity, gentle insight, and space to reflect on what truly resonates."
+      answer: "AI Complete Me doesn't promise romantic destiny. It offers emotional clarity, gentle insight, and space to reflect on what truly resonates."
     },
     {
       question: "How does the video chat feature work?",
@@ -135,7 +135,7 @@ const FAQ = () => {
               Frequently Asked Questions
             </h1>
             <p className="text-xl text-muted-foreground">
-              Everything you need to know about DateSync
+              Everything you need to know about AI Complete Me
             </p>
           </div>
 
@@ -143,7 +143,7 @@ const FAQ = () => {
             <CardHeader>
               <CardTitle>Quick Start Guide</CardTitle>
               <CardDescription>
-                New to DateSync? Here's how to get started in 3 simple steps.
+                New to AI Complete Me? Here's how to get started in 3 simple steps.
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
