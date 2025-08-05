@@ -26,6 +26,10 @@ serve(async (req) => {
   try {
     logStep("Function started");
 
+    const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
+    if (!stripeKey) throw new Error("STRIPE_SECRET_KEY is not set");
+    logStep("Stripe key verified");
+
     const authHeader = req.headers.get("Authorization");
     if (!authHeader) throw new Error("No authorization header provided");
 
@@ -36,7 +40,7 @@ serve(async (req) => {
     if (!user?.email) throw new Error("User not authenticated or email not available");
     logStep("User authenticated", { userId: user.id, email: user.email });
 
-    const stripe = new Stripe(Deno.env.get("STRIPE_SECRET_KEY") || "", { apiVersion: "2023-10-16" });
+    const stripe = new Stripe(stripeKey, { apiVersion: "2023-10-16" });
     const customers = await stripe.customers.list({ email: user.email, limit: 1 });
     
     if (customers.data.length === 0) {
@@ -79,14 +83,17 @@ serve(async (req) => {
       const amount = price.unit_amount || 0;
       const interval = price.recurring?.interval;
       
-      if (amount === 500 && interval === "month") {
-        subscriptionTier = "Unlocked";
-      } else if (amount === 1200 && interval === "month") {
-        subscriptionTier = "Unlocked+";
+      // Map to AI Complete Me subscription tiers
+      if (amount === 1200 && interval === "month") {
+        subscriptionTier = "Premium"; // Complete Plus $12/month
       } else if (amount === 3900 && interval === "year") {
-        subscriptionTier = "Founder's Circle";
+        subscriptionTier = "Pro"; // Complete Beyond $39/year
+      } else if (amount === 400 && interval === "month") {
+        subscriptionTier = "Echo"; // Echo Amplified Monthly $4/month
+      } else if (amount === 1200 && !interval) {
+        subscriptionTier = "Echo_Lifetime"; // Echo Amplified Lifetime $12 one-time
       } else {
-        subscriptionTier = "Unknown";
+        subscriptionTier = "Basic";
       }
       logStep("Determined subscription tier", { priceId, amount, interval, subscriptionTier });
     } else {

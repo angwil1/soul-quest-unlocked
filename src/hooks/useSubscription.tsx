@@ -22,23 +22,24 @@ export const useSubscription = () => {
       const { data, error } = await supabase.functions.invoke('check-subscription');
       
       if (error) {
-        // Temporarily suppress subscription check errors
+        console.error('Subscription check error:', error);
+        // Fall back to free tier on error
         setSubscription({
           subscribed: false,
-          subscription_tier: 'Unlocked'
+          subscription_tier: null
         });
         return;
       }
       
       setSubscription(data || {
         subscribed: false,
-        subscription_tier: 'Unlocked'
+        subscription_tier: null
       });
     } catch (error) {
       console.error('Error checking subscription:', error);
       setSubscription({
         subscribed: false,
-        subscription_tier: 'Unlocked'
+        subscription_tier: null
       });
     } finally {
       setLoading(false);
@@ -52,7 +53,7 @@ export const useSubscription = () => {
       // Set default subscription state for non-authenticated users
       setSubscription({
         subscribed: false,
-        subscription_tier: 'Unlocked'
+        subscription_tier: null
       });
       setLoading(false);
     }
@@ -86,6 +87,11 @@ export const useSubscription = () => {
       if (data?.url) {
         // Open Stripe checkout in a new tab
         window.open(data.url, '_blank');
+        
+        // Refresh subscription status after a delay to catch successful payments
+        setTimeout(() => {
+          checkSubscription();
+        }, 5000);
       }
     } catch (error) {
       console.error('Error creating checkout:', error);

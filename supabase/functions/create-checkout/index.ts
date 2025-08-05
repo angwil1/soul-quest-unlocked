@@ -19,23 +19,29 @@ serve(async (req) => {
 
   const supabaseClient = createClient(
     Deno.env.get("SUPABASE_URL") ?? "",
-    Deno.env.get("SUPABASE_ANON_KEY") ?? ""
+    Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "",
+    { auth: { persistSession: false } }
   );
 
   try {
     logStep("Function started");
-
-    const authHeader = req.headers.get("Authorization")!;
-    const token = authHeader.replace("Bearer ", "");
-    const { data } = await supabaseClient.auth.getUser(token);
-    const user = data.user;
-    if (!user?.email) throw new Error("User not authenticated or email not available");
-    logStep("User authenticated", { userId: user.id, email: user.email });
-
     const { plan } = await req.json();
     logStep("Plan requested", { plan });
 
-    const stripe = new Stripe(Deno.env.get("STRIPE_SECRET_KEY") || "", { apiVersion: "2023-10-16" });
+    const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
+    if (!stripeKey) throw new Error("STRIPE_SECRET_KEY is not set");
+
+    const authHeader = req.headers.get("Authorization");
+    if (!authHeader) throw new Error("No authorization header provided");
+
+    const token = authHeader.replace("Bearer ", "");
+    const { data: userData, error: userError } = await supabaseClient.auth.getUser(token);
+    if (userError) throw new Error(`Authentication error: ${userError.message}`);
+    const user = userData.user;
+    if (!user?.email) throw new Error("User not authenticated or email not available");
+    logStep("User authenticated", { userId: user.id, email: user.email });
+
+    const stripe = new Stripe(stripeKey, { apiVersion: "2023-10-16" });
     
     // Check if customer exists
     const customers = await stripe.customers.list({ email: user.email, limit: 1 });
@@ -45,13 +51,12 @@ serve(async (req) => {
       logStep("Found existing customer", { customerId });
     }
 
-    // Define pricing including Echo plans
+    // Define AI Complete Me pricing
     const pricingMap = {
-      unlocked: { amount: 500, interval: "month" as const, name: "Unlocked" }, // $5/month
-      "unlocked-plus": { amount: 1200, interval: "month" as const, name: "Unlocked+" }, // $12/month  
-      "unlocked-beyond": { amount: 3900, interval: "year" as const, name: "Unlocked Beyond" }, // $39/year
-      "unlocked-echo-monthly": { amount: 400, interval: "month" as const, name: "Unlocked Echo" }, // $4/month
-      "unlocked-echo-lifetime": { amount: 1200, interval: null, name: "Unlocked Echo Lifetime" }, // $12 one-time
+      "unlocked-plus": { amount: 1200, interval: "month" as const, name: "Complete Plus" }, // $12/month  
+      "unlocked-beyond": { amount: 3900, interval: "year" as const, name: "Complete Beyond" }, // $39/year
+      "unlocked-echo-monthly": { amount: 400, interval: "month" as const, name: "Echo Amplified Monthly" }, // $4/month
+      "unlocked-echo-lifetime": { amount: 1200, interval: null, name: "Echo Amplified Lifetime" }, // $12 one-time
     };
 
     const pricing = pricingMap[plan as keyof typeof pricingMap];
@@ -73,8 +78,8 @@ serve(async (req) => {
         },
       ],
       mode: pricing.interval ? "subscription" : "payment",
-      success_url: `https://getunlockedapp.com/profile?success=true`,
-      cancel_url: `https://getunlockedapp.com/profile?canceled=true`,
+      success_url: `${req.headers.get("origin")}/subscription?success=true`,
+      cancel_url: `${req.headers.get("origin")}/pricing?canceled=true`,
     });
 
     logStep("Checkout session created", { sessionId: session.id });

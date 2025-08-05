@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import { useSubscription } from '@/hooks/useSubscription';
 import { Button } from '@/components/ui/button';
@@ -18,10 +18,38 @@ import { useEchoSubscription } from '@/hooks/useEchoSubscription';
 const Subscription = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
   const { toast } = useToast();
   const { subscription, loading, checkSubscription, createCheckout, manageBilling } = useSubscription();
   const { echoSubscription, isEchoActive } = useEchoSubscription();
   const [upgrading, setUpgrading] = useState(false);
+
+  // Handle success/cancel URL parameters
+  useEffect(() => {
+    const success = searchParams.get('success');
+    const canceled = searchParams.get('canceled');
+    
+    if (success === 'true') {
+      toast({
+        title: "Payment Successful! 🎉",
+        description: "Your subscription has been activated. Welcome to AI Complete Me!",
+      });
+      // Refresh subscription status
+      setTimeout(() => {
+        checkSubscription();
+      }, 2000);
+      // Clean up URL
+      setSearchParams({});
+    } else if (canceled === 'true') {
+      toast({
+        title: "Payment Canceled",
+        description: "Your subscription was not activated. You can try again anytime.",
+        variant: "destructive",
+      });
+      // Clean up URL
+      setSearchParams({});
+    }
+  }, [searchParams, setSearchParams, toast, checkSubscription]);
 
   useEffect(() => {
     checkSubscription();
