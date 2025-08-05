@@ -3,12 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { ArrowLeft, Heart, X, MapPin, Users } from 'lucide-react';
+import { ArrowLeft, Heart, X, MapPin, Users, Settings } from 'lucide-react';
 import caseyProfile from '@/assets/casey-profile-realistic.jpg';
+import SearchFilters from '@/components/SearchFilters';
 
 const Matches = () => {
   const navigate = useNavigate();
   const [currentMatchIndex, setCurrentMatchIndex] = useState(0);
+  const [showFilters, setShowFilters] = useState(false);
+  const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
 
   // Demo matches data
   const matches = [
@@ -64,6 +67,14 @@ const Matches = () => {
     }
   };
 
+  const handleFiltersChange = (filters: string[]) => {
+    setSelectedFilters(filters);
+  };
+
+  const handleUpgradePrompt = () => {
+    navigate('/subscription');
+  };
+
   if (currentMatchIndex >= matches.length) {
     return (
       <div className="min-h-screen bg-background">
@@ -103,19 +114,44 @@ const Matches = () => {
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Dashboard
           </Button>
-          <div className="flex items-center gap-2">
-            <Users className="h-5 w-5 text-primary" />
-            <span className="font-medium">Discover Matches</span>
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2">
+              <Users className="h-5 w-5 text-primary" />
+              <span className="font-medium">Discover Matches</span>
+            </div>
+            <Button 
+              variant="outline" 
+              size="sm"
+              onClick={() => setShowFilters(!showFilters)}
+            >
+              <Settings className="h-4 w-4 mr-2" />
+              Filters
+            </Button>
           </div>
         </div>
       </div>
 
       <div className="max-w-2xl mx-auto px-4 py-8">
+        {/* Filters Section */}
+        {showFilters && (
+          <div className="mb-6">
+            <SearchFilters 
+              onFiltersChange={handleFiltersChange}
+              onUpgradePrompt={handleUpgradePrompt}
+            />
+          </div>
+        )}
+
         {/* Progress indicator */}
         <div className="text-center mb-6">
           <p className="text-sm text-muted-foreground">
             {currentMatchIndex + 1} of {matches.length} matches
           </p>
+          {selectedFilters.length > 0 && (
+            <p className="text-xs text-muted-foreground mt-1">
+              Filtering by: {selectedFilters.join(', ')}
+            </p>
+          )}
         </div>
 
         {/* Match Card */}
