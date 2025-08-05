@@ -21,7 +21,7 @@ const Matches = () => {
   const matches = [
     {
       id: 'demo-1',
-      name: 'Emma',
+      name: 'Alex',
       age: 26,
       bio: "Marketing coordinator who loves weekend farmers markets and trying new brunch spots. Looking for someone to explore the city with!",
       location: 'Portland, OR',
@@ -33,7 +33,7 @@ const Matches = () => {
     },
     {
       id: 'demo-2', 
-      name: 'Mike',
+      name: 'Jordan',
       age: 29,
       bio: "Software engineer by day, guitar player by night. Love cooking, craft beer, and hiking on weekends.",
       location: 'Austin, TX',
@@ -45,7 +45,7 @@ const Matches = () => {
     },
     {
       id: 'demo-3',
-      name: 'Sarah',
+      name: 'Casey',
       age: 24,
       bio: "Elementary school teacher who loves books, coffee shops, and weekend adventures. Always up for trying new restaurants!",
       location: 'Seattle, WA',
@@ -57,7 +57,7 @@ const Matches = () => {
     },
     {
       id: 'demo-4',
-      name: 'Jessica',
+      name: 'Alex',
       age: 31,
       bio: "Nurse who values work-life balance. Love fitness classes, wine nights with friends, and exploring new neighborhoods.",
       location: 'Denver, CO',
@@ -69,7 +69,7 @@ const Matches = () => {
     },
     {
       id: 'demo-5',
-      name: 'David',
+      name: 'Jordan',
       age: 27,
       bio: "Graphic designer who loves good food and better company. Enjoy board games, concerts, and lazy Sunday mornings.",
       location: 'Asheville, NC',
@@ -81,7 +81,7 @@ const Matches = () => {
     },
     {
       id: 'demo-6',
-      name: 'Katie',
+      name: 'Casey',
       age: 25,
       bio: "Physical therapist who stays active and loves the outdoors. Looking for someone to share adventures and Netflix marathons with.",
       location: 'Santa Fe, NM',
@@ -93,7 +93,7 @@ const Matches = () => {
     },
     {
       id: 'demo-7',
-      name: 'Chris',
+      name: 'Alex',
       age: 28,
       bio: "Accountant who loves weekends at the beach, trying new craft breweries, and playing volleyball with friends.",
       location: 'San Diego, CA',
@@ -105,7 +105,7 @@ const Matches = () => {
     },
     {
       id: 'demo-8',
-      name: 'Lauren',
+      name: 'Alex',
       age: 30,
       bio: "High school English teacher who loves live music, farmers markets, and cozy coffee shops. Let's grab drinks and see where it goes!",
       location: 'Nashville, TN',
