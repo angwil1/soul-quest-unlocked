@@ -3,8 +3,8 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Edit, MapPin, Briefcase, Heart } from 'lucide-react';
-import alexProfileMain from '@/assets/alex-profile-main.jpg';
-import alexProfilePhotography from '@/assets/alex-profile-photography.jpg';
+import alexProfileRealistic from '@/assets/alex-profile-realistic.jpg';
+import alexHikingRealistic from '@/assets/alex-hiking-realistic.jpg';
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -18,8 +18,8 @@ const Profile = () => {
     occupation: "Product Designer",
     interests: ["Photography", "Hiking", "Coffee", "Travel", "Music", "Art"],
     photos: [
-      alexProfileMain,
-      alexProfilePhotography
+      alexProfileRealistic,
+      alexHikingRealistic
     ]
   };
 
