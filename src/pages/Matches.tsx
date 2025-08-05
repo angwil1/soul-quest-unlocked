@@ -5,6 +5,8 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ArrowLeft, Heart, X, MapPin, Users } from 'lucide-react';
 import caseyProfile from '@/assets/casey-profile-realistic.jpg';
+import alexProfileMain from '@/assets/alex-profile-main.jpg';
+import jordanProfileMain from '@/assets/jordan-profile-main.jpg';
 
 const Matches = () => {
   const navigate = useNavigate();
@@ -20,7 +22,7 @@ const Matches = () => {
       location: 'San Francisco, CA',
       occupation: 'Product Designer',
       interests: ['Photography', 'Hiking', 'Coffee', 'Travel'],
-      avatar_url: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400',
+      avatar_url: alexProfileMain,
       compatibility_score: 94,
       distance: 12
     },
@@ -32,7 +34,7 @@ const Matches = () => {
       location: 'Oakland, CA',
       occupation: 'Software Engineer',
       interests: ['Music', 'Technology', 'Food', 'Art'],
-      avatar_url: 'https://images.unsplash.com/photo-1535268647677-300dbf3d78d1?w=400',
+      avatar_url: jordanProfileMain,
       compatibility_score: 89,
       distance: 8
     },
