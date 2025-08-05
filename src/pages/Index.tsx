@@ -161,7 +161,7 @@ const Index = () => {
                   <p>What if your emotional weather could guide your discovery—not just what shows up?</p>
                 </div>
                 <p className="text-lg mt-6 font-medium text-foreground">
-                  GetUnlocked is that vision, made real.<br />
+                  AI Complete Me is that vision, made real.<br />
                   For the quiet ones, the intentional ones, the ones who never felt seen—we built this for you.
                 </p>
               </div>
