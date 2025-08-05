@@ -22,6 +22,7 @@ import Mission from "./pages/Mission";
 import FAQ from "./pages/FAQ";
 import Privacy from "./pages/Privacy";
 import TermsOfService from "./pages/TermsOfService";
+import StripeTest from "./pages/StripeTest";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -52,6 +53,7 @@ const App = () => (
             <Route path="/faq" element={<FAQ />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/terms" element={<TermsOfService />} />
+            <Route path="/stripe-test" element={<StripeTest />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AppWrapper>
