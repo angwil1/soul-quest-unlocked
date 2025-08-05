@@ -8,6 +8,7 @@ import { useEchoTouchpoints } from '@/hooks/useEchoTouchpoints';
 import { EchoResponseInviteModal } from './EchoResponseInviteModal';
 import { EchoConnectionCompletionModal } from './EchoConnectionCompletionModal';
 import { formatDistanceToNow } from 'date-fns';
+import { useToast } from '@/hooks/use-toast';
 
 export const EchoTouchpointsHub = () => {
   const { 
@@ -19,6 +20,8 @@ export const EchoTouchpointsHub = () => {
     acceptResponseInvite,
     completeConnection
   } = useEchoTouchpoints();
+  
+  const { toast } = useToast();
 
   const [selectedNote, setSelectedNote] = useState<any>(null);
   const [showResponseModal, setShowResponseModal] = useState(false);
@@ -33,6 +36,29 @@ export const EchoTouchpointsHub = () => {
   const handleCompleteConnection = (chat: any) => {
     setSelectedChat(chat);
     setShowCompletionModal(true);
+  };
+
+  const getEchoAge = (createdAt: string) => {
+    const created = new Date(createdAt);
+    const now = new Date();
+    const diffInDays = Math.floor((now.getTime() - created.getTime()) / (1000 * 60 * 60 * 24));
+    return diffInDays;
+  };
+
+  const handleArchiveEcho = async (chat: any) => {
+    // Archive the echo quietly
+    toast({
+      title: "Echo Archived 🌙",
+      description: "Your gentle echo has been preserved in memory",
+    });
+  };
+
+  const handleRekindleEcho = async (chat: any) => {
+    // Send a gentle rekindle invitation
+    toast({
+      title: "Echo Rekindled ✨", 
+      description: "A gentle invitation to reconnect has been sent",
+    });
   };
 
   const onConnectionComplete = async (chatId: string) => {
@@ -213,17 +239,23 @@ export const EchoTouchpointsHub = () => {
                             Daily limit: {chat.daily_message_limit} messages • 
                             Expires {formatDistanceToNow(new Date(chat.expires_at), { addSuffix: true })}
                           </div>
-                          {chat.can_complete_connection && (
-                            <div className="text-xs text-purple-600 dark:text-purple-400 mt-1">
-                              ✨ Contemplation phase complete. Echo continues, or deepen when ready.
-                            </div>
-                          )}
+                          
+                          {/* Emotional Status */}
+                          <div className="text-xs italic mt-1">
+                            {chat.can_complete_connection 
+                              ? <span className="text-purple-600 dark:text-purple-400">✨ Contemplation phase complete. Echo continues, or deepen when ready.</span>
+                              : getEchoAge(chat.created_at) > 7 
+                                ? <span className="text-muted-foreground">🌙 Some echoes drift away... Archive or rekindle?</span>
+                                : <span className="text-blue-600 dark:text-blue-400">🎭 Still Listening</span>
+                            }
+                          </div>
                         </div>
                         <div className="flex gap-2">
                           <Button size="sm" variant="outline">
                             Open Chat
                           </Button>
-                          {chat.can_complete_connection && (
+                          
+                          {chat.can_complete_connection ? (
                             <Button 
                               size="sm" 
                               onClick={() => handleCompleteConnection(chat)}
@@ -231,6 +263,34 @@ export const EchoTouchpointsHub = () => {
                               className="text-purple-600 border-purple-200 hover:bg-purple-50 dark:text-purple-400 dark:border-purple-800 dark:hover:bg-purple-950/20"
                             >
                               Deepen Connection
+                            </Button>
+                          ) : getEchoAge(chat.created_at) > 7 ? (
+                            <div className="flex gap-1">
+                              <Button 
+                                size="sm" 
+                                variant="ghost"
+                                onClick={() => handleArchiveEcho(chat)}
+                                className="text-xs text-muted-foreground hover:text-foreground"
+                              >
+                                Archive
+                              </Button>
+                              <Button 
+                                size="sm" 
+                                variant="outline"
+                                onClick={() => handleRekindleEcho(chat)}
+                                className="text-xs text-purple-600 border-purple-200 hover:bg-purple-50 dark:text-purple-400 dark:border-purple-800 dark:hover:bg-purple-950/20"
+                              >
+                                Rekindle
+                              </Button>
+                            </div>
+                          ) : (
+                            <Button 
+                              size="sm" 
+                              variant="ghost"
+                              className="text-xs text-muted-foreground"
+                              disabled
+                            >
+                              Echo Resonating...
                             </Button>
                           )}
                         </div>
