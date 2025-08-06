@@ -465,7 +465,7 @@ const Index = () => {
 
         {/* Hero Section */}
         <div 
-          className="text-center mb-12 relative rounded-2xl overflow-hidden"
+          className="text-center mb-12 relative rounded-2xl overflow-hidden shadow-2xl border border-primary/20"
           style={{
             backgroundImage: `url(${datingBackground})`,
             backgroundSize: 'cover',
@@ -473,16 +473,18 @@ const Index = () => {
             backgroundRepeat: 'no-repeat'
           }}
         >
-          <div className="absolute inset-0 bg-background/40"></div>
-          <div className="relative z-10 py-16 px-8">
-            <h1 className="text-5xl font-bold mb-6">Dating with depth, powered by trust.</h1>
-            <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+          <div className="absolute inset-0 bg-gradient-to-br from-background/20 via-background/30 to-primary/20"></div>
+          <div className="relative z-10 py-20 px-8">
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 text-white drop-shadow-2xl">
+              Dating with depth, powered by trust.
+            </h1>
+            <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-2xl mx-auto drop-shadow-lg">
               Because real connection isn't rare, it's just waiting for the right space.
             </p>
             <Button 
               onClick={() => navigate('/questions')} 
               size="lg"
-              className="text-lg px-8 py-6"
+              className="text-lg px-8 py-6 bg-white/20 backdrop-blur-sm border border-white/30 text-white hover:bg-white/30 hover:scale-105 transition-all duration-300 shadow-xl"
             >
               Take the Compatibility Quiz
             </Button>
