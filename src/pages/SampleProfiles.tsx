@@ -9,6 +9,7 @@ import { ArrowLeft, Heart, MapPin, Briefcase, Sparkles, Copy, RefreshCw, Volume2
 import { useNavigate } from 'react-router-dom';
 import { founderCuratedProfiles, echoStarters, vibeTags, poeticMicrocopy } from '@/data/sampleProfiles';
 import { useToast } from '@/hooks/use-toast';
+import { SoundtrackPlayer } from '@/components/SoundtrackPlayer';
 
 const SampleProfiles = () => {
   const navigate = useNavigate();
@@ -237,9 +238,12 @@ const SampleProfiles = () => {
                     <Volume2 className="h-4 w-4 text-purple-600" />
                     <span className="font-medium text-purple-800 dark:text-purple-200">Emotional Soundtrack</span>
                   </div>
-                  <p className="text-sm text-purple-700 dark:text-purple-300">
-                    {selectedProfile.emotionalSoundtrack}
-                  </p>
+                  <div className="flex items-center gap-2">
+                    <p className="text-sm text-purple-700 dark:text-purple-300 flex-1">
+                      {selectedProfile.emotionalSoundtrack}
+                    </p>
+                    <SoundtrackPlayer text={selectedProfile.emotionalSoundtrack} />
+                  </div>
                 </div>
 
                 <div className="border-l-4 border-purple-500 pl-4">
