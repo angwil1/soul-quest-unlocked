@@ -9,6 +9,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { useEchoSubscription } from '@/hooks/useEchoSubscription';
 import { EmotionalSoundtrackPrompt } from './EmotionalSoundtrackPrompt';
+import { SoundtrackPlayer } from './SoundtrackPlayer';
 
 interface TikTokProfileEmbedProps {
   isEditMode?: boolean;
@@ -289,7 +290,8 @@ export const TikTokProfileEmbed = ({ isEditMode = false }: TikTokProfileEmbedPro
         <CardContent className="p-4">
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <span className="text-lg">💭</span>
-            <span className="italic">"{emotionalSoundtrack}"</span>
+            <span className="italic flex-1">"{emotionalSoundtrack}"</span>
+            <SoundtrackPlayer text={emotionalSoundtrack} />
           </div>
         </CardContent>
       )}
