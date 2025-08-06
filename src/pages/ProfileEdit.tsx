@@ -13,8 +13,8 @@ import { useProfile, Profile } from '@/hooks/useProfile';
 import { ArrowLeft, Upload, X, Camera } from 'lucide-react';
 
 const ProfileEdit = () => {
-  const { user } = useAuth();
-  const { profile, loading, updateProfile, addPhoto, removePhoto, setAsAvatar } = useProfile();
+  const { user, loading: authLoading } = useAuth();
+  const { profile, loading: profileLoading, updateProfile, addPhoto, removePhoto, setAsAvatar } = useProfile();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState<Partial<Profile>>({});
@@ -83,16 +83,23 @@ const ProfileEdit = () => {
 
   // Redirect to auth if not logged in
   useEffect(() => {
-    if (!loading && !user) {
+    console.log('ProfileEdit - Auth state:', { user: !!user, authLoading });
+    if (!authLoading && !user) {
+      console.log('ProfileEdit - Redirecting to auth');
       navigate('/auth');
     }
-  }, [user, loading, navigate]);
+  }, [user, authLoading, navigate]);
 
-  if (loading) {
+  console.log('ProfileEdit - Current state:', { userExists: !!user, authLoading, profileLoading });
+
+  // Show loading while checking authentication
+  if (authLoading) {
+    console.log('ProfileEdit - Showing auth loading screen');
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-center">
           <h2 className="text-xl">Loading...</h2>
+          <p className="text-sm text-muted-foreground mt-2">Checking authentication...</p>
         </div>
       </div>
     );
@@ -100,7 +107,21 @@ const ProfileEdit = () => {
 
   // Don't render anything if redirecting to auth
   if (!user) {
+    console.log('ProfileEdit - No user, should redirect');
     return null;
+  }
+
+  // Show loading while fetching profile data
+  if (profileLoading) {
+    console.log('ProfileEdit - Showing profile loading screen');
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <div className="text-center">
+          <h2 className="text-xl">Loading Profile...</h2>
+          <p className="text-sm text-muted-foreground mt-2">Setting up your profile editor...</p>
+        </div>
+      </div>
+    );
   }
 
   return (
