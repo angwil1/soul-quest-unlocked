@@ -12,7 +12,6 @@ export const Navbar = () => {
   const navigation = [
     { name: "Home", href: "/" },
     { name: "Quiz", href: "/questions" },
-    { name: "Sample Profiles", href: "/sample-profiles" },
     { name: "Premium", href: "/premium-dashboard" },
     { name: "AI Digest", href: "/ai-digest" },
     { name: "Connection DNA", href: "/connection-dna" },
@@ -20,6 +19,10 @@ export const Navbar = () => {
     { name: "Upgrade", href: "/pricing" },
     { name: "Safety", href: "/safety" },
     { name: "FAQ", href: "/faq" },
+  ];
+
+  const echoNavigation = [
+    { name: "Sample Profiles", href: "/sample-profiles" },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -49,6 +52,25 @@ export const Navbar = () => {
                 {item.name}
               </Link>
             ))}
+            
+            {/* Echo Section */}
+            <div className="flex items-center space-x-2">
+              <span className="text-xs text-muted-foreground">|</span>
+              <span className="text-xs font-medium text-purple-600">Echo</span>
+              {echoNavigation.map((item) => (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  className={`text-sm font-medium transition-colors hover:text-purple-600 ${
+                    isActive(item.href)
+                      ? "text-purple-600"
+                      : "text-muted-foreground"
+                  }`}
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </div>
           </div>
 
           {/* Desktop Auth Buttons */}
@@ -101,6 +123,27 @@ export const Navbar = () => {
                   {item.name}
                 </Link>
               ))}
+              
+              {/* Echo Section Mobile */}
+              <div className="border-t border-border mt-3 pt-3">
+                <div className="px-3 py-1">
+                  <span className="text-sm font-medium text-purple-600">Echo Features</span>
+                </div>
+                {echoNavigation.map((item) => (
+                  <Link
+                    key={item.name}
+                    to={item.href}
+                    className={`block px-3 py-2 text-base font-medium transition-colors hover:text-purple-600 ${
+                      isActive(item.href)
+                        ? "text-purple-600 bg-purple-50"
+                        : "text-muted-foreground"
+                    }`}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
               <div className="px-3 py-2 border-t border-border mt-4">
                 {user ? (
                   <div className="space-y-2">

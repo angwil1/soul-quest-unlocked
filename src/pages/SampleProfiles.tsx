@@ -10,10 +10,13 @@ import { useNavigate } from 'react-router-dom';
 import { founderCuratedProfiles, echoStarters, vibeTags, poeticMicrocopy } from '@/data/sampleProfiles';
 import { useToast } from '@/hooks/use-toast';
 import { SoundtrackPlayer } from '@/components/SoundtrackPlayer';
+import { useEchoSubscription } from '@/hooks/useEchoSubscription';
+import { EchoPurchasePrompt } from '@/components/EchoPurchasePrompt';
 
 const SampleProfiles = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { isEchoActive } = useEchoSubscription();
   const [selectedProfile, setSelectedProfile] = useState(founderCuratedProfiles[0]);
   const [showInspiration, setShowInspiration] = useState(false);
 
@@ -28,6 +31,25 @@ const SampleProfiles = () => {
   const getRandomInspiration = (array: string[]) => {
     return array[Math.floor(Math.random() * array.length)];
   };
+
+  // Check if user has Echo access
+  if (!isEchoActive) {
+    return (
+      <div className="min-h-screen bg-background">
+        <div className="bg-card border-b">
+          <div className="max-w-6xl mx-auto px-4 py-4 flex items-center">
+            <Button variant="ghost" onClick={() => navigate('/')}>
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              Back
+            </Button>
+          </div>
+        </div>
+        <div className="max-w-2xl mx-auto px-4 py-20">
+          <EchoPurchasePrompt />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">
