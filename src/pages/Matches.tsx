@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { ArrowLeft, Heart, X, MapPin, Users } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { ArrowLeft, Heart, X, MapPin, Users, Search, Filter } from 'lucide-react';
 import caseyProfile from '@/assets/casey-profile-realistic.jpg';
 import caseyProfileAlt from '@/assets/casey-profile.jpg';
 import alexProfileRealistic from '@/assets/alex-profile-realistic.jpg';
@@ -16,6 +17,10 @@ import jordanProfileMain from '@/assets/jordan-profile-main.jpg';
 const Matches = () => {
   const navigate = useNavigate();
   const [currentMatchIndex, setCurrentMatchIndex] = useState(0);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [ageRange, setAgeRange] = useState([18, 50]);
+  const [maxDistance, setMaxDistance] = useState(50);
+  const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
 
   // Demo matches data with everyday people
   const matches = [
@@ -117,22 +122,49 @@ const Matches = () => {
     }
   ];
 
-  const currentMatch = matches[currentMatchIndex];
+  // Filter matches based on search criteria
+  const filteredMatches = matches.filter(match => {
+    const matchesSearch = searchTerm === '' || 
+      match.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      match.bio.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      match.occupation.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      match.interests.some(interest => interest.toLowerCase().includes(searchTerm.toLowerCase()));
+    
+    const matchesAge = match.age >= ageRange[0] && match.age <= ageRange[1];
+    const matchesDistance = match.distance <= maxDistance;
+    const matchesInterests = selectedInterests.length === 0 || 
+      selectedInterests.some(interest => match.interests.includes(interest));
+    
+    return matchesSearch && matchesAge && matchesDistance && matchesInterests;
+  });
+
+  const currentMatch = filteredMatches[currentMatchIndex];
 
   const handleLike = () => {
-    if (currentMatchIndex < matches.length - 1) {
+    if (currentMatchIndex < filteredMatches.length - 1) {
       setCurrentMatchIndex(currentMatchIndex + 1);
     }
   };
 
   const handlePass = () => {
-    if (currentMatchIndex < matches.length - 1) {
+    if (currentMatchIndex < filteredMatches.length - 1) {
       setCurrentMatchIndex(currentMatchIndex + 1);
     }
   };
 
+  const resetSearch = () => {
+    setSearchTerm('');
+    setAgeRange([18, 50]);
+    setMaxDistance(50);
+    setSelectedInterests([]);
+    setCurrentMatchIndex(0);
+  };
 
-  if (currentMatchIndex >= matches.length) {
+  // Get unique interests for filter options
+  const allInterests = Array.from(new Set(matches.flatMap(match => match.interests)));
+
+
+  if (currentMatchIndex >= filteredMatches.length || filteredMatches.length === 0) {
     return (
       <div className="min-h-screen bg-background">
         <div className="bg-card border-b">
@@ -149,10 +181,20 @@ const Matches = () => {
         </div>
         <Card className="max-w-md mx-auto mt-8">
           <CardContent className="p-12 text-center">
-            <h2 className="text-2xl font-bold mb-4">🎉 All caught up!</h2>
+            <h2 className="text-2xl font-bold mb-4">
+              {filteredMatches.length === 0 ? "🔍 No matches found" : "🎉 All caught up!"}
+            </h2>
             <p className="text-muted-foreground mb-6">
-              You've seen all available matches. Check back later for new connections!
+              {filteredMatches.length === 0 
+                ? "Try adjusting your search filters to see more potential matches."
+                : "You've seen all available matches. Check back later for new connections!"
+              }
             </p>
+            {filteredMatches.length === 0 && (searchTerm || selectedInterests.length > 0) && (
+              <Button variant="outline" onClick={resetSearch} className="mb-4 w-full">
+                Clear All Filters
+              </Button>
+            )}
             <Button onClick={() => navigate('/')}>
               Back to Dashboard
             </Button>
@@ -179,10 +221,67 @@ const Matches = () => {
       </div>
 
       <div className="max-w-2xl mx-auto px-4 py-8">
-        {/* Progress indicator */}
+        {/* Search and Filters */}
+        <Card className="mb-6">
+          <CardContent className="p-4">
+            <div className="space-y-4">
+              {/* Search Input */}
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <Input
+                  placeholder="Search by name, occupation, interests..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="pl-10"
+                />
+              </div>
+              
+              {/* Quick Interest Filters */}
+              <div>
+                <h4 className="text-sm font-medium mb-2">Popular Interests</h4>
+                <div className="flex flex-wrap gap-2">
+                  {['Hiking', 'Coffee', 'Travel', 'Music', 'Fitness', 'Reading'].map((interest) => (
+                    <Badge
+                      key={interest}
+                      variant={selectedInterests.includes(interest) ? "default" : "outline"}
+                      className="cursor-pointer text-xs"
+                      onClick={() => {
+                        setSelectedInterests(prev => 
+                          prev.includes(interest) 
+                            ? prev.filter(i => i !== interest)
+                            : [...prev, interest]
+                        );
+                        setCurrentMatchIndex(0);
+                      }}
+                    >
+                      {interest}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+              
+              {/* Clear Filters */}
+              {(searchTerm || selectedInterests.length > 0) && (
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  onClick={resetSearch}
+                  className="w-full"
+                >
+                  Clear All Filters
+                </Button>
+              )}
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Results Counter */}
         <div className="text-center mb-6">
           <p className="text-sm text-muted-foreground">
-            {currentMatchIndex + 1} of {matches.length} matches
+            {filteredMatches.length > 0 
+              ? `${currentMatchIndex + 1} of ${filteredMatches.length} matches` 
+              : `Found ${filteredMatches.length} matches`}
+            {searchTerm && <span> for "{searchTerm}"</span>}
           </p>
         </div>
 
