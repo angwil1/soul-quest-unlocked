@@ -67,7 +67,7 @@ const Matches = () => {
     },
     {
       id: 'demo-4',
-      name: 'Alex',
+      name: 'Taylor',
       age: 31,
       bio: "Nurse who values work-life balance. Love fitness classes, wine nights with friends, and exploring new neighborhoods.",
       location: 'Denver, CO',
@@ -79,7 +79,7 @@ const Matches = () => {
     },
     {
       id: 'demo-5',
-      name: 'Jordan',
+      name: 'Morgan',
       age: 27,
       bio: "Graphic designer who loves good food and better company. Enjoy board games, concerts, and lazy Sunday mornings.",
       location: 'Asheville, NC',
@@ -91,7 +91,7 @@ const Matches = () => {
     },
     {
       id: 'demo-6',
-      name: 'Casey',
+      name: 'River',
       age: 25,
       bio: "Physical therapist who stays active and loves the outdoors. Looking for someone to share adventures and Netflix marathons with.",
       location: 'Santa Fe, NM',
@@ -103,7 +103,7 @@ const Matches = () => {
     },
     {
       id: 'demo-7',
-      name: 'Alex',
+      name: 'Sage',
       age: 28,
       bio: "Accountant who loves weekends at the beach, trying new craft breweries, and playing volleyball with friends.",
       location: 'San Diego, CA',
@@ -115,7 +115,7 @@ const Matches = () => {
     },
     {
       id: 'demo-8',
-      name: 'Alex',
+      name: 'Quinn',
       age: 30,
       bio: "High school English teacher who loves live music, farmers markets, and cozy coffee shops. Let's grab drinks and see where it goes!",
       location: 'Nashville, TN',
@@ -124,6 +124,90 @@ const Matches = () => {
       avatar_url: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=400&h=400&fit=crop&crop=face",
       compatibility_score: 87,
       distance: 19
+    },
+    {
+      id: 'demo-9',
+      name: 'Avery',
+      age: 26,
+      bio: "Social worker passionate about making a difference. Love yoga, farmers markets, and trying new vegetarian restaurants.",
+      location: 'Boulder, CO',
+      occupation: 'Social Worker',
+      interests: ['Yoga', 'Vegetarian food', 'Meditation', 'Volunteering'],
+      avatar_url: "https://images.unsplash.com/photo-1494790108755-2616b1e0b3cc?w=400&h=400&fit=crop&crop=face",
+      compatibility_score: 90,
+      distance: 16
+    },
+    {
+      id: 'demo-10',
+      name: 'Rowan',
+      age: 32,
+      bio: "Veterinarian who adores animals and outdoor adventures. Looking for someone who shares my love for nature and furry friends.",
+      location: 'Bend, OR',
+      occupation: 'Veterinarian',
+      interests: ['Animals', 'Hiking', 'Photography', 'Camping'],
+      avatar_url: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&h=400&fit=crop&crop=face",
+      compatibility_score: 86,
+      distance: 20
+    },
+    {
+      id: 'demo-11',
+      name: 'Phoenix',
+      age: 24,
+      bio: "Barista and part-time artist who loves creating and exploring. Always down for gallery openings, coffee tastings, and deep conversations.",
+      location: 'San Francisco, CA',
+      occupation: 'Barista/Artist',
+      interests: ['Art', 'Coffee', 'Galleries', 'Painting'],
+      avatar_url: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=400&h=400&fit=crop&crop=face",
+      compatibility_score: 84,
+      distance: 28
+    },
+    {
+      id: 'demo-12',
+      name: 'Ember',
+      age: 29,
+      bio: "Chef who believes food brings people together. Love experimenting in the kitchen, wine pairings, and cozy dinner parties.",
+      location: 'Charleston, SC',
+      occupation: 'Chef',
+      interests: ['Cooking', 'Wine', 'Food photography', 'Travel'],
+      avatar_url: "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=400&h=400&fit=crop&crop=face",
+      compatibility_score: 95,
+      distance: 12
+    },
+    {
+      id: 'demo-13',
+      name: 'Storm',
+      age: 27,
+      bio: "Personal trainer who lives an active lifestyle. Love rock climbing, CrossFit, and helping others reach their fitness goals.",
+      location: 'Salt Lake City, UT',
+      occupation: 'Personal Trainer',
+      interests: ['Rock climbing', 'CrossFit', 'Nutrition', 'Outdoor sports'],
+      avatar_url: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=400&fit=crop&crop=face",
+      compatibility_score: 83,
+      distance: 24
+    },
+    {
+      id: 'demo-14',
+      name: 'Luna',
+      age: 25,
+      bio: "Librarian by day, bookworm by night. Love quiet cafes, literary discussions, and discovering hidden bookstore gems.",
+      location: 'Madison, WI',
+      occupation: 'Librarian',
+      interests: ['Reading', 'Writing', 'Book clubs', 'Tea'],
+      avatar_url: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop&crop=face",
+      compatibility_score: 89,
+      distance: 17
+    },
+    {
+      id: 'demo-15',
+      name: 'Ocean',
+      age: 31,
+      bio: "Marine biologist who's passionate about ocean conservation. Love scuba diving, beach cleanups, and sharing my love of the sea.",
+      location: 'Monterey, CA',
+      occupation: 'Marine Biologist',
+      interests: ['Scuba diving', 'Conservation', 'Marine life', 'Photography'],
+      avatar_url: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=face",
+      compatibility_score: 92,
+      distance: 11
     }
   ];
 
