@@ -32,9 +32,8 @@ const SampleProfiles = () => {
     return array[Math.floor(Math.random() * array.length)];
   };
 
-  // Check if user has Echo access - TEMPORARILY DISABLED FOR DEMO
-  const showDemo = true; // Override for demo purposes
-  if (!showDemo && !isEchoActive) {
+  // Check if user has Echo access
+  if (!isEchoActive) {
     return (
       <div className="min-h-screen bg-background">
         <div className="bg-card border-b">
