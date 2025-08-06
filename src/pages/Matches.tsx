@@ -4,6 +4,9 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Checkbox } from '@/components/ui/checkbox';
+import SearchFilters from '@/components/SearchFilters';
 import { ArrowLeft, Heart, X, MapPin, Users, Search, Filter } from 'lucide-react';
 import caseyProfile from '@/assets/casey-profile-realistic.jpg';
 import caseyProfileAlt from '@/assets/casey-profile.jpg';
@@ -21,6 +24,8 @@ const Matches = () => {
   const [ageRange, setAgeRange] = useState([18, 50]);
   const [maxDistance, setMaxDistance] = useState(50);
   const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
+  const [genderFilters, setGenderFilters] = useState<string[]>([]);
+  const [showPreferencesModal, setShowPreferencesModal] = useState(true);
 
   // Demo matches data with everyday people
   const matches = [
@@ -206,6 +211,27 @@ const Matches = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Preferences Modal */}
+      <Dialog open={showPreferencesModal} onOpenChange={() => {}}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle>Set Your Match Preferences</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4">
+            <SearchFilters 
+              onFiltersChange={setGenderFilters}
+              onUpgradePrompt={() => {}}
+            />
+            <Button 
+              className="w-full" 
+              onClick={() => setShowPreferencesModal(false)}
+            >
+              Start Browsing Matches
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
       {/* Header */}
       <div className="bg-card border-b">
         <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
