@@ -170,7 +170,7 @@ const Index = () => {
                 <Button 
                   variant="outline" 
                   size="lg"
-                  onClick={() => navigate('/sample-profiles')}
+                  onClick={() => navigate('/pricing')}
                   className="px-8 py-4 text-lg font-semibold border-primary/20 hover:bg-primary/5 animate-scale-in"
                 >
                   <Users className="h-5 w-5 mr-2" />
