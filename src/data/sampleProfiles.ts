@@ -34,8 +34,8 @@ export const founderCuratedProfiles: SampleProfile[] = [
     emotionalSoundtrack: "Melancholic wonder: Bon Iver's falsetto meets library silence",
     tiktokUrl: "https://www.tiktok.com/@user/video/demo1",
     photos: [
-      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400",
-      "https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?w=400"
+      "/src/assets/luna-profile-1.jpg",
+      "/src/assets/luna-profile-2.jpg"
     ],
     interests: ["Vintage bookstores", "Rainy day photography", "Handwritten letters", "Vinyl collecting", "Philosophy cafés"],
     echoStarters: [
@@ -71,8 +71,8 @@ export const founderCuratedProfiles: SampleProfile[] = [
     emotionalSoundtrack: "Vulnerable strength: Johnny Cash's honesty wrapped in Phoebe Bridgers' tenderness",
     tiktokUrl: "https://www.tiktok.com/@user/video/demo2",
     photos: [
-      "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?w=400",
-      "https://images.unsplash.com/photo-1535268647677-300dbf3078d1?w=400"
+      "/src/assets/river-profile-1.jpg",
+      "/src/assets/river-profile-2.jpg"
     ],
     interests: ["Therapy research", "Open mic nights", "Emotional archaeology", "Sacred activism", "Sunrise hikes"],
     echoStarters: [
@@ -108,8 +108,8 @@ export const founderCuratedProfiles: SampleProfile[] = [
     emotionalSoundtrack: "Gentle rebellion: Fleet Foxes harmonies dancing with Billie Eilish whispers",
     tiktokUrl: "https://www.tiktok.com/@user/video/demo3",
     photos: [
-      "https://images.unsplash.com/photo-1473091534298-04dcbce3278c?w=400",
-      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400"
+      "/src/assets/sage-profile-1.jpg",
+      "/src/assets/sage-profile-2.jpg"
     ],
     interests: ["Forest bathing", "Climate art", "Pressed flower journals", "Thrift store treasures", "Moonrise ceremonies"],
     echoStarters: [
@@ -145,8 +145,8 @@ export const founderCuratedProfiles: SampleProfile[] = [
     emotionalSoundtrack: "Empowered vulnerability: Lianne La Havas meets Joni Mitchell's fearless truth",
     tiktokUrl: "https://www.tiktok.com/@user/video/demo4", 
     photos: [
-      "https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?w=400",
-      "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?w=400"
+      "/src/assets/phoenix-profile-1.jpg",
+      "/src/assets/phoenix-profile-2.jpg"
     ],
     interests: ["Boundary setting", "Expressive art therapy", "Mountain meditation", "Conscious communication", "Sacred rage"],
     echoStarters: [
@@ -182,8 +182,8 @@ export const founderCuratedProfiles: SampleProfile[] = [
     emotionalSoundtrack: "Thoughtful presence: Nils Frahm's piano meets the sound of pages turning",
     tiktokUrl: "https://www.tiktok.com/@user/video/demo5",
     photos: [
-      "https://images.unsplash.com/photo-1535268647677-300dbf3078d1?w=400",
-      "https://images.unsplash.com/photo-1473091534298-04dcbce3278c?w=400"
+      "/src/assets/atlas-profile-1.jpg",
+      "/src/assets/atlas-profile-2.jpg"
     ],
     interests: ["Slow living", "Philosophy podcasts", "Sourdough bread", "Stargazing", "Handwritten journals"],
     echoStarters: [
@@ -219,8 +219,8 @@ export const founderCuratedProfiles: SampleProfile[] = [
     emotionalSoundtrack: "Ethereal grounding: FKA twigs' otherworldly vocals wrapped in forest sounds",
     tiktokUrl: "https://www.tiktok.com/@user/video/demo6",
     photos: [
-      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400",
-      "https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?w=400"
+      "/src/assets/iris-profile-1.jpg",
+      "/src/assets/iris-profile-2.jpg"
     ],
     interests: ["Crystal healing", "Moon rituals", "Herbal medicine", "Sacred geometry", "Energy work"],
     echoStarters: [
@@ -256,8 +256,8 @@ export const founderCuratedProfiles: SampleProfile[] = [
     emotionalSoundtrack: "Ocean depth: Jack Johnson's warmth meeting the rhythm of breaking waves",
     tiktokUrl: "https://www.tiktok.com/@user/video/demo7",
     photos: [
-      "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?w=400",
-      "https://images.unsplash.com/photo-1535268647677-300dbf3078d1?w=400"
+      "/src/assets/ocean-profile-1.jpg",
+      "/src/assets/ocean-profile-2.jpg"
     ],
     interests: ["Ocean conservation", "Surf photography", "Beach cleanups", "Whale watching", "Saltwater therapy"],
     echoStarters: [
@@ -293,8 +293,8 @@ export const founderCuratedProfiles: SampleProfile[] = [
     emotionalSoundtrack: "Velvet vulnerability: Lana Del Rey's cinematic sadness meets hope",
     tiktokUrl: "https://www.tiktok.com/@user/video/demo8",
     photos: [
-      "https://images.unsplash.com/photo-1473091534298-04dcbce3278c?w=400",
-      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400"
+      "/src/assets/ember-profile-1.jpg",
+      "/src/assets/ember-profile-2.jpg"
     ],
     interests: ["Songwriting", "Poetry slams", "Vintage vinyl", "Late night coffee shops", "Emotional archaeology"],
     echoStarters: [
@@ -330,8 +330,8 @@ export const founderCuratedProfiles: SampleProfile[] = [
     emotionalSoundtrack: "Wandering wonder: World music fusion meets the sound of train stations",
     tiktokUrl: "https://www.tiktok.com/@user/video/demo9",
     photos: [
-      "https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?w=400",
-      "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?w=400"
+      "/src/assets/story-profile-1.jpg",
+      "/src/assets/story-profile-2.jpg"
     ],
     interests: ["Cultural immersion", "Language learning", "Street food adventures", "Local storytelling", "Border-crossing"],
     echoStarters: [
@@ -367,8 +367,8 @@ export const founderCuratedProfiles: SampleProfile[] = [
     emotionalSoundtrack: "Grounded magic: Bon Iver's forest sounds meet the whisper of wind through leaves",
     tiktokUrl: "https://www.tiktok.com/@user/video/demo10",
     photos: [
-      "https://images.unsplash.com/photo-1535268647677-300dbf3078d1?w=400",
-      "https://images.unsplash.com/photo-1473091534298-04dcbce3278c?w=400"
+      "/src/assets/cedar-profile-1.jpg",
+      "/src/assets/cedar-profile-2.jpg"
     ],
     interests: ["Permaculture", "Herbal medicine", "Forest restoration", "Mushroom foraging", "Seed saving"],
     echoStarters: [
