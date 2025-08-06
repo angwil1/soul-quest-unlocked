@@ -157,11 +157,11 @@ const Index = () => {
                 <span className="text-primary font-semibold"> genuine compatibility</span>.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16 max-w-lg mx-auto">
                 <Button 
                   size="lg" 
                   onClick={() => navigate('/auth')}
-                  className="px-8 py-4 text-lg font-semibold bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90 transform hover:scale-105 transition-all duration-200 animate-scale-in"
+                  className="w-full sm:w-auto px-8 py-4 text-lg font-semibold bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90 transform hover:scale-105 transition-all duration-200 animate-scale-in shadow-lg hover:shadow-xl"
                 >
                   <Heart className="h-5 w-5 mr-2" />
                   Start Your Journey
@@ -171,7 +171,7 @@ const Index = () => {
                   variant="outline" 
                   size="lg"
                   onClick={() => navigate('/pricing')}
-                  className="px-8 py-4 text-lg font-semibold border-primary/20 hover:bg-primary/5 animate-scale-in"
+                  className="w-full sm:w-auto px-8 py-4 text-lg font-semibold border-2 border-primary/30 hover:border-primary/50 hover:bg-primary/5 transform hover:scale-105 transition-all duration-200 animate-scale-in"
                 >
                   <Users className="h-5 w-5 mr-2" />
                   See How It Works
