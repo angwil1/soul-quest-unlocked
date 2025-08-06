@@ -370,7 +370,10 @@ const SampleProfiles = () => {
                   Use these profiles as inspiration to create your authentic, emotionally rich dating profile.
                 </p>
                 <div className="flex gap-2 justify-center">
-                  <Button onClick={() => navigate('/profile/edit')}>
+                  <Button onClick={() => {
+                    console.log('Create My Echo Profile button clicked - navigating to /profile/edit');
+                    navigate('/profile/edit');
+                  }}>
                     Create My Echo Profile
                   </Button>
                   <Button variant="outline" onClick={() => setShowInspiration(true)}>
