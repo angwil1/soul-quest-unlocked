@@ -304,13 +304,18 @@ const SampleProfiles = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {selectedProfile.vibeGallery.map((vibe, index) => (
                     <Card key={index} className="overflow-hidden">
-                      <div className="aspect-square bg-gradient-to-br from-purple-100 to-pink-100 dark:from-purple-900 dark:to-pink-900 flex items-center justify-center">
-                        <div className="text-center p-4">
-                          <div className="text-4xl mb-2">✨</div>
-                          <p className="text-sm font-medium capitalize">{vibe.mood} Vibe</p>
-                        </div>
+                      <div className="aspect-square overflow-hidden">
+                        <img 
+                          src={vibe.image} 
+                          alt={`${vibe.mood} vibe`}
+                          className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                        />
                       </div>
                       <CardContent className="p-4">
+                        <div className="flex items-center gap-2 mb-2">
+                          <span className="text-sm font-medium capitalize text-purple-600">{vibe.mood}</span>
+                          <Badge variant="secondary" className="text-xs">Vibe</Badge>
+                        </div>
                         <p className="text-sm text-muted-foreground mb-2">{vibe.description}</p>
                         <div className="flex flex-wrap gap-1">
                           {vibe.tags.map((tag, tagIndex) => (

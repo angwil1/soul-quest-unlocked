@@ -19,6 +19,7 @@ export interface SampleProfile {
     mood: string;
     description: string;
     tags: string[];
+    image: string;
   }[];
 }
 
@@ -51,12 +52,14 @@ export const founderCuratedProfiles: SampleProfile[] = [
       {
         mood: "contemplative",
         description: "Reading poetry by the window while rain traces stories on glass",
-        tags: ["melancholy", "peaceful", "introspective"]
+        tags: ["melancholy", "peaceful", "introspective"],
+        image: "/src/assets/vibe-contemplative-1.jpg"
       },
       {
         mood: "enchanted",
         description: "Found this hidden bookstore that feels like Narnia's library",
-        tags: ["magical", "discovery", "wonder"]
+        tags: ["magical", "discovery", "wonder"],
+        image: "/src/assets/vibe-enchanted-1.jpg"
       }
     ]
   },
@@ -88,12 +91,14 @@ export const founderCuratedProfiles: SampleProfile[] = [
       {
         mood: "healing",
         description: "Today's therapy session: helping someone find their voice again",
-        tags: ["purpose", "compassion", "growth"]
+        tags: ["purpose", "compassion", "growth"],
+        image: "/src/assets/vibe-healing-2.jpg"
       },
       {
         mood: "raw",
         description: "3AM songwriting session - sometimes vulnerability sounds like this",
-        tags: ["creative", "honest", "midnight"]
+        tags: ["creative", "honest", "midnight"],
+        image: "/src/assets/vibe-raw-2.jpg"
       }
     ]
   },
@@ -125,12 +130,14 @@ export const founderCuratedProfiles: SampleProfile[] = [
       {
         mood: "mystical",
         description: "Creating art from fallen leaves - everything has a second life",
-        tags: ["creative", "earth", "transformation"]
+        tags: ["creative", "earth", "transformation"],
+        image: "/src/assets/vibe-mystical-3.jpg"
       },
       {
         mood: "intimate",
         description: "Secret garden where I go to remember who I am",
-        tags: ["private", "sacred", "solitude"]
+        tags: ["private", "sacred", "solitude"],
+        image: "/src/assets/vibe-intimate-3.jpg"
       }
     ]
   },
@@ -162,12 +169,14 @@ export const founderCuratedProfiles: SampleProfile[] = [
       {
         mood: "fierce",
         description: "Setting boundaries feels like coming home to myself",
-        tags: ["empowered", "strong", "self-love"]
+        tags: ["empowered", "strong", "self-love"],
+        image: "/src/assets/vibe-fierce-4.jpg"
       },
       {
         mood: "soft",
         description: "Some mornings I just need to paint my feelings instead of explaining them",
-        tags: ["creative", "gentle", "processing"]
+        tags: ["creative", "gentle", "processing"],
+        image: "/src/assets/vibe-soft-4.jpg"
       }
     ]
   },
@@ -199,12 +208,14 @@ export const founderCuratedProfiles: SampleProfile[] = [
       {
         mood: "contemplative",
         description: "Morning coffee ritual: where philosophy meets gratitude",
-        tags: ["peaceful", "mindful", "morning"]
+        tags: ["peaceful", "mindful", "morning"],
+        image: "/src/assets/vibe-contemplative-5.jpg"
       },
       {
         mood: "connected",
         description: "Best conversations happen when hands are busy with soil",
-        tags: ["grounded", "present", "growth"]
+        tags: ["grounded", "present", "growth"],
+        image: "/src/assets/vibe-connected-5.jpg"
       }
     ]
   },
@@ -236,12 +247,14 @@ export const founderCuratedProfiles: SampleProfile[] = [
       {
         mood: "ritualistic",
         description: "New moon intention setting with my crystal collection",
-        tags: ["mystical", "intentional", "sacred"]
+        tags: ["mystical", "intentional", "sacred"],
+        image: "/src/assets/vibe-ritualistic-6.jpg"
       },
       {
         mood: "nurturing",
         description: "Tending to my plant babies - they tell me their secrets",
-        tags: ["gentle", "caring", "connected"]
+        tags: ["gentle", "caring", "connected"],
+        image: "/src/assets/vibe-nurturing-6.jpg"
       }
     ]
   },
@@ -273,12 +286,14 @@ export const founderCuratedProfiles: SampleProfile[] = [
       {
         mood: "adventurous",
         description: "Caught this perfect wave and felt infinite for a moment",
-        tags: ["free", "alive", "ocean"]
+        tags: ["free", "alive", "ocean"],
+        image: "/src/assets/vibe-adventurous-7.jpg"
       },
       {
         mood: "protective",
         description: "Documenting the beauty we need to protect",
-        tags: ["passionate", "purpose", "conservation"]
+        tags: ["passionate", "purpose", "conservation"],
+        image: "/src/assets/vibe-protective-7.jpg"
       }
     ]
   },
@@ -310,12 +325,14 @@ export const founderCuratedProfiles: SampleProfile[] = [
       {
         mood: "creative",
         description: "3AM inspiration hitting different when the world is sleeping",
-        tags: ["artistic", "late-night", "inspired"]
+        tags: ["artistic", "late-night", "inspired"],
+        image: "/src/assets/vibe-creative-8.jpg"
       },
       {
         mood: "intimate",
         description: "Sharing my newest song with the coffee shop regular who always listens",
-        tags: ["vulnerable", "connecting", "brave"]
+        tags: ["vulnerable", "connecting", "brave"],
+        image: "/src/assets/vibe-intimate-8.jpg"
       }
     ]
   },
@@ -347,12 +364,14 @@ export const founderCuratedProfiles: SampleProfile[] = [
       {
         mood: "adventurous",
         description: "Lost in Lisbon's backstreets, found in conversation with strangers",
-        tags: ["exploration", "connection", "discovery"]
+        tags: ["exploration", "connection", "discovery"],
+        image: "/src/assets/vibe-adventurous-9.jpg"
       },
       {
         mood: "reflective",
         description: "Writing postcards to my future self from this rooftop in Alfama",
-        tags: ["thoughtful", "romantic", "dreaming"]
+        tags: ["thoughtful", "romantic", "dreaming"],
+        image: "/src/assets/vibe-reflective-9.jpg"
       }
     ]
   },
@@ -384,12 +403,14 @@ export const founderCuratedProfiles: SampleProfile[] = [
       {
         mood: "nurturing",
         description: "Teaching kids how to save seeds for next year's garden",
-        tags: ["teaching", "hope", "growth"]
+        tags: ["teaching", "hope", "growth"],
+        image: "/src/assets/vibe-nurturing-10.jpg"
       },
       {
         mood: "meditative",
         description: "Morning ritual: coffee with the sunrise, gratitude with the trees",
-        tags: ["peaceful", "connected", "sacred"]
+        tags: ["peaceful", "connected", "sacred"],
+        image: "/src/assets/vibe-meditative-10.jpg"
       }
     ]
   }
