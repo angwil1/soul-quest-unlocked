@@ -81,6 +81,13 @@ const ProfileEdit = () => {
     setIsSubmitting(false);
   };
 
+  // Redirect to auth if not logged in
+  useEffect(() => {
+    if (!loading && !user) {
+      navigate('/auth');
+    }
+  }, [user, loading, navigate]);
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
@@ -89,6 +96,11 @@ const ProfileEdit = () => {
         </div>
       </div>
     );
+  }
+
+  // Don't render anything if redirecting to auth
+  if (!user) {
+    return null;
   }
 
   return (
