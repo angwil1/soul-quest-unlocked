@@ -25,8 +25,11 @@ export const SoundtrackPlayer: React.FC<SoundtrackPlayerProps> = ({
       const availableVoices = window.speechSynthesis.getVoices();
       setVoices(availableVoices);
       
-      // Set default voice (prefer English voices)
-      const defaultVoice = availableVoices.find(voice => 
+      // Set default voice (prefer Zira first, then other English voices)
+      const ziraVoice = availableVoices.find(voice => 
+        voice.name.toLowerCase().includes('zira')
+      );
+      const defaultVoice = ziraVoice || availableVoices.find(voice => 
         voice.lang.startsWith('en') && voice.name.includes('Female')
       ) || availableVoices.find(voice => 
         voice.lang.startsWith('en')
