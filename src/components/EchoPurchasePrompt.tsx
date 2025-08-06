@@ -27,27 +27,35 @@ export const EchoPurchasePrompt: React.FC<EchoPurchasePromptProps> = ({
         <div className="mx-auto mb-3 w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
           <Crown className="h-8 w-8 text-white" />
         </div>
-        <CardTitle className="text-xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-          Unlock Echo Features
+        <CardTitle className="text-xl font-bold flex items-center justify-center gap-2">
+          Echo Amplified 🪞
         </CardTitle>
-        <p className="text-sm text-muted-foreground">
-          Access deeper connections and premium dating tools
+        <p className="text-sm text-muted-foreground italic">
+          Every Echo holds its own rhythm—quiet reflection for 3 days, and the option to complete after 7.
         </p>
       </CardHeader>
       
       <CardContent className="space-y-4">
         <div className="space-y-3">
-          <div className="flex items-center gap-3">
-            <Sparkles className="h-4 w-4 text-purple-500" />
-            <span className="text-sm">Sample Echo Profiles for inspiration</span>
+          <div className="flex items-center gap-2">
+            <span className="text-emerald-500 font-bold">✓</span>
+            <span className="text-sm">TikTok-style profile embed (optional)</span>
           </div>
-          <div className="flex items-center gap-3">
-            <Heart className="h-4 w-4 text-purple-500" />
-            <span className="text-sm">Limited messaging for deeper connections</span>
+          <div className="flex items-center gap-2">
+            <span className="text-emerald-500 font-bold">✓</span>
+            <span className="text-sm">Emotional soundtrack prompts</span>
           </div>
-          <div className="flex items-center gap-3">
-            <Star className="h-4 w-4 text-purple-500" />
-            <span className="text-sm">Quiet notes and response invites</span>
+          <div className="flex items-center gap-2">
+            <span className="text-emerald-500 font-bold">✓</span>
+            <span className="text-sm">Discoverability via vibe gallery</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="text-emerald-500 font-bold">✓</span>
+            <span className="text-sm">Echo badge toggle</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="text-emerald-500 font-bold">✓</span>
+            <span className="text-sm">7-day Echo completion</span>
           </div>
         </div>
 
