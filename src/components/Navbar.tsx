@@ -34,10 +34,10 @@ export const Navbar = () => {
           <div className="flex items-center">
             <Link to="/" className="flex items-center gap-1 group">
               <div className="flex items-center">
-                <span className="text-lg lg:text-xl font-bold bg-gradient-to-r from-primary via-purple-600 to-pink-600 bg-clip-text text-transparent group-hover:from-primary/80 group-hover:via-purple-600/80 group-hover:to-pink-600/80 transition-all duration-300">
+                <span className="text-base lg:text-lg font-bold bg-gradient-to-r from-primary via-purple-600 to-pink-600 bg-clip-text text-transparent group-hover:from-primary/80 group-hover:via-purple-600/80 group-hover:to-pink-600/80 transition-all duration-300">
                   AI Complete Me
                 </span>
-                <div className="w-1.5 h-1.5 lg:w-2 lg:h-2 bg-gradient-to-r from-primary to-purple-600 rounded-full ml-1 lg:ml-2 group-hover:scale-125 transition-transform duration-300"></div>
+                <div className="w-1.5 h-1.5 bg-gradient-to-r from-primary to-purple-600 rounded-full ml-1 group-hover:scale-125 transition-transform duration-300"></div>
               </div>
             </Link>
           </div>
