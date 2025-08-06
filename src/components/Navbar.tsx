@@ -20,7 +20,6 @@ export const Navbar = () => {
     { name: "Upgrade", href: "/pricing" },
     { name: "Safety", href: "/safety" },
     { name: "FAQ", href: "/faq" },
-    { name: "Feature Test", href: "/feature-test" },
   ];
 
   const isActive = (path: string) => location.pathname === path;
