@@ -32,15 +32,12 @@ export const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
-            <Link to="/" className="flex items-center gap-2 group">
+            <Link to="/" className="flex items-center gap-1 group">
               <div className="flex items-center">
-                <span className="text-xl md:text-2xl font-bold bg-gradient-to-r from-primary via-purple-600 to-pink-600 bg-clip-text text-transparent group-hover:from-primary/80 group-hover:via-purple-600/80 group-hover:to-pink-600/80 transition-all duration-300">
-                  AI
+                <span className="text-lg md:text-2xl font-bold bg-gradient-to-r from-primary via-purple-600 to-pink-600 bg-clip-text text-transparent group-hover:from-primary/80 group-hover:via-purple-600/80 group-hover:to-pink-600/80 transition-all duration-300">
+                  AI Complete Me
                 </span>
-                <span className="hidden sm:inline text-xl md:text-2xl font-bold bg-gradient-to-r from-primary via-purple-600 to-pink-600 bg-clip-text text-transparent group-hover:from-primary/80 group-hover:via-purple-600/80 group-hover:to-pink-600/80 transition-all duration-300 ml-1">
-                  Complete Me
-                </span>
-                <div className="w-2 h-2 bg-gradient-to-r from-primary to-purple-600 rounded-full ml-2 group-hover:scale-125 transition-transform duration-300"></div>
+                <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-gradient-to-r from-primary to-purple-600 rounded-full ml-1 md:ml-2 group-hover:scale-125 transition-transform duration-300"></div>
               </div>
             </Link>
           </div>
