@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Play, Pause, Volume2 } from 'lucide-react';
-import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/components/ui/use-toast';
 
 interface SoundtrackPlayerProps {
@@ -15,39 +14,47 @@ export const SoundtrackPlayer: React.FC<SoundtrackPlayerProps> = ({
 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
   const { toast } = useToast();
 
   const handlePlay = async () => {
-    if (isPlaying && audio) {
-      audio.pause();
+    if (isPlaying) {
+      // Stop current speech
+      window.speechSynthesis.cancel();
       setIsPlaying(false);
+      return;
+    }
+
+    if (!window.speechSynthesis) {
+      toast({
+        title: "Not Supported",
+        description: "Text-to-speech is not supported in this browser",
+        variant: "destructive",
+      });
       return;
     }
 
     setIsLoading(true);
     try {
-      const { data, error } = await supabase.functions.invoke('text-to-speech', {
-        body: { text, voice: 'alloy' }
-      });
-
-      if (error) throw error;
-
-      const audioBlob = new Blob([
-        Uint8Array.from(atob(data.audioContent), c => c.charCodeAt(0))
-      ], { type: 'audio/mp3' });
+      // Take only first few words for a short preview
+      const shortText = text.split(' ').slice(0, 6).join(' ');
       
-      const audioUrl = URL.createObjectURL(audioBlob);
-      const audioElement = new Audio(audioUrl);
+      const utterance = new SpeechSynthesisUtterance(shortText);
+      utterance.rate = 0.9;
+      utterance.pitch = 1.0;
+      utterance.volume = 0.8;
       
-      audioElement.onended = () => {
-        setIsPlaying(false);
-        URL.revokeObjectURL(audioUrl);
+      utterance.onstart = () => {
+        setIsPlaying(true);
+        setIsLoading(false);
       };
       
-      audioElement.onerror = () => {
+      utterance.onend = () => {
         setIsPlaying(false);
-        URL.revokeObjectURL(audioUrl);
+      };
+      
+      utterance.onerror = () => {
+        setIsPlaying(false);
+        setIsLoading(false);
         toast({
           title: "Playback Error",
           description: "Failed to play audio",
@@ -55,18 +62,15 @@ export const SoundtrackPlayer: React.FC<SoundtrackPlayerProps> = ({
         });
       };
 
-      setAudio(audioElement);
-      await audioElement.play();
-      setIsPlaying(true);
+      window.speechSynthesis.speak(utterance);
     } catch (error) {
       console.error('Error playing soundtrack:', error);
+      setIsLoading(false);
       toast({
         title: "Error",
         description: "Failed to generate audio preview",
         variant: "destructive",
       });
-    } finally {
-      setIsLoading(false);
     }
   };
 
