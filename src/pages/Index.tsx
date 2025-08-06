@@ -142,10 +142,12 @@ const Index = () => {
                 AI-Powered Emotional Intelligence
               </Badge>
               
-              <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-primary via-purple-600 to-pink-600 bg-clip-text text-transparent">
-                Find Your
+              <h1 className="text-5xl md:text-7xl font-bold mb-6">
+                <span className="bg-gradient-to-r from-primary via-purple-600 to-pink-600 bg-clip-text text-transparent">
+                  Find Your
+                </span>
                 <br />
-                <span className="relative">
+                <span className="relative bg-gradient-to-r from-primary via-purple-600 to-pink-600 bg-clip-text text-transparent">
                   Perfect Match
                   <div className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-primary via-purple-600 to-pink-600 rounded-full animate-scale-in"></div>
                 </span>
