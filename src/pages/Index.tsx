@@ -146,7 +146,7 @@ const Index = () => {
                 Find Your
                 <br />
                 <span className="relative">
-                  Complete Me
+                  Perfect Match
                   <div className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-primary via-purple-600 to-pink-600 rounded-full animate-scale-in"></div>
                 </span>
               </h1>
