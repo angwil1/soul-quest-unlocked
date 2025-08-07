@@ -23,6 +23,7 @@ import FAQ from "./pages/FAQ";
 import Privacy from "./pages/Privacy";
 import TermsOfService from "./pages/TermsOfService";
 import CookieStatement from "./pages/CookieStatement";
+import AccessibilityStatement from "./pages/AccessibilityStatement";
 import StripeTest from "./pages/StripeTest";
 import FeatureTest from "./pages/FeatureTest";
 import SafetyCenter from "./pages/SafetyCenter";
@@ -58,6 +59,7 @@ const App = () => (
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/terms" element={<TermsOfService />} />
             <Route path="/cookies" element={<CookieStatement />} />
+            <Route path="/accessibility" element={<AccessibilityStatement />} />
             <Route path="/stripe-test" element={<StripeTest />} />
             <Route path="/feature-test" element={<FeatureTest />} />
             <Route path="/safety" element={<SafetyCenter />} />
