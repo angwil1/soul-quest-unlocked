@@ -275,9 +275,9 @@ const Matches = () => {
           <CardContent className="p-12 text-center">
             {filteredMatches.length === 0 ? (
               <>
-                <h2 className="text-2xl font-bold mb-4">🔍 No matches found</h2>
+                <h2 className="text-2xl font-bold mb-4">🔍 No matches just yet</h2>
                 <p className="text-muted-foreground mb-6">
-                  Try adjusting your search filters to see more potential matches.
+                  But connection isn't always instant—it's ambient, unfolding, and sometimes quiet. Try adjusting your filters, or simply return tomorrow. The right presence may be waiting just beyond today's horizon.
                 </p>
                 {(searchTerm || selectedInterests.length > 0) && (
                   <Button variant="outline" onClick={resetSearch} className="mb-4 w-full">
