@@ -60,7 +60,7 @@ const SearchFilters = ({ onFiltersChange, onUpgradePrompt }: SearchFiltersProps)
           </CardTitle>
           <div className="space-y-3">
             <p className="text-sm text-muted-foreground">
-              Welcome to AI Complete Me. This is a space for all identities, orientations, and expressions. Whether you're queer, questioning, or quietly exploring—your presence is honored here. You control your visibility. You shape your experience. Connection begins with being seen.
+              Welcome to AI Complete Me. This is a space for all identities, orientations, and expressions. Whether you're LGBTQ+, questioning, or quietly exploring—your presence is honored here. You control your visibility. You shape your experience. Connection begins with being seen.
             </p>
             <div className="flex items-center gap-2">
               <Button 
