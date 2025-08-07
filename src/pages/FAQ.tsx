@@ -121,6 +121,10 @@ const FAQ = () => {
     {
       question: "How does the video chat feature work?",
       answer: "Video chat is available for premium subscribers. Once you match with someone, you can initiate a video call directly through the app for safe, secure conversations."
+    },
+    {
+      question: "Is AI Complete Me accessible to users with disabilities?",
+      answer: "Yes, we are committed to making AI Complete Me accessible to all users. We follow WCAG guidelines and continuously work to improve accessibility. View our full accessibility statement for detailed information about our accessibility features and ongoing efforts."
     }
   ];
 
