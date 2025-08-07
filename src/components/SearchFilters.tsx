@@ -59,7 +59,7 @@ const SearchFilters = ({ onFiltersChange, onUpgradePrompt }: SearchFiltersProps)
             Identity Filters
           </CardTitle>
           <p className="text-sm text-muted-foreground">
-            AI Complete Me invites you to begin with 15 identity filters—designed for clarity, not constraint.
+            I Complete Me invites you to begin with 15 identity filters—designed for clarity, not constraint.
           </p>
           {!isEchoActive && (
             <p className="text-xs text-muted-foreground">
