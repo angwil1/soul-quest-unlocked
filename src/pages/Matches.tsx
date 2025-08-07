@@ -26,6 +26,7 @@ const Matches = () => {
   const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
   const [genderFilters, setGenderFilters] = useState<string[]>([]);
   const [showPreferencesModal, setShowPreferencesModal] = useState(true);
+  const [viewedMatchesCount, setViewedMatchesCount] = useState(0);
 
   // Demo matches data with everyday people
   const matches = [
@@ -232,12 +233,14 @@ const Matches = () => {
   const handleLike = () => {
     if (currentMatchIndex < filteredMatches.length - 1) {
       setCurrentMatchIndex(currentMatchIndex + 1);
+      setViewedMatchesCount(prev => prev + 1);
     }
   };
 
   const handlePass = () => {
     if (currentMatchIndex < filteredMatches.length - 1) {
       setCurrentMatchIndex(currentMatchIndex + 1);
+      setViewedMatchesCount(prev => prev + 1);
     }
   };
 
@@ -270,21 +273,40 @@ const Matches = () => {
         </div>
         <Card className="max-w-md mx-auto mt-8">
           <CardContent className="p-12 text-center">
-            <h2 className="text-2xl font-bold mb-4">
-              {filteredMatches.length === 0 ? "🔍 No matches found" : "🎉 All caught up!"}
-            </h2>
-            <p className="text-muted-foreground mb-6">
-              {filteredMatches.length === 0 
-                ? "Try adjusting your search filters to see more potential matches."
-                : "You've seen all available matches. Check back later for new connections!"
-              }
-            </p>
-            {filteredMatches.length === 0 && (searchTerm || selectedInterests.length > 0) && (
-              <Button variant="outline" onClick={resetSearch} className="mb-4 w-full">
-                Clear All Filters
-              </Button>
+            {filteredMatches.length === 0 ? (
+              <>
+                <h2 className="text-2xl font-bold mb-4">🔍 No matches found</h2>
+                <p className="text-muted-foreground mb-6">
+                  Try adjusting your search filters to see more potential matches.
+                </p>
+                {(searchTerm || selectedInterests.length > 0) && (
+                  <Button variant="outline" onClick={resetSearch} className="mb-4 w-full">
+                    Clear All Filters
+                  </Button>
+                )}
+              </>
+            ) : viewedMatchesCount >= 15 ? (
+              <>
+                <h2 className="text-2xl font-bold mb-4">✨ You've explored 15 connections</h2>
+                <p className="text-muted-foreground mb-6">
+                  Ready to go deeper? Unlock unlimited matches and discover your perfect connection.
+                </p>
+                <Button 
+                  className="mb-4 w-full bg-primary hover:bg-primary/90" 
+                  onClick={() => navigate('/pricing')}
+                >
+                  Unlock More Matches
+                </Button>
+              </>
+            ) : (
+              <>
+                <h2 className="text-2xl font-bold mb-4">🎉 All caught up!</h2>
+                <p className="text-muted-foreground mb-6">
+                  You've seen all available matches. Check back later for new connections!
+                </p>
+              </>
             )}
-            <Button onClick={() => navigate('/')}>
+            <Button variant="outline" onClick={() => navigate('/')}>
               Back to Dashboard
             </Button>
           </CardContent>
