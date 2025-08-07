@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
-import { Sparkles, Crown, ArrowRight } from 'lucide-react';
+import { Sparkles, Crown, ArrowRight, Settings } from 'lucide-react';
 import { useEchoSubscription } from '@/hooks/useEchoSubscription';
 
 interface SearchFiltersProps {
@@ -58,9 +58,25 @@ const SearchFilters = ({ onFiltersChange, onUpgradePrompt }: SearchFiltersProps)
             <Sparkles className="h-5 w-5 text-primary" />
             Identity Filters
           </CardTitle>
-          <p className="text-sm text-muted-foreground">
-            AI Complete Me invites you to begin with 15 identity filters—designed for clarity, not constraint.
-          </p>
+          <div className="space-y-3">
+            <p className="text-sm text-muted-foreground">
+              Welcome to AI Complete Me. This is a space for all identities, orientations, and expressions. Whether you're queer, questioning, or quietly exploring—your presence is honored here. You control your visibility. You shape your experience. Connection begins with being seen.
+            </p>
+            <div className="flex items-center gap-2">
+              <Button 
+                variant="outline" 
+                size="sm" 
+                onClick={() => {/* Navigate to visibility settings */}}
+                className="text-xs h-8"
+              >
+                <Settings className="h-3 w-3 mr-1" />
+                Visibility Settings
+              </Button>
+            </div>
+            <p className="text-sm text-muted-foreground">
+              AI Complete Me invites you to begin with 15 identity filters—designed for clarity, not constraint.
+            </p>
+          </div>
           {!isEchoActive && (
             <p className="text-xs text-muted-foreground">
               Premium tiers offer expanded matching pathways and deeper identity exploration
