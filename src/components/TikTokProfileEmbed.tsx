@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Play, Pause, Volume2, VolumeX, Edit, Sparkles } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { useProfile } from '@/hooks/useProfile';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
@@ -19,6 +20,7 @@ export const TikTokProfileEmbed = ({ isEditMode = false }: TikTokProfileEmbedPro
   const { profile, updateProfile } = useProfile();
   const { isEchoActive } = useEchoSubscription();
   const { toast } = useToast();
+  const navigate = useNavigate();
   const videoRef = useRef<HTMLVideoElement>(null);
   
   const [isPlaying, setIsPlaying] = useState(false);
@@ -135,12 +137,12 @@ export const TikTokProfileEmbed = ({ isEditMode = false }: TikTokProfileEmbedPro
             Available with Unlocked Echo subscription
           </p>
           <div className="space-y-2">
-            <Button size="sm" className="w-full" variant="outline" onClick={() => window.location.href = '/pricing'}>
+            <Button size="sm" className="w-full" variant="outline" onClick={() => navigate('/pricing')}>
               <Sparkles className="h-4 w-4 mr-2" />
               Get Echo Monthly ($4/mo)
             </Button>
             <div className="text-center text-xs text-muted-foreground">or</div>
-            <Button size="sm" className="w-full" onClick={() => window.location.href = '/pricing'}>
+            <Button size="sm" className="w-full" onClick={() => navigate('/pricing')}>
               <Sparkles className="h-4 w-4 mr-2" />
               Unlock Echo Forever ($12)
             </Button>

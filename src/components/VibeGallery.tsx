@@ -6,6 +6,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Plus, Heart, MessageCircle, Share, Play } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
 import { useEchoSubscription } from '@/hooks/useEchoSubscription';
 import { supabase } from '@/integrations/supabase/client';
@@ -32,6 +33,7 @@ export const VibeGallery = ({ isOwnProfile = false, userId }: VibeGalleryProps) 
   const { user } = useAuth();
   const { isEchoActive } = useEchoSubscription();
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [items, setItems] = useState<VibeGalleryItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [isAddingItem, setIsAddingItem] = useState(false);
@@ -230,12 +232,12 @@ export const VibeGallery = ({ isOwnProfile = false, userId }: VibeGalleryProps) 
             Available with Unlocked Echo subscription
           </p>
           <div className="space-y-2">
-            <Button size="sm" className="w-full" variant="outline" onClick={() => window.location.href = '/pricing'}>
+            <Button size="sm" className="w-full" variant="outline" onClick={() => navigate('/pricing')}>
               <Plus className="h-4 w-4 mr-2" />
               Get Echo Monthly ($4/mo)
             </Button>
             <div className="text-center text-xs text-muted-foreground">or</div>
-            <Button size="sm" className="w-full" onClick={() => window.location.href = '/pricing'}>
+            <Button size="sm" className="w-full" onClick={() => navigate('/pricing')}>
               <Plus className="h-4 w-4 mr-2" />
               Unlock Echo Forever ($12)
             </Button>
