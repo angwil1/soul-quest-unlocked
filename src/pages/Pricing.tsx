@@ -5,6 +5,7 @@ import { useSubscription } from "@/hooks/useSubscription";
 import { useAuth } from "@/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { Footer } from "@/components/Footer";
+import { Navbar } from "@/components/Navbar";
 
 const Pricing = () => {
   const { subscription, loading, createCheckout } = useSubscription();
@@ -112,126 +113,129 @@ const Pricing = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50 dark:from-purple-950 dark:via-pink-950 dark:to-blue-950 py-12 px-4">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent">
-            AI Complete Me Pricing Plans
-          </h1>
-          <p className="text-lg text-muted-foreground mb-2">Gentle by design. Emotionally intelligent by intention.</p>
-          <p className="text-muted-foreground mb-4">
-            Choose the plan that resonates with your journey toward deeper connection.
-          </p>
-          <div className="inline-block bg-gradient-to-r from-purple-100 to-pink-100 dark:from-purple-900 dark:to-pink-900 rounded-lg px-4 py-2 text-sm border border-purple-200 dark:border-purple-700">
-            💡 Spend $12/month or unlock everything for just $39/year—a quiet nudge toward completeness.
+    <>
+      <Navbar />
+      <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50 dark:from-purple-950 dark:via-pink-950 dark:to-blue-950 py-12 px-4">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent">
+              AI Complete Me Pricing Plans
+            </h1>
+            <p className="text-lg text-muted-foreground mb-2">Gentle by design. Emotionally intelligent by intention.</p>
+            <p className="text-muted-foreground mb-4">
+              Choose the plan that resonates with your journey toward deeper connection.
+            </p>
+            <div className="inline-block bg-gradient-to-r from-purple-100 to-pink-100 dark:from-purple-900 dark:to-pink-900 rounded-lg px-4 py-2 text-sm border border-purple-200 dark:border-purple-700">
+              💡 Spend $12/month or unlock everything for just $39/year—a quiet nudge toward completeness.
+            </div>
           </div>
-        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {plans.map((plan) => {
-            const isCurrentPlan = getCurrentPlan() === plan.name.replace(" 💖", "").replace(" 🌌", "").replace(" 🪞", "");
-            const isFree = plan.name === "Free";
-            
-            return (
-              <Card 
-                key={plan.name} 
-                className={`relative backdrop-blur-sm ${
-                  plan.popular 
-                    ? "border-primary shadow-lg scale-105 bg-gradient-to-br from-primary/10 via-secondary/10 to-accent/10" 
-                    : "border-border bg-white/70 dark:bg-gray-800/70 hover:bg-gradient-to-br hover:from-purple-50 hover:to-pink-50 dark:hover:from-purple-900/30 dark:hover:to-pink-900/30"
-                } ${isCurrentPlan ? "border-green-500 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950 dark:to-emerald-950" : ""} transition-all duration-300 hover:shadow-lg`}
-              >
-                {isCurrentPlan ? (
-                  <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-green-500 to-emerald-500 text-white">
-                    Current Plan
-                  </Badge>
-                ) : plan.popular ? (
-                  <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-primary to-secondary text-white">
-                    Most Popular
-                  </Badge>
-                ) : plan.isAddOn ? (
-                  <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-purple-500 to-pink-500 text-white">
-                    Add-On
-                  </Badge>
-                ) : null}
-                
-                <CardHeader className="text-center pb-4">
-                  <CardTitle className="text-xl font-bold flex items-center justify-center gap-2">
-                    <span className="text-2xl">{plan.icon}</span>
-                    {plan.name}
-                  </CardTitle>
-                  <div className="flex items-baseline justify-center gap-1">
-                    <span className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">{plan.price}</span>
-                    <span className="text-muted-foreground">{plan.period}</span>
-                  </div>
-                  <p className="text-sm text-muted-foreground italic">
-                    {plan.description}
-                  </p>
-                </CardHeader>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {plans.map((plan) => {
+              const isCurrentPlan = getCurrentPlan() === plan.name.replace(" 💖", "").replace(" 🌌", "").replace(" 🪞", "");
+              const isFree = plan.name === "Free";
+              
+              return (
+                <Card 
+                  key={plan.name} 
+                  className={`relative backdrop-blur-sm ${
+                    plan.popular 
+                      ? "border-primary shadow-lg scale-105 bg-gradient-to-br from-primary/10 via-secondary/10 to-accent/10" 
+                      : "border-border bg-white/70 dark:bg-gray-800/70 hover:bg-gradient-to-br hover:from-purple-50 hover:to-pink-50 dark:hover:from-purple-900/30 dark:hover:to-pink-900/30"
+                  } ${isCurrentPlan ? "border-green-500 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950 dark:to-emerald-950" : ""} transition-all duration-300 hover:shadow-lg`}
+                >
+                  {isCurrentPlan ? (
+                    <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-green-500 to-emerald-500 text-white">
+                      Current Plan
+                    </Badge>
+                  ) : plan.popular ? (
+                    <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-primary to-secondary text-white">
+                      Most Popular
+                    </Badge>
+                  ) : plan.isAddOn ? (
+                    <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-purple-500 to-pink-500 text-white">
+                      Add-On
+                    </Badge>
+                  ) : null}
+                  
+                  <CardHeader className="text-center pb-4">
+                    <CardTitle className="text-xl font-bold flex items-center justify-center gap-2">
+                      <span className="text-2xl">{plan.icon}</span>
+                      {plan.name}
+                    </CardTitle>
+                    <div className="flex items-baseline justify-center gap-1">
+                      <span className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">{plan.price}</span>
+                      <span className="text-muted-foreground">{plan.period}</span>
+                    </div>
+                    <p className="text-sm text-muted-foreground italic">
+                      {plan.description}
+                    </p>
+                  </CardHeader>
 
-                <CardContent className="space-y-4">
-                  <ul className="space-y-3">
-                    {plan.features.map((feature) => (
-                      <li key={feature} className="flex items-center gap-2">
-                        <span className="text-emerald-500 font-bold">✓</span>
-                        <span className="text-sm">{feature}</span>
-                      </li>
-                    ))}
-                    {plan.restrictedFeatures?.map((feature) => (
-                      <li key={feature} className="flex items-center gap-2">
-                        <span className="text-rose-500 font-bold">✗</span>
-                        <span className="text-sm text-muted-foreground line-through">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  <CardContent className="space-y-4">
+                    <ul className="space-y-3">
+                      {plan.features.map((feature) => (
+                        <li key={feature} className="flex items-center gap-2">
+                          <span className="text-emerald-500 font-bold">✓</span>
+                          <span className="text-sm">{feature}</span>
+                        </li>
+                      ))}
+                      {plan.restrictedFeatures?.map((feature) => (
+                        <li key={feature} className="flex items-center gap-2">
+                          <span className="text-rose-500 font-bold">✗</span>
+                          <span className="text-sm text-muted-foreground line-through">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
 
-                  {plan.isAddOn && plan.alternativeOption ? (
-                    <div className="space-y-2">
+                    {plan.isAddOn && plan.alternativeOption ? (
+                      <div className="space-y-2">
+                        <Button 
+                          className="w-full"
+                          variant="outline"
+                          disabled={loading || isCurrentPlan}
+                          onClick={() => handleSubscribe(plan.plan)}
+                        >
+                          {plan.buttonText}
+                        </Button>
+                        <div className="text-center text-xs text-muted-foreground">or</div>
+                        <Button 
+                          className="w-full"
+                          variant="default"
+                          disabled={loading || isCurrentPlan}
+                          onClick={() => handleSubscribe(plan.alternativeOption.plan)}
+                        >
+                          {plan.alternativeOption.buttonText}
+                        </Button>
+                        <div className="text-center text-xs text-muted-foreground">
+                          {plan.alternativeOption.price} {plan.alternativeOption.period}
+                        </div>
+                      </div>
+                    ) : (
                       <Button 
-                        className="w-full"
-                        variant="outline"
-                        disabled={loading || isCurrentPlan}
+                        className="w-full mt-6"
+                        variant={plan.popular ? "default" : "outline"}
+                        disabled={loading || isCurrentPlan || isFree}
                         onClick={() => handleSubscribe(plan.plan)}
                       >
-                        {plan.buttonText}
+                        {isCurrentPlan ? "Current Plan" : plan.buttonText}
                       </Button>
-                      <div className="text-center text-xs text-muted-foreground">or</div>
-                      <Button 
-                        className="w-full"
-                        variant="default"
-                        disabled={loading || isCurrentPlan}
-                        onClick={() => handleSubscribe(plan.alternativeOption.plan)}
-                      >
-                        {plan.alternativeOption.buttonText}
-                      </Button>
-                      <div className="text-center text-xs text-muted-foreground">
-                        {plan.alternativeOption.price} {plan.alternativeOption.period}
-                      </div>
-                    </div>
-                  ) : (
-                    <Button 
-                      className="w-full mt-6"
-                      variant={plan.popular ? "default" : "outline"}
-                      disabled={loading || isCurrentPlan || isFree}
-                      onClick={() => handleSubscribe(plan.plan)}
-                    >
-                      {isCurrentPlan ? "Current Plan" : plan.buttonText}
-                    </Button>
-                  )}
-                </CardContent>
-              </Card>
-            );
-          })}
-        </div>
+                    )}
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
 
-        <div className="text-center mt-12">
-          <p className="text-sm text-muted-foreground">
-            All plans include our core matching experience. Cancel anytime.
-          </p>
+          <div className="text-center mt-12">
+            <p className="text-sm text-muted-foreground">
+              All plans include our core matching experience. Cancel anytime.
+            </p>
+          </div>
         </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </>
   );
 };
 
