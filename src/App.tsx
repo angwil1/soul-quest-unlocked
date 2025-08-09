@@ -30,6 +30,7 @@ import FeatureTest from "./pages/FeatureTest";
 import SafetyCenter from "./pages/SafetyCenter";
 import SampleUserProfile from "./pages/SampleUserProfile";
 import NotFound from "./pages/NotFound";
+import ResetPassword from "./pages/ResetPassword";
 
 const queryClient = new QueryClient();
 
@@ -42,6 +43,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/auth" element={<Auth />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/profile/edit" element={<ProfileEdit />} />
             <Route path="/matches" element={<Matches />} />
