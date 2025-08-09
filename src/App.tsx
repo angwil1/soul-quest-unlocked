@@ -20,6 +20,7 @@ import MemoryVault from "./pages/MemoryVault";
 import AIDigest from "./pages/AIDigest";
 import Mission from "./pages/Mission";
 import FAQ from "./pages/FAQ";
+import QuickStart from "./pages/QuickStart";
 import Privacy from "./pages/Privacy";
 import TermsOfService from "./pages/TermsOfService";
 import CookieStatement from "./pages/CookieStatement";
@@ -56,6 +57,7 @@ const App = () => (
             <Route path="/ai-digest" element={<AIDigest />} />
             <Route path="/mission" element={<Mission />} />
             <Route path="/faq" element={<FAQ />} />
+            <Route path="/quick-start" element={<QuickStart />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/terms" element={<TermsOfService />} />
             <Route path="/cookies" element={<CookieStatement />} />
