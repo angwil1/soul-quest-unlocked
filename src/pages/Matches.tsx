@@ -25,7 +25,7 @@ const Matches = () => {
   const [maxDistance, setMaxDistance] = useState(50);
   const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
   const [genderFilters, setGenderFilters] = useState<string[]>([]);
-  const [showPreferencesModal, setShowPreferencesModal] = useState(true);
+  const [showPreferencesModal, setShowPreferencesModal] = useState(false);
   const [viewedMatchesCount, setViewedMatchesCount] = useState(0);
 
   // Demo matches data with everyday people
@@ -318,7 +318,7 @@ const Matches = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Preferences Modal */}
-      <Dialog open={showPreferencesModal} onOpenChange={() => {}}>
+      <Dialog open={showPreferencesModal} onOpenChange={setShowPreferencesModal}>
         <DialogContent className="max-w-md">
           <DialogHeader>
             <DialogTitle>Set Your Match Preferences</DialogTitle>
