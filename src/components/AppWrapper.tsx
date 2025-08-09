@@ -4,6 +4,7 @@ import { useSubscription } from '@/hooks/useSubscription';
 import { useProfile } from '@/hooks/useProfile';
 import { ProfileSetupModal } from '@/components/ProfileSetupModal';
 import { AgeVerification } from '@/components/AgeVerification';
+import { supabase } from '@/integrations/supabase/client';
 
 interface AppWrapperProps {
   children: React.ReactNode;
@@ -16,25 +17,74 @@ export const AppWrapper: React.FC<AppWrapperProps> = ({ children }) => {
   const [showProfileSetup, setShowProfileSetup] = useState(false);
   const [showAgeVerification, setShowAgeVerification] = useState(false);
   const [hasShownModal, setHasShownModal] = useState(false);
+  const [ageVerified, setAgeVerified] = useState<boolean | null>(null);
+  const [ageVerificationLoading, setAgeVerificationLoading] = useState(true);
 
-  // Show profile setup for new users who haven't completed basic setup
+  // Check age verification status when user logs in
   useEffect(() => {
-    if (!authLoading && !profileLoading && user && profile && !hasShownModal) {
-      const needsProfileSetup = !profile.gender || !profile.looking_for || !profile.location;
-      if (needsProfileSetup) {
-        setShowProfileSetup(true);
+    const checkAgeVerification = async () => {
+      if (!user) {
+        setAgeVerificationLoading(false);
+        return;
+      }
+
+      try {
+        const { data, error } = await supabase
+          .from('age_verifications')
+          .select('is_verified')
+          .eq('user_id', user.id)
+          .single();
+
+        if (error && error.code !== 'PGRST116') {
+          console.error('Age verification check error:', error);
+        }
+
+        setAgeVerified(data?.is_verified || false);
+      } catch (error) {
+        console.error('Age verification check error:', error);
+        setAgeVerified(false);
+      } finally {
+        setAgeVerificationLoading(false);
+      }
+    };
+
+    checkAgeVerification();
+  }, [user]);
+
+  // Show age verification first, then profile setup
+  useEffect(() => {
+    if (!authLoading && !profileLoading && !ageVerificationLoading && user && !hasShownModal) {
+      // If age not verified, show age verification first
+      if (ageVerified === false) {
+        setShowAgeVerification(true);
         setHasShownModal(true);
+      } 
+      // If age verified but profile incomplete, show profile setup
+      else if (ageVerified === true && profile) {
+        const needsProfileSetup = !profile.gender || !profile.looking_for || !profile.location;
+        if (needsProfileSetup) {
+          setShowProfileSetup(true);
+          setHasShownModal(true);
+        }
       }
     }
-  }, [user, profile, authLoading, profileLoading, hasShownModal]);
-
-  const handleProfileSetupComplete = () => {
-    setShowProfileSetup(false);
-    setShowAgeVerification(true);
-  };
+  }, [user, profile, authLoading, profileLoading, ageVerificationLoading, ageVerified, hasShownModal]);
 
   const handleAgeVerificationComplete = () => {
     setShowAgeVerification(false);
+    setAgeVerified(true);
+    
+    // After age verification, check if profile setup is needed
+    if (profile) {
+      const needsProfileSetup = !profile.gender || !profile.looking_for || !profile.location;
+      if (needsProfileSetup) {
+        setShowProfileSetup(true);
+      }
+    }
+  };
+
+  const handleProfileSetupComplete = () => {
+    setShowProfileSetup(false);
   };
 
   return (
