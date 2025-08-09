@@ -94,13 +94,8 @@ export const useSubscription = () => {
       }
       
       if (data?.url) {
-        // Open Stripe checkout in a new tab
-        window.open(data.url, '_blank');
-        
-        // Refresh subscription status after a delay to catch successful payments
-        setTimeout(() => {
-          checkSubscription();
-        }, 5000);
+        // Redirect to Stripe checkout in the same tab to avoid popup blockers
+        window.location.href = data.url;
       }
     } catch (error) {
       console.error('Error creating checkout:', error);
@@ -136,8 +131,8 @@ export const useSubscription = () => {
       }
       
       if (data?.url) {
-        // Open Stripe customer portal in a new tab
-        window.open(data.url, '_blank');
+        // Redirect to Stripe customer portal in the same tab
+        window.location.href = data.url;
       }
     } catch (error) {
       console.error('Error accessing billing portal:', error);
