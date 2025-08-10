@@ -6,6 +6,8 @@ import { useAuth } from "@/hooks/useAuth";
 import { useSubscription } from "@/hooks/useSubscription";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { DistanceChecker } from "@/components/DistanceChecker";
+import { ZipCodeMatcher } from "@/components/ZipCodeMatcher";
 import { 
   CheckCircle, 
   XCircle, 
@@ -18,7 +20,8 @@ import {
   Video,
   Heart,
   Star,
-  Shield
+  Shield,
+  MapPin
 } from "lucide-react";
 
 interface TestResult {
@@ -46,6 +49,7 @@ const FeatureTest = () => {
     { name: "Memory Vault", status: 'pending', message: "Testing saved content...", icon: Star },
     { name: "Echo Messaging", status: 'pending', message: "Testing messaging system...", icon: MessageSquare },
     { name: "Video Integration", status: 'pending', message: "Testing video call features...", icon: Video },
+    { name: "Distance Calculator", status: 'pending', message: "Testing zip code distance calculation...", icon: MapPin },
   ];
 
   useEffect(() => {
@@ -176,6 +180,17 @@ const FeatureTest = () => {
       updateTestResult(9, 'error', `❌ Video integration error: ${error}`);
     }
 
+    // Test 11: Distance Calculator
+    try {
+      const { data, error } = await supabase.functions.invoke('calculate-distance', {
+        body: { zipCode1: '10001', zipCode2: '90210' }
+      });
+      if (error) throw error;
+      updateTestResult(10, 'success', `✅ Distance calculation: ${data.distance} miles`);
+    } catch (error) {
+      updateTestResult(10, 'error', `❌ Distance calculation error: ${error}`);
+    }
+
     setIsRunning(false);
     
     const allPassed = testResults.every(test => test.status === 'success');
@@ -291,6 +306,12 @@ const FeatureTest = () => {
             </div>
           </CardContent>
         </Card>
+
+        {/* Distance Testing Components */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
+          <DistanceChecker />
+          <ZipCodeMatcher />
+        </div>
       </div>
     </div>
   );
