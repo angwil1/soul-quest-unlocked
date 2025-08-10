@@ -8,12 +8,15 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useAuth } from '@/hooks/useAuth';
 import { useEffect } from 'react';
 import { Navbar } from '@/components/Navbar';
+import { AgeVerification } from '@/components/AgeVerification';
 
 const Auth = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [resetLoading, setResetLoading] = useState(false);
+  const [showAgeVerification, setShowAgeVerification] = useState(false);
+  const [pendingSignup, setPendingSignup] = useState<{email: string, password: string} | null>(null);
   const { signIn, signUp, user } = useAuth();
   const navigate = useNavigate();
 
@@ -39,10 +42,21 @@ const Auth = () => {
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // First, show age verification before creating account
+    setPendingSignup({ email, password });
+    setShowAgeVerification(true);
+  };
+
+  const handleAgeVerificationComplete = async () => {
+    if (!pendingSignup) return;
+    
     setIsLoading(true);
+    setShowAgeVerification(false);
     
-    await signUp(email, password);
+    await signUp(pendingSignup.email, pendingSignup.password);
     
+    setPendingSignup(null);
     setIsLoading(false);
   };
 
@@ -178,6 +192,15 @@ const Auth = () => {
           </Tabs>
         </CardContent>
       </Card>
+      
+      {/* Age Verification Modal */}
+      {showAgeVerification && (
+        <div className="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50">
+          <div className="max-w-md w-full">
+            <AgeVerification onVerificationComplete={handleAgeVerificationComplete} />
+          </div>
+        </div>
+      )}
       </div>
     </div>
   );
