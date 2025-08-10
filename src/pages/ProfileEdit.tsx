@@ -10,6 +10,7 @@ import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useAuth } from '@/hooks/useAuth';
 import { useProfile, Profile } from '@/hooks/useProfile';
+import { AgeVerification } from '@/components/AgeVerification';
 import { ArrowLeft, Upload, X, Camera, MapPin } from 'lucide-react';
 
 const ProfileEdit = () => {
@@ -20,8 +21,24 @@ const ProfileEdit = () => {
   const [formData, setFormData] = useState<Partial<Profile>>({});
   const [newInterest, setNewInterest] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showAgeVerification, setShowAgeVerification] = useState(false);
 
-  // Demo mode - allow viewing without authentication
+  // Check if user needs age verification
+  useEffect(() => {
+    const checkAgeVerification = () => {
+      const ageVerified = localStorage.getItem('ageVerified');
+      const isNewUser = !profile?.name; // Assume new user if no name set
+      
+      // Show age verification for new users who haven't verified yet
+      if (isNewUser && ageVerified !== 'true') {
+        setShowAgeVerification(true);
+      }
+    };
+
+    if (user && !profileLoading) {
+      checkAgeVerification();
+    }
+  }, [user, profile, profileLoading]);
 
   useEffect(() => {
     if (profile) {
@@ -207,6 +224,18 @@ const ProfileEdit = () => {
       </div>
 
       <div className="max-w-4xl mx-auto px-4 py-8">
+        {/* Age Verification Modal for New Users */}
+        {showAgeVerification && (
+          <div className="mb-8">
+            <AgeVerification 
+              forceOpen={true}
+              onVerificationComplete={() => {
+                setShowAgeVerification(false);
+              }}
+            />
+          </div>
+        )}
+
         <form id="profile-form" onSubmit={handleSubmit} className="space-y-8">
           
           {/* Photos Section */}
