@@ -177,7 +177,7 @@ const Matches = () => {
       id: 'demo-10',
       name: 'Rowan',
       age: 32,
-      gender: 'man',
+      gender: 'woman',
       bio: "Veterinarian who adores animals and outdoor adventures. Looking for someone who shares my love for nature and furry friends.",
       location: 'Bend, OR',
       occupation: 'Veterinarian',
