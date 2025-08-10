@@ -169,7 +169,7 @@ const Matches = () => {
       location: 'Boulder, CO',
       occupation: 'Social Worker',
       interests: ['Yoga', 'Farmers markets', 'Meditation', 'Bad puns', 'Social justice'],
-      avatar_url: "https://images.unsplash.com/photo-1494790108755-2616b1e0b3cc?w=400&h=400&fit=crop&crop=face",
+      avatar_url: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&crop=face",
       compatibility_score: 90,
       distance: 16
     },
