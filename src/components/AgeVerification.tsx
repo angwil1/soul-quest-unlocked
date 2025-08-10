@@ -24,32 +24,42 @@ export const AgeVerification = ({ onVerificationComplete }: AgeVerificationProps
   const { toast } = useToast();
 
   useEffect(() => {
-    if (user) {
-      checkAgeVerification();
-    }
-  }, [user]);
+    checkAgeVerification();
+  }, []);
 
   const checkAgeVerification = async () => {
-    if (!user) return;
+    // First check localStorage for non-authenticated users
+    const localVerification = localStorage.getItem('ageVerified');
+    if (localVerification === 'true') {
+      setIsVerified(true);
+      return;
+    }
 
-    try {
-      const { data, error } = await supabase
-        .from('age_verifications')
-        .select('*')
-        .eq('user_id', user.id)
-        .single();
+    // If user is logged in, also check database
+    if (user) {
+      try {
+        const { data, error } = await supabase
+          .from('age_verifications')
+          .select('*')
+          .eq('user_id', user.id)
+          .single();
 
-      if (error && error.code !== 'PGRST116') {
+        if (error && error.code !== 'PGRST116') {
+          console.error('Age verification check error:', error);
+          return;
+        }
+
+        if (data) {
+          setVerification(data);
+          setIsVerified(data.is_verified);
+          // Sync with localStorage
+          if (data.is_verified) {
+            localStorage.setItem('ageVerified', 'true');
+          }
+        }
+      } catch (error) {
         console.error('Age verification check error:', error);
-        return;
       }
-
-      if (data) {
-        setVerification(data);
-        setIsVerified(data.is_verified);
-      }
-    } catch (error) {
-      console.error('Age verification check error:', error);
     }
   };
 
@@ -67,15 +77,6 @@ export const AgeVerification = ({ onVerificationComplete }: AgeVerificationProps
   };
 
   const handleVerifyAge = async () => {
-    if (!user) {
-      toast({
-        title: "Authentication Required",
-        description: "Please sign in to verify your age",
-        variant: "destructive"
-      });
-      return;
-    }
-
     if (!dateOfBirth) {
       toast({
         title: "Date Required",
@@ -97,27 +98,36 @@ export const AgeVerification = ({ onVerificationComplete }: AgeVerificationProps
 
     setLoading(true);
     try {
-      const { error } = await supabase
-        .from('age_verifications')
-        .upsert({
-          user_id: user.id,
-          date_of_birth: dateOfBirth,
-          is_verified: true,
-          verification_method: 'self_reported',
-          verified_at: new Date().toISOString()
-        });
+      // Always store in localStorage for immediate verification
+      localStorage.setItem('ageVerified', 'true');
+      localStorage.setItem('ageVerificationDate', dateOfBirth);
+      
+      // If user is logged in, also store in database
+      if (user) {
+        const { error } = await supabase
+          .from('age_verifications')
+          .upsert({
+            user_id: user.id,
+            date_of_birth: dateOfBirth,
+            is_verified: true,
+            verification_method: 'self_reported',
+            verified_at: new Date().toISOString()
+          });
 
-      if (error) throw error;
+        if (error) {
+          console.error('Database verification error:', error);
+          // Still continue with localStorage verification
+        }
+      }
 
       toast({
         title: "Age Verified Successfully",
-        description: "Your age has been verified. You can now access all features.",
+        description: "Your age has been verified. Welcome!",
         variant: "default"
       });
 
       setIsVerified(true);
       setIsOpen(false);
-      await checkAgeVerification();
       onVerificationComplete?.();
     } catch (error) {
       console.error('Age verification error:', error);
