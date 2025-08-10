@@ -142,20 +142,17 @@ const Index = () => {
                 AI-Powered Emotional Intelligence
               </Badge>
               
-              <h1 className="text-5xl md:text-7xl font-bold mb-6 space-y-2">
-                <div className="bg-gradient-to-r from-primary via-purple-600 to-pink-600 bg-clip-text text-transparent">
+              <h1 className="text-4xl md:text-6xl font-bold mb-6 text-center">
+                <div className="text-primary mb-2">
                   Find Your
                 </div>
-                <div className="relative bg-gradient-to-r from-primary via-purple-600 to-pink-600 bg-clip-text text-transparent">
+                <div className="text-primary">
                   Perfect Match
-                  <div className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-primary via-purple-600 to-pink-600 rounded-full animate-scale-in"></div>
                 </div>
               </h1>
               
-              <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
-                Beyond swipes. Beyond games. Discover meaningful connections through{" "}
-                <span className="text-primary font-semibold">emotional intelligence</span> and{" "}
-                <span className="text-primary font-semibold">genuine compatibility</span>.
+              <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto text-center px-4">
+                Beyond swipes. Beyond games. Discover meaningful connections through emotional intelligence and genuine compatibility.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16 max-w-lg mx-auto">
