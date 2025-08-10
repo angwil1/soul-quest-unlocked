@@ -18,18 +18,22 @@ const QuickStart = () => {
   const canTakeQuiz = user && isProfileComplete;
 
   const handleStepClick = (step: number) => {
+    console.log('Step clicked:', step, { user: !!user, isProfileComplete });
     switch (step) {
       case 1:
         // Create Account
+        console.log('Navigating to auth - no user');
         if (!user) {
           navigate('/auth');
         } else {
           // User already has account, go to step 2
+          console.log('User exists, navigating to profile edit');
           navigate('/profile/edit');
         }
         break;
       case 2:
         // Complete Profile  
+        console.log('Step 2 clicked - Complete Profile');
         if (!user) {
           toast({
             title: "Create Account First",
@@ -43,6 +47,7 @@ const QuickStart = () => {
         break;
       case 3:
         // Take Quiz
+        console.log('Step 3 clicked - Take Quiz');
         if (!user) {
           toast({
             title: "Create Account First",
