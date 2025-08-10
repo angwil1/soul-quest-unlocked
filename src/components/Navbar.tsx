@@ -48,6 +48,17 @@ export const Navbar = () => {
 
   const handlePreferenceChange = (preference: string) => {
     setSearchPreference(preference);
+    // Convert preference to gender filter format for matches page
+    const genderMap: Record<string, string[]> = {
+      'men': ['men'],
+      'women': ['women'], 
+      'non-binary': ['non-binary'],
+      'all': ['all']
+    };
+    
+    if (genderMap[preference]) {
+      setSelectedFilters(genderMap[preference]);
+    }
   };
 
   const handleZipCodeChange = (zip: string) => {
@@ -56,11 +67,22 @@ export const Navbar = () => {
 
   const handleSearch = () => {
     setShowSearchModal(false);
+    const params = new URLSearchParams();
+    
     if (searchQuery.trim()) {
-      navigate(`/matches?search=${encodeURIComponent(searchQuery.trim())}`);
-    } else {
-      navigate('/matches');
+      params.set('search', searchQuery.trim());
     }
+    
+    if (searchPreference) {
+      params.set('preference', searchPreference);
+    }
+    
+    if (zipCode) {
+      params.set('zip', zipCode);
+    }
+    
+    const queryString = params.toString();
+    navigate(`/matches${queryString ? `?${queryString}` : ''}`);
   };
 
   return (

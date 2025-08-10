@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -19,6 +19,7 @@ import jordanProfileMain from '@/assets/jordan-profile-main.jpg';
 
 const Matches = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [currentMatchIndex, setCurrentMatchIndex] = useState(0);
   const [searchTerm, setSearchTerm] = useState('');
   const [ageRange, setAgeRange] = useState([18, 50]);
@@ -28,12 +29,38 @@ const Matches = () => {
   const [showPreferencesModal, setShowPreferencesModal] = useState(false);
   const [viewedMatchesCount, setViewedMatchesCount] = useState(0);
 
+  // Initialize filters from URL parameters
+  useEffect(() => {
+    const searchQuery = searchParams.get('search');
+    const preference = searchParams.get('preference');
+    const zip = searchParams.get('zip');
+    
+    if (searchQuery) {
+      setSearchTerm(searchQuery);
+    }
+    
+    if (preference) {
+      // Convert preference to gender filter
+      const genderMap: Record<string, string[]> = {
+        'men': ['men'],
+        'women': ['women'], 
+        'non-binary': ['non-binary'],
+        'all': ['all']
+      };
+      
+      if (genderMap[preference]) {
+        setGenderFilters(genderMap[preference]);
+      }
+    }
+  }, [searchParams]);
+
   // Demo matches data with everyday people
   const matches = [
     {
       id: 'demo-1',
       name: 'Alex',
       age: 26,
+      gender: 'man',
       bio: "Marketing coordinator who loves weekend farmers markets and trying new brunch spots. Looking for someone to explore the city with!",
       location: 'Portland, OR',
       occupation: 'Marketing Coordinator',
@@ -46,6 +73,7 @@ const Matches = () => {
       id: 'demo-2', 
       name: 'Jordan',
       age: 29,
+      gender: 'man',
       bio: "Software engineer by day, guitar player by night. Love cooking, craft beer, and hiking on weekends.",
       location: 'Austin, TX',
       occupation: 'Software Engineer',
@@ -58,6 +86,7 @@ const Matches = () => {
       id: 'demo-3',
       name: 'Casey',
       age: 24,
+      gender: 'woman',
       bio: "Elementary school teacher who loves books, coffee shops, and weekend adventures. Always up for trying new restaurants!",
       location: 'Seattle, WA',
       occupation: 'Elementary School Teacher',
@@ -70,6 +99,7 @@ const Matches = () => {
       id: 'demo-4',
       name: 'Taylor',
       age: 31,
+      gender: 'woman',
       bio: "Nurse who values work-life balance. Love fitness classes, wine nights with friends, and exploring new neighborhoods.",
       location: 'Denver, CO',
       occupation: 'Registered Nurse',
@@ -82,6 +112,7 @@ const Matches = () => {
       id: 'demo-5',
       name: 'Morgan',
       age: 27,
+      gender: 'non-binary',
       bio: "Graphic designer who loves good food and better company. Enjoy board games, concerts, and lazy Sunday mornings.",
       location: 'Asheville, NC',
       occupation: 'Graphic Designer',
@@ -94,6 +125,7 @@ const Matches = () => {
       id: 'demo-6',
       name: 'River',
       age: 25,
+      gender: 'non-binary',
       bio: "Physical therapist who stays active and loves the outdoors. Looking for someone to share adventures and Netflix marathons with.",
       location: 'Santa Fe, NM',
       occupation: 'Physical Therapist',
@@ -106,6 +138,7 @@ const Matches = () => {
       id: 'demo-7',
       name: 'Sage',
       age: 28,
+      gender: 'man',
       bio: "Accountant who loves weekends at the beach, trying new craft breweries, and playing volleyball with friends.",
       location: 'San Diego, CA',
       occupation: 'Accountant',
@@ -118,6 +151,7 @@ const Matches = () => {
       id: 'demo-8',
       name: 'Quinn',
       age: 30,
+      gender: 'woman',
       bio: "High school English teacher who loves live music, farmers markets, and cozy coffee shops. Let's grab drinks and see where it goes!",
       location: 'Nashville, TN',
       occupation: 'High School Teacher',
@@ -130,6 +164,7 @@ const Matches = () => {
       id: 'demo-9',
       name: 'Avery',
       age: 26,
+      gender: 'woman',
       bio: "Social worker passionate about making a difference. Love yoga, farmers markets, and trying new vegetarian restaurants.",
       location: 'Boulder, CO',
       occupation: 'Social Worker',
@@ -142,6 +177,7 @@ const Matches = () => {
       id: 'demo-10',
       name: 'Rowan',
       age: 32,
+      gender: 'man',
       bio: "Veterinarian who adores animals and outdoor adventures. Looking for someone who shares my love for nature and furry friends.",
       location: 'Bend, OR',
       occupation: 'Veterinarian',
@@ -154,6 +190,7 @@ const Matches = () => {
       id: 'demo-11',
       name: 'Phoenix',
       age: 24,
+      gender: 'non-binary',
       bio: "Barista and part-time artist who loves creating and exploring. Always down for gallery openings, coffee tastings, and deep conversations.",
       location: 'San Francisco, CA',
       occupation: 'Barista/Artist',
@@ -166,6 +203,7 @@ const Matches = () => {
       id: 'demo-12',
       name: 'Ember',
       age: 29,
+      gender: 'woman',
       bio: "Chef who believes food brings people together. Love experimenting in the kitchen, wine pairings, and cozy dinner parties.",
       location: 'Charleston, SC',
       occupation: 'Chef',
@@ -178,6 +216,7 @@ const Matches = () => {
       id: 'demo-13',
       name: 'Storm',
       age: 27,
+      gender: 'man',
       bio: "Personal trainer who lives an active lifestyle. Love rock climbing, CrossFit, and helping others reach their fitness goals.",
       location: 'Salt Lake City, UT',
       occupation: 'Personal Trainer',
@@ -190,6 +229,7 @@ const Matches = () => {
       id: 'demo-14',
       name: 'Luna',
       age: 25,
+      gender: 'woman',
       bio: "Librarian by day, bookworm by night. Love quiet cafes, literary discussions, and discovering hidden bookstore gems.",
       location: 'Madison, WI',
       occupation: 'Librarian',
@@ -202,6 +242,7 @@ const Matches = () => {
       id: 'demo-15',
       name: 'Ocean',
       age: 31,
+      gender: 'woman',
       bio: "Marine biologist who's passionate about ocean conservation. Love scuba diving, beach cleanups, and sharing my love of the sea.",
       location: 'Monterey, CA',
       occupation: 'Marine Biologist',
@@ -218,14 +259,25 @@ const Matches = () => {
       match.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       match.bio.toLowerCase().includes(searchTerm.toLowerCase()) ||
       match.occupation.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      match.interests.some(interest => interest.toLowerCase().includes(searchTerm.toLowerCase()));
+      match.interests.some(interest => interest.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      match.gender.toLowerCase().includes(searchTerm.toLowerCase());
     
     const matchesAge = match.age >= ageRange[0] && match.age <= ageRange[1];
     const matchesDistance = match.distance <= maxDistance;
     const matchesInterests = selectedInterests.length === 0 || 
       selectedInterests.some(interest => match.interests.includes(interest));
     
-    return matchesSearch && matchesAge && matchesDistance && matchesInterests;
+    // Gender filter logic
+    const matchesGender = genderFilters.length === 0 || 
+      genderFilters.includes('all') ||
+      genderFilters.some(filter => {
+        if (filter === 'men' && match.gender === 'man') return true;
+        if (filter === 'women' && match.gender === 'woman') return true;
+        if (filter === 'non-binary' && match.gender === 'non-binary') return true;
+        return false;
+      });
+    
+    return matchesSearch && matchesAge && matchesDistance && matchesInterests && matchesGender;
   });
 
   const currentMatch = filteredMatches[currentMatchIndex];
