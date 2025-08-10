@@ -1,10 +1,44 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Navbar } from "@/components/Navbar";
-import { CheckCircle, ArrowRight, Heart, Zap, Brain } from "lucide-react";
+import { CheckCircle, ArrowRight, Heart, Zap, Brain, User, UserCheck } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
 
 const QuickStart = () => {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
+  const handleStepClick = (step: number) => {
+    switch (step) {
+      case 1:
+        // Create Account
+        if (!user) {
+          navigate('/auth');
+        } else {
+          // User already has account, go to step 2
+          navigate('/profile/edit');
+        }
+        break;
+      case 2:
+        // Complete Profile  
+        if (!user) {
+          navigate('/auth'); // Need to create account first
+        } else {
+          navigate('/profile/edit');
+        }
+        break;
+      case 3:
+        // Take Quiz
+        if (!user) {
+          navigate('/auth'); // Need to create account first
+        } else {
+          navigate('/questions');
+        }
+        break;
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted">
       <Navbar />
@@ -32,23 +66,54 @@ const QuickStart = () => {
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="grid md:grid-cols-3 gap-6">
-                <div className="text-center p-6 rounded-lg bg-muted/50 border">
-                  <div className="w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-2xl font-bold mx-auto mb-4">1</div>
+                <div 
+                  className="text-center p-6 rounded-lg bg-muted/50 border hover:border-primary/50 hover:bg-primary/5 cursor-pointer transition-all duration-200 group"
+                  onClick={() => handleStepClick(1)}
+                >
+                  <div className="w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-2xl font-bold mx-auto mb-4 group-hover:scale-110 transition-transform">
+                    {user ? <CheckCircle className="h-6 w-6" /> : "1"}
+                  </div>
                   <h3 className="font-semibold mb-2">Create Your Account</h3>
                   <p className="text-sm text-muted-foreground mb-4">Sign up with your email and set your basic preferences</p>
-                  <CheckCircle className="h-5 w-5 text-green-500 mx-auto" />
+                  <div className="flex items-center justify-center gap-2">
+                    {user ? (
+                      <>
+                        <CheckCircle className="h-5 w-5 text-green-500" />
+                        <span className="text-xs text-green-600 font-medium">Complete</span>
+                      </>
+                    ) : (
+                      <>
+                        <User className="h-4 w-4 text-primary" />
+                        <span className="text-xs text-primary font-medium">Click to start</span>
+                      </>
+                    )}
+                  </div>
                 </div>
-                <div className="text-center p-6 rounded-lg bg-muted/50 border">
-                  <div className="w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-2xl font-bold mx-auto mb-4">2</div>
+                
+                <div 
+                  className="text-center p-6 rounded-lg bg-muted/50 border hover:border-primary/50 hover:bg-primary/5 cursor-pointer transition-all duration-200 group"
+                  onClick={() => handleStepClick(2)}
+                >
+                  <div className="w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-2xl font-bold mx-auto mb-4 group-hover:scale-110 transition-transform">2</div>
                   <h3 className="font-semibold mb-2">Complete Your Profile</h3>
                   <p className="text-sm text-muted-foreground mb-4">Add photos, verify your age, and fill out your profile details</p>
-                  <CheckCircle className="h-5 w-5 text-green-500 mx-auto" />
+                  <div className="flex items-center justify-center gap-2">
+                    <UserCheck className="h-4 w-4 text-primary" />
+                    <span className="text-xs text-primary font-medium">Click to continue</span>
+                  </div>
                 </div>
-                <div className="text-center p-6 rounded-lg bg-muted/50 border">
-                  <div className="w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-2xl font-bold mx-auto mb-4">3</div>
+                
+                <div 
+                  className="text-center p-6 rounded-lg bg-muted/50 border hover:border-primary/50 hover:bg-primary/5 cursor-pointer transition-all duration-200 group"
+                  onClick={() => handleStepClick(3)}
+                >
+                  <div className="w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-2xl font-bold mx-auto mb-4 group-hover:scale-110 transition-transform">3</div>
                   <h3 className="font-semibold mb-2">Take the Personality Quiz</h3>
                   <p className="text-sm text-muted-foreground mb-4">Complete our AI assessment to find compatible matches</p>
-                  <CheckCircle className="h-5 w-5 text-green-500 mx-auto" />
+                  <div className="flex items-center justify-center gap-2">
+                    <Brain className="h-4 w-4 text-primary" />
+                    <span className="text-xs text-primary font-medium">Click to begin</span>
+                  </div>
                 </div>
               </div>
               
