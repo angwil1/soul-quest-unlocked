@@ -49,8 +49,13 @@ const Auth = () => {
     if (ageVerified) {
       // Age already verified, proceed with signup immediately
       setIsLoading(true);
-      await signUp(email, password);
+      const result = await signUp(email, password);
       setIsLoading(false);
+      
+      // Check if signup was successful and redirect
+      if (!result?.error) {
+        navigate('/');
+      }
     } else {
       // Need age verification first
       setPendingSignup({ email, password });
@@ -64,6 +69,7 @@ const Auth = () => {
     
     if (!pendingSignup) {
       console.error("No pending signup found!");
+      setShowAgeVerification(false);
       return;
     }
     
@@ -73,6 +79,11 @@ const Auth = () => {
     console.log("Attempting signup with:", pendingSignup.email);
     const result = await signUp(pendingSignup.email, pendingSignup.password);
     console.log("Signup result:", result);
+    
+    // Check if signup was successful and redirect
+    if (!result?.error) {
+      navigate('/');
+    }
     
     setPendingSignup(null);
     setIsLoading(false);
