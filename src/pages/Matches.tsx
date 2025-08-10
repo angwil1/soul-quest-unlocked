@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Checkbox } from '@/components/ui/checkbox';
 import SearchFilters from '@/components/SearchFilters';
-import { ArrowLeft, Heart, X, MapPin, Users, Search, Filter } from 'lucide-react';
+import { ArrowLeft, Heart, X, MapPin, Users, Search, Filter, MessageCircle } from 'lucide-react';
 import caseyProfile from '@/assets/casey-profile-realistic.jpg';
 import caseyProfileAlt from '@/assets/casey-profile.jpg';
 import alexProfileRealistic from '@/assets/alex-profile-realistic.jpg';
@@ -514,22 +514,39 @@ const Matches = () => {
             </div>
 
             {/* Action Buttons */}
-            <div className="flex gap-4">
-              <Button 
-                variant="outline" 
-                className="flex-1" 
-                onClick={handlePass}
-              >
-                <X className="h-5 w-5 mr-2" />
-                Pass
-              </Button>
-              <Button 
-                className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground" 
-                onClick={handleLike}
-              >
-                <Heart className="h-5 w-5 mr-2" />
-                Like
-              </Button>
+            <div className="space-y-4">
+              <div className="flex gap-3">
+                <Button 
+                  variant="outline" 
+                  size="lg" 
+                  onClick={handlePass}
+                  className="flex-1 h-12"
+                >
+                  <X className="h-5 w-5 mr-2" />
+                  Pass
+                </Button>
+                <Button 
+                  variant="outline" 
+                  size="lg" 
+                  onClick={() => navigate('/messages')}
+                  className="flex-1 h-12"
+                >
+                  <MessageCircle className="h-5 w-5 mr-2" />
+                  Message
+                </Button>
+                <Button 
+                  size="lg" 
+                  onClick={handleLike}
+                  className="flex-1 h-12 bg-primary hover:bg-primary/90"
+                >
+                  <Heart className="h-5 w-5 mr-2" />
+                  Like
+                </Button>
+              </div>
+              
+              <p className="text-xs text-center text-muted-foreground">
+                {filteredMatches.length - currentMatchIndex - 1} more matches to explore
+              </p>
             </div>
           </CardContent>
         </Card>
