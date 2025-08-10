@@ -416,9 +416,11 @@ const Index = () => {
                               <SelectItem value="women">Women</SelectItem>
                               <SelectItem value="non-binary">Non-Binary</SelectItem>
                               <SelectItem value="all">Everyone</SelectItem>
-                              <SelectItem value="queer">Queer</SelectItem>
-                              <SelectItem value="trans">Trans</SelectItem>
-                              <SelectItem value="genderfluid">Genderfluid</SelectItem>
+                              <SelectItem value="bisexual">Bisexual Individuals</SelectItem>
+                              <SelectItem value="pansexual">Pansexual Individuals</SelectItem>
+                              <SelectItem value="asexual">Asexual Individuals</SelectItem>
+                              <SelectItem value="genderfluid">Genderfluid Individuals</SelectItem>
+                              <SelectItem value="demisexual">Demisexual Individuals</SelectItem>
                             </SelectContent>
                           </Select>
                         </div>
@@ -465,7 +467,7 @@ const Index = () => {
                             • Basic compatibility matching
                           </p>
                           <p className="text-sm text-muted-foreground mb-3">
-                            • All gender preference options
+                            • All detailed orientation options
                           </p>
                           <Button 
                             variant="outline" 
