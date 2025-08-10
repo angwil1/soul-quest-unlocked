@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '@/hooks/useAuth';
+import { useMessageLimits } from '@/hooks/useMessageLimits';
+import { useSubscription } from '@/hooks/useSubscription';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -8,7 +10,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { useToast } from '@/hooks/use-toast';
 import { Navbar } from '@/components/Navbar';
 import { VideoCallButton } from '@/components/VideoCallButton';
-import { ArrowLeft, Send } from 'lucide-react';
+import { ArrowLeft, Send, Crown } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
 
@@ -36,6 +38,8 @@ interface Match {
 
 const Messages = () => {
   const { user, loading: authLoading } = useAuth();
+  const { sendMessage: sendMessageWithLimits, remainingMessages, isPremium, canSendMessage, upgradePrompt } = useMessageLimits();
+  const { createCheckout } = useSubscription();
   const { toast } = useToast();
   const navigate = useNavigate();
   const [matches, setMatches] = useState<Match[]>([]);
@@ -175,26 +179,16 @@ const Messages = () => {
 
   const sendMessage = async () => {
     if (!user || !selectedMatch || !newMessage.trim()) return;
+    
+    // Check if user can send message (with limits)
+    if (!canSendMessage) {
+      upgradePrompt();
+      return;
+    }
 
-    try {
-      const { error } = await supabase
-        .from('messages')
-        .insert({
-          sender_id: user.id,
-          match_id: selectedMatch,
-          message_text: newMessage.trim()
-        });
-
-      if (error) throw error;
-
+    const success = await sendMessageWithLimits(newMessage.trim(), selectedMatch);
+    if (success) {
       setNewMessage('');
-    } catch (error) {
-      console.error('Error sending message:', error);
-      toast({
-        title: "Error",
-        description: "Failed to send message",
-        variant: "destructive"
-      });
     }
   };
 
@@ -235,6 +229,30 @@ const Messages = () => {
             <h1 className="text-3xl font-bold">Messages</h1>
           </div>
           <div className="flex items-center gap-4">
+            {/* Message Limits Display */}
+            {!isPremium && (
+              <div className="flex items-center gap-2 px-3 py-2 bg-muted rounded-lg">
+                <span className="text-sm font-medium">
+                  {remainingMessages} messages left today
+                </span>
+                {remainingMessages === 0 && (
+                  <Button 
+                    size="sm" 
+                    onClick={() => createCheckout('premium')}
+                    className="ml-2"
+                  >
+                    <Crown className="h-4 w-4 mr-1" />
+                    Upgrade
+                  </Button>
+                )}
+              </div>
+            )}
+            {isPremium && (
+              <div className="flex items-center gap-2 px-3 py-2 bg-primary/10 text-primary rounded-lg">
+                <Crown className="h-4 w-4" />
+                <span className="text-sm font-medium">Premium • Unlimited</span>
+              </div>
+            )}
             <VideoCallButton 
               matchName="Your Match" 
               variant="default" 
@@ -321,22 +339,30 @@ const Messages = () => {
                   </ScrollArea>
 
                   {/* Message Input */}
-                  <div className="flex gap-2">
-                    <Input
-                      value={newMessage}
-                      onChange={(e) => setNewMessage(e.target.value)}
-                      placeholder="Type a message..."
-                      onKeyPress={(e) => {
-                        if (e.key === 'Enter' && !e.shiftKey) {
-                          e.preventDefault();
-                          sendMessage();
-                        }
-                      }}
-                    />
-                    <Button onClick={sendMessage} disabled={!newMessage.trim()}>
-                      <Send className="h-4 w-4" />
-                    </Button>
-                  </div>
+                   <div className="flex gap-2">
+                     <Input
+                       value={newMessage}
+                       onChange={(e) => setNewMessage(e.target.value)}
+                       placeholder={
+                         !canSendMessage 
+                           ? "Daily message limit reached - Upgrade to Premium"
+                           : "Type a message..."
+                       }
+                       onKeyPress={(e) => {
+                         if (e.key === 'Enter' && !e.shiftKey) {
+                           e.preventDefault();
+                           sendMessage();
+                         }
+                       }}
+                       disabled={!canSendMessage}
+                     />
+                     <Button 
+                       onClick={sendMessage} 
+                       disabled={!canSendMessage || !newMessage.trim()}
+                     >
+                       <Send className="h-4 w-4" />
+                     </Button>
+                   </div>
                 </>
               ) : (
                 <div className="flex-1 flex items-center justify-center text-muted-foreground">

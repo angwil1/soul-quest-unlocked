@@ -25,7 +25,15 @@ serve(async (req) => {
 
   try {
     logStep("Function started");
-    const { plan } = await req.json();
+    
+    // Try to get plan from request body, but don't require it
+    let plan = null;
+    try {
+      const body = await req.json();
+      plan = body.plan;
+    } catch (e) {
+      // No body or invalid JSON, use default pricing
+    }
     logStep("Plan requested", { plan });
 
     const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
@@ -51,16 +59,25 @@ serve(async (req) => {
       logStep("Found existing customer", { customerId });
     }
 
-    // Define AI Complete Me pricing
-    const pricingMap = {
-      "unlocked-plus": { amount: 1200, interval: "month" as const, name: "Complete Plus" }, // $12/month  
-      "unlocked-beyond": { amount: 3900, interval: "year" as const, name: "Complete Beyond" }, // $39/year
-      "unlocked-echo-monthly": { amount: 400, interval: "month" as const, name: "Echo Amplified Monthly" }, // $4/month
-      "unlocked-echo-lifetime": { amount: 1200, interval: null, name: "Echo Amplified Lifetime" }, // $12 one-time
-    };
+    // Define simple premium pricing (default if no plan specified)
+    let pricing = { amount: 999, interval: "month" as const, name: "Premium Subscription" }; // $9.99/month
 
-    const pricing = pricingMap[plan as keyof typeof pricingMap];
-    if (!pricing) throw new Error("Invalid plan selected");
+    // If plan is specified, use the existing pricing map
+    if (plan) {
+      const pricingMap = {
+        "unlocked-plus": { amount: 1200, interval: "month" as const, name: "Complete Plus" }, // $12/month  
+        "unlocked-beyond": { amount: 3900, interval: "year" as const, name: "Complete Beyond" }, // $39/year
+        "unlocked-echo-monthly": { amount: 400, interval: "month" as const, name: "Echo Amplified Monthly" }, // $4/month
+        "unlocked-echo-lifetime": { amount: 1200, interval: null, name: "Echo Amplified Lifetime" }, // $12 one-time
+        "premium": { amount: 999, interval: "month" as const, name: "Premium Subscription" }, // $9.99/month
+      };
+
+      const selectedPricing = pricingMap[plan as keyof typeof pricingMap];
+      if (selectedPricing) {
+        pricing = selectedPricing;
+      }
+    }
+    
     logStep("Pricing configured", { pricing });
 
     const session = await stripe.checkout.sessions.create({

@@ -341,6 +341,33 @@ export type Database = {
         }
         Relationships: []
       }
+      daily_message_limits: {
+        Row: {
+          created_at: string
+          id: string
+          message_count: number
+          message_date: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          message_count?: number
+          message_date?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          message_count?: number
+          message_date?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       echo_limited_chats: {
         Row: {
           can_complete_connection: boolean | null
@@ -1842,6 +1869,10 @@ export type Database = {
           is_premium_preview: boolean
         }[]
       }
+      can_send_message: {
+        Args: { p_user_id: string }
+        Returns: boolean
+      }
       check_daily_message_limit: {
         Args: { chat_id_param: string; sender_id_param: string }
         Returns: boolean
@@ -1979,6 +2010,14 @@ export type Database = {
           ai_match_summary: string
           embedding: string
         }[]
+      }
+      get_remaining_messages: {
+        Args: { p_user_id: string }
+        Returns: number
+      }
+      increment_message_count: {
+        Args: { p_user_id: string }
+        Returns: number
       }
       is_user_adult: {
         Args: { user_birth_date: string }
