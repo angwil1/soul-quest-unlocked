@@ -10,7 +10,7 @@ import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useAuth } from '@/hooks/useAuth';
 import { useProfile, Profile } from '@/hooks/useProfile';
-import { ArrowLeft, Upload, X, Camera } from 'lucide-react';
+import { ArrowLeft, Upload, X, Camera, MapPin } from 'lucide-react';
 
 const ProfileEdit = () => {
   const { user, loading: authLoading } = useAuth();
@@ -385,17 +385,6 @@ const ProfileEdit = () => {
                 </div>
 
                 <div>
-                  <Label htmlFor="zip_code">Zip Code</Label>
-                  <Input
-                    id="zip_code"
-                    value={formData.zip_code || ''}
-                    onChange={(e) => handleInputChange('zip_code', e.target.value)}
-                    placeholder="12345"
-                    maxLength={10}
-                  />
-                </div>
-
-                <div>
                   <Label htmlFor="occupation">Occupation</Label>
                   <Input
                     id="occupation"
@@ -483,49 +472,75 @@ const ProfileEdit = () => {
           {/* Preferences */}
           <Card>
             <CardHeader>
-              <CardTitle>Dating Preferences</CardTitle>
-              <CardDescription>Set your preferences for potential matches</CardDescription>
+              <CardTitle>Dating Preferences & Search Settings</CardTitle>
+              <CardDescription>Set your preferences for finding matches</CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div>
-                  <Label htmlFor="age_min">Min Age</Label>
-                  <Input
-                    id="age_min"
-                    type="number"
-                    value={formData.age_preference_min || ''}
-                    onChange={(e) => handleInputChange('age_preference_min', parseInt(e.target.value) || undefined)}
-                    min="18"
-                    max="100"
-                  />
+            <CardContent className="space-y-6">
+              {/* Location-based Search */}
+              <div className="space-y-4">
+                <h4 className="font-medium flex items-center gap-2">
+                  <MapPin className="h-4 w-4" />
+                  Location-Based Search
+                </h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 bg-secondary/50 rounded-lg">
+                  <div>
+                    <Label htmlFor="zip_code_pref">Your Zip Code</Label>
+                    <Input
+                      id="zip_code_pref"
+                      value={formData.zip_code || ''}
+                      onChange={(e) => handleInputChange('zip_code', e.target.value)}
+                      placeholder="12345"
+                      maxLength={10}
+                    />
+                    <p className="text-xs text-muted-foreground mt-1">
+                      Used for accurate distance calculations
+                    </p>
+                  </div>
+                  <div>
+                    <Label htmlFor="distance">Search Distance (miles)</Label>
+                    <Input
+                      id="distance"
+                      type="number"
+                      value={formData.distance_preference || ''}
+                      onChange={(e) => handleInputChange('distance_preference', parseInt(e.target.value) || undefined)}
+                      min="1"
+                      max="500"
+                      placeholder="25"
+                    />
+                    <p className="text-xs text-muted-foreground mt-1">
+                      Find matches within this distance from your zip code
+                    </p>
+                  </div>
                 </div>
-                
-                <div>
-                  <Label htmlFor="age_max">Max Age</Label>
-                  <Input
-                    id="age_max"
-                    type="number"
-                    value={formData.age_preference_max || ''}
-                    onChange={(e) => handleInputChange('age_preference_max', parseInt(e.target.value) || undefined)}
-                    min="18"
-                    max="100"
-                  />
-                </div>
+              </div>
 
-                <div>
-                  <Label htmlFor="distance">Distance (miles)</Label>
-                  <Input
-                    id="distance"
-                    type="number"
-                    value={formData.distance_preference || ''}
-                    onChange={(e) => handleInputChange('distance_preference', parseInt(e.target.value) || undefined)}
-                    min="1"
-                    max="500"
-                    placeholder="50"
-                  />
-                  <p className="text-xs text-muted-foreground mt-1">
-                    Distance is calculated from your zip code
-                  </p>
+              {/* Age Preferences */}
+              <div className="space-y-4">
+                <h4 className="font-medium">Age Range</h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="age_min">Min Age</Label>
+                    <Input
+                      id="age_min"
+                      type="number"
+                      value={formData.age_preference_min || ''}
+                      onChange={(e) => handleInputChange('age_preference_min', parseInt(e.target.value) || undefined)}
+                      min="18"
+                      max="100"
+                    />
+                  </div>
+                
+                  <div>
+                    <Label htmlFor="age_max">Max Age</Label>
+                    <Input
+                      id="age_max"
+                      type="number"
+                      value={formData.age_preference_max || ''}
+                      onChange={(e) => handleInputChange('age_preference_max', parseInt(e.target.value) || undefined)}
+                      min="18"
+                      max="100"
+                    />
+                  </div>
                 </div>
               </div>
             </CardContent>
