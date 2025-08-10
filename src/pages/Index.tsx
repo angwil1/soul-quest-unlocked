@@ -105,57 +105,92 @@ const Index = () => {
       <div className="min-h-screen bg-background">
         <Navbar />
         
-        {/* Simple Hero Section */}
-        <section className="min-h-screen flex items-center justify-center px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <Badge variant="secondary" className="mb-6 px-4 py-2 text-sm font-medium bg-primary/10 text-primary border-primary/20">
-              <Sparkles className="h-4 w-4 mr-2" />
-              AI-Powered Dating Platform
-            </Badge>
-            
-            <h1 className="text-5xl md:text-6xl font-bold text-primary mb-8">
-              Find Your Perfect Match
-            </h1>
-            
-            <p className="text-xl text-muted-foreground mb-12 max-w-3xl mx-auto">
-              AI-powered dating that connects hearts through genuine compatibility and emotional intelligence.
-            </p>
+        {/* Modern Hero Section with Couples and Purple Gradients */}
+        <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+          {/* Background with Couple Images */}
+          <div className="absolute inset-0 z-0">
+            <div className="relative w-full h-full">
+              <img 
+                src={coupleHero1} 
+                alt="Couple connecting" 
+                className="absolute inset-0 w-full h-full object-cover opacity-20 animate-fade-in"
+              />
+              <div className="absolute inset-0 bg-gradient-to-br from-background/95 via-background/80 to-primary/20"></div>
+            </div>
+          </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-              <Button 
-                size="lg" 
-                onClick={() => navigate('/auth')}
-                className="w-full sm:w-auto px-8 py-4 text-lg font-semibold bg-primary hover:bg-primary/90"
-              >
-                <Heart className="h-5 w-5 mr-2" />
-                Start Your Journey
-              </Button>
+          {/* Hero Content */}
+          <div className="relative z-10 max-w-6xl mx-auto px-4 py-20 text-center">
+            <div className="animate-fade-in">
+              <Badge variant="secondary" className="mb-6 px-4 py-2 text-sm font-medium bg-primary/10 text-primary border-primary/20">
+                <Sparkles className="h-4 w-4 mr-2" />
+                AI-Powered Emotional Intelligence
+              </Badge>
               
-              <Button 
-                variant="outline" 
-                size="lg"
-                onClick={() => navigate('/pricing')}
-                className="w-full sm:w-auto px-8 py-4 text-lg font-semibold"
-              >
-                <Users className="h-5 w-5 mr-2" />
-                See How It Works
-              </Button>
-            </div>
+              <h1 className="text-5xl md:text-7xl font-bold mb-6">
+                <span className="bg-gradient-to-r from-primary via-purple-600 to-pink-600 bg-clip-text text-transparent block">
+                  Find Your
+                </span>
+                <span className="bg-gradient-to-r from-primary via-purple-600 to-pink-600 bg-clip-text text-transparent block relative">
+                  Perfect Match
+                  <div className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-primary via-purple-600 to-pink-600 rounded-full animate-scale-in"></div>
+                </span>
+              </h1>
+              
+              <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
+                Beyond swipes. Beyond games. Discover meaningful connections through{" "}
+                <span className="text-primary font-semibold">emotional intelligence</span> and{" "}
+                <span className="text-primary font-semibold">genuine compatibility</span>.
+              </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-2xl mx-auto">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-primary mb-2">10,000+</div>
-                <div className="text-sm text-muted-foreground">Meaningful Connections</div>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16 max-w-lg mx-auto">
+                <Button 
+                  size="lg" 
+                  onClick={() => navigate('/auth')}
+                  className="w-full sm:w-auto px-8 py-4 text-lg font-semibold bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90 transform hover:scale-105 transition-all duration-200 animate-scale-in shadow-lg hover:shadow-xl"
+                >
+                  <Heart className="h-5 w-5 mr-2" />
+                  Start Your Journey
+                </Button>
+                
+                <Button 
+                  variant="outline" 
+                  size="lg"
+                  onClick={() => navigate('/pricing')}
+                  className="w-full sm:w-auto px-8 py-4 text-lg font-semibold border-2 border-primary/30 hover:border-primary/50 hover:bg-primary/5 transform hover:scale-105 transition-all duration-200 animate-scale-in"
+                >
+                  <Users className="h-5 w-5 mr-2" />
+                  See How It Works
+                </Button>
               </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-primary mb-2">94%</div>
-                <div className="text-sm text-muted-foreground">Match Compatibility Rate</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-primary mb-2">4.8★</div>
-                <div className="text-sm text-muted-foreground">User Satisfaction Score</div>
+
+              {/* Stats */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-2xl mx-auto">
+                <div className="text-center animate-fade-in">
+                  <div className="text-3xl font-bold text-primary mb-2">10,000+</div>
+                  <div className="text-sm text-muted-foreground">Meaningful Connections</div>
+                </div>
+                <div className="text-center animate-fade-in">
+                  <div className="text-3xl font-bold text-primary mb-2">94%</div>
+                  <div className="text-sm text-muted-foreground">Match Compatibility Rate</div>
+                </div>
+                <div className="text-center animate-fade-in">
+                  <div className="text-3xl font-bold text-primary mb-2">4.8★</div>
+                  <div className="text-sm text-muted-foreground">User Satisfaction Score</div>
+                </div>
               </div>
             </div>
+          </div>
+
+          {/* Floating Elements */}
+          <div className="absolute top-20 left-10 animate-pulse">
+            <div className="w-3 h-3 bg-primary/30 rounded-full"></div>
+          </div>
+          <div className="absolute bottom-32 right-16 animate-pulse" style={{ animationDelay: '1s' }}>
+            <div className="w-2 h-2 bg-purple-500/40 rounded-full"></div>
+          </div>
+          <div className="absolute top-1/3 right-10 animate-pulse" style={{ animationDelay: '2s' }}>
+            <div className="w-4 h-4 bg-pink-500/30 rounded-full"></div>
           </div>
         </section>
 
