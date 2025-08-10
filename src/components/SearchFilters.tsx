@@ -82,25 +82,6 @@ const SearchFilters = ({ onFiltersChange, onUpgradePrompt, onPreferenceChange, o
         </CardHeader>
         <CardContent className="px-0 space-y-4">
           <div className="grid gap-4">
-            {/* Location Input */}
-            <div className="space-y-2">
-              <label className="text-sm font-semibold flex items-center gap-2">
-                <MapPin className="h-4 w-4 text-primary" />
-                Location
-              </label>
-              <Input
-                type="text"
-                placeholder="Enter zip code (e.g., 10001)"
-                value={zipCode}
-                onChange={(e) => {
-                  setZipCode(e.target.value);
-                  onZipCodeChange?.(e.target.value);
-                }}
-                maxLength={10}
-                className="w-full h-11"
-              />
-            </div>
-            
             {/* Gender Preference */}
             <div className="space-y-2">
               <label className="text-sm font-semibold flex items-center gap-2">
@@ -121,6 +102,25 @@ const SearchFilters = ({ onFiltersChange, onUpgradePrompt, onPreferenceChange, o
                   <SelectItem value="all">Everyone</SelectItem>
                 </SelectContent>
               </Select>
+            </div>
+            
+            {/* Location Input */}
+            <div className="space-y-2">
+              <label className="text-sm font-semibold flex items-center gap-2">
+                <MapPin className="h-4 w-4 text-primary" />
+                Location
+              </label>
+              <Input
+                type="text"
+                placeholder="Enter zip code (e.g., 10001)"
+                value={zipCode}
+                onChange={(e) => {
+                  setZipCode(e.target.value);
+                  onZipCodeChange?.(e.target.value);
+                }}
+                maxLength={10}
+                className="w-full h-11"
+              />
             </div>
           </div>
           
