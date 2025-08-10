@@ -14,6 +14,7 @@ import { FloatingQuizButton } from '@/components/FloatingQuizButton';
 import { FirstLightModal } from '@/components/FirstLightModal';
 import { InviteKindredSoul } from '@/components/InviteKindredSoul';
 import { AgeVerification } from '@/components/AgeVerification';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import SearchFilters from '@/components/SearchFilters';
 import { Search, Crown, ArrowRight, Heart, Users, Sparkles } from 'lucide-react';
 import datingBackground from '@/assets/dating-background.jpg';
@@ -34,6 +35,7 @@ const Index = () => {
   const [showSearchUpgradePrompt, setShowSearchUpgradePrompt] = useState(false);
   const [showAgeVerification, setShowAgeVerification] = useState(false);
   const [ageVerified, setAgeVerified] = useState(false);
+  const [searchPreference, setSearchPreference] = useState('');
 
   // Check if user has Echo Amplified (premium tier)
   const isEchoActive = subscription?.subscribed && subscription?.subscription_tier === 'Pro';
@@ -400,16 +402,38 @@ const Index = () => {
                     </div>
                     
                     <div className="space-y-4">
-                      <div className="relative">
-                        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
-                        <Input
-                          type="text"
-                          placeholder="Search by interests, location, or keywords..."
-                          value={searchQuery}
-                          onChange={(e) => setSearchQuery(e.target.value)}
-                          onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
-                          className="pl-10"
-                        />
+                      <div className="space-y-3">
+                        <div>
+                          <label className="text-sm font-medium text-muted-foreground mb-2 block">
+                            I'm looking for:
+                          </label>
+                          <Select value={searchPreference} onValueChange={setSearchPreference}>
+                            <SelectTrigger className="w-full">
+                              <SelectValue placeholder="Select your preference" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="men">Men</SelectItem>
+                              <SelectItem value="women">Women</SelectItem>
+                              <SelectItem value="non-binary">Non-Binary</SelectItem>
+                              <SelectItem value="all">Everyone</SelectItem>
+                              <SelectItem value="queer">Queer</SelectItem>
+                              <SelectItem value="trans">Trans</SelectItem>
+                              <SelectItem value="genderfluid">Genderfluid</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        
+                        <div className="relative">
+                          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+                          <Input
+                            type="text"
+                            placeholder="Search by interests, location, or keywords..."
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
+                            className="pl-10"
+                          />
+                        </div>
                       </div>
                       
                       <div className="grid grid-cols-2 gap-2">
@@ -435,10 +459,13 @@ const Index = () => {
                             Free Version Includes:
                           </p>
                           <p className="text-sm text-muted-foreground mb-2">
-                            • Up to 15 free matches
+                            • Up to 15 free matches daily
+                          </p>
+                          <p className="text-sm text-muted-foreground mb-2">
+                            • Basic compatibility matching
                           </p>
                           <p className="text-sm text-muted-foreground mb-3">
-                            • Basic compatibility matching
+                            • All gender preference options
                           </p>
                           <Button 
                             variant="outline" 
