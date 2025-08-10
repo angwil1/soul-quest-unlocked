@@ -59,7 +59,7 @@ const SearchFilters = ({ onFiltersChange, onUpgradePrompt, onPreferenceChange, o
         <CardHeader className="px-0 pb-4">
           <div className="space-y-3">
             <p className="text-sm text-muted-foreground leading-relaxed">
-              🌈 Welcome to AI Complete Me - a space where all identities, orientations, and expressions are celebrated. 
+              Welcome to AI Complete Me - a space where all identities, orientations, and expressions are celebrated. 
               Whether you're LGBTQ+, questioning, or exploring - you belong here.
             </p>
             <div className="flex items-center gap-2">
