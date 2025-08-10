@@ -127,8 +127,9 @@ export const AgeVerification = ({ onVerificationComplete }: AgeVerificationProps
       });
 
       setIsVerified(true);
-      setIsOpen(false);
-      onVerificationComplete?.();
+      
+      // Don't close the modal immediately, let user click Continue
+      console.log("Age verification completed, waiting for user to continue");
     } catch (error) {
       console.error('Age verification error:', error);
       toast({

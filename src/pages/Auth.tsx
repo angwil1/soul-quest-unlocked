@@ -49,12 +49,20 @@ const Auth = () => {
   };
 
   const handleAgeVerificationComplete = async () => {
-    if (!pendingSignup) return;
+    console.log("Age verification complete callback triggered");
+    console.log("Pending signup:", pendingSignup);
+    
+    if (!pendingSignup) {
+      console.error("No pending signup found!");
+      return;
+    }
     
     setIsLoading(true);
     setShowAgeVerification(false);
     
-    await signUp(pendingSignup.email, pendingSignup.password);
+    console.log("Attempting signup with:", pendingSignup.email);
+    const result = await signUp(pendingSignup.email, pendingSignup.password);
+    console.log("Signup result:", result);
     
     setPendingSignup(null);
     setIsLoading(false);
