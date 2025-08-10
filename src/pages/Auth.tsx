@@ -75,7 +75,14 @@ const Auth = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      <div className="flex items-center justify-center p-4 pt-20">
+      <div className="flex flex-col items-center justify-center p-4 pt-20">
+        {/* Top Login Button */}
+        <div className="w-full max-w-md mb-6">
+          <Button className="w-full h-14 text-xl font-bold bg-primary hover:bg-primary/90">
+            Log In / Sign Up
+          </Button>
+        </div>
+        
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <CardTitle className="text-2xl font-bold">Welcome to AI Complete Me</CardTitle>
