@@ -5,7 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Sparkles, Crown, ArrowRight, Settings } from 'lucide-react';
+import { Sparkles, Crown, ArrowRight, Settings, MapPin, Heart, Filter } from 'lucide-react';
 import { useEchoSubscription } from '@/hooks/useEchoSubscription';
 
 interface SearchFiltersProps {
@@ -54,16 +54,13 @@ const SearchFilters = ({ onFiltersChange, onUpgradePrompt, onPreferenceChange, o
   };
 
   return (
-    <div className="space-y-4">
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Sparkles className="h-5 w-5 text-primary" />
-            Identity Filters
-          </CardTitle>
+    <div className="space-y-5">
+      <Card className="border-0 shadow-none">
+        <CardHeader className="px-0 pb-4">
           <div className="space-y-3">
-            <p className="text-sm text-muted-foreground">
-              Welcome to AI Complete Me. This is a space for all identities, orientations, and expressions. Whether you're LGBTQ+, questioning, or quietly exploring—your presence is honored here. You control your visibility. You shape your experience. Connection begins with being seen.
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              🌈 Welcome to AI Complete Me - a space where all identities, orientations, and expressions are celebrated. 
+              Whether you're LGBTQ+, questioning, or exploring - you belong here.
             </p>
             <div className="flex items-center gap-2">
               <Button 
@@ -73,23 +70,24 @@ const SearchFilters = ({ onFiltersChange, onUpgradePrompt, onPreferenceChange, o
                 className="text-xs h-8"
               >
                 <Settings className="h-3 w-3 mr-1" />
-                Visibility Settings
+                Privacy Settings
               </Button>
             </div>
-            <p className="text-sm text-muted-foreground">
-              AI Complete Me invites you to begin with 15 identity filters—designed for clarity, not constraint.
-            </p>
           </div>
           {!isEchoActive && (
-            <p className="text-xs text-muted-foreground">
-              Premium tiers offer expanded matching pathways and deeper identity exploration
+            <p className="text-xs text-muted-foreground italic">
+              ✨ Premium members get expanded matching options
             </p>
           )}
         </CardHeader>
-        <CardContent className="space-y-3">
-          <div className="space-y-4 pt-3 border-t border-border">
+        <CardContent className="px-0 space-y-4">
+          <div className="grid gap-4">
+            {/* Location Input */}
             <div className="space-y-2">
-              <label className="text-sm font-medium">Zip Code</label>
+              <label className="text-sm font-semibold flex items-center gap-2">
+                <MapPin className="h-4 w-4 text-primary" />
+                Location
+              </label>
               <Input
                 type="text"
                 placeholder="Enter zip code (e.g., 10001)"
@@ -99,29 +97,28 @@ const SearchFilters = ({ onFiltersChange, onUpgradePrompt, onPreferenceChange, o
                   onZipCodeChange?.(e.target.value);
                 }}
                 maxLength={10}
-                className="w-full"
+                className="w-full h-11"
               />
             </div>
             
+            {/* Gender Preference */}
             <div className="space-y-2">
-              <label className="text-sm font-medium">I'm looking for</label>
+              <label className="text-sm font-semibold flex items-center gap-2">
+                <Heart className="h-4 w-4 text-primary" />
+                I'm looking for
+              </label>
               <Select value={searchPreference} onValueChange={(value) => {
                 setSearchPreference(value);
                 onPreferenceChange?.(value);
               }}>
-                <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Select your preference" />
+                <SelectTrigger className="w-full h-11">
+                  <SelectValue placeholder="Choose your preference" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="men">Men</SelectItem>
                   <SelectItem value="women">Women</SelectItem>
-                  <SelectItem value="non-binary">Non-binary</SelectItem>
-                  <SelectItem value="bisexual">Bisexual Individuals</SelectItem>
-                  <SelectItem value="pansexual">Pansexual Individuals</SelectItem>
-                  <SelectItem value="asexual">Asexual Individuals</SelectItem>
-                  <SelectItem value="genderfluid">Genderfluid Individuals</SelectItem>
-                  <SelectItem value="demisexual">Demisexual Individuals</SelectItem>
-                  <SelectItem value="all">All gender preference</SelectItem>
+                  <SelectItem value="non-binary">Non-binary folks</SelectItem>
+                  <SelectItem value="all">Everyone</SelectItem>
                 </SelectContent>
               </Select>
             </div>

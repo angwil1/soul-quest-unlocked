@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Menu, X, Search } from "lucide-react";
+import { Menu, X, Search, Filter } from "lucide-react";
 import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -263,35 +263,62 @@ export const Navbar = () => {
 
       {/* Search Modal */}
       <Dialog open={showSearchModal} onOpenChange={setShowSearchModal}>
-        <DialogContent className="max-w-[95vw] w-full sm:max-w-md max-h-[90vh] overflow-y-auto">
-          <DialogHeader>
-            <DialogTitle className="text-lg">Search for Connections</DialogTitle>
+        <DialogContent className="max-w-[95vw] w-full sm:max-w-lg max-h-[90vh] overflow-y-auto">
+          <DialogHeader className="text-center pb-4">
+            <DialogTitle className="text-xl font-bold flex items-center justify-center gap-2">
+              <Search className="h-5 w-5 text-primary" />
+              Find Your Perfect Match
+            </DialogTitle>
+            <p className="text-sm text-muted-foreground mt-2">
+              Discover meaningful connections based on your preferences
+            </p>
           </DialogHeader>
-          <div className="space-y-4">
-            <div className="space-y-2">
-              <label className="text-sm font-medium">Search by keywords, interests, or location</label>
-              <Input
-                type="text"
-                placeholder="e.g., hiking, photography, NYC..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
-                className="w-full"
+          
+          <div className="space-y-6">
+            {/* Main Search Input */}
+            <div className="space-y-3">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <Input
+                  type="text"
+                  placeholder="Try: hiking, coffee lover, Portland..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
+                  className="w-full pl-10 h-12 text-base border-2 focus:border-primary"
+                />
+              </div>
+              <p className="text-xs text-muted-foreground px-1">
+                💡 Search by interests, hobbies, location, or occupation
+              </p>
+            </div>
+
+            {/* Preferences Section */}
+            <div className="bg-muted/30 rounded-lg p-4 space-y-4">
+              <h3 className="font-semibold text-base flex items-center gap-2">
+                <Filter className="h-4 w-4" />
+                Refine Your Search
+              </h3>
+              
+              <SearchFilters
+                onFiltersChange={handleFiltersChange}
+                onPreferenceChange={handlePreferenceChange}
+                onZipCodeChange={handleZipCodeChange}
               />
             </div>
 
-            <SearchFilters
-              onFiltersChange={handleFiltersChange}
-              onPreferenceChange={handlePreferenceChange}
-              onZipCodeChange={handleZipCodeChange}
-            />
-
-            <div className="flex flex-col sm:flex-row gap-3">
-              <Button onClick={handleSearch} className="flex-1 w-full">
-                Search Now
+            {/* Action Buttons */}
+            <div className="flex flex-col gap-3 pt-2">
+              <Button onClick={handleSearch} className="w-full h-12 text-base font-semibold">
+                <Search className="h-4 w-4 mr-2" />
+                Start Searching
               </Button>
-              <Button variant="outline" onClick={() => setShowSearchModal(false)} className="w-full sm:w-auto">
-                Cancel
+              <Button 
+                variant="outline" 
+                onClick={() => setShowSearchModal(false)} 
+                className="w-full h-10"
+              >
+                Maybe Later
               </Button>
             </div>
 
