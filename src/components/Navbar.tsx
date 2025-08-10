@@ -1,13 +1,24 @@
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
-import { Link, useLocation } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Menu, X, Search } from "lucide-react";
 import { useState } from "react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useSubscription } from "@/hooks/useSubscription";
+import SearchFilters from "@/components/SearchFilters";
 
 export const Navbar = () => {
   const { user, signOut } = useAuth();
+  const { subscription } = useSubscription();
   const location = useLocation();
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showSearchModal, setShowSearchModal] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
+  const [searchPreference, setSearchPreference] = useState('');
 
   const navigation = [
     { name: "Home", href: "/" },
@@ -26,6 +37,22 @@ export const Navbar = () => {
   ];
 
   const isActive = (path: string) => location.pathname === path;
+
+  // Check if user has Echo Amplified (premium tier)
+  const isEchoActive = subscription?.subscribed && subscription?.subscription_tier === 'Pro';
+
+  const handleFiltersChange = (filters: string[]) => {
+    setSelectedFilters(filters);
+  };
+
+  const handleSearch = () => {
+    setShowSearchModal(false);
+    if (searchQuery.trim()) {
+      navigate(`/matches?search=${encodeURIComponent(searchQuery.trim())}`);
+    } else {
+      navigate('/matches');
+    }
+  };
 
   return (
     <nav className="bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border sticky top-0 z-50">
@@ -80,6 +107,15 @@ export const Navbar = () => {
 
           {/* Desktop Auth Buttons */}
           <div className="hidden md:flex items-center space-x-4">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setShowSearchModal(true)}
+              className="flex items-center gap-2"
+            >
+              <Search className="h-4 w-4" />
+              Search
+            </Button>
             {user ? (
               <div className="flex items-center space-x-4">
                 <Link to="/profile">
@@ -149,6 +185,20 @@ export const Navbar = () => {
                   </Link>
                 ))}
               </div>
+              <div className="px-3 py-2 border-t border-border mt-2">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => {
+                    setShowSearchModal(true);
+                    setIsMenuOpen(false);
+                  }}
+                  className="w-full justify-start flex items-center gap-2"
+                >
+                  <Search className="h-4 w-4" />
+                  Search
+                </Button>
+              </div>
               <div className="px-3 py-2 border-t border-border mt-4">
                 {user ? (
                   <div className="space-y-2">
@@ -179,6 +229,83 @@ export const Navbar = () => {
           </div>
         )}
       </div>
+
+      {/* Search Modal */}
+      <Dialog open={showSearchModal} onOpenChange={setShowSearchModal}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Search for Connections</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div className="space-y-2">
+              <label className="text-sm font-medium">Search by keywords, interests, or location</label>
+              <Input
+                type="text"
+                placeholder="e.g., hiking, photography, NYC..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <label className="text-sm font-medium">I'm looking for</label>
+              <Select value={searchPreference} onValueChange={setSearchPreference}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select your preference" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="men">Men</SelectItem>
+                  <SelectItem value="women">Women</SelectItem>
+                  <SelectItem value="non-binary">Non-binary</SelectItem>
+                  <SelectItem value="bisexual">Bisexual Individuals</SelectItem>
+                  <SelectItem value="pansexual">Pansexual Individuals</SelectItem>
+                  <SelectItem value="asexual">Asexual Individuals</SelectItem>
+                  <SelectItem value="genderfluid">Genderfluid Individuals</SelectItem>
+                  <SelectItem value="demisexual">Demisexual Individuals</SelectItem>
+                  <SelectItem value="all">All gender preference</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            <SearchFilters
+              onFiltersChange={handleFiltersChange}
+            />
+
+            <div className="flex gap-3">
+              <Button onClick={handleSearch} className="flex-1">
+                Search Now
+              </Button>
+              <Button variant="outline" onClick={() => setShowSearchModal(false)}>
+                Cancel
+              </Button>
+            </div>
+
+            {!isEchoActive && (
+              <div className="mt-4 p-4 bg-muted rounded-lg">
+                <h4 className="font-semibold mb-2">Free Tier Includes:</h4>
+                <div className="space-y-1 text-sm text-muted-foreground">
+                  <p>• Basic compatibility matching</p>
+                  <p>• All gender preference options</p>
+                  <p>• Limited advanced filters</p>
+                </div>
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="mt-3 w-full"
+                  onClick={() => {
+                    setShowSearchModal(false);
+                    navigate('/subscription');
+                  }}
+                >
+                  <span className="mr-2">👑</span>
+                  Upgrade for Unlimited Filters
+                </Button>
+              </div>
+            )}
+          </div>
+        </DialogContent>
+      </Dialog>
     </nav>
   );
 };
