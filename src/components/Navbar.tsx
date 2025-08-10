@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Menu, X, Search, Filter } from "lucide-react";
+import { Menu, X, Search, Filter, LogOut, User } from "lucide-react";
 import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -85,6 +85,17 @@ export const Navbar = () => {
     navigate(`/matches${queryString ? `?${queryString}` : ''}`);
   };
 
+  const handleMobileLogout = async () => {
+    // Add haptic feedback for mobile apps
+    if ('vibrate' in navigator) {
+      navigator.vibrate(50); // Light haptic feedback
+    }
+    
+    await signOut();
+    setIsMenuOpen(false);
+    navigate('/');
+  };
+
   return (
     <nav className="bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -150,11 +161,13 @@ export const Navbar = () => {
             {user ? (
               <div className="flex items-center space-x-4">
                 <Link to="/profile">
-                  <Button variant="ghost" size="sm">
+                  <Button variant="ghost" size="sm" className="flex items-center gap-2">
+                    <User className="h-4 w-4" />
                     Profile
                   </Button>
                 </Link>
-                <Button variant="outline" size="sm" onClick={signOut}>
+                <Button variant="outline" size="sm" onClick={signOut} className="flex items-center gap-2">
+                  <LogOut className="h-4 w-4" />
                   Sign Out
                 </Button>
               </div>
@@ -232,21 +245,20 @@ export const Navbar = () => {
               </div>
               <div className="px-3 py-2 border-t border-border mt-4">
                 {user ? (
-                  <div className="space-y-2">
+                  <div className="space-y-3">
                     <Link to="/profile" onClick={() => setIsMenuOpen(false)}>
-                      <Button variant="ghost" size="sm" className="w-full justify-start">
-                        Profile
+                      <Button variant="ghost" size="sm" className="w-full justify-start flex items-center gap-3">
+                        <User className="h-4 w-4" />
+                        View Profile
                       </Button>
                     </Link>
                     <Button 
-                      variant="outline" 
+                      variant="destructive" 
                       size="sm" 
-                      className="w-full"
-                      onClick={() => {
-                        signOut();
-                        setIsMenuOpen(false);
-                      }}
+                      className="w-full justify-start flex items-center gap-3"
+                      onClick={handleMobileLogout}
                     >
+                      <LogOut className="h-4 w-4" />
                       Sign Out
                     </Button>
                   </div>
