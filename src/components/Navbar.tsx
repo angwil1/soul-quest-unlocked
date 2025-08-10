@@ -241,9 +241,9 @@ export const Navbar = () => {
 
       {/* Search Modal */}
       <Dialog open={showSearchModal} onOpenChange={setShowSearchModal}>
-        <DialogContent className="sm:max-w-md">
+        <DialogContent className="max-w-[95vw] w-full sm:max-w-md max-h-[90vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle>Search for Connections</DialogTitle>
+            <DialogTitle className="text-lg">Search for Connections</DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
             <div className="space-y-2">
@@ -254,6 +254,7 @@ export const Navbar = () => {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
+                className="w-full"
               />
             </div>
 
@@ -263,11 +264,11 @@ export const Navbar = () => {
               onZipCodeChange={handleZipCodeChange}
             />
 
-            <div className="flex gap-3">
-              <Button onClick={handleSearch} className="flex-1">
+            <div className="flex flex-col sm:flex-row gap-3">
+              <Button onClick={handleSearch} className="flex-1 w-full">
                 Search Now
               </Button>
-              <Button variant="outline" onClick={() => setShowSearchModal(false)}>
+              <Button variant="outline" onClick={() => setShowSearchModal(false)} className="w-full sm:w-auto">
                 Cancel
               </Button>
             </div>

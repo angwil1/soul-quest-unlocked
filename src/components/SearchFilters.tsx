@@ -99,6 +99,7 @@ const SearchFilters = ({ onFiltersChange, onUpgradePrompt, onPreferenceChange, o
                   onZipCodeChange?.(e.target.value);
                 }}
                 maxLength={10}
+                className="w-full"
               />
             </div>
             
@@ -108,7 +109,7 @@ const SearchFilters = ({ onFiltersChange, onUpgradePrompt, onPreferenceChange, o
                 setSearchPreference(value);
                 onPreferenceChange?.(value);
               }}>
-                <SelectTrigger>
+                <SelectTrigger className="w-full">
                   <SelectValue placeholder="Select your preference" />
                 </SelectTrigger>
                 <SelectContent>
