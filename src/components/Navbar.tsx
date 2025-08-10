@@ -45,6 +45,10 @@ export const Navbar = () => {
     setSelectedFilters(filters);
   };
 
+  const handlePreferenceChange = (preference: string) => {
+    setSearchPreference(preference);
+  };
+
   const handleSearch = () => {
     setShowSearchModal(false);
     if (searchQuery.trim()) {
@@ -247,29 +251,10 @@ export const Navbar = () => {
                 onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
               />
             </div>
-            
-            <div className="space-y-2">
-              <label className="text-sm font-medium">I'm looking for</label>
-              <Select value={searchPreference} onValueChange={setSearchPreference}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select your preference" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="men">Men</SelectItem>
-                  <SelectItem value="women">Women</SelectItem>
-                  <SelectItem value="non-binary">Non-binary</SelectItem>
-                  <SelectItem value="bisexual">Bisexual Individuals</SelectItem>
-                  <SelectItem value="pansexual">Pansexual Individuals</SelectItem>
-                  <SelectItem value="asexual">Asexual Individuals</SelectItem>
-                  <SelectItem value="genderfluid">Genderfluid Individuals</SelectItem>
-                  <SelectItem value="demisexual">Demisexual Individuals</SelectItem>
-                  <SelectItem value="all">All gender preference</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
 
             <SearchFilters
               onFiltersChange={handleFiltersChange}
+              onPreferenceChange={handlePreferenceChange}
             />
 
             <div className="flex gap-3">
