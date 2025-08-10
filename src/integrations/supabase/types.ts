@@ -1353,6 +1353,7 @@ export type Database = {
           unlocked_beyond_badge_enabled: boolean | null
           updated_at: string | null
           vibe_gallery: Json | null
+          zip_code: string | null
         }
         Insert: {
           age?: number | null
@@ -1388,6 +1389,7 @@ export type Database = {
           unlocked_beyond_badge_enabled?: boolean | null
           updated_at?: string | null
           vibe_gallery?: Json | null
+          zip_code?: string | null
         }
         Update: {
           age?: number | null
@@ -1423,6 +1425,7 @@ export type Database = {
           unlocked_beyond_badge_enabled?: boolean | null
           updated_at?: string | null
           vibe_gallery?: Json | null
+          zip_code?: string | null
         }
         Relationships: []
       }
