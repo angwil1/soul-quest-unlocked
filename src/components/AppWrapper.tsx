@@ -4,7 +4,9 @@ import { useSubscription } from '@/hooks/useSubscription';
 import { useProfile } from '@/hooks/useProfile';
 import { ProfileSetupModal } from '@/components/ProfileSetupModal';
 import { AgeVerification } from '@/components/AgeVerification';
+import SearchFilters from '@/components/SearchFilters';
 import { supabase } from '@/integrations/supabase/client';
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 
 interface AppWrapperProps {
   children: React.ReactNode;
@@ -16,6 +18,7 @@ export const AppWrapper: React.FC<AppWrapperProps> = ({ children }) => {
   const { profile, loading: profileLoading } = useProfile();
   const [showProfileSetup, setShowProfileSetup] = useState(false);
   const [showAgeVerification, setShowAgeVerification] = useState(false);
+  const [showSearchFilters, setShowSearchFilters] = useState(false);
   const [hasShownModal, setHasShownModal] = useState(false);
   const [ageVerified, setAgeVerified] = useState<boolean | null>(null);
   const [ageVerificationLoading, setAgeVerificationLoading] = useState(true);
@@ -73,13 +76,8 @@ export const AppWrapper: React.FC<AppWrapperProps> = ({ children }) => {
     setShowAgeVerification(false);
     setAgeVerified(true);
     
-    // After age verification, check if profile setup is needed
-    if (profile) {
-      const needsProfileSetup = !profile.gender || !profile.looking_for || !profile.location;
-      if (needsProfileSetup) {
-        setShowProfileSetup(true);
-      }
-    }
+    // After age verification, show search filters popup
+    setShowSearchFilters(true);
   };
 
   const handleProfileSetupComplete = () => {
@@ -100,6 +98,19 @@ export const AppWrapper: React.FC<AppWrapperProps> = ({ children }) => {
           </div>
         </div>
       )}
+      <Sheet open={showSearchFilters} onOpenChange={setShowSearchFilters}>
+        <SheetContent side="bottom" className="max-h-[80vh] overflow-y-auto">
+          <SheetHeader>
+            <SheetTitle>Set Your Preferences</SheetTitle>
+          </SheetHeader>
+          <div className="py-4">
+            <SearchFilters
+              onPreferenceChange={() => {}}
+              onZipCodeChange={() => {}}
+            />
+          </div>
+        </SheetContent>
+      </Sheet>
     </>
   );
 };
