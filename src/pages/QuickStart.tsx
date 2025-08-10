@@ -2,12 +2,20 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Link, useNavigate } from "react-router-dom";
 import { Navbar } from "@/components/Navbar";
-import { CheckCircle, ArrowRight, Heart, Zap, Brain, User, UserCheck } from "lucide-react";
+import { CheckCircle, ArrowRight, Heart, Zap, Brain, User, UserCheck, Lock } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
+import { useProfile } from "@/hooks/useProfile";
+import { useToast } from "@/hooks/use-toast";
 
 const QuickStart = () => {
   const { user } = useAuth();
+  const { profile } = useProfile();
+  const { toast } = useToast();
   const navigate = useNavigate();
+
+  // Check if profile is considered complete (has basic info like name, age, etc.)
+  const isProfileComplete = profile?.name && profile?.age && profile?.zip_code;
+  const canTakeQuiz = user && isProfileComplete;
 
   const handleStepClick = (step: number) => {
     switch (step) {
@@ -23,7 +31,12 @@ const QuickStart = () => {
       case 2:
         // Complete Profile  
         if (!user) {
-          navigate('/auth'); // Need to create account first
+          toast({
+            title: "Create Account First",
+            description: "Please create an account before completing your profile.",
+            variant: "destructive"
+          });
+          navigate('/auth');
         } else {
           navigate('/profile/edit');
         }
@@ -31,7 +44,19 @@ const QuickStart = () => {
       case 3:
         // Take Quiz
         if (!user) {
-          navigate('/auth'); // Need to create account first
+          toast({
+            title: "Create Account First",
+            description: "Please create an account and complete your profile before taking the quiz.",
+            variant: "destructive"
+          });
+          navigate('/auth');
+        } else if (!isProfileComplete) {
+          toast({
+            title: "Complete Profile First",
+            description: "Please complete your profile before taking the personality quiz.",
+            variant: "destructive"
+          });
+          navigate('/profile/edit');
         } else {
           navigate('/questions');
         }
@@ -91,39 +116,94 @@ const QuickStart = () => {
                 </div>
                 
                 <div 
-                  className="text-center p-6 rounded-lg bg-muted/50 border hover:border-primary/50 hover:bg-primary/5 cursor-pointer transition-all duration-200 group"
+                  className={`text-center p-6 rounded-lg border transition-all duration-200 group ${
+                    !user 
+                      ? "bg-muted/50 hover:border-primary/50 hover:bg-primary/5 cursor-pointer" 
+                      : "bg-green-50 border-green-200 cursor-default"
+                  }`}
                   onClick={() => handleStepClick(2)}
                 >
-                  <div className="w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-2xl font-bold mx-auto mb-4 group-hover:scale-110 transition-transform">2</div>
+                  <div className={`w-12 h-12 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 transition-transform ${
+                    !user 
+                      ? "bg-primary text-primary-foreground group-hover:scale-110" 
+                      : "bg-green-500 text-white"
+                  }`}>
+                    {user && isProfileComplete ? <CheckCircle className="h-6 w-6" /> : (user ? "2" : "2")}
+                  </div>
                   <h3 className="font-semibold mb-2">Complete Your Profile</h3>
                   <p className="text-sm text-muted-foreground mb-4">Add photos, verify your age, and fill out your profile details</p>
                   <div className="flex items-center justify-center gap-2">
-                    <UserCheck className="h-4 w-4 text-primary" />
-                    <span className="text-xs text-primary font-medium">Click to continue</span>
+                    {user && isProfileComplete ? (
+                      <>
+                        <CheckCircle className="h-5 w-5 text-green-500" />
+                        <span className="text-xs text-green-600 font-medium">Complete</span>
+                      </>
+                    ) : user ? (
+                      <>
+                        <UserCheck className="h-4 w-4 text-primary" />
+                        <span className="text-xs text-primary font-medium">Click to complete</span>
+                      </>
+                    ) : (
+                      <>
+                        <UserCheck className="h-4 w-4 text-muted-foreground" />
+                        <span className="text-xs text-muted-foreground font-medium">Account required</span>
+                      </>
+                    )}
                   </div>
                 </div>
                 
                 <div 
-                  className="text-center p-6 rounded-lg bg-muted/50 border hover:border-primary/50 hover:bg-primary/5 cursor-pointer transition-all duration-200 group"
+                  className={`text-center p-6 rounded-lg border transition-all duration-200 group ${
+                    canTakeQuiz 
+                      ? "bg-muted/50 hover:border-primary/50 hover:bg-primary/5 cursor-pointer" 
+                      : "bg-muted/30 border-muted cursor-not-allowed opacity-60"
+                  }`}
                   onClick={() => handleStepClick(3)}
                 >
-                  <div className="w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-2xl font-bold mx-auto mb-4 group-hover:scale-110 transition-transform">3</div>
+                  <div className={`w-12 h-12 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 transition-transform ${
+                    canTakeQuiz 
+                      ? "bg-primary text-primary-foreground group-hover:scale-110" 
+                      : "bg-muted text-muted-foreground"
+                  }`}>
+                    {canTakeQuiz ? "3" : <Lock className="h-6 w-6" />}
+                  </div>
                   <h3 className="font-semibold mb-2">Take the Personality Quiz</h3>
                   <p className="text-sm text-muted-foreground mb-4">Complete our AI assessment to find compatible matches</p>
                   <div className="flex items-center justify-center gap-2">
-                    <Brain className="h-4 w-4 text-primary" />
-                    <span className="text-xs text-primary font-medium">Click to begin</span>
+                    {canTakeQuiz ? (
+                      <>
+                        <Brain className="h-4 w-4 text-primary" />
+                        <span className="text-xs text-primary font-medium">Click to begin</span>
+                      </>
+                    ) : (
+                      <>
+                        <Lock className="h-4 w-4 text-muted-foreground" />
+                        <span className="text-xs text-muted-foreground font-medium">Complete steps 1 & 2 first</span>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>
               
               <div className="flex justify-center mt-8">
-                <Link to="/questions">
-                  <Button size="lg" className="gap-2">
-                    <Brain className="h-4 w-4" />
-                    Take Quiz
+                {canTakeQuiz ? (
+                  <Link to="/questions">
+                    <Button size="lg" className="gap-2">
+                      <Brain className="h-4 w-4" />
+                      Take Quiz
+                    </Button>
+                  </Link>
+                ) : (
+                  <Button 
+                    size="lg" 
+                    className="gap-2" 
+                    disabled 
+                    onClick={() => handleStepClick(3)}
+                  >
+                    <Lock className="h-4 w-4" />
+                    Complete Steps 1 & 2 First
                   </Button>
-                </Link>
+                )}
               </div>
             </CardContent>
           </Card>
