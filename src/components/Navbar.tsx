@@ -48,10 +48,10 @@ export const Navbar = () => {
 
   const handlePreferenceChange = (preference: string) => {
     setSearchPreference(preference);
-    // Convert preference to gender filter format for matches page
+    // Convert preference to gender filter format using correct singular forms
     const genderMap: Record<string, string[]> = {
-      'men': ['men'],
-      'women': ['women'], 
+      'men': ['man'],
+      'women': ['woman'], 
       'non-binary': ['non-binary'],
       'all': ['all']
     };

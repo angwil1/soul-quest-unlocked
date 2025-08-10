@@ -40,10 +40,10 @@ const Matches = () => {
     }
     
     if (preference) {
-      // Convert preference to gender filter
+      // Convert preference to gender filter using correct singular forms
       const genderMap: Record<string, string[]> = {
-        'men': ['men'],
-        'women': ['women'], 
+        'men': ['man'],
+        'women': ['woman'], 
         'non-binary': ['non-binary'],
         'all': ['all']
       };
@@ -267,15 +267,10 @@ const Matches = () => {
     const matchesInterests = selectedInterests.length === 0 || 
       selectedInterests.some(interest => match.interests.includes(interest));
     
-    // Gender filter logic
+    // Gender filter logic - match against actual profile gender values
     const matchesGender = genderFilters.length === 0 || 
       genderFilters.includes('all') ||
-      genderFilters.some(filter => {
-        if (filter === 'men' && match.gender === 'man') return true;
-        if (filter === 'women' && match.gender === 'woman') return true;
-        if (filter === 'non-binary' && match.gender === 'non-binary') return true;
-        return false;
-      });
+      genderFilters.includes(match.gender);
     
     return matchesSearch && matchesAge && matchesDistance && matchesInterests && matchesGender;
   });
