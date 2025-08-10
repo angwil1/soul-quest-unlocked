@@ -183,7 +183,7 @@ const Index = () => {
                 <Button 
                   variant="outline" 
                   size="lg"
-                  onClick={() => navigate('/pricing')}
+                  onClick={() => navigate('/quickstart')}
                   className="w-full sm:w-auto px-8 py-4 text-lg font-semibold border-2 border-primary/30 hover:border-primary/50 hover:bg-primary/5 transform hover:scale-105 transition-all duration-200 animate-scale-in"
                 >
                   <Users className="h-5 w-5 mr-2" />
