@@ -467,7 +467,7 @@ const Index = () => {
                             • Basic compatibility matching
                           </p>
                           <p className="text-sm text-muted-foreground mb-3">
-                            • All detailed orientation options
+                            • All gender preference options
                           </p>
                           <Button 
                             variant="outline" 
