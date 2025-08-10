@@ -13,6 +13,7 @@ import { Footer } from '@/components/Footer';
 import { FloatingQuizButton } from '@/components/FloatingQuizButton';
 import { FirstLightModal } from '@/components/FirstLightModal';
 import { InviteKindredSoul } from '@/components/InviteKindredSoul';
+import { AgeVerification } from '@/components/AgeVerification';
 import SearchFilters from '@/components/SearchFilters';
 import { Search, Crown, ArrowRight, Heart, Users, Sparkles } from 'lucide-react';
 import datingBackground from '@/assets/dating-background.jpg';
@@ -31,6 +32,7 @@ const Index = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
   const [showSearchUpgradePrompt, setShowSearchUpgradePrompt] = useState(false);
+  const [showAgeVerification, setShowAgeVerification] = useState(false);
 
   // Check if user has Echo Amplified (premium tier)
   const isEchoActive = subscription?.subscribed && subscription?.subscription_tier === 'Pro';
@@ -69,6 +71,18 @@ const Index = () => {
     }
   };
 
+  // Check age verification status on page load
+  useEffect(() => {
+    const checkAgeVerificationStatus = () => {
+      const ageVerified = localStorage.getItem('ageVerified');
+      if (!ageVerified) {
+        setShowAgeVerification(true);
+      }
+    };
+
+    checkAgeVerificationStatus();
+  }, []);
+
   useEffect(() => {
     const fetchFaqs = async () => {
       const { data } = await supabase
@@ -89,6 +103,11 @@ const Index = () => {
       setShowFirstLightModal(true);
     }
   }, [user, loading, navigate]);
+
+  const handleAgeVerificationComplete = () => {
+    setShowAgeVerification(false);
+    localStorage.setItem('ageVerified', 'true');
+  };
 
   if (loading) {
     return (
@@ -232,6 +251,15 @@ const Index = () => {
           </div>
         </div>
         <Footer />
+        
+        {/* Age Verification Modal */}
+        {showAgeVerification && (
+          <div className="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50">
+            <div className="max-w-md w-full">
+              <AgeVerification onVerificationComplete={handleAgeVerificationComplete} />
+            </div>
+          </div>
+        )}
       </div>
     );
   }
@@ -341,6 +369,15 @@ const Index = () => {
         </div>
       </div>
       <Footer />
+      
+      {/* Age Verification Modal */}
+      {showAgeVerification && (
+        <div className="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50">
+          <div className="max-w-md w-full">
+            <AgeVerification onVerificationComplete={handleAgeVerificationComplete} />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
