@@ -26,11 +26,15 @@ export const AppWrapper: React.FC<AppWrapperProps> = ({ children }) => {
   // Check age verification status when user logs in
   useEffect(() => {
     const checkAgeVerification = async () => {
+      console.log('Checking age verification for user:', user?.id);
       setAgeVerificationLoading(true);
       
       // First check localStorage for immediate verification
       const localVerification = localStorage.getItem('ageVerified');
+      console.log('localStorage ageVerified:', localVerification);
+      
       if (localVerification === 'true') {
+        console.log('Age verified via localStorage');
         setAgeVerified(true);
         setAgeVerificationLoading(false);
         return;
@@ -39,22 +43,27 @@ export const AppWrapper: React.FC<AppWrapperProps> = ({ children }) => {
       // If user is logged in, also check database
       if (user) {
         try {
+          console.log('Checking database for age verification...');
           const { data, error } = await supabase
             .from('age_verifications')
             .select('is_verified')
             .eq('user_id', user.id)
             .single();
 
+          console.log('Database age verification result:', { data, error });
+
           if (error && error.code !== 'PGRST116') {
             console.error('Age verification check error:', error);
           }
 
           const dbVerified = data?.is_verified || false;
+          console.log('Database verified status:', dbVerified);
           setAgeVerified(dbVerified);
           
           // Sync localStorage with database
           if (dbVerified) {
             localStorage.setItem('ageVerified', 'true');
+            console.log('Synced localStorage with database verification');
           }
         } catch (error) {
           console.error('Age verification check error:', error);
@@ -62,6 +71,7 @@ export const AppWrapper: React.FC<AppWrapperProps> = ({ children }) => {
         }
       } else {
         // For non-logged-in users, rely on localStorage only
+        console.log('No user, setting age verified to false');
         setAgeVerified(false);
       }
       
@@ -73,14 +83,24 @@ export const AppWrapper: React.FC<AppWrapperProps> = ({ children }) => {
 
   // Show age verification first, then profile setup
   useEffect(() => {
+    console.log('AppWrapper useEffect triggered:', {
+      authLoading,
+      ageVerificationLoading,
+      ageVerified,
+      user: !!user,
+      hasShownModal
+    });
+    
     if (!authLoading && !ageVerificationLoading) {
       // If age not verified, show age verification modal
       if (ageVerified === false) {
+        console.log('Showing age verification modal');
         setShowAgeVerification(true);
       } 
       // If age verified and user exists but profile incomplete, show profile setup
       else if (ageVerified === true && user && !profileLoading && profile && !hasShownModal) {
         const needsProfileSetup = !profile.gender || !profile.looking_for || !profile.location;
+        console.log('Profile setup check:', { needsProfileSetup, profile: !!profile });
         if (needsProfileSetup) {
           setShowProfileSetup(true);
           setHasShownModal(true);
@@ -88,6 +108,7 @@ export const AppWrapper: React.FC<AppWrapperProps> = ({ children }) => {
       }
       // If age verified but no user (localStorage only), don't show anything
       else if (ageVerified === true && !user) {
+        console.log('Age verified, no user - hiding age verification');
         setShowAgeVerification(false);
       }
     }
