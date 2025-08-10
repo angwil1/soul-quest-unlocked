@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
+import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Sparkles, Crown, ArrowRight, Settings } from 'lucide-react';
 import { useEchoSubscription } from '@/hooks/useEchoSubscription';
@@ -11,11 +12,13 @@ interface SearchFiltersProps {
   onFiltersChange?: (filters: string[]) => void;
   onUpgradePrompt?: () => void;
   onPreferenceChange?: (preference: string) => void;
+  onZipCodeChange?: (zipCode: string) => void;
 }
 
-const SearchFilters = ({ onFiltersChange, onUpgradePrompt, onPreferenceChange }: SearchFiltersProps) => {
+const SearchFilters = ({ onFiltersChange, onUpgradePrompt, onPreferenceChange, onZipCodeChange }: SearchFiltersProps) => {
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
   const [searchPreference, setSearchPreference] = useState('');
+  const [zipCode, setZipCode] = useState('');
   const [showUpgradePrompt, setShowUpgradePrompt] = useState(false);
   const { isEchoActive } = useEchoSubscription();
 
@@ -103,27 +106,43 @@ const SearchFilters = ({ onFiltersChange, onUpgradePrompt, onPreferenceChange }:
             </div>
             ))}
           
-          <div className="space-y-2 pt-3 border-t border-border">
-            <label className="text-sm font-medium">I'm looking for</label>
-            <Select value={searchPreference} onValueChange={(value) => {
-              setSearchPreference(value);
-              onPreferenceChange?.(value);
-            }}>
-              <SelectTrigger>
-                <SelectValue placeholder="Select your preference" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="men">Men</SelectItem>
-                <SelectItem value="women">Women</SelectItem>
-                <SelectItem value="non-binary">Non-binary</SelectItem>
-                <SelectItem value="bisexual">Bisexual Individuals</SelectItem>
-                <SelectItem value="pansexual">Pansexual Individuals</SelectItem>
-                <SelectItem value="asexual">Asexual Individuals</SelectItem>
-                <SelectItem value="genderfluid">Genderfluid Individuals</SelectItem>
-                <SelectItem value="demisexual">Demisexual Individuals</SelectItem>
-                <SelectItem value="all">All gender preference</SelectItem>
-              </SelectContent>
-            </Select>
+          <div className="space-y-4 pt-3 border-t border-border">
+            <div className="space-y-2">
+              <label className="text-sm font-medium">Zip Code</label>
+              <Input
+                type="text"
+                placeholder="Enter zip code (e.g., 10001)"
+                value={zipCode}
+                onChange={(e) => {
+                  setZipCode(e.target.value);
+                  onZipCodeChange?.(e.target.value);
+                }}
+                maxLength={10}
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <label className="text-sm font-medium">I'm looking for</label>
+              <Select value={searchPreference} onValueChange={(value) => {
+                setSearchPreference(value);
+                onPreferenceChange?.(value);
+              }}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select your preference" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="men">Men</SelectItem>
+                  <SelectItem value="women">Women</SelectItem>
+                  <SelectItem value="non-binary">Non-binary</SelectItem>
+                  <SelectItem value="bisexual">Bisexual Individuals</SelectItem>
+                  <SelectItem value="pansexual">Pansexual Individuals</SelectItem>
+                  <SelectItem value="asexual">Asexual Individuals</SelectItem>
+                  <SelectItem value="genderfluid">Genderfluid Individuals</SelectItem>
+                  <SelectItem value="demisexual">Demisexual Individuals</SelectItem>
+                  <SelectItem value="all">All gender preference</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
           </div>
           
           {selectedFilters.length > 0 && (

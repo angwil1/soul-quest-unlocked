@@ -19,6 +19,7 @@ export const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
   const [searchPreference, setSearchPreference] = useState('');
+  const [zipCode, setZipCode] = useState('');
 
   const navigation = [
     { name: "Home", href: "/" },
@@ -47,6 +48,10 @@ export const Navbar = () => {
 
   const handlePreferenceChange = (preference: string) => {
     setSearchPreference(preference);
+  };
+
+  const handleZipCodeChange = (zip: string) => {
+    setZipCode(zip);
   };
 
   const handleSearch = () => {
@@ -255,6 +260,7 @@ export const Navbar = () => {
             <SearchFilters
               onFiltersChange={handleFiltersChange}
               onPreferenceChange={handlePreferenceChange}
+              onZipCodeChange={handleZipCodeChange}
             />
 
             <div className="flex gap-3">
