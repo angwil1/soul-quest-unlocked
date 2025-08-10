@@ -53,14 +53,13 @@ export const AppWrapper: React.FC<AppWrapperProps> = ({ children }) => {
 
   // Show age verification first, then profile setup
   useEffect(() => {
-    if (!authLoading && !profileLoading && !ageVerificationLoading && user && !hasShownModal) {
-      // If age not verified, show age verification first
+    if (!authLoading && !ageVerificationLoading && user) {
+      // If age not verified, show age verification first (always show, don't track hasShownModal for this)
       if (ageVerified === false) {
         setShowAgeVerification(true);
-        setHasShownModal(true);
       } 
       // If age verified but profile incomplete, show profile setup
-      else if (ageVerified === true && profile) {
+      else if (ageVerified === true && !profileLoading && profile && !hasShownModal) {
         const needsProfileSetup = !profile.gender || !profile.looking_for || !profile.location;
         if (needsProfileSetup) {
           setShowProfileSetup(true);
@@ -95,17 +94,9 @@ export const AppWrapper: React.FC<AppWrapperProps> = ({ children }) => {
         onComplete={handleProfileSetupComplete} 
       />
       {showAgeVerification && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
+        <div className="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50">
           <div className="max-w-md w-full">
-            <AgeVerification />
-            <div className="mt-4 text-center">
-              <button 
-                onClick={handleAgeVerificationComplete}
-                className="text-white/70 hover:text-white text-sm underline"
-              >
-                Skip for now
-              </button>
-            </div>
+            <AgeVerification onVerificationComplete={handleAgeVerificationComplete} />
           </div>
         </div>
       )}

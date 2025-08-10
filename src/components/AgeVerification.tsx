@@ -10,7 +10,11 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { CalendarDays, CheckCircle, AlertCircle, ShieldCheck } from "lucide-react";
 
-export const AgeVerification = () => {
+interface AgeVerificationProps {
+  onVerificationComplete?: () => void;
+}
+
+export const AgeVerification = ({ onVerificationComplete }: AgeVerificationProps = {}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [loading, setLoading] = useState(false);
@@ -114,6 +118,7 @@ export const AgeVerification = () => {
       setIsVerified(true);
       setIsOpen(false);
       await checkAgeVerification();
+      onVerificationComplete?.();
     } catch (error) {
       console.error('Age verification error:', error);
       toast({
