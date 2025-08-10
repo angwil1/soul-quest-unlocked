@@ -22,11 +22,8 @@ const SearchFilters = ({ onFiltersChange, onUpgradePrompt, onPreferenceChange, o
   const [showUpgradePrompt, setShowUpgradePrompt] = useState(false);
   const { isEchoActive } = useEchoSubscription();
 
-  const identityOptions = [
-    { id: 'men', label: 'People who identify as men' },
-    { id: 'women', label: 'People who identify as women' },
-    { id: 'non-binary', label: 'People beyond the binary' }
-  ];
+  const identityOptions: { id: string; label: string }[] = [];
+  // Identity options removed since they're covered in the "I'm looking for" dropdown
 
   const handleFilterChange = (filterId: string, checked: boolean) => {
     let newFilters: string[];
@@ -90,22 +87,6 @@ const SearchFilters = ({ onFiltersChange, onUpgradePrompt, onPreferenceChange, o
           )}
         </CardHeader>
         <CardContent className="space-y-3">
-          {identityOptions.map((option) => (
-            <div key={option.id} className="flex items-center space-x-2">
-              <Checkbox
-                id={option.id}
-                checked={selectedFilters.includes(option.id)}
-                onCheckedChange={(checked) => handleFilterChange(option.id, !!checked)}
-              />
-              <label
-                htmlFor={option.id}
-                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
-              >
-                {option.label}
-              </label>
-            </div>
-            ))}
-          
           <div className="space-y-4 pt-3 border-t border-border">
             <div className="space-y-2">
               <label className="text-sm font-medium">Zip Code</label>
