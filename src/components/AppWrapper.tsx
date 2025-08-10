@@ -29,6 +29,15 @@ export const AppWrapper: React.FC<AppWrapperProps> = ({ children }) => {
       console.log('Checking age verification for user:', user?.id);
       setAgeVerificationLoading(true);
       
+      // For new users, clear localStorage to force verification
+      if (user && profile && !profile.name) {
+        console.log('New user detected, clearing age verification');
+        localStorage.removeItem('ageVerified');
+        setAgeVerified(false);
+        setAgeVerificationLoading(false);
+        return;
+      }
+      
       // First check localStorage for immediate verification
       const localVerification = localStorage.getItem('ageVerified');
       console.log('localStorage ageVerified:', localVerification);
@@ -79,7 +88,7 @@ export const AppWrapper: React.FC<AppWrapperProps> = ({ children }) => {
     };
 
     checkAgeVerification();
-  }, [user]);
+  }, [user, profile]);
 
   // Show age verification first, then profile setup
   useEffect(() => {

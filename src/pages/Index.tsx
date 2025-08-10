@@ -33,8 +33,6 @@ const Index = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
   const [showSearchUpgradePrompt, setShowSearchUpgradePrompt] = useState(false);
-  const [showAgeVerification, setShowAgeVerification] = useState(false);
-  const [ageVerified, setAgeVerified] = useState(false);
   const [searchPreference, setSearchPreference] = useState('');
 
   // Check if user has Echo Amplified (premium tier)
@@ -74,17 +72,6 @@ const Index = () => {
     }
   };
 
-  // Check age verification status on page load
-  useEffect(() => {
-    const checkAgeVerificationStatus = () => {
-      const ageVerified = localStorage.getItem('ageVerified');
-      if (!ageVerified) {
-        setShowAgeVerification(true);
-      }
-    };
-
-    checkAgeVerificationStatus();
-  }, []);
 
   useEffect(() => {
     const fetchFaqs = async () => {
@@ -107,15 +94,6 @@ const Index = () => {
     }
   }, [user, loading, navigate]);
 
-  const handleAgeVerificationComplete = () => {
-    setAgeVerified(true);
-    localStorage.setItem('ageVerified', 'true');
-    setShowAgeVerification(false);
-  };
-
-  const handleModalComplete = () => {
-    setShowAgeVerification(false);
-  };
 
   if (loading) {
     return (
@@ -260,14 +238,6 @@ const Index = () => {
         </div>
         <Footer />
         
-        {/* Age Verification Modal */}
-        {showAgeVerification && (
-          <div className="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50">
-            <div className="max-w-md w-full">
-              <AgeVerification onVerificationComplete={handleAgeVerificationComplete} />
-            </div>
-          </div>
-        )}
       </div>
     );
   }
@@ -378,125 +348,6 @@ const Index = () => {
       </div>
       <Footer />
       
-      {/* Combined Age Verification and Search Modal */}
-      {showAgeVerification && (
-        <div className="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50">
-          <div className="max-w-lg w-full max-h-[90vh] overflow-y-auto">
-            <Card className="bg-background border-primary/20">
-              <CardContent className="p-0">
-                {!ageVerified ? (
-                  // Age Verification Section
-                  <div className="p-6">
-                    <AgeVerification onVerificationComplete={handleAgeVerificationComplete} />
-                  </div>
-                ) : (
-                  // Search Matches Section
-                  <div className="p-6">
-                    <div className="text-center mb-6">
-                      <CardTitle className="flex items-center justify-center gap-2 mb-2">
-                        <Heart className="h-5 w-5 text-primary" />
-                        Find Your Match
-                      </CardTitle>
-                      <CardDescription>
-                        Start your journey to meaningful connections
-                      </CardDescription>
-                    </div>
-                    
-                    <div className="space-y-4">
-                      <div className="space-y-3">
-                        <div>
-                          <label className="text-sm font-medium text-muted-foreground mb-2 block">
-                            I'm looking for:
-                          </label>
-                          <Select value={searchPreference} onValueChange={setSearchPreference}>
-                            <SelectTrigger className="w-full">
-                              <SelectValue placeholder="Select your preference" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="men">Men</SelectItem>
-                              <SelectItem value="women">Women</SelectItem>
-                              <SelectItem value="non-binary">Non-Binary</SelectItem>
-                              <SelectItem value="all">Everyone</SelectItem>
-                              <SelectItem value="bisexual">Bisexual Individuals</SelectItem>
-                              <SelectItem value="pansexual">Pansexual Individuals</SelectItem>
-                              <SelectItem value="asexual">Asexual Individuals</SelectItem>
-                              <SelectItem value="genderfluid">Genderfluid Individuals</SelectItem>
-                              <SelectItem value="demisexual">Demisexual Individuals</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </div>
-                        
-                        <div className="relative">
-                          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
-                          <Input
-                            type="text"
-                            placeholder="Search by interests, location, or keywords..."
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                            onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
-                            className="pl-10"
-                          />
-                        </div>
-                      </div>
-                      
-                      <div className="grid grid-cols-2 gap-2">
-                        <Button 
-                          onClick={handleSearch}
-                          className="w-full"
-                        >
-                          <Search className="h-4 w-4 mr-2" />
-                          Search Matches
-                        </Button>
-                        <Button 
-                          variant="outline"
-                          onClick={() => navigate('/matches')}
-                          className="w-full"
-                        >
-                          Browse All
-                        </Button>
-                      </div>
-                      
-                      <div className="bg-primary/5 border border-primary/20 rounded-lg p-4">
-                        <div className="text-center">
-                          <p className="text-sm font-medium text-primary mb-1">
-                            Free Version Includes:
-                          </p>
-                          <p className="text-sm text-muted-foreground mb-2">
-                            • Up to 15 free matches daily
-                          </p>
-                          <p className="text-sm text-muted-foreground mb-2">
-                            • Basic compatibility matching
-                          </p>
-                          <p className="text-sm text-muted-foreground mb-3">
-                            • All gender preference options
-                          </p>
-                          <Button 
-                            variant="outline" 
-                            size="sm"
-                            onClick={() => navigate('/pricing')}
-                            className="text-primary border-primary/30 hover:bg-primary/10"
-                          >
-                            Upgrade for Unlimited Matches
-                          </Button>
-                        </div>
-                      </div>
-                      
-                      <div className="flex justify-end gap-2 pt-4 border-t">
-                        <Button 
-                          variant="outline" 
-                          onClick={handleModalComplete}
-                        >
-                          Skip for now
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
