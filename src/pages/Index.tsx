@@ -33,7 +33,7 @@ const Index = () => {
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
   const [showSearchUpgradePrompt, setShowSearchUpgradePrompt] = useState(false);
   const [showAgeVerification, setShowAgeVerification] = useState(false);
-  const [showSearchMatches, setShowSearchMatches] = useState(false);
+  const [ageVerified, setAgeVerified] = useState(false);
 
   // Check if user has Echo Amplified (premium tier)
   const isEchoActive = subscription?.subscribed && subscription?.subscription_tier === 'Pro';
@@ -106,14 +106,12 @@ const Index = () => {
   }, [user, loading, navigate]);
 
   const handleAgeVerificationComplete = () => {
-    setShowAgeVerification(false);
+    setAgeVerified(true);
     localStorage.setItem('ageVerified', 'true');
-    // Show search matches after age verification
-    setShowSearchMatches(true);
   };
 
-  const handleSearchMatchesComplete = () => {
-    setShowSearchMatches(false);
+  const handleModalComplete = () => {
+    setShowAgeVerification(false);
   };
 
   if (loading) {
@@ -377,83 +375,93 @@ const Index = () => {
       </div>
       <Footer />
       
-      {/* Age Verification Modal */}
+      {/* Combined Age Verification and Search Modal */}
       {showAgeVerification && (
         <div className="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50">
-          <div className="max-w-md w-full">
-            <AgeVerification onVerificationComplete={handleAgeVerificationComplete} />
-          </div>
-        </div>
-      )}
-
-      {/* Search Matches Modal */}
-      {showSearchMatches && (
-        <div className="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50">
-          <div className="max-w-lg w-full">
+          <div className="max-w-lg w-full max-h-[90vh] overflow-y-auto">
             <Card className="bg-background border-primary/20">
-              <CardHeader className="text-center">
-                <CardTitle className="flex items-center justify-center gap-2">
-                  <Heart className="h-5 w-5 text-primary" />
-                  Find Your Match
-                </CardTitle>
-                <CardDescription>
-                  Start your journey to meaningful connections
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="space-y-3">
-                  <div className="relative">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
-                    <Input
-                      type="text"
-                      placeholder="Search by interests, location, or keywords..."
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
-                      className="pl-10"
-                    />
+              <CardContent className="p-0">
+                {!ageVerified ? (
+                  // Age Verification Section
+                  <div className="p-6">
+                    <AgeVerification onVerificationComplete={handleAgeVerificationComplete} />
                   </div>
-                  
-                  <div className="grid grid-cols-2 gap-2">
-                    <Button 
-                      onClick={handleSearch}
-                      className="w-full"
-                    >
-                      <Search className="h-4 w-4 mr-2" />
-                      Search Matches
-                    </Button>
-                    <Button 
-                      variant="outline"
-                      onClick={() => navigate('/matches')}
-                      className="w-full"
-                    >
-                      Browse All
-                    </Button>
+                ) : (
+                  // Search Matches Section
+                  <div className="p-6">
+                    <div className="text-center mb-6">
+                      <CardTitle className="flex items-center justify-center gap-2 mb-2">
+                        <Heart className="h-5 w-5 text-primary" />
+                        Find Your Match
+                      </CardTitle>
+                      <CardDescription>
+                        Start your journey to meaningful connections
+                      </CardDescription>
+                    </div>
+                    
+                    <div className="space-y-4">
+                      <div className="relative">
+                        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+                        <Input
+                          type="text"
+                          placeholder="Search by interests, location, or keywords..."
+                          value={searchQuery}
+                          onChange={(e) => setSearchQuery(e.target.value)}
+                          onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
+                          className="pl-10"
+                        />
+                      </div>
+                      
+                      <div className="grid grid-cols-2 gap-2">
+                        <Button 
+                          onClick={handleSearch}
+                          className="w-full"
+                        >
+                          <Search className="h-4 w-4 mr-2" />
+                          Search Matches
+                        </Button>
+                        <Button 
+                          variant="outline"
+                          onClick={() => navigate('/matches')}
+                          className="w-full"
+                        >
+                          Browse All
+                        </Button>
+                      </div>
+                      
+                      <div className="bg-primary/5 border border-primary/20 rounded-lg p-4">
+                        <div className="text-center">
+                          <p className="text-sm font-medium text-primary mb-1">
+                            Free Version Includes:
+                          </p>
+                          <p className="text-sm text-muted-foreground mb-2">
+                            • Up to 15 free matches
+                          </p>
+                          <p className="text-sm text-muted-foreground mb-3">
+                            • Basic compatibility matching
+                          </p>
+                          <Button 
+                            variant="outline" 
+                            size="sm"
+                            onClick={() => navigate('/pricing')}
+                            className="text-primary border-primary/30 hover:bg-primary/10"
+                          >
+                            Upgrade for Unlimited Matches
+                          </Button>
+                        </div>
+                      </div>
+                      
+                      <div className="flex justify-end gap-2 pt-4 border-t">
+                        <Button 
+                          variant="outline" 
+                          onClick={handleModalComplete}
+                        >
+                          Skip for now
+                        </Button>
+                      </div>
+                    </div>
                   </div>
-                  
-                  <div className="text-center">
-                    <p className="text-sm text-muted-foreground mb-2">
-                      Free version includes basic matching
-                    </p>
-                    <Button 
-                      variant="link" 
-                      size="sm"
-                      onClick={() => navigate('/pricing')}
-                      className="text-primary"
-                    >
-                      Upgrade for premium features
-                    </Button>
-                  </div>
-                </div>
-                
-                <div className="flex justify-end gap-2 pt-4 border-t">
-                  <Button 
-                    variant="outline" 
-                    onClick={handleSearchMatchesComplete}
-                  >
-                    Skip for now
-                  </Button>
-                </div>
+                )}
               </CardContent>
             </Card>
           </div>
