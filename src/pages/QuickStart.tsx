@@ -52,14 +52,12 @@ const QuickStart = () => {
                 </div>
               </div>
               
-              <div className="flex justify-center gap-4 mt-8">
-                <Link to="/auth">
-                  <Button size="lg" className="gap-2">
-                    Get Started <ArrowRight className="h-4 w-4" />
-                  </Button>
-                </Link>
+              <div className="flex justify-center mt-8">
                 <Link to="/questions">
-                  <Button variant="outline" size="lg">Take Quiz Now</Button>
+                  <Button size="lg" className="gap-2">
+                    <Brain className="h-4 w-4" />
+                    Take Quiz
+                  </Button>
                 </Link>
               </div>
             </CardContent>
@@ -176,7 +174,9 @@ const QuickStart = () => {
             </p>
             <div className="flex justify-center gap-4">
               <Link to="/auth">
-                <Button size="lg">Start Your Journey</Button>
+                <Button size="lg" className="gap-2">
+                  Get Started <ArrowRight className="h-4 w-4" />
+                </Button>
               </Link>
               <Link to="/faq">
                 <Button variant="outline" size="lg">View FAQ</Button>
