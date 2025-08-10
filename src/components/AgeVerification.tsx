@@ -226,13 +226,17 @@ export const AgeVerification = ({ onVerificationComplete }: AgeVerificationProps
                   </div>
                   <Button 
                     onClick={() => {
+                      console.log("Continue button clicked, calling onVerificationComplete");
                       setIsOpen(false);
-                      // Call the onVerificationComplete callback to continue signup
+                      // Immediately call the callback to continue signup
                       if (onVerificationComplete) {
+                        console.log("Calling onVerificationComplete callback");
                         onVerificationComplete();
+                      } else {
+                        console.error("onVerificationComplete callback not found!");
                       }
                     }}
-                    className="w-full"
+                    className="w-full bg-green-600 hover:bg-green-700"
                   >
                     Continue to Sign Up
                   </Button>

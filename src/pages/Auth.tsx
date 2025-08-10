@@ -43,9 +43,19 @@ const Auth = () => {
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // First, show age verification before creating account
-    setPendingSignup({ email, password });
-    setShowAgeVerification(true);
+    // Check if age verification is already done
+    const ageVerified = localStorage.getItem('ageVerified') === 'true';
+    
+    if (ageVerified) {
+      // Age already verified, proceed with signup immediately
+      setIsLoading(true);
+      await signUp(email, password);
+      setIsLoading(false);
+    } else {
+      // Need age verification first
+      setPendingSignup({ email, password });
+      setShowAgeVerification(true);
+    }
   };
 
   const handleAgeVerificationComplete = async () => {
