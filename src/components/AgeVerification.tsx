@@ -12,9 +12,10 @@ import { CalendarDays, CheckCircle, AlertCircle, ShieldCheck } from "lucide-reac
 
 interface AgeVerificationProps {
   onVerificationComplete?: () => void;
+  forceOpen?: boolean;
 }
 
-export const AgeVerification = ({ onVerificationComplete }: AgeVerificationProps = {}) => {
+export const AgeVerification = ({ onVerificationComplete, forceOpen = false }: AgeVerificationProps = {}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [loading, setLoading] = useState(false);
@@ -25,7 +26,10 @@ export const AgeVerification = ({ onVerificationComplete }: AgeVerificationProps
 
   useEffect(() => {
     checkAgeVerification();
-  }, []);
+    if (forceOpen) {
+      setIsOpen(true);
+    }
+  }, [forceOpen]);
 
   const checkAgeVerification = async () => {
     // First check localStorage for non-authenticated users
@@ -197,7 +201,7 @@ export const AgeVerification = ({ onVerificationComplete }: AgeVerificationProps
           {getVerificationStatus()}
         </div>
         
-        <Dialog open={isOpen} onOpenChange={setIsOpen}>
+        <Dialog open={isOpen || forceOpen} onOpenChange={(open) => !forceOpen && setIsOpen(open)}>
           <DialogTrigger asChild>
             <Button className="w-full">
               Verify Age

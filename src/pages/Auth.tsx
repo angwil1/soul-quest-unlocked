@@ -213,11 +213,10 @@ const Auth = () => {
       
       {/* Age Verification Modal */}
       {showAgeVerification && (
-        <div className="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50">
-          <div className="max-w-md w-full">
-            <AgeVerification onVerificationComplete={handleAgeVerificationComplete} />
-          </div>
-        </div>
+        <AgeVerification 
+          onVerificationComplete={handleAgeVerificationComplete}
+          forceOpen={true}
+        />
       )}
       </div>
     </div>
