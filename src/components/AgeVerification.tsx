@@ -226,7 +226,10 @@ export const AgeVerification = ({ onVerificationComplete }: AgeVerificationProps
                   <Button 
                     onClick={() => {
                       setIsOpen(false);
-                      onVerificationComplete?.();
+                      // Call the onVerificationComplete callback to continue signup
+                      if (onVerificationComplete) {
+                        onVerificationComplete();
+                      }
                     }}
                     className="w-full"
                   >
