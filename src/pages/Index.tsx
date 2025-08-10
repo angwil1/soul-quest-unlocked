@@ -139,20 +139,15 @@ const Index = () => {
             <div className="animate-fade-in">
               <Badge variant="secondary" className="mb-6 px-4 py-2 text-sm font-medium bg-primary/10 text-primary border-primary/20">
                 <Sparkles className="h-4 w-4 mr-2" />
-                AI-Powered Emotional Intelligence
+                AI-Powered Dating Platform
               </Badge>
               
-              <h1 className="text-4xl md:text-6xl font-bold mb-6 text-center">
-                <div className="text-primary mb-2">
-                  Find Your
-                </div>
-                <div className="text-primary">
-                  Perfect Match
-                </div>
+              <h1 className="text-4xl md:text-6xl font-bold mb-6 text-center text-primary">
+                Find Your Perfect Match
               </h1>
               
               <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto text-center px-4">
-                Beyond swipes. Beyond games. Discover meaningful connections through emotional intelligence and genuine compatibility.
+                AI-powered dating that connects hearts through genuine compatibility and emotional intelligence.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16 max-w-lg mx-auto">
