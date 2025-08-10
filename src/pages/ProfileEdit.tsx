@@ -40,6 +40,7 @@ const ProfileEdit = () => {
         distance_preference: profile.distance_preference || 50,
         age_preference_min: profile.age_preference_min || 18,
         age_preference_max: profile.age_preference_max || 65,
+        zip_code: profile.zip_code || '',
       });
     }
   }, [profile]);
@@ -379,7 +380,18 @@ const ProfileEdit = () => {
                     id="location"
                     value={formData.location || ''}
                     onChange={(e) => handleInputChange('location', e.target.value)}
-                    placeholder="City, Country"
+                    placeholder="City, State"
+                  />
+                </div>
+
+                <div>
+                  <Label htmlFor="zip_code">Zip Code</Label>
+                  <Input
+                    id="zip_code"
+                    value={formData.zip_code || ''}
+                    onChange={(e) => handleInputChange('zip_code', e.target.value)}
+                    placeholder="12345"
+                    maxLength={10}
                   />
                 </div>
 
@@ -472,6 +484,7 @@ const ProfileEdit = () => {
           <Card>
             <CardHeader>
               <CardTitle>Dating Preferences</CardTitle>
+              <CardDescription>Set your preferences for potential matches</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -500,7 +513,7 @@ const ProfileEdit = () => {
                 </div>
 
                 <div>
-                  <Label htmlFor="distance">Distance (km)</Label>
+                  <Label htmlFor="distance">Distance (miles)</Label>
                   <Input
                     id="distance"
                     type="number"
@@ -508,7 +521,11 @@ const ProfileEdit = () => {
                     onChange={(e) => handleInputChange('distance_preference', parseInt(e.target.value) || undefined)}
                     min="1"
                     max="500"
+                    placeholder="50"
                   />
+                  <p className="text-xs text-muted-foreground mt-1">
+                    Distance is calculated from your zip code
+                  </p>
                 </div>
               </div>
             </CardContent>

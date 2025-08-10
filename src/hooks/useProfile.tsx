@@ -21,6 +21,7 @@ export interface Profile {
   distance_preference: number | null;
   age_preference_min: number | null;
   age_preference_max: number | null;
+  zip_code: string | null;
   created_at: string;
   updated_at: string | null;
   // Echo features
