@@ -68,6 +68,72 @@ const ProfileEdit = () => {
     }
   };
 
+  const handleCameraCapture = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ 
+        video: { facingMode: 'user' } 
+      });
+      
+      // Create a video element to show camera preview
+      const video = document.createElement('video');
+      video.srcObject = stream;
+      video.play();
+      
+      // Create a modal for camera capture
+      const modal = document.createElement('div');
+      modal.className = 'fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center p-4';
+      modal.innerHTML = `
+        <div class="bg-white rounded-lg p-6 max-w-md w-full">
+          <h3 class="text-lg font-semibold mb-4">Take Photo</h3>
+          <div class="relative">
+            <video id="camera-preview" class="w-full rounded-lg" autoplay></video>
+            <canvas id="camera-canvas" class="hidden"></canvas>
+          </div>
+          <div class="flex gap-2 mt-4">
+            <button id="capture-btn" class="flex-1 bg-primary text-primary-foreground px-4 py-2 rounded-md">
+              Capture
+            </button>
+            <button id="cancel-btn" class="flex-1 bg-secondary text-secondary-foreground px-4 py-2 rounded-md">
+              Cancel
+            </button>
+          </div>
+        </div>
+      `;
+      
+      document.body.appendChild(modal);
+      const videoElement = modal.querySelector('#camera-preview') as HTMLVideoElement;
+      videoElement.srcObject = stream;
+      
+      const cleanup = () => {
+        stream.getTracks().forEach(track => track.stop());
+        document.body.removeChild(modal);
+      };
+      
+      modal.querySelector('#cancel-btn')?.addEventListener('click', cleanup);
+      
+      modal.querySelector('#capture-btn')?.addEventListener('click', () => {
+        const canvas = modal.querySelector('#camera-canvas') as HTMLCanvasElement;
+        const context = canvas.getContext('2d');
+        
+        canvas.width = videoElement.videoWidth;
+        canvas.height = videoElement.videoHeight;
+        context?.drawImage(videoElement, 0, 0);
+        
+        canvas.toBlob(async (blob) => {
+          if (blob) {
+            const file = new File([blob], `camera-photo-${Date.now()}.jpg`, { type: 'image/jpeg' });
+            await addPhoto(file);
+          }
+          cleanup();
+        }, 'image/jpeg', 0.8);
+      });
+      
+    } catch (error) {
+      console.error('Camera access error:', error);
+      alert('Camera access not available. Please use the upload option instead.');
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -150,17 +216,25 @@ const ProfileEdit = () => {
             </CardHeader>
             <CardContent className="space-y-4">
               {/* Main Avatar */}
-              <div className="flex flex-col items-center space-y-2">
-                <Avatar className="h-24 w-24">
+              <div className="flex flex-col items-center space-y-4">
+                <Avatar className="h-32 w-32 border-4 border-primary/20">
                   <AvatarImage src={profile?.avatar_url || undefined} />
-                  <AvatarFallback>
+                  <AvatarFallback className="text-2xl">
                     {profile?.name?.charAt(0)?.toUpperCase() || user?.email?.charAt(0)?.toUpperCase()}
                   </AvatarFallback>
                 </Avatar>
-                <Button variant="outline" size="sm" onClick={() => document.getElementById('avatar-upload')?.click()}>
-                  <Camera className="h-4 w-4 mr-2" />
-                  Upload Photo
-                </Button>
+                
+                <div className="flex gap-2">
+                  <Button variant="outline" size="sm" onClick={() => document.getElementById('avatar-upload')?.click()}>
+                    <Upload className="h-4 w-4 mr-2" />
+                    Upload Photo
+                  </Button>
+                  <Button variant="outline" size="sm" onClick={handleCameraCapture}>
+                    <Camera className="h-4 w-4 mr-2" />
+                    Take Picture
+                  </Button>
+                </div>
+                
                 <input
                   id="avatar-upload"
                   type="file"
@@ -172,32 +246,75 @@ const ProfileEdit = () => {
 
               {/* Additional Photos */}
               {profile?.photos && profile.photos.length > 0 && (
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                  {profile.photos.map((photo, index) => (
-                    <div key={index} className="relative group">
-                      <img 
-                        src={photo} 
-                        alt={`Profile photo ${index + 1}`}
-                        className="w-full aspect-square object-cover rounded-lg"
-                      />
-                      <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center space-x-2">
-                        <Button
-                          size="sm"
-                          variant="secondary"
-                          onClick={() => setAsAvatar(photo)}
-                        >
-                          Set as Avatar
-                        </Button>
-                        <Button
-                          size="sm"
-                          variant="destructive"
-                          onClick={() => removePhoto(photo)}
-                        >
-                          <X className="h-4 w-4" />
-                        </Button>
+                <div>
+                  <h4 className="font-medium mb-2">Additional Photos</h4>
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    {profile.photos.map((photo, index) => (
+                      <div key={index} className="relative group">
+                        <img 
+                          src={photo} 
+                          alt={`Profile photo ${index + 1}`}
+                          className="w-full aspect-square object-cover rounded-lg border border-border"
+                        />
+                        <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center">
+                          <div className="flex flex-col gap-1">
+                            <Button
+                              size="sm"
+                              variant="secondary"
+                              onClick={() => setAsAvatar(photo)}
+                              className="text-xs"
+                            >
+                              Set as Main
+                            </Button>
+                            <Button
+                              size="sm"
+                              variant="destructive"
+                              onClick={() => removePhoto(photo)}
+                              className="text-xs"
+                            >
+                              <X className="h-3 w-3" />
+                            </Button>
+                          </div>
+                        </div>
                       </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+              
+              {/* Add More Photos */}
+              {(!profile?.photos || profile.photos.length < 6) && (
+                <div className="border-2 border-dashed border-border rounded-lg p-6 text-center">
+                  <div className="flex flex-col items-center space-y-3">
+                    <div className="text-muted-foreground">
+                      <Upload className="h-8 w-8 mx-auto mb-2" />
+                      <p className="text-sm">Add more photos to show your personality</p>
+                      <p className="text-xs text-muted-foreground">
+                        {profile?.photos?.length || 0} of 6 photos
+                      </p>
                     </div>
-                  ))}
+                    <div className="flex gap-2">
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        onClick={() => document.getElementById('additional-upload')?.click()}
+                      >
+                        <Upload className="h-4 w-4 mr-2" />
+                        Upload
+                      </Button>
+                      <Button variant="outline" size="sm" onClick={handleCameraCapture}>
+                        <Camera className="h-4 w-4 mr-2" />
+                        Camera
+                      </Button>
+                    </div>
+                    <input
+                      id="additional-upload"
+                      type="file"
+                      accept="image/*"
+                      onChange={handlePhotoUpload}
+                      className="hidden"
+                    />
+                  </div>
                 </div>
               )}
             </CardContent>
