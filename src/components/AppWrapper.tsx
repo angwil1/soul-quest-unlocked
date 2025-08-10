@@ -76,8 +76,30 @@ export const AppWrapper: React.FC<AppWrapperProps> = ({ children }) => {
     setShowAgeVerification(false);
     setAgeVerified(true);
     
-    // After age verification, show search filters popup
-    setShowSearchFilters(true);
+    // Re-check age verification to ensure consistency
+    setTimeout(() => {
+      const checkAgeVerification = async () => {
+        if (!user) return;
+        
+        try {
+          const { data, error } = await supabase
+            .from('age_verifications')
+            .select('is_verified')
+            .eq('user_id', user.id)
+            .single();
+
+          if (data?.is_verified) {
+            setAgeVerified(true);
+            // After age verification, show search filters popup
+            setShowSearchFilters(true);
+          }
+        } catch (error) {
+          console.error('Age verification re-check error:', error);
+        }
+      };
+      
+      checkAgeVerification();
+    }, 500);
   };
 
   const handleProfileSetupComplete = () => {
