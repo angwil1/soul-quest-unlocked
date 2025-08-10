@@ -74,12 +74,15 @@ const Index = () => {
     }
   };
 
-  // Check age verification status on page load
+  // Show search modal immediately when page loads, after age verification
   useEffect(() => {
     const checkAgeVerificationStatus = () => {
       const ageVerified = localStorage.getItem('ageVerified');
       if (!ageVerified) {
         setShowAgeVerification(true);
+      } else {
+        // Show search modal after age verification is complete
+        setShowSearchUpgradePrompt(true);
       }
     };
 
@@ -110,6 +113,8 @@ const Index = () => {
   const handleAgeVerificationComplete = () => {
     setAgeVerified(true);
     localStorage.setItem('ageVerified', 'true');
+    // Show search modal after age verification
+    setShowSearchUpgradePrompt(true);
   };
 
   const handleModalComplete = () => {
