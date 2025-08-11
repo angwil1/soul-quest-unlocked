@@ -170,12 +170,13 @@ const Index = () => {
               </div>
 
               <div className="text-center mb-16">
+                <p className="text-muted-foreground mb-2">Already have an account?</p>
                 <Button 
-                  variant="ghost" 
+                  variant="link" 
                   onClick={() => navigate('/auth')}
-                  className="text-muted-foreground hover:text-primary transition-colors underline"
+                  className="text-primary hover:text-primary/80 font-semibold text-lg underline"
                 >
-                  Already complete? Log in and reconnect.
+                  Log in and reconnect
                 </Button>
               </div>
 
