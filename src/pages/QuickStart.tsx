@@ -14,6 +14,12 @@ const QuickStart = () => {
   const navigate = useNavigate();
 
   // Check if profile is considered complete (has basic info like name, age, etc.)
+  console.log('Profile data:', { 
+    name: profile?.name, 
+    age: profile?.age, 
+    zip_code: profile?.zip_code,
+    fullProfile: profile
+  });
   const isProfileComplete = profile?.name && profile?.age && profile?.zip_code;
   const canTakeQuiz = user && isProfileComplete;
 
