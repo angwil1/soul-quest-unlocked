@@ -293,7 +293,17 @@ const Index = () => {
                     onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
                     className="pl-10 text-lg py-6"
                   />
-                </div>
+            </div>
+
+            <div className="text-center mb-8">
+              <Button 
+                variant="ghost" 
+                onClick={() => navigate('/auth')}
+                className="text-muted-foreground hover:text-primary transition-colors underline"
+              >
+                Already complete? Log in and reconnect.
+              </Button>
+            </div>
                 <Button 
                   onClick={handleSearch}
                   size="lg"
