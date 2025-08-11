@@ -31,7 +31,7 @@ import SafetyCenter from "./pages/SafetyCenter";
 import SampleUserProfile from "./pages/SampleUserProfile";
 import NotFound from "./pages/NotFound";
 import ResetPassword from "./pages/ResetPassword";
-import MatchSearch from "./pages/MatchSearch";
+
 
 const queryClient = new QueryClient();
 
@@ -48,7 +48,7 @@ const App = () => (
             <Route path="/profile" element={<Profile />} />
             <Route path="/profile/edit" element={<ProfileEdit />} />
             <Route path="/matches" element={<Matches />} />
-            <Route path="/match-search" element={<MatchSearch />} />
+            
             <Route path="/messages" element={<Messages />} />
             <Route path="/questions" element={<Questions />} />
             <Route path="/quiz-results" element={<QuizResults />} />
