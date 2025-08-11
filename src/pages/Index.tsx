@@ -118,9 +118,9 @@ const Index = () => {
               <img 
                 src={coupleHero1} 
                 alt="Couple connecting" 
-                className="absolute inset-0 w-full h-full object-cover opacity-20 animate-fade-in"
+                className="absolute inset-0 w-full h-full object-cover opacity-60 animate-fade-in"
               />
-              <div className="absolute inset-0 bg-gradient-to-br from-background/95 via-background/80 to-primary/20"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-background/70 via-background/60 to-primary/20"></div>
             </div>
           </div>
 
