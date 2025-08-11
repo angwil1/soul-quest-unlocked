@@ -16,7 +16,7 @@ import { InviteKindredSoul } from '@/components/InviteKindredSoul';
 import { AgeVerification } from '@/components/AgeVerification';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import SearchFilters from '@/components/SearchFilters';
-import { Search, Crown, ArrowRight, Heart, Users, Sparkles, MapPin, Filter } from 'lucide-react';
+import { Search, Crown, ArrowRight, Heart, Users, Sparkles, MapPin, Filter, HelpCircle } from 'lucide-react';
 import datingBackground from '@/assets/dating-background.jpg';
 import coupleHero1 from '@/assets/couple-hero-1.jpg';
 import coupleHero2 from '@/assets/couple-hero-2.jpg';
@@ -109,6 +109,26 @@ const Index = () => {
     return (
       <div className="min-h-screen bg-background">
         <Navbar />
+        
+        {/* Quick Login Box */}
+        <div className="absolute top-4 right-4 z-50">
+          <Card className="w-64 bg-background/95 backdrop-blur-sm border border-primary/20 shadow-lg">
+            <CardContent className="p-4">
+              <div className="flex items-center gap-2 mb-3">
+                <HelpCircle className="h-4 w-4 text-primary" />
+                <span className="text-sm font-medium">Already have an account?</span>
+              </div>
+              <Button 
+                onClick={() => navigate('/auth')}
+                size="sm"
+                className="w-full bg-primary/10 hover:bg-primary/20 text-primary border border-primary/30"
+                variant="outline"
+              >
+                Quick Login
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
         
         {/* Modern Hero Section with Couples and Purple Gradients */}
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -294,17 +314,7 @@ const Index = () => {
                     onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
                     className="pl-10 text-lg py-6"
                   />
-            </div>
-
-            <div className="text-center mb-8">
-              <Button 
-                variant="ghost" 
-                onClick={() => navigate('/auth')}
-                className="text-muted-foreground hover:text-primary transition-colors underline"
-              >
-                Already complete? Log in and reconnect.
-              </Button>
-            </div>
+                </div>
                 <Button 
                   onClick={handleSearch}
                   size="lg"
