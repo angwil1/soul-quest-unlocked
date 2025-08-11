@@ -151,11 +151,11 @@ const Index = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16 max-w-lg mx-auto">
                 <Button 
                   size="lg" 
-                  onClick={() => navigate('/auth')}
+                  onClick={() => navigate('/quick-start')}
                   className="w-full sm:w-auto px-8 py-4 text-lg font-semibold bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90 transform hover:scale-105 transition-all duration-200 animate-scale-in shadow-lg hover:shadow-xl"
                 >
                   <Heart className="h-5 w-5 mr-2" />
-                  Sign Up & Take Quiz
+                  Start Your Journey
                 </Button>
                 
                 <Button 
@@ -296,19 +296,7 @@ const Index = () => {
           </div>
 
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Take Quiz</CardTitle>
-                <CardDescription>Complete your compatibility profile</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Button onClick={() => navigate('/questions')} className="w-full">
-                  Start Quiz
-                </Button>
-              </CardContent>
-            </Card>
-
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <Card>
               <CardHeader>
                 <CardTitle>Find Matches</CardTitle>
