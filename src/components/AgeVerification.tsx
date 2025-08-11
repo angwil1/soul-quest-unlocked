@@ -132,8 +132,11 @@ export const AgeVerification = ({ onVerificationComplete, forceOpen = false }: A
 
       setIsVerified(true);
       
-      // Don't close the modal immediately, let user click Continue
-      console.log("Age verification completed, waiting for user to continue");
+      // Trigger completion callback to close modal and update parent state
+      console.log("Age verification completed, triggering completion callback");
+      setTimeout(() => {
+        onVerificationComplete?.();
+      }, 1000); // Small delay to show success message
     } catch (error) {
       console.error('Age verification error:', error);
       toast({

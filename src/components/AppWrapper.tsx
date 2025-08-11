@@ -109,12 +109,13 @@ export const AppWrapper: React.FC<AppWrapperProps> = ({ children }) => {
   }, [user, profile, authLoading, profileLoading, ageVerificationLoading, ageVerified, hasShownModal]);
 
   const handleAgeVerificationComplete = () => {
+    console.log('🎉 Age verification completed!');
     setShowAgeVerification(false);
     setAgeVerified(true);
     
-    // Re-check age verification to ensure consistency
+    // Re-check age verification to ensure consistency and update from database
     setTimeout(() => {
-      const checkAgeVerification = async () => {
+      const recheckAgeVerification = async () => {
         if (!user) return;
         
         try {
@@ -122,19 +123,19 @@ export const AppWrapper: React.FC<AppWrapperProps> = ({ children }) => {
             .from('age_verifications')
             .select('is_verified')
             .eq('user_id', user.id)
-            .single();
+            .maybeSingle();
 
           if (data?.is_verified) {
+            console.log('✅ Database confirms age verification');
             setAgeVerified(true);
-            // After age verification, show search filters popup
-            setShowSearchFilters(true);
+            localStorage.setItem('ageVerified', 'true');
           }
         } catch (error) {
           console.error('Age verification re-check error:', error);
         }
       };
       
-      checkAgeVerification();
+      recheckAgeVerification();
     }, 500);
   };
 
