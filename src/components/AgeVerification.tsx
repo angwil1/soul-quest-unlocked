@@ -132,8 +132,16 @@ export const AgeVerification = ({ onVerificationComplete, forceOpen = false }: A
 
       setIsVerified(true);
       
-      // Don't auto-close, let user click Continue button
-      console.log("Age verification completed successfully, showing continue button");
+      // Auto-close after 2 seconds to avoid getting stuck
+      console.log("Age verification completed successfully, auto-closing in 2 seconds");
+      setTimeout(() => {
+        console.log("Auto-closing age verification modal");
+        setIsOpen(false);
+        if (onVerificationComplete) {
+          console.log("Calling onVerificationComplete callback");
+          onVerificationComplete();
+        }
+      }, 2000);
     } catch (error) {
       console.error('Age verification error:', error);
       toast({
