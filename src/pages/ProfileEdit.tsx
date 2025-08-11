@@ -11,7 +11,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useAuth } from '@/hooks/useAuth';
 import { useProfile, Profile } from '@/hooks/useProfile';
 import { AgeVerification } from '@/components/AgeVerification';
-import { ArrowLeft, Upload, X, Camera, MapPin } from 'lucide-react';
+import { ArrowLeft, Upload, X, Camera, MapPin, Search } from 'lucide-react';
 
 const ProfileEdit = () => {
   const { user, loading: authLoading } = useAuth();
@@ -569,6 +569,56 @@ const ProfileEdit = () => {
                       min="18"
                       max="100"
                     />
+                  </div>
+                </div>
+                
+                {/* Quick Search Bar */}
+                <div className="pt-4 border-t">
+                  <div className="space-y-3">
+                    <h4 className="font-medium flex items-center gap-2">
+                      <Search className="h-4 w-4 text-primary" />
+                      Quick Match Search
+                    </h4>
+                    <p className="text-xs text-muted-foreground">
+                      Ready to find matches? Search based on your preferences above
+                    </p>
+                    <div className="flex gap-2">
+                      <Input
+                        placeholder="Search by interests, location, or keywords..."
+                        className="flex-1"
+                        onKeyPress={(e) => {
+                          if (e.key === 'Enter') {
+                            navigate('/matches');
+                          }
+                        }}
+                      />
+                      <Button 
+                        type="button"
+                        onClick={() => navigate('/matches')}
+                        className="px-6"
+                      >
+                        <Search className="h-4 w-4 mr-2" />
+                        Search
+                      </Button>
+                    </div>
+                    <div className="flex gap-2">
+                      <Button 
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        onClick={() => navigate('/match-search')}
+                      >
+                        Advanced Search
+                      </Button>
+                      <Button 
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        onClick={() => navigate('/matches')}
+                      >
+                        Browse All
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </div>
