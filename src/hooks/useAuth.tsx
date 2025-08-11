@@ -37,7 +37,7 @@ export const useAuth = () => {
       const validEmail = emailSchema.parse(email);
       const validPassword = passwordSchema.parse(password);
       
-      const redirectUrl = `${window.location.origin}/`;
+      const redirectUrl = `${window.location.origin}/questions`;
       
       const { error } = await supabase.auth.signUp({
         email: validEmail,

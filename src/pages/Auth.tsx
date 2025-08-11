@@ -23,7 +23,7 @@ const Auth = () => {
   // Redirect if already authenticated
   useEffect(() => {
     if (user) {
-      navigate('/');
+      navigate('/questions');
     }
   }, [user, navigate]);
 
@@ -34,7 +34,7 @@ const Auth = () => {
     const { error } = await signIn(email, password);
     
     if (!error) {
-      navigate('/');
+      navigate('/questions');
     }
     
     setIsLoading(false);
@@ -54,7 +54,7 @@ const Auth = () => {
       
       // Check if signup was successful and redirect
       if (!result?.error) {
-        navigate('/');
+        navigate('/questions');
       }
     } else {
       // Need age verification first
@@ -82,7 +82,7 @@ const Auth = () => {
     
     // Check if signup was successful and redirect
     if (!result?.error) {
-      navigate('/');
+      navigate('/questions');
     }
     
     setPendingSignup(null);
