@@ -18,9 +18,12 @@ const QuickStart = () => {
     name: profile?.name, 
     age: profile?.age, 
     zip_code: profile?.zip_code,
+    gender: profile?.gender,
+    looking_for: profile?.looking_for,
     fullProfile: profile
   });
-  const isProfileComplete = profile?.name && profile?.age && profile?.zip_code;
+  // More realistic completeness check - just need name and basic preferences
+  const isProfileComplete = profile?.name && profile?.gender && profile?.looking_for;
   const canTakeQuiz = user && isProfileComplete;
 
   const handleStepClick = (step: number) => {
