@@ -1,5 +1,4 @@
 import { Navbar } from "@/components/Navbar";
-import { AgeVerification } from "@/components/AgeVerification";
 import { SafetySettings } from "@/components/SafetySettings";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -23,9 +22,6 @@ const SafetyCenter = () => {
         </div>
 
         <div className="space-y-6">
-          {/* Age Verification */}
-          <AgeVerification />
-
           {/* Safety Settings */}
           <SafetySettings />
 
