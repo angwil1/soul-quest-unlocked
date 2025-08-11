@@ -23,6 +23,15 @@ function calculateDistance(lat1: number, lon1: number, lat2: number, lon2: numbe
 const zipCodeCoordinates: Record<string, { lat: number, lon: number }> = {
   // Major US cities for demo
   '10001': { lat: 40.7505, lon: -73.9934 }, // NYC
+  '10002': { lat: 40.7209, lon: -73.9896 }, // NYC Lower East Side
+  '10003': { lat: 40.7310, lon: -73.9896 }, // NYC East Village
+  '10004': { lat: 40.7042, lon: -74.0142 }, // NYC Financial District
+  '10010': { lat: 40.7391, lon: -73.9826 }, // NYC Flatiron
+  '11201': { lat: 40.6926, lon: -73.9901 }, // Brooklyn Heights
+  '11375': { lat: 40.7256, lon: -73.8486 }, // Forest Hills, Queens
+  '10451': { lat: 40.8207, lon: -73.9250 }, // South Bronx
+  '10301': { lat: 40.6323, lon: -74.1651 }, // St. George, Staten Island
+  '06712': { lat: 41.5623, lon: -73.2106 }, // Prospect, CT (user's zip code)
   '90210': { lat: 34.0901, lon: -118.4065 }, // Beverly Hills
   '60601': { lat: 41.8781, lon: -87.6298 }, // Chicago
   '33101': { lat: 25.7617, lon: -80.1918 }, // Miami

@@ -42,6 +42,16 @@ const ProfileEdit = () => {
 
   useEffect(() => {
     if (profile) {
+      // Auto-populate zip_code from location if it looks like a zip code and zip_code is empty
+      let autoZipCode = profile.zip_code || '';
+      if (!autoZipCode && profile.location) {
+        const locationZipMatch = profile.location.match(/^\d{5}(-\d{4})?$/);
+        if (locationZipMatch) {
+          autoZipCode = profile.location;
+          console.log('🏠 Auto-populated zip code from location:', autoZipCode);
+        }
+      }
+      
       setFormData({
         name: profile.name || '',
         bio: profile.bio || '',
@@ -57,7 +67,7 @@ const ProfileEdit = () => {
         distance_preference: profile.distance_preference || 50,
         age_preference_min: profile.age_preference_min || 18,
         age_preference_max: profile.age_preference_max || 65,
-        zip_code: profile.zip_code || '',
+        zip_code: autoZipCode,
       });
     }
   }, [profile]);
