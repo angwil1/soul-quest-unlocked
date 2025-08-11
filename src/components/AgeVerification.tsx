@@ -106,22 +106,19 @@ export const AgeVerification = ({ onVerificationComplete, forceOpen = false }: A
       localStorage.setItem('ageVerified', 'true');
       localStorage.setItem('ageVerificationDate', dateOfBirth);
       
-      // If user is logged in, also store in database
+      // If user is logged in, use the secure database function
       if (user) {
-        const { error } = await supabase
-          .from('age_verifications')
-          .upsert({
-            user_id: user.id,
-            date_of_birth: dateOfBirth,
-            is_verified: true,
-            verification_method: 'self_reported',
-            verified_at: new Date().toISOString()
-          });
-
+        console.log('🔒 Using secure database function for age verification');
+        const { data, error } = await supabase.rpc('verify_user_age', {
+          p_date_of_birth: dateOfBirth
+        });
+        
         if (error) {
           console.error('Database verification error:', error);
-          // Still continue with localStorage verification
+          throw error;
         }
+        
+        console.log('✅ Database verification successful');
       }
 
       toast({
@@ -142,11 +139,16 @@ export const AgeVerification = ({ onVerificationComplete, forceOpen = false }: A
           onVerificationComplete();
         }
       }, 2000);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Age verification error:', error);
+      
+      // Clear localStorage if database save failed
+      localStorage.removeItem('ageVerified');
+      localStorage.removeItem('ageVerificationDate');
+      
       toast({
         title: "Verification Failed",
-        description: "Unable to verify age. Please try again.",
+        description: error.message || "Unable to verify age. Please try again.",
         variant: "destructive"
       });
     } finally {

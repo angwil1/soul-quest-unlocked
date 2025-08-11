@@ -2076,6 +2076,10 @@ export type Database = {
           user_id: string | null
         }
       }
+      verify_user_age: {
+        Args: { p_date_of_birth: string }
+        Returns: boolean
+      }
     }
     Enums: {
       report_reason:
