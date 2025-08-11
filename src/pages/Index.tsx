@@ -295,48 +295,6 @@ const Index = () => {
             </div>
           </div>
 
-          {/* Enhanced Search & Discovery Section */}
-          <div className="mb-8">
-            <Card className="bg-gradient-to-r from-primary/5 to-purple-600/5 border-primary/20">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Search className="h-5 w-5 text-primary" />
-                  Start Your Search
-                </CardTitle>
-                <CardDescription>
-                  Ready to find your perfect match? Use our advanced search tools
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <Button 
-                    onClick={() => navigate('/matches')} 
-                    size="lg"
-                    className="h-16 text-left flex-col items-start justify-center px-6"
-                  >
-                    <div className="flex items-center gap-2 mb-1">
-                      <MapPin className="h-4 w-4" />
-                      <span className="font-semibold">Distance Search</span>
-                    </div>
-                    <span className="text-xs opacity-80">Find matches near you</span>
-                  </Button>
-                  
-                  <Button 
-                    onClick={() => navigate('/match-search')} 
-                    variant="outline"
-                    size="lg"
-                    className="h-16 text-left flex-col items-start justify-center px-6"
-                  >
-                    <div className="flex items-center gap-2 mb-1">
-                      <Filter className="h-4 w-4" />
-                      <span className="font-semibold">Advanced Filters</span>
-                    </div>
-                    <span className="text-xs opacity-80">Detailed search preferences</span>
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <Card>
