@@ -420,12 +420,12 @@ const QuizResults = () => {
 
         {/* Action Buttons */}
         <div className="flex gap-4 justify-center mb-8">
-          <Button onClick={handleViewMatches} size="lg" className="flex-1 max-w-xs">
+          <Button onClick={handleViewMatches} size="lg" className="flex-1 max-w-xs bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90">
             <Heart className="h-4 w-4 mr-2" />
-            View Matches
+            Find Your Matches
           </Button>
           <Button onClick={handleViewProfile} variant="outline" size="lg" className="flex-1 max-w-xs">
-            Complete Profile
+            Edit Profile
           </Button>
         </div>
 

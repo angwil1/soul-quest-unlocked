@@ -155,17 +155,17 @@ const Index = () => {
                   className="w-full sm:w-auto px-8 py-4 text-lg font-semibold bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90 transform hover:scale-105 transition-all duration-200 animate-scale-in shadow-lg hover:shadow-xl"
                 >
                   <Heart className="h-5 w-5 mr-2" />
-                  Start Your Journey
+                  Sign Up & Take Quiz
                 </Button>
                 
                 <Button 
                   variant="outline" 
                   size="lg"
-                  onClick={() => navigate('/quick-start')}
+                  onClick={() => navigate('/sample-profiles')}
                   className="w-full sm:w-auto px-8 py-4 text-lg font-semibold border-2 border-primary/30 hover:border-primary/50 hover:bg-primary/5 transform hover:scale-105 transition-all duration-200 animate-scale-in"
                 >
                   <Users className="h-5 w-5 mr-2" />
-                  See How It Works
+                  Browse Sample Profiles
                 </Button>
               </div>
 
@@ -299,24 +299,36 @@ const Index = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <Card>
               <CardHeader>
-                <CardTitle>Profile</CardTitle>
-                <CardDescription>Manage your dating profile</CardDescription>
+                <CardTitle>Take Quiz</CardTitle>
+                <CardDescription>Complete your compatibility profile</CardDescription>
               </CardHeader>
               <CardContent>
-                <Button onClick={() => navigate('/profile')} className="w-full">
-                  View Profile
+                <Button onClick={() => navigate('/questions')} className="w-full">
+                  Start Quiz
                 </Button>
               </CardContent>
             </Card>
 
             <Card>
               <CardHeader>
-                <CardTitle>Discover</CardTitle>
-                <CardDescription>Find your perfect match</CardDescription>
+                <CardTitle>Find Matches</CardTitle>
+                <CardDescription>Discover your perfect match</CardDescription>
               </CardHeader>
               <CardContent>
                 <Button onClick={() => navigate('/matches')} className="w-full">
-                  Start Matching
+                  View Matches
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Profile</CardTitle>
+                <CardDescription>Manage your dating profile</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Button onClick={() => navigate('/profile')} className="w-full">
+                  Edit Profile
                 </Button>
               </CardContent>
             </Card>
@@ -329,18 +341,6 @@ const Index = () => {
               <CardContent>
                 <Button onClick={() => navigate('/messages')} className="w-full">
                   View Messages
-                </Button>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>Premium</CardTitle>
-                <CardDescription>Unlock advanced features</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Button onClick={() => navigate('/pricing')} className="w-full">
-                  View Plans
                 </Button>
               </CardContent>
             </Card>

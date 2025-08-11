@@ -134,7 +134,7 @@ const Questions = () => {
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold mb-4">Compatibility Quiz</h1>
           <p className="text-xl text-muted-foreground">
-            Discover deeper connections through meaningful questions
+            Answer questions to build your compatibility profile and discover meaningful matches
           </p>
         </div>
 
