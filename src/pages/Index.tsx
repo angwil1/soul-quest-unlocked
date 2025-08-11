@@ -148,7 +148,7 @@ const Index = () => {
                 <span className="text-primary font-semibold">genuine compatibility</span>.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16 max-w-lg mx-auto">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8 max-w-lg mx-auto">
                 <Button 
                   size="lg" 
                   onClick={() => navigate('/quick-start')}
@@ -166,6 +166,16 @@ const Index = () => {
                 >
                   <Users className="h-5 w-5 mr-2" />
                   See How It Works
+                </Button>
+              </div>
+
+              <div className="text-center mb-16">
+                <Button 
+                  variant="ghost" 
+                  onClick={() => navigate('/auth')}
+                  className="text-muted-foreground hover:text-primary transition-colors underline"
+                >
+                  Already complete? Log in and reconnect.
                 </Button>
               </div>
 
