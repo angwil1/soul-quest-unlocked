@@ -91,19 +91,20 @@ export const AppWrapper: React.FC<AppWrapperProps> = ({ children }) => {
         console.log('🚨 SHOWING AGE VERIFICATION MODAL');
         setShowAgeVerification(true);
       } 
-      // If age verified and user exists but profile incomplete, show profile setup
-      else if (ageVerified === true && user && !profileLoading && profile && !hasShownModal) {
-        const needsProfileSetup = !profile.gender || !profile.looking_for || !profile.location;
-        console.log('Profile setup check:', { needsProfileSetup, profile: !!profile });
-        if (needsProfileSetup) {
-          setShowProfileSetup(true);
-          setHasShownModal(true);
-        }
-      }
-      // If age verified but no user (localStorage only), don't show anything
-      else if (ageVerified === true && !user) {
-        console.log('Age verified, no user - hiding age verification');
+      // FORCE CLOSE if age is verified
+      else if (ageVerified === true) {
+        console.log('✅ Age verified - FORCE CLOSING modal');
         setShowAgeVerification(false);
+        
+        // Profile setup logic for verified users
+        if (user && !profileLoading && profile && !hasShownModal) {
+          const needsProfileSetup = !profile.gender || !profile.looking_for || !profile.location;
+          console.log('Profile setup check:', { needsProfileSetup, profile: !!profile });
+          if (needsProfileSetup) {
+            setShowProfileSetup(true);
+            setHasShownModal(true);
+          }
+        }
       }
     }
   }, [user, profile, authLoading, profileLoading, ageVerificationLoading, ageVerified, hasShownModal]);
