@@ -23,13 +23,13 @@ export const FloatingQuizButton = () => {
           <X className="h-3 w-3" />
         </Button>
         
-        <Link to="/questions">
+        <Link to="/profile/edit">
           <Button 
             size="lg" 
             className="rounded-full shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-r from-primary to-primary/80 hover:from-primary hover:to-primary text-primary-foreground border-0"
           >
             <Brain className="h-5 w-5 mr-2" />
-            Take Quiz
+            Complete Profile
           </Button>
         </Link>
       </div>

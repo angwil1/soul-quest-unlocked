@@ -72,7 +72,7 @@ const QuickStart = () => {
           });
           navigate('/profile/edit');
         } else {
-          navigate('/questions');
+          navigate('/profile/edit');
         }
         break;
     }
@@ -181,7 +181,7 @@ const QuickStart = () => {
                   }`}>
                     {canTakeQuiz ? "3" : <Lock className="h-6 w-6" />}
                   </div>
-                  <h3 className="font-semibold mb-2">Take the Personality Quiz</h3>
+                  <h3 className="font-semibold mb-2">Complete Your Profile</h3>
                   <p className="text-sm text-muted-foreground mb-4">Complete our AI assessment to find compatible matches</p>
                   <div className="flex items-center justify-center gap-2">
                     {canTakeQuiz ? (
@@ -201,10 +201,10 @@ const QuickStart = () => {
               
               <div className="flex justify-center mt-8">
                 {canTakeQuiz ? (
-                  <Link to="/questions">
+                  <Link to="/profile/edit">
                     <Button size="lg" className="gap-2">
                       <Brain className="h-4 w-4" />
-                      Take Quiz
+                      Complete Profile
                     </Button>
                   </Link>
                 ) : (
@@ -234,7 +234,7 @@ const QuickStart = () => {
                 <div className="space-y-3">
                   <div className="flex gap-3">
                     <div className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold">1</div>
-                    <p className="text-sm">AI analyzes your personality quiz responses</p>
+                    <p className="text-sm">AI analyzes your profile responses</p>
                   </div>
                   <div className="flex gap-3">
                     <div className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold">2</div>

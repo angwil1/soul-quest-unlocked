@@ -142,11 +142,11 @@ const Profile = () => {
                 </Button>
                 
                 <Button 
-                  onClick={() => navigate('/questions')} 
+                  onClick={() => navigate('/sample-profiles')} 
                   variant="outline" 
                   className="w-full"
                 >
-                  Take Compatibility Quiz
+                  Explore Community Features
                 </Button>
               </CardContent>
             </Card>

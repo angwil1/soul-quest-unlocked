@@ -13,7 +13,7 @@ export const FirstLightModal = ({ isOpen, onClose }: FirstLightModalProps) => {
 
   const handleTakeQuiz = () => {
     onClose();
-    navigate('/questions');
+    navigate('/profile/edit');
   };
 
   const handleBrowsePrompts = () => {
@@ -42,7 +42,7 @@ export const FirstLightModal = ({ isOpen, onClose }: FirstLightModalProps) => {
             </div>
             <div className="flex items-center justify-start gap-3 text-left">
               <span className="text-primary text-xl">✓</span>
-              <span className="text-foreground">Take the Compatibility Quiz</span>
+              <span className="text-foreground">Complete Your Profile</span>
             </div>
             <div className="flex items-center justify-start gap-3 text-left">
               <span className="text-primary text-xl">✓</span>
@@ -60,7 +60,7 @@ export const FirstLightModal = ({ isOpen, onClose }: FirstLightModalProps) => {
               className="w-full bg-gradient-to-r from-primary to-secondary hover:opacity-90"
               size="lg"
             >
-              Take the Compatibility Quiz
+              Complete Your Profile
             </Button>
             <Button 
               onClick={handleBrowsePrompts}

@@ -21,7 +21,7 @@ const Pricing = () => {
       period: "/month",
       description: "Opens curiosity, perfect for getting started",
       features: [
-        "Take the compatibility quiz",
+        "Complete your profile",
         "View matches", 
         "Limited messaging",
         "Explore onboarding questions and sample prompts",
