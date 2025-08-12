@@ -10,13 +10,13 @@ import { useNavigate } from 'react-router-dom';
 import { founderCuratedProfiles, echoStarters, vibeTags, poeticMicrocopy } from '@/data/sampleProfiles';
 import { useToast } from '@/hooks/use-toast';
 import { SoundtrackPlayer } from '@/components/SoundtrackPlayer';
-import { useEchoSubscription } from '@/hooks/useEchoSubscription';
+
 import { EchoPurchasePrompt } from '@/components/EchoPurchasePrompt';
 
 const SampleProfiles = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { isEchoActive } = useEchoSubscription();
+  const isEchoActive = false; // Simplified without subscription
   const [selectedProfile, setSelectedProfile] = useState(founderCuratedProfiles[0]);
   const [showInspiration, setShowInspiration] = useState(false);
 

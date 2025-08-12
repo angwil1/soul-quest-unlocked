@@ -13,7 +13,6 @@ import Questions from "./pages/Questions";
 import QuizResults from "./pages/QuizResults";
 import SampleProfiles from "./pages/SampleProfiles";
 import Pricing from "./pages/Pricing";
-import Subscription from "./pages/Subscription";
 import PremiumDashboard from "./pages/PremiumDashboard";
 import ConnectionDNA from "./pages/ConnectionDNA";
 import MemoryVault from "./pages/MemoryVault";
@@ -25,7 +24,7 @@ import Privacy from "./pages/Privacy";
 import TermsOfService from "./pages/TermsOfService";
 import CookieStatement from "./pages/CookieStatement";
 import AccessibilityStatement from "./pages/AccessibilityStatement";
-import StripeTest from "./pages/StripeTest";
+
 import FeatureTest from "./pages/FeatureTest";
 import SafetyCenter from "./pages/SafetyCenter";
 import SampleUserProfile from "./pages/SampleUserProfile";
@@ -54,7 +53,6 @@ const App = () => (
             <Route path="/quiz-results" element={<QuizResults />} />
             <Route path="/sample-profiles" element={<SampleProfiles />} />
             <Route path="/pricing" element={<Pricing />} />
-            <Route path="/subscription" element={<Subscription />} />
             <Route path="/premium-dashboard" element={<PremiumDashboard />} />
             <Route path="/connection-dna" element={<ConnectionDNA />} />
             <Route path="/memory-vault" element={<MemoryVault />} />
@@ -66,7 +64,7 @@ const App = () => (
             <Route path="/terms" element={<TermsOfService />} />
             <Route path="/cookies" element={<CookieStatement />} />
             <Route path="/accessibility" element={<AccessibilityStatement />} />
-            <Route path="/stripe-test" element={<StripeTest />} />
+            
             <Route path="/feature-test" element={<FeatureTest />} />
             <Route path="/safety" element={<SafetyCenter />} />
             <Route path="/sample-user" element={<SampleUserProfile />} />

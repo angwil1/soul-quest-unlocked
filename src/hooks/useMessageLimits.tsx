@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/hooks/useAuth';
-import { useSubscription } from '@/hooks/useSubscription';
+
 import { useToast } from '@/hooks/use-toast';
 
 export interface MessageLimits {
@@ -15,7 +15,6 @@ export interface MessageLimits {
 
 export const useMessageLimits = () => {
   const { user } = useAuth();
-  const { createCheckout } = useSubscription();
   const { toast } = useToast();
   const [limits, setLimits] = useState<MessageLimits>({
     remainingMessages: 5,
@@ -149,15 +148,7 @@ export const useMessageLimits = () => {
   const upgradePrompt = () => {
     toast({
       title: "Upgrade to Premium",
-      description: "Get unlimited messaging and premium features for just $9.99/month!",
-      action: (
-        <button 
-          onClick={() => createCheckout('premium')}
-          className="bg-primary text-primary-foreground px-3 py-1 rounded text-sm"
-        >
-          Upgrade Now
-        </button>
-      ),
+      description: "Get unlimited messaging and premium features!",
     });
   };
 

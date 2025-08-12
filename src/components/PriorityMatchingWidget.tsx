@@ -2,11 +2,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Zap, Users, Target, Crown, TrendingUp } from "lucide-react";
-import { useSubscription } from "@/hooks/useSubscription";
 import { Link } from "react-router-dom";
 
 export const PriorityMatchingWidget = () => {
-  const { isUnlockedPlus, isUnlockedBeyond } = useSubscription();
+  const isUnlockedPlus = false;
+  const isUnlockedBeyond = false;
 
   const hasPriorityAccess = isUnlockedPlus || isUnlockedBeyond;
 

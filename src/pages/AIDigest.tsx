@@ -7,13 +7,12 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Separator } from '@/components/ui/separator';
 import { useAIDigest } from '@/hooks/useAIDigest';
 import { useAuth } from '@/hooks/useAuth';
-import { useSubscription } from '@/hooks/useSubscription';
+
 import { Clock, Sparkles, MessageCircle, TrendingUp, Calendar, Users, Crown, Lock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const AIDigest = () => {
   const { user } = useAuth();
-  const { subscription, loading: subscriptionLoading } = useSubscription();
   const { 
     digest, 
     digests, 
@@ -58,7 +57,7 @@ const AIDigest = () => {
     );
   }
 
-  // Premium feature check
+  const subscription = { subscribed: false };
   if (!subscription?.subscribed) {
     return (
       <div className="min-h-screen bg-background">

@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { useProfile } from '@/hooks/useProfile';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
-import { useEchoSubscription } from '@/hooks/useEchoSubscription';
+
 import { EmotionalSoundtrackPrompt } from './EmotionalSoundtrackPrompt';
 import { SoundtrackPlayer } from './SoundtrackPlayer';
 
@@ -18,7 +18,7 @@ interface TikTokProfileEmbedProps {
 
 export const TikTokProfileEmbed = ({ isEditMode = false }: TikTokProfileEmbedProps) => {
   const { profile, updateProfile } = useProfile();
-  const { isEchoActive } = useEchoSubscription();
+  const isEchoActive = false; // Simplified without subscription
   const { toast } = useToast();
   const navigate = useNavigate();
   const videoRef = useRef<HTMLVideoElement>(null);

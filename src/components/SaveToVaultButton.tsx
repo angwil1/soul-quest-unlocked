@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { useSubscription } from '@/hooks/useSubscription';
+
 import { useMemoryVault } from '@/hooks/useMemoryVault';
 import { BookmarkPlus, BookmarkCheck, Crown } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
@@ -38,12 +38,11 @@ export const SaveToVaultButton = ({
   size = 'sm',
   className = ''
 }: SaveToVaultButtonProps) => {
-  const { subscription } = useSubscription();
   const { saveMatch, savePrompt, saveMoment, loading } = useMemoryVault();
   const { toast } = useToast();
   const [isSaved, setIsSaved] = useState(false);
 
-  const isUnlockedBeyond = subscription?.subscription_tier === 'Pro' && subscription?.subscribed;
+  const isUnlockedBeyond = false; // Simplified without subscription
 
   const handleSave = async () => {
     if (!isUnlockedBeyond) {

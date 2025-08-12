@@ -8,7 +8,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Plus, Heart, MessageCircle, Share, Play } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
-import { useEchoSubscription } from '@/hooks/useEchoSubscription';
+
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 
@@ -31,7 +31,7 @@ interface VibeGalleryProps {
 
 export const VibeGallery = ({ isOwnProfile = false, userId }: VibeGalleryProps) => {
   const { user } = useAuth();
-  const { isEchoActive } = useEchoSubscription();
+  const isEchoActive = false; // Simplified without subscription
   const { toast } = useToast();
   const navigate = useNavigate();
   const [items, setItems] = useState<VibeGalleryItem[]>([]);

@@ -4,13 +4,12 @@ import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { useConnectionDNA } from '@/hooks/useConnectionDNA';
-import { useSubscription } from '@/hooks/useSubscription';
+
 import { Brain, Heart, MessageSquare, Target, ChevronRight, Crown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export const ConnectionDNAWidget = () => {
   const { getDNAProfile, getInsights, isUnlockedBeyond } = useConnectionDNA();
-  const { subscription } = useSubscription();
   const [dnaProfile, setDnaProfile] = useState<any>(null);
   const [insights, setInsights] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);

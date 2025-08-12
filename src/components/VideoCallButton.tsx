@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Video, Crown } from 'lucide-react';
-import { useSubscription } from '@/hooks/useSubscription';
 import { useToast } from '@/hooks/use-toast';
 import VideoCallModal from '@/components/VideoCallModal';
 
@@ -20,9 +19,10 @@ export const VideoCallButton = ({
   size = "default",
   className = ""
 }: VideoCallButtonProps) => {
-  const { isUnlockedPlus, isUnlockedBeyond } = useSubscription();
   const { toast } = useToast();
   const [showVideoCall, setShowVideoCall] = useState(false);
+  const isUnlockedPlus = false;
+  const isUnlockedBeyond = false;
 
   const hasVideoAccess = isUnlockedPlus || isUnlockedBeyond;
 

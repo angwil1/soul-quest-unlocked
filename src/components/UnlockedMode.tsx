@@ -1,10 +1,8 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Heart, Users, Sparkles, Crown } from "lucide-react";
-import { useSubscription } from "@/hooks/useSubscription";
-
 export const UnlockedMode = () => {
-  const { isUnlockedBeyond } = useSubscription();
+  const isUnlockedBeyond = false;
 
   if (!isUnlockedBeyond) {
     return null;

@@ -6,12 +6,10 @@ import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useSubscription } from "@/hooks/useSubscription";
 import SearchFilters from "@/components/SearchFilters";
 
 export const Navbar = () => {
   const { user, signOut } = useAuth();
-  const { subscription } = useSubscription();
   const location = useLocation();
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -39,8 +37,8 @@ export const Navbar = () => {
 
   const isActive = (path: string) => location.pathname === path;
 
-  // Check if user has Echo Amplified (premium tier)
-  const isEchoActive = subscription?.subscribed && subscription?.subscription_tier === 'Pro';
+  // Check if user has premium features (simplified without subscription)
+  const isEchoActive = false;
 
   const handleFiltersChange = (filters: string[]) => {
     setSelectedFilters(filters);
@@ -348,7 +346,7 @@ export const Navbar = () => {
                   className="mt-3 w-full"
                   onClick={() => {
                     setShowSearchModal(false);
-                    navigate('/subscription');
+                    navigate('/pricing');
                   }}
                 >
                   <span className="mr-2">👑</span>

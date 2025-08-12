@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '@/hooks/useAuth';
-import { useSubscription } from '@/hooks/useSubscription';
 import { useProfile } from '@/hooks/useProfile';
 import { ProfileSetupModal } from '@/components/ProfileSetupModal';
 import SearchFilters from '@/components/SearchFilters';
@@ -12,7 +11,6 @@ interface AppWrapperProps {
 
 export const AppWrapper: React.FC<AppWrapperProps> = ({ children }) => {
   const { user, loading: authLoading } = useAuth();
-  const { subscription, loading: subscriptionLoading } = useSubscription();
   const { profile, loading: profileLoading } = useProfile();
   const [showProfileSetup, setShowProfileSetup] = useState(false);
   const [showSearchFilters, setShowSearchFilters] = useState(false);

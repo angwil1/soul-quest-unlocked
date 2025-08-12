@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Sparkles, Heart, Crown, ArrowRight } from 'lucide-react';
-import { useSubscription } from '@/hooks/useSubscription';
+
 
 interface EchoConnectionCompletionModalProps {
   isOpen: boolean;
@@ -20,7 +20,6 @@ export const EchoConnectionCompletionModal = ({
   onComplete 
 }: EchoConnectionCompletionModalProps) => {
   const [completing, setCompleting] = useState(false);
-  const { createCheckout } = useSubscription();
 
   const handleComplete = async () => {
     setCompleting(true);
@@ -30,7 +29,8 @@ export const EchoConnectionCompletionModal = ({
   };
 
   const handleUpgrade = async (plan: string) => {
-    await createCheckout(plan);
+    // Redirect to pricing page instead of creating checkout
+    window.location.href = '/pricing';
   };
 
   return (

@@ -6,7 +6,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Sparkles, Crown, ArrowRight, Settings, MapPin, Heart, Filter } from 'lucide-react';
-import { useEchoSubscription } from '@/hooks/useEchoSubscription';
+
 
 interface SearchFiltersProps {
   onFiltersChange?: (filters: string[]) => void;
@@ -20,7 +20,7 @@ const SearchFilters = ({ onFiltersChange, onUpgradePrompt, onPreferenceChange, o
   const [searchPreference, setSearchPreference] = useState('');
   const [zipCode, setZipCode] = useState('');
   const [showUpgradePrompt, setShowUpgradePrompt] = useState(false);
-  const { isEchoActive } = useEchoSubscription();
+  const isEchoActive = false; // Simplified without subscription
 
   const identityOptions: { id: string; label: string }[] = [];
   // Identity options removed since they're covered in the "I'm looking for" dropdown

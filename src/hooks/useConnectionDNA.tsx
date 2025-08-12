@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
-import { useSubscription } from '@/hooks/useSubscription';
+
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 
@@ -56,11 +56,10 @@ export interface CompatibilityAnalysis {
 
 export const useConnectionDNA = () => {
   const { user } = useAuth();
-  const { subscription } = useSubscription();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
 
-  const isUnlockedBeyond = subscription?.subscription_tier === 'Pro' && subscription?.subscribed;
+  const isUnlockedBeyond = false; // Simplified without subscription
 
   const trackInteraction = async (interactionData: {
     type: string;

@@ -2,17 +2,16 @@ import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useMemoryVault } from '@/hooks/useMemoryVault';
-import { useSubscription } from '@/hooks/useSubscription';
+
 import { Heart, Lightbulb, Star, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export const MemoryVaultWidget = () => {
   const { getVaultStats } = useMemoryVault();
-  const { subscription } = useSubscription();
   const [stats, setStats] = useState({ matches: 0, prompts: 0, moments: 0 });
   const [loading, setLoading] = useState(true);
 
-  const isUnlockedBeyond = subscription?.subscription_tier === 'Pro' && subscription?.subscribed;
+  const isUnlockedBeyond = false; // Simplified without subscription
 
   useEffect(() => {
     if (isUnlockedBeyond) {

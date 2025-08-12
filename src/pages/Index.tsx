@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { useAuth } from '@/hooks/useAuth';
-import { useSubscription } from '@/hooks/useSubscription';
+
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import { Navbar } from '@/components/Navbar';
@@ -24,7 +24,6 @@ import coupleDigital from '@/assets/couple-digital.jpg';
 
 const Index = () => {
   const { user, loading, signOut } = useAuth();
-  const { subscription, loading: subscriptionLoading, isUnlockedPlus, isUnlockedBeyond } = useSubscription();
   const { toast } = useToast();
   const navigate = useNavigate();
   const [faqs, setFaqs] = useState<Array<{id: number; question: string; answer: string}>>([]);
@@ -35,11 +34,13 @@ const Index = () => {
   const [showSearchUpgradePrompt, setShowSearchUpgradePrompt] = useState(false);
   const [searchPreference, setSearchPreference] = useState('');
 
-  // Check if user has Echo Amplified (premium tier)
-  const isEchoActive = subscription?.subscribed && subscription?.subscription_tier === 'Pro';
+  // Simplified without subscription
+  const isEchoActive = false;
+  const isUnlockedPlus = false;
+  const isUnlockedBeyond = false;
 
   const handleUpgradePrompt = () => {
-    navigate('/subscription');
+    navigate('/pricing');
   };
 
   const handleFiltersChange = (filters: string[]) => {
