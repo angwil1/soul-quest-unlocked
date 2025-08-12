@@ -40,7 +40,8 @@ serve(async (req) => {
     // PayPal API credentials
     const clientId = Deno.env.get('PAYPAL_CLIENT_ID');
     const clientSecret = Deno.env.get('PAYPAL_CLIENT_SECRET');
-    const isProduction = Deno.env.get('PAYPAL_ENVIRONMENT') === 'production';
+    // Default to sandbox if no environment specified
+    const isProduction = false;
     
     if (!clientId || !clientSecret) {
       throw new Error('PayPal credentials not configured');
