@@ -1093,6 +1093,54 @@ export type Database = {
         }
         Relationships: []
       }
+      paypal_payments: {
+        Row: {
+          amount: number
+          completed_at: string | null
+          created_at: string
+          currency: string
+          id: string
+          is_recurring: boolean
+          payment_provider: string
+          paypal_capture_id: string | null
+          paypal_order_id: string | null
+          paypal_subscription_id: string | null
+          plan_name: string
+          status: string
+          user_id: string
+        }
+        Insert: {
+          amount: number
+          completed_at?: string | null
+          created_at?: string
+          currency?: string
+          id?: string
+          is_recurring?: boolean
+          payment_provider?: string
+          paypal_capture_id?: string | null
+          paypal_order_id?: string | null
+          paypal_subscription_id?: string | null
+          plan_name: string
+          status?: string
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          completed_at?: string | null
+          created_at?: string
+          currency?: string
+          id?: string
+          is_recurring?: boolean
+          payment_provider?: string
+          paypal_capture_id?: string | null
+          paypal_order_id?: string | null
+          paypal_subscription_id?: string | null
+          plan_name?: string
+          status?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       premium_ai_matches: {
         Row: {
           created_at: string | null

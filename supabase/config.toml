@@ -60,14 +60,11 @@ enable_confirmations = false
 enabled = true
 verify_jwt = true
 
-[functions.create-checkout]
+[functions.create-paypal-payment]
 verify_jwt = true
 
-[functions.check-subscription]
-verify_jwt = true
-
-[functions.customer-portal]
-verify_jwt = true
+[functions.paypal-webhook]
+verify_jwt = false
 
 [functions.ai-matching]
 verify_jwt = true
