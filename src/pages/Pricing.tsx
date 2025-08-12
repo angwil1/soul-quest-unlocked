@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useAuth } from "@/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 
@@ -96,15 +97,33 @@ const Pricing = () => {
     }
   ];
 
-  const handleSubscribe = (plan: string | null) => {
+  const handleSubscribe = async (plan: string | null) => {
     if (!user) {
       navigate('/auth');
       return;
     }
     
-    if (plan) {
-      // Redirect to checkout placeholder or show message
-      console.log('Checkout for plan:', plan);
+    if (!plan) return;
+
+    try {
+      const { data, error } = await supabase.functions.invoke('create-paypal-payment', {
+        body: { 
+          plan, 
+          userId: user.id 
+        }
+      });
+
+      if (error) {
+        console.error('PayPal payment error:', error);
+        return;
+      }
+
+      if (data?.approvalUrl) {
+        // Redirect to PayPal for payment approval
+        window.open(data.approvalUrl, '_blank');
+      }
+    } catch (error) {
+      console.error('Error creating PayPal payment:', error);
     }
   };
 
