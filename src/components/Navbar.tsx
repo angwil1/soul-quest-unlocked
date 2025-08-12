@@ -21,7 +21,7 @@ export const Navbar = () => {
 
   const navigation = [
     { name: "Home", href: "/" },
-    { name: "Quiz", href: "/questions" },
+    
     { name: "Premium", href: "/premium-dashboard" },
     { name: "AI Digest", href: "/ai-digest" },
     { name: "Connection DNA", href: "/connection-dna" },

@@ -9,7 +9,7 @@ import Profile from "./pages/Profile";
 import ProfileEdit from "./pages/ProfileEdit";
 import Matches from "./pages/Matches";
 import Messages from "./pages/Messages";
-import Questions from "./pages/Questions";
+
 import QuizResults from "./pages/QuizResults";
 import SampleProfiles from "./pages/SampleProfiles";
 import Pricing from "./pages/Pricing";
@@ -49,7 +49,7 @@ const App = () => (
             <Route path="/matches" element={<Matches />} />
             
             <Route path="/messages" element={<Messages />} />
-            <Route path="/questions" element={<Questions />} />
+            
             <Route path="/quiz-results" element={<QuizResults />} />
             <Route path="/sample-profiles" element={<SampleProfiles />} />
             <Route path="/pricing" element={<Pricing />} />
