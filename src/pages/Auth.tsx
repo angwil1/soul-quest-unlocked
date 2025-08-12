@@ -9,6 +9,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { useEffect } from 'react';
 import { Navbar } from '@/components/Navbar';
 import { AgeVerification } from '@/components/AgeVerification';
+import { supabase } from '@/integrations/supabase/client';
 
 const Auth = () => {
   const [email, setEmail] = useState('');
@@ -20,10 +21,34 @@ const Auth = () => {
   const { signIn, signUp, user } = useAuth();
   const navigate = useNavigate();
 
-  // Redirect if already authenticated
+  // Redirect if already authenticated - check if user has completed quiz first
   useEffect(() => {
     if (user) {
-      navigate('/profile/edit');
+      // Check if user has completed quiz by checking if they have quiz answers
+      const checkQuizCompletion = async () => {
+        try {
+          const { data } = await supabase
+            .from('user_events')
+            .select('*')
+            .eq('user_id', user.id)
+            .eq('event_type', 'quiz_completed')
+            .limit(1);
+          
+          if (data && data.length > 0) {
+            // User has completed quiz, go to main page
+            navigate('/');
+          } else {
+            // User hasn't completed quiz, send to quiz
+            navigate('/questions');
+          }
+        } catch (error) {
+          console.error('Error checking quiz completion:', error);
+          // Default to quiz if error
+          navigate('/questions');
+        }
+      };
+      
+      checkQuizCompletion();
     }
   }, [user, navigate]);
 
@@ -34,7 +59,27 @@ const Auth = () => {
     const { error } = await signIn(email, password);
     
     if (!error) {
-      navigate('/profile/edit');
+      // After successful login, check if user has completed quiz
+      try {
+        const { data } = await supabase
+          .from('user_events')
+          .select('*')
+          .eq('user_id', user?.id || '')
+          .eq('event_type', 'quiz_completed')
+          .limit(1);
+        
+        if (data && data.length > 0) {
+          // User has completed quiz, go to main page
+          navigate('/');
+        } else {
+          // User hasn't completed quiz, send to quiz
+          navigate('/questions');
+        }
+      } catch (error) {
+        console.error('Error checking quiz completion:', error);
+        // Default to quiz if error
+        navigate('/questions');
+      }
     }
     
     setIsLoading(false);

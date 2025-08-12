@@ -271,75 +271,145 @@ const Index = () => {
       
       <div className="p-4">
         <div className="max-w-4xl mx-auto">
-          <div className="mb-8 p-4 bg-primary/5 rounded-lg border border-primary/20">
-            <div>
-              <h2 className="text-2xl font-bold text-primary">Welcome back!</h2>
-              <p className="text-muted-foreground">You are successfully logged in as {user.email}</p>
+          <div className="mb-8 p-6 bg-gradient-to-r from-primary/10 to-purple-600/10 rounded-xl border border-primary/20 shadow-sm">
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="text-3xl font-bold text-primary mb-2">Welcome back!</h2>
+                <p className="text-muted-foreground text-lg">Ready to discover meaningful connections?</p>
+              </div>
+              <div className="flex items-center gap-3">
+                <Button 
+                  onClick={() => navigate('/profile')} 
+                  variant="outline"
+                  className="border-primary/30 hover:border-primary/50"
+                >
+                  View Profile
+                </Button>
+                <Button 
+                  onClick={() => signOut()} 
+                  variant="ghost"
+                  className="text-muted-foreground hover:text-foreground"
+                >
+                  Sign Out
+                </Button>
+              </div>
             </div>
           </div>
 
           <div className="mb-12">
-            <div className="max-w-2xl mx-auto">
-              <h2 className="text-3xl font-bold text-center mb-6">Find Your Perfect Match</h2>
-              <p className="text-center text-muted-foreground mb-8 text-lg">
-                Search for connections that resonate with your soul
-              </p>
-              <div className="flex gap-2">
-                <div className="relative flex-1">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
-                  <Input
-                    type="text"
-                    placeholder="Search by interests location or keywords..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
-                    className="pl-10 text-lg py-6"
-                  />
+            <div className="max-w-3xl mx-auto">
+              <div className="text-center mb-8">
+                <h2 className="text-4xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent mb-4">Find Your Perfect Match</h2>
+                <p className="text-muted-foreground text-xl leading-relaxed">
+                  Search for connections that resonate with your soul through AI-powered compatibility
+                </p>
+              </div>
+              
+              <div className="bg-gradient-to-r from-primary/5 to-purple-600/5 p-6 rounded-2xl border border-primary/20 mb-8">
+                <div className="flex gap-3 mb-4">
+                  <div className="relative flex-1">
+                    <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5" />
+                    <Input
+                      type="text"
+                      placeholder="Search by interests, location, or keywords..."
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
+                      className="pl-12 text-lg py-4 h-14 bg-background/50 border-primary/20 focus:border-primary/40"
+                    />
+                  </div>
+                  <Button 
+                    onClick={handleSearch}
+                    size="lg"
+                    className="px-8 h-14 text-lg bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90 shadow-lg"
+                  >
+                    <Search className="h-5 w-5 mr-2" />
+                    Search
+                  </Button>
                 </div>
-                <Button 
-                  onClick={handleSearch}
-                  size="lg"
-                  className="px-8 py-6 text-lg"
-                >
-                  Search
-                </Button>
+                
+                <div className="text-center">
+                  <Button 
+                    onClick={() => navigate('/matches')}
+                    variant="outline"
+                    className="border-primary/30 hover:border-primary/50 hover:bg-primary/5"
+                  >
+                    <Heart className="h-4 w-4 mr-2" />
+                    View All Matches
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
 
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Find Matches</CardTitle>
-                <CardDescription>Discover your perfect match</CardDescription>
+            <Card className="border-primary/20 hover:border-primary/40 transition-all duration-200 hover:shadow-lg group">
+              <CardHeader className="pb-4">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="p-2 bg-primary/10 rounded-lg">
+                    <Heart className="h-6 w-6 text-primary" />
+                  </div>
+                  <CardTitle className="text-xl">Discover Matches</CardTitle>
+                </div>
+                <CardDescription className="text-base">
+                  Find connections that resonate with your soul through AI compatibility
+                </CardDescription>
               </CardHeader>
               <CardContent>
-                <Button onClick={() => navigate('/matches')} className="w-full">
+                <Button 
+                  onClick={() => navigate('/matches')} 
+                  className="w-full h-12 text-lg group-hover:scale-105 transition-transform"
+                >
+                  <Users className="h-5 w-5 mr-2" />
                   View Matches
                 </Button>
               </CardContent>
             </Card>
 
-            <Card>
-              <CardHeader>
-                <CardTitle>Profile</CardTitle>
-                <CardDescription>Manage your dating profile</CardDescription>
+            <Card className="border-primary/20 hover:border-primary/40 transition-all duration-200 hover:shadow-lg group">
+              <CardHeader className="pb-4">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="p-2 bg-purple-600/10 rounded-lg">
+                    <Users className="h-6 w-6 text-purple-600" />
+                  </div>
+                  <CardTitle className="text-xl">Your Profile</CardTitle>
+                </div>
+                <CardDescription className="text-base">
+                  Showcase your authentic self and attract meaningful connections
+                </CardDescription>
               </CardHeader>
               <CardContent>
-                <Button onClick={() => navigate('/profile')} className="w-full">
+                <Button 
+                  onClick={() => navigate('/profile')} 
+                  className="w-full h-12 text-lg group-hover:scale-105 transition-transform"
+                  variant="outline"
+                >
+                  <Users className="h-5 w-5 mr-2" />
                   Edit Profile
                 </Button>
               </CardContent>
             </Card>
 
-            <Card>
-              <CardHeader>
-                <CardTitle>Messages</CardTitle>
-                <CardDescription>Chat with your matches</CardDescription>
+            <Card className="border-primary/20 hover:border-primary/40 transition-all duration-200 hover:shadow-lg group">
+              <CardHeader className="pb-4">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="p-2 bg-pink-600/10 rounded-lg">
+                    <Sparkles className="h-6 w-6 text-pink-600" />
+                  </div>
+                  <CardTitle className="text-xl">Messages</CardTitle>
+                </div>
+                <CardDescription className="text-base">
+                  Connect and build relationships with your compatible matches
+                </CardDescription>
               </CardHeader>
               <CardContent>
-                <Button onClick={() => navigate('/messages')} className="w-full">
+                <Button 
+                  onClick={() => navigate('/messages')} 
+                  className="w-full h-12 text-lg group-hover:scale-105 transition-transform"
+                  variant="outline"
+                >
+                  <ArrowRight className="h-5 w-5 mr-2" />
                   View Messages
                 </Button>
               </CardContent>
