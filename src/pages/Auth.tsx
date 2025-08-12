@@ -52,9 +52,9 @@ const Auth = () => {
       const result = await signUp(email, password);
       setIsLoading(false);
       
-      // Check if signup was successful and redirect
+      // Check if signup was successful and redirect to quiz
       if (!result?.error) {
-        navigate('/profile/edit');
+        navigate('/questions');
       }
     } else {
       // Need age verification first
@@ -80,9 +80,9 @@ const Auth = () => {
     const result = await signUp(pendingSignup.email, pendingSignup.password);
     console.log("Signup result:", result);
     
-    // Check if signup was successful and redirect
+    // Check if signup was successful and redirect to quiz
     if (!result?.error) {
-      navigate('/profile/edit');
+      navigate('/questions');
     }
     
     setPendingSignup(null);

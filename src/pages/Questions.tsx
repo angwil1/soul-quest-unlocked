@@ -94,8 +94,8 @@ const Questions = () => {
         description: "Your compatibility profile is being generated. You'll receive an email with your results!",
       });
 
-      // Navigate to quiz results page
-      navigate('/quiz-results');
+      // Navigate to matches with AI compatibility
+      navigate('/matches');
     } catch (error) {
       console.error('Error submitting quiz:', error);
       toast({
