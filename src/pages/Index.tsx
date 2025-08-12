@@ -111,7 +111,7 @@ const Index = () => {
         <Navbar />
         
         {/* Quick Login Box */}
-        <div className="absolute top-4 right-4 z-50">
+        <div className="absolute top-20 right-4 z-50">
           <Card className="w-48 bg-background/95 backdrop-blur-sm border border-primary/20 shadow-lg">
             <CardContent className="p-3">
               <div className="flex items-center gap-1 mb-2">
