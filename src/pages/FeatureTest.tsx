@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useAuth } from "@/hooks/useAuth";
-import { useSubscription } from "@/hooks/useSubscription";
+
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { DistanceChecker } from "@/components/DistanceChecker";
@@ -33,7 +33,8 @@ interface TestResult {
 
 const FeatureTest = () => {
   const { user } = useAuth();
-  const { subscription, checkSubscription } = useSubscription();
+  const subscription = null; // Simplified without subscription
+  const checkSubscription = () => Promise.resolve(); // Mock function
   const { toast } = useToast();
   const [testResults, setTestResults] = useState<TestResult[]>([]);
   const [isRunning, setIsRunning] = useState(false);

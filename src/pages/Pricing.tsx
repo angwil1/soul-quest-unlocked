@@ -1,16 +1,16 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { useSubscription } from "@/hooks/useSubscription";
 import { useAuth } from "@/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 
 const Pricing = () => {
-  const { subscription, loading, createCheckout } = useSubscription();
   const { user } = useAuth();
   const navigate = useNavigate();
+  const subscription = null; // Simplified without subscription
+  const loading = false;
 
   const plans = [
     {
@@ -103,7 +103,8 @@ const Pricing = () => {
     }
     
     if (plan) {
-      createCheckout(plan);
+      // Redirect to checkout placeholder or show message
+      console.log('Checkout for plan:', plan);
     }
   };
 

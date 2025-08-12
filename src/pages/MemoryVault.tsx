@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
-import { useSubscription } from '@/hooks/useSubscription';
+
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import { Navbar } from '@/components/Navbar';
@@ -47,7 +47,6 @@ interface VaultMoment {
 
 const MemoryVault = () => {
   const { user } = useAuth();
-  const { subscription } = useSubscription();
   const { toast } = useToast();
 
   const [matches, setMatches] = useState<VaultMatch[]>([]);
@@ -66,7 +65,7 @@ const MemoryVault = () => {
     tags: ''
   });
 
-  const isUnlockedBeyond = subscription?.subscription_tier === 'Pro' && subscription?.subscribed;
+  const isUnlockedBeyond = false; // Simplified without subscription
 
   useEffect(() => {
     if (user && isUnlockedBeyond) {

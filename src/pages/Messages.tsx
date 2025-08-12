@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { useMessageLimits } from '@/hooks/useMessageLimits';
-import { useSubscription } from '@/hooks/useSubscription';
+
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -39,7 +39,6 @@ interface Match {
 const Messages = () => {
   const { user, loading: authLoading } = useAuth();
   const { sendMessage: sendMessageWithLimits, remainingMessages, isPremium, canSendMessage, upgradePrompt } = useMessageLimits();
-  const { createCheckout } = useSubscription();
   const { toast } = useToast();
   const navigate = useNavigate();
   const [matches, setMatches] = useState<Match[]>([]);
@@ -238,7 +237,7 @@ const Messages = () => {
                 {remainingMessages === 0 && (
                   <Button 
                     size="sm" 
-                    onClick={() => createCheckout('premium')}
+                    onClick={() => navigate('/pricing')}
                     className="ml-2"
                   >
                     <Crown className="h-4 w-4 mr-1" />

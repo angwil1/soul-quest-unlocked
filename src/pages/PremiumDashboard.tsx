@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
-import { useSubscription } from '@/hooks/useSubscription';
+
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -14,7 +14,7 @@ import { Crown, Sparkles, Settings, BarChart3 } from 'lucide-react';
 const PremiumDashboard = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
-  const { subscription, loading } = useSubscription();
+  const loading = false; // Simplified without subscription
 
   useEffect(() => {
     if (!loading && !user) {
@@ -40,6 +40,7 @@ const PremiumDashboard = () => {
     return null;
   }
 
+  const subscription = { subscribed: false, subscription_tier: null, subscription_end: null };
   const isSubscribed = subscription?.subscribed || false;
   const subscriptionTier = subscription?.subscription_tier;
 

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
-import { useSubscription } from '@/hooks/useSubscription';
+
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import { Navbar } from '@/components/Navbar';
@@ -42,7 +42,6 @@ interface DNAInsight {
 
 const ConnectionDNA = () => {
   const { user } = useAuth();
-  const { subscription } = useSubscription();
   const { toast } = useToast();
 
   const [dnaProfile, setDnaProfile] = useState<DNAProfile | null>(null);
@@ -50,7 +49,7 @@ const ConnectionDNA = () => {
   const [loading, setLoading] = useState(true);
   const [analyzing, setAnalyzing] = useState(false);
 
-  const isUnlockedBeyond = subscription?.subscription_tier === 'Pro' && subscription?.subscribed;
+  const isUnlockedBeyond = false; // Simplified without subscription
 
   useEffect(() => {
     if (user && isUnlockedBeyond) {
