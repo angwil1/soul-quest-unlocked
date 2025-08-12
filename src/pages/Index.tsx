@@ -112,16 +112,16 @@ const Index = () => {
         
         {/* Quick Login Box */}
         <div className="absolute top-4 right-4 z-50">
-          <Card className="w-64 bg-background/95 backdrop-blur-sm border border-primary/20 shadow-lg">
-            <CardContent className="p-4">
-              <div className="flex items-center gap-2 mb-3">
-                <HelpCircle className="h-4 w-4 text-primary" />
-                <span className="text-sm font-medium">Already have an account?</span>
+          <Card className="w-48 bg-background/95 backdrop-blur-sm border border-primary/20 shadow-lg">
+            <CardContent className="p-3">
+              <div className="flex items-center gap-1 mb-2">
+                <HelpCircle className="h-3 w-3 text-primary" />
+                <span className="text-xs font-medium">Already have an account?</span>
               </div>
               <Button 
                 onClick={() => navigate('/auth')}
                 size="sm"
-                className="w-full bg-primary/10 hover:bg-primary/20 text-primary border border-primary/30"
+                className="w-full bg-primary/10 hover:bg-primary/20 text-primary border border-primary/30 text-xs"
                 variant="outline"
               >
                 Quick Login
