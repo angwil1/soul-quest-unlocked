@@ -24,8 +24,8 @@ const Auth = () => {
   // Only redirect if already authenticated and NOT from a fresh signup
   useEffect(() => {
     if (user && !pendingSignup) {
-      // Small delay to ensure we don't redirect during signup process
-      const timer = setTimeout(() => {
+      // Check if we're on the auth page and user is already authenticated
+      if (window.location.pathname === '/auth') {
         // Check if user has completed quiz by checking if they have quiz answers
         const checkQuizCompletion = async () => {
           try {
@@ -51,9 +51,7 @@ const Auth = () => {
         };
         
         checkQuizCompletion();
-      }, 500); // Small delay to allow signup flow to complete
-
-      return () => clearTimeout(timer);
+      }
     }
   }, [user, navigate, pendingSignup]);
 

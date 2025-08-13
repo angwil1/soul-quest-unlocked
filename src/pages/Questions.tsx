@@ -91,11 +91,11 @@ const Questions = () => {
 
       toast({
         title: "Quiz completed! 🎉",
-        description: "Your compatibility profile is being generated. You'll receive an email with your results!",
+        description: "Here are your quiz results! Your compatibility profile has been generated.",
       });
 
-      // Navigate to matches with AI compatibility
-      navigate('/matches');
+      // Navigate to quiz results instead of matches
+      navigate('/quiz-results');
     } catch (error) {
       console.error('Error submitting quiz:', error);
       toast({
