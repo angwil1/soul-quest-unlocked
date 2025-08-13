@@ -300,16 +300,16 @@ const Index = () => {
       <Navbar />
       
       {/* Welcome Back Section */}
-      <div className="pt-16 pb-6 px-4">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-xl font-bold text-primary mb-2">Welcome back!</h2>
-          <p className="text-muted-foreground mb-4 text-sm">Ready to discover meaningful connections?</p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+      <div className="pt-12 pb-4 px-3">
+        <div className="max-w-sm sm:max-w-2xl mx-auto text-center">
+          <h2 className="text-lg sm:text-xl font-bold text-primary mb-1">Welcome back!</h2>
+          <p className="text-muted-foreground mb-3 text-xs sm:text-sm">Ready to discover meaningful connections?</p>
+          <div className="flex flex-col gap-2 max-w-xs mx-auto">
             <Button 
               onClick={() => navigate('/profile')} 
               variant="outline"
               size="sm"
-              className="w-full sm:w-auto"
+              className="w-full h-8 text-xs"
             >
               View Profile
             </Button>
@@ -317,7 +317,7 @@ const Index = () => {
               onClick={() => signOut()} 
               variant="ghost"
               size="sm"
-              className="w-full sm:w-auto"
+              className="w-full h-8 text-xs"
             >
               Sign Out
             </Button>
@@ -326,108 +326,110 @@ const Index = () => {
       </div>
 
       {/* Main Hero Section */}
-      <div className="relative py-12 px-4">
-        <div className="max-w-5xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent mb-4 animate-fade-in">
+      <div className="relative py-6 px-3">
+        <div className="max-w-sm sm:max-w-4xl mx-auto text-center">
+          <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent mb-3 sm:mb-4 animate-fade-in leading-tight">
             Find Your
             <br />
             Perfect Match
           </h1>
-          <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: '0.2s' }}>
+          <p className="text-sm sm:text-lg md:text-xl text-muted-foreground mb-6 sm:mb-8 max-w-xs sm:max-w-2xl mx-auto animate-fade-in leading-relaxed" style={{ animationDelay: '0.2s' }}>
             Search for connections that resonate with your soul through AI-powered compatibility.
           </p>
 
           {/* Search Section */}
-          <div className="max-w-xl mx-auto mb-8 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-            <div className="flex gap-2 mb-4">
+          <div className="max-w-xs sm:max-w-xl mx-auto mb-6 sm:mb-8 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+            <div className="flex flex-col sm:flex-row gap-2 mb-3 sm:mb-4">
               <Input
                 type="text"
-                placeholder="Search by interests, location..."
+                placeholder="Search by interests..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="flex-1"
+                className="flex-1 h-9 sm:h-10 text-sm"
                 onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
               />
-              <Button onClick={handleSearch} size="sm" className="px-4">
-                <Search className="h-4 w-4" />
+              <Button onClick={handleSearch} size="sm" className="px-3 h-9 sm:h-10">
+                <Search className="h-3 w-3 sm:h-4 sm:w-4" />
               </Button>
             </div>
 
             {/* Filter Toggle */}
-            <div className="flex justify-center mb-4">
-              <SearchFilters 
-                onFiltersChange={handleFiltersChange}
-                onUpgradePrompt={handleUpgradePrompt}
-                onPreferenceChange={setSearchPreference}
-              />
+            <div className="flex justify-center mb-3 sm:mb-4">
+              <div className="w-full max-w-xs sm:max-w-none">
+                <SearchFilters 
+                  onFiltersChange={handleFiltersChange}
+                  onUpgradePrompt={handleUpgradePrompt}
+                  onPreferenceChange={setSearchPreference}
+                />
+              </div>
             </div>
           </div>
 
           {/* Quick Actions */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl mx-auto mb-12 animate-fade-in" style={{ animationDelay: '0.6s' }}>
+          <div className="grid grid-cols-1 gap-3 max-w-xs sm:max-w-2xl mx-auto mb-8 sm:mb-12 animate-fade-in px-2" style={{ animationDelay: '0.6s' }}>
             <Button 
               onClick={() => navigate('/matches')} 
               variant="outline" 
-              size="default"
-              className="h-12 border-primary/30 hover:border-primary/50"
+              size="sm"
+              className="h-10 sm:h-12 text-sm border-primary/30 hover:border-primary/50"
             >
-              <Users className="h-5 w-5 mr-2" />
+              <Users className="h-4 w-4 mr-2" />
               Discover Matches
             </Button>
             <Button 
               onClick={() => navigate('/profile/edit')} 
               variant="outline" 
-              size="default"
-              className="h-12 border-primary/30 hover:border-primary/50"
+              size="sm"
+              className="h-10 sm:h-12 text-sm border-primary/30 hover:border-primary/50"
             >
-              <Settings className="h-5 w-5 mr-2" />
+              <Settings className="h-4 w-4 mr-2" />
               Edit Profile
             </Button>
             <Button 
               onClick={() => navigate('/messages')} 
               variant="outline" 
-              size="default"
-              className="h-12 border-primary/30 hover:border-primary/50"
+              size="sm"
+              className="h-10 sm:h-12 text-sm border-primary/30 hover:border-primary/50"
             >
-              <MessageCircle className="h-5 w-5 mr-2" />
+              <MessageCircle className="h-4 w-4 mr-2" />
               Messages
             </Button>
           </div>
 
           {/* Journey Stats */}
-          <div className="text-center animate-fade-in" style={{ animationDelay: '0.8s' }}>
-            <h3 className="text-lg font-semibold mb-6">Your Journey</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-2xl mx-auto">
-              <Card className="p-4 hover:shadow-lg transition-shadow">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-base">Meaningful Connections</CardTitle>
+          <div className="text-center animate-fade-in px-3" style={{ animationDelay: '0.8s' }}>
+            <h3 className="text-base sm:text-lg font-semibold mb-4 sm:mb-6">Your Journey</h3>
+            <div className="grid grid-cols-1 gap-3 max-w-xs sm:max-w-2xl mx-auto">
+              <Card className="p-3 sm:p-4 hover:shadow-lg transition-shadow">
+                <CardHeader className="pb-1 sm:pb-2">
+                  <CardTitle className="text-sm sm:text-base">Meaningful Connections</CardTitle>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="pt-1">
                   <div className="flex items-center justify-center">
-                    <Heart className="h-6 w-6 text-primary" />
+                    <Heart className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
                   </div>
                 </CardContent>
               </Card>
-              <Card className="p-4 hover:shadow-lg transition-shadow">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-base">AI Powered</CardTitle>
+              <Card className="p-3 sm:p-4 hover:shadow-lg transition-shadow">
+                <CardHeader className="pb-1 sm:pb-2">
+                  <CardTitle className="text-sm sm:text-base">AI Powered</CardTitle>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="pt-1">
                   <div className="flex items-center justify-center">
-                    <Sparkles className="h-6 w-6 text-primary" />
+                    <Sparkles className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
                   </div>
-                  <p className="text-xs text-muted-foreground mt-2">Smart Matching</p>
+                  <p className="text-xs text-muted-foreground mt-1 sm:mt-2">Smart Matching</p>
                 </CardContent>
               </Card>
-              <Card className="p-4 hover:shadow-lg transition-shadow">
-                <CardHeader className="pb-2">
-                  <CardTitle className="text-base">Privacy First</CardTitle>
+              <Card className="p-3 sm:p-4 hover:shadow-lg transition-shadow">
+                <CardHeader className="pb-1 sm:pb-2">
+                  <CardTitle className="text-sm sm:text-base">Privacy First</CardTitle>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="pt-1">
                   <div className="flex items-center justify-center">
-                    <Shield className="h-6 w-6 text-primary" />
+                    <Shield className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
                   </div>
-                  <p className="text-xs text-muted-foreground mt-2">Data Protected</p>
+                  <p className="text-xs text-muted-foreground mt-1 sm:mt-2">Data Protected</p>
                 </CardContent>
               </Card>
             </div>
