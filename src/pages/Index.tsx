@@ -108,148 +108,184 @@ const Index = () => {
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-background overflow-hidden">
         <Navbar />
         
-        {/* Modern Hero Section with Couples and Purple Gradients */}
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-          {/* Background with Couple Images */}
+        {/* Modern Hero Section with Enhanced Visuals */}
+        <section className="relative min-h-screen flex items-center justify-center">
+          {/* Dynamic Background with Multiple Layers */}
           <div className="absolute inset-0 z-0">
             <div className="relative w-full h-full">
+              {/* Primary Background Image */}
               <img 
                 src={coupleHero1} 
                 alt="Couple connecting" 
-                className="absolute inset-0 w-full h-full object-cover opacity-60 animate-fade-in"
+                className="absolute inset-0 w-full h-full object-cover opacity-40 animate-fade-in"
               />
-              <div className="absolute inset-0 bg-gradient-to-br from-background/70 via-background/60 to-primary/20"></div>
+              
+              {/* Secondary Background for Depth */}
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-purple-600/15 to-pink-600/20"></div>
+              
+              {/* Overlay Pattern */}
+              <div className="absolute inset-0 bg-gradient-to-br from-background/85 via-background/75 to-background/85"></div>
+              
+              {/* Floating Background Elements */}
+              <div className="absolute top-20 left-20 w-72 h-72 bg-gradient-to-br from-primary/10 to-purple-600/10 rounded-full blur-3xl animate-pulse"></div>
+              <div className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-br from-pink-600/10 to-primary/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
             </div>
           </div>
 
           {/* Hero Content */}
-          <div className="relative z-10 max-w-6xl mx-auto px-4 py-20 text-center">
+          <div className="relative z-10 max-w-7xl mx-auto px-4 py-20 text-center">
             <div className="animate-fade-in">
-              <Badge variant="secondary" className="mb-6 px-4 py-2 text-sm font-medium bg-primary/10 text-primary border-primary/20">
-                <Sparkles className="h-4 w-4 mr-2" />
-                AI-Powered Emotional Intelligence
-              </Badge>
+              {/* Enhanced Badge */}
+              <div className="inline-flex items-center px-6 py-3 mb-8 rounded-full bg-gradient-to-r from-primary/10 to-purple-600/10 border border-primary/20 backdrop-blur-sm">
+                <Sparkles className="h-5 w-5 mr-3 text-primary animate-pulse" />
+                <span className="text-primary font-semibold">AI-Powered Emotional Intelligence Dating</span>
+              </div>
               
-              <h1 className="text-5xl md:text-7xl font-bold mb-6">
-                <span className="bg-gradient-to-r from-primary via-purple-600 to-pink-600 bg-clip-text text-transparent block">
-                  Find Your
+              {/* Main Title with Enhanced Typography */}
+              <h1 className="text-5xl md:text-8xl font-bold mb-8 leading-tight">
+                <span className="block bg-gradient-to-r from-primary via-purple-600 to-pink-600 bg-clip-text text-transparent animate-scale-in">
+                  Beyond Swipes,
                 </span>
-                <span className="bg-gradient-to-r from-primary via-purple-600 to-pink-600 bg-clip-text text-transparent block relative">
-                  Perfect Match
-                  <div className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-primary via-purple-600 to-pink-600 rounded-full animate-scale-in"></div>
+                <span className="block bg-gradient-to-r from-pink-600 via-purple-600 to-primary bg-clip-text text-transparent animate-scale-in relative" style={{ animationDelay: '0.2s' }}>
+                  Find Your Soul
+                  <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-32 h-2 bg-gradient-to-r from-primary via-purple-600 to-pink-600 rounded-full animate-scale-in" style={{ animationDelay: '0.5s' }}></div>
                 </span>
               </h1>
               
-              <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
-                Beyond swipes. Beyond games. Discover meaningful connections through{" "}
-                <span className="text-primary font-semibold">emotional intelligence</span> and{" "}
-                <span className="text-primary font-semibold">genuine compatibility</span>.
+              {/* Enhanced Description */}
+              <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-4xl mx-auto leading-relaxed animate-fade-in" style={{ animationDelay: '0.3s' }}>
+                Discover meaningful connections through <span className="text-primary font-semibold bg-primary/10 px-2 py-1 rounded">emotional intelligence</span> and{" "}
+                <span className="text-purple-600 font-semibold bg-purple-600/10 px-2 py-1 rounded">genuine compatibility</span>. 
+                No games, no superficial swipes—just authentic relationships.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8 max-w-lg mx-auto">
+              {/* Enhanced CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16 max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: '0.4s' }}>
                 <Button 
                   size="lg" 
                   onClick={() => navigate('/quick-start')}
-                  className="w-full sm:w-auto px-8 py-4 text-lg font-semibold bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90 transform hover:scale-105 transition-all duration-200 animate-scale-in shadow-lg hover:shadow-xl"
+                  className="w-full sm:w-auto px-12 py-6 text-xl font-bold bg-gradient-to-r from-primary via-purple-600 to-pink-600 hover:from-primary/90 hover:via-purple-600/90 hover:to-pink-600/90 transform hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl rounded-2xl border-0"
                 >
-                  <Heart className="h-5 w-5 mr-2" />
+                  <Heart className="h-6 w-6 mr-3" />
                   Start Your Journey
+                  <ArrowRight className="h-5 w-5 ml-3" />
                 </Button>
                 
                 <Button 
                   variant="outline" 
                   size="lg"
                   onClick={() => navigate('/quick-start')}
-                  className="w-full sm:w-auto px-8 py-4 text-lg font-semibold border-2 border-primary/30 hover:border-primary/50 hover:bg-primary/5 transform hover:scale-105 transition-all duration-200 animate-scale-in"
+                  className="w-full sm:w-auto px-12 py-6 text-xl font-semibold border-2 border-primary/40 hover:border-primary/60 hover:bg-primary/10 transform hover:scale-105 transition-all duration-300 rounded-2xl backdrop-blur-sm"
                 >
-                  <Users className="h-5 w-5 mr-2" />
+                  <Users className="h-6 w-6 mr-3" />
                   See How It Works
                 </Button>
               </div>
 
-              <div className="text-center mb-16">
-                <p className="text-muted-foreground mb-2">Already have an account?</p>
+              {/* Login Section */}
+              <div className="text-center mb-16 animate-fade-in" style={{ animationDelay: '0.5s' }}>
+                <p className="text-muted-foreground mb-4 text-lg">Already have an account?</p>
                 <Button 
-                  variant="link" 
+                  variant="ghost" 
                   onClick={() => navigate('/auth')}
-                  className="text-primary hover:text-primary/80 font-semibold text-lg underline"
+                  className="text-primary hover:text-primary/80 font-semibold text-xl px-8 py-4 rounded-xl hover:bg-primary/10 transition-all duration-300"
                 >
                   Log in and reconnect
+                  <ArrowRight className="h-5 w-5 ml-2" />
                 </Button>
               </div>
 
-              {/* Stats */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-2xl mx-auto">
-                <div className="text-center animate-fade-in">
-                  <div className="text-3xl font-bold text-primary mb-2">10,000+</div>
-                  <div className="text-sm text-muted-foreground">Meaningful Connections</div>
+              {/* Enhanced Stats */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto animate-fade-in" style={{ animationDelay: '0.6s' }}>
+                <div className="text-center p-6 rounded-2xl bg-gradient-to-br from-primary/5 to-purple-600/5 border border-primary/10 backdrop-blur-sm hover:scale-105 transition-transform duration-300">
+                  <div className="text-4xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent mb-3">10,000+</div>
+                  <div className="text-muted-foreground font-medium">Meaningful Connections Made</div>
                 </div>
-                <div className="text-center animate-fade-in">
-                  <div className="text-3xl font-bold text-primary mb-2">94%</div>
-                  <div className="text-sm text-muted-foreground">Match Compatibility Rate</div>
+                <div className="text-center p-6 rounded-2xl bg-gradient-to-br from-purple-600/5 to-pink-600/5 border border-purple-600/10 backdrop-blur-sm hover:scale-105 transition-transform duration-300">
+                  <div className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-3">94%</div>
+                  <div className="text-muted-foreground font-medium">Match Compatibility Rate</div>
                 </div>
-                <div className="text-center animate-fade-in">
-                  <div className="text-3xl font-bold text-primary mb-2">4.8★</div>
-                  <div className="text-sm text-muted-foreground">User Satisfaction Score</div>
+                <div className="text-center p-6 rounded-2xl bg-gradient-to-br from-pink-600/5 to-primary/5 border border-pink-600/10 backdrop-blur-sm hover:scale-105 transition-transform duration-300">
+                  <div className="text-4xl font-bold bg-gradient-to-r from-pink-600 to-primary bg-clip-text text-transparent mb-3">4.8★</div>
+                  <div className="text-muted-foreground font-medium">User Satisfaction Score</div>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Floating Elements */}
-          <div className="absolute top-20 left-10 animate-pulse">
-            <div className="w-3 h-3 bg-primary/30 rounded-full"></div>
+          {/* Enhanced Floating Elements */}
+          <div className="absolute top-32 left-16 animate-pulse">
+            <div className="w-4 h-4 bg-gradient-to-r from-primary to-purple-600 rounded-full"></div>
           </div>
-          <div className="absolute bottom-32 right-16 animate-pulse" style={{ animationDelay: '1s' }}>
-            <div className="w-2 h-2 bg-purple-500/40 rounded-full"></div>
+          <div className="absolute bottom-40 right-20 animate-pulse" style={{ animationDelay: '1s' }}>
+            <div className="w-3 h-3 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full"></div>
           </div>
-          <div className="absolute top-1/3 right-10 animate-pulse" style={{ animationDelay: '2s' }}>
-            <div className="w-4 h-4 bg-pink-500/30 rounded-full"></div>
+          <div className="absolute top-1/3 right-16 animate-pulse" style={{ animationDelay: '2s' }}>
+            <div className="w-5 h-5 bg-gradient-to-r from-pink-600 to-primary rounded-full"></div>
+          </div>
+          <div className="absolute top-2/3 left-24 animate-pulse" style={{ animationDelay: '1.5s' }}>
+            <div className="w-2 h-2 bg-gradient-to-r from-primary to-pink-600 rounded-full"></div>
           </div>
         </section>
 
-        <div className="p-4">
-          <div className="max-w-6xl mx-auto">
-            {/* What Makes Us Different Section */}
-            <div className="mt-16">
-              <h2 className="text-3xl font-bold text-center mb-12">What Makes Us Different</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <Card className="border-primary/20 bg-gradient-to-br from-primary/5 to-background">
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-3">
-                      <span className="text-2xl">🔐</span>
+        {/* Enhanced Features Section */}
+        <section className="py-24 bg-gradient-to-br from-background to-primary/5">
+          <div className="max-w-6xl mx-auto px-4">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent mb-6">
+                What Makes Us Different
+              </h2>
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+                We're redefining dating through authenticity, privacy, and meaningful connections
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <Card className="border-primary/20 bg-gradient-to-br from-primary/5 to-background backdrop-blur-sm hover:shadow-xl transition-all duration-300 group">
+                <CardHeader className="pb-6">
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="p-3 bg-gradient-to-br from-primary/20 to-purple-600/20 rounded-xl">
+                      <span className="text-3xl">🔐</span>
+                    </div>
+                    <CardTitle className="text-2xl font-bold group-hover:text-primary transition-colors">
                       Privacy First Always
                     </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground leading-relaxed">
-                      No ads. No tracking. No selling your data. You are here to connect not to be commodified. We never compromise on user trust.
-                    </p>
-                  </CardContent>
-                </Card>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground leading-relaxed text-lg">
+                    No ads. No tracking. No selling your data. You are here to connect, not to be commodified. 
+                    We never compromise on user trust and transparency.
+                  </p>
+                </CardContent>
+              </Card>
 
-                <Card className="border-primary/20 bg-gradient-to-br from-primary/5 to-background">
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-3">
-                      <span className="text-2xl">🤖</span>
+              <Card className="border-primary/20 bg-gradient-to-br from-purple-600/5 to-background backdrop-blur-sm hover:shadow-xl transition-all duration-300 group">
+                <CardHeader className="pb-6">
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="p-3 bg-gradient-to-br from-purple-600/20 to-pink-600/20 rounded-xl">
+                      <span className="text-3xl">🤖</span>
+                    </div>
+                    <CardTitle className="text-2xl font-bold group-hover:text-purple-600 transition-colors">
                       AI That Respects You
                     </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground leading-relaxed">
-                      Our matchmaking uses AI to spark real compatibility not swipe fatigue. You will receive digestible insights designed to help you reflect not react.
-                    </p>
-                  </CardContent>
-                </Card>
-              </div>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground leading-relaxed text-lg">
+                    Our matchmaking uses AI to spark real compatibility, not swipe fatigue. 
+                    Receive digestible insights designed to help you reflect, not react.
+                  </p>
+                </CardContent>
+              </Card>
             </div>
           </div>
-        </div>
-        <Footer />
+        </section>
         
+        <Footer />
       </div>
     );
   }
