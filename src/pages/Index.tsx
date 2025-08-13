@@ -345,147 +345,153 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-background to-pink-900 overflow-hidden">
       <Navbar />
       
-      {/* Welcome Back Section */}
-      <div className="pt-12 pb-4 px-3">
-        <div className="max-w-sm sm:max-w-2xl mx-auto text-center">
-          <h2 className="text-lg sm:text-xl font-bold text-primary mb-1">Welcome back!</h2>
-          <p className="text-muted-foreground mb-3 text-xs sm:text-sm">Ready to discover meaningful connections?</p>
-          <div className="flex flex-col gap-2 max-w-xs mx-auto">
-            <Button 
-              onClick={() => navigate('/profile')} 
-              variant="outline"
-              size="sm"
-              className="w-full h-8 text-xs"
-            >
-              View Profile
-            </Button>
-            <Button 
-              onClick={() => signOut()} 
-              variant="ghost"
-              size="sm"
-              className="w-full h-8 text-xs"
-            >
-              Sign Out
-            </Button>
+      {/* DRAMATIC HERO DESIGN FOR LOGGED IN USERS */}
+      <section className="relative min-h-screen flex items-center justify-center">
+        {/* Dynamic Background with Multiple Layers */}
+        <div className="absolute inset-0 z-0">
+          <div className="relative w-full h-full">
+            {/* Primary Background Image */}
+            <img 
+              src={coupleHero1} 
+              alt="Couple connecting" 
+              className="absolute inset-0 w-full h-full object-cover opacity-40 animate-fade-in transition-opacity duration-1000"
+            />
+            
+            {/* Secondary Background for Depth */}
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-purple-600/15 to-pink-600/20 transition-all duration-1000"></div>
+            
+            {/* Overlay Pattern */}
+            <div className="absolute inset-0 bg-gradient-to-br from-background/85 via-background/75 to-background/85"></div>
+            
+            {/* Floating Background Elements */}
+            <div className="absolute top-20 left-20 w-72 h-72 bg-gradient-to-br from-primary/10 to-purple-600/10 rounded-full blur-3xl animate-pulse"></div>
+            <div className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-br from-pink-600/10 to-primary/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
           </div>
         </div>
-      </div>
 
-      {/* Main Hero Section */}
-      <div className="relative py-6 px-3">
-        <div className="max-w-sm sm:max-w-4xl mx-auto text-center">
-          <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent mb-3 sm:mb-4 animate-fade-in leading-tight">
-            Find Your
-            <br />
-            Perfect Match
-          </h1>
-          <p className="text-sm sm:text-lg md:text-xl text-muted-foreground mb-6 sm:mb-8 max-w-xs sm:max-w-2xl mx-auto animate-fade-in leading-relaxed" style={{ animationDelay: '0.2s' }}>
-            Search for connections that resonate with your soul through AI-powered compatibility.
-          </p>
-
-          {/* Search Section */}
-          <div className="max-w-xs sm:max-w-xl mx-auto mb-6 sm:mb-8 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-            <div className="flex flex-col sm:flex-row gap-2 mb-3 sm:mb-4">
-              <Input
-                type="text"
-                placeholder="Search by interests..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="flex-1 h-9 sm:h-10 text-sm"
-                onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
+        {/* Hero Content */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 py-20 text-center">
+          <div className="animate-fade-in">
+            {/* Enhanced Badge */}
+            <div className="inline-flex items-center px-6 py-3 mb-12 rounded-full bg-gradient-to-r from-primary/10 to-purple-600/10 border border-primary/20 backdrop-blur-sm hover:scale-105 transition-transform duration-300">
+              <Sparkles className="h-5 w-5 mr-3 text-primary animate-pulse" />
+              <span className="text-primary font-semibold">Welcome Back - Let's Find Your Match!</span>
+            </div>
+            
+            {/* MASSIVE TITLE - Mobile Responsive */}
+            <h1 className="text-4xl sm:text-6xl md:text-9xl font-black mb-8 sm:mb-16 leading-none">
+              <span className="block bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 bg-clip-text text-transparent animate-scale-in hover:scale-105 transition-transform duration-500">
+                🔥 HOTTEST 🔥
+              </span>
+              <span className="block bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent animate-scale-in text-3xl sm:text-8xl md:text-[12rem] hover:scale-105 transition-transform duration-500" style={{ animationDelay: '0.2s' }}>
+                DATING APP
+                <div className="absolute -bottom-4 sm:-bottom-8 left-1/2 transform -translate-x-1/2 w-32 sm:w-64 h-2 sm:h-4 bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 rounded-full animate-scale-in shadow-2xl hover:shadow-3xl transition-shadow duration-300" style={{ animationDelay: '0.5s' }}></div>
+              </span>
+            </h1>
+            
+            {/* SEARCH SECTION */}
+            <div className="mb-12 sm:mb-20 max-w-xl mx-auto">
+              <div className="flex flex-col sm:flex-row gap-2 mb-4">
+                <Input
+                  type="text"
+                  placeholder="Search by interests..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="flex-1 h-12 text-lg bg-white/10 backdrop-blur-sm border-white/20 text-white placeholder:text-white/60"
+                  onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
+                />
+                <Button onClick={handleSearch} size="lg" className="px-6 h-12 bg-gradient-to-r from-primary via-purple-600 to-pink-600">
+                  <Search className="h-5 w-5" />
+                </Button>
+              </div>
+              <SearchFilters 
+                onFiltersChange={handleFiltersChange}
+                onUpgradePrompt={handleUpgradePrompt}
+                onPreferenceChange={setSearchPreference}
               />
-              <Button onClick={handleSearch} size="sm" className="px-3 h-9 sm:h-10">
-                <Search className="h-3 w-3 sm:h-4 sm:w-4" />
+            </div>
+
+            {/* Enhanced CTA Buttons - Mobile Responsive */}
+            <div className="flex flex-col gap-4 sm:gap-8 justify-center items-center mb-12 sm:mb-20 max-w-xs sm:max-w-2xl mx-auto animate-fade-in px-4" style={{ animationDelay: '0.4s' }}>
+              <Button 
+                size="lg" 
+                onClick={() => navigate('/matches')}
+                className="w-full px-8 sm:px-12 py-4 sm:py-6 text-lg sm:text-xl font-bold bg-gradient-to-r from-primary via-purple-600 to-pink-600 hover:from-primary/90 hover:via-purple-600/90 hover:to-pink-600/90 transform hover:scale-110 transition-all duration-500 shadow-xl hover:shadow-3xl rounded-2xl border-0"
+              >
+                <Users className="h-5 w-5 sm:h-6 sm:w-6 mr-2 sm:mr-3" />
+                Discover Matches
+                <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 ml-2 sm:ml-3" />
+              </Button>
+              
+              <div className="grid grid-cols-2 gap-3 w-full">
+                <Button 
+                  variant="outline" 
+                  size="lg"
+                  onClick={() => navigate('/profile/edit')}
+                  className="px-4 py-4 text-sm font-semibold border-2 border-primary/40 hover:border-primary/60 hover:bg-primary/10 transform hover:scale-110 transition-all duration-500 rounded-2xl backdrop-blur-sm"
+                >
+                  <Settings className="h-4 w-4 mr-2" />
+                  Profile
+                </Button>
+                <Button 
+                  variant="outline" 
+                  size="lg"
+                  onClick={() => navigate('/messages')}
+                  className="px-4 py-4 text-sm font-semibold border-2 border-primary/40 hover:border-primary/60 hover:bg-primary/10 transform hover:scale-110 transition-all duration-500 rounded-2xl backdrop-blur-sm"
+                >
+                  <MessageCircle className="h-4 w-4 mr-2" />
+                  Messages
+                </Button>
+              </div>
+            </div>
+
+            {/* User Menu Section */}
+            <div className="text-center mb-12 sm:mb-20 animate-fade-in px-4" style={{ animationDelay: '0.5s' }}>
+              <Button 
+                variant="ghost" 
+                onClick={() => signOut()}
+                className="text-white/80 hover:text-white font-semibold text-lg px-6 py-3 rounded-xl hover:bg-white/10 transform hover:scale-105 transition-all duration-300"
+              >
+                Sign Out
               </Button>
             </div>
 
-            {/* Filter Toggle */}
-            <div className="flex justify-center mb-3 sm:mb-4">
-              <div className="w-full max-w-xs sm:max-w-none">
-                <SearchFilters 
-                  onFiltersChange={handleFiltersChange}
-                  onUpgradePrompt={handleUpgradePrompt}
-                  onPreferenceChange={setSearchPreference}
-                />
+            {/* Enhanced Stats */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto animate-fade-in" style={{ animationDelay: '0.6s' }}>
+              <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-primary/5 to-purple-600/5 border border-primary/10 backdrop-blur-sm hover:scale-110 hover:shadow-xl transition-all duration-500">
+                <div className="text-4xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent mb-3">10,000+</div>
+                <div className="text-muted-foreground font-medium">Meaningful Connections Made</div>
+              </div>
+              <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-purple-600/5 to-pink-600/5 border border-purple-600/10 backdrop-blur-sm hover:scale-110 hover:shadow-xl transition-all duration-500">
+                <div className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-3">94%</div>
+                <div className="text-muted-foreground font-medium">Match Compatibility Rate</div>
+              </div>
+              <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-pink-600/5 to-primary/5 border border-pink-600/10 backdrop-blur-sm hover:scale-110 hover:shadow-xl transition-all duration-500">
+                <div className="text-4xl font-bold bg-gradient-to-r from-pink-600 to-primary bg-clip-text text-transparent mb-3">4.8★</div>
+                <div className="text-muted-foreground font-medium">User Satisfaction Score</div>
               </div>
             </div>
           </div>
-
-          {/* Quick Actions */}
-          <div className="grid grid-cols-1 gap-3 max-w-xs sm:max-w-2xl mx-auto mb-8 sm:mb-12 animate-fade-in px-2" style={{ animationDelay: '0.6s' }}>
-            <Button 
-              onClick={() => navigate('/matches')} 
-              variant="outline" 
-              size="sm"
-              className="h-10 sm:h-12 text-sm border-primary/30 hover:border-primary/50"
-            >
-              <Users className="h-4 w-4 mr-2" />
-              Discover Matches
-            </Button>
-            <Button 
-              onClick={() => navigate('/profile/edit')} 
-              variant="outline" 
-              size="sm"
-              className="h-10 sm:h-12 text-sm border-primary/30 hover:border-primary/50"
-            >
-              <Settings className="h-4 w-4 mr-2" />
-              Edit Profile
-            </Button>
-            <Button 
-              onClick={() => navigate('/messages')} 
-              variant="outline" 
-              size="sm"
-              className="h-10 sm:h-12 text-sm border-primary/30 hover:border-primary/50"
-            >
-              <MessageCircle className="h-4 w-4 mr-2" />
-              Messages
-            </Button>
-          </div>
-
-          {/* Journey Stats */}
-          <div className="text-center animate-fade-in px-3" style={{ animationDelay: '0.8s' }}>
-            <h3 className="text-base sm:text-lg font-semibold mb-4 sm:mb-6">Your Journey</h3>
-            <div className="grid grid-cols-1 gap-3 max-w-xs sm:max-w-2xl mx-auto">
-              <Card className="p-3 sm:p-4 hover:shadow-lg transition-shadow">
-                <CardHeader className="pb-1 sm:pb-2">
-                  <CardTitle className="text-sm sm:text-base">Meaningful Connections</CardTitle>
-                </CardHeader>
-                <CardContent className="pt-1">
-                  <div className="flex items-center justify-center">
-                    <Heart className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
-                  </div>
-                </CardContent>
-              </Card>
-              <Card className="p-3 sm:p-4 hover:shadow-lg transition-shadow">
-                <CardHeader className="pb-1 sm:pb-2">
-                  <CardTitle className="text-sm sm:text-base">AI Powered</CardTitle>
-                </CardHeader>
-                <CardContent className="pt-1">
-                  <div className="flex items-center justify-center">
-                    <Sparkles className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
-                  </div>
-                  <p className="text-xs text-muted-foreground mt-1 sm:mt-2">Smart Matching</p>
-                </CardContent>
-              </Card>
-              <Card className="p-3 sm:p-4 hover:shadow-lg transition-shadow">
-                <CardHeader className="pb-1 sm:pb-2">
-                  <CardTitle className="text-sm sm:text-base">Privacy First</CardTitle>
-                </CardHeader>
-                <CardContent className="pt-1">
-                  <div className="flex items-center justify-center">
-                    <Shield className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
-                  </div>
-                  <p className="text-xs text-muted-foreground mt-1 sm:mt-2">Data Protected</p>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
         </div>
-      </div>
 
+        {/* Enhanced Floating Elements */}
+        <div className="absolute top-32 left-16 animate-pulse hover:scale-150 transition-transform duration-500">
+          <div className="w-4 h-4 bg-gradient-to-r from-primary to-purple-600 rounded-full"></div>
+        </div>
+        <div className="absolute bottom-40 right-20 animate-pulse hover:scale-150 transition-transform duration-500" style={{ animationDelay: '1s' }}>
+          <div className="w-3 h-3 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full"></div>
+        </div>
+        <div className="absolute top-1/3 right-16 animate-pulse hover:scale-150 transition-transform duration-500" style={{ animationDelay: '2s' }}>
+          <div className="w-5 h-5 bg-gradient-to-r from-pink-600 to-primary rounded-full"></div>
+        </div>
+        <div className="absolute top-2/3 left-24 animate-pulse hover:scale-150 transition-transform duration-500" style={{ animationDelay: '1.5s' }}>
+          <div className="w-2 h-2 bg-gradient-to-r from-primary to-pink-600 rounded-full"></div>
+        </div>
+      </section>
+      
       <Footer />
       
       <FirstLightModal 
