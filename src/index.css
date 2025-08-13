@@ -8,63 +8,63 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Clean, modern background */
-    --background: 210 40% 98%;
-    --foreground: 215 25% 15%;
+    /* Clean, neutral background */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 10%;
 
-    /* Card colors with subtle blue tint */
+    /* Card colors - pure whites and grays */
     --card: 0 0% 100%;
-    --card-foreground: 215 25% 15%;
+    --card-foreground: 0 0% 10%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 215 25% 15%;
+    --popover-foreground: 0 0% 10%;
 
-    /* Primary: Clean blue */
-    --primary: 220 85% 55%;
+    /* Primary: Clean blue without purple tint */
+    --primary: 210 100% 50%;
     --primary-foreground: 0 0% 100%;
-    --primary-glow: 220 85% 70%;
+    --primary-glow: 210 100% 70%;
 
-    /* Secondary: Better contrast blue-gray */
-    --secondary: 220 50% 90%;
-    --secondary-foreground: 215 25% 20%;
+    /* Secondary: Clean grays */
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 20%;
 
-    /* Muted: Light blue-gray */
-    --muted: 220 40% 95%;
-    --muted-foreground: 220 15% 50%;
+    /* Muted: Light grays */
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
 
-    /* Accent: Vibrant teal */
-    --accent: 200 80% 85%;
-    --accent-foreground: 215 50% 25%;
+    /* Accent: Light blue */
+    --accent: 210 50% 95%;
+    --accent-foreground: 210 100% 25%;
 
-    /* Destructive: Warm red */
+    /* Destructive: Red */
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    /* Borders and inputs with blue tint */
-    --border: 220 25% 88%;
-    --input: 220 25% 88%;
-    --ring: 250 75% 60%;
+    /* Borders and inputs - neutral grays */
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 210 100% 50%;
 
     --radius: 0.75rem;
 
-    /* Clean gradients - blue to blue-green */
-    --gradient-primary: linear-gradient(135deg, hsl(220 85% 55%), hsl(195 80% 60%));
-    --gradient-secondary: linear-gradient(135deg, hsl(220 50% 92%), hsl(220 40% 95%));
-    --gradient-hero: linear-gradient(135deg, hsl(220 85% 55%) 0%, hsl(195 80% 60%) 50%, hsl(170 60% 65%) 100%);
+    /* Clean gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(210 100% 50%), hsl(210 100% 60%));
+    --gradient-secondary: linear-gradient(135deg, hsl(0 0% 96%), hsl(0 0% 98%));
+    --gradient-hero: linear-gradient(135deg, hsl(210 100% 50%) 0%, hsl(210 100% 60%) 100%);
     
-    /* Shadows with subtle blue */
-    --shadow-primary: 0 10px 30px -10px hsl(250 75% 60% / 0.3);
-    --shadow-secondary: 0 4px 20px -4px hsl(200 80% 65% / 0.2);
+    /* Clean shadows */
+    --shadow-primary: 0 10px 30px -10px hsl(210 100% 50% / 0.2);
+    --shadow-secondary: 0 4px 20px -4px hsl(0 0% 0% / 0.1);
 
-    /* Sidebar colors */
-    --sidebar-background: 210 40% 98%;
-    --sidebar-foreground: 215 25% 25%;
-    --sidebar-primary: 250 75% 60%;
+    /* Sidebar colors - clean */
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 0 0% 10%;
+    --sidebar-primary: 210 100% 50%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 220 40% 95%;
-    --sidebar-accent-foreground: 215 25% 25%;
-    --sidebar-border: 220 25% 88%;
-    --sidebar-ring: 250 75% 60%;
+    --sidebar-accent: 0 0% 96%;
+    --sidebar-accent-foreground: 0 0% 10%;
+    --sidebar-border: 0 0% 90%;
+    --sidebar-ring: 210 100% 50%;
 }
 
 /* Mobile-specific styles */
