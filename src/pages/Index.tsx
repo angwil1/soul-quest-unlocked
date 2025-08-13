@@ -300,14 +300,15 @@ const Index = () => {
       <Navbar />
       
       {/* Welcome Back Section */}
-      <div className="pt-20 pb-8 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-2xl font-bold text-primary mb-2">Welcome back!</h2>
-          <p className="text-muted-foreground mb-6">Ready to discover meaningful connections?</p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <div className="pt-16 pb-6 px-4">
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="text-xl font-bold text-primary mb-2">Welcome back!</h2>
+          <p className="text-muted-foreground mb-4 text-sm">Ready to discover meaningful connections?</p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
             <Button 
               onClick={() => navigate('/profile')} 
               variant="outline"
+              size="sm"
               className="w-full sm:w-auto"
             >
               View Profile
@@ -315,6 +316,7 @@ const Index = () => {
             <Button 
               onClick={() => signOut()} 
               variant="ghost"
+              size="sm"
               className="w-full sm:w-auto"
             >
               Sign Out
@@ -324,35 +326,35 @@ const Index = () => {
       </div>
 
       {/* Main Hero Section */}
-      <div className="relative py-20 px-4">
-        <div className="max-w-6xl mx-auto text-center">
-          <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent mb-6 animate-fade-in">
+      <div className="relative py-12 px-4">
+        <div className="max-w-5xl mx-auto text-center">
+          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent mb-4 animate-fade-in">
             Find Your
             <br />
             Perfect Match
           </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto animate-fade-in" style={{ animationDelay: '0.2s' }}>
-            Search for connections that resonate with your soul through AI-powered compatibility and emotional intelligence.
+          <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: '0.2s' }}>
+            Search for connections that resonate with your soul through AI-powered compatibility.
           </p>
 
           {/* Search Section */}
-          <div className="max-w-2xl mx-auto mb-12 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-            <div className="flex gap-3 mb-6">
+          <div className="max-w-xl mx-auto mb-8 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+            <div className="flex gap-2 mb-4">
               <Input
                 type="text"
-                placeholder="Search by interests, location, or keywords..."
+                placeholder="Search by interests, location..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="flex-1 text-base"
+                className="flex-1"
                 onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
               />
-              <Button onClick={handleSearch} className="px-6">
-                <Search className="h-5 w-5" />
+              <Button onClick={handleSearch} size="sm" className="px-4">
+                <Search className="h-4 w-4" />
               </Button>
             </div>
 
             {/* Filter Toggle */}
-            <div className="flex justify-center mb-6">
+            <div className="flex justify-center mb-4">
               <SearchFilters 
                 onFiltersChange={handleFiltersChange}
                 onUpgradePrompt={handleUpgradePrompt}
@@ -362,70 +364,70 @@ const Index = () => {
           </div>
 
           {/* Quick Actions */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-16 animate-fade-in" style={{ animationDelay: '0.6s' }}>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl mx-auto mb-12 animate-fade-in" style={{ animationDelay: '0.6s' }}>
             <Button 
               onClick={() => navigate('/matches')} 
               variant="outline" 
-              size="lg"
-              className="h-16 text-lg border-primary/30 hover:border-primary/50"
+              size="default"
+              className="h-12 border-primary/30 hover:border-primary/50"
             >
-              <Users className="h-6 w-6 mr-3" />
+              <Users className="h-5 w-5 mr-2" />
               Discover Matches
             </Button>
             <Button 
               onClick={() => navigate('/profile/edit')} 
               variant="outline" 
-              size="lg"
-              className="h-16 text-lg border-primary/30 hover:border-primary/50"
+              size="default"
+              className="h-12 border-primary/30 hover:border-primary/50"
             >
-              <Settings className="h-6 w-6 mr-3" />
+              <Settings className="h-5 w-5 mr-2" />
               Edit Profile
             </Button>
             <Button 
               onClick={() => navigate('/messages')} 
               variant="outline" 
-              size="lg"
-              className="h-16 text-lg border-primary/30 hover:border-primary/50"
+              size="default"
+              className="h-12 border-primary/30 hover:border-primary/50"
             >
-              <MessageCircle className="h-6 w-6 mr-3" />
+              <MessageCircle className="h-5 w-5 mr-2" />
               Messages
             </Button>
           </div>
 
           {/* Journey Stats */}
           <div className="text-center animate-fade-in" style={{ animationDelay: '0.8s' }}>
-            <h3 className="text-2xl font-semibold mb-8">Your Journey</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto">
-              <Card className="p-6 hover:shadow-lg transition-shadow">
+            <h3 className="text-lg font-semibold mb-6">Your Journey</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-2xl mx-auto">
+              <Card className="p-4 hover:shadow-lg transition-shadow">
                 <CardHeader className="pb-2">
-                  <CardTitle className="text-lg">Meaningful Connections Await</CardTitle>
+                  <CardTitle className="text-base">Meaningful Connections</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="flex items-center justify-center">
-                    <Heart className="h-8 w-8 text-primary" />
+                    <Heart className="h-6 w-6 text-primary" />
                   </div>
                 </CardContent>
               </Card>
-              <Card className="p-6 hover:shadow-lg transition-shadow">
+              <Card className="p-4 hover:shadow-lg transition-shadow">
                 <CardHeader className="pb-2">
-                  <CardTitle className="text-lg">AI Powered</CardTitle>
+                  <CardTitle className="text-base">AI Powered</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="flex items-center justify-center">
-                    <Sparkles className="h-8 w-8 text-primary" />
+                    <Sparkles className="h-6 w-6 text-primary" />
                   </div>
-                  <p className="text-sm text-muted-foreground mt-2">Smart Compatibility Matching</p>
+                  <p className="text-xs text-muted-foreground mt-2">Smart Matching</p>
                 </CardContent>
               </Card>
-              <Card className="p-6 hover:shadow-lg transition-shadow">
+              <Card className="p-4 hover:shadow-lg transition-shadow">
                 <CardHeader className="pb-2">
-                  <CardTitle className="text-lg">Privacy First</CardTitle>
+                  <CardTitle className="text-base">Privacy First</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="flex items-center justify-center">
-                    <Shield className="h-8 w-8 text-primary" />
+                    <Shield className="h-6 w-6 text-primary" />
                   </div>
-                  <p className="text-sm text-muted-foreground mt-2">Your Data Protected</p>
+                  <p className="text-xs text-muted-foreground mt-2">Data Protected</p>
                 </CardContent>
               </Card>
             </div>
