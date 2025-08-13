@@ -108,11 +108,11 @@ const Index = () => {
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-background to-pink-900">
+      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-background to-pink-900 overflow-hidden">
         <Navbar />
         
-        {/* DRAMATIC NEW HERO DESIGN */}
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        {/* DRAMATIC HERO DESIGN */}
+        <section className="relative min-h-screen flex items-center justify-center">
           {/* Dynamic Background with Multiple Layers */}
           <div className="absolute inset-0 z-0">
             <div className="relative w-full h-full">
@@ -120,11 +120,11 @@ const Index = () => {
               <img 
                 src={coupleHero1} 
                 alt="Couple connecting" 
-                className="absolute inset-0 w-full h-full object-cover opacity-40 animate-fade-in"
+                className="absolute inset-0 w-full h-full object-cover opacity-40 animate-fade-in transition-opacity duration-1000"
               />
               
               {/* Secondary Background for Depth */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-purple-600/15 to-pink-600/20"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-purple-600/15 to-pink-600/20 transition-all duration-1000"></div>
               
               {/* Overlay Pattern */}
               <div className="absolute inset-0 bg-gradient-to-br from-background/85 via-background/75 to-background/85"></div>
@@ -139,35 +139,37 @@ const Index = () => {
           <div className="relative z-10 max-w-7xl mx-auto px-4 py-20 text-center">
             <div className="animate-fade-in">
               {/* Enhanced Badge */}
-              <div className="inline-flex items-center px-6 py-3 mb-8 rounded-full bg-gradient-to-r from-primary/10 to-purple-600/10 border border-primary/20 backdrop-blur-sm">
+              <div className="inline-flex items-center px-6 py-3 mb-12 rounded-full bg-gradient-to-r from-primary/10 to-purple-600/10 border border-primary/20 backdrop-blur-sm hover:scale-105 transition-transform duration-300">
                 <Sparkles className="h-5 w-5 mr-3 text-primary animate-pulse" />
                 <span className="text-primary font-semibold">AI-Powered Emotional Intelligence Dating</span>
               </div>
               
-              {/* MASSIVE NEW TITLE */}
-              <h1 className="text-6xl md:text-9xl font-black mb-12 leading-none">
-                <span className="block bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 bg-clip-text text-transparent animate-scale-in">
+              {/* MASSIVE TITLE */}
+              <h1 className="text-6xl md:text-9xl font-black mb-16 leading-none">
+                <span className="block bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 bg-clip-text text-transparent animate-scale-in hover:scale-105 transition-transform duration-500">
                   🔥 HOTTEST 🔥
                 </span>
-                <span className="block bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent animate-scale-in text-8xl md:text-[12rem]" style={{ animationDelay: '0.2s' }}>
+                <span className="block bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent animate-scale-in text-8xl md:text-[12rem] hover:scale-105 transition-transform duration-500" style={{ animationDelay: '0.2s' }}>
                   DATING APP
-                  <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 w-64 h-4 bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 rounded-full animate-scale-in shadow-2xl" style={{ animationDelay: '0.5s' }}></div>
+                  <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 w-64 h-4 bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 rounded-full animate-scale-in shadow-2xl hover:shadow-3xl transition-shadow duration-300" style={{ animationDelay: '0.5s' }}></div>
                 </span>
               </h1>
               
-              {/* DRAMATIC NEW DESCRIPTION */}
-              <p className="text-2xl md:text-4xl text-white font-bold mb-12 max-w-5xl mx-auto leading-relaxed animate-fade-in bg-gradient-to-r from-red-500 to-pink-500 p-8 rounded-3xl shadow-2xl" style={{ animationDelay: '0.3s' }}>
-                🚀 <span className="text-yellow-300 bg-black px-4 py-2 rounded-xl">NO MORE BORING SWIPES!</span> 🚀
-                <br/>
-                Find your <span className="text-yellow-300 underline decoration-4 decoration-yellow-300">SOULMATE</span> with AI that actually works!
-              </p>
+              {/* DRAMATIC DESCRIPTION */}
+              <div className="mb-20">
+                <p className="text-2xl md:text-4xl text-white font-bold mb-12 max-w-5xl mx-auto leading-relaxed animate-fade-in bg-gradient-to-r from-red-500 to-pink-500 p-8 rounded-3xl shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-500" style={{ animationDelay: '0.3s' }}>
+                  🚀 <span className="text-yellow-300 bg-black px-4 py-2 rounded-xl">NO MORE BORING SWIPES!</span> 🚀
+                  <br/>
+                  Find your <span className="text-yellow-300 underline decoration-4 decoration-yellow-300">SOULMATE</span> with AI that actually works!
+                </p>
+              </div>
 
               {/* Enhanced CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16 max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: '0.4s' }}>
+              <div className="flex flex-col sm:flex-row gap-8 justify-center items-center mb-20 max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: '0.4s' }}>
                 <Button 
                   size="lg" 
                   onClick={() => navigate('/quick-start')}
-                  className="w-full sm:w-auto px-12 py-6 text-xl font-bold bg-gradient-to-r from-primary via-purple-600 to-pink-600 hover:from-primary/90 hover:via-purple-600/90 hover:to-pink-600/90 transform hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl rounded-2xl border-0"
+                  className="w-full sm:w-auto px-12 py-6 text-xl font-bold bg-gradient-to-r from-primary via-purple-600 to-pink-600 hover:from-primary/90 hover:via-purple-600/90 hover:to-pink-600/90 transform hover:scale-110 transition-all duration-500 shadow-xl hover:shadow-3xl rounded-2xl border-0"
                 >
                   <Heart className="h-6 w-6 mr-3" />
                   Start Your Journey
@@ -178,7 +180,7 @@ const Index = () => {
                   variant="outline" 
                   size="lg"
                   onClick={() => navigate('/quick-start')}
-                  className="w-full sm:w-auto px-12 py-6 text-xl font-semibold border-2 border-primary/40 hover:border-primary/60 hover:bg-primary/10 transform hover:scale-105 transition-all duration-300 rounded-2xl backdrop-blur-sm"
+                  className="w-full sm:w-auto px-12 py-6 text-xl font-semibold border-2 border-primary/40 hover:border-primary/60 hover:bg-primary/10 transform hover:scale-110 transition-all duration-500 rounded-2xl backdrop-blur-sm"
                 >
                   <Users className="h-6 w-6 mr-3" />
                   See How It Works
@@ -186,12 +188,12 @@ const Index = () => {
               </div>
 
               {/* Login Section */}
-              <div className="text-center mb-16 animate-fade-in" style={{ animationDelay: '0.5s' }}>
-                <p className="text-muted-foreground mb-4 text-lg">Already have an account?</p>
+              <div className="text-center mb-20 animate-fade-in" style={{ animationDelay: '0.5s' }}>
+                <p className="text-muted-foreground mb-6 text-lg">Already have an account?</p>
                 <Button 
                   variant="ghost" 
                   onClick={() => navigate('/auth')}
-                  className="text-primary hover:text-primary/80 font-semibold text-xl px-8 py-4 rounded-xl hover:bg-primary/10 transition-all duration-300"
+                  className="text-primary hover:text-primary/80 font-semibold text-xl px-8 py-4 rounded-xl hover:bg-primary/10 transform hover:scale-105 transition-all duration-300"
                 >
                   Log in and reconnect
                   <ArrowRight className="h-5 w-5 ml-2" />
@@ -200,15 +202,15 @@ const Index = () => {
 
               {/* Enhanced Stats */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto animate-fade-in" style={{ animationDelay: '0.6s' }}>
-                <div className="text-center p-6 rounded-2xl bg-gradient-to-br from-primary/5 to-purple-600/5 border border-primary/10 backdrop-blur-sm hover:scale-105 transition-transform duration-300">
+                <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-primary/5 to-purple-600/5 border border-primary/10 backdrop-blur-sm hover:scale-110 hover:shadow-xl transition-all duration-500">
                   <div className="text-4xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent mb-3">10,000+</div>
                   <div className="text-muted-foreground font-medium">Meaningful Connections Made</div>
                 </div>
-                <div className="text-center p-6 rounded-2xl bg-gradient-to-br from-purple-600/5 to-pink-600/5 border border-purple-600/10 backdrop-blur-sm hover:scale-105 transition-transform duration-300">
+                <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-purple-600/5 to-pink-600/5 border border-purple-600/10 backdrop-blur-sm hover:scale-110 hover:shadow-xl transition-all duration-500">
                   <div className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-3">94%</div>
                   <div className="text-muted-foreground font-medium">Match Compatibility Rate</div>
                 </div>
-                <div className="text-center p-6 rounded-2xl bg-gradient-to-br from-pink-600/5 to-primary/5 border border-pink-600/10 backdrop-blur-sm hover:scale-105 transition-transform duration-300">
+                <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-pink-600/5 to-primary/5 border border-pink-600/10 backdrop-blur-sm hover:scale-110 hover:shadow-xl transition-all duration-500">
                   <div className="text-4xl font-bold bg-gradient-to-r from-pink-600 to-primary bg-clip-text text-transparent mb-3">4.8★</div>
                   <div className="text-muted-foreground font-medium">User Satisfaction Score</div>
                 </div>
@@ -217,40 +219,43 @@ const Index = () => {
           </div>
 
           {/* Enhanced Floating Elements */}
-          <div className="absolute top-32 left-16 animate-pulse">
+          <div className="absolute top-32 left-16 animate-pulse hover:scale-150 transition-transform duration-500">
             <div className="w-4 h-4 bg-gradient-to-r from-primary to-purple-600 rounded-full"></div>
           </div>
-          <div className="absolute bottom-40 right-20 animate-pulse" style={{ animationDelay: '1s' }}>
+          <div className="absolute bottom-40 right-20 animate-pulse hover:scale-150 transition-transform duration-500" style={{ animationDelay: '1s' }}>
             <div className="w-3 h-3 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full"></div>
           </div>
-          <div className="absolute top-1/3 right-16 animate-pulse" style={{ animationDelay: '2s' }}>
+          <div className="absolute top-1/3 right-16 animate-pulse hover:scale-150 transition-transform duration-500" style={{ animationDelay: '2s' }}>
             <div className="w-5 h-5 bg-gradient-to-r from-pink-600 to-primary rounded-full"></div>
           </div>
-          <div className="absolute top-2/3 left-24 animate-pulse" style={{ animationDelay: '1.5s' }}>
+          <div className="absolute top-2/3 left-24 animate-pulse hover:scale-150 transition-transform duration-500" style={{ animationDelay: '1.5s' }}>
             <div className="w-2 h-2 bg-gradient-to-r from-primary to-pink-600 rounded-full"></div>
           </div>
         </section>
 
-        {/* Enhanced Features Section */}
-        <section className="py-24 bg-gradient-to-br from-background to-primary/5">
+        {/* BREATHING ROOM */}
+        <div className="h-32"></div>
+
+        {/* QUIET CONTRAST - Enhanced Features Section */}
+        <section className="py-32 bg-gradient-to-br from-background to-primary/5 relative">
           <div className="max-w-6xl mx-auto px-4">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent mb-6">
+            <div className="text-center mb-20 animate-fade-in">
+              <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent mb-8">
                 What Makes Us Different
               </h2>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
                 We're redefining dating through authenticity, privacy, and meaningful connections
               </p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <Card className="border-primary/20 bg-gradient-to-br from-primary/5 to-background backdrop-blur-sm hover:shadow-xl transition-all duration-300 group">
-                <CardHeader className="pb-6">
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="p-3 bg-gradient-to-br from-primary/20 to-purple-600/20 rounded-xl">
-                      <span className="text-3xl">🔐</span>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+              <Card className="border-primary/20 bg-gradient-to-br from-primary/5 to-background backdrop-blur-sm hover:shadow-2xl hover:scale-105 transition-all duration-700 group">
+                <CardHeader className="pb-8">
+                  <div className="flex items-center gap-6 mb-6">
+                    <div className="p-4 bg-gradient-to-br from-primary/20 to-purple-600/20 rounded-2xl group-hover:scale-110 transition-transform duration-500">
+                      <span className="text-4xl">🔐</span>
                     </div>
-                    <CardTitle className="text-2xl font-bold group-hover:text-primary transition-colors">
+                    <CardTitle className="text-3xl font-bold group-hover:text-primary transition-colors duration-500">
                       Privacy First Always
                     </CardTitle>
                   </div>
@@ -263,13 +268,13 @@ const Index = () => {
                 </CardContent>
               </Card>
 
-              <Card className="border-primary/20 bg-gradient-to-br from-purple-600/5 to-background backdrop-blur-sm hover:shadow-xl transition-all duration-300 group">
-                <CardHeader className="pb-6">
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="p-3 bg-gradient-to-br from-purple-600/20 to-pink-600/20 rounded-xl">
-                      <span className="text-3xl">🤖</span>
+              <Card className="border-primary/20 bg-gradient-to-br from-purple-600/5 to-background backdrop-blur-sm hover:shadow-2xl hover:scale-105 transition-all duration-700 group">
+                <CardHeader className="pb-8">
+                  <div className="flex items-center gap-6 mb-6">
+                    <div className="p-4 bg-gradient-to-br from-purple-600/20 to-pink-600/20 rounded-2xl group-hover:scale-110 transition-transform duration-500">
+                      <span className="text-4xl">🤖</span>
                     </div>
-                    <CardTitle className="text-2xl font-bold group-hover:text-purple-600 transition-colors">
+                    <CardTitle className="text-3xl font-bold group-hover:text-purple-600 transition-colors duration-500">
                       AI That Respects You
                     </CardTitle>
                   </div>
@@ -281,6 +286,50 @@ const Index = () => {
                   </p>
                 </CardContent>
               </Card>
+            </div>
+          </div>
+        </section>
+
+        {/* BREATHING ROOM */}
+        <div className="h-32"></div>
+
+        {/* POETIC TESTIMONIAL SECTION */}
+        <section className="py-24 bg-gradient-to-r from-primary/5 via-purple-600/5 to-pink-600/5 relative overflow-hidden">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(139,92,246,0.1),transparent_70%)]"></div>
+          <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
+            <div className="animate-fade-in">
+              <h3 className="text-3xl md:text-4xl font-light text-foreground mb-12 italic">
+                "Where souls recognize each other..."
+              </h3>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                <div className="p-8 rounded-3xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 hover:scale-105 transition-all duration-700">
+                  <p className="text-muted-foreground italic mb-4 leading-relaxed">
+                    "Finally, an app that sees beyond the surface. Found my person through shared dreams, not just photos."
+                  </p>
+                  <div className="text-sm font-medium text-primary">- Sarah & Michael</div>
+                </div>
+                
+                <div className="p-8 rounded-3xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 hover:scale-105 transition-all duration-700">
+                  <p className="text-muted-foreground italic mb-4 leading-relaxed">
+                    "The AI understood what I couldn't put into words. It felt like magic when we matched."
+                  </p>
+                  <div className="text-sm font-medium text-primary">- Alex & Jordan</div>
+                </div>
+                
+                <div className="p-8 rounded-3xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 hover:scale-105 transition-all duration-700">
+                  <p className="text-muted-foreground italic mb-4 leading-relaxed">
+                    "Privacy respected, hearts connected. This is how dating should be in 2024."
+                  </p>
+                  <div className="text-sm font-medium text-primary">- River & Phoenix</div>
+                </div>
+              </div>
+              
+              <div className="text-center">
+                <p className="text-xl text-muted-foreground font-light italic">
+                  Your story begins here...
+                </p>
+              </div>
             </div>
           </div>
         </section>
