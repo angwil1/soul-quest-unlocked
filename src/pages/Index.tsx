@@ -144,59 +144,59 @@ const Index = () => {
                 <span className="text-primary font-semibold">AI-Powered Emotional Intelligence Dating</span>
               </div>
               
-              {/* MASSIVE TITLE */}
-              <h1 className="text-6xl md:text-9xl font-black mb-16 leading-none">
+              {/* MASSIVE TITLE - Mobile Responsive */}
+              <h1 className="text-4xl sm:text-6xl md:text-9xl font-black mb-8 sm:mb-16 leading-none">
                 <span className="block bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 bg-clip-text text-transparent animate-scale-in hover:scale-105 transition-transform duration-500">
                   🔥 HOTTEST 🔥
                 </span>
-                <span className="block bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent animate-scale-in text-8xl md:text-[12rem] hover:scale-105 transition-transform duration-500" style={{ animationDelay: '0.2s' }}>
+                <span className="block bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent animate-scale-in text-3xl sm:text-8xl md:text-[12rem] hover:scale-105 transition-transform duration-500" style={{ animationDelay: '0.2s' }}>
                   DATING APP
-                  <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 w-64 h-4 bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 rounded-full animate-scale-in shadow-2xl hover:shadow-3xl transition-shadow duration-300" style={{ animationDelay: '0.5s' }}></div>
+                  <div className="absolute -bottom-4 sm:-bottom-8 left-1/2 transform -translate-x-1/2 w-32 sm:w-64 h-2 sm:h-4 bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 rounded-full animate-scale-in shadow-2xl hover:shadow-3xl transition-shadow duration-300" style={{ animationDelay: '0.5s' }}></div>
                 </span>
               </h1>
               
-              {/* DRAMATIC DESCRIPTION */}
-              <div className="mb-20">
-                <p className="text-2xl md:text-4xl text-white font-bold mb-12 max-w-5xl mx-auto leading-relaxed animate-fade-in bg-gradient-to-r from-red-500 to-pink-500 p-8 rounded-3xl shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-500" style={{ animationDelay: '0.3s' }}>
-                  🚀 <span className="text-yellow-300 bg-black px-4 py-2 rounded-xl">NO MORE BORING SWIPES!</span> 🚀
-                  <br/>
-                  Find your <span className="text-yellow-300 underline decoration-4 decoration-yellow-300">SOULMATE</span> with AI that actually works!
+              {/* DRAMATIC DESCRIPTION - Mobile Responsive */}
+              <div className="mb-12 sm:mb-20">
+                <p className="text-lg sm:text-2xl md:text-4xl text-white font-bold mb-8 sm:mb-12 max-w-xs sm:max-w-5xl mx-auto leading-relaxed animate-fade-in bg-gradient-to-r from-red-500 to-pink-500 p-4 sm:p-8 rounded-2xl sm:rounded-3xl shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-500" style={{ animationDelay: '0.3s' }}>
+                  🚀 <span className="text-yellow-300 bg-black px-2 sm:px-4 py-1 sm:py-2 rounded-lg sm:rounded-xl text-sm sm:text-base">NO MORE BORING SWIPES!</span> 🚀
+                  <br className="hidden sm:block"/>
+                  <span className="block sm:inline mt-2 sm:mt-0">Find your <span className="text-yellow-300 underline decoration-2 sm:decoration-4 decoration-yellow-300">SOULMATE</span> with AI that actually works!</span>
                 </p>
               </div>
 
-              {/* Enhanced CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-8 justify-center items-center mb-20 max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: '0.4s' }}>
+              {/* Enhanced CTA Buttons - Mobile Responsive */}
+              <div className="flex flex-col gap-4 sm:gap-8 justify-center items-center mb-12 sm:mb-20 max-w-xs sm:max-w-2xl mx-auto animate-fade-in px-4" style={{ animationDelay: '0.4s' }}>
                 <Button 
                   size="lg" 
                   onClick={() => navigate('/quick-start')}
-                  className="w-full sm:w-auto px-12 py-6 text-xl font-bold bg-gradient-to-r from-primary via-purple-600 to-pink-600 hover:from-primary/90 hover:via-purple-600/90 hover:to-pink-600/90 transform hover:scale-110 transition-all duration-500 shadow-xl hover:shadow-3xl rounded-2xl border-0"
+                  className="w-full px-8 sm:px-12 py-4 sm:py-6 text-lg sm:text-xl font-bold bg-gradient-to-r from-primary via-purple-600 to-pink-600 hover:from-primary/90 hover:via-purple-600/90 hover:to-pink-600/90 transform hover:scale-110 transition-all duration-500 shadow-xl hover:shadow-3xl rounded-2xl border-0"
                 >
-                  <Heart className="h-6 w-6 mr-3" />
+                  <Heart className="h-5 w-5 sm:h-6 sm:w-6 mr-2 sm:mr-3" />
                   Start Your Journey
-                  <ArrowRight className="h-5 w-5 ml-3" />
+                  <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 ml-2 sm:ml-3" />
                 </Button>
                 
                 <Button 
                   variant="outline" 
                   size="lg"
                   onClick={() => navigate('/quick-start')}
-                  className="w-full sm:w-auto px-12 py-6 text-xl font-semibold border-2 border-primary/40 hover:border-primary/60 hover:bg-primary/10 transform hover:scale-110 transition-all duration-500 rounded-2xl backdrop-blur-sm"
+                  className="w-full px-8 sm:px-12 py-4 sm:py-6 text-lg sm:text-xl font-semibold border-2 border-primary/40 hover:border-primary/60 hover:bg-primary/10 transform hover:scale-110 transition-all duration-500 rounded-2xl backdrop-blur-sm"
                 >
-                  <Users className="h-6 w-6 mr-3" />
+                  <Users className="h-5 w-5 sm:h-6 sm:w-6 mr-2 sm:mr-3" />
                   See How It Works
                 </Button>
               </div>
 
-              {/* Login Section */}
-              <div className="text-center mb-20 animate-fade-in" style={{ animationDelay: '0.5s' }}>
-                <p className="text-muted-foreground mb-6 text-lg">Already have an account?</p>
+              {/* Login Section - Mobile Responsive */}
+              <div className="text-center mb-12 sm:mb-20 animate-fade-in px-4" style={{ animationDelay: '0.5s' }}>
+                <p className="text-muted-foreground mb-4 sm:mb-6 text-base sm:text-lg">Already have an account?</p>
                 <Button 
                   variant="ghost" 
                   onClick={() => navigate('/auth')}
-                  className="text-primary hover:text-primary/80 font-semibold text-xl px-8 py-4 rounded-xl hover:bg-primary/10 transform hover:scale-105 transition-all duration-300"
+                  className="text-primary hover:text-primary/80 font-semibold text-lg sm:text-xl px-6 sm:px-8 py-3 sm:py-4 rounded-xl hover:bg-primary/10 transform hover:scale-105 transition-all duration-300"
                 >
                   Log in and reconnect
-                  <ArrowRight className="h-5 w-5 ml-2" />
+                  <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 ml-2" />
                 </Button>
               </div>
 
