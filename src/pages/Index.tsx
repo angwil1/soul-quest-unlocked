@@ -108,11 +108,11 @@ const Index = () => {
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-background overflow-hidden">
+      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-background to-pink-900">
         <Navbar />
         
-        {/* Modern Hero Section with Enhanced Visuals */}
-        <section className="relative min-h-screen flex items-center justify-center">
+        {/* DRAMATIC NEW HERO DESIGN */}
+        <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
           {/* Dynamic Background with Multiple Layers */}
           <div className="absolute inset-0 z-0">
             <div className="relative w-full h-full">
@@ -144,22 +144,22 @@ const Index = () => {
                 <span className="text-primary font-semibold">AI-Powered Emotional Intelligence Dating</span>
               </div>
               
-              {/* Main Title with Enhanced Typography */}
-              <h1 className="text-5xl md:text-8xl font-bold mb-8 leading-tight">
-                <span className="block bg-gradient-to-r from-primary via-purple-600 to-pink-600 bg-clip-text text-transparent animate-scale-in">
-                  Beyond Swipes,
+              {/* MASSIVE NEW TITLE */}
+              <h1 className="text-6xl md:text-9xl font-black mb-12 leading-none">
+                <span className="block bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 bg-clip-text text-transparent animate-scale-in">
+                  🔥 HOTTEST 🔥
                 </span>
-                <span className="block bg-gradient-to-r from-pink-600 via-purple-600 to-primary bg-clip-text text-transparent animate-scale-in relative" style={{ animationDelay: '0.2s' }}>
-                  Find Your Soul
-                  <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-32 h-2 bg-gradient-to-r from-primary via-purple-600 to-pink-600 rounded-full animate-scale-in" style={{ animationDelay: '0.5s' }}></div>
+                <span className="block bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent animate-scale-in text-8xl md:text-[12rem]" style={{ animationDelay: '0.2s' }}>
+                  DATING APP
+                  <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 w-64 h-4 bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 rounded-full animate-scale-in shadow-2xl" style={{ animationDelay: '0.5s' }}></div>
                 </span>
               </h1>
               
-              {/* Enhanced Description */}
-              <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-4xl mx-auto leading-relaxed animate-fade-in" style={{ animationDelay: '0.3s' }}>
-                Discover meaningful connections through <span className="text-primary font-semibold bg-primary/10 px-2 py-1 rounded">emotional intelligence</span> and{" "}
-                <span className="text-purple-600 font-semibold bg-purple-600/10 px-2 py-1 rounded">genuine compatibility</span>. 
-                No games, no superficial swipes—just authentic relationships.
+              {/* DRAMATIC NEW DESCRIPTION */}
+              <p className="text-2xl md:text-4xl text-white font-bold mb-12 max-w-5xl mx-auto leading-relaxed animate-fade-in bg-gradient-to-r from-red-500 to-pink-500 p-8 rounded-3xl shadow-2xl" style={{ animationDelay: '0.3s' }}>
+                🚀 <span className="text-yellow-300 bg-black px-4 py-2 rounded-xl">NO MORE BORING SWIPES!</span> 🚀
+                <br/>
+                Find your <span className="text-yellow-300 underline decoration-4 decoration-yellow-300">SOULMATE</span> with AI that actually works!
               </p>
 
               {/* Enhanced CTA Buttons */}
