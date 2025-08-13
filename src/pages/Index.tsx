@@ -16,7 +16,7 @@ import { InviteKindredSoul } from '@/components/InviteKindredSoul';
 import { AgeVerification } from '@/components/AgeVerification';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import SearchFilters from '@/components/SearchFilters';
-import { Search, Crown, ArrowRight, Heart, Users, Sparkles, MapPin, Filter, HelpCircle } from 'lucide-react';
+import { Search, Crown, ArrowRight, Heart, Users, Sparkles, MapPin, Filter, HelpCircle, MessageCircle, Star, Settings, Shield } from 'lucide-react';
 import datingBackground from '@/assets/dating-background.jpg';
 import coupleHero1 from '@/assets/couple-hero-1.jpg';
 import coupleHero2 from '@/assets/couple-hero-2.jpg';
@@ -381,133 +381,162 @@ const Index = () => {
           onClose={handleCloseFirstLightModal} 
         />
         
-        <div className="px-4">
-          <div className="max-w-4xl mx-auto">
-            {/* Hero-Style Main Section */}
-            <section className="relative min-h-[60vh] flex items-center justify-center mb-16">
-              <div className="relative z-10 max-w-6xl mx-auto px-4 py-16 text-center">
-                <div className="animate-fade-in">
-                  <Badge variant="secondary" className="mb-6 px-4 py-2 text-sm font-medium bg-primary/10 text-primary border-primary/20">
-                    <Sparkles className="h-4 w-4 mr-2" />
-                    Ready to Connect
-                  </Badge>
-                  
-                  <h1 className="text-4xl md:text-6xl font-bold mb-6">
-                    <span className="bg-gradient-to-r from-primary via-purple-600 to-pink-600 bg-clip-text text-transparent block">
-                      Find Your
-                    </span>
-                    <span className="bg-gradient-to-r from-primary via-purple-600 to-pink-600 bg-clip-text text-transparent block relative">
-                      Perfect Match
-                      <div className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-primary via-purple-600 to-pink-600 rounded-full animate-scale-in"></div>
-                    </span>
-                  </h1>
-                  
-                  <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
-                    Search for connections that resonate with your soul through{" "}
-                    <span className="text-primary font-semibold">AI-powered compatibility</span> and{" "}
-                    <span className="text-primary font-semibold">emotional intelligence</span>.
-                  </p>
-
-                  {/* Search Section */}
-                  <div className="max-w-2xl mx-auto mb-8">
-                    <div className="flex gap-3 mb-6">
-                      <div className="relative flex-1">
-                        <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5" />
-                        <Input
-                          type="text"
-                          placeholder="Search by interests, location, or keywords..."
-                          value={searchQuery}
-                          onChange={(e) => setSearchQuery(e.target.value)}
-                          onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
-                          className="pl-12 text-lg py-4 h-14 bg-background/50 border-primary/20 focus:border-primary/40"
-                        />
-                      </div>
-                      <Button 
-                        onClick={handleSearch}
-                        size="lg"
-                        className="px-8 h-14 text-lg bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90 shadow-lg transform hover:scale-105 transition-all duration-200"
-                      >
-                        <Search className="h-5 w-5 mr-2" />
-                        Search
-                      </Button>
-                    </div>
-                  </div>
-
-                  {/* Action Buttons */}
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8 max-w-lg mx-auto">
-                    <Button 
-                      size="lg" 
-                      onClick={() => navigate('/matches')}
-                      className="w-full sm:w-auto px-8 py-4 text-lg font-semibold bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90 transform hover:scale-105 transition-all duration-200 animate-scale-in shadow-lg hover:shadow-xl"
-                    >
-                      <Heart className="h-5 w-5 mr-2" />
-                      Discover Matches
-                    </Button>
-                    
-                    <Button 
-                      variant="outline" 
-                      size="lg"
-                      onClick={() => navigate('/profile')}
-                      className="w-full sm:w-auto px-8 py-4 text-lg font-semibold border-2 border-primary/30 hover:border-primary/50 hover:bg-primary/5 transform hover:scale-105 transition-all duration-200 animate-scale-in"
-                    >
-                      <Users className="h-5 w-5 mr-2" />
-                      Edit Profile
-                    </Button>
-                  </div>
-
-                  {/* Quick Actions */}
-                  <div className="text-center mb-8">
-                    <p className="text-muted-foreground mb-4">Quick actions</p>
-                    <div className="flex flex-wrap justify-center gap-3">
-                      <Button 
-                        variant="ghost" 
-                        onClick={() => navigate('/messages')}
-                        className="text-primary hover:text-primary/80 font-semibold"
-                      >
-                        <ArrowRight className="h-4 w-4 mr-2" />
-                        Messages
-                      </Button>
-                      <Button 
-                        variant="ghost" 
-                        onClick={() => signOut()}
-                        className="text-muted-foreground hover:text-foreground font-semibold"
-                      >
-                        Sign Out
-                      </Button>
-                    </div>
-                  </div>
-
-                  {/* Stats */}
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-2xl mx-auto">
-                    <div className="text-center animate-fade-in">
-                      <div className="text-2xl font-bold text-primary mb-2">Your Journey</div>
-                      <div className="text-sm text-muted-foreground">Meaningful Connections Await</div>
-                    </div>
-                    <div className="text-center animate-fade-in">
-                      <div className="text-2xl font-bold text-primary mb-2">AI Powered</div>
-                      <div className="text-sm text-muted-foreground">Smart Compatibility Matching</div>
-                    </div>
-                    <div className="text-center animate-fade-in">
-                      <div className="text-2xl font-bold text-primary mb-2">Privacy First</div>
-                      <div className="text-sm text-muted-foreground">Your Data Protected</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Floating Elements */}
-              <div className="absolute top-20 left-10 animate-pulse">
-                <div className="w-3 h-3 bg-primary/30 rounded-full"></div>
-              </div>
-              <div className="absolute bottom-32 right-16 animate-pulse" style={{ animationDelay: '1s' }}>
-                <div className="w-2 h-2 bg-purple-500/40 rounded-full"></div>
-              </div>
-              <div className="absolute top-1/3 right-10 animate-pulse" style={{ animationDelay: '2s' }}>
-                <div className="w-4 h-4 bg-pink-500/30 rounded-full"></div>
-              </div>
-            </section>
+        {/* Main Content */}
+        <main className="flex-1 px-6 pb-12">
+          {/* Welcome Back Section */}
+          <div className="mb-12 text-center">
+            <div className="inline-flex items-center gap-3 bg-primary/10 rounded-full px-6 py-3 mb-6">
+              <div className="w-3 h-3 bg-primary rounded-full animate-pulse"></div>
+              <span className="text-primary font-medium">You're back! Ready to connect?</span>
+            </div>
+            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+              Welcome back, <span className="text-primary">Explorer</span>
+            </h1>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-8">
+              Your journey to meaningful connections continues. What will you discover today?
+            </p>
           </div>
-        </div>
+
+          {/* Main Dashboard Grid */}
+          <div className="max-w-7xl mx-auto space-y-8">
+            
+            {/* Primary Actions Row */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              
+              {/* Main Search Card */}
+              <div className="lg:col-span-2">
+                <Card className="p-8 h-full bg-gradient-to-br from-card to-card/80 border-2 border-primary/20">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
+                      <Search className="h-5 w-5 text-white" />
+                    </div>
+                    <div>
+                      <h2 className="text-2xl font-bold text-foreground">Discover Matches</h2>
+                      <p className="text-muted-foreground">Find souls that resonate with yours</p>
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div className="relative">
+                      <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5" />
+                      <Input
+                        placeholder="Search by interests, values, location..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
+                        className="pl-12 h-14 text-lg bg-background/50 border-2 border-border/50 focus:border-primary/50"
+                      />
+                    </div>
+                    
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <Button size="lg" className="h-12" onClick={() => navigate('/matches')}>
+                        <Heart className="mr-2 h-5 w-5" />
+                        Find Matches
+                      </Button>
+                      <Button variant="outline" size="lg" className="h-12">
+                        <Sparkles className="mr-2 h-5 w-5" />
+                        AI Suggest
+                      </Button>
+                    </div>
+                  </div>
+                </Card>
+              </div>
+
+              {/* Quick Stats */}
+              <Card className="p-6">
+                <h3 className="text-lg font-semibold text-foreground mb-4">Your Activity</h3>
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <span className="text-muted-foreground">Profile Views</span>
+                    <span className="text-2xl font-bold text-primary">24</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-muted-foreground">New Matches</span>
+                    <span className="text-2xl font-bold text-primary">3</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-muted-foreground">Messages</span>
+                    <span className="text-2xl font-bold text-primary">12</span>
+                  </div>
+                  <Button variant="outline" className="w-full mt-4" onClick={() => navigate('/profile')}>
+                    <Users className="mr-2 h-4 w-4" />
+                    View Profile
+                  </Button>
+                </div>
+              </Card>
+            </div>
+
+            {/* Quick Actions Grid */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <Card className="p-6 hover:shadow-lg transition-all duration-300 cursor-pointer group hover:border-primary/50" onClick={() => navigate('/profile/edit')}>
+                <div className="text-center">
+                  <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors group-hover:scale-110">
+                    <Users className="h-6 w-6 text-primary" />
+                  </div>
+                  <h3 className="font-semibold text-foreground mb-1">Edit Profile</h3>
+                  <p className="text-xs text-muted-foreground">Update details</p>
+                </div>
+              </Card>
+
+              <Card className="p-6 hover:shadow-lg transition-all duration-300 cursor-pointer group hover:border-primary/50" onClick={() => navigate('/messages')}>
+                <div className="text-center">
+                  <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors group-hover:scale-110">
+                    <MessageCircle className="h-6 w-6 text-primary" />
+                  </div>
+                  <h3 className="font-semibold text-foreground mb-1">Messages</h3>
+                  <p className="text-xs text-muted-foreground">Chat now</p>
+                </div>
+              </Card>
+
+              <Card className="p-6 hover:shadow-lg transition-all duration-300 cursor-pointer group hover:border-primary/50" onClick={() => navigate('/matches')}>
+                <div className="text-center">
+                  <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors group-hover:scale-110">
+                    <Star className="h-6 w-6 text-primary" />
+                  </div>
+                  <h3 className="font-semibold text-foreground mb-1">Matches</h3>
+                  <p className="text-xs text-muted-foreground">View all</p>
+                </div>
+              </Card>
+
+              <Card className="p-6 hover:shadow-lg transition-all duration-300 cursor-pointer group hover:border-primary/50" onClick={() => signOut()}>
+                <div className="text-center">
+                  <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors group-hover:scale-110">
+                    <Settings className="h-6 w-6 text-primary" />
+                  </div>
+                  <h3 className="font-semibold text-foreground mb-1">Sign Out</h3>
+                  <p className="text-xs text-muted-foreground">Exit app</p>
+                </div>
+              </Card>
+            </div>
+
+            {/* Features Overview */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <Card className="p-8 text-center bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20">
+                <div className="w-16 h-16 bg-gradient-to-br from-primary to-primary/80 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                  <Sparkles className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-foreground mb-3">AI-Powered Matching</h3>
+                <p className="text-muted-foreground leading-relaxed">Advanced algorithms analyze compatibility beyond surface-level attraction</p>
+              </Card>
+
+              <Card className="p-8 text-center bg-gradient-to-br from-secondary/5 to-secondary/10 border-secondary/20">
+                <div className="w-16 h-16 bg-gradient-to-br from-secondary to-secondary/80 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                  <Shield className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-foreground mb-3">Privacy Protected</h3>
+                <p className="text-muted-foreground leading-relaxed">Your personal data is secured with enterprise-grade encryption</p>
+              </Card>
+
+              <Card className="p-8 text-center bg-gradient-to-br from-accent/5 to-accent/10 border-accent/20">
+                <div className="w-16 h-16 bg-gradient-to-br from-accent to-accent/80 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                  <Heart className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-foreground mb-3">Meaningful Connections</h3>
+                <p className="text-muted-foreground leading-relaxed">Find relationships built on shared values and genuine compatibility</p>
+              </Card>
+            </div>
+          </div>
+        </main>
       </div>
       <Footer />
     </div>
