@@ -261,37 +261,37 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
-      {/* Happy Couples Background Overlay */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute top-0 left-0 w-64 h-64 opacity-10 animate-fade-in">
+      {/* Happy Couples Background Overlay - Top Section */}
+      <div className="absolute top-0 left-0 right-0 h-96 z-0 overflow-hidden">
+        <div className="absolute top-10 left-10 w-48 h-48 opacity-15 animate-fade-in">
           <img 
             src={coupleHero1} 
             alt="Happy couple" 
             className="w-full h-full object-cover rounded-full blur-sm"
           />
         </div>
-        <div className="absolute top-20 right-0 w-48 h-48 opacity-15 animate-fade-in" style={{ animationDelay: '0.5s' }}>
+        <div className="absolute top-5 right-16 w-56 h-56 opacity-12 animate-fade-in" style={{ animationDelay: '0.5s' }}>
           <img 
             src={coupleHero2} 
             alt="Happy couple" 
             className="w-full h-full object-cover rounded-full blur-sm"
           />
         </div>
-        <div className="absolute bottom-20 left-10 w-56 h-56 opacity-10 animate-fade-in" style={{ animationDelay: '1s' }}>
+        <div className="absolute top-20 left-1/3 w-40 h-40 opacity-10 animate-fade-in" style={{ animationDelay: '1s' }}>
           <img 
             src={coupleDigital} 
             alt="Happy couple" 
             className="w-full h-full object-cover rounded-full blur-sm"
           />
         </div>
-        <div className="absolute bottom-10 right-20 w-40 h-40 opacity-15 animate-fade-in" style={{ animationDelay: '1.5s' }}>
+        <div className="absolute top-32 right-1/4 w-32 h-32 opacity-8 animate-fade-in" style={{ animationDelay: '1.5s' }}>
           <img 
             src={coupleHero1} 
             alt="Happy couple" 
             className="w-full h-full object-cover rounded-full blur-sm"
           />
         </div>
-        <div className="absolute top-1/2 left-1/3 w-32 h-32 opacity-8 animate-fade-in" style={{ animationDelay: '2s' }}>
+        <div className="absolute top-16 left-2/3 w-36 h-36 opacity-12 animate-fade-in" style={{ animationDelay: '2s' }}>
           <img 
             src={coupleHero2} 
             alt="Happy couple" 
@@ -300,7 +300,7 @@ const Index = () => {
         </div>
         
         {/* Gradient overlay to ensure readability */}
-        <div className="absolute inset-0 bg-gradient-to-br from-background/95 via-background/90 to-background/95"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/90 to-background/95"></div>
       </div>
       
       <div className="relative z-10">
