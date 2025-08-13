@@ -19,10 +19,10 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 215 25% 15%;
 
-    /* Primary: Modern blue-purple gradient */
-    --primary: 250 75% 60%;
+    /* Primary: Clean blue */
+    --primary: 220 85% 55%;
     --primary-foreground: 0 0% 100%;
-    --primary-glow: 250 75% 75%;
+    --primary-glow: 220 85% 70%;
 
     /* Secondary: Better contrast blue-gray */
     --secondary: 220 50% 90%;
@@ -47,10 +47,10 @@ All colors MUST be HSL.
 
     --radius: 0.75rem;
 
-    /* Modern gradients - blue to teal */
-    --gradient-primary: linear-gradient(135deg, hsl(250 75% 60%), hsl(200 80% 65%));
+    /* Clean gradients - blue to blue-green */
+    --gradient-primary: linear-gradient(135deg, hsl(220 85% 55%), hsl(195 80% 60%));
     --gradient-secondary: linear-gradient(135deg, hsl(220 50% 92%), hsl(220 40% 95%));
-    --gradient-hero: linear-gradient(135deg, hsl(250 75% 60%) 0%, hsl(200 80% 65%) 50%, hsl(180 60% 70%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(220 85% 55%) 0%, hsl(195 80% 60%) 50%, hsl(170 60% 65%) 100%);
     
     /* Shadows with subtle blue */
     --shadow-primary: 0 10px 30px -10px hsl(250 75% 60% / 0.3);
@@ -91,10 +91,10 @@ body {
     --popover: 215 25% 12%;
     --popover-foreground: 210 40% 95%;
 
-    /* Primary: Bright blue-purple for dark mode */
-    --primary: 250 75% 70%;
+    /* Primary: Clean blue for dark mode */
+    --primary: 220 85% 65%;
     --primary-foreground: 215 25% 8%;
-    --primary-glow: 250 75% 85%;
+    --primary-glow: 220 85% 80%;
 
     /* Secondary: Dark blue-gray */
     --secondary: 215 25% 18%;
@@ -117,10 +117,10 @@ body {
     --input: 215 25% 18%;
     --ring: 250 75% 70%;
 
-    /* Dark gradients - blue to teal */
-    --gradient-primary: linear-gradient(135deg, hsl(250 75% 70%), hsl(200 80% 75%));
+    /* Clean dark gradients - blue to blue-green */
+    --gradient-primary: linear-gradient(135deg, hsl(220 85% 65%), hsl(195 80% 70%));
     --gradient-secondary: linear-gradient(135deg, hsl(215 25% 18%), hsl(220 25% 22%));
-    --gradient-hero: linear-gradient(135deg, hsl(250 75% 70%) 0%, hsl(200 80% 75%) 50%, hsl(180 60% 70%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(220 85% 65%) 0%, hsl(195 80% 70%) 50%, hsl(170 60% 65%) 100%);
 
     /* Dark sidebar colors */
     --sidebar-background: 215 25% 8%;
