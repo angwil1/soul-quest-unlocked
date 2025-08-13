@@ -271,24 +271,24 @@ const Index = () => {
       
       <div className="p-4">
         <div className="max-w-4xl mx-auto">
-          <div className="mb-8 p-6 bg-gradient-to-r from-primary/10 to-purple-600/10 rounded-xl border border-primary/20 shadow-sm">
-            <div className="flex items-center justify-between">
-              <div>
-                <h2 className="text-3xl font-bold text-primary mb-2">Welcome back!</h2>
-                <p className="text-muted-foreground text-lg">Ready to discover meaningful connections?</p>
+          <div className="mb-8 p-4 md:p-6 bg-gradient-to-r from-primary/10 to-purple-600/10 rounded-xl border border-primary/20 shadow-sm">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+              <div className="text-center md:text-left">
+                <h2 className="text-xl md:text-3xl font-bold text-primary mb-1 md:mb-2">Welcome back!</h2>
+                <p className="text-muted-foreground text-sm md:text-lg">Ready to discover meaningful connections?</p>
               </div>
-              <div className="flex items-center gap-3">
+              <div className="flex flex-col sm:flex-row items-center gap-2 md:gap-3 w-full md:w-auto">
                 <Button 
                   onClick={() => navigate('/profile')} 
                   variant="outline"
-                  className="border-primary/30 hover:border-primary/50"
+                  className="w-full sm:w-auto border-primary/30 hover:border-primary/50 text-sm md:text-base"
                 >
                   View Profile
                 </Button>
                 <Button 
                   onClick={() => signOut()} 
                   variant="ghost"
-                  className="text-muted-foreground hover:text-foreground"
+                  className="w-full sm:w-auto text-muted-foreground hover:text-foreground text-sm md:text-base"
                 >
                   Sign Out
                 </Button>
