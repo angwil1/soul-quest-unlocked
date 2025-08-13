@@ -260,17 +260,60 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
-      <FloatingQuizButton />
+    <div className="min-h-screen bg-background relative overflow-hidden">
+      {/* Happy Couples Background Overlay */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute top-0 left-0 w-64 h-64 opacity-10 animate-fade-in">
+          <img 
+            src={coupleHero1} 
+            alt="Happy couple" 
+            className="w-full h-full object-cover rounded-full blur-sm"
+          />
+        </div>
+        <div className="absolute top-20 right-0 w-48 h-48 opacity-15 animate-fade-in" style={{ animationDelay: '0.5s' }}>
+          <img 
+            src={coupleHero2} 
+            alt="Happy couple" 
+            className="w-full h-full object-cover rounded-full blur-sm"
+          />
+        </div>
+        <div className="absolute bottom-20 left-10 w-56 h-56 opacity-10 animate-fade-in" style={{ animationDelay: '1s' }}>
+          <img 
+            src={coupleDigital} 
+            alt="Happy couple" 
+            className="w-full h-full object-cover rounded-full blur-sm"
+          />
+        </div>
+        <div className="absolute bottom-10 right-20 w-40 h-40 opacity-15 animate-fade-in" style={{ animationDelay: '1.5s' }}>
+          <img 
+            src={coupleHero1} 
+            alt="Happy couple" 
+            className="w-full h-full object-cover rounded-full blur-sm"
+          />
+        </div>
+        <div className="absolute top-1/2 left-1/3 w-32 h-32 opacity-8 animate-fade-in" style={{ animationDelay: '2s' }}>
+          <img 
+            src={coupleHero2} 
+            alt="Happy couple" 
+            className="w-full h-full object-cover rounded-full blur-sm"
+          />
+        </div>
+        
+        {/* Gradient overlay to ensure readability */}
+        <div className="absolute inset-0 bg-gradient-to-br from-background/95 via-background/90 to-background/95"></div>
+      </div>
       
-      <FirstLightModal 
-        isOpen={showFirstLightModal} 
-        onClose={handleCloseFirstLightModal} 
-      />
-      
-      <div className="p-4">
-        <div className="max-w-4xl mx-auto">
+      <div className="relative z-10">
+        <Navbar />
+        <FloatingQuizButton />
+        
+        <FirstLightModal 
+          isOpen={showFirstLightModal} 
+          onClose={handleCloseFirstLightModal} 
+        />
+        
+        <div className="p-4">
+          <div className="max-w-4xl mx-auto">
           <div className="mb-8 p-4 md:p-6 bg-gradient-to-r from-primary/10 to-purple-600/10 rounded-xl border border-primary/20 shadow-sm">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
               <div className="text-center md:text-left">
@@ -414,6 +457,7 @@ const Index = () => {
                 </Button>
               </CardContent>
             </Card>
+          </div>
           </div>
         </div>
       </div>
