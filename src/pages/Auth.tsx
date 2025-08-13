@@ -21,36 +21,41 @@ const Auth = () => {
   const { signIn, signUp, user } = useAuth();
   const navigate = useNavigate();
 
-  // Redirect if already authenticated - check if user has completed quiz first
+  // Only redirect if already authenticated and NOT from a fresh signup
   useEffect(() => {
-    if (user) {
-      // Check if user has completed quiz by checking if they have quiz answers
-      const checkQuizCompletion = async () => {
-        try {
-          const { data } = await supabase
-            .from('user_events')
-            .select('*')
-            .eq('user_id', user.id)
-            .eq('event_type', 'quiz_completed')
-            .limit(1);
-          
-          if (data && data.length > 0) {
-            // User has completed quiz, go to main page
-            navigate('/');
-          } else {
-            // User hasn't completed quiz, send to quiz
+    if (user && !pendingSignup) {
+      // Small delay to ensure we don't redirect during signup process
+      const timer = setTimeout(() => {
+        // Check if user has completed quiz by checking if they have quiz answers
+        const checkQuizCompletion = async () => {
+          try {
+            const { data } = await supabase
+              .from('user_events')
+              .select('*')
+              .eq('user_id', user.id)
+              .eq('event_type', 'quiz_completed')
+              .limit(1);
+            
+            if (data && data.length > 0) {
+              // User has completed quiz, go to main page
+              navigate('/');
+            } else {
+              // User hasn't completed quiz, send to quiz
+              navigate('/questions');
+            }
+          } catch (error) {
+            console.error('Error checking quiz completion:', error);
+            // Default to quiz if error
             navigate('/questions');
           }
-        } catch (error) {
-          console.error('Error checking quiz completion:', error);
-          // Default to quiz if error
-          navigate('/questions');
-        }
-      };
-      
-      checkQuizCompletion();
+        };
+        
+        checkQuizCompletion();
+      }, 500); // Small delay to allow signup flow to complete
+
+      return () => clearTimeout(timer);
     }
-  }, [user, navigate]);
+  }, [user, navigate, pendingSignup]);
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
