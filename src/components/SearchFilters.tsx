@@ -55,12 +55,16 @@ const SearchFilters = ({ onFiltersChange, onUpgradePrompt, onPreferenceChange, o
 
   return (
     <div className="space-y-5">
-      <Card className="border-0 shadow-none">
-        <CardHeader className="px-0 pb-4">
+      <Card className="border-2 border-primary/20 bg-gradient-to-r from-primary/5 to-secondary/5 shadow-lg">
+        <CardHeader className="px-6 py-4">
           <div className="space-y-3">
-            <p className="text-sm text-muted-foreground leading-relaxed">
+            <div className="flex items-center gap-2 mb-2">
+              <div className="h-2 w-2 rounded-full bg-primary animate-pulse"></div>
+              <span className="text-xs font-medium text-primary uppercase tracking-wider">Inclusive Space</span>
+            </div>
+            <p className="text-base font-medium leading-relaxed text-foreground">
               Welcome to AI Complete Me - a space where all identities, orientations, and expressions are celebrated. 
-              Whether you're LGBTQ+, questioning, or exploring - you belong here.
+              Whether you&apos;re LGBTQ+, questioning, or exploring - <span className="font-semibold text-primary">you belong here</span>.
             </p>
             <div className="flex items-center gap-2">
               <Button 
@@ -73,12 +77,12 @@ const SearchFilters = ({ onFiltersChange, onUpgradePrompt, onPreferenceChange, o
                 Privacy Settings
               </Button>
             </div>
+            {!isEchoActive && (
+              <p className="text-xs text-muted-foreground italic">
+                ✨ Premium members get expanded matching options
+              </p>
+            )}
           </div>
-          {!isEchoActive && (
-            <p className="text-xs text-muted-foreground italic">
-              ✨ Premium members get expanded matching options
-            </p>
-          )}
         </CardHeader>
         <CardContent className="px-0 space-y-4">
           <div className="grid gap-4">
