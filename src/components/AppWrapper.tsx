@@ -18,13 +18,13 @@ export const AppWrapper: React.FC<AppWrapperProps> = ({ children }) => {
   const [hasShownModal, setHasShownModal] = useState(false);
   const location = useLocation();
 
-  // Show profile setup when needed (but not on profile edit page)
+  // Show profile setup when needed (but not on profile pages)
   useEffect(() => {
     if (!authLoading && !profileLoading && user && profile && !hasShownModal) {
-      // Don't show modal if user is on profile edit page
-      const isOnProfileEdit = location.pathname === '/profile/edit';
+      // Don't show modal if user is on any profile-related page
+      const isOnProfilePage = location.pathname.startsWith('/profile');
       
-      if (!isOnProfileEdit) {
+      if (!isOnProfilePage) {
         const needsProfileSetup = !profile.gender || !profile.looking_for || !profile.location;
         if (needsProfileSetup) {
           setShowProfileSetup(true);
