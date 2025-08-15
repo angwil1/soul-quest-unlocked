@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Card, CardContent } from "@/components/ui/card";
 import SearchFilters from "@/components/SearchFilters";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -367,26 +368,33 @@ export const Navbar = () => {
             </div>
 
             {!isEchoActive && (
-              <div className="mt-4 p-4 bg-muted rounded-lg">
-                <h4 className="font-semibold mb-2">Free Tier Includes:</h4>
-                <div className="space-y-1 text-sm text-muted-foreground">
-                  <p>• Basic compatibility matching</p>
-                  <p>• All gender preference options</p>
-                  <p>• Limited advanced filters</p>
-                </div>
-                <Button 
-                  variant="outline" 
-                  size="sm" 
-                  className="mt-3 w-full"
-                  onClick={() => {
-                    setShowSearchModal(false);
-                    navigate('/pricing');
-                  }}
-                >
-                  <span className="mr-2">👑</span>
-                  Upgrade for Unlimited Filters
-                </Button>
-              </div>
+              <Card className="border-primary/20 bg-gradient-to-r from-primary/5 to-secondary/5 mt-4">
+                <CardContent className="p-4">
+                  <div className="flex items-start gap-3">
+                    <div className="text-2xl">⭐</div>
+                    <div className="flex-1">
+                      <h4 className="font-semibold text-sm mb-2">Free Tier Includes:</h4>
+                      <div className="space-y-1 text-sm text-muted-foreground mb-3">
+                        <p>• Basic compatibility matching</p>
+                        <p>• All gender preference options</p>
+                        <p>• Limited advanced filters</p>
+                      </div>
+                      <Button 
+                        variant="default" 
+                        size="sm" 
+                        className="w-full text-xs h-8"
+                        onClick={() => {
+                          setShowSearchModal(false);
+                          navigate('/pricing');
+                        }}
+                      >
+                        <span className="mr-2">👑</span>
+                        Upgrade for Unlimited Filters
+                      </Button>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
             )}
           </div>
         </DialogContent>
