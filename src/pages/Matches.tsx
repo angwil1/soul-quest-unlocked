@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -7,10 +7,43 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Navbar } from '@/components/Navbar';
 import { Heart, Settings, MapPin, Briefcase, Sparkles } from 'lucide-react';
 import { founderCuratedProfiles } from '@/data/sampleProfiles';
+import { useAuth } from '@/hooks/useAuth';
+import { supabase } from '@/integrations/supabase/client';
 
 const Matches = () => {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [likedProfiles, setLikedProfiles] = useState<Set<string>>(new Set());
+
+  // Check if user has completed quiz and redirect if not
+  useEffect(() => {
+    const checkQuizCompletion = async () => {
+      if (!user) {
+        navigate('/auth');
+        return;
+      }
+
+      try {
+        const { data } = await supabase
+          .from('user_events')
+          .select('*')
+          .eq('user_id', user.id)
+          .eq('event_type', 'quiz_completed')
+          .limit(1);
+        
+        if (!data || data.length === 0) {
+          // User hasn't completed quiz, redirect to quiz
+          navigate('/questions');
+        }
+      } catch (error) {
+        console.error('Error checking quiz completion:', error);
+        // Default to quiz if error
+        navigate('/questions');
+      }
+    };
+
+    checkQuizCompletion();
+  }, [user, navigate]);
 
   const handleLike = (profileId: string) => {
     setLikedProfiles(prev => new Set([...prev, profileId]));
