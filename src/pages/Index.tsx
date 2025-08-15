@@ -33,6 +33,7 @@ const Index = () => {
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
   const [showSearchUpgradePrompt, setShowSearchUpgradePrompt] = useState(false);
   const [searchPreference, setSearchPreference] = useState('');
+  const [hasCompletedQuiz, setHasCompletedQuiz] = useState(false);
 
   // Simplified without subscription
   const isEchoActive = false;
@@ -94,6 +95,32 @@ const Index = () => {
       setShowFirstLightModal(true);
     }
   }, [user, loading, navigate]);
+
+  // Check if user has completed quiz
+  useEffect(() => {
+    const checkQuizCompletion = async () => {
+      if (!user) {
+        setHasCompletedQuiz(false);
+        return;
+      }
+
+      try {
+        const { data } = await supabase
+          .from('user_events')
+          .select('*')
+          .eq('user_id', user.id)
+          .eq('event_type', 'quiz_completed')
+          .limit(1);
+        
+        setHasCompletedQuiz(data && data.length > 0);
+      } catch (error) {
+        console.error('Error checking quiz completion:', error);
+        setHasCompletedQuiz(false);
+      }
+    };
+
+    checkQuizCompletion();
+  }, [user]);
 
 
   if (loading) {
@@ -392,27 +419,29 @@ const Index = () => {
               </span>
             </h1>
             
-            {/* SEARCH SECTION */}
-            <div className="mb-12 sm:mb-20 max-w-xl mx-auto">
-              <div className="flex flex-col sm:flex-row gap-2 mb-4">
-                <Input
-                  type="text"
-                  placeholder="Search by interests..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="flex-1 h-12 text-lg bg-white/10 backdrop-blur-sm border-white/20 text-white placeholder:text-white/60"
-                  onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
+            {/* SEARCH SECTION - Only show for users who completed quiz */}
+            {hasCompletedQuiz && (
+              <div className="mb-12 sm:mb-20 max-w-xl mx-auto">
+                <div className="flex flex-col sm:flex-row gap-2 mb-4">
+                  <Input
+                    type="text"
+                    placeholder="Search by interests..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="flex-1 h-12 text-lg bg-white/10 backdrop-blur-sm border-white/20 text-white placeholder:text-white/60"
+                    onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
+                  />
+                  <Button onClick={handleSearch} size="lg" className="px-6 h-12 bg-gradient-to-r from-primary via-purple-600 to-pink-600">
+                    <Search className="h-5 w-5" />
+                  </Button>
+                </div>
+                <SearchFilters 
+                  onFiltersChange={handleFiltersChange}
+                  onUpgradePrompt={handleUpgradePrompt}
+                  onPreferenceChange={setSearchPreference}
                 />
-                <Button onClick={handleSearch} size="lg" className="px-6 h-12 bg-gradient-to-r from-primary via-purple-600 to-pink-600">
-                  <Search className="h-5 w-5" />
-                </Button>
               </div>
-              <SearchFilters 
-                onFiltersChange={handleFiltersChange}
-                onUpgradePrompt={handleUpgradePrompt}
-                onPreferenceChange={setSearchPreference}
-              />
-            </div>
+            )}
 
             {/* Enhanced CTA Buttons - Mobile Responsive */}
             <div className="flex flex-col gap-4 sm:gap-8 justify-center items-center mb-12 sm:mb-20 max-w-xs sm:max-w-2xl mx-auto animate-fade-in px-4" style={{ animationDelay: '0.4s' }}>
