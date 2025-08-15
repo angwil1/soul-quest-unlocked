@@ -2,11 +2,12 @@ import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Menu, X, Search, Filter, LogOut, User } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import SearchFilters from "@/components/SearchFilters";
+import { supabase } from "@/integrations/supabase/client";
 
 export const Navbar = () => {
   const { user, signOut } = useAuth();
@@ -18,6 +19,33 @@ export const Navbar = () => {
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
   const [searchPreference, setSearchPreference] = useState('');
   const [zipCode, setZipCode] = useState('');
+  const [hasCompletedQuiz, setHasCompletedQuiz] = useState(false);
+
+  // Check if user has completed quiz
+  useEffect(() => {
+    const checkQuizCompletion = async () => {
+      if (!user) {
+        setHasCompletedQuiz(false);
+        return;
+      }
+
+      try {
+        const { data } = await supabase
+          .from('user_events')
+          .select('*')
+          .eq('user_id', user.id)
+          .eq('event_type', 'quiz_completed')
+          .limit(1);
+        
+        setHasCompletedQuiz(data && data.length > 0);
+      } catch (error) {
+        console.error('Error checking quiz completion:', error);
+        setHasCompletedQuiz(false);
+      }
+    };
+
+    checkQuizCompletion();
+  }, [user]);
 
   const navigation = [
     { name: "Home", href: "/" },
@@ -147,15 +175,18 @@ export const Navbar = () => {
 
           {/* Desktop Auth Buttons */}
           <div className="hidden md:flex items-center space-x-4">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setShowSearchModal(true)}
-              className="flex items-center gap-2"
-            >
-              <Search className="h-4 w-4" />
-              Search
-            </Button>
+            {/* Only show search if user has completed quiz */}
+            {user && hasCompletedQuiz && (
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setShowSearchModal(true)}
+                className="flex items-center gap-2"
+              >
+                <Search className="h-4 w-4" />
+                Search
+              </Button>
+            )}
             {user ? (
               <div className="flex items-center space-x-4">
                 <Link to="/profile">
@@ -227,20 +258,23 @@ export const Navbar = () => {
                   </Link>
                 ))}
               </div>
-              <div className="px-3 py-2 border-t border-border mt-2">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => {
-                    setShowSearchModal(true);
-                    setIsMenuOpen(false);
-                  }}
-                  className="w-full justify-start flex items-center gap-2"
-                >
-                  <Search className="h-4 w-4" />
-                  Search
-                </Button>
-              </div>
+              {/* Only show search in mobile if user has completed quiz */}
+              {user && hasCompletedQuiz && (
+                <div className="px-3 py-2 border-t border-border mt-2">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => {
+                      setShowSearchModal(true);
+                      setIsMenuOpen(false);
+                    }}
+                    className="w-full justify-start flex items-center gap-2"
+                  >
+                    <Search className="h-4 w-4" />
+                    Search
+                  </Button>
+                </div>
+              )}
               <div className="px-3 py-2 border-t border-border mt-4">
                 {user ? (
                   <div className="space-y-3">
