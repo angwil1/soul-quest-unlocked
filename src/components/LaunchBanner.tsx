@@ -63,13 +63,13 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
   if (isDismissed) return null;
 
   return (
-    <Card className={`relative overflow-hidden bg-gradient-primary border-primary/20 shadow-primary ${className}`}>
+    <Card className={`relative overflow-hidden bg-gradient-launch border-pink-500/30 shadow-launch ${className}`}>
       {showDismiss && (
         <Button
           variant="ghost"
           size="sm"
           onClick={handleDismiss}
-          className="absolute top-2 right-2 h-6 w-6 p-0 text-primary-foreground/80 hover:text-primary-foreground hover:bg-primary-foreground/20 z-10"
+          className="absolute top-2 right-2 h-6 w-6 p-0 text-white/80 hover:text-white hover:bg-white/20 z-10"
         >
           <X className="h-3 w-3" />
         </Button>
@@ -80,21 +80,21 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
           {/* Left side - Main message */}
           <div className="text-center md:text-left">
             <div className="flex items-center justify-center md:justify-start gap-2 mb-2">
-              <Sparkles className="h-5 w-5 text-primary-foreground animate-pulse" />
-              <Badge variant="secondary" className="bg-primary-foreground/20 text-primary-foreground border-primary-foreground/30">
+              <Sparkles className="h-5 w-5 text-pink-300 animate-pulse" />
+              <Badge variant="secondary" className="bg-white/20 text-white border-white/30">
                 Free During Launch
               </Badge>
             </div>
             
-            <h3 className="text-lg md:text-xl font-bold text-primary-foreground mb-2">
+            <h3 className="text-lg md:text-xl font-bold text-white mb-2">
               AI Complete Me is free during launch! 💫
             </h3>
             
-            <p className="text-primary-foreground/90 text-sm md:text-base mb-3">
+            <p className="text-white/90 text-sm md:text-base mb-3">
               Take the compatibility quiz to unlock your profile—no email, no payment, just connection.
             </p>
             
-            <div className="text-primary-foreground/80 text-xs md:text-sm">
+            <div className="text-white/80 text-xs md:text-sm">
               ✨ All identities welcome. All journeys respected.
             </div>
           </div>
@@ -102,7 +102,7 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
           {/* Right side - Features and countdown */}
           <div className="flex flex-col items-center gap-3 min-w-0">
             {/* Countdown */}
-            <div className="flex items-center gap-2 text-primary-foreground">
+            <div className="flex items-center gap-2 text-white">
               <Clock className="h-4 w-4" />
               <div className="text-sm font-medium">
                 {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m left
@@ -110,7 +110,7 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
             </div>
 
             {/* Features */}
-            <div className="flex flex-wrap justify-center gap-2 text-xs text-primary-foreground/90">
+            <div className="flex flex-wrap justify-center gap-2 text-xs text-white/90">
               <div className="flex items-center gap-1">
                 <Heart className="h-3 w-3" />
                 <span>Compatibility Quiz</span>
@@ -128,7 +128,7 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
                 onClick={handleQuizStart}
                 variant="secondary"
                 size="sm"
-                className="bg-primary-foreground text-primary hover:bg-primary-foreground/90 font-medium"
+                className="bg-white text-black hover:bg-white/90 font-medium"
               >
                 Start Quiz Free ✨
               </Button>

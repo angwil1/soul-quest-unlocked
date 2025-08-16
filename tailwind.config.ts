@@ -67,11 +67,13 @@ export default {
 			backgroundImage: {
 				'gradient-primary': 'var(--gradient-primary)',
 				'gradient-secondary': 'var(--gradient-secondary)',
-				'gradient-hero': 'var(--gradient-hero)'
+				'gradient-hero': 'var(--gradient-hero)',
+				'gradient-launch': 'var(--gradient-launch)'
 			},
 			boxShadow: {
 				'primary': 'var(--shadow-primary)',
-				'secondary': 'var(--shadow-secondary)'
+				'secondary': 'var(--shadow-secondary)',
+				'launch': 'var(--shadow-launch)'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
