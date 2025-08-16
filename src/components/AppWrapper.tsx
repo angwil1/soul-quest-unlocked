@@ -37,7 +37,11 @@ export const AppWrapper: React.FC<AppWrapperProps> = ({ children }) => {
         '/ai-digest',
         '/mission',
         '/faq',
-        '/privacy'
+        '/privacy',
+        '/terms',
+        '/cookies',
+        '/accessibility',
+        '/safety'
       ];
       
       const shouldExclude = excludedPaths.some(path => 
