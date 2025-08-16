@@ -7,7 +7,7 @@ export type Json =
   | Json[]
 
 export type Database = {
-  // Allows to automatically instanciate createClient with right options
+  // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
     PostgrestVersion: "12.2.3 (519615d)"
@@ -1915,9 +1915,9 @@ export type Database = {
       calculate_match_intelligence: {
         Args: { input_user_id: string }
         Returns: {
-          match_id: string
           compatibility_score: number
           is_premium_preview: boolean
+          match_id: string
         }[]
       }
       can_send_message: {
@@ -1948,26 +1948,26 @@ export type Database = {
       check_whisper_window_constraints: {
         Args: {
           chat_id_param: string
-          sender_id_param: string
           message_text_param: string
+          sender_id_param: string
         }
         Returns: Json
       }
       compute_interaction_risk: {
         Args: { p_user_id: string }
         Returns: {
-          computed_user_id: string
-          swiping_anomaly_score: number
           block_report_score: number
+          computed_user_id: string
+          debug_info: Json
+          interaction_limit_multiplier: number
           location_shift_score: number
+          swiping_anomaly_score: number
           total_risk_score: number
           warning_level: string
-          interaction_limit_multiplier: number
-          debug_info: Json
         }[]
       }
       compute_match_embedding: {
-        Args: { p_user_id: string; p_matched_user_id: string }
+        Args: { p_matched_user_id: string; p_user_id: string }
         Returns: string
       }
       create_signup_event_for_user: {
@@ -1981,8 +1981,8 @@ export type Database = {
       generate_ai_match: {
         Args: Record<PropertyKey, never> | { user_id: string }
         Returns: {
-          matched_user_id: string
           match_score: number
+          matched_user_id: string
         }[]
       }
       generate_ai_match_v2: {
@@ -1993,9 +1993,9 @@ export type Database = {
         Args: Record<PropertyKey, never> | { user_id: number }
         Returns: {
           match_id: number
+          score: number
           user_id_1: number
           user_id_2: number
-          score: number
         }[]
       }
       generate_daily_compatibility_digest: {
@@ -2012,7 +2012,7 @@ export type Database = {
         }
       }
       generate_match_preview: {
-        Args: { p_user_id: string; p_preview_user_id: string }
+        Args: { p_preview_user_id: string; p_user_id: string }
         Returns: {
           blurred_avatar_url: string | null
           expires_at: string | null
@@ -2025,11 +2025,11 @@ export type Database = {
         }
       }
       generate_match_summary: {
-        Args: { p_user_id: string; p_matched_user_id: string }
+        Args: { p_matched_user_id: string; p_user_id: string }
         Returns: string
       }
       generate_top_picks: {
-        Args: { p_user_id: string; p_max_picks?: number }
+        Args: { p_max_picks?: number; p_user_id: string }
         Returns: {
           candidate_user_id: string | null
           cooldown_until: string | null
@@ -2047,19 +2047,19 @@ export type Database = {
       }
       get_premium_matches: {
         Args: {
-          p_user_id: string
-          p_min_compatibility?: number
-          p_sort_by?: string
           p_limit?: number
+          p_min_compatibility?: number
           p_offset?: number
+          p_sort_by?: string
+          p_user_id: string
         }
         Returns: {
-          matched_user_id: string
+          ai_match_summary: string
           compatibility_score: number
+          embedding: string
           interaction_boost: number
           match_timestamp: string
-          ai_match_summary: string
-          embedding: string
+          matched_user_id: string
         }[]
       }
       get_remaining_messages: {
@@ -2076,8 +2076,8 @@ export type Database = {
       }
       log_security_event: {
         Args: {
-          p_event_type: string
           p_event_details?: Json
+          p_event_type: string
           p_ip_address?: unknown
           p_user_agent?: string
         }
@@ -2091,8 +2091,8 @@ export type Database = {
         Args: Record<PropertyKey, never>
         Returns: {
           id: number
-          user_id: string
           match_score: number
+          user_id: string
         }[]
       }
       secure_generate_ai_match_new: {
