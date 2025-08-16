@@ -364,9 +364,26 @@ const Messages = () => {
                    </div>
                 </>
               ) : (
-                <div className="flex-1 flex items-center justify-center text-muted-foreground">
-                  Select a match to start messaging
-                </div>
+                <>
+                  <div className="flex-1 flex items-center justify-center text-muted-foreground">
+                    Select a match to start messaging
+                  </div>
+                  
+                  {/* Message Input - Always Show */}
+                  <div className="flex gap-2">
+                    <Input
+                      value={newMessage}
+                      onChange={(e) => setNewMessage(e.target.value)}
+                      placeholder="Select a match first to send a message..."
+                      disabled={true}
+                    />
+                    <Button 
+                      disabled={true}
+                    >
+                      <Send className="h-4 w-4" />
+                    </Button>
+                  </div>
+                </>
               )}
             </CardContent>
           </Card>
