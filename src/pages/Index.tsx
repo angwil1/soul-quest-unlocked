@@ -12,7 +12,7 @@ import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { FloatingQuizButton } from '@/components/FloatingQuizButton';
 import { FirstLightModal } from '@/components/FirstLightModal';
-
+import { LaunchBanner } from '@/components/LaunchBanner';
 import { AgeVerification } from '@/components/AgeVerification';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import SearchFilters from '@/components/SearchFilters';
@@ -164,6 +164,11 @@ const Index = () => {
 
           {/* Hero Content */}
           <div className="relative z-10 max-w-7xl mx-auto px-4 py-20 text-center">
+            {/* Launch Banner */}
+            <div className="mb-8 animate-fade-in">
+              <LaunchBanner showDismiss={true} variant="homepage" />
+            </div>
+            
             <div className="animate-fade-in">
               {/* Enhanced Badge */}
               <div className="inline-flex items-center px-6 py-3 mb-12 rounded-full bg-gradient-to-r from-primary/10 to-purple-600/10 border border-primary/20 backdrop-blur-sm hover:scale-105 transition-transform duration-300">
