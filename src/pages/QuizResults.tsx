@@ -10,6 +10,7 @@ import { Sparkles, Heart, Crown, MessageCircle, Eye, EyeOff, Mail, RefreshCw } f
 import { supabase } from '@/integrations/supabase/client';
 import { useEmailJourneys } from '@/hooks/useEmailJourneys';
 import { useToast } from '@/hooks/use-toast';
+import { InviteKindredSoul } from '@/components/InviteKindredSoul';
 
 interface MatchPreview {
   id: string;
@@ -427,6 +428,11 @@ const QuizResults = () => {
           <Button onClick={handleViewProfile} variant="outline" size="lg" className="flex-1 max-w-xs">
             Edit Profile
           </Button>
+        </div>
+
+        {/* Invite Kindred Soul Section - Perfect emotional moment after seeing matches */}
+        <div className="mb-8">
+          <InviteKindredSoul />
         </div>
 
         {/* Founder Note */}

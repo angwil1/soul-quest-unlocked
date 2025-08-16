@@ -12,7 +12,7 @@ import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { FloatingQuizButton } from '@/components/FloatingQuizButton';
 import { FirstLightModal } from '@/components/FirstLightModal';
-import { InviteKindredSoul } from '@/components/InviteKindredSoul';
+
 import { AgeVerification } from '@/components/AgeVerification';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import SearchFilters from '@/components/SearchFilters';
@@ -506,7 +506,7 @@ const Index = () => {
       />
       
       <FloatingQuizButton />
-      <InviteKindredSoul />
+      
       <AgeVerification />
     </div>
   );
