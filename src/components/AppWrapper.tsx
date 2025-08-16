@@ -18,15 +18,33 @@ export const AppWrapper: React.FC<AppWrapperProps> = ({ children }) => {
   const [hasShownModal, setHasShownModal] = useState(false);
   const location = useLocation();
 
-  // Show profile setup when needed (but not on profile pages, home page, or messages)
+  // Show profile setup when needed (exclude from most pages)
   useEffect(() => {
     if (!authLoading && !profileLoading && user && profile && !hasShownModal) {
-      // Don't show modal if user is on profile pages, home page, or messages page
-      const isOnProfilePage = location.pathname.startsWith('/profile');
-      const isOnHomePage = location.pathname === '/';
-      const isOnMessagesPage = location.pathname === '/messages';
+      // Don't show modal on these pages
+      const excludedPaths = [
+        '/profile',
+        '/',
+        '/messages',
+        '/reset-password',
+        '/matches',
+        '/questions', 
+        '/quiz-results',
+        '/sample-profiles',
+        '/pricing',
+        '/connection-dna',
+        '/memory-vault',
+        '/ai-digest',
+        '/mission',
+        '/faq',
+        '/privacy'
+      ];
       
-      if (!isOnProfilePage && !isOnHomePage && !isOnMessagesPage) {
+      const shouldExclude = excludedPaths.some(path => 
+        path === '/' ? location.pathname === '/' : location.pathname.startsWith(path)
+      );
+      
+      if (!shouldExclude) {
         const needsProfileSetup = !profile.gender || !profile.looking_for || !profile.location;
         if (needsProfileSetup) {
           setShowProfileSetup(true);
