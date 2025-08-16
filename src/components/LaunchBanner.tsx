@@ -80,7 +80,7 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
           {/* Left side - Main message */}
           <div className="text-center md:text-left">
             <div className="flex items-center justify-center md:justify-start gap-2 mb-2">
-              <Sparkles className="h-5 w-5 text-pink-300 animate-pulse" />
+              <Sparkles className="h-5 w-5 text-pink-500 animate-pulse" />
               <Badge variant="secondary" className="bg-white/20 text-white border-white/30">
                 Free During Launch
               </Badge>
