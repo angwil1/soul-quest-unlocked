@@ -1941,6 +1941,10 @@ export type Database = {
         Args: { p_user_id: string }
         Returns: boolean
       }
+      check_user_message_limit_access: {
+        Args: { p_user_id: string }
+        Returns: boolean
+      }
       check_user_security_level: {
         Args: Record<PropertyKey, never>
         Returns: boolean
