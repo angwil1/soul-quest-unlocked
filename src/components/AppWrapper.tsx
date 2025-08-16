@@ -51,6 +51,11 @@ export const AppWrapper: React.FC<AppWrapperProps> = ({ children }) => {
         path === '/' ? location.pathname === '/' : location.pathname.startsWith(path)
       );
       
+      // Always exclude the profile setup modal from messages page
+      if (location.pathname === '/messages') {
+        return;
+      }
+      
       if (!shouldExclude) {
         const needsProfileSetup = !profile.gender || !profile.looking_for || !profile.location;
         if (needsProfileSetup) {
