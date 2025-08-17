@@ -171,11 +171,14 @@ const Index = () => {
           {/* Dynamic Background with Multiple Layers */}
           <div className="absolute inset-0 z-0">
             <div className="relative w-full h-full">
-              {/* Primary Background Image - Clean and visible */}
+              {/* Primary Background Image - Responsive for all devices */}
               <img 
                 src={heroImages[currentHeroImageIndex]} 
                 alt="Happy couple in warm connection" 
-                className="absolute inset-0 w-full h-full object-cover object-bottom opacity-100 animate-fade-in transition-opacity duration-1000"
+                className="absolute inset-0 w-full h-full object-cover object-center sm:object-bottom opacity-100 animate-fade-in transition-opacity duration-1000"
+                style={{
+                  objectPosition: 'center 20%' // Better positioning for mobile portraits
+                }}
                 onError={(e) => {
                   console.error('Hero image failed to load:', heroImages[currentHeroImageIndex]);
                 }}
@@ -187,9 +190,9 @@ const Index = () => {
               {/* Very light overlay for text readability */}
               <div className="absolute inset-0 bg-gradient-to-b from-background/5 via-transparent to-pink-500/3"></div>
               
-              {/* Floating Background Elements */}
-              <div className="absolute top-20 left-20 w-72 h-72 bg-gradient-to-br from-primary/10 to-purple-600/10 rounded-full blur-3xl animate-pulse"></div>
-              <div className="absolute bottom-20 right-20 w-96 h-96 bg-gradient-to-br from-pink-600/10 to-primary/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+              {/* Responsive Floating Background Elements */}
+              <div className="absolute top-10 sm:top-20 left-4 sm:left-20 w-32 sm:w-72 h-32 sm:h-72 bg-gradient-to-br from-primary/10 to-purple-600/10 rounded-full blur-2xl sm:blur-3xl animate-pulse"></div>
+              <div className="absolute bottom-10 sm:bottom-20 right-4 sm:right-20 w-48 sm:w-96 h-48 sm:h-96 bg-gradient-to-br from-pink-600/10 to-primary/10 rounded-full blur-2xl sm:blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
             </div>
           </div>
 
