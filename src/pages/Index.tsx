@@ -243,7 +243,7 @@ const Index = () => {
               
               <div className="animate-fade-in">
                 {/* Enhanced Badge */}
-                <div className="inline-flex items-center px-6 py-3 mb-12 rounded-full bg-gradient-to-r from-primary/10 to-purple-600/10 border border-primary/20 backdrop-blur-sm hover:scale-105 transition-transform duration-300">
+                <div className="inline-flex items-center px-6 py-3 mb-6 sm:mb-8 rounded-full bg-gradient-to-r from-primary/10 to-purple-600/10 border border-primary/20 backdrop-blur-sm hover:scale-105 transition-transform duration-300">
                   <Sparkles className="h-5 w-5 mr-3 text-primary animate-pulse" />
                   <span className="text-primary font-semibold">AI-Powered Emotional Intelligence Dating</span>
                 </div>
