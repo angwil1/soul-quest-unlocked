@@ -159,7 +159,7 @@ const Index = () => {
         <Navbar />
         
         {/* DRAMATIC HERO DESIGN */}
-        <section className="relative min-h-[100vh] min-h-[100dvh] flex items-center justify-center">
+        <section className="relative min-h-[100vh] min-h-[100dvh] flex items-center justify-center pt-8 md:pt-0">
           {/* Dynamic Background with Multiple Layers */}
           <div className="absolute inset-0 z-0">
             <div className="relative w-full h-full">
@@ -167,14 +167,14 @@ const Index = () => {
               <img 
                 src={heroImages[currentHeroImageIndex]} 
                 alt="Happy couple in warm connection" 
-                className="absolute inset-0 w-full h-full object-cover object-center opacity-80 animate-fade-in transition-opacity duration-1000"
+                className="absolute inset-0 w-full h-full object-cover object-bottom md:object-center opacity-90 animate-fade-in transition-opacity duration-1000"
               />
               
               {/* Secondary Background for Depth */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-purple-600/10 to-pink-600/15 transition-all duration-1000"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-purple-600/5 to-pink-600/10 md:from-primary/10 md:via-purple-600/10 md:to-pink-600/15 transition-all duration-1000"></div>
               
-              {/* Overlay Pattern */}
-              <div className="absolute inset-0 bg-gradient-to-br from-background/40 via-background/30 to-background/40"></div>
+              {/* Overlay Pattern - Reduced opacity on mobile */}
+              <div className="absolute inset-0 bg-gradient-to-br from-background/20 via-background/15 to-background/25 md:from-background/40 md:via-background/30 md:to-background/40"></div>
               
               {/* Floating Background Elements */}
               <div className="absolute top-20 left-20 w-72 h-72 bg-gradient-to-br from-primary/10 to-purple-600/10 rounded-full blur-3xl animate-pulse"></div>
