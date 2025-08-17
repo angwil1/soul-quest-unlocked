@@ -194,7 +194,7 @@ const Index = () => {
           </div>
 
           {/* HOTTEST DATING APP - Top of page on tablet */}
-          <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-30 animate-fade-in hidden md:block lg:hidden">
+          <div className="absolute top-8 left-1/2 transform -translate-x-1/2 z-30 animate-fade-in hidden md:block lg:hidden">
             <h1 className="text-2xl font-black leading-none text-center">
               <span className="block bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 bg-clip-text text-transparent animate-scale-in hover:scale-105 transition-transform duration-500">
                 🔥 HOTTEST 🔥
