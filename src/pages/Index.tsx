@@ -147,7 +147,7 @@ const Index = () => {
               <img 
                 src="/lovable-uploads/cad4cf3a-5e0b-419d-ad23-e8fa3d30cabf.png" 
                 alt="Happy couple in warm connection" 
-                className="absolute inset-0 w-full h-full object-cover opacity-50 animate-fade-in transition-opacity duration-1000"
+                className="absolute inset-0 w-full h-full object-cover opacity-80 animate-fade-in transition-opacity duration-1000"
               />
               
               {/* Secondary Background for Depth */}
