@@ -255,7 +255,7 @@ const Index = () => {
                 </div>
 
                 {/* Enhanced CTA Buttons - Mobile Responsive */}
-                <div className="flex flex-col gap-4 sm:gap-8 justify-center items-center mb-12 sm:mb-20 max-w-xs sm:max-w-2xl mx-auto animate-fade-in px-4" style={{ animationDelay: '0.4s' }}>
+                <div className="flex flex-col gap-4 sm:gap-8 justify-center items-center mb-12 sm:mb-20 mt-4 sm:mt-0 max-w-xs sm:max-w-2xl mx-auto animate-fade-in px-4" style={{ animationDelay: '0.4s' }}>
                   <Button 
                     size="lg" 
                     onClick={() => navigate('/quick-start')}
