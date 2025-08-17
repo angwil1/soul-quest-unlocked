@@ -172,6 +172,20 @@ const Index = () => {
         
         {/* DRAMATIC HERO DESIGN */}
         <section className="relative min-h-[100vh] min-h-[100dvh] flex items-center justify-center">
+          
+          {/* Already have account - Top Right */}
+          <div className="absolute top-4 right-4 z-30 animate-fade-in">
+            <p className="text-white/80 mb-2 text-sm">Already have an account?</p>
+            <Button 
+              variant="ghost" 
+              onClick={() => navigate('/auth')}
+              className="text-white hover:text-white/80 font-medium text-sm px-4 py-2 rounded-lg hover:bg-white/10 transition-all duration-300"
+            >
+              Log in
+              <ArrowRight className="h-3 w-3 ml-1" />
+            </Button>
+          </div>
+
           {/* Responsive padding to prevent overlap */}
           <div className="relative pt-8 md:pt-12 lg:pt-16 w-full h-full">
             {/* Dynamic Background with Proper Z-Index Layering */}
@@ -252,19 +266,6 @@ const Index = () => {
                     <br className="hidden sm:block"/>
                     <span className="block sm:inline mt-1 sm:mt-0 text-xs sm:text-2xl md:text-4xl">Find your <span className="text-yellow-300 underline decoration-1 sm:decoration-4 decoration-yellow-300">SOULMATE</span> with AI!</span>
                   </p>
-                </div>
-
-                {/* Login Section - Mobile Responsive */}
-                <div className="text-center mb-12 sm:mb-20 animate-fade-in px-4" style={{ animationDelay: '0.5s' }}>
-                  <p className="text-muted-foreground mb-4 sm:mb-6 text-base sm:text-lg">Already have an account?</p>
-                  <Button 
-                    variant="ghost" 
-                    onClick={() => navigate('/auth')}
-                    className="text-primary hover:text-primary/80 font-semibold text-lg sm:text-xl px-6 sm:px-8 py-3 sm:py-4 rounded-xl hover:bg-primary/10 transform hover:scale-105 transition-all duration-300"
-                  >
-                    Log in and reconnect
-                    <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 ml-2" />
-                  </Button>
                 </div>
 
                 {/* Enhanced CTA Buttons - Mobile Responsive */}
