@@ -321,10 +321,10 @@ const Index = () => {
                   </div>
                 </div>
 
-                {/* Tablet Layout - Split positioning */}
-                <div className="hidden md:block lg:hidden relative h-96">
-                  {/* Pink box - Lower Left */}
-                  <div className="absolute bottom-8 left-8 z-30 animate-fade-in">
+                {/* Tablet Layout - Split positioning above stats */}
+                <div className="hidden md:block lg:hidden relative -mb-16 z-20">
+                  {/* Pink box - Above left side of stats */}
+                  <div className="absolute bottom-0 left-8 z-30 animate-fade-in">
                     <p className="text-base text-white font-bold max-w-xs leading-relaxed bg-gradient-to-r from-red-500 to-pink-500 p-2 rounded-lg shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-500" style={{ animationDelay: '0.3s' }}>
                       🚀 <span className="text-yellow-300 bg-black px-1.5 py-0.5 rounded-md text-xs">NO MORE BORING SWIPES!</span> 🚀
                       <br/>
@@ -332,8 +332,8 @@ const Index = () => {
                     </p>
                   </div>
                   
-                  {/* Start Journey - Lower Right */}
-                  <div className="absolute bottom-8 right-8 z-30 animate-fade-in">
+                  {/* Start Journey - Above right side of stats */}
+                  <div className="absolute bottom-0 right-8 z-30 animate-fade-in">
                     <div 
                       onClick={() => navigate('/quick-start')}
                       className="cursor-pointer relative bg-gradient-to-r from-primary via-purple-600 to-pink-600 text-white px-4 py-3 rounded-2xl rounded-bl-sm shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-base font-medium max-w-fit"
