@@ -180,17 +180,17 @@ const Index = () => {
             {/* Dynamic Background with Proper Z-Index Layering */}
             <div className="absolute inset-0 z-0">
               <div className="relative w-full h-full">
-                {/* Primary Background Image - Responsive with better face positioning */}
+                {/* Primary Background Image - Optimized positioning for face visibility */}
                 <img 
                   src={heroImages[currentHeroImageIndex]} 
                   alt="Happy couple in warm connection" 
                   className="absolute inset-0 w-full h-full object-cover animate-fade-in transition-opacity duration-1000 z-0"
                   style={{
                     objectPosition: window.innerWidth >= 768 && window.innerWidth < 1024 
-                      ? 'center 35%' // Tablet: lower positioning to avoid face cropping
+                      ? 'center 20%' // Tablet: much lower positioning for face visibility
                       : window.innerWidth < 768 
-                        ? 'center 25%' // Mobile: centered with slight upward bias
-                        : 'center bottom' // Desktop: bottom positioning
+                        ? 'center 15%' // Mobile: lower positioning to show faces clearly
+                        : 'center 30%' // Desktop: adjusted for better face framing
                   }}
                   onError={(e) => {
                     console.error('Hero image failed to load:', heroImages[currentHeroImageIndex]);
@@ -200,8 +200,8 @@ const Index = () => {
                   }}
                 />
                 
-                {/* Responsive overlay - lighter on tablet to avoid masking */}
-                <div className="absolute inset-0 bg-gradient-to-b from-background/3 via-transparent to-pink-500/2 md:from-background/5 md:to-pink-500/3 z-10"></div>
+                {/* Minimal overlay - removed on mobile to eliminate masking */}
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-transparent md:from-background/2 md:to-pink-500/1 z-10"></div>
                 
                 {/* Responsive Floating Background Elements */}
                 <div className="absolute top-10 sm:top-20 left-4 sm:left-20 w-32 sm:w-72 h-32 sm:h-72 bg-gradient-to-br from-primary/10 to-purple-600/10 rounded-full blur-2xl sm:blur-3xl animate-pulse z-10"></div>
