@@ -271,15 +271,16 @@ const Index = () => {
 
                 {/* Enhanced CTA Buttons - Mobile Responsive */}
                 <div className="flex flex-col gap-4 sm:gap-8 justify-center items-center mb-12 sm:mb-20 mt-8 sm:mt-0 max-w-xs sm:max-w-2xl mx-auto animate-fade-in px-4" style={{ animationDelay: '0.4s' }}>
-                  <Button 
-                    size="lg" 
+                  <div 
                     onClick={() => navigate('/quick-start')}
-                    className="w-full px-3 sm:px-12 py-1.5 sm:py-6 text-sm sm:text-xl font-bold bg-gradient-to-r from-primary via-purple-600 to-pink-600 hover:from-primary/90 hover:via-purple-600/90 hover:to-pink-600/90 transform hover:scale-110 transition-all duration-500 shadow-xl hover:shadow-3xl rounded-2xl border-0"
+                    className="cursor-pointer relative bg-gradient-to-r from-primary via-purple-600 to-pink-600 text-white px-3 py-2 rounded-2xl rounded-bl-sm shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-sm font-medium max-w-fit"
                   >
-                    <Heart className="h-3 w-3 sm:h-6 sm:w-6 mr-1 sm:mr-3" />
+                    <Heart className="h-3 w-3 mr-1 inline" />
                     Start Your Journey
-                    <ArrowRight className="h-2.5 w-2.5 sm:h-5 sm:w-5 ml-1 sm:ml-3" />
-                  </Button>
+                    <ArrowRight className="h-3 w-3 ml-1 inline" />
+                    {/* Message bubble tail */}
+                    <div className="absolute -bottom-1 left-2 w-3 h-3 bg-gradient-to-r from-primary to-purple-600 transform rotate-45 rounded-sm"></div>
+                  </div>
                   
                   <Button 
                     variant="ghost" 
