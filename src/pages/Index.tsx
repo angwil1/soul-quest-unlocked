@@ -256,11 +256,11 @@ const Index = () => {
                 </div>
                 
                 {/* DRAMATIC DESCRIPTION - Mobile only */}
-                <div className="mb-6 sm:mb-8 lg:hidden">
-                  <p className="text-xs sm:text-lg md:text-2xl text-white font-bold max-w-xs sm:max-w-3xl mx-auto leading-relaxed animate-fade-in bg-gradient-to-r from-red-500 to-pink-500 p-1.5 sm:p-4 rounded-lg sm:rounded-2xl shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-500" style={{ animationDelay: '0.3s' }}>
+                <div className="mb-6 sm:mb-8 md:hidden">
+                  <p className="text-xs sm:text-lg text-white font-bold max-w-xs sm:max-w-3xl mx-auto leading-relaxed animate-fade-in bg-gradient-to-r from-red-500 to-pink-500 p-1.5 sm:p-4 rounded-lg sm:rounded-2xl shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-500" style={{ animationDelay: '0.3s' }}>
                     🚀 <span className="text-yellow-300 bg-black px-1 sm:px-2 py-0.5 sm:py-1 rounded-md sm:rounded-lg text-xs sm:text-sm">NO MORE BORING SWIPES!</span> 🚀
                     <br className="hidden sm:block"/>
-                    <span className="block sm:inline mt-1 sm:mt-0 text-xs sm:text-lg md:text-2xl">Find your <span className="text-yellow-300 underline decoration-1 sm:decoration-2 decoration-yellow-300">SOULMATE</span> with AI!</span>
+                    <span className="block sm:inline mt-1 sm:mt-0 text-xs sm:text-lg">Find your <span className="text-yellow-300 underline decoration-1 sm:decoration-2 decoration-yellow-300">SOULMATE</span> with AI!</span>
                   </p>
                 </div>
                 
@@ -298,6 +298,15 @@ const Index = () => {
                     <Users className="h-2.5 w-2.5 sm:h-5 w-5 lg:h-6 lg:w-6 mr-0.5 sm:mr-2 lg:mr-3" />
                     See How It Works
                   </Button>
+                  
+                  {/* DRAMATIC DESCRIPTION - Tablet only, positioned below buttons */}
+                  <div className="hidden md:block lg:hidden mt-6">
+                    <p className="text-lg text-white font-bold max-w-2xl mx-auto leading-relaxed animate-fade-in bg-gradient-to-r from-red-500 to-pink-500 p-3 rounded-xl shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-500" style={{ animationDelay: '0.3s' }}>
+                      🚀 <span className="text-yellow-300 bg-black px-2 py-1 rounded-lg text-sm">NO MORE BORING SWIPES!</span> 🚀
+                      <br/>
+                      <span className="text-lg">Find your <span className="text-yellow-300 underline decoration-2 decoration-yellow-300">SOULMATE</span> with AI!</span>
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
