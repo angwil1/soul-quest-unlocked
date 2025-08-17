@@ -75,22 +75,22 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
         </Button>
       )}
       
-      <CardContent className="p-6">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+      <CardContent className="p-3 md:p-6">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-2 md:gap-4">
           {/* Left side - Main message */}
           <div className="text-center md:text-left">
-            <div className="flex items-center justify-center md:justify-start gap-2 mb-2">
-              <Sparkles className="h-5 w-5 text-pink-500 animate-pulse" />
-              <Badge variant="secondary" className="bg-white/20 text-white border-white/30">
+            <div className="flex items-center justify-center md:justify-start gap-2 mb-1 md:mb-2">
+              <Sparkles className="h-4 w-4 md:h-5 md:w-5 text-pink-500 animate-pulse" />
+              <Badge variant="secondary" className="bg-white/20 text-white border-white/30 text-xs">
                 Free During Launch
               </Badge>
             </div>
             
-            <h3 className="text-lg md:text-xl font-bold text-white mb-2">
+            <h3 className="text-base md:text-xl font-bold text-white mb-1 md:mb-2">
               AI Complete Me is free during launch! 💫
             </h3>
             
-            <p className="text-white/90 text-sm md:text-base mb-3">
+            <p className="text-white/90 text-xs md:text-base mb-2 md:mb-3 leading-tight">
               Take the compatibility quiz to unlock your profile—no email, no payment, just connection.
             </p>
             
@@ -100,17 +100,17 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
           </div>
 
           {/* Right side - Features and countdown */}
-          <div className="flex flex-col items-center gap-3 min-w-0">
+          <div className="flex flex-col items-center gap-2 md:gap-3 min-w-0">
             {/* Countdown */}
             <div className="flex items-center gap-2 text-white">
-              <Clock className="h-4 w-4" />
-              <div className="text-sm font-medium">
+              <Clock className="h-3 w-3 md:h-4 md:w-4" />
+              <div className="text-xs md:text-sm font-medium">
                 {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m left
               </div>
             </div>
 
             {/* Features */}
-            <div className="flex flex-wrap justify-center gap-2 text-xs text-white/90">
+            <div className="flex flex-wrap justify-center gap-1 md:gap-2 text-xs text-white/90">
               <div className="flex items-center gap-1">
                 <Heart className="h-3 w-3" />
                 <span>Compatibility Quiz</span>
@@ -128,7 +128,7 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
                 onClick={handleQuizStart}
                 variant="secondary"
                 size="sm"
-                className="bg-white text-black hover:bg-white/90 font-medium"
+                className="bg-white text-black hover:bg-white/90 font-medium text-xs md:text-sm px-3 py-1.5"
               >
                 Start Quiz Free ✨
               </Button>
