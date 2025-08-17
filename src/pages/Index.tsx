@@ -259,20 +259,20 @@ const Index = () => {
                   <Button 
                     size="lg" 
                     onClick={() => navigate('/quick-start')}
-                    className="w-full px-8 sm:px-12 py-4 sm:py-6 text-lg sm:text-xl font-bold bg-gradient-to-r from-primary via-purple-600 to-pink-600 hover:from-primary/90 hover:via-purple-600/90 hover:to-pink-600/90 transform hover:scale-110 transition-all duration-500 shadow-xl hover:shadow-3xl rounded-2xl border-0"
+                    className="w-full px-4 sm:px-12 py-2 sm:py-6 text-base sm:text-xl font-bold bg-gradient-to-r from-primary via-purple-600 to-pink-600 hover:from-primary/90 hover:via-purple-600/90 hover:to-pink-600/90 transform hover:scale-110 transition-all duration-500 shadow-xl hover:shadow-3xl rounded-2xl border-0"
                   >
-                    <Heart className="h-5 w-5 sm:h-6 sm:w-6 mr-2 sm:mr-3" />
+                    <Heart className="h-4 w-4 sm:h-6 sm:w-6 mr-1 sm:mr-3" />
                     Start Your Journey
-                    <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 ml-2 sm:ml-3" />
+                    <ArrowRight className="h-3 w-3 sm:h-5 sm:w-5 ml-1 sm:ml-3" />
                   </Button>
                   
                   <Button 
                     variant="outline" 
                     size="lg"
                     onClick={() => navigate('/quick-start')}
-                    className="w-full px-8 sm:px-12 py-4 sm:py-6 text-lg sm:text-xl font-semibold border-2 border-primary/40 hover:border-primary/60 hover:bg-primary/10 transform hover:scale-110 transition-all duration-500 rounded-2xl backdrop-blur-sm"
+                    className="w-full px-4 sm:px-12 py-2 sm:py-6 text-base sm:text-xl font-semibold border-2 border-primary/40 hover:border-primary/60 hover:bg-primary/10 transform hover:scale-110 transition-all duration-500 rounded-2xl backdrop-blur-sm"
                   >
-                    <Users className="h-5 w-5 sm:h-6 sm:w-6 mr-2 sm:mr-3" />
+                    <Users className="h-4 w-4 sm:h-6 sm:w-6 mr-1 sm:mr-3" />
                     See How It Works
                   </Button>
                 </div>
