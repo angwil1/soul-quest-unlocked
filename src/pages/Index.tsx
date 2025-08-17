@@ -23,8 +23,17 @@ import coupleAmbientClear from '@/assets/couple-ambient-clear.jpg';
 import coupleHeroOptimized from '@/assets/couple-hero-optimized.jpg';
 import coupleClaspedHands from '/lovable-uploads/3a5c5b31-1df1-48ad-accf-4a340d4e914f.png';
 
-// Single hero image - the best looking one
-const heroImage = coupleHeroOptimized; // Emotionally engaging couple with best positioning and clarity
+// Hero image rotation array - emotionally engaging images with proper positioning
+const heroImages = [
+  coupleHeroOptimized, // Emotionally engaging couple with centered face positioning
+  '/lovable-uploads/91ef8e13-28c7-4171-b1e7-1795b85fbbbf.png' // Beautiful sunset couple with warm golden hour lighting
+];
+
+// Conditional captions for specific images
+const imageSpecificCaptions = {
+  [coupleHeroOptimized]: "Connection begins with a single gesture.",
+  '/lovable-uploads/91ef8e13-28c7-4171-b1e7-1795b85fbbbf.png': "In the golden hour, love finds its light."
+};
 
 // Dynamic captions with accessibility support
 const captions = [
@@ -46,6 +55,7 @@ const Index = () => {
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
   const [showSearchUpgradePrompt, setShowSearchUpgradePrompt] = useState(false);
   const [searchPreference, setSearchPreference] = useState('');
+  const [currentHeroImageIndex, setCurrentHeroImageIndex] = useState(0);
   const [hasCompletedQuiz, setHasCompletedQuiz] = useState(false);
   
 
@@ -136,6 +146,17 @@ const Index = () => {
     checkQuizCompletion();
   }, [user]);
 
+  // Hero image rotation effect
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentHeroImageIndex((prevIndex) => 
+        (prevIndex + 1) % heroImages.length
+      );
+    }, 5000); // Change image every 5 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
 
   if (loading) {
     return (
@@ -161,15 +182,21 @@ const Index = () => {
               <div className="relative w-full h-full">
                 {/* Primary Background Image - Responsive with better face positioning */}
                 <img 
-                  src={heroImage} 
+                  src={heroImages[currentHeroImageIndex]} 
                   alt="Happy couple in warm connection" 
-                  className="absolute inset-0 w-full h-full object-cover z-0"
+                  className="absolute inset-0 w-full h-full object-cover animate-fade-in transition-opacity duration-1000 z-0"
                   style={{
                     objectPosition: window.innerWidth >= 768 && window.innerWidth < 1024 
                       ? 'center 20%' // Tablet: better positioning to avoid face cropping
                       : window.innerWidth < 768 
                         ? 'center 15%' // Mobile: centered with slight upward bias for face visibility
                         : 'center 30%' // Desktop: lower positioning
+                  }}
+                  onError={(e) => {
+                    console.error('Hero image failed to load:', heroImages[currentHeroImageIndex]);
+                  }}
+                  onLoad={(e) => {
+                    console.log('Hero image loaded and displayed:', heroImages[currentHeroImageIndex]);
                   }}
                 />
                 
@@ -182,17 +209,19 @@ const Index = () => {
               </div>
             </div>
 
-            {/* Caption for the hero image */}
-            <div className="absolute top-1/3 w-full text-center text-white text-xl sm:text-2xl font-serif z-20 px-6 animate-fade-in">
-              <div 
-                className="inline-block bg-black/20 px-6 py-3 rounded-2xl backdrop-blur-sm border border-white/10 hover:bg-black/30 transition-colors duration-300"
-                style={{ 
-                  textShadow: '2px 2px 8px rgba(0,0,0,0.8), 0 0 16px rgba(0,0,0,0.6)'
-                }}
-              >
-                Connection begins with a single gesture.
+            {/* JSX-Based Conditional Captions */}
+            {imageSpecificCaptions[heroImages[currentHeroImageIndex]] && (
+              <div className="absolute top-1/3 w-full text-center text-white text-xl sm:text-2xl font-serif z-20 px-6 animate-fade-in">
+                <div 
+                  className="inline-block bg-black/20 px-6 py-3 rounded-2xl backdrop-blur-sm border border-white/10 hover:bg-black/30 transition-colors duration-300"
+                  style={{ 
+                    textShadow: '2px 2px 8px rgba(0,0,0,0.8), 0 0 16px rgba(0,0,0,0.6)'
+                  }}
+                >
+                  {imageSpecificCaptions[heroImages[currentHeroImageIndex]]}
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Hero Content - Proper Z-Index and spacing */}
             <div className="relative z-20 max-w-7xl mx-auto px-4 py-12 sm:py-20 text-center">
