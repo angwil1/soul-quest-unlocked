@@ -243,52 +243,52 @@ const Index = () => {
               
               <div className="animate-fade-in">
                 {/* Enhanced Badge */}
-                <div className="inline-flex items-center px-6 py-3 mb-6 sm:mb-8 rounded-full bg-gradient-to-r from-primary/10 to-purple-600/10 border border-primary/20 backdrop-blur-sm hover:scale-105 transition-transform duration-300">
+                <div className="inline-flex items-center px-6 py-3 mb-6 sm:mb-8 lg:mb-12 rounded-full bg-gradient-to-r from-primary/10 to-purple-600/10 border border-primary/20 backdrop-blur-sm hover:scale-105 transition-transform duration-300">
                   <Sparkles className="h-5 w-5 mr-3 text-primary animate-pulse" />
-                  <span className="text-primary font-semibold">AI-Powered Emotional Intelligence Dating</span>
+                  <span className="text-primary font-semibold text-sm sm:text-base lg:text-lg">AI-Powered Emotional Intelligence Dating</span>
                 </div>
                 
                 {/* DRAMATIC DESCRIPTION - Between Badge and Title */}
-                <div className="mb-6 sm:mb-8">
-                  <p className="text-xs sm:text-lg md:text-2xl text-white font-bold max-w-xs sm:max-w-3xl mx-auto leading-relaxed animate-fade-in bg-gradient-to-r from-red-500 to-pink-500 p-1.5 sm:p-4 rounded-lg sm:rounded-2xl shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-500" style={{ animationDelay: '0.3s' }}>
-                    🚀 <span className="text-yellow-300 bg-black px-1 sm:px-2 py-0.5 sm:py-1 rounded-md sm:rounded-lg text-xs sm:text-sm">NO MORE BORING SWIPES!</span> 🚀
+                <div className="mb-6 sm:mb-8 lg:mb-12">
+                  <p className="text-xs sm:text-lg md:text-2xl lg:text-3xl text-white font-bold max-w-xs sm:max-w-3xl lg:max-w-4xl mx-auto leading-relaxed animate-fade-in bg-gradient-to-r from-red-500 to-pink-500 p-1.5 sm:p-4 lg:p-6 rounded-lg sm:rounded-2xl lg:rounded-3xl shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-500" style={{ animationDelay: '0.3s' }}>
+                    🚀 <span className="text-yellow-300 bg-black px-1 sm:px-2 lg:px-4 py-0.5 sm:py-1 lg:py-2 rounded-md sm:rounded-lg lg:rounded-xl text-xs sm:text-sm lg:text-base">NO MORE BORING SWIPES!</span> 🚀
                     <br className="hidden sm:block"/>
-                    <span className="block sm:inline mt-1 sm:mt-0 text-xs sm:text-lg md:text-2xl">Find your <span className="text-yellow-300 underline decoration-1 sm:decoration-2 decoration-yellow-300">SOULMATE</span> with AI!</span>
+                    <span className="block sm:inline mt-1 sm:mt-0 text-xs sm:text-lg md:text-2xl lg:text-3xl">Find your <span className="text-yellow-300 underline decoration-1 sm:decoration-2 lg:decoration-4 decoration-yellow-300">SOULMATE</span> with AI!</span>
                   </p>
                 </div>
                 
                 {/* MASSIVE TITLE - Mobile Responsive */}
-                <h1 className="text-xl sm:text-3xl md:text-5xl font-black mb-4 sm:mb-8 leading-none">
+                <h1 className="text-xl sm:text-3xl md:text-5xl lg:text-7xl font-black mb-4 sm:mb-8 lg:mb-12 leading-none">
                   <span className="block bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 bg-clip-text text-transparent animate-scale-in hover:scale-105 transition-transform duration-500">
                     🔥 HOTTEST 🔥
                   </span>
-                  <span className="block bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent animate-scale-in text-lg sm:text-4xl md:text-6xl hover:scale-105 transition-transform duration-500" style={{ animationDelay: '0.2s' }}>
+                  <span className="block bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent animate-scale-in text-lg sm:text-4xl md:text-6xl lg:text-8xl hover:scale-105 transition-transform duration-500" style={{ animationDelay: '0.2s' }}>
                     DATING APP
-                    <div className="absolute -bottom-2 sm:-bottom-4 left-1/2 transform -translate-x-1/2 w-12 sm:w-24 h-1 sm:h-2 bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 rounded-full animate-scale-in shadow-2xl hover:shadow-3xl transition-shadow duration-300" style={{ animationDelay: '0.5s' }}></div>
+                    <div className="absolute -bottom-2 sm:-bottom-4 lg:-bottom-6 left-1/2 transform -translate-x-1/2 w-12 sm:w-24 lg:w-48 h-1 sm:h-2 lg:h-4 bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 rounded-full animate-scale-in shadow-2xl hover:shadow-3xl transition-shadow duration-300" style={{ animationDelay: '0.5s' }}></div>
                   </span>
                 </h1>
                 
 
                 {/* Enhanced CTA Buttons - Mobile Responsive */}
-                <div className="flex flex-col gap-4 sm:gap-8 justify-center items-center mb-12 sm:mb-20 mt-8 sm:mt-0 max-w-xs sm:max-w-2xl mx-auto animate-fade-in px-4" style={{ animationDelay: '0.4s' }}>
+                <div className="flex flex-col gap-4 sm:gap-6 lg:gap-8 justify-center items-center mb-12 sm:mb-16 lg:mb-20 mt-8 sm:mt-12 lg:mt-16 max-w-xs sm:max-w-md lg:max-w-2xl mx-auto animate-fade-in px-4" style={{ animationDelay: '0.4s' }}>
                   <div 
                     onClick={() => navigate('/quick-start')}
-                    className="cursor-pointer relative bg-gradient-to-r from-primary via-purple-600 to-pink-600 text-white px-2 py-1.5 rounded-xl rounded-bl-sm shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-xs font-medium max-w-fit"
+                    className="cursor-pointer relative bg-gradient-to-r from-primary via-purple-600 to-pink-600 text-white px-2 sm:px-4 lg:px-8 py-1.5 sm:py-3 lg:py-4 rounded-xl sm:rounded-2xl lg:rounded-3xl rounded-bl-sm shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-xs sm:text-base lg:text-xl font-medium max-w-fit"
                   >
-                    <Heart className="h-2.5 w-2.5 mr-0.5 inline" />
+                    <Heart className="h-2.5 w-2.5 sm:h-4 w-4 lg:h-6 lg:w-6 mr-0.5 sm:mr-2 lg:mr-3 inline" />
                     Start Your Journey
-                    <ArrowRight className="h-2.5 w-2.5 ml-0.5 inline" />
+                    <ArrowRight className="h-2.5 w-2.5 sm:h-4 w-4 lg:h-6 lg:w-6 ml-0.5 sm:ml-2 lg:ml-3 inline" />
                     {/* Message bubble tail */}
-                    <div className="absolute -bottom-0.5 left-1.5 w-2 h-2 bg-gradient-to-r from-primary to-purple-600 transform rotate-45 rounded-sm"></div>
+                    <div className="absolute -bottom-0.5 sm:-bottom-1 lg:-bottom-2 left-1.5 sm:left-3 lg:left-4 w-2 sm:w-3 lg:w-4 h-2 sm:h-3 lg:h-4 bg-gradient-to-r from-primary to-purple-600 transform rotate-45 rounded-sm"></div>
                   </div>
                   
                   <Button 
                     variant="ghost" 
                     size="sm"
                     onClick={() => navigate('/quick-start')}
-                    className="w-full px-2 sm:px-12 py-1 sm:py-6 text-xs sm:text-xl text-white hover:text-white/80 font-medium hover:bg-white/10 transform hover:scale-105 transition-all duration-300 rounded-lg sm:rounded-2xl backdrop-blur-sm"
+                    className="w-full px-2 sm:px-8 lg:px-12 py-1 sm:py-4 lg:py-6 text-xs sm:text-lg lg:text-xl text-white hover:text-white/80 font-medium hover:bg-white/10 transform hover:scale-105 transition-all duration-300 rounded-lg sm:rounded-xl lg:rounded-2xl backdrop-blur-sm"
                   >
-                    <Users className="h-2.5 w-2.5 sm:h-6 sm:w-6 mr-0.5 sm:mr-3" />
+                    <Users className="h-2.5 w-2.5 sm:h-5 w-5 lg:h-6 lg:w-6 mr-0.5 sm:mr-2 lg:mr-3" />
                     See How It Works
                   </Button>
                 </div>
