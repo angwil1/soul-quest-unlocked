@@ -248,6 +248,15 @@ const Index = () => {
                   <span className="text-primary font-semibold">AI-Powered Emotional Intelligence Dating</span>
                 </div>
                 
+                {/* DRAMATIC DESCRIPTION - Between Badge and Title */}
+                <div className="mb-6 sm:mb-8">
+                  <p className="text-xs sm:text-lg md:text-2xl text-white font-bold max-w-xs sm:max-w-3xl mx-auto leading-relaxed animate-fade-in bg-gradient-to-r from-red-500 to-pink-500 p-1.5 sm:p-4 rounded-lg sm:rounded-2xl shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-500" style={{ animationDelay: '0.3s' }}>
+                    🚀 <span className="text-yellow-300 bg-black px-1 sm:px-2 py-0.5 sm:py-1 rounded-md sm:rounded-lg text-xs sm:text-sm">NO MORE BORING SWIPES!</span> 🚀
+                    <br className="hidden sm:block"/>
+                    <span className="block sm:inline mt-1 sm:mt-0 text-xs sm:text-lg md:text-2xl">Find your <span className="text-yellow-300 underline decoration-1 sm:decoration-2 decoration-yellow-300">SOULMATE</span> with AI!</span>
+                  </p>
+                </div>
+                
                 {/* MASSIVE TITLE - Mobile Responsive */}
                 <h1 className="text-2xl sm:text-4xl md:text-6xl font-black mb-4 sm:mb-8 leading-none">
                   <span className="block bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 bg-clip-text text-transparent animate-scale-in hover:scale-105 transition-transform duration-500">
@@ -259,14 +268,6 @@ const Index = () => {
                   </span>
                 </h1>
                 
-                {/* DRAMATIC DESCRIPTION - Mobile Responsive */}
-                <div className="mb-8 sm:mb-20 mt-4 sm:mt-0">
-                  <p className="text-xs sm:text-2xl md:text-4xl text-white font-bold mb-8 sm:mb-12 max-w-xs sm:max-w-5xl mx-auto leading-relaxed animate-fade-in bg-gradient-to-r from-red-500 to-pink-500 p-1.5 sm:p-8 rounded-lg sm:rounded-3xl shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-500" style={{ animationDelay: '0.3s' }}>
-                    🚀 <span className="text-yellow-300 bg-black px-1 sm:px-4 py-0.5 sm:py-2 rounded-md sm:rounded-xl text-xs sm:text-base">NO MORE BORING SWIPES!</span> 🚀
-                    <br className="hidden sm:block"/>
-                    <span className="block sm:inline mt-1 sm:mt-0 text-xs sm:text-2xl md:text-4xl">Find your <span className="text-yellow-300 underline decoration-1 sm:decoration-4 decoration-yellow-300">SOULMATE</span> with AI!</span>
-                  </p>
-                </div>
 
                 {/* Enhanced CTA Buttons - Mobile Responsive */}
                 <div className="flex flex-col gap-4 sm:gap-8 justify-center items-center mb-12 sm:mb-20 mt-8 sm:mt-0 max-w-xs sm:max-w-2xl mx-auto animate-fade-in px-4" style={{ animationDelay: '0.4s' }}>
