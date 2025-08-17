@@ -151,10 +151,10 @@ const Index = () => {
               />
               
               {/* Secondary Background for Depth */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-purple-600/15 to-pink-600/20 transition-all duration-1000"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-purple-600/10 to-pink-600/15 transition-all duration-1000"></div>
               
               {/* Overlay Pattern */}
-              <div className="absolute inset-0 bg-gradient-to-br from-background/85 via-background/75 to-background/85"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-background/40 via-background/30 to-background/40"></div>
               
               {/* Floating Background Elements */}
               <div className="absolute top-20 left-20 w-72 h-72 bg-gradient-to-br from-primary/10 to-purple-600/10 rounded-full blur-3xl animate-pulse"></div>
