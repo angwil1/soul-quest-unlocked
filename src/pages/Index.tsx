@@ -312,6 +312,87 @@ const Index = () => {
                 We're redefining dating through authenticity, privacy, and meaningful connections
               </p>
             </div>
+
+            {/* Feature Cards Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+              {/* AI-Powered Matching */}
+              <div className="group p-8 rounded-3xl bg-gradient-to-br from-white/5 to-primary/5 border border-primary/10 backdrop-blur-sm hover:scale-105 hover:shadow-xl transition-all duration-500">
+                <div className="mb-6">
+                  <div className="w-16 h-16 bg-gradient-to-br from-primary to-purple-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                    <Sparkles className="h-8 w-8 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-foreground mb-4">AI-Powered Intelligence</h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    Our advanced AI analyzes your personality, values, and preferences to find genuinely compatible matches - not just surface-level attraction.
+                  </p>
+                </div>
+              </div>
+
+              {/* Privacy First */}
+              <div className="group p-8 rounded-3xl bg-gradient-to-br from-white/5 to-purple-600/5 border border-purple-600/10 backdrop-blur-sm hover:scale-105 hover:shadow-xl transition-all duration-500">
+                <div className="mb-6">
+                  <div className="w-16 h-16 bg-gradient-to-br from-purple-600 to-pink-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                    <Shield className="h-8 w-8 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-foreground mb-4">Privacy & Safety First</h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    Your data is encrypted and protected. We prioritize your safety with verified profiles and comprehensive reporting tools.
+                  </p>
+                </div>
+              </div>
+
+              {/* Meaningful Connections */}
+              <div className="group p-8 rounded-3xl bg-gradient-to-br from-white/5 to-pink-600/5 border border-pink-600/10 backdrop-blur-sm hover:scale-105 hover:shadow-xl transition-all duration-500">
+                <div className="mb-6">
+                  <div className="w-16 h-16 bg-gradient-to-br from-pink-600 to-primary rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                    <Heart className="h-8 w-8 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-foreground mb-4">Quality Over Quantity</h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    We focus on meaningful connections rather than endless swiping. Every match is carefully curated for compatibility.
+                  </p>
+                </div>
+              </div>
+
+              {/* Location Based */}
+              <div className="group p-8 rounded-3xl bg-gradient-to-br from-white/5 to-primary/5 border border-primary/10 backdrop-blur-sm hover:scale-105 hover:shadow-xl transition-all duration-500">
+                <div className="mb-6">
+                  <div className="w-16 h-16 bg-gradient-to-br from-primary to-purple-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                    <MapPin className="h-8 w-8 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-foreground mb-4">Smart Location Matching</h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    Find people in your area or expand your search globally. Distance preferences that actually make sense for real relationships.
+                  </p>
+                </div>
+              </div>
+
+              {/* Premium Features */}
+              <div className="group p-8 rounded-3xl bg-gradient-to-br from-white/5 to-purple-600/5 border border-purple-600/10 backdrop-blur-sm hover:scale-105 hover:shadow-xl transition-all duration-500">
+                <div className="mb-6">
+                  <div className="w-16 h-16 bg-gradient-to-br from-purple-600 to-pink-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                    <Crown className="h-8 w-8 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-foreground mb-4">Premium Experience</h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    Unlock advanced features like unlimited likes, super boosts, and priority matching for the ultimate dating experience.
+                  </p>
+                </div>
+              </div>
+
+              {/* Community */}
+              <div className="group p-8 rounded-3xl bg-gradient-to-br from-white/5 to-pink-600/5 border border-pink-600/10 backdrop-blur-sm hover:scale-105 hover:shadow-xl transition-all duration-500">
+                <div className="mb-6">
+                  <div className="w-16 h-16 bg-gradient-to-br from-pink-600 to-primary rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                    <Users className="h-8 w-8 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-foreground mb-4">Vibrant Community</h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    Join a community of genuine people looking for real connections, not just hookups or games.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
       </div>
