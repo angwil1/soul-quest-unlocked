@@ -22,10 +22,8 @@ import coupleHero1 from '@/assets/couple-hero-1.jpg';
 import coupleAmbientClear from '@/assets/couple-ambient-clear.jpg';
 import coupleHeroOptimized from '@/assets/couple-hero-optimized.jpg';
 
-// Hero image rotation array
+// Hero image rotation array - cleaned up
 const heroImages = [
-  '/lovable-uploads/cad4cf3a-5e0b-419d-ad23-e8fa3d30cabf.png',
-  '/lovable-uploads/fff4c684-28bc-468f-8bc0-481d0ced042a.png',
   coupleHeroOptimized, // New emotionally engaging couple with better face positioning
   '/lovable-uploads/4d9dd872-6dba-4924-b50f-ebea68fb0e0e.png', // New ambient image with better mobile clarity
   coupleAmbientClear // Ultra-clear ambient couple image optimized for mobile
