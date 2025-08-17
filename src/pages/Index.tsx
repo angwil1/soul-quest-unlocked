@@ -19,7 +19,7 @@ import SearchFilters from '@/components/SearchFilters';
 import { Search, Crown, ArrowRight, Heart, Users, Sparkles, MapPin, Filter, HelpCircle, MessageCircle, Star, Settings, Shield } from 'lucide-react';
 import datingBackground from '@/assets/dating-background.jpg';
 import coupleHero1 from '@/assets/couple-hero-1.jpg';
-import coupleHero2 from '@/assets/couple-hero-2.jpg';
+// Replaced with new ambient image for better mobile clarity
 import coupleDigital from '@/assets/couple-digital.jpg';
 
 // Hero image rotation array
@@ -27,7 +27,7 @@ const heroImages = [
   '/lovable-uploads/cad4cf3a-5e0b-419d-ad23-e8fa3d30cabf.png',
   '/lovable-uploads/fff4c684-28bc-468f-8bc0-481d0ced042a.png',
   coupleHero1,
-  coupleHero2,
+  '/lovable-uploads/4d9dd872-6dba-4924-b50f-ebea68fb0e0e.png', // New ambient image with better mobile clarity
   coupleDigital
 ];
 
