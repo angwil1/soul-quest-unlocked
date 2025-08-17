@@ -31,7 +31,6 @@ const heroImages = [
 
 // Conditional captions for specific images
 const imageSpecificCaptions = {
-  [coupleHeroOptimized]: "Connection begins with a single gesture.",
   '/lovable-uploads/91ef8e13-28c7-4171-b1e7-1795b85fbbbf.png': "In the golden hour, love finds its light."
 };
 
