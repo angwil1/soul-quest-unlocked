@@ -27,14 +27,12 @@ import coupleClaspedHands from '/lovable-uploads/3a5c5b31-1df1-48ad-accf-4a340d4
 const heroImages = [
   coupleHeroOptimized, // Emotionally engaging couple with centered face positioning
   coupleClaspedHands, // New ambient golden hour image with lower-framed faces
-  coupleAmbientClear // Ultra-clear ambient couple image optimized for mobile
 ];
 
 // Conditional captions for specific images
 const imageSpecificCaptions = {
   [coupleClaspedHands]: "In your hands, I've found my heart.",
   [coupleHeroOptimized]: "Connection begins with a single gesture.",
-  [coupleAmbientClear]: "Love looks like this."
 };
 
 // Dynamic captions with accessibility support
