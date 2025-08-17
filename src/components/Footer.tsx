@@ -38,7 +38,7 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="md:col-span-2">
             <h3 className="text-lg font-semibold mb-4">AI Complete Me</h3>
-            <p className="text-muted-foreground text-sm leading-relaxed">
+            <p className="text-foreground/80 text-sm leading-relaxed">
               Dating with depth, powered by trust. Because real connection isn't rare—it's just waiting for the right space.
             </p>
           </div>
@@ -47,21 +47,21 @@ export const Footer = () => {
             <h4 className="font-semibold mb-4">Platform</h4>
             <ul className="space-y-2 text-sm">
               
-              <li><Link to="/pricing" className="text-muted-foreground hover:text-primary">Pricing</Link></li>
-              <li><Link to="/ai-digest" className="text-muted-foreground hover:text-primary">AI Digest</Link></li>
-              <li><Link to="/faq" className="text-muted-foreground hover:text-primary">FAQ</Link></li>
+              <li><Link to="/pricing" className="text-foreground/70 hover:text-primary">Pricing</Link></li>
+              <li><Link to="/ai-digest" className="text-foreground/70 hover:text-primary">AI Digest</Link></li>
+              <li><Link to="/faq" className="text-foreground/70 hover:text-primary">FAQ</Link></li>
             </ul>
           </div>
           
           <div>
             <h4 className="font-semibold mb-4">Legal</h4>
             <ul className="space-y-2 text-sm">
-              <li><Link to="/privacy" className="text-muted-foreground hover:text-primary">Privacy Policy</Link></li>
-              <li><Link to="/cookies" className="text-muted-foreground hover:text-primary">Cookie Statement</Link></li>
-              <li><Link to="/accessibility" className="text-muted-foreground hover:text-primary">Accessibility Statement</Link></li>
-              <li><Link to="/safety" className="text-muted-foreground hover:text-primary">Safety Center</Link></li>
-              <li><Link to="/terms" className="text-muted-foreground hover:text-primary">Terms of Service</Link></li>
-              <li><a href="mailto:support@getunlockedapp.com" className="text-muted-foreground hover:text-primary">Contact</a></li>
+              <li><Link to="/privacy" className="text-foreground/70 hover:text-primary">Privacy Policy</Link></li>
+              <li><Link to="/cookies" className="text-foreground/70 hover:text-primary">Cookie Statement</Link></li>
+              <li><Link to="/accessibility" className="text-foreground/70 hover:text-primary">Accessibility Statement</Link></li>
+              <li><Link to="/safety" className="text-foreground/70 hover:text-primary">Safety Center</Link></li>
+              <li><Link to="/terms" className="text-foreground/70 hover:text-primary">Terms of Service</Link></li>
+              <li><a href="mailto:support@getunlockedapp.com" className="text-foreground/70 hover:text-primary">Contact</a></li>
             </ul>
           </div>
         </div>
@@ -69,13 +69,13 @@ export const Footer = () => {
         <div className="border-t border-border mt-8 pt-6">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-foreground/70">
                 © 2025 AI Complete Me. All rights reserved.
               </p>
               
               {/* Payment Methods */}
               <div className="flex items-center gap-2 mt-3 flex-wrap">
-                <span className="text-xs text-muted-foreground mr-2">We accept:</span>
+                <span className="text-xs text-foreground/70 mr-2">We accept:</span>
                 
                 {/* PayPal */}
                 <div className="flex items-center gap-1 px-2 py-1 bg-background border border-border rounded text-xs font-medium">
@@ -135,7 +135,7 @@ export const Footer = () => {
               
               {/* Share This Page */}
               <div className="border-t border-border pt-4">
-                <p className="text-sm text-muted-foreground mb-3 font-medium">Share this page:</p>
+                <p className="text-sm text-foreground/70 mb-3 font-medium">Share this page:</p>
                 <div className="flex flex-wrap gap-2">
                   <Button
                     variant="outline"
