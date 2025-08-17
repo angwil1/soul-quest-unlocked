@@ -170,11 +170,11 @@ const Index = () => {
                 className="absolute inset-0 w-full h-full object-cover object-bottom md:object-center opacity-90 animate-fade-in transition-opacity duration-1000"
               />
               
-              {/* Secondary Background for Depth */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-purple-600/5 to-pink-600/10 md:from-primary/10 md:via-purple-600/10 md:to-pink-600/15 transition-all duration-1000"></div>
+              {/* Secondary Background for Depth - More transparent on mobile */}
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/2 via-purple-600/2 to-pink-600/5 md:from-primary/10 md:via-purple-600/10 md:to-pink-600/15 transition-all duration-1000"></div>
               
-              {/* Overlay Pattern - Reduced opacity on mobile */}
-              <div className="absolute inset-0 bg-gradient-to-br from-background/20 via-background/15 to-background/25 md:from-background/40 md:via-background/30 md:to-background/40"></div>
+              {/* Overlay Pattern - Much lighter on mobile */}
+              <div className="absolute inset-0 bg-gradient-to-br from-background/10 via-background/5 to-background/15 md:from-background/40 md:via-background/30 md:to-background/40"></div>
               
               {/* Floating Background Elements */}
               <div className="absolute top-20 left-20 w-72 h-72 bg-gradient-to-br from-primary/10 to-purple-600/10 rounded-full blur-3xl animate-pulse"></div>
@@ -182,10 +182,10 @@ const Index = () => {
             </div>
           </div>
 
-          {/* Hero Content */}
-          <div className="relative z-10 max-w-7xl mx-auto px-4 py-20 text-center">
-            {/* Launch Banner */}
-            <div className="mb-8 animate-fade-in">
+          {/* Hero Content - Better mobile spacing */}
+          <div className="relative z-10 max-w-7xl mx-auto px-4 py-12 sm:py-20 text-center">
+            {/* Launch Banner - More top margin on mobile */}
+            <div className="mb-6 sm:mb-8 mt-4 sm:mt-0 animate-fade-in">
               <LaunchBanner showDismiss={true} variant="homepage" />
             </div>
             
