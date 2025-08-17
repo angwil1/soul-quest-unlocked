@@ -20,12 +20,13 @@ import { Search, Crown, ArrowRight, Heart, Users, Sparkles, MapPin, Filter, Help
 import datingBackground from '@/assets/dating-background.jpg';
 import coupleHero1 from '@/assets/couple-hero-1.jpg';
 import coupleAmbientClear from '@/assets/couple-ambient-clear.jpg';
+import coupleHeroOptimized from '@/assets/couple-hero-optimized.jpg';
 
 // Hero image rotation array
 const heroImages = [
   '/lovable-uploads/cad4cf3a-5e0b-419d-ad23-e8fa3d30cabf.png',
   '/lovable-uploads/fff4c684-28bc-468f-8bc0-481d0ced042a.png',
-  coupleHero1,
+  coupleHeroOptimized, // New emotionally engaging couple with better face positioning
   '/lovable-uploads/4d9dd872-6dba-4924-b50f-ebea68fb0e0e.png', // New ambient image with better mobile clarity
   coupleAmbientClear // Ultra-clear ambient couple image optimized for mobile
 ];
@@ -171,13 +172,17 @@ const Index = () => {
           {/* Dynamic Background with Multiple Layers */}
           <div className="absolute inset-0 z-0">
             <div className="relative w-full h-full">
-              {/* Primary Background Image - Responsive for all devices */}
+              {/* Primary Background Image - Responsive with better face positioning */}
               <img 
                 src={heroImages[currentHeroImageIndex]} 
                 alt="Happy couple in warm connection" 
-                className="absolute inset-0 w-full h-full object-cover object-center sm:object-bottom opacity-100 animate-fade-in transition-opacity duration-1000"
+                className="absolute inset-0 w-full h-full object-cover animate-fade-in transition-opacity duration-1000"
                 style={{
-                  objectPosition: 'center 20%' // Better positioning for mobile portraits
+                  objectPosition: window.innerWidth >= 768 && window.innerWidth < 1024 
+                    ? 'center 35%' // Tablet: lower positioning to avoid face cropping
+                    : window.innerWidth < 768 
+                      ? 'center 25%' // Mobile: centered with slight upward bias
+                      : 'center bottom' // Desktop: bottom positioning
                 }}
                 onError={(e) => {
                   console.error('Hero image failed to load:', heroImages[currentHeroImageIndex]);
@@ -187,8 +192,8 @@ const Index = () => {
                 }}
               />
               
-              {/* Very light overlay for text readability */}
-              <div className="absolute inset-0 bg-gradient-to-b from-background/5 via-transparent to-pink-500/3"></div>
+              {/* Responsive overlay - lighter on tablet to avoid masking */}
+              <div className="absolute inset-0 bg-gradient-to-b from-background/3 via-transparent to-pink-500/2 md:from-background/5 md:to-pink-500/3"></div>
               
               {/* Responsive Floating Background Elements */}
               <div className="absolute top-10 sm:top-20 left-4 sm:left-20 w-32 sm:w-72 h-32 sm:h-72 bg-gradient-to-br from-primary/10 to-purple-600/10 rounded-full blur-2xl sm:blur-3xl animate-pulse"></div>
