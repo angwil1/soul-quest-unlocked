@@ -303,21 +303,6 @@ const Index = () => {
             <div className="w-2 h-2 bg-gradient-to-r from-primary to-pink-600 rounded-full"></div>
           </div>
           
-          {/* Dynamic Accessible Captions */}
-          <div 
-            className="absolute bottom-12 left-6 right-6 text-white text-base sm:text-xl md:text-2xl font-serif z-30 text-center animate-fade-in transition-all duration-500" 
-            style={{ 
-              textShadow: '2px 2px 8px rgba(0,0,0,0.8), 0 0 16px rgba(0,0,0,0.6)',
-              backdropFilter: 'blur(4px)'
-            }}
-            role="img"
-            aria-label={captions[currentHeroImageIndex % captions.length]?.ariaLabel}
-            aria-live="polite"
-          >
-            <div className="bg-black/20 px-4 py-3 rounded-2xl backdrop-blur-sm border border-white/10 hover:bg-black/30 transition-colors duration-300">
-              {captions[currentHeroImageIndex % captions.length]?.text}
-            </div>
-          </div>
         </section>
 
         {/* BREATHING ROOM */}
