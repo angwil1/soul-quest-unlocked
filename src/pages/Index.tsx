@@ -273,13 +273,13 @@ const Index = () => {
                 <div className="flex flex-col gap-4 sm:gap-8 justify-center items-center mb-12 sm:mb-20 mt-8 sm:mt-0 max-w-xs sm:max-w-2xl mx-auto animate-fade-in px-4" style={{ animationDelay: '0.4s' }}>
                   <div 
                     onClick={() => navigate('/quick-start')}
-                    className="cursor-pointer relative bg-gradient-to-r from-primary via-purple-600 to-pink-600 text-white px-3 py-2 rounded-2xl rounded-bl-sm shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-sm font-medium max-w-fit"
+                    className="cursor-pointer relative bg-gradient-to-r from-primary via-purple-600 to-pink-600 text-white px-2 py-1.5 rounded-xl rounded-bl-sm shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-xs font-medium max-w-fit"
                   >
-                    <Heart className="h-3 w-3 mr-1 inline" />
+                    <Heart className="h-2.5 w-2.5 mr-0.5 inline" />
                     Start Your Journey
-                    <ArrowRight className="h-3 w-3 ml-1 inline" />
+                    <ArrowRight className="h-2.5 w-2.5 ml-0.5 inline" />
                     {/* Message bubble tail */}
-                    <div className="absolute -bottom-1 left-2 w-3 h-3 bg-gradient-to-r from-primary to-purple-600 transform rotate-45 rounded-sm"></div>
+                    <div className="absolute -bottom-0.5 left-1.5 w-2 h-2 bg-gradient-to-r from-primary to-purple-600 transform rotate-45 rounded-sm"></div>
                   </div>
                   
                   <Button 
