@@ -20,7 +20,7 @@ import { Search, Crown, ArrowRight, Heart, Users, Sparkles, MapPin, Filter, Help
 import datingBackground from '@/assets/dating-background.jpg';
 import coupleHero1 from '@/assets/couple-hero-1.jpg';
 // Replaced with new ambient image for better mobile clarity
-import coupleDigital from '@/assets/couple-digital.jpg';
+import coupleLGBTQ from '@/assets/couple-lgbtq-ambient.jpg';
 
 // Hero image rotation array
 const heroImages = [
@@ -28,7 +28,7 @@ const heroImages = [
   '/lovable-uploads/fff4c684-28bc-468f-8bc0-481d0ced042a.png',
   coupleHero1,
   '/lovable-uploads/4d9dd872-6dba-4924-b50f-ebea68fb0e0e.png', // New ambient image with better mobile clarity
-  coupleDigital
+  coupleLGBTQ // LGBTQ+ representation with lower-framed faces and warm lighting
 ];
 
 const Index = () => {
