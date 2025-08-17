@@ -258,13 +258,13 @@ const Index = () => {
                 </div>
                 
                 {/* MASSIVE TITLE - Mobile Responsive */}
-                <h1 className="text-2xl sm:text-4xl md:text-6xl font-black mb-4 sm:mb-8 leading-none">
+                <h1 className="text-xl sm:text-3xl md:text-5xl font-black mb-4 sm:mb-8 leading-none">
                   <span className="block bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 bg-clip-text text-transparent animate-scale-in hover:scale-105 transition-transform duration-500">
                     🔥 HOTTEST 🔥
                   </span>
-                  <span className="block bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent animate-scale-in text-xl sm:text-5xl md:text-7xl hover:scale-105 transition-transform duration-500" style={{ animationDelay: '0.2s' }}>
+                  <span className="block bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent animate-scale-in text-lg sm:text-4xl md:text-6xl hover:scale-105 transition-transform duration-500" style={{ animationDelay: '0.2s' }}>
                     DATING APP
-                    <div className="absolute -bottom-2 sm:-bottom-4 left-1/2 transform -translate-x-1/2 w-16 sm:w-32 h-1 sm:h-2 bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 rounded-full animate-scale-in shadow-2xl hover:shadow-3xl transition-shadow duration-300" style={{ animationDelay: '0.5s' }}></div>
+                    <div className="absolute -bottom-2 sm:-bottom-4 left-1/2 transform -translate-x-1/2 w-12 sm:w-24 h-1 sm:h-2 bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 rounded-full animate-scale-in shadow-2xl hover:shadow-3xl transition-shadow duration-300" style={{ animationDelay: '0.5s' }}></div>
                   </span>
                 </h1>
                 
