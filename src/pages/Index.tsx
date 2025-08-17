@@ -22,6 +22,15 @@ import coupleHero1 from '@/assets/couple-hero-1.jpg';
 import coupleHero2 from '@/assets/couple-hero-2.jpg';
 import coupleDigital from '@/assets/couple-digital.jpg';
 
+// Hero image rotation array
+const heroImages = [
+  '/lovable-uploads/cad4cf3a-5e0b-419d-ad23-e8fa3d30cabf.png',
+  '/lovable-uploads/fff4c684-28bc-468f-8bc0-481d0ced042a.png',
+  coupleHero1,
+  coupleHero2,
+  coupleDigital
+];
+
 const Index = () => {
   const { user, loading, signOut } = useAuth();
   const { toast } = useToast();
@@ -34,6 +43,7 @@ const Index = () => {
   const [showSearchUpgradePrompt, setShowSearchUpgradePrompt] = useState(false);
   const [searchPreference, setSearchPreference] = useState('');
   const [hasCompletedQuiz, setHasCompletedQuiz] = useState(false);
+  const [currentHeroImageIndex, setCurrentHeroImageIndex] = useState(0);
 
   // Simplified without subscription
   const isEchoActive = false;
@@ -122,6 +132,16 @@ const Index = () => {
     checkQuizCompletion();
   }, [user]);
 
+  // Hero image rotation effect
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentHeroImageIndex((prevIndex) => 
+        (prevIndex + 1) % heroImages.length
+      );
+    }, 5000); // Change image every 5 seconds
+
+    return () => clearInterval(interval);
+  }, []);
 
   if (loading) {
     return (
@@ -145,7 +165,7 @@ const Index = () => {
             <div className="relative w-full h-full">
               {/* Primary Background Image */}
               <img 
-                src="/lovable-uploads/cad4cf3a-5e0b-419d-ad23-e8fa3d30cabf.png" 
+                src={heroImages[currentHeroImageIndex]} 
                 alt="Happy couple in warm connection" 
                 className="absolute inset-0 w-full h-full object-cover object-center opacity-80 animate-fade-in transition-opacity duration-1000"
               />
