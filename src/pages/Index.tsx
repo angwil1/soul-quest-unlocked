@@ -163,18 +163,23 @@ const Index = () => {
           {/* Dynamic Background with Multiple Layers */}
           <div className="absolute inset-0 z-0">
             <div className="relative w-full h-full">
-              {/* Primary Background Image - Enhanced mobile clarity */}
+              {/* Primary Background Image - Fixed visibility */}
               <img 
                 src={heroImages[currentHeroImageIndex]} 
                 alt="Happy couple in warm connection" 
-                className="absolute inset-0 w-full h-full object-cover object-bottom opacity-95 sm:opacity-90 animate-fade-in transition-opacity duration-1000"
+                className="absolute inset-0 w-full h-full object-cover object-bottom opacity-85 animate-fade-in transition-opacity duration-1000"
+                onError={(e) => {
+                  console.error('Hero image failed to load:', heroImages[currentHeroImageIndex]);
+                  e.currentTarget.style.display = 'none';
+                }}
+                onLoad={() => console.log('Hero image loaded:', heroImages[currentHeroImageIndex])}
               />
               
-              {/* Secondary Background for Depth - Minimal on mobile */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/1 via-purple-600/1 to-pink-600/2 sm:from-primary/5 sm:via-purple-600/5 sm:to-pink-600/10 md:from-primary/10 md:via-purple-600/10 md:to-pink-600/15 transition-all duration-1000"></div>
+              {/* Secondary Background for Depth - Balanced visibility */}
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/3 via-purple-600/3 to-pink-600/5 transition-all duration-1000"></div>
               
-              {/* Overlay Pattern - Drastically reduced on mobile */}
-              <div className="absolute inset-0 bg-gradient-to-b from-background/5 via-transparent to-pink-500/5 sm:from-background/15 sm:via-background/8 sm:to-background/20 md:from-background/40 md:via-background/30 md:to-background/40"></div>
+              {/* Overlay Pattern - Light but visible */}
+              <div className="absolute inset-0 bg-gradient-to-b from-background/10 via-transparent to-pink-500/8"></div>
               
               {/* Floating Background Elements */}
               <div className="absolute top-20 left-20 w-72 h-72 bg-gradient-to-br from-primary/10 to-purple-600/10 rounded-full blur-3xl animate-pulse"></div>
