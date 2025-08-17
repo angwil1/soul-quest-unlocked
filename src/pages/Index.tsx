@@ -193,6 +193,18 @@ const Index = () => {
             </p>
           </div>
 
+          {/* HOTTEST DATING APP - Top of page on tablet */}
+          <div className="absolute top-4 left-4 z-30 animate-fade-in hidden md:block lg:hidden">
+            <h1 className="text-2xl font-black leading-none">
+              <span className="block bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 bg-clip-text text-transparent animate-scale-in hover:scale-105 transition-transform duration-500">
+                🔥 HOTTEST 🔥
+              </span>
+              <span className="block bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent animate-scale-in text-3xl hover:scale-105 transition-transform duration-500" style={{ animationDelay: '0.2s' }}>
+                DATING APP
+              </span>
+            </h1>
+          </div>
+
           {/* Responsive padding to prevent overlap */}
           <div className="relative pt-8 md:pt-12 lg:pt-16 w-full h-full">
             {/* Dynamic Background with Proper Z-Index Layering */}
@@ -264,14 +276,14 @@ const Index = () => {
                   </p>
                 </div>
                 
-                {/* MASSIVE TITLE - Mobile Responsive */}
-                <h1 className="text-xl sm:text-3xl md:text-4xl lg:text-7xl font-black mb-4 sm:mb-8 lg:mb-12 leading-none md:text-left lg:text-center md:-mt-8 lg:mt-0">
+                {/* MASSIVE TITLE - Mobile and Desktop only */}
+                <h1 className="text-xl sm:text-3xl md:hidden lg:block lg:text-7xl font-black mb-4 sm:mb-8 lg:mb-12 leading-none">
                   <span className="block bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 bg-clip-text text-transparent animate-scale-in hover:scale-105 transition-transform duration-500">
                     🔥 HOTTEST 🔥
                   </span>
-                  <span className="block bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent animate-scale-in text-lg sm:text-4xl md:text-5xl lg:text-8xl hover:scale-105 transition-transform duration-500" style={{ animationDelay: '0.2s' }}>
+                  <span className="block bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent animate-scale-in text-lg sm:text-4xl lg:text-8xl hover:scale-105 transition-transform duration-500" style={{ animationDelay: '0.2s' }}>
                     DATING APP
-                    <div className="absolute -bottom-2 sm:-bottom-4 lg:-bottom-6 md:left-0 lg:left-1/2 lg:transform lg:-translate-x-1/2 w-12 sm:w-24 lg:w-48 h-1 sm:h-2 lg:h-4 bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 rounded-full animate-scale-in shadow-2xl hover:shadow-3xl transition-shadow duration-300" style={{ animationDelay: '0.5s' }}></div>
+                    <div className="absolute -bottom-2 sm:-bottom-4 lg:-bottom-6 left-1/2 transform -translate-x-1/2 w-12 sm:w-24 lg:w-48 h-1 sm:h-2 lg:h-4 bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 rounded-full animate-scale-in shadow-2xl hover:shadow-3xl transition-shadow duration-300" style={{ animationDelay: '0.5s' }}></div>
                   </span>
                 </h1>
                 
