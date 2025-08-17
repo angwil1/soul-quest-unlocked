@@ -246,7 +246,7 @@ const Index = () => {
                 </h1>
                 
                 {/* DRAMATIC DESCRIPTION - Mobile Responsive */}
-                <div className="mb-8 sm:mb-20 mt-12 sm:mt-0">
+                <div className="mb-8 sm:mb-20 mt-8 sm:mt-0">
                   <p className="text-xs sm:text-2xl md:text-4xl text-white font-bold mb-8 sm:mb-12 max-w-xs sm:max-w-5xl mx-auto leading-relaxed animate-fade-in bg-gradient-to-r from-red-500 to-pink-500 p-1.5 sm:p-8 rounded-lg sm:rounded-3xl shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-500" style={{ animationDelay: '0.3s' }}>
                     🚀 <span className="text-yellow-300 bg-black px-1 sm:px-4 py-0.5 sm:py-2 rounded-md sm:rounded-xl text-xs sm:text-base">NO MORE BORING SWIPES!</span> 🚀
                     <br className="hidden sm:block"/>
