@@ -173,6 +173,20 @@ const Index = () => {
         {/* DRAMATIC HERO DESIGN */}
         <section className="relative min-h-[100vh] min-h-[100dvh] flex items-center justify-center">
           
+          {/* Start Your Journey - Top left on desktop */}
+          <div className="absolute top-4 left-4 z-30 animate-fade-in hidden lg:block">
+            <div 
+              onClick={() => navigate('/quick-start')}
+              className="cursor-pointer relative bg-gradient-to-r from-primary via-purple-600 to-pink-600 text-white px-4 py-2 rounded-xl rounded-bl-sm shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-sm font-medium"
+            >
+              <Heart className="h-4 w-4 mr-2 inline" />
+              Start Your Journey
+              <ArrowRight className="h-4 w-4 ml-2 inline" />
+              {/* Message bubble tail */}
+              <div className="absolute -bottom-1 left-3 w-3 h-3 bg-gradient-to-r from-primary to-purple-600 transform rotate-45 rounded-sm"></div>
+            </div>
+          </div>
+
           {/* Already have account - Top Right */}
           <div className="absolute top-4 right-4 z-30 animate-fade-in">
             <p className="text-white/70 mb-1 text-xs">Already have an account?</p>
@@ -292,16 +306,6 @@ const Index = () => {
 
                 {/* Enhanced CTA Buttons - Mobile and Desktop */}
                 <div className="flex flex-col gap-4 sm:gap-6 lg:gap-8 justify-center items-center mb-12 sm:mb-16 lg:mb-20 mt-8 sm:mt-12 lg:mt-16 max-w-xs sm:max-w-md lg:max-w-2xl mx-auto animate-fade-in px-4 md:hidden lg:flex" style={{ animationDelay: '0.4s' }}>
-                  <div 
-                    onClick={() => navigate('/quick-start')}
-                    className="cursor-pointer relative bg-gradient-to-r from-primary via-purple-600 to-pink-600 text-white px-2 sm:px-4 lg:px-8 py-1.5 sm:py-3 lg:py-4 rounded-xl sm:rounded-2xl lg:rounded-3xl rounded-bl-sm shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-xs sm:text-base lg:text-xl font-medium max-w-fit"
-                  >
-                    <Heart className="h-2.5 w-2.5 sm:h-4 w-4 lg:h-6 lg:w-6 mr-0.5 sm:mr-2 lg:mr-3 inline" />
-                    Start Your Journey
-                    <ArrowRight className="h-2.5 w-2.5 sm:h-4 w-4 lg:h-6 lg:w-6 ml-0.5 sm:ml-2 lg:ml-3 inline" />
-                    {/* Message bubble tail */}
-                    <div className="absolute -bottom-0.5 sm:-bottom-1 lg:-bottom-2 left-1.5 sm:left-3 lg:left-4 w-2 sm:w-3 lg:w-4 h-2 sm:h-3 lg:h-4 bg-gradient-to-r from-primary to-purple-600 transform rotate-45 rounded-sm"></div>
-                  </div>
                   
                   <Button 
                     variant="ghost" 
