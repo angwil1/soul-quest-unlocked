@@ -254,6 +254,19 @@ const Index = () => {
                   </p>
                 </div>
 
+                {/* Login Section - Mobile Responsive */}
+                <div className="text-center mb-12 sm:mb-20 animate-fade-in px-4" style={{ animationDelay: '0.5s' }}>
+                  <p className="text-muted-foreground mb-4 sm:mb-6 text-base sm:text-lg">Already have an account?</p>
+                  <Button 
+                    variant="ghost" 
+                    onClick={() => navigate('/auth')}
+                    className="text-primary hover:text-primary/80 font-semibold text-lg sm:text-xl px-6 sm:px-8 py-3 sm:py-4 rounded-xl hover:bg-primary/10 transform hover:scale-105 transition-all duration-300"
+                  >
+                    Log in and reconnect
+                    <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 ml-2" />
+                  </Button>
+                </div>
+
                 {/* Enhanced CTA Buttons - Mobile Responsive */}
                 <div className="flex flex-col gap-4 sm:gap-8 justify-center items-center mb-12 sm:mb-20 mt-8 sm:mt-0 max-w-xs sm:max-w-2xl mx-auto animate-fade-in px-4" style={{ animationDelay: '0.4s' }}>
                   <Button 
@@ -274,19 +287,6 @@ const Index = () => {
                   >
                     <Users className="h-2.5 w-2.5 sm:h-6 sm:w-6 mr-0.5 sm:mr-3" />
                     See How It Works
-                  </Button>
-                </div>
-
-                {/* Login Section - Mobile Responsive */}
-                <div className="text-center mb-12 sm:mb-20 animate-fade-in px-4" style={{ animationDelay: '0.5s' }}>
-                  <p className="text-muted-foreground mb-4 sm:mb-6 text-base sm:text-lg">Already have an account?</p>
-                  <Button 
-                    variant="ghost" 
-                    onClick={() => navigate('/auth')}
-                    className="text-primary hover:text-primary/80 font-semibold text-lg sm:text-xl px-6 sm:px-8 py-3 sm:py-4 rounded-xl hover:bg-primary/10 transform hover:scale-105 transition-all duration-300"
-                  >
-                    Log in and reconnect
-                    <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 ml-2" />
                   </Button>
                 </div>
 
