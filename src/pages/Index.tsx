@@ -163,23 +163,22 @@ const Index = () => {
           {/* Dynamic Background with Multiple Layers */}
           <div className="absolute inset-0 z-0">
             <div className="relative w-full h-full">
-              {/* Primary Background Image - Fixed visibility */}
+              {/* Primary Background Image - Maximum visibility */}
               <img 
                 src={heroImages[currentHeroImageIndex]} 
                 alt="Happy couple in warm connection" 
-                className="absolute inset-0 w-full h-full object-cover object-bottom opacity-85 animate-fade-in transition-opacity duration-1000"
+                className="absolute inset-0 w-full h-full object-cover object-bottom opacity-100 animate-fade-in transition-opacity duration-1000 z-0"
                 onError={(e) => {
                   console.error('Hero image failed to load:', heroImages[currentHeroImageIndex]);
-                  e.currentTarget.style.display = 'none';
                 }}
-                onLoad={() => console.log('Hero image loaded:', heroImages[currentHeroImageIndex])}
+                onLoad={() => console.log('Hero image loaded and displayed:', heroImages[currentHeroImageIndex])}
               />
               
-              {/* Secondary Background for Depth - Balanced visibility */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/3 via-purple-600/3 to-pink-600/5 transition-all duration-1000"></div>
+              {/* Secondary Background for Depth - Very light */}
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/2 via-purple-600/2 to-pink-600/3 transition-all duration-1000 z-1"></div>
               
-              {/* Overlay Pattern - Light but visible */}
-              <div className="absolute inset-0 bg-gradient-to-b from-background/10 via-transparent to-pink-500/8"></div>
+              {/* Overlay Pattern - Minimal for mobile clarity */}
+              <div className="absolute inset-0 bg-gradient-to-b from-background/8 via-transparent to-pink-500/5 z-2"></div>
               
               {/* Floating Background Elements */}
               <div className="absolute top-20 left-20 w-72 h-72 bg-gradient-to-br from-primary/10 to-purple-600/10 rounded-full blur-3xl animate-pulse"></div>
