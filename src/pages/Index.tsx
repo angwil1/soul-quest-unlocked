@@ -288,8 +288,8 @@ const Index = () => {
                 </h1>
                 
 
-                {/* Enhanced CTA Buttons - Mobile Responsive */}
-                <div className="flex flex-col gap-4 sm:gap-6 lg:gap-8 justify-center items-center mb-12 sm:mb-16 lg:mb-20 mt-8 sm:mt-12 lg:mt-16 max-w-xs sm:max-w-md lg:max-w-2xl mx-auto animate-fade-in px-4" style={{ animationDelay: '0.4s' }}>
+                {/* Enhanced CTA Buttons - Mobile and Desktop */}
+                <div className="flex flex-col gap-4 sm:gap-6 lg:gap-8 justify-center items-center mb-12 sm:mb-16 lg:mb-20 mt-8 sm:mt-12 lg:mt-16 max-w-xs sm:max-w-md lg:max-w-2xl mx-auto animate-fade-in px-4 md:hidden lg:flex" style={{ animationDelay: '0.4s' }}>
                   <div 
                     onClick={() => navigate('/quick-start')}
                     className="cursor-pointer relative bg-gradient-to-r from-primary via-purple-600 to-pink-600 text-white px-2 sm:px-4 lg:px-8 py-1.5 sm:py-3 lg:py-4 rounded-xl sm:rounded-2xl lg:rounded-3xl rounded-bl-sm shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-xs sm:text-base lg:text-xl font-medium max-w-fit"
@@ -318,6 +318,32 @@ const Index = () => {
                       <br/>
                       <span className="text-lg">Find your <span className="text-yellow-300 underline decoration-2 decoration-yellow-300">SOULMATE</span> with AI!</span>
                     </p>
+                  </div>
+                </div>
+
+                {/* Tablet Layout - Split positioning */}
+                <div className="hidden md:block lg:hidden relative h-96">
+                  {/* Pink box - Lower Left */}
+                  <div className="absolute bottom-8 left-8 z-30 animate-fade-in">
+                    <p className="text-base text-white font-bold max-w-xs leading-relaxed bg-gradient-to-r from-red-500 to-pink-500 p-2 rounded-lg shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-500" style={{ animationDelay: '0.3s' }}>
+                      🚀 <span className="text-yellow-300 bg-black px-1.5 py-0.5 rounded-md text-xs">NO MORE BORING SWIPES!</span> 🚀
+                      <br/>
+                      <span className="text-base">Find your <span className="text-yellow-300 underline decoration-2 decoration-yellow-300">SOULMATE</span> with AI!</span>
+                    </p>
+                  </div>
+                  
+                  {/* Start Journey - Lower Right */}
+                  <div className="absolute bottom-8 right-8 z-30 animate-fade-in">
+                    <div 
+                      onClick={() => navigate('/quick-start')}
+                      className="cursor-pointer relative bg-gradient-to-r from-primary via-purple-600 to-pink-600 text-white px-4 py-3 rounded-2xl rounded-bl-sm shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-base font-medium max-w-fit"
+                    >
+                      <Heart className="h-4 w-4 mr-2 inline" />
+                      Start Your Journey
+                      <ArrowRight className="h-4 w-4 ml-2 inline" />
+                      {/* Message bubble tail */}
+                      <div className="absolute -bottom-1 left-3 w-3 h-3 bg-gradient-to-r from-primary to-purple-600 transform rotate-45 rounded-sm"></div>
+                    </div>
                   </div>
                 </div>
               </div>
