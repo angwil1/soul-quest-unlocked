@@ -186,6 +186,13 @@ const Index = () => {
             </Button>
           </div>
 
+          {/* Pink "NO MORE BORING SWIPES!" box - Top of page on desktop */}
+          <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-30 animate-fade-in hidden lg:block">
+            <p className="text-base text-white font-bold max-w-xl mx-auto leading-relaxed bg-gradient-to-r from-red-500 to-pink-500 p-1.5 rounded-md shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-500" style={{ animationDelay: '0.3s' }}>
+              🚀 <span className="text-yellow-300 bg-black px-1.5 py-0.5 rounded-sm text-xs">NO MORE BORING SWIPES!</span> 🚀 Find your <span className="text-yellow-300 underline decoration-1 decoration-yellow-300">SOULMATE</span> with AI!
+            </p>
+          </div>
+
           {/* Responsive padding to prevent overlap */}
           <div className="relative pt-8 md:pt-12 lg:pt-16 w-full h-full">
             {/* Dynamic Background with Proper Z-Index Layering */}
@@ -248,12 +255,12 @@ const Index = () => {
                   <span className="text-primary font-semibold text-sm sm:text-base lg:text-lg">AI-Powered Emotional Intelligence Dating</span>
                 </div>
                 
-                {/* DRAMATIC DESCRIPTION - Between Badge and Title */}
-                <div className="mb-6 sm:mb-8 lg:mb-24 lg:-mt-24">
-                  <p className="text-xs sm:text-lg md:text-2xl lg:text-base text-white font-bold max-w-xs sm:max-w-3xl lg:max-w-xl mx-auto leading-relaxed animate-fade-in bg-gradient-to-r from-red-500 to-pink-500 p-1.5 sm:p-4 lg:p-1.5 rounded-lg sm:rounded-2xl lg:rounded-md shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-500" style={{ animationDelay: '0.3s' }}>
-                    🚀 <span className="text-yellow-300 bg-black px-1 sm:px-2 lg:px-1.5 py-0.5 sm:py-1 lg:py-0.5 rounded-md sm:rounded-lg lg:rounded-sm text-xs sm:text-sm lg:text-xs">NO MORE BORING SWIPES!</span> 🚀
-                    <br className="hidden sm:block lg:hidden"/>
-                    <span className="block sm:inline lg:inline mt-1 sm:mt-0 lg:mt-0 text-xs sm:text-lg md:text-2xl lg:text-base"> Find your <span className="text-yellow-300 underline decoration-1 sm:decoration-2 lg:decoration-1 decoration-yellow-300">SOULMATE</span> with AI!</span>
+                {/* DRAMATIC DESCRIPTION - Mobile only */}
+                <div className="mb-6 sm:mb-8 lg:hidden">
+                  <p className="text-xs sm:text-lg md:text-2xl text-white font-bold max-w-xs sm:max-w-3xl mx-auto leading-relaxed animate-fade-in bg-gradient-to-r from-red-500 to-pink-500 p-1.5 sm:p-4 rounded-lg sm:rounded-2xl shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-500" style={{ animationDelay: '0.3s' }}>
+                    🚀 <span className="text-yellow-300 bg-black px-1 sm:px-2 py-0.5 sm:py-1 rounded-md sm:rounded-lg text-xs sm:text-sm">NO MORE BORING SWIPES!</span> 🚀
+                    <br className="hidden sm:block"/>
+                    <span className="block sm:inline mt-1 sm:mt-0 text-xs sm:text-lg md:text-2xl">Find your <span className="text-yellow-300 underline decoration-1 sm:decoration-2 decoration-yellow-300">SOULMATE</span> with AI!</span>
                   </p>
                 </div>
                 
