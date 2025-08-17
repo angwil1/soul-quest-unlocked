@@ -175,14 +175,14 @@ const Index = () => {
           
           {/* Already have account - Top Right */}
           <div className="absolute top-4 right-4 z-30 animate-fade-in">
-            <p className="text-white/80 mb-2 text-sm">Already have an account?</p>
+            <p className="text-white/70 mb-1 text-xs">Already have an account?</p>
             <Button 
               variant="ghost" 
               onClick={() => navigate('/auth')}
-              className="text-white hover:text-white/80 font-medium text-sm px-4 py-2 rounded-lg hover:bg-white/10 transition-all duration-300"
+              className="text-white hover:text-white/80 font-medium text-xs px-2 py-1 rounded-md hover:bg-white/10 transition-all duration-300"
             >
               Log in
-              <ArrowRight className="h-3 w-3 ml-1" />
+              <ArrowRight className="h-2.5 w-2.5 ml-0.5" />
             </Button>
           </div>
 
