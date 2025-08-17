@@ -268,11 +268,11 @@ const Index = () => {
                   
                   <Button 
                     variant="outline" 
-                    size="lg"
+                    size="sm"
                     onClick={() => navigate('/quick-start')}
-                    className="w-full px-4 sm:px-12 py-2 sm:py-6 text-base sm:text-xl font-semibold border-2 border-primary/40 hover:border-primary/60 hover:bg-primary/10 transform hover:scale-110 transition-all duration-500 rounded-2xl backdrop-blur-sm"
+                    className="w-full px-3 sm:px-12 py-1.5 sm:py-6 text-sm sm:text-xl font-semibold border-2 border-primary/40 hover:border-primary/60 hover:bg-primary/10 transform hover:scale-110 transition-all duration-500 rounded-xl sm:rounded-2xl backdrop-blur-sm"
                   >
-                    <Users className="h-4 w-4 sm:h-6 sm:w-6 mr-1 sm:mr-3" />
+                    <Users className="h-3 w-3 sm:h-6 sm:w-6 mr-1 sm:mr-3" />
                     See How It Works
                   </Button>
                 </div>
