@@ -292,6 +292,16 @@ const Index = () => {
 
                 {/* Enhanced CTA Buttons - Mobile and Desktop */}
                 <div className="flex flex-col gap-4 sm:gap-6 lg:gap-8 justify-center items-center mb-12 sm:mb-16 lg:mb-20 mt-8 sm:mt-12 lg:mt-16 max-w-xs sm:max-w-md lg:max-w-2xl mx-auto animate-fade-in px-4 md:hidden lg:flex" style={{ animationDelay: '0.4s' }}>
+                  <Button 
+                    variant="ghost" 
+                    size="sm"
+                    onClick={() => navigate('/quick-start')}
+                    className="w-full px-2 sm:px-8 lg:px-12 py-1 sm:py-4 lg:py-6 text-xs sm:text-lg lg:text-xl text-white hover:text-white/80 font-medium hover:bg-white/10 transform hover:scale-105 transition-all duration-300 rounded-lg sm:rounded-xl lg:rounded-2xl backdrop-blur-sm"
+                  >
+                    <Users className="h-2.5 w-2.5 sm:h-5 w-5 lg:h-6 lg:w-6 mr-0.5 sm:mr-2 lg:mr-3" />
+                    See How It Works
+                  </Button>
+
                   <div 
                     onClick={() => navigate('/quick-start')}
                     className="cursor-pointer relative bg-gradient-to-r from-primary via-purple-600 to-pink-600 text-white px-2 sm:px-4 lg:px-4 py-1.5 sm:py-3 lg:py-2 rounded-xl sm:rounded-2xl lg:rounded-xl rounded-bl-sm shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-xs sm:text-base lg:text-sm font-medium max-w-fit"
@@ -302,15 +312,6 @@ const Index = () => {
                     {/* Message bubble tail */}
                     <div className="absolute -bottom-0.5 sm:-bottom-1 lg:-bottom-0.5 left-1.5 sm:left-3 lg:left-2 w-2 sm:w-3 lg:w-2 h-2 sm:h-3 lg:h-2 bg-gradient-to-r from-primary to-purple-600 transform rotate-45 rounded-sm"></div>
                   </div>
-                  <Button 
-                    variant="ghost" 
-                    size="sm"
-                    onClick={() => navigate('/quick-start')}
-                    className="w-full px-2 sm:px-8 lg:px-12 py-1 sm:py-4 lg:py-6 text-xs sm:text-lg lg:text-xl text-white hover:text-white/80 font-medium hover:bg-white/10 transform hover:scale-105 transition-all duration-300 rounded-lg sm:rounded-xl lg:rounded-2xl backdrop-blur-sm"
-                  >
-                    <Users className="h-2.5 w-2.5 sm:h-5 w-5 lg:h-6 lg:w-6 mr-0.5 sm:mr-2 lg:mr-3" />
-                    See How It Works
-                  </Button>
                   
                   {/* DRAMATIC DESCRIPTION - Tablet only, positioned below buttons */}
                   <div className="hidden md:block lg:hidden mt-6">
