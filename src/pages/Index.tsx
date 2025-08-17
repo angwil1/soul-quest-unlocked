@@ -161,26 +161,34 @@ const Index = () => {
         {/* DRAMATIC HERO DESIGN */}
         <section className="relative min-h-[100vh] min-h-[100dvh] flex items-center justify-center pt-8 md:pt-0">
           {/* Dynamic Background with Multiple Layers */}
-          <div className="absolute inset-0 z-0">
-            <div className="relative w-full h-full">
-              {/* Primary Background Image - Base layer */}
+          <div className="absolute inset-0 z-0 bg-red-500/20">
+            <div className="relative w-full h-full bg-blue-500/20">
+              {/* Primary Background Image - Testing visibility */}
               <img 
                 src={heroImages[currentHeroImageIndex]} 
                 alt="Happy couple in warm connection" 
-                className="absolute inset-0 w-full h-full object-cover object-bottom opacity-100 animate-fade-in transition-opacity duration-1000"
+                className="absolute inset-0 w-full h-full object-cover object-bottom"
+                style={{ 
+                  opacity: 1, 
+                  zIndex: 1,
+                  border: '5px solid yellow',
+                  backgroundColor: 'green'
+                }}
                 onError={(e) => {
                   console.error('Hero image failed to load:', heroImages[currentHeroImageIndex]);
+                  console.log('Image element dimensions:', e.currentTarget.getBoundingClientRect());
                 }}
                 onLoad={(e) => {
                   console.log('Hero image loaded and displayed:', heroImages[currentHeroImageIndex]);
+                  console.log('Image element dimensions:', e.currentTarget.getBoundingClientRect());
+                  console.log('Image natural dimensions:', e.currentTarget.naturalWidth, 'x', e.currentTarget.naturalHeight);
+                  console.log('Container dimensions:', e.currentTarget.parentElement?.getBoundingClientRect());
                 }}
               />
               
-              {/* Secondary Background for Depth - Overlays on top of image */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/2 via-purple-600/2 to-pink-600/3 transition-all duration-1000"></div>
-              
-              {/* Overlay Pattern - Minimal for mobile clarity */}
-              <div className="absolute inset-0 bg-gradient-to-b from-background/8 via-transparent to-pink-500/5"></div>
+              {/* Temporarily removing overlays for debugging */}
+              {/* <div className="absolute inset-0 bg-gradient-to-br from-primary/2 via-purple-600/2 to-pink-600/3 transition-all duration-1000"></div>
+              <div className="absolute inset-0 bg-gradient-to-b from-background/8 via-transparent to-pink-500/5"></div> */}
               
               {/* Floating Background Elements */}
               <div className="absolute top-20 left-20 w-72 h-72 bg-gradient-to-br from-primary/10 to-purple-600/10 rounded-full blur-3xl animate-pulse"></div>
