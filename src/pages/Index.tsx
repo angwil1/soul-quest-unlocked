@@ -31,6 +31,13 @@ const heroImages = [
   coupleLGBTQ // LGBTQ+ representation with lower-framed faces and warm lighting
 ];
 
+// Hero captions for emotional storytelling
+const captions = [
+  "They didn't expect to find each other. But they did.",
+  "Connection begins with a gesture.",
+  "Love looks like this. And this. And this.",
+];
+
 const Index = () => {
   const { user, loading, signOut } = useAuth();
   const { toast } = useToast();
@@ -285,6 +292,17 @@ const Index = () => {
           </div>
           <div className="absolute top-2/3 left-24 animate-pulse hover:scale-150 transition-transform duration-500" style={{ animationDelay: '1.5s' }}>
             <div className="w-2 h-2 bg-gradient-to-r from-primary to-pink-600 rounded-full"></div>
+          </div>
+          
+          {/* Rotating Captions for Emotional Storytelling */}
+          <div className="absolute bottom-12 left-6 right-6 text-white text-base sm:text-xl md:text-2xl font-serif z-30 text-center animate-fade-in" 
+               style={{ 
+                 textShadow: '2px 2px 8px rgba(0,0,0,0.8), 0 0 16px rgba(0,0,0,0.6)',
+                 backdropFilter: 'blur(4px)'
+               }}>
+            <div className="bg-black/20 px-4 py-3 rounded-2xl backdrop-blur-sm border border-white/10">
+              {captions[currentHeroImageIndex % captions.length]}
+            </div>
           </div>
         </section>
 
