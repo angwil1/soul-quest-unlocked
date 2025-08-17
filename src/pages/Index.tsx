@@ -19,8 +19,7 @@ import SearchFilters from '@/components/SearchFilters';
 import { Search, Crown, ArrowRight, Heart, Users, Sparkles, MapPin, Filter, HelpCircle, MessageCircle, Star, Settings, Shield } from 'lucide-react';
 import datingBackground from '@/assets/dating-background.jpg';
 import coupleHero1 from '@/assets/couple-hero-1.jpg';
-// Replaced with new ambient image for better mobile clarity
-// Replaced couple-digital with new diverse couple image
+import coupleAmbientClear from '@/assets/couple-ambient-clear.jpg';
 
 // Hero image rotation array
 const heroImages = [
@@ -28,14 +27,16 @@ const heroImages = [
   '/lovable-uploads/fff4c684-28bc-468f-8bc0-481d0ced042a.png',
   coupleHero1,
   '/lovable-uploads/4d9dd872-6dba-4924-b50f-ebea68fb0e0e.png', // New ambient image with better mobile clarity
-  '/lovable-uploads/c5ed4a83-bb15-448b-986c-aed514993f83.png' // New diverse couple with better framing and warm lighting
+  coupleAmbientClear // Ultra-clear ambient couple image optimized for mobile
 ];
 
-// Hero captions for emotional storytelling
+// Dynamic captions with accessibility support
 const captions = [
-  "They didn't expect to find each other. But they did.",
-  "Connection begins with a gesture.",
-  "Love looks like this. And this. And this.",
+  { text: "They didn't expect to find each other. But they did.", ariaLabel: "A story of unexpected love and connection" },
+  { text: "Connection begins with a gesture.", ariaLabel: "The power of small moments in relationships" },
+  { text: "Love looks like this. And this. And this.", ariaLabel: "Celebrating diverse expressions of love" },
+  { text: "Every heart finds its echo.", ariaLabel: "The universal search for meaningful connection" },
+  { text: "In a world of noise, they found silence together.", ariaLabel: "Finding peace and understanding in partnership" }
 ];
 
 const Index = () => {
@@ -294,14 +295,19 @@ const Index = () => {
             <div className="w-2 h-2 bg-gradient-to-r from-primary to-pink-600 rounded-full"></div>
           </div>
           
-          {/* Rotating Captions for Emotional Storytelling */}
-          <div className="absolute bottom-12 left-6 right-6 text-white text-base sm:text-xl md:text-2xl font-serif z-30 text-center animate-fade-in" 
-               style={{ 
-                 textShadow: '2px 2px 8px rgba(0,0,0,0.8), 0 0 16px rgba(0,0,0,0.6)',
-                 backdropFilter: 'blur(4px)'
-               }}>
-            <div className="bg-black/20 px-4 py-3 rounded-2xl backdrop-blur-sm border border-white/10">
-              {captions[currentHeroImageIndex % captions.length]}
+          {/* Dynamic Accessible Captions */}
+          <div 
+            className="absolute bottom-12 left-6 right-6 text-white text-base sm:text-xl md:text-2xl font-serif z-30 text-center animate-fade-in transition-all duration-500" 
+            style={{ 
+              textShadow: '2px 2px 8px rgba(0,0,0,0.8), 0 0 16px rgba(0,0,0,0.6)',
+              backdropFilter: 'blur(4px)'
+            }}
+            role="img"
+            aria-label={captions[currentHeroImageIndex % captions.length]?.ariaLabel}
+            aria-live="polite"
+          >
+            <div className="bg-black/20 px-4 py-3 rounded-2xl backdrop-blur-sm border border-white/10 hover:bg-black/30 transition-colors duration-300">
+              {captions[currentHeroImageIndex % captions.length]?.text}
             </div>
           </div>
         </section>
