@@ -291,7 +291,7 @@ const Index = () => {
                 
 
                 {/* Enhanced CTA Buttons - Mobile and Desktop */}
-                <div className="flex flex-col gap-4 sm:gap-6 lg:gap-8 justify-center items-center mb-12 sm:mb-16 lg:mb-20 mt-8 sm:mt-12 lg:mt-16 max-w-xs sm:max-w-md lg:max-w-2xl mx-auto animate-fade-in px-4 md:hidden lg:flex" style={{ animationDelay: '0.4s' }}>
+                <div className="flex flex-col gap-4 sm:gap-6 lg:gap-8 justify-center items-center mb-12 sm:mb-16 lg:mb-20 mt-8 sm:mt-12 lg:mt-24 max-w-xs sm:max-w-md lg:max-w-2xl mx-auto animate-fade-in px-4 md:hidden lg:flex" style={{ animationDelay: '0.4s' }}>
                   <Button 
                     variant="ghost" 
                     size="sm"
