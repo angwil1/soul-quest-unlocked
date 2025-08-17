@@ -340,6 +340,34 @@ const Index = () => {
 
             {/* Enhanced Stats */}
             <div className="relative z-20 max-w-7xl mx-auto px-4 pb-12">
+              {/* Tablet Layout - Elements in purple area above stats */}
+              <div className="hidden md:block lg:hidden mb-8">
+                <div className="flex justify-between items-center max-w-4xl mx-auto">
+                  {/* Pink box - Left side */}
+                  <div className="animate-fade-in">
+                    <p className="text-base text-white font-bold max-w-xs leading-relaxed bg-gradient-to-r from-red-500 to-pink-500 p-2 rounded-lg shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-500" style={{ animationDelay: '0.3s' }}>
+                      🚀 <span className="text-yellow-300 bg-black px-1.5 py-0.5 rounded-md text-xs">NO MORE BORING SWIPES!</span> 🚀
+                      <br/>
+                      <span className="text-base">Find your <span className="text-yellow-300 underline decoration-2 decoration-yellow-300">SOULMATE</span> with AI!</span>
+                    </p>
+                  </div>
+                  
+                  {/* Start Journey - Right side */}
+                  <div className="animate-fade-in">
+                    <div 
+                      onClick={() => navigate('/quick-start')}
+                      className="cursor-pointer relative bg-gradient-to-r from-primary via-purple-600 to-pink-600 text-white px-4 py-3 rounded-2xl rounded-bl-sm shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-base font-medium max-w-fit"
+                    >
+                      <Heart className="h-4 w-4 mr-2 inline" />
+                      Start Your Journey
+                      <ArrowRight className="h-4 w-4 ml-2 inline" />
+                      {/* Message bubble tail */}
+                      <div className="absolute -bottom-1 left-3 w-3 h-3 bg-gradient-to-r from-primary to-purple-600 transform rotate-45 rounded-sm"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto animate-fade-in" style={{ animationDelay: '0.6s' }}>
                 <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-primary/5 to-purple-600/5 border border-primary/10 backdrop-blur-sm hover:scale-110 hover:shadow-xl transition-all duration-500">
                   <div className="text-4xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent mb-3">10,000+</div>
@@ -363,34 +391,6 @@ const Index = () => {
 
         {/* QUIET CONTRAST - Enhanced Features Section */}
         <section className="py-32 bg-gradient-to-br from-background to-primary/5 relative">
-          {/* Tablet Layout - Elements in purple section */}
-          <div className="hidden md:block lg:hidden absolute top-8 left-0 right-0 z-20">
-            <div className="max-w-6xl mx-auto px-4 flex justify-between items-start">
-              {/* Pink box - Left side */}
-              <div className="animate-fade-in">
-                <p className="text-base text-white font-bold max-w-xs leading-relaxed bg-gradient-to-r from-red-500 to-pink-500 p-2 rounded-lg shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-500" style={{ animationDelay: '0.3s' }}>
-                  🚀 <span className="text-yellow-300 bg-black px-1.5 py-0.5 rounded-md text-xs">NO MORE BORING SWIPES!</span> 🚀
-                  <br/>
-                  <span className="text-base">Find your <span className="text-yellow-300 underline decoration-2 decoration-yellow-300">SOULMATE</span> with AI!</span>
-                </p>
-              </div>
-              
-              {/* Start Journey - Right side */}
-              <div className="animate-fade-in">
-                <div 
-                  onClick={() => navigate('/quick-start')}
-                  className="cursor-pointer relative bg-gradient-to-r from-primary via-purple-600 to-pink-600 text-white px-4 py-3 rounded-2xl rounded-bl-sm shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-base font-medium max-w-fit"
-                >
-                  <Heart className="h-4 w-4 mr-2 inline" />
-                  Start Your Journey
-                  <ArrowRight className="h-4 w-4 ml-2 inline" />
-                  {/* Message bubble tail */}
-                  <div className="absolute -bottom-1 left-3 w-3 h-3 bg-gradient-to-r from-primary to-purple-600 transform rotate-45 rounded-sm"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
           <div className="max-w-6xl mx-auto px-4">
             <div className="text-center mb-20 animate-fade-in">
               <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent mb-8">
