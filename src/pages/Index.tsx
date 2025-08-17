@@ -243,22 +243,9 @@ const Index = () => {
               
               <div className="animate-fade-in">
                 {/* Enhanced Badge */}
-                <div className="inline-flex items-center px-6 py-3 mb-4 sm:mb-6 rounded-full bg-gradient-to-r from-primary/10 to-purple-600/10 border border-primary/20 backdrop-blur-sm hover:scale-105 transition-transform duration-300">
+                <div className="inline-flex items-center px-6 py-3 mb-6 sm:mb-8 rounded-full bg-gradient-to-r from-primary/10 to-purple-600/10 border border-primary/20 backdrop-blur-sm hover:scale-105 transition-transform duration-300">
                   <Sparkles className="h-5 w-5 mr-3 text-primary animate-pulse" />
                   <span className="text-primary font-semibold">AI-Powered Emotional Intelligence Dating</span>
-                </div>
-                
-                {/* See How It Works under AI badge */}
-                <div className="mb-6 sm:mb-8">
-                  <Button 
-                    variant="ghost" 
-                    size="sm"
-                    onClick={() => navigate('/quick-start')}
-                    className="px-2 py-1 text-xs text-white hover:text-white/80 font-medium hover:bg-white/10 transform hover:scale-105 transition-all duration-300 rounded-lg backdrop-blur-sm"
-                  >
-                    <Users className="h-2.5 w-2.5 mr-0.5" />
-                    See How It Works
-                  </Button>
                 </div>
                 
                 {/* DRAMATIC DESCRIPTION - Between Badge and Title */}
@@ -294,22 +281,16 @@ const Index = () => {
                     {/* Message bubble tail */}
                     <div className="absolute -bottom-0.5 left-1.5 w-2 h-2 bg-gradient-to-r from-primary to-purple-600 transform rotate-45 rounded-sm"></div>
                   </div>
-                </div>
-
-                {/* Enhanced Stats */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto animate-fade-in" style={{ animationDelay: '0.6s' }}>
-                  <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-primary/5 to-purple-600/5 border border-primary/10 backdrop-blur-sm hover:scale-110 hover:shadow-xl transition-all duration-500">
-                    <div className="text-4xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent mb-3">10,000+</div>
-                    <div className="text-muted-foreground font-medium">Meaningful Connections Made</div>
-                  </div>
-                  <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-purple-600/5 to-pink-600/5 border border-purple-600/10 backdrop-blur-sm hover:scale-110 hover:shadow-xl transition-all duration-500">
-                    <div className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-3">94%</div>
-                    <div className="text-muted-foreground font-medium">Match Compatibility Rate</div>
-                  </div>
-                  <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-pink-600/5 to-primary/5 border border-pink-600/10 backdrop-blur-sm hover:scale-110 hover:shadow-xl transition-all duration-500">
-                    <div className="text-4xl font-bold bg-gradient-to-r from-pink-600 to-primary bg-clip-text text-transparent mb-3">4.8★</div>
-                    <div className="text-muted-foreground font-medium">User Satisfaction Score</div>
-                  </div>
+                  
+                  <Button 
+                    variant="ghost" 
+                    size="sm"
+                    onClick={() => navigate('/quick-start')}
+                    className="w-full px-2 sm:px-12 py-1 sm:py-6 text-xs sm:text-xl text-white hover:text-white/80 font-medium hover:bg-white/10 transform hover:scale-105 transition-all duration-300 rounded-lg sm:rounded-2xl backdrop-blur-sm"
+                  >
+                    <Users className="h-2.5 w-2.5 sm:h-6 sm:w-6 mr-0.5 sm:mr-3" />
+                    See How It Works
+                  </Button>
                 </div>
               </div>
             </div>
@@ -326,6 +307,24 @@ const Index = () => {
             </div>
             <div className="absolute top-2/3 left-24 animate-pulse hover:scale-150 transition-transform duration-500 z-20" style={{ animationDelay: '1.5s' }}>
               <div className="w-2 h-2 bg-gradient-to-r from-primary to-pink-600 rounded-full"></div>
+            </div>
+
+            {/* Enhanced Stats */}
+            <div className="relative z-20 max-w-7xl mx-auto px-4 pb-12">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto animate-fade-in" style={{ animationDelay: '0.6s' }}>
+                <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-primary/5 to-purple-600/5 border border-primary/10 backdrop-blur-sm hover:scale-110 hover:shadow-xl transition-all duration-500">
+                  <div className="text-4xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent mb-3">10,000+</div>
+                  <div className="text-muted-foreground font-medium">Meaningful Connections Made</div>
+                </div>
+                <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-purple-600/5 to-pink-600/5 border border-purple-600/10 backdrop-blur-sm hover:scale-110 hover:shadow-xl transition-all duration-500">
+                  <div className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-3">94%</div>
+                  <div className="text-muted-foreground font-medium">Match Compatibility Rate</div>
+                </div>
+                <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-pink-600/5 to-primary/5 border border-pink-600/10 backdrop-blur-sm hover:scale-110 hover:shadow-xl transition-all duration-500">
+                  <div className="text-4xl font-bold bg-gradient-to-r from-pink-600 to-primary bg-clip-text text-transparent mb-3">4.8★</div>
+                  <div className="text-muted-foreground font-medium">User Satisfaction Score</div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
