@@ -40,23 +40,23 @@ export const FloatingQuizButton = () => {
   if (!user || !isVisible || hasCompletedQuiz) return null;
 
   return (
-    <div className="fixed bottom-6 right-6 z-40 md:bottom-6 md:right-6 sm:bottom-4 sm:right-4">
+    <div className="fixed bottom-20 right-4 z-40 md:bottom-6 md:right-6">
       <div className="relative">
         <Button
           size="sm"
           variant="ghost"
-          className="absolute -top-2 -right-2 h-6 w-6 rounded-full p-0 bg-background border border-border shadow-sm hover:bg-muted"
+          className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 bg-background border border-border shadow-sm hover:bg-muted"
           onClick={() => setIsVisible(false)}
         >
-          <X className="h-3 w-3" />
+          <X className="h-2.5 w-2.5" />
         </Button>
         
         <Link to="/profile/edit">
           <Button 
-            size="lg" 
-            className="rounded-full shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-r from-primary to-primary/80 hover:from-primary hover:to-primary text-primary-foreground border-0"
+            size="sm" 
+            className="rounded-full shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-r from-primary to-primary/80 hover:from-primary hover:to-primary text-primary-foreground border-0 text-xs px-3 py-2"
           >
-            <Brain className="h-5 w-5 mr-2" />
+            <Brain className="h-3 w-3 mr-1" />
             Complete Profile
           </Button>
         </Link>
