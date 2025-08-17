@@ -21,18 +21,18 @@ import datingBackground from '@/assets/dating-background.jpg';
 import coupleHero1 from '@/assets/couple-hero-1.jpg';
 import coupleAmbientClear from '@/assets/couple-ambient-clear.jpg';
 import coupleHeroOptimized from '@/assets/couple-hero-optimized.jpg';
-import couplePoetricInclusive from '@/assets/couple-poetic-inclusive.jpg';
+import coupleClaspedHands from '/lovable-uploads/3a5c5b31-1df1-48ad-accf-4a340d4e914f.png';
 
 // Hero image rotation array - emotionally engaging images with proper positioning
 const heroImages = [
   coupleHeroOptimized, // Emotionally engaging couple with centered face positioning
-  couplePoetricInclusive, // Poetic and inclusive with faces in lower third
+  coupleClaspedHands, // New ambient golden hour image with lower-framed faces
   coupleAmbientClear // Ultra-clear ambient couple image optimized for mobile
 ];
 
 // Conditional captions for specific images
 const imageSpecificCaptions = {
-  [couplePoetricInclusive]: "In your hands, I've found my heart.",
+  [coupleClaspedHands]: "In your hands, I've found my heart.",
   [coupleHeroOptimized]: "Connection begins with a single gesture.",
   [coupleAmbientClear]: "Love looks like this."
 };
