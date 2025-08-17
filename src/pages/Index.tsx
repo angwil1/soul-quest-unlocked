@@ -139,7 +139,7 @@ const Index = () => {
         <Navbar />
         
         {/* DRAMATIC HERO DESIGN */}
-        <section className="relative min-h-screen flex items-center justify-center">
+        <section className="relative min-h-[100vh] min-h-[100dvh] flex items-center justify-center">
           {/* Dynamic Background with Multiple Layers */}
           <div className="absolute inset-0 z-0">
             <div className="relative w-full h-full">
@@ -147,7 +147,7 @@ const Index = () => {
               <img 
                 src="/lovable-uploads/cad4cf3a-5e0b-419d-ad23-e8fa3d30cabf.png" 
                 alt="Happy couple in warm connection" 
-                className="absolute inset-0 w-full h-full object-cover opacity-80 animate-fade-in transition-opacity duration-1000"
+                className="absolute inset-0 w-full h-full object-cover object-center opacity-80 animate-fade-in transition-opacity duration-1000"
               />
               
               {/* Secondary Background for Depth */}
