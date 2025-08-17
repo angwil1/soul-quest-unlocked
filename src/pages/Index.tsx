@@ -326,6 +326,103 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
+      
+      {/* Main Dashboard Content for Logged-in Users */}
+      <main className="pt-20 px-4 max-w-7xl mx-auto">
+        {/* Welcome Section */}
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold mb-4">Welcome back!</h1>
+          <p className="text-xl text-muted-foreground">Ready to find your perfect match?</p>
+        </div>
+
+        {/* Search Section */}
+        <div className="max-w-2xl mx-auto mb-12">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5" />
+            <Input
+              placeholder="Search for your perfect match..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="pl-10 pr-4 py-3 text-lg rounded-xl"
+              onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
+            />
+          </div>
+          
+          {/* Search Filters */}
+          <div className="mt-6">
+            <SearchFilters onFiltersChange={handleFiltersChange} />
+          </div>
+          
+          <Button 
+            onClick={handleSearch}
+            className="w-full mt-6 py-3 text-lg rounded-xl"
+            size="lg"
+          >
+            <Search className="h-5 w-5 mr-2" />
+            Find Your Match
+          </Button>
+        </div>
+
+        {/* Quick Actions */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          <Card className="p-6 hover:shadow-lg transition-shadow cursor-pointer" onClick={() => navigate('/matches')}>
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <Heart className="h-5 w-5 mr-2 text-primary" />
+                Browse Matches
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <CardDescription>Discover people who share your interests and values</CardDescription>
+            </CardContent>
+          </Card>
+
+          <Card className="p-6 hover:shadow-lg transition-shadow cursor-pointer" onClick={() => navigate('/messages')}>
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <MessageCircle className="h-5 w-5 mr-2 text-primary" />
+                Messages
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <CardDescription>Continue conversations with your connections</CardDescription>
+            </CardContent>
+          </Card>
+
+          <Card className="p-6 hover:shadow-lg transition-shadow cursor-pointer" onClick={() => navigate('/profile')}>
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <Settings className="h-5 w-5 mr-2 text-primary" />
+                Edit Profile
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <CardDescription>Update your profile to attract better matches</CardDescription>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Featured Section */}
+        {!hasCompletedQuiz && (
+          <Card className="mb-12 bg-gradient-to-r from-primary/10 to-purple-600/10 border-primary/20">
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <HelpCircle className="h-5 w-5 mr-2 text-primary" />
+                Complete Your Compatibility Quiz
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <CardDescription className="mb-4">
+                Take our AI-powered quiz to get better matches based on your personality and preferences.
+              </CardDescription>
+              <Button onClick={() => navigate('/questions')} className="w-full">
+                Take Quiz Now
+              </Button>
+            </CardContent>
+          </Card>
+        )}
+      </main>
+      
       <Footer />
       
       <FirstLightModal 
