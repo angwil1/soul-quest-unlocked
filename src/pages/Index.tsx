@@ -23,19 +23,8 @@ import coupleAmbientClear from '@/assets/couple-ambient-clear.jpg';
 import coupleHeroOptimized from '@/assets/couple-hero-optimized.jpg';
 import coupleClaspedHands from '/lovable-uploads/3a5c5b31-1df1-48ad-accf-4a340d4e914f.png';
 
-// Hero image rotation array - emotionally engaging images with proper positioning
-const heroImages = [
-  coupleHeroOptimized, // Emotionally engaging couple with centered face positioning
-  coupleClaspedHands, // New ambient golden hour image with lower-framed faces
-  coupleAmbientClear // Ultra-clear ambient couple image optimized for mobile
-];
-
-// Conditional captions for specific images
-const imageSpecificCaptions = {
-  [coupleClaspedHands]: "In your hands, I've found my heart.",
-  [coupleHeroOptimized]: "Connection begins with a single gesture.",
-  [coupleAmbientClear]: "Love looks like this."
-};
+// Single hero image - the best looking one
+const heroImage = coupleHeroOptimized; // Emotionally engaging couple with best positioning and clarity
 
 // Dynamic captions with accessibility support
 const captions = [
@@ -58,7 +47,7 @@ const Index = () => {
   const [showSearchUpgradePrompt, setShowSearchUpgradePrompt] = useState(false);
   const [searchPreference, setSearchPreference] = useState('');
   const [hasCompletedQuiz, setHasCompletedQuiz] = useState(false);
-  const [currentHeroImageIndex, setCurrentHeroImageIndex] = useState(0);
+  
 
   // Simplified without subscription
   const isEchoActive = false;
@@ -147,16 +136,6 @@ const Index = () => {
     checkQuizCompletion();
   }, [user]);
 
-  // Hero image rotation effect
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentHeroImageIndex((prevIndex) => 
-        (prevIndex + 1) % heroImages.length
-      );
-    }, 5000); // Change image every 5 seconds
-
-    return () => clearInterval(interval);
-  }, []);
 
   if (loading) {
     return (
@@ -182,21 +161,15 @@ const Index = () => {
               <div className="relative w-full h-full">
                 {/* Primary Background Image - Responsive with better face positioning */}
                 <img 
-                  src={heroImages[currentHeroImageIndex]} 
+                  src={heroImage} 
                   alt="Happy couple in warm connection" 
-                  className="absolute inset-0 w-full h-full object-cover animate-fade-in transition-opacity duration-1000 z-0"
+                  className="absolute inset-0 w-full h-full object-cover z-0"
                   style={{
                     objectPosition: window.innerWidth >= 768 && window.innerWidth < 1024 
-                      ? 'center 35%' // Tablet: lower positioning to avoid face cropping
+                      ? 'center 20%' // Tablet: better positioning to avoid face cropping
                       : window.innerWidth < 768 
-                        ? 'center 25%' // Mobile: centered with slight upward bias
-                        : 'center bottom' // Desktop: bottom positioning
-                  }}
-                  onError={(e) => {
-                    console.error('Hero image failed to load:', heroImages[currentHeroImageIndex]);
-                  }}
-                  onLoad={(e) => {
-                    console.log('Hero image loaded and displayed:', heroImages[currentHeroImageIndex]);
+                        ? 'center 15%' // Mobile: centered with slight upward bias for face visibility
+                        : 'center 30%' // Desktop: lower positioning
                   }}
                 />
                 
@@ -209,19 +182,17 @@ const Index = () => {
               </div>
             </div>
 
-            {/* JSX-Based Conditional Captions */}
-            {imageSpecificCaptions[heroImages[currentHeroImageIndex]] && (
-              <div className="absolute top-1/3 w-full text-center text-white text-xl sm:text-2xl font-serif z-20 px-6 animate-fade-in">
-                <div 
-                  className="inline-block bg-black/20 px-6 py-3 rounded-2xl backdrop-blur-sm border border-white/10 hover:bg-black/30 transition-colors duration-300"
-                  style={{ 
-                    textShadow: '2px 2px 8px rgba(0,0,0,0.8), 0 0 16px rgba(0,0,0,0.6)'
-                  }}
-                >
-                  {imageSpecificCaptions[heroImages[currentHeroImageIndex]]}
-                </div>
+            {/* Caption for the hero image */}
+            <div className="absolute top-1/3 w-full text-center text-white text-xl sm:text-2xl font-serif z-20 px-6 animate-fade-in">
+              <div 
+                className="inline-block bg-black/20 px-6 py-3 rounded-2xl backdrop-blur-sm border border-white/10 hover:bg-black/30 transition-colors duration-300"
+                style={{ 
+                  textShadow: '2px 2px 8px rgba(0,0,0,0.8), 0 0 16px rgba(0,0,0,0.6)'
+                }}
+              >
+                Connection begins with a single gesture.
               </div>
-            )}
+            </div>
 
             {/* Hero Content - Proper Z-Index and spacing */}
             <div className="relative z-20 max-w-7xl mx-auto px-4 py-12 sm:py-20 text-center">
