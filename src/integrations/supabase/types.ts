@@ -2128,6 +2128,10 @@ export type Database = {
           user_id: string | null
         }
       }
+      validate_user_input: {
+        Args: { input_text: string; max_length?: number }
+        Returns: boolean
+      }
       verify_user_age: {
         Args: { p_date_of_birth: string }
         Returns: boolean
