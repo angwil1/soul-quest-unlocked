@@ -140,7 +140,7 @@ const Profile = () => {
                 </Button>
                 
                 <Button 
-                  onClick={() => navigate('/sample-profiles')} 
+                  onClick={() => navigate('/matches')} 
                   variant="outline" 
                   className="w-full"
                 >
