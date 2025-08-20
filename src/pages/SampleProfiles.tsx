@@ -16,7 +16,7 @@ import { EchoPurchasePrompt } from '@/components/EchoPurchasePrompt';
 const SampleProfiles = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const isEchoActive = false; // Simplified without subscription
+  const isEchoActive = true; // Enabled for demo
   const [selectedProfile, setSelectedProfile] = useState(founderCuratedProfiles[0]);
   const [showInspiration, setShowInspiration] = useState(false);
 
