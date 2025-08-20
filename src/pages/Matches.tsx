@@ -15,34 +15,11 @@ const Matches = () => {
   const { user } = useAuth();
   const [likedProfiles, setLikedProfiles] = useState<Set<string>>(new Set());
 
-  // Check if user has completed quiz and redirect if not
+  // Check if user is authenticated and redirect if not
   useEffect(() => {
-    const checkQuizCompletion = async () => {
-      if (!user) {
-        navigate('/auth');
-        return;
-      }
-
-      try {
-        const { data } = await supabase
-          .from('user_events')
-          .select('*')
-          .eq('user_id', user.id)
-          .eq('event_type', 'quiz_completed')
-          .limit(1);
-        
-        if (!data || data.length === 0) {
-          // User hasn't completed quiz, redirect to quiz
-          navigate('/questions');
-        }
-      } catch (error) {
-        console.error('Error checking quiz completion:', error);
-        // Default to quiz if error
-        navigate('/questions');
-      }
-    };
-
-    checkQuizCompletion();
+    if (!user) {
+      navigate('/auth');
+    }
   }, [user, navigate]);
 
   const handleLike = (profileId: string) => {
