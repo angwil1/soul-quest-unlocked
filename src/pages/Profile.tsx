@@ -132,7 +132,7 @@ const Profile = () => {
                 </Button>
                 
                 <Button 
-                  onClick={() => navigate('/matches')} 
+                  onClick={() => navigate('/browse-profiles')} 
                   variant="outline" 
                   className="w-full"
                 >

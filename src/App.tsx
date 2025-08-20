@@ -10,6 +10,7 @@ import Profile from "./pages/Profile";
 import ProfileEdit from "./pages/ProfileEdit";
 import Matches from "./pages/Matches";
 import Messages from "./pages/Messages";
+import BrowseProfiles from "./pages/BrowseProfiles";
 
 import Questions from "./pages/Questions";
 import QuizResults from "./pages/QuizResults";
@@ -49,6 +50,7 @@ const App = () => (
             <Route path="/profile" element={<Profile />} />
             <Route path="/profile/edit" element={<ProfileEdit />} />
             <Route path="/matches" element={<Matches />} />
+            <Route path="/browse-profiles" element={<BrowseProfiles />} />
             
             <Route path="/messages" element={<Messages />} />
             
