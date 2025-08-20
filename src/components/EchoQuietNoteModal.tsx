@@ -3,8 +3,10 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
-import { Sparkles } from 'lucide-react';
+import { Sparkles, AlertTriangle } from 'lucide-react';
 import { useEchoTouchpoints } from '@/hooks/useEchoTouchpoints';
+import { quietNoteSchema, sanitizeInput } from '@/lib/validation';
+import { useToast } from '@/hooks/use-toast';
 
 interface EchoQuietNoteModalProps {
   isOpen: boolean;
@@ -21,19 +23,77 @@ export const EchoQuietNoteModal = ({
 }: EchoQuietNoteModalProps) => {
   const [noteText, setNoteText] = useState('');
   const [sending, setSending] = useState(false);
+  const [validationError, setValidationError] = useState<string>('');
   const { sendQuietNote } = useEchoTouchpoints();
+  const { toast } = useToast();
+
+  const validateAndSanitizeNote = (text: string): { isValid: boolean; sanitized: string; error?: string } => {
+    const sanitized = sanitizeInput(text);
+    
+    try {
+      quietNoteSchema.parse({ note: sanitized });
+      return { isValid: true, sanitized };
+    } catch (error: any) {
+      const errorMessage = error.issues?.[0]?.message || 'Invalid note content';
+      return { isValid: false, sanitized, error: errorMessage };
+    }
+  };
+
+  const handleNoteChange = (value: string) => {
+    setNoteText(value);
+    setValidationError('');
+    
+    // Real-time validation feedback
+    if (value.trim()) {
+      const validation = validateAndSanitizeNote(value);
+      if (!validation.isValid && validation.error) {
+        setValidationError(validation.error);
+      }
+    }
+  };
 
   const handleSend = async () => {
-    if (!noteText.trim()) return;
+    const validation = validateAndSanitizeNote(noteText);
+    
+    if (!validation.isValid) {
+      setValidationError(validation.error || 'Invalid note content');
+      toast({
+        title: "Validation Error",
+        description: validation.error || 'Please check your note content',
+        variant: "destructive"
+      });
+      return;
+    }
     
     setSending(true);
-    const { error } = await sendQuietNote(recipientId, noteText);
-    
-    if (!error) {
-      setNoteText('');
-      onClose();
+    try {
+      const { error } = await sendQuietNote(recipientId, validation.sanitized);
+      
+      if (error) {
+        toast({
+          title: "Failed to Send Echo",
+          description: "Please try again later",
+          variant: "destructive"
+        });
+      } else {
+        toast({
+          title: "Echo Sent",
+          description: `Your quiet echo was sent to ${recipientName}`,
+          variant: "default"
+        });
+        setNoteText('');
+        setValidationError('');
+        onClose();
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "An unexpected error occurred",
+        variant: "destructive"
+      });
+    } finally {
+      setSending(false);
     }
-    setSending(false);
   };
 
   const exampleNotes = [
@@ -42,6 +102,8 @@ export const EchoQuietNoteModal = ({
     "Your energy speaks my language.",
     "Found myself in your reflection."
   ];
+
+  const isValid = !validationError && noteText.trim().length >= 10;
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -55,7 +117,7 @@ export const EchoQuietNoteModal = ({
         
         <div className="space-y-4">
           <p className="text-sm text-muted-foreground">
-            Send a one-line expressive note to <span className="font-medium">{recipientName}</span>. 
+            Send a thoughtful note to <span className="font-medium">{recipientName}</span>. 
             No reply required—just a gentle resonance.
           </p>
 
@@ -65,13 +127,21 @@ export const EchoQuietNoteModal = ({
               id="note"
               placeholder="Your echo felt like..."
               value={noteText}
-              onChange={(e) => setNoteText(e.target.value)}
-              maxLength={120}
-              className="mt-2 resize-none"
+              onChange={(e) => handleNoteChange(e.target.value)}
+              maxLength={375}
+              className={`mt-2 resize-none ${validationError ? 'border-red-500' : ''}`}
               rows={3}
             />
-            <div className="text-xs text-muted-foreground mt-1 text-right">
-              {noteText.length}/120
+            <div className="flex justify-between items-center mt-1">
+              <div className="text-xs text-muted-foreground">
+                {noteText.length}/375
+              </div>
+              {validationError && (
+                <div className="flex items-center gap-1 text-xs text-red-500">
+                  <AlertTriangle className="h-3 w-3" />
+                  {validationError}
+                </div>
+              )}
             </div>
           </div>
 
@@ -81,7 +151,7 @@ export const EchoQuietNoteModal = ({
               {exampleNotes.map((example, index) => (
                 <button
                   key={index}
-                  onClick={() => setNoteText(example)}
+                  onClick={() => handleNoteChange(example)}
                   className="text-xs text-purple-600 hover:text-purple-800 dark:text-purple-400 dark:hover:text-purple-300 block transition-colors"
                 >
                   "{example}"
@@ -96,7 +166,7 @@ export const EchoQuietNoteModal = ({
             </Button>
             <Button 
               onClick={handleSend} 
-              disabled={!noteText.trim() || sending}
+              disabled={!isValid || sending}
               className="flex-1 bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600"
             >
               {sending ? 'Sending...' : 'Send Echo'}

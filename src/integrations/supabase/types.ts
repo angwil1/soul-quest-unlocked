@@ -2080,7 +2080,7 @@ export type Database = {
       }
       log_security_event: {
         Args: {
-          p_event_details?: Json
+          p_event_data?: Json
           p_event_type: string
           p_ip_address?: unknown
           p_user_agent?: string
@@ -2090,6 +2090,10 @@ export type Database = {
       perform_sensitive_action: {
         Args: { p_action_details: Json }
         Returns: boolean
+      }
+      sanitize_user_content: {
+        Args: { input_text: string }
+        Returns: string
       }
       secure_generate_ai_match_deprecated: {
         Args: Record<PropertyKey, never>

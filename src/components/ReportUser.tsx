@@ -9,6 +9,7 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { AlertTriangle, Shield } from "lucide-react";
+import { reportSchema, sanitizeForStorage } from "@/lib/validation";
 
 interface ReportUserProps {
   reportedUserId: string;
@@ -20,6 +21,7 @@ export const ReportUser = ({ reportedUserId, reportedUserName }: ReportUserProps
   const [reason, setReason] = useState<string>("");
   const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
+  const [validationError, setValidationError] = useState<string>('');
   const { user } = useAuth();
   const { toast } = useToast();
 
@@ -29,8 +31,29 @@ export const ReportUser = ({ reportedUserId, reportedUserName }: ReportUserProps
     { value: "spam", label: "Spam or Scam" },
     { value: "fake_profile", label: "Fake Profile" },
     { value: "underage", label: "Appears to be Underage" },
+    { value: "safety_concern", label: "Safety Concern" },
     { value: "other", label: "Other" }
   ];
+
+  const validateReport = () => {
+    try {
+      reportSchema.parse({ 
+        reason, 
+        description: description.trim() || undefined 
+      });
+      setValidationError('');
+      return true;
+    } catch (error: any) {
+      const errorMessage = error.issues?.[0]?.message || 'Invalid report data';
+      setValidationError(errorMessage);
+      return false;
+    }
+  };
+
+  const handleDescriptionChange = (value: string) => {
+    setDescription(value);
+    setValidationError('');
+  };
 
   const handleSubmitReport = async () => {
     if (!user) {
@@ -42,10 +65,10 @@ export const ReportUser = ({ reportedUserId, reportedUserName }: ReportUserProps
       return;
     }
 
-    if (!reason) {
+    if (!validateReport()) {
       toast({
-        title: "Reason Required",
-        description: "Please select a reason for reporting this user",
+        title: "Validation Error",
+        description: validationError || "Please check your report details",
         variant: "destructive"
       });
       return;
@@ -53,26 +76,40 @@ export const ReportUser = ({ reportedUserId, reportedUserName }: ReportUserProps
 
     setLoading(true);
     try {
+      // Sanitize the description before storing
+      const sanitizedDescription = description.trim() ? sanitizeForStorage(description) : null;
+      
       const { error } = await supabase
         .from('user_reports')
         .insert({
           reporter_id: user.id,
           reported_user_id: reportedUserId,
           reason: reason as any,
-          description: description.trim() || null
+          description: sanitizedDescription
         });
 
       if (error) throw error;
 
+      // Log the security event
+      await supabase.rpc('log_security_event', {
+        p_event_type: 'user_report_submitted',
+        p_event_data: {
+          reported_user_id: reportedUserId,
+          reason: reason,
+          has_description: !!sanitizedDescription
+        }
+      });
+
       toast({
         title: "Report Submitted",
-        description: "Thank you for helping keep our community safe. We'll review this report.",
+        description: "Thank you for helping keep our community safe. We'll review this report promptly.",
         variant: "default"
       });
 
       setIsOpen(false);
       setReason("");
       setDescription("");
+      setValidationError('');
     } catch (error) {
       console.error('Report submission error:', error);
       toast({
@@ -88,7 +125,7 @@ export const ReportUser = ({ reportedUserId, reportedUserName }: ReportUserProps
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline" size="sm" className="text-red-600 hover:text-red-700">
+        <Button variant="outline" size="sm" className="text-red-600 hover:text-red-700 hover:border-red-200">
           <AlertTriangle className="h-4 w-4 mr-2" />
           Report
         </Button>
@@ -103,9 +140,9 @@ export const ReportUser = ({ reportedUserId, reportedUserName }: ReportUserProps
         
         <div className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="reason">Reason for Report</Label>
+            <Label htmlFor="reason">Reason for Report *</Label>
             <Select value={reason} onValueChange={setReason}>
-              <SelectTrigger>
+              <SelectTrigger className={validationError && !reason ? 'border-red-500' : ''}>
                 <SelectValue placeholder="Select a reason..." />
               </SelectTrigger>
               <SelectContent>
@@ -124,18 +161,28 @@ export const ReportUser = ({ reportedUserId, reportedUserName }: ReportUserProps
               id="description"
               placeholder="Provide additional context about this report..."
               value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              maxLength={500}
+              onChange={(e) => handleDescriptionChange(e.target.value)}
+              maxLength={1000}
               rows={3}
+              className={validationError && description ? 'border-red-500' : ''}
             />
-            <p className="text-xs text-muted-foreground">
-              {description.length}/500 characters
-            </p>
+            <div className="flex justify-between items-center">
+              <p className="text-xs text-muted-foreground">
+                {description.length}/1000 characters
+              </p>
+              {validationError && (
+                <div className="flex items-center gap-1 text-xs text-red-500">
+                  <AlertTriangle className="h-3 w-3" />
+                  {validationError}
+                </div>
+              )}
+            </div>
           </div>
 
-          <div className="bg-yellow-50 dark:bg-yellow-950 p-3 rounded-lg">
+          <div className="bg-yellow-50 dark:bg-yellow-950 p-3 rounded-lg border border-yellow-200 dark:border-yellow-800">
             <p className="text-sm text-yellow-800 dark:text-yellow-200">
-              Reports are reviewed by our safety team. False reports may result in account restrictions.
+              <strong>Important:</strong> Reports are reviewed by our safety team. False reports may result in account restrictions.
+              All reports are logged for security purposes.
             </p>
           </div>
 
