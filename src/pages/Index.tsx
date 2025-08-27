@@ -267,8 +267,8 @@ const Index = () => {
 
             {/* Hero Content - Proper Z-Index and spacing */}
             <div className="relative z-20 max-w-7xl mx-auto px-4 py-12 sm:py-20 text-center">
-              {/* Launch Banner - More top margin on mobile */}
-              <div className="mb-6 sm:mb-8 mt-4 sm:mt-0 animate-fade-in">
+              {/* Launch Banner - More spacing on desktop to prevent overlap */}
+              <div className="mb-8 sm:mb-12 lg:mb-16 mt-4 sm:mt-0 animate-fade-in">
                 <LaunchBanner showDismiss={true} variant="homepage" />
               </div>
               
