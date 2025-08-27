@@ -265,14 +265,15 @@ const Index = () => {
               </div>
             )}
 
-            {/* Hero Content - Proper Z-Index and spacing */}
+            {/* Hero Content - Adjusted positioning to prevent image overlap */}
             <div className="relative z-20 max-w-7xl mx-auto px-4 py-12 sm:py-20 text-center">
-              {/* Launch Banner - Increased spacing to prevent desktop overlap */}
-              <div className="mb-12 sm:mb-16 lg:mb-24 xl:mb-32 mt-8 sm:mt-12 lg:mt-16 animate-fade-in">
+              {/* Launch Banner - Positioned higher to avoid blocking imagery */}
+              <div className="absolute top-4 left-1/2 transform -translate-x-1/2 w-full max-w-4xl px-4 animate-fade-in z-10">
                 <LaunchBanner showDismiss={true} variant="homepage" />
               </div>
               
-              <div className="animate-fade-in">
+              {/* Content pushed down to avoid banner */}
+              <div className="mt-32 sm:mt-24 lg:mt-20 animate-fade-in">
                 {/* Enhanced Badge */}
                 <div className="inline-flex items-center px-6 py-3 mb-6 sm:mb-8 lg:mb-12 rounded-full bg-gradient-to-r from-primary/10 to-purple-600/10 border border-primary/20 backdrop-blur-sm hover:scale-105 transition-transform duration-300">
                   <Sparkles className="h-5 w-5 mr-3 text-primary animate-pulse" />
