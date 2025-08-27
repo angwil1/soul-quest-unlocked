@@ -22,6 +22,8 @@ import coupleHero1 from '@/assets/couple-hero-1.jpg';
 import coupleAmbientClear from '@/assets/couple-ambient-clear.jpg';
 import coupleHeroOptimized from '@/assets/couple-hero-optimized.jpg';
 import coupleClaspedHands from '/lovable-uploads/3a5c5b31-1df1-48ad-accf-4a340d4e914f.png';
+import { AmbientCoupleCarousel } from '@/components/AmbientCoupleCarousel';
+import { SoulfulInvitation } from '@/components/SoulfulInvitation';
 
 // Hero image rotation array - emotionally engaging images with proper positioning
 const heroImages = [
@@ -167,60 +169,29 @@ const Index = () => {
 
   // Always show the beautiful homepage regardless of login status
   return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-background to-pink-900 overflow-hidden">
+      <div className="min-h-screen bg-gradient-to-br from-background via-muted/5 to-background">
         <Navbar />
         
-        {/* DRAMATIC HERO DESIGN */}
+        {/* EMOTIONALLY INTELLIGENT HERO DESIGN */}
         <section className="relative min-h-[100vh] min-h-[100dvh] flex items-center justify-center">
           
           {/* Already have account - Top Right */}
           <div className="absolute top-4 right-4 z-30 animate-fade-in">
-            <p className="text-white/70 mb-1 text-xs">Already have an account?</p>
+            <p className="text-muted-foreground mb-1 text-xs">Already have an account?</p>
             <Button 
               variant="ghost" 
               onClick={() => navigate('/auth')}
-              className="text-white hover:text-white/80 font-medium text-xs px-2 py-1 rounded-md hover:bg-white/10 transition-all duration-300"
+              className="text-muted-foreground hover:text-foreground font-medium text-xs px-2 py-1 rounded-md hover:bg-muted/10 transition-all duration-300"
             >
               Log in
               <ArrowRight className="h-2.5 w-2.5 ml-0.5" />
             </Button>
           </div>
 
-          {/* Pink "NO MORE BORING SWIPES!" box - Top of page on desktop */}
-          <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-30 animate-fade-in hidden lg:block">
-            <p className="text-base text-white font-bold max-w-xl mx-auto leading-relaxed bg-gradient-to-r from-red-500 to-pink-500 p-1.5 rounded-md shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-500" style={{ animationDelay: '0.3s' }}>
-              🚀 <span className="text-yellow-300 bg-black px-1.5 py-0.5 rounded-sm text-xs">NO MORE BORING SWIPES!</span> 🚀 Find your <span className="text-yellow-300 underline decoration-1 decoration-yellow-300">SOULMATE</span> with AI!
-            </p>
-          </div>
-
-          {/* HOTTEST DATING APP - Under pink box on desktop */}
-          <div className="absolute top-16 left-1/2 transform -translate-x-1/2 z-30 animate-fade-in hidden lg:block">
-            <h1 className="text-4xl font-black leading-none text-center">
-              <span className="block bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 bg-clip-text text-transparent animate-scale-in hover:scale-105 transition-transform duration-500">
-                🔥 HOTTEST 🔥
-              </span>
-              <span className="block bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent animate-scale-in text-5xl hover:scale-105 transition-transform duration-500" style={{ animationDelay: '0.2s' }}>
-                DATING APP
-              </span>
-            </h1>
-          </div>
-
-          {/* HOTTEST DATING APP - Top of page on tablet */}
-          <div className="absolute top-8 left-1/2 transform -translate-x-1/2 z-30 animate-fade-in hidden md:block lg:hidden">
-            <h1 className="text-2xl font-black leading-none text-center">
-              <span className="block bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 bg-clip-text text-transparent animate-scale-in hover:scale-105 transition-transform duration-500">
-                🔥 HOTTEST 🔥
-              </span>
-              <span className="block bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-clip-text text-transparent animate-scale-in text-3xl hover:scale-105 transition-transform duration-500" style={{ animationDelay: '0.2s' }}>
-                DATING APP
-              </span>
-            </h1>
-          </div>
-
-          {/* Responsive padding to prevent overlap */}
-          <div className="relative pt-8 md:pt-12 lg:pt-16 w-full h-full">
-            {/* Dynamic Background with Proper Z-Index Layering */}
-            <div className="absolute inset-0 z-0">
+          {/* Simplified, breathing room design */}
+          <div className="relative w-full h-full flex items-center justify-center">
+            {/* Minimal background overlay */}
+            <div className="absolute inset-0 bg-gradient-to-br from-muted/10 via-transparent to-primary/5 z-0"></div>
               <div className="relative w-full h-full">
                 {/* Primary Background Image - Responsive with better face positioning */}
                 <img 
@@ -265,19 +236,44 @@ const Index = () => {
               </div>
             )}
 
-            {/* Hero Content - Adjusted positioning to prevent image overlap */}
+            {/* Poetic Hero Section with Breathing Room */}
             <div className="relative z-20 max-w-7xl mx-auto px-4 py-12 sm:py-20 text-center">
-              {/* Launch Banner - Positioned higher to avoid blocking imagery */}
-              <div className="absolute top-4 left-1/2 transform -translate-x-1/2 w-full max-w-4xl px-4 animate-fade-in z-10">
-                <LaunchBanner showDismiss={true} variant="homepage" />
-              </div>
-              
-              {/* Content pushed down to avoid banner */}
-              <div className="mt-32 sm:mt-24 lg:mt-20 animate-fade-in">
-                {/* Enhanced Badge */}
-                <div className="inline-flex items-center px-6 py-3 mb-6 sm:mb-8 lg:mb-12 rounded-full bg-gradient-to-r from-primary/10 to-purple-600/10 border border-primary/20 backdrop-blur-sm hover:scale-105 transition-transform duration-300">
-                  <Sparkles className="h-5 w-5 mr-3 text-primary animate-pulse" />
-                  <span className="text-primary font-semibold text-sm sm:text-base lg:text-lg">AI-Powered Emotional Intelligence Dating</span>
+              <div className="space-y-16 sm:space-y-20 lg:space-y-24 animate-fade-in">
+                {/* Repositioned Launch Banner - Subtle Integration */}
+                <div className="flex justify-center">
+                  <div className="w-full max-w-2xl">
+                    <LaunchBanner showDismiss={true} variant="homepage" />
+                  </div>
+                </div>
+                
+                {/* Poetic Hero Content */}
+                <div className="space-y-8 sm:space-y-10 lg:space-y-12">
+                  {/* Emotional Badge */}
+                  <div className="inline-flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-primary/10 to-purple-600/10 border border-primary/20 backdrop-blur-sm">
+                    <Heart className="h-5 w-5 mr-3 text-primary" />
+                    <span className="text-sm font-medium text-primary">
+                      Where souls recognize each other
+                    </span>
+                  </div>
+
+                  {/* Poetic Headline */}
+                  <div className="space-y-6">
+                    <h1 className="text-4xl sm:text-5xl lg:text-6xl font-light leading-tight tracking-wide">
+                      <span className="block mb-3 text-foreground">
+                        Beyond the surface,
+                      </span>
+                      <span className="block mb-3 bg-gradient-to-r from-primary via-purple-500 to-pink-500 bg-clip-text text-transparent font-medium">
+                        beneath the noise
+                      </span>
+                      <span className="block text-muted-foreground text-3xl sm:text-4xl lg:text-5xl">
+                        real connection awaits
+                      </span>
+                    </h1>
+                    
+                    <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed font-light">
+                      A space for meaningful encounters, authentic stories, and the kind of love that changes everything.
+                    </p>
+                  </div>
                 </div>
                 
                 {/* DRAMATIC DESCRIPTION - Mobile only */}
@@ -342,35 +338,7 @@ const Index = () => {
             </div>
 
             {/* Enhanced Stats */}
-            <div className="relative z-20 max-w-7xl mx-auto px-4 pb-12">
-              {/* Tablet Layout - Elements in purple area above stats */}
-              <div className="hidden md:block lg:hidden mb-8">
-                <div className="flex justify-between items-center max-w-4xl mx-auto">
-                  {/* Pink box - Left side */}
-                  <div className="animate-fade-in">
-                    <p className="text-base text-white font-bold max-w-xs leading-relaxed bg-gradient-to-r from-red-500 to-pink-500 p-2 rounded-lg shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-500" style={{ animationDelay: '0.3s' }}>
-                      🚀 <span className="text-yellow-300 bg-black px-1.5 py-0.5 rounded-md text-xs">NO MORE BORING SWIPES!</span> 🚀
-                      <br/>
-                      <span className="text-base">Find your <span className="text-yellow-300 underline decoration-2 decoration-yellow-300">SOULMATE</span> with AI!</span>
-                    </p>
-                  </div>
-                  
-                  {/* Start Journey - Right side */}
-                  <div className="animate-fade-in">
-                    <div 
-                      onClick={() => navigate('/quick-start')}
-                      className="cursor-pointer relative bg-gradient-to-r from-primary via-purple-600 to-pink-600 text-white px-4 py-3 rounded-2xl rounded-bl-sm shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-base font-medium max-w-fit"
-                    >
-                      <Heart className="h-4 w-4 mr-2 inline" />
-                      Start Your Journey
-                      <ArrowRight className="h-4 w-4 ml-2 inline" />
-                      {/* Message bubble tail */}
-                      <div className="absolute -bottom-1 left-3 w-3 h-3 bg-gradient-to-r from-primary to-purple-600 transform rotate-45 rounded-sm"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
+            <div className="relative z-20 max-w-7xl mx-auto px-4 pb-12">              
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto animate-fade-in" style={{ animationDelay: '0.6s' }}>
                 <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-primary/5 to-purple-600/5 border border-primary/10 backdrop-blur-sm hover:scale-110 hover:shadow-xl transition-all duration-500">
                   <div className="text-4xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent mb-3">10,000+</div>
@@ -389,100 +357,31 @@ const Index = () => {
           </div>
         </section>
 
-        {/* BREATHING ROOM */}
-        <div className="h-32"></div>
+        {/* Ambient Couple Carousel Section */}
+        <section className="py-20 bg-gradient-to-br from-muted/20 to-background">
+          <AmbientCoupleCarousel />
+        </section>
 
-        {/* QUIET CONTRAST - Enhanced Features Section */}
-        <section className="py-32 bg-gradient-to-br from-background to-primary/5 relative">
-          <div className="max-w-6xl mx-auto px-4">
-            <div className="text-center mb-20 animate-fade-in">
-              <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent mb-8">
-                What Makes Us Different
-              </h2>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-                We're redefining dating through authenticity, privacy, and meaningful connections
-              </p>
-            </div>
+        {/* Soulful Invitation Section */}
+        <SoulfulInvitation />
 
-            {/* Feature Cards Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-              {/* AI-Powered Matching */}
-              <div className="group p-8 rounded-3xl bg-gradient-to-br from-white/5 to-primary/5 border border-primary/10 backdrop-blur-sm hover:scale-105 hover:shadow-xl transition-all duration-500">
-                <div className="mb-6">
-                  <div className="w-16 h-16 bg-gradient-to-br from-primary to-purple-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                    <Sparkles className="h-8 w-8 text-white" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-foreground mb-4">AI-Powered Intelligence</h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    Our advanced AI analyzes your personality, values, and preferences to find genuinely compatible matches - not just surface-level attraction.
-                  </p>
-                </div>
-              </div>
-
-              {/* Privacy First */}
-              <div className="group p-8 rounded-3xl bg-gradient-to-br from-white/5 to-purple-600/5 border border-purple-600/10 backdrop-blur-sm hover:scale-105 hover:shadow-xl transition-all duration-500">
-                <div className="mb-6">
-                  <div className="w-16 h-16 bg-gradient-to-br from-purple-600 to-pink-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                    <Shield className="h-8 w-8 text-white" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-foreground mb-4">Privacy & Safety First</h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    Your data is encrypted and protected. We prioritize your safety with verified profiles and comprehensive reporting tools.
-                  </p>
-                </div>
-              </div>
-
-              {/* Meaningful Connections */}
-              <div className="group p-8 rounded-3xl bg-gradient-to-br from-white/5 to-pink-600/5 border border-pink-600/10 backdrop-blur-sm hover:scale-105 hover:shadow-xl transition-all duration-500">
-                <div className="mb-6">
-                  <div className="w-16 h-16 bg-gradient-to-br from-pink-600 to-primary rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                    <Heart className="h-8 w-8 text-white" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-foreground mb-4">Quality Over Quantity</h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    We focus on meaningful connections rather than endless swiping. Every match is carefully curated for compatibility.
-                  </p>
-                </div>
-              </div>
-
-              {/* Location Based */}
-              <div className="group p-8 rounded-3xl bg-gradient-to-br from-white/5 to-primary/5 border border-primary/10 backdrop-blur-sm hover:scale-105 hover:shadow-xl transition-all duration-500">
-                <div className="mb-6">
-                  <div className="w-16 h-16 bg-gradient-to-br from-primary to-purple-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                    <MapPin className="h-8 w-8 text-white" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-foreground mb-4">Smart Location Matching</h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    Find people in your area or expand your search globally. Distance preferences that actually make sense for real relationships.
-                  </p>
-                </div>
-              </div>
-
-              {/* Premium Features */}
-              <div className="group p-8 rounded-3xl bg-gradient-to-br from-white/5 to-purple-600/5 border border-purple-600/10 backdrop-blur-sm hover:scale-105 hover:shadow-xl transition-all duration-500">
-                <div className="mb-6">
-                  <div className="w-16 h-16 bg-gradient-to-br from-purple-600 to-pink-600 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                    <Crown className="h-8 w-8 text-white" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-foreground mb-4">Premium Experience</h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    Unlock advanced features like unlimited likes, super boosts, and priority matching for the ultimate dating experience.
-                  </p>
-                </div>
-              </div>
-
-              {/* Community */}
-              <div className="group p-8 rounded-3xl bg-gradient-to-br from-white/5 to-pink-600/5 border border-pink-600/10 backdrop-blur-sm hover:scale-105 hover:shadow-xl transition-all duration-500">
-                <div className="mb-6">
-                  <div className="w-16 h-16 bg-gradient-to-br from-pink-600 to-primary rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                    <Users className="h-8 w-8 text-white" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-foreground mb-4">Vibrant Community</h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    Join a community of genuine people looking for real connections, not just hookups or games.
-                  </p>
-                </div>
-              </div>
+        {/* Simple Features Section */}
+        <section className="py-20 bg-gradient-to-br from-background to-primary/5">
+          <div className="max-w-4xl mx-auto px-4 text-center">
+            <h2 className="text-3xl font-light text-foreground mb-12">
+              Connection beyond the surface
+            </h2>
+            <div className="grid md:grid-cols-2 gap-8">
+              <Card className="p-6 bg-gradient-to-br from-primary/5 to-purple-500/5 border-primary/20">
+                <Heart className="h-8 w-8 text-primary mb-4 mx-auto" />
+                <h3 className="font-medium mb-2">Emotional Intelligence</h3>
+                <p className="text-sm text-muted-foreground">AI-powered matching based on authentic compatibility</p>
+              </Card>
+              <Card className="p-6 bg-gradient-to-br from-purple-500/5 to-pink-500/5 border-purple-500/20">
+                <Shield className="h-8 w-8 text-purple-500 mb-4 mx-auto" />
+                <h3 className="font-medium mb-2">Privacy First</h3>
+                <p className="text-sm text-muted-foreground">Your data protected with military-grade encryption</p>
+              </Card>
             </div>
           </div>
         </section>
