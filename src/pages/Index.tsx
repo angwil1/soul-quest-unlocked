@@ -189,38 +189,36 @@ const Index = () => {
           </div>
 
           {/* Simplified, breathing room design */}
-          <div className="relative w-full h-full flex items-center justify-center">
+          <div className="relative w-full h-full">
             {/* Minimal background overlay */}
             <div className="absolute inset-0 bg-gradient-to-br from-muted/10 via-transparent to-primary/5 z-0"></div>
-              <div className="relative w-full h-full">
-                {/* Primary Background Image - Responsive with better face positioning */}
-                <img 
-                  src={heroImages[currentHeroImageIndex]} 
-                  alt="Happy couple in warm connection" 
-                  className="absolute inset-0 w-full h-full object-cover animate-fade-in transition-opacity duration-1000 z-0"
-                  style={{
-                    objectPosition: window.innerWidth >= 768 && window.innerWidth < 1024 
-                      ? 'center 20%' // Tablet: better positioning to avoid face cropping
-                      : window.innerWidth < 768 
-                        ? 'center 15%' // Mobile: centered with slight upward bias for face visibility
-                        : 'center 30%' // Desktop: lower positioning
-                  }}
-                  onError={(e) => {
-                    console.error('Hero image failed to load:', heroImages[currentHeroImageIndex]);
-                  }}
-                  onLoad={(e) => {
-                    console.log('Hero image loaded and displayed:', heroImages[currentHeroImageIndex]);
-                  }}
-                />
-                
-                {/* Responsive overlay - lighter on tablet to avoid masking */}
-                <div className="absolute inset-0 bg-gradient-to-b from-background/3 via-transparent to-pink-500/2 md:from-background/5 md:to-pink-500/3 z-10"></div>
-                
-                {/* Responsive Floating Background Elements */}
-                <div className="absolute top-10 sm:top-20 left-4 sm:left-20 w-32 sm:w-72 h-32 sm:h-72 bg-gradient-to-br from-primary/10 to-purple-600/10 rounded-full blur-2xl sm:blur-3xl animate-pulse z-10"></div>
-                <div className="absolute bottom-10 sm:bottom-20 right-4 sm:right-20 w-48 sm:w-96 h-48 sm:h-96 bg-gradient-to-br from-pink-600/10 to-primary/10 rounded-full blur-2xl sm:blur-3xl animate-pulse z-10" style={{ animationDelay: '1s' }}></div>
-              </div>
-            </div>
+            
+            {/* Primary Background Image - Responsive with better face positioning */}
+            <img 
+              src={heroImages[currentHeroImageIndex]} 
+              alt="Happy couple in warm connection" 
+              className="absolute inset-0 w-full h-full object-cover animate-fade-in transition-opacity duration-1000 z-0"
+              style={{
+                objectPosition: window.innerWidth >= 768 && window.innerWidth < 1024 
+                  ? 'center 20%' // Tablet: better positioning to avoid face cropping
+                  : window.innerWidth < 768 
+                    ? 'center 15%' // Mobile: centered with slight upward bias for face visibility
+                    : 'center 30%' // Desktop: lower positioning
+              }}
+              onError={(e) => {
+                console.error('Hero image failed to load:', heroImages[currentHeroImageIndex]);
+              }}
+              onLoad={(e) => {
+                console.log('Hero image loaded and displayed:', heroImages[currentHeroImageIndex]);
+              }}
+            />
+            
+            {/* Responsive overlay - lighter on tablet to avoid masking */}
+            <div className="absolute inset-0 bg-gradient-to-b from-background/3 via-transparent to-pink-500/2 md:from-background/5 md:to-pink-500/3 z-10"></div>
+            
+            {/* Responsive Floating Background Elements */}
+            <div className="absolute top-10 sm:top-20 left-4 sm:left-20 w-32 sm:w-72 h-32 sm:h-72 bg-gradient-to-br from-primary/10 to-purple-600/10 rounded-full blur-2xl sm:blur-3xl animate-pulse z-10"></div>
+            <div className="absolute bottom-10 sm:bottom-20 right-4 sm:right-20 w-48 sm:w-96 h-48 sm:h-96 bg-gradient-to-br from-pink-600/10 to-primary/10 rounded-full blur-2xl sm:blur-3xl animate-pulse z-10" style={{ animationDelay: '1s' }}></div>
 
             {/* JSX-Based Conditional Captions */}
             {imageSpecificCaptions[heroImages[currentHeroImageIndex]] && (
