@@ -2,7 +2,6 @@ import { useState, useRef } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Badge } from '@/components/ui/badge';
 import { Play, Pause, Volume2, VolumeX, Edit, Sparkles } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useProfile } from '@/hooks/useProfile';
@@ -18,7 +17,6 @@ interface TikTokProfileEmbedProps {
 
 export const TikTokProfileEmbed = ({ isEditMode = false }: TikTokProfileEmbedProps) => {
   const { profile, updateProfile } = useProfile();
-  const isEchoActive = false; // Simplified without subscription
   const { toast } = useToast();
   const navigate = useNavigate();
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -115,202 +113,29 @@ export const TikTokProfileEmbed = ({ isEditMode = false }: TikTokProfileEmbedPro
     );
   }
 
-  if (!isEchoActive) {
-    return (
-      <Card className="w-full max-w-md mx-auto border-purple-200 bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-950/20 dark:to-pink-950/20">
-        <CardHeader>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <span className="text-2xl">🎵</span>
-              <CardTitle className="text-lg">TikTok Profile Embed</CardTitle>
-            </div>
-            <Badge variant="secondary" className="bg-purple-100 text-purple-800">
-              Echo
-            </Badge>
-          </div>
-          <p className="text-muted-foreground text-sm">
-            Express your vibe through TikTok-style content
-          </p>
-        </CardHeader>
-        <CardContent>
-          <p className="text-sm text-muted-foreground mb-3">
-            Available with Unlocked Echo subscription
-          </p>
-          <div className="space-y-2">
-            <Button size="sm" className="w-full" variant="outline" onClick={() => navigate('/pricing')}>
-              <Sparkles className="h-4 w-4 mr-2" />
-              Get Echo Monthly ($4/mo)
-            </Button>
-            <div className="text-center text-xs text-muted-foreground">or</div>
-            <Button size="sm" className="w-full" onClick={() => navigate('/pricing')}>
-              <Sparkles className="h-4 w-4 mr-2" />
-              Unlock Echo Forever ($12)
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
-    );
-  }
-
-  if (isEditMode || isEditing) {
-    return (
-      <Card className="w-full max-w-md mx-auto">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <span className="text-2xl">🎵</span>
-            TikTok Profile Embed
-            <Badge variant="secondary" className="bg-purple-100 text-purple-800">Echo</Badge>
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          {/* AI Soundtrack Prompting */}
-          <div className="p-4 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg border border-purple-200">
-            <div className="flex items-center gap-2 mb-2">
-              <Sparkles className="h-5 w-5 text-purple-600" />
-              <span className="font-medium text-purple-800">Echo Enhancement</span>
-            </div>
-            <p className="text-sm text-purple-700 mb-3">
-              Let AI curate the perfect soundtrack based on your mood
-            </p>
-            <Button
-              onClick={() => setShowSoundtrackPrompt(true)}
-              className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
-            >
-              <Sparkles className="h-4 w-4 mr-2" />
-              Find My Soundtrack
-            </Button>
-          </div>
-
-          <div>
-            <label className="text-sm font-medium">TikTok Video URL</label>
-            <Input
-              value={tiktokUrl}
-              onChange={(e) => setTiktokUrl(e.target.value)}
-              placeholder="https://www.tiktok.com/@username/video/123456789"
-              className="mt-1"
-            />
-            <p className="text-xs text-muted-foreground mt-1">
-              Paste a TikTok video URL that represents your vibe
-            </p>
-          </div>
-          
-          <div>
-            <label className="text-sm font-medium">Emotional Soundtrack</label>
-            <Input
-              value={emotionalSoundtrack}
-              onChange={(e) => setEmotionalSoundtrack(e.target.value)}
-              placeholder="Describe the mood/feeling this represents"
-              className="mt-1"
-            />
-            <p className="text-xs text-muted-foreground mt-1">
-              What emotion or vibe does this video capture for you?
-            </p>
-          </div>
-
-          <div className="flex gap-2">
-            <Button onClick={handleSave} className="flex-1">
-              Save Changes
-            </Button>
-            <Button variant="outline" onClick={() => setIsEditing(false)}>
-              Cancel
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
-    );
-  }
-
-  if (!tiktokUrl) {
-    return (
-      <Card className="w-full max-w-md mx-auto">
-        <CardContent className="p-8 text-center">
-          <div className="text-4xl mb-4">🎵</div>
-          <h3 className="font-semibold mb-2">No TikTok Embed</h3>
-          <p className="text-muted-foreground text-sm mb-4">
-            Add a TikTok video to show your vibe
-          </p>
-          {isEditMode && (
-            <Button onClick={() => setIsEditing(true)}>
-              <Edit className="h-4 w-4 mr-2" />
-              Add TikTok Video
-            </Button>
-          )}
-        </CardContent>
-      </Card>
-    );
-  }
-
+  // For now, show coming soon placeholder
   return (
-    <Card className="w-full max-w-md mx-auto overflow-hidden">
-      <div className="relative aspect-[9/16] bg-black">
-        {videoId ? (
-          <iframe
-            src={`https://www.tiktok.com/embed/v2/${videoId}`}
-            className="w-full h-full"
-            allowFullScreen
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-purple-500 to-pink-500">
-            <div className="text-center text-white">
-              <div className="text-6xl mb-4">🎵</div>
-              <p className="text-lg font-semibold">TikTok Vibes</p>
-              <p className="text-sm opacity-80">Coming Soon</p>
-            </div>
+    <Card className="w-full max-w-md mx-auto border-primary/20 bg-gradient-to-br from-primary/5 to-secondary/5">
+      <CardHeader>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <span className="text-2xl">🎵</span>
+            <CardTitle className="text-lg">TikTok Profile Embed</CardTitle>
           </div>
-        )}
-        
-        {/* Overlay controls */}
-        <div className="absolute bottom-4 right-4 flex gap-2">
-          <Button
-            size="sm"
-            variant="secondary"
-            className="bg-black/50 text-white hover:bg-black/70"
-            onClick={handlePlayPause}
-          >
-            {isPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
-          </Button>
-          <Button
-            size="sm"
-            variant="secondary"
-            className="bg-black/50 text-white hover:bg-black/70"
-            onClick={handleMuteToggle}
-          >
-            {isMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
-          </Button>
         </div>
-
-        {/* Echo badge */}
-        <div className="absolute top-4 left-4">
-          <Badge className="bg-purple-500 text-white">
-            Echo
-          </Badge>
-        </div>
-      </div>
-
-      {emotionalSoundtrack && (
-        <CardContent className="p-4">
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <span className="text-lg">💭</span>
-            <span className="italic flex-1">"{emotionalSoundtrack}"</span>
-            <SoundtrackPlayer text={emotionalSoundtrack} />
-          </div>
-        </CardContent>
-      )}
-
-      {isEditMode && (
-        <CardContent className="p-4 border-t">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => setIsEditing(true)}
-            className="w-full"
-          >
-            <Edit className="h-4 w-4 mr-2" />
-            Edit TikTok Embed
-          </Button>
-        </CardContent>
-      )}
+        <p className="text-muted-foreground text-sm">
+          Express your vibe through TikTok-style content
+        </p>
+      </CardHeader>
+      <CardContent>
+        <p className="text-sm text-muted-foreground mb-3">
+          Coming soon - Link your TikTok to show your personality
+        </p>
+        <Button size="sm" className="w-full" variant="outline" disabled>
+          <Sparkles className="h-4 w-4 mr-2" />
+          Feature Coming Soon
+        </Button>
+      </CardContent>
     </Card>
   );
 };

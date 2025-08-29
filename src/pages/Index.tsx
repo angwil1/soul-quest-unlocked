@@ -39,7 +39,7 @@ const captions = [
   { text: "They didn't expect to find each other. But they did.", ariaLabel: "A story of unexpected love and connection" },
   { text: "Connection begins with a gesture.", ariaLabel: "The power of small moments in relationships" },
   { text: "Love looks like this. And this. And this.", ariaLabel: "Celebrating diverse expressions of love" },
-  { text: "Every heart finds its echo.", ariaLabel: "The universal search for meaningful connection" },
+  { text: "Every heart finds its rhythm.", ariaLabel: "The universal search for meaningful connection" },
   { text: "In a world of noise, they found silence together.", ariaLabel: "Finding peace and understanding in partnership" }
 ];
 

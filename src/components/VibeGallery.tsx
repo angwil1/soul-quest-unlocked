@@ -31,7 +31,6 @@ interface VibeGalleryProps {
 
 export const VibeGallery = ({ isOwnProfile = false, userId }: VibeGalleryProps) => {
   const { user } = useAuth();
-  const isEchoActive = false; // Simplified without subscription
   const { toast } = useToast();
   const navigate = useNavigate();
   const [items, setItems] = useState<VibeGalleryItem[]>([]);
@@ -210,18 +209,15 @@ export const VibeGallery = ({ isOwnProfile = false, userId }: VibeGalleryProps) 
     );
   }
 
-  if (!isEchoActive && isOwnProfile) {
+  if (isOwnProfile) {
     return (
-      <Card className="border-purple-200 bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-950/20 dark:to-pink-950/20">
+      <Card className="border-primary/20 bg-gradient-to-br from-primary/5 to-secondary/5">
         <CardHeader>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <span className="text-3xl">✨</span>
               <CardTitle className="text-lg">Vibe Gallery</CardTitle>
             </div>
-            <Badge variant="secondary" className="bg-purple-100 text-purple-800">
-              Echo
-            </Badge>
           </div>
           <p className="text-muted-foreground">
             Express your authentic self through creative vibes
@@ -229,19 +225,12 @@ export const VibeGallery = ({ isOwnProfile = false, userId }: VibeGalleryProps) 
         </CardHeader>
         <CardContent>
           <p className="text-sm text-muted-foreground mb-3">
-            Available with Unlocked Echo subscription
+            Coming soon - Share your favorite moments and vibes
           </p>
-          <div className="space-y-2">
-            <Button size="sm" className="w-full" variant="outline" onClick={() => navigate('/pricing')}>
-              <Plus className="h-4 w-4 mr-2" />
-              Get Echo Monthly ($4/mo)
-            </Button>
-            <div className="text-center text-xs text-muted-foreground">or</div>
-            <Button size="sm" className="w-full" onClick={() => navigate('/pricing')}>
-              <Plus className="h-4 w-4 mr-2" />
-              Unlock Echo Forever ($12)
-            </Button>
-          </div>
+          <Button size="sm" className="w-full" variant="outline" disabled>
+            <Plus className="h-4 w-4 mr-2" />
+            Feature Coming Soon
+          </Button>
         </CardContent>
       </Card>
     );
@@ -254,14 +243,13 @@ export const VibeGallery = ({ isOwnProfile = false, userId }: VibeGalleryProps) 
           <h2 className="text-2xl font-bold flex items-center gap-2">
             <span className="text-3xl">✨</span>
             Vibe Gallery
-            <Badge variant="secondary" className="bg-purple-100 text-purple-800">Echo</Badge>
           </h2>
           <p className="text-muted-foreground">
             {isOwnProfile ? 'Your collection of vibes and moments' : 'Discover authentic vibes from the community'}
           </p>
         </div>
         
-        {isOwnProfile && isEchoActive && (
+        {isOwnProfile && (
           <Dialog open={isAddingItem} onOpenChange={setIsAddingItem}>
             <DialogTrigger asChild>
               <Button>

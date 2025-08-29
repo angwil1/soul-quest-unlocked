@@ -11,10 +11,6 @@ const FAQ = () => {
       answer: "Free: A quiet start. You get access to basic matching, public prompts, and core connection tools—with no pressure.\n\nComplete Plus: Everything in Free, plus deeper compatibility quizzes, private Match Memory, and early access to new features. You're signaling you're ready for more emotional texture.\n\nComplete Beyond: A full emotional toolkit. Includes everything above—plus Memory Vault to save connection moments, Connection DNA for deep emotional mirroring, and poetic onboarding overlays for when you need a fresh start."
     },
     {
-      question: "What is Echo Amplified, and who can use it?",
-      answer: "Every Echo holds its own rhythm—quiet reflection for 3 days, and the option to complete after 7.\n\nEcho Amplified is available for $4/month and includes:\n• TikTok-style profile embed (optional)\n• Emotional soundtrack prompts\n• Discoverability via vibe gallery\n• Echo badge toggle\n• 7-day Echo completion arc with gentle flows\n\nEcho is a creative expression add-on that can be added to any plan, or purchased on its own. Expression isn't reserved for premium—it's available to all.\n\n• Monthly ($4/mo) or one-time ($12) pricing\n• Echo is not required for matching—it's for emotional self-presentation\n• You can hide Echo features at any time—privacy always comes first"
-    },
-    {
       question: "How does AI Complete Me work?",
       answer: "AI Complete Me uses advanced AI matching algorithms to connect you with compatible partners based on your personality, interests, and values. Complete our comprehensive quiz to get started."
     },
@@ -67,12 +63,12 @@ const FAQ = () => {
       answer: "Yes—and that's the point. We're building this with you. Features will evolve based on emotional feedback, not market trends. Early users help steer the ship."
     },
     {
-      question: "🎁 Can I gift a subscription or Echo add-on to someone?",
-      answer: "Not yet—but this is on our radar. We believe generosity should be built-in, and we're exploring \"Matchlight Gifts\" as a future feature. Stay tuned."
+      question: "🎁 Can I gift a subscription to someone?",
+      answer: "Not yet—but this is on our radar. We believe generosity should be built-in, and we're exploring gift subscriptions as a future feature. Stay tuned."
     },
     {
-      question: "📷 Can I turn off Echo features once I've activated them?",
-      answer: "Always. Expressiveness should never feel performative. You can toggle badges, hide media, or mute your soundtrack any time. Echo adapts to your comfort."
+      question: "📷 Can I turn off premium features once I've activated them?",
+      answer: "Always. You can toggle any premium features, hide content, or adjust your visibility at any time. Flexibility adapts to your comfort."
     },
     {
       question: "What if I want to delete my account or data?",
@@ -100,11 +96,11 @@ const FAQ = () => {
     },
     {
       question: "👥 Will people know what tier I'm on?",
-      answer: "Only if you want them to. Badges like Echo or Complete Beyond are toggleable. You choose what you signal."
+      answer: "Only if you want them to. Badges are toggleable. You choose what you signal."
     },
     {
-      question: "🎨 Can I change my profile vibe or soundtrack later?",
-      answer: "Yes, whenever you want. Your emotional palette can evolve—and Echo lets you reflect that freely."
+      question: "🎨 Can I change my profile later?",
+      answer: "Yes, whenever you want. Your profile can evolve—and our features let you reflect that freely."
     },
     {
       question: "🛬 I signed up, but nothing's happening. Did I do something wrong?",

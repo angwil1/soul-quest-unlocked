@@ -24,13 +24,13 @@ export interface Profile {
   zip_code?: string | null;
   created_at: string;
   updated_at: string | null;
-  // Echo features
+  // Premium features
   echo_badge_enabled?: boolean;
   unlocked_beyond_badge_enabled?: boolean;
   tiktok_embed_url?: string;
   vibe_gallery?: any[];
   emotional_soundtrack?: string;
-  // Echo Amplified features
+  // Advanced features
   open_to_connection_invites?: boolean;
   echo_visibility_level?: string;
 }
