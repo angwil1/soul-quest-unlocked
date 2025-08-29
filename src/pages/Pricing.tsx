@@ -19,7 +19,7 @@ const Pricing = () => {
       icon: "🌱",
       price: "$0",
       period: "/month",
-      description: "A gentle introduction to meaningful connections",
+      description: "A gentle introduction to meaningful connections.",
       features: [
         "Complete your profile",
         "View matches", 
