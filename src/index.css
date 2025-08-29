@@ -8,65 +8,65 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Clean, neutral background */
-    --background: 0 0% 100%;
-    --foreground: 0 0% 10%;
+    /* Beachy + Peachy Background */
+    --background: 30 25% 96%;
+    --foreground: 180 40% 15%;
 
-    /* Card colors - pure whites and grays */
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 10%;
+    /* Card colors - warm beige tones */
+    --card: 30 25% 98%;
+    --card-foreground: 180 40% 15%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 10%;
+    --popover: 30 25% 98%;
+    --popover-foreground: 180 40% 15%;
 
-    /* Primary: Clean blue without purple tint */
-    --primary: 210 100% 50%;
-    --primary-foreground: 0 0% 100%;
-    --primary-glow: 210 100% 70%;
+    /* Primary: Dark teal from palette */
+    --primary: 180 40% 25%;
+    --primary-foreground: 30 25% 96%;
+    --primary-glow: 180 40% 45%;
 
-    /* Secondary: Clean grays */
-    --secondary: 0 0% 96%;
-    --secondary-foreground: 0 0% 20%;
+    /* Secondary: Light coral/peach */
+    --secondary: 15 80% 85%;
+    --secondary-foreground: 180 40% 20%;
 
-    /* Muted: Light grays */
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 45%;
+    /* Muted: Soft beige tones */
+    --muted: 30 25% 90%;
+    --muted-foreground: 180 25% 40%;
 
-    /* Accent: Light blue */
-    --accent: 210 50% 95%;
-    --accent-foreground: 210 100% 25%;
+    /* Accent: Darker coral from palette */
+    --accent: 10 70% 65%;
+    --accent-foreground: 30 25% 96%;
 
-    /* Destructive: Red */
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 98%;
+    /* Destructive: Warm coral red */
+    --destructive: 5 75% 60%;
+    --destructive-foreground: 30 25% 96%;
 
-    /* Borders and inputs - neutral grays */
-    --border: 0 0% 90%;
-    --input: 0 0% 90%;
-    --ring: 210 100% 50%;
+    /* Borders and inputs - soft beige */
+    --border: 30 25% 85%;
+    --input: 30 25% 90%;
+    --ring: 180 40% 35%;
 
     --radius: 0.75rem;
 
-    /* Clean gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(210 100% 50%), hsl(210 100% 60%));
-    --gradient-secondary: linear-gradient(135deg, hsl(0 0% 96%), hsl(0 0% 98%));
-    --gradient-hero: linear-gradient(135deg, hsl(210 100% 50%) 0%, hsl(210 100% 60%) 100%);
-    --gradient-launch: linear-gradient(135deg, hsl(0 0% 5%) 0%, hsl(330 80% 25%) 50%, hsl(330 70% 50%) 100%);
+    /* Beachy + Peachy gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(180 40% 25%), hsl(180 40% 35%));
+    --gradient-secondary: linear-gradient(135deg, hsl(15 80% 85%), hsl(10 70% 75%));
+    --gradient-hero: linear-gradient(135deg, hsl(180 40% 25%) 0%, hsl(15 80% 75%) 50%, hsl(10 70% 65%) 100%);
+    --gradient-launch: linear-gradient(135deg, hsl(180 40% 20%) 0%, hsl(15 80% 70%) 50%, hsl(10 70% 60%) 100%);
     
-    /* Clean shadows */
-    --shadow-primary: 0 10px 30px -10px hsl(210 100% 50% / 0.2);
-    --shadow-secondary: 0 4px 20px -4px hsl(0 0% 0% / 0.1);
-    --shadow-launch: 0 10px 30px -10px hsl(340 85% 40% / 0.3);
+    /* Beachy shadows with teal and coral tones */
+    --shadow-primary: 0 10px 30px -10px hsl(180 40% 25% / 0.2);
+    --shadow-secondary: 0 4px 20px -4px hsl(30 25% 70% / 0.15);
+    --shadow-launch: 0 10px 30px -10px hsl(10 70% 65% / 0.3);
 
-    /* Sidebar colors - clean */
-    --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 0 0% 10%;
-    --sidebar-primary: 210 100% 50%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 0 0% 96%;
-    --sidebar-accent-foreground: 0 0% 10%;
-    --sidebar-border: 0 0% 90%;
-    --sidebar-ring: 210 100% 50%;
+    /* Sidebar colors - beachy theme */
+    --sidebar-background: 30 25% 96%;
+    --sidebar-foreground: 180 40% 15%;
+    --sidebar-primary: 180 40% 25%;
+    --sidebar-primary-foreground: 30 25% 96%;
+    --sidebar-accent: 15 80% 85%;
+    --sidebar-accent-foreground: 180 40% 20%;
+    --sidebar-border: 30 25% 85%;
+    --sidebar-ring: 180 40% 35%;
 }
 
 /* Mobile-specific styles */
@@ -83,56 +83,56 @@ body {
 }
 
   .dark {
-    /* Dark mode with deep blues */
-    --background: 215 25% 8%;
-    --foreground: 210 40% 95%;
+    /* Dark beachy + peachy theme */
+    --background: 180 40% 8%;
+    --foreground: 30 25% 95%;
 
-    --card: 215 25% 12%;
-    --card-foreground: 210 40% 95%;
+    --card: 180 40% 12%;
+    --card-foreground: 30 25% 95%;
 
-    --popover: 215 25% 12%;
-    --popover-foreground: 210 40% 95%;
+    --popover: 180 40% 12%;
+    --popover-foreground: 30 25% 95%;
 
-    /* Primary: Clean blue for dark mode */
-    --primary: 220 85% 65%;
-    --primary-foreground: 215 25% 8%;
-    --primary-glow: 220 85% 80%;
+    /* Primary: Lighter teal for dark mode */
+    --primary: 180 50% 55%;
+    --primary-foreground: 180 40% 8%;
+    --primary-glow: 180 50% 75%;
 
-    /* Secondary: Dark blue-gray */
-    --secondary: 215 25% 18%;
-    --secondary-foreground: 210 40% 95%;
+    /* Secondary: Muted coral for dark mode */
+    --secondary: 15 60% 25%;
+    --secondary-foreground: 30 25% 95%;
 
-    /* Muted: Dark blue-gray */
-    --muted: 215 25% 18%;
-    --muted-foreground: 220 25% 70%;
+    /* Muted: Dark teal-gray */
+    --muted: 180 30% 18%;
+    --muted-foreground: 30 15% 70%;
 
-    /* Accent: Bright teal for dark mode */
-    --accent: 200 80% 75%;
-    --accent-foreground: 215 25% 8%;
+    /* Accent: Warm coral for dark mode */
+    --accent: 10 65% 60%;
+    --accent-foreground: 180 40% 8%;
 
-    /* Destructive: Bright red for dark mode */
-    --destructive: 0 75% 65%;
-    --destructive-foreground: 210 40% 95%;
+    /* Destructive: Bright coral red for dark mode */
+    --destructive: 5 70% 65%;
+    --destructive-foreground: 30 25% 95%;
 
-    /* Dark borders with blue tint */
-    --border: 215 25% 18%;
-    --input: 215 25% 18%;
-    --ring: 250 75% 70%;
+    /* Dark borders with teal tint */
+    --border: 180 30% 18%;
+    --input: 180 30% 18%;
+    --ring: 180 50% 55%;
 
-    /* Clean dark gradients - blue to blue-green */
-    --gradient-primary: linear-gradient(135deg, hsl(220 85% 65%), hsl(195 80% 70%));
-    --gradient-secondary: linear-gradient(135deg, hsl(215 25% 18%), hsl(220 25% 22%));
-    --gradient-hero: linear-gradient(135deg, hsl(220 85% 65%) 0%, hsl(195 80% 70%) 50%, hsl(170 60% 65%) 100%);
+    /* Dark beachy gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(180 50% 55%), hsl(180 45% 65%));
+    --gradient-secondary: linear-gradient(135deg, hsl(180 30% 18%), hsl(15 40% 22%));
+    --gradient-hero: linear-gradient(135deg, hsl(180 50% 55%) 0%, hsl(15 60% 60%) 50%, hsl(10 65% 55%) 100%);
 
-    /* Dark sidebar colors */
-    --sidebar-background: 215 25% 8%;
-    --sidebar-foreground: 210 40% 95%;
-    --sidebar-primary: 250 75% 70%;
-    --sidebar-primary-foreground: 215 25% 8%;
-    --sidebar-accent: 215 25% 18%;
-    --sidebar-accent-foreground: 210 40% 95%;
-    --sidebar-border: 215 25% 18%;
-    --sidebar-ring: 250 75% 70%;
+    /* Dark sidebar colors - beachy theme */
+    --sidebar-background: 180 40% 8%;
+    --sidebar-foreground: 30 25% 95%;
+    --sidebar-primary: 180 50% 55%;
+    --sidebar-primary-foreground: 180 40% 8%;
+    --sidebar-accent: 180 30% 18%;
+    --sidebar-accent-foreground: 30 25% 95%;
+    --sidebar-border: 180 30% 18%;
+    --sidebar-ring: 180 50% 55%;
   }
 }
 
