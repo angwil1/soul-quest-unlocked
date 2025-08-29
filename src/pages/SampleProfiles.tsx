@@ -7,7 +7,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ArrowLeft, Heart, MapPin, Briefcase, Sparkles, Copy, RefreshCw, Volume2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { founderCuratedProfiles, echoStarters, vibeTags, poeticMicrocopy } from '@/data/sampleProfiles';
+import { founderCuratedProfiles, conversationStarters, vibeTags, poeticMicrocopy } from '@/data/sampleProfiles';
 import { useToast } from '@/hooks/use-toast';
 import { SoundtrackPlayer } from '@/components/SoundtrackPlayer';
 
@@ -73,7 +73,7 @@ const SampleProfiles = () => {
                     <p className="text-sm text-muted-foreground">
                       Deep conversation starters from our sample profiles
                     </p>
-                    {echoStarters.slice(0, 8).map((starter, index) => (
+                    {conversationStarters.slice(0, 8).map((starter, index) => (
                       <div key={index} className="flex items-center justify-between p-3 bg-muted rounded-lg">
                         <span className="text-sm">{starter}</span>
                         <Button 
@@ -88,7 +88,7 @@ const SampleProfiles = () => {
                     <Button 
                       variant="outline" 
                       className="w-full"
-                      onClick={() => handleCopyText(getRandomInspiration(echoStarters), "Random conversation starter")}
+                      onClick={() => handleCopyText(getRandomInspiration(conversationStarters), "Random conversation starter")}
                     >
                       <RefreshCw className="h-4 w-4 mr-2" />
                       Get Random Starter
@@ -281,7 +281,7 @@ const SampleProfiles = () => {
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
-                  {selectedProfile.echoStarters.map((starter, index) => (
+                  {selectedProfile.conversationStarters.map((starter, index) => (
                     <div key={index} className="flex items-center justify-between p-3 bg-muted rounded-lg">
                       <span className="text-sm">{starter}</span>
                       <Button 

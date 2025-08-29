@@ -10,7 +10,7 @@ export interface SampleProfile {
   tiktokUrl: string;
   photos: string[];
   interests: string[];
-  echoStarters: string[];
+  conversationStarters: string[];
   poeticMicrocopy: string;
   aestheticPreference: string;
   personalityType: string;
@@ -39,7 +39,7 @@ export const founderCuratedProfiles: SampleProfile[] = [
       "/src/assets/luna-profile-2.jpg"
     ],
     interests: ["Vintage bookstores", "Rainy day photography", "Handwritten letters", "Vinyl collecting", "Philosophy cafés"],
-    echoStarters: [
+    conversationStarters: [
       "What's a book that made you cry in public?",
       "Tell me about a moment when time stood still for you",
       "What does your soul sound like when no one's listening?"
@@ -78,7 +78,7 @@ export const founderCuratedProfiles: SampleProfile[] = [
       "/src/assets/river-profile-2.jpg"
     ],
     interests: ["Therapy research", "Open mic nights", "Emotional archaeology", "Sacred activism", "Sunrise hikes"],
-    echoStarters: [
+    conversationStarters: [
       "What's the most honest thing you've never said out loud?",
       "How do you hold space for your own healing?",
       "What song plays when your heart feels too full?"
@@ -117,7 +117,7 @@ export const founderCuratedProfiles: SampleProfile[] = [
       "/src/assets/sage-profile-2.jpg"
     ],
     interests: ["Forest bathing", "Climate art", "Pressed flower journals", "Thrift store treasures", "Moonrise ceremonies"],
-    echoStarters: [
+    conversationStarters: [
       "What's your secret ritual for connecting with nature?",
       "Tell me about a time you felt most alive",
       "What would you whisper to your younger self?"
@@ -156,7 +156,7 @@ export const founderCuratedProfiles: SampleProfile[] = [
       "/src/assets/phoenix-profile-2.jpg"
     ],
     interests: ["Boundary setting", "Expressive art therapy", "Mountain meditation", "Conscious communication", "Sacred rage"],
-    echoStarters: [
+    conversationStarters: [
       "What's something you're unlearning about love?",
       "How do you celebrate your own growth?",
       "What does your intuition sound like?"
@@ -195,7 +195,7 @@ export const founderCuratedProfiles: SampleProfile[] = [
       "/src/assets/atlas-profile-2.jpg"
     ],
     interests: ["Slow living", "Philosophy podcasts", "Sourdough bread", "Stargazing", "Handwritten journals"],
-    echoStarters: [
+    conversationStarters: [
       "What question do you wish someone would ask you?",
       "How do you find meaning in mundane moments?",
       "What does your heart know that your mind hasn't figured out yet?"
@@ -234,7 +234,7 @@ export const founderCuratedProfiles: SampleProfile[] = [
       "/src/assets/iris-profile-2.jpg"
     ],
     interests: ["Crystal healing", "Moon rituals", "Herbal medicine", "Sacred geometry", "Energy work"],
-    echoStarters: [
+    conversationStarters: [
       "What's your relationship with magic and mystery?",
       "How do you honor the cycles in your life?",
       "What does your soul crave that your mind can't name?"
@@ -273,7 +273,7 @@ export const founderCuratedProfiles: SampleProfile[] = [
       "/src/assets/ocean-profile-2.jpg"
     ],
     interests: ["Ocean conservation", "Surf photography", "Beach cleanups", "Whale watching", "Saltwater therapy"],
-    echoStarters: [
+    conversationStarters: [
       "What does freedom mean to your soul?",
       "How does the ocean make you feel?",
       "What adventure is calling your name?"
@@ -312,7 +312,7 @@ export const founderCuratedProfiles: SampleProfile[] = [
       "/src/assets/ember-profile-2.jpg"
     ],
     interests: ["Songwriting", "Poetry slams", "Vintage vinyl", "Late night coffee shops", "Emotional archaeology"],
-    echoStarters: [
+    conversationStarters: [
       "What's a lyric that lives in your bones?",
       "How do you turn pain into art?",
       "What story is your heart trying to tell?"
@@ -351,7 +351,7 @@ export const founderCuratedProfiles: SampleProfile[] = [
       "/src/assets/story-profile-2.jpg"
     ],
     interests: ["Cultural immersion", "Language learning", "Street food adventures", "Local storytelling", "Border-crossing"],
-    echoStarters: [
+    conversationStarters: [
       "What place has changed you the most?",
       "How do you find home in unfamiliar spaces?",
       "What story does your heart want to tell the world?"
@@ -390,7 +390,7 @@ export const founderCuratedProfiles: SampleProfile[] = [
       "/src/assets/cedar-profile-2.jpg"
     ],
     interests: ["Permaculture", "Herbal medicine", "Forest restoration", "Mushroom foraging", "Seed saving"],
-    echoStarters: [
+    conversationStarters: [
       "What does the earth whisper to you?",
       "How do you practice gratitude to the natural world?",
       "What would you plant if you knew love would grow?"
@@ -416,7 +416,7 @@ export const founderCuratedProfiles: SampleProfile[] = [
   }
 ];
 
-export const echoStarters = [
+export const conversationStarters = [
   "What book made you cry in public?",
   "How do you hold space for your own healing?", 
   "What's your secret ritual for connecting with nature?",
