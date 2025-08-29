@@ -52,9 +52,6 @@ const SampleProfiles = () => {
               <Button onClick={() => navigate('/profile/edit')}>
                 Create Your Profile
               </Button>
-              <Button variant="outline" onClick={() => setShowInspiration(true)}>
-                Get Inspiration
-              </Button>
             </div>
           </Card>
 
@@ -150,64 +147,6 @@ const SampleProfiles = () => {
               These are sample profiles to help you understand what makes a great AI dating profile.
             </p>
           </div>
-          <Dialog open={showInspiration} onOpenChange={setShowInspiration}>
-            <DialogTrigger asChild>
-              <Button>
-                <RefreshCw className="h-4 w-4 mr-2" />
-                Get Inspired
-              </Button>
-            </DialogTrigger>
-            <DialogContent className="max-w-2xl">
-              <DialogHeader>
-                <DialogTitle>Profile Inspiration Generator</DialogTitle>
-              </DialogHeader>
-              <Tabs defaultValue="vibes" className="w-full">
-                <TabsList className="grid w-full grid-cols-2">
-                  <TabsTrigger value="vibes">Vibe Tags</TabsTrigger>
-                  <TabsTrigger value="copy">Microcopy</TabsTrigger>
-                </TabsList>
-                <TabsContent value="vibes" className="space-y-4">
-                  <div className="space-y-3">
-                    <p className="text-sm text-muted-foreground">
-                      Expressive vibe tags to describe your essence
-                    </p>
-                    <div className="grid grid-cols-2 gap-2">
-                      {vibeTags.map((tag, index) => (
-                        <Button
-                          key={index}
-                          variant="outline"
-                          className="justify-start"
-                          onClick={() => handleCopyText(tag, "Vibe tag")}
-                        >
-                          <Sparkles className="h-4 w-4 mr-2 text-purple-600" />
-                          {tag}
-                        </Button>
-                      ))}
-                    </div>
-                  </div>
-                </TabsContent>
-                <TabsContent value="copy" className="space-y-4">
-                  <div className="space-y-3">
-                    <p className="text-sm text-muted-foreground">
-                      Poetic microcopy for your dating intentions
-                    </p>
-                    {poeticMicrocopy.map((copy, index) => (
-                      <div key={index} className="flex items-center justify-between p-3 bg-muted rounded-lg">
-                        <span className="text-sm italic">"{copy}"</span>
-                        <Button 
-                          size="sm" 
-                          variant="ghost"
-                          onClick={() => handleCopyText(copy, "Poetic microcopy")}
-                        >
-                          <Copy className="h-4 w-4" />
-                        </Button>
-                      </div>
-                    ))}
-                  </div>
-                </TabsContent>
-              </Tabs>
-            </DialogContent>
-          </Dialog>
         </div>
       </div>
 
@@ -424,9 +363,6 @@ const SampleProfiles = () => {
                     navigate('/profile/edit');
                   }}>
                     Create My Profile
-                  </Button>
-                  <Button variant="outline" onClick={() => setShowInspiration(true)}>
-                    Get More Inspiration
                   </Button>
                 </div>
               </CardContent>
