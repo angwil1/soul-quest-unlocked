@@ -14,8 +14,135 @@ import { SoundtrackPlayer } from '@/components/SoundtrackPlayer';
 const SampleProfiles = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const [selectedProfile, setSelectedProfile] = useState(founderCuratedProfiles[0]);
+  const [selectedProfile, setSelectedProfile] = useState(founderCuratedProfiles[0] || null);
   const [showInspiration, setShowInspiration] = useState(false);
+
+  // If no profiles exist, show empty state
+  if (founderCuratedProfiles.length === 0) {
+    return (
+      <div className="min-h-screen bg-background">
+        {/* Header */}
+        <div className="bg-card border-b">
+          <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+            <Button variant="ghost" onClick={() => navigate('/')}>
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              Back
+            </Button>
+            <div className="text-center">
+              <h1 className="text-2xl font-bold flex items-center gap-2">
+                <Sparkles className="h-6 w-6 text-purple-600" />
+                Founder-Curated Sample Profiles
+              </h1>
+              <p className="text-sm text-muted-foreground">
+                Poetic demos crafted to spark your authentic self
+              </p>
+            </div>
+            <div className="w-24" />
+          </div>
+        </div>
+
+        <div className="max-w-4xl mx-auto px-4 py-16 text-center">
+          <Card className="p-8">
+            <Sparkles className="h-16 w-16 text-purple-600 mx-auto mb-4" />
+            <h2 className="text-2xl font-semibold mb-4">No Sample Profiles Available</h2>
+            <p className="text-muted-foreground mb-6">
+              Sample profiles have been removed. You can still get inspiration for your own profile creation.
+            </p>
+            <div className="flex gap-4 justify-center">
+              <Button onClick={() => navigate('/profile/edit')}>
+                Create Your Profile
+              </Button>
+              <Button variant="outline" onClick={() => setShowInspiration(true)}>
+                Get Inspiration
+              </Button>
+            </div>
+          </Card>
+
+          {/* Inspiration Dialog */}
+          <Dialog open={showInspiration} onOpenChange={setShowInspiration}>
+            <DialogContent className="max-w-2xl">
+              <DialogHeader>
+                <DialogTitle>Profile Inspiration Generator</DialogTitle>
+              </DialogHeader>
+              <Tabs defaultValue="starters" className="w-full">
+                <TabsList className="grid w-full grid-cols-3">
+                  <TabsTrigger value="starters">Conversation Starters</TabsTrigger>
+                  <TabsTrigger value="vibes">Vibe Tags</TabsTrigger>
+                  <TabsTrigger value="copy">Microcopy</TabsTrigger>
+                </TabsList>
+                <TabsContent value="starters" className="space-y-4">
+                  <div className="space-y-3">
+                    <p className="text-sm text-muted-foreground">
+                      Deep conversation starters for your profile
+                    </p>
+                    {conversationStarters.slice(0, 8).map((starter, index) => (
+                      <div key={index} className="flex items-center justify-between p-3 bg-muted rounded-lg">
+                        <span className="text-sm">{starter}</span>
+                        <Button 
+                          size="sm" 
+                          variant="ghost"
+                          onClick={() => handleCopyText(starter, "Conversation starter")}
+                        >
+                          <Copy className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    ))}
+                    <Button 
+                      variant="outline" 
+                      className="w-full"
+                      onClick={() => handleCopyText(getRandomInspiration(conversationStarters), "Random conversation starter")}
+                    >
+                      <RefreshCw className="h-4 w-4 mr-2" />
+                      Get Random Starter
+                    </Button>
+                  </div>
+                </TabsContent>
+                <TabsContent value="vibes" className="space-y-4">
+                  <div className="space-y-3">
+                    <p className="text-sm text-muted-foreground">
+                      Expressive vibe tags to describe your essence
+                    </p>
+                    <div className="grid grid-cols-2 gap-2">
+                      {vibeTags.map((tag, index) => (
+                        <Button
+                          key={index}
+                          variant="outline"
+                          className="justify-start"
+                          onClick={() => handleCopyText(tag, "Vibe tag")}
+                        >
+                          <Sparkles className="h-4 w-4 mr-2 text-purple-600" />
+                          {tag}
+                        </Button>
+                      ))}
+                    </div>
+                  </div>
+                </TabsContent>
+                <TabsContent value="copy" className="space-y-4">
+                  <div className="space-y-3">
+                    <p className="text-sm text-muted-foreground">
+                      Poetic microcopy for your dating intentions
+                    </p>
+                    {poeticMicrocopy.map((copy, index) => (
+                      <div key={index} className="flex items-center justify-between p-3 bg-muted rounded-lg">
+                        <span className="text-sm italic">"{copy}"</span>
+                        <Button 
+                          size="sm" 
+                          variant="ghost"
+                          onClick={() => handleCopyText(copy, "Poetic microcopy")}
+                        >
+                          <Copy className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    ))}
+                  </div>
+                </TabsContent>
+              </Tabs>
+            </DialogContent>
+          </Dialog>
+        </div>
+      </div>
+    );
+  }
 
   const handleCopyText = (text: string, type: string) => {
     navigator.clipboard.writeText(text);
