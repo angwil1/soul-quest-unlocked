@@ -15,11 +15,11 @@ const Pricing = () => {
 
   const plans = [
     {
-      name: "Free",
-      icon: "",
+      name: "Quiet Start",
+      icon: "🌱",
       price: "$0",
       period: "/month",
-      description: "Opens curiosity, perfect for getting started",
+      description: "A gentle introduction to meaningful connections",
       features: [
         "Complete your profile",
         "View matches", 
@@ -44,7 +44,7 @@ const Pricing = () => {
         "Video chat with matches",
         "AI Digest summaries",
         "Priority matching",
-        "All free features"
+        "All Quiet Start features"
       ],
       buttonText: "Get Complete Plus",
       plan: "unlocked-plus",
@@ -104,7 +104,7 @@ const Pricing = () => {
   };
 
   const getCurrentPlan = () => {
-    if (!subscription?.subscribed) return "Free";
+    if (!subscription?.subscribed) return "Quiet Start";
     return subscription.subscription_tier || "Unknown";
   };
 
@@ -129,7 +129,7 @@ const Pricing = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {plans.map((plan) => {
               const isCurrentPlan = getCurrentPlan() === plan.name.replace(" 💖", "").replace(" 🌌", "");
-              const isFree = plan.name === "Free";
+              const isFree = plan.name === "Quiet Start";
               
               return (
                 <Card 

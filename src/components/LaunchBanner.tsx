@@ -82,12 +82,12 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
             <div className="flex items-center justify-center md:justify-start gap-2 mb-1 md:mb-2">
               <Sparkles className="h-4 w-4 md:h-5 md:w-5 text-pink-500 animate-pulse" />
               <Badge variant="secondary" className="bg-white/20 text-white border-white/30 text-xs">
-                Free During Launch
+                Quiet Start During Launch
               </Badge>
             </div>
             
             <h3 className="text-base md:text-xl font-bold text-white mb-1 md:mb-2">
-              AI Complete Me is free during launch! 💫
+              AI Complete Me offers Quiet Start during launch! 💫
             </h3>
             
             <p className="text-white/90 text-xs md:text-base mb-2 md:mb-3 leading-tight">
@@ -130,7 +130,7 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
                 size="sm"
                 className="bg-white text-black hover:bg-white/90 font-medium text-xs md:text-sm px-3 py-1.5"
               >
-                Start Quiz Free ✨
+                Start Quiz - Quiet Start ✨
               </Button>
             )}
           </div>

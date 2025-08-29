@@ -8,7 +8,7 @@ const FAQ = () => {
   const faqs = [
     {
       question: "What's included in each tier?",
-      answer: "Free: A quiet start. You get access to basic matching, public prompts, and core connection tools—with no pressure.\n\nComplete Plus: Everything in Free, plus deeper compatibility quizzes, private Match Memory, and early access to new features. You're signaling you're ready for more emotional texture.\n\nComplete Beyond: A full emotional toolkit. Includes everything above—plus Memory Vault to save connection moments, Connection DNA for deep emotional mirroring, and poetic onboarding overlays for when you need a fresh start."
+      answer: "Quiet Start: A gentle beginning. You get access to basic matching, public prompts, and core connection tools—with no pressure.\n\nComplete Plus: Everything in Quiet Start, plus deeper compatibility quizzes, private Match Memory, and early access to new features. You're signaling you're ready for more emotional texture.\n\nComplete Beyond: A full emotional toolkit. Includes everything above—plus Memory Vault to save connection moments, Connection DNA for deep emotional mirroring, and poetic onboarding overlays for when you need a fresh start."
     },
     {
       question: "How does AI Complete Me work?",
@@ -24,7 +24,7 @@ const FAQ = () => {
     },
     {
       question: "How much does AI Complete Me cost?",
-      answer: "We offer a free tier with basic features, and paid plans starting at $12/month for advanced features like video chat, read receipts, and priority matching."
+      answer: "We offer a Quiet Start tier with basic features, and paid plans starting at $12/month for advanced features like video chat, read receipts, and priority matching."
     },
     {
       question: "Can I cancel my subscription anytime?",
@@ -55,8 +55,8 @@ const FAQ = () => {
       answer: "It means we don't just sort you by location or age—we pay attention to emotional patterns, compatibility signals, and storytelling layers. Your inner world matters here."
     },
     {
-      question: "What's the difference between Free and Complete Beyond emotionally?",
-      answer: "Free is like browsing poetry in a bookstore. Complete Beyond lets you write in the margins, remember what moved you, and take the book home. One is nice; the other is deeply yours."
+      question: "What's the difference between Quiet Start and Complete Beyond emotionally?",
+      answer: "Quiet Start is like browsing poetry in a bookstore. Complete Beyond lets you write in the margins, remember what moved you, and take the book home. One is nice; the other is deeply yours."
     },
     {
       question: "🛠️ Will AI Complete Me keep changing over time?",

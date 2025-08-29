@@ -89,7 +89,7 @@ const FeatureTest = () => {
     // Test 3: Subscription System
     try {
       await checkSubscription();
-      updateTestResult(2, 'success', `✅ Subscription check: ${subscription?.subscribed ? 'Active' : 'Free'}`);
+      updateTestResult(2, 'success', `✅ Subscription check: ${subscription?.subscribed ? 'Active' : 'Quiet Start'}`);
     } catch (error) {
       updateTestResult(2, 'error', `❌ Subscription error: ${error}`);
     }
@@ -234,7 +234,7 @@ const FeatureTest = () => {
                   User: {user ? "✅ Logged In" : "❌ Not Logged In"}
                 </Badge>
                 <Badge variant="outline">
-                  Plan: {subscription?.subscription_tier || "Free"}
+                  Plan: {subscription?.subscription_tier || "Quiet Start"}
                 </Badge>
               </div>
             </div>
