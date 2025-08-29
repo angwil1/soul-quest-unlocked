@@ -39,7 +39,7 @@ const Pricing = () => {
       icon: "✨",
       price: "$12",
       period: "/month", 
-      description: "Offers the upgrade logic for better connections",
+      description: "Offers the upgrade logic for better connections.",
       features: [
         "Video chat with matches",
         "AI Digest summaries",
