@@ -125,8 +125,7 @@ export const EmotionalSoundtrackPrompt = ({ onSoundtrackSelect }: EmotionalSound
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Music className="h-6 w-6 text-purple-600" />
-          What feeling are you echoing today?
-          <Badge className="bg-primary text-primary-foreground">Echo</Badge>
+          What feeling are you sharing today?
         </CardTitle>
         <p className="text-muted-foreground">
           Select your vibe and get 5 curated soundtrack suggestions

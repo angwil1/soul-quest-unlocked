@@ -11,12 +11,9 @@ import { founderCuratedProfiles, echoStarters, vibeTags, poeticMicrocopy } from 
 import { useToast } from '@/hooks/use-toast';
 import { SoundtrackPlayer } from '@/components/SoundtrackPlayer';
 
-import { EchoPurchasePrompt } from '@/components/EchoPurchasePrompt';
-
 const SampleProfiles = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
-  const isEchoActive = true; // Enabled for demo
   const [selectedProfile, setSelectedProfile] = useState(founderCuratedProfiles[0]);
   const [showInspiration, setShowInspiration] = useState(false);
 
@@ -32,24 +29,6 @@ const SampleProfiles = () => {
     return array[Math.floor(Math.random() * array.length)];
   };
 
-  // Check if user has Echo access
-  if (!isEchoActive) {
-    return (
-      <div className="min-h-screen bg-background">
-        <div className="bg-card border-b">
-          <div className="max-w-6xl mx-auto px-4 py-4 flex items-center">
-            <Button variant="ghost" onClick={() => navigate('/')}>
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Back
-            </Button>
-          </div>
-        </div>
-        <div className="max-w-2xl mx-auto px-4 py-20">
-          <EchoPurchasePrompt />
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -63,10 +42,10 @@ const SampleProfiles = () => {
           <div className="text-center">
             <h1 className="text-2xl font-bold flex items-center gap-2">
               <Sparkles className="h-6 w-6 text-purple-600" />
-              Founder-Curated Echo Profiles
+              Founder-Curated Sample Profiles
             </h1>
             <p className="text-sm text-muted-foreground">
-              Poetic demos crafted to spark your authentic Echo
+              Poetic demos crafted to spark your authentic self
             </p>
             <p className="text-xs text-muted-foreground mt-2 max-w-2xl mx-auto">
               These are not real users. They're poetic examples curated by the founder to help you imagine connection beyond the scroll.
@@ -81,11 +60,11 @@ const SampleProfiles = () => {
             </DialogTrigger>
             <DialogContent className="max-w-2xl">
               <DialogHeader>
-                <DialogTitle>Echo Inspiration Generator</DialogTitle>
+                <DialogTitle>Profile Inspiration Generator</DialogTitle>
               </DialogHeader>
               <Tabs defaultValue="starters" className="w-full">
                 <TabsList className="grid w-full grid-cols-3">
-                  <TabsTrigger value="starters">Echo Starters</TabsTrigger>
+                  <TabsTrigger value="starters">Conversation Starters</TabsTrigger>
                   <TabsTrigger value="vibes">Vibe Tags</TabsTrigger>
                   <TabsTrigger value="copy">Microcopy</TabsTrigger>
                 </TabsList>
@@ -100,7 +79,7 @@ const SampleProfiles = () => {
                         <Button 
                           size="sm" 
                           variant="ghost"
-                          onClick={() => handleCopyText(starter, "Echo starter")}
+                          onClick={() => handleCopyText(starter, "Conversation starter")}
                         >
                           <Copy className="h-4 w-4" />
                         </Button>
@@ -109,7 +88,7 @@ const SampleProfiles = () => {
                     <Button 
                       variant="outline" 
                       className="w-full"
-                      onClick={() => handleCopyText(getRandomInspiration(echoStarters), "Random echo starter")}
+                      onClick={() => handleCopyText(getRandomInspiration(echoStarters), "Random conversation starter")}
                     >
                       <RefreshCw className="h-4 w-4 mr-2" />
                       Get Random Starter
@@ -207,7 +186,7 @@ const SampleProfiles = () => {
               </div>
               <div className="absolute top-12 right-4 z-10">
                 <Badge variant="outline" className="bg-background/90 text-xs">
-                  Created to spark your Echo
+                  Created to spark your inspiration
                 </Badge>
               </div>
             </div>
@@ -292,12 +271,12 @@ const SampleProfiles = () => {
               </CardContent>
             </Card>
 
-            {/* Echo Starters */}
+            {/* Conversation Starters */}
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Sparkles className="h-5 w-5 text-purple-600" />
-                  Echo Conversation Starters
+                  Conversation Starters
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -308,7 +287,7 @@ const SampleProfiles = () => {
                       <Button 
                         size="sm" 
                         variant="ghost"
-                        onClick={() => handleCopyText(starter, "Echo starter")}
+                        onClick={() => handleCopyText(starter, "Conversation starter")}
                       >
                         <Copy className="h-4 w-4" />
                       </Button>
@@ -323,7 +302,6 @@ const SampleProfiles = () => {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   ✨ Vibe Gallery
-                  <Badge variant="secondary" className="bg-purple-100 text-purple-800">Echo</Badge>
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -391,16 +369,16 @@ const SampleProfiles = () => {
             <Card className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950 dark:to-pink-950 border-purple-200">
               <CardContent className="p-6 text-center">
                 <Sparkles className="h-8 w-8 text-purple-600 mx-auto mb-4" />
-                <h3 className="text-lg font-semibold mb-2">Ready to craft your own Echo?</h3>
+                <h3 className="text-lg font-semibold mb-2">Ready to craft your own profile?</h3>
                 <p className="text-sm text-muted-foreground mb-4">
                   Use these profiles as inspiration to create your authentic, emotionally rich dating profile.
                 </p>
                 <div className="flex gap-2 justify-center">
                   <Button onClick={() => {
-                    console.log('Create My Echo Profile button clicked - navigating to /profile/edit');
+                    console.log('Create My Profile button clicked - navigating to /profile/edit');
                     navigate('/profile/edit');
                   }}>
-                    Create My Echo Profile
+                    Create My Profile
                   </Button>
                   <Button variant="outline" onClick={() => setShowInspiration(true)}>
                     Get More Inspiration

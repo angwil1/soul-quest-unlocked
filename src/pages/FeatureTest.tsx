@@ -48,7 +48,6 @@ const FeatureTest = () => {
     { name: "Age Verification", status: 'pending', message: "Testing age verification system...", icon: Shield },
     { name: "Connection DNA", status: 'pending', message: "Testing compatibility analysis...", icon: Heart },
     { name: "Memory Vault", status: 'pending', message: "Testing saved content...", icon: Star },
-    { name: "Echo Messaging", status: 'pending', message: "Testing messaging system...", icon: MessageSquare },
     { name: "Video Integration", status: 'pending', message: "Testing video call features...", icon: Video },
     { name: "Distance Calculator", status: 'pending', message: "Testing zip code distance calculation...", icon: MapPin },
   ];
@@ -161,35 +160,23 @@ const FeatureTest = () => {
       updateTestResult(7, 'error', `❌ Memory Vault error: ${error}`);
     }
 
-    // Test 9: Echo Messaging
-    try {
-      const { data, error } = await supabase
-        .from('echo_limited_chats')
-        .select('id')
-        .limit(1);
-      
-      updateTestResult(8, 'success', "✅ Echo messaging tables accessible");
-    } catch (error) {
-      updateTestResult(8, 'error', `❌ Echo messaging error: ${error}`);
-    }
-
-    // Test 10: Video Integration
+    // Test 9: Video Integration
     try {
       // Test if video call components can be accessed
-      updateTestResult(9, 'success', "✅ Video call components loaded");
+      updateTestResult(8, 'success', "✅ Video call components loaded");
     } catch (error) {
-      updateTestResult(9, 'error', `❌ Video integration error: ${error}`);
+      updateTestResult(8, 'error', `❌ Video integration error: ${error}`);
     }
 
-    // Test 11: Distance Calculator
+    // Test 10: Distance Calculator
     try {
       const { data, error } = await supabase.functions.invoke('calculate-distance', {
         body: { zipCode1: '10001', zipCode2: '90210' }
       });
       if (error) throw error;
-      updateTestResult(10, 'success', `✅ Distance calculation: ${data.distance} miles`);
+      updateTestResult(9, 'success', `✅ Distance calculation: ${data.distance} miles`);
     } catch (error) {
-      updateTestResult(10, 'error', `❌ Distance calculation error: ${error}`);
+      updateTestResult(9, 'error', `❌ Distance calculation error: ${error}`);
     }
 
     setIsRunning(false);

@@ -49,25 +49,14 @@ export const Navbar = () => {
   }, [user]);
 
   const navigation = [
-    { name: "Home", href: "/" },
-    
-    { name: "Premium", href: "/premium-dashboard" },
-    { name: "AI Digest", href: "/ai-digest" },
-    { name: "Connection DNA", href: "/connection-dna" },
-    { name: "Memory Vault", href: "/memory-vault" },
-    { name: "Upgrade", href: "/pricing" },
-    { name: "Safety", href: "/safety" },
+    { name: "Browse", href: "/browse" },
+    { name: "Matches", href: "/matches" },  
+    { name: "Messages", href: "/messages" },
+    { name: "Sample Profiles", href: "/sample-profiles" },
     { name: "FAQ", href: "/faq" },
   ];
 
-  const echoNavigation = [
-    { name: "Sample Profiles", href: "/sample-profiles" },
-  ];
-
   const isActive = (path: string) => location.pathname === path;
-
-  // Check if user has premium features (simplified without subscription)
-  const isEchoActive = false;
 
   const handleFiltersChange = (filters: string[]) => {
     setSelectedFilters(filters);
@@ -153,25 +142,6 @@ export const Navbar = () => {
                 {item.name}
               </Link>
             ))}
-            
-            {/* Echo Section */}
-            <div className="flex items-center space-x-2">
-              <span className="text-xs text-muted-foreground">|</span>
-              <span className="text-xs font-medium text-purple-600">Echo</span>
-              {echoNavigation.map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  className={`text-sm font-medium transition-colors hover:text-purple-600 ${
-                    isActive(item.href)
-                      ? "text-purple-600"
-                      : "text-muted-foreground"
-                  }`}
-                >
-                  {item.name}
-                </Link>
-              ))}
-            </div>
           </div>
 
           {/* Desktop Auth Buttons */}
@@ -238,27 +208,6 @@ export const Navbar = () => {
                   {item.name}
                 </Link>
               ))}
-              
-              {/* Echo Section Mobile */}
-              <div className="border-t border-border mt-3 pt-3">
-                <div className="px-3 py-1">
-                  <span className="text-sm font-medium text-purple-600">Echo Features</span>
-                </div>
-                {echoNavigation.map((item) => (
-                  <Link
-                    key={item.name}
-                    to={item.href}
-                    className={`block px-3 py-2 text-base font-medium transition-colors hover:text-purple-600 ${
-                      isActive(item.href)
-                        ? "text-purple-600 bg-purple-50"
-                        : "text-muted-foreground"
-                    }`}
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {item.name}
-                  </Link>
-                ))}
-              </div>
               {/* Only show search in mobile if user has completed quiz */}
               {user && hasCompletedQuiz && (
                 <div className="px-3 py-2 border-t border-border mt-2">
@@ -367,35 +316,6 @@ export const Navbar = () => {
               </Button>
             </div>
 
-            {!isEchoActive && (
-              <Card className="border-primary/20 bg-gradient-to-r from-primary/5 to-secondary/5 mt-4">
-                <CardContent className="p-4">
-                  <div className="flex items-start gap-3">
-                    <div className="text-2xl">⭐</div>
-                    <div className="flex-1">
-                      <h4 className="font-semibold text-sm mb-2">Free Tier Includes:</h4>
-                      <div className="space-y-1 text-sm text-muted-foreground mb-3">
-                        <p>• Basic compatibility matching</p>
-                        <p>• All gender preference options</p>
-                        <p>• Limited advanced filters</p>
-                      </div>
-                      <Button 
-                        variant="default" 
-                        size="sm" 
-                        className="w-full text-xs h-8"
-                        onClick={() => {
-                          setShowSearchModal(false);
-                          navigate('/pricing');
-                        }}
-                      >
-                        <span className="mr-2">👑</span>
-                        Upgrade for Unlimited Filters
-                      </Button>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            )}
           </div>
         </DialogContent>
       </Dialog>
