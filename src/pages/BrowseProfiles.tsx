@@ -51,7 +51,7 @@ const BrowseProfiles = () => {
                       <AvatarImage 
                         src={profile.photos[0]} 
                         alt={profile.name}
-                        className="object-cover"
+                        className="object-cover blur-sm"
                       />
                       <AvatarFallback className="w-full h-full rounded-none text-4xl">
                         {profile.name.split(' ').map(n => n[0]).join('')}
