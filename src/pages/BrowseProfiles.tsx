@@ -51,17 +51,17 @@ const BrowseProfiles = () => {
                       <AvatarImage 
                         src={profile.photos[0]} 
                         alt={profile.name}
-                        className="object-cover transition-transform duration-500 group-hover:scale-110"
+                        className="object-cover"
                       />
                       <AvatarFallback className="w-full h-full rounded-none text-4xl">
                         {profile.name.split(' ').map(n => n[0]).join('')}
                       </AvatarFallback>
                     </Avatar>
                   </div>
-                  {/* Gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-70 group-hover:opacity-50 transition-opacity duration-300" />
-                  {/* Subtle shine effect */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  {/* Dark shaded overlay */}
+                  <div className="absolute inset-0 bg-black/30" />
+                  {/* Bottom shadow for text readability */}
+                  <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/70 to-transparent" />
                   <Badge 
                     className="absolute top-3 right-3 bg-primary text-primary-foreground"
                   >
