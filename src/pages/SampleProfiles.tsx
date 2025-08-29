@@ -64,39 +64,11 @@ const SampleProfiles = () => {
               <DialogHeader>
                 <DialogTitle>Profile Inspiration Generator</DialogTitle>
               </DialogHeader>
-              <Tabs defaultValue="starters" className="w-full">
-                <TabsList className="grid w-full grid-cols-3">
-                  <TabsTrigger value="starters">Conversation Starters</TabsTrigger>
+              <Tabs defaultValue="vibes" className="w-full">
+                <TabsList className="grid w-full grid-cols-2">
                   <TabsTrigger value="vibes">Vibe Tags</TabsTrigger>
                   <TabsTrigger value="copy">Microcopy</TabsTrigger>
                 </TabsList>
-                <TabsContent value="starters" className="space-y-4">
-                  <div className="space-y-3">
-                    <p className="text-sm text-muted-foreground">
-                      Deep conversation starters for your profile
-                    </p>
-                    {conversationStarters.slice(0, 8).map((starter, index) => (
-                      <div key={index} className="flex items-center justify-between p-3 bg-muted rounded-lg">
-                        <span className="text-sm">{starter}</span>
-                        <Button 
-                          size="sm" 
-                          variant="ghost"
-                          onClick={() => handleCopyText(starter, "Conversation starter")}
-                        >
-                          <Copy className="h-4 w-4" />
-                        </Button>
-                      </div>
-                    ))}
-                    <Button 
-                      variant="outline" 
-                      className="w-full"
-                      onClick={() => handleCopyText(getRandomInspiration(conversationStarters), "Random conversation starter")}
-                    >
-                      <RefreshCw className="h-4 w-4 mr-2" />
-                      Get Random Starter
-                    </Button>
-                  </div>
-                </TabsContent>
                 <TabsContent value="vibes" className="space-y-4">
                   <div className="space-y-3">
                     <p className="text-sm text-muted-foreground">
@@ -189,39 +161,11 @@ const SampleProfiles = () => {
               <DialogHeader>
                 <DialogTitle>Profile Inspiration Generator</DialogTitle>
               </DialogHeader>
-              <Tabs defaultValue="starters" className="w-full">
-                <TabsList className="grid w-full grid-cols-3">
-                  <TabsTrigger value="starters">Conversation Starters</TabsTrigger>
+              <Tabs defaultValue="vibes" className="w-full">
+                <TabsList className="grid w-full grid-cols-2">
                   <TabsTrigger value="vibes">Vibe Tags</TabsTrigger>
                   <TabsTrigger value="copy">Microcopy</TabsTrigger>
                 </TabsList>
-                <TabsContent value="starters" className="space-y-4">
-                  <div className="space-y-3">
-                    <p className="text-sm text-muted-foreground">
-                      Deep conversation starters from our sample profiles
-                    </p>
-                    {conversationStarters.slice(0, 8).map((starter, index) => (
-                      <div key={index} className="flex items-center justify-between p-3 bg-muted rounded-lg">
-                        <span className="text-sm">{starter}</span>
-                        <Button 
-                          size="sm" 
-                          variant="ghost"
-                          onClick={() => handleCopyText(starter, "Conversation starter")}
-                        >
-                          <Copy className="h-4 w-4" />
-                        </Button>
-                      </div>
-                    ))}
-                    <Button 
-                      variant="outline" 
-                      className="w-full"
-                      onClick={() => handleCopyText(getRandomInspiration(conversationStarters), "Random conversation starter")}
-                    >
-                      <RefreshCw className="h-4 w-4 mr-2" />
-                      Get Random Starter
-                    </Button>
-                  </div>
-                </TabsContent>
                 <TabsContent value="vibes" className="space-y-4">
                   <div className="space-y-3">
                     <p className="text-sm text-muted-foreground">
@@ -393,32 +337,6 @@ const SampleProfiles = () => {
                     <Badge key={index} variant="secondary">
                       {interest}
                     </Badge>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Conversation Starters */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Sparkles className="h-5 w-5 text-purple-600" />
-                  Conversation Starters
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  {selectedProfile.conversationStarters.map((starter, index) => (
-                    <div key={index} className="flex items-center justify-between p-3 bg-muted rounded-lg">
-                      <span className="text-sm">{starter}</span>
-                      <Button 
-                        size="sm" 
-                        variant="ghost"
-                        onClick={() => handleCopyText(starter, "Conversation starter")}
-                      >
-                        <Copy className="h-4 w-4" />
-                      </Button>
-                    </div>
                   ))}
                 </div>
               </CardContent>
