@@ -76,11 +76,12 @@ export const AmbientCoupleCarousel = () => {
             <CarouselItem key={index} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
               <Card className="border-0 bg-transparent group cursor-pointer">
                 <div className="relative overflow-hidden rounded-2xl">
-                  <img
-                    src={image.src}
-                    alt={image.alt}
-                    className="w-full h-64 sm:h-80 object-cover transition-all duration-500 group-hover:scale-105"
-                  />
+                   <img
+                     src={image.src}
+                     alt={image.alt}
+                     className="w-full h-48 xs:h-56 sm:h-64 md:h-72 lg:h-80 object-cover transition-all duration-500 group-hover:scale-105"
+                     loading="lazy"
+                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <div className="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
                     <p className="text-sm font-light leading-relaxed">

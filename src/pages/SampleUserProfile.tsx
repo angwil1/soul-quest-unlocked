@@ -71,57 +71,61 @@ const SampleUserProfile = () => {
             <Card>
               <CardContent className="p-6">
                 <div className="space-y-4">
-                  {/* Main Photo */}
-                  <div className="aspect-square rounded-lg overflow-hidden bg-muted">
+                   {/* Main Photo - Responsive */}
+                  <div className="aspect-[3/4] sm:aspect-square rounded-lg overflow-hidden bg-muted">
                     <Dialog>
                       <DialogTrigger asChild>
                         <div className="relative cursor-pointer group">
                           <img 
                             src={profile.photos[0]} 
                             alt={profile.name}
-                            className="w-full h-full object-cover"
+                            className="w-full h-full object-cover object-center"
+                            loading="eager"
                           />
                           <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
                             <Eye className="h-8 w-8 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
                           </div>
                         </div>
                       </DialogTrigger>
-                      <DialogContent className="max-w-3xl">
+                      <DialogContent className="max-w-[90vw] max-h-[90vh] w-full">
                         <img 
                           src={profile.photos[0]} 
                           alt={profile.name}
-                          className="w-full h-auto rounded-lg"
+                          className="w-full h-auto max-h-[80vh] object-contain rounded-lg"
                         />
                       </DialogContent>
                     </Dialog>
                   </div>
                   
-                  {/* Additional Photos */}
-                  {profile.photos.slice(1).map((photo, index) => (
-                    <div key={index} className="aspect-square rounded-lg overflow-hidden bg-muted">
-                      <Dialog>
-                        <DialogTrigger asChild>
-                          <div className="relative cursor-pointer group">
+                  {/* Additional Photos - Responsive Grid */}
+                  <div className="grid grid-cols-2 gap-2 sm:grid-cols-1 sm:gap-4">
+                    {profile.photos.slice(1).map((photo, index) => (
+                      <div key={index} className="aspect-[3/4] sm:aspect-square rounded-lg overflow-hidden bg-muted">
+                        <Dialog>
+                          <DialogTrigger asChild>
+                            <div className="relative cursor-pointer group">
+                              <img 
+                                src={photo} 
+                                alt={`${profile.name} photo ${index + 2}`}
+                                className="w-full h-full object-cover object-center"
+                                loading="lazy"
+                              />
+                              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+                                <Eye className="h-6 w-6 sm:h-8 sm:w-8 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
+                              </div>
+                            </div>
+                          </DialogTrigger>
+                          <DialogContent className="max-w-[90vw] max-h-[90vh] w-full">
                             <img 
                               src={photo} 
                               alt={`${profile.name} photo ${index + 2}`}
-                              className="w-full h-full object-cover"
+                              className="w-full h-auto max-h-[80vh] object-contain rounded-lg"
                             />
-                            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
-                              <Eye className="h-8 w-8 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
-                            </div>
-                          </div>
-                        </DialogTrigger>
-                        <DialogContent className="max-w-3xl">
-                          <img 
-                            src={photo} 
-                            alt={`${profile.name} photo ${index + 2}`}
-                            className="w-full h-auto rounded-lg"
-                          />
-                        </DialogContent>
-                      </Dialog>
-                    </div>
-                  ))}
+                          </DialogContent>
+                        </Dialog>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </CardContent>
             </Card>

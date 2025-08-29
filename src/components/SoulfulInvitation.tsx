@@ -26,7 +26,8 @@ export const SoulfulInvitation = () => {
               <img
                 src={profileSilhouette}
                 alt="Silhouettes of people connecting meaningfully"
-                className="w-full h-96 object-cover"
+                className="w-full h-80 sm:h-96 md:h-[30rem] lg:h-[32rem] object-cover object-center"
+                loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
               <div className="absolute bottom-6 left-6 right-6 text-white">

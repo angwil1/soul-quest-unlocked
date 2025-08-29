@@ -193,25 +193,22 @@ const Index = () => {
             {/* Minimal background overlay */}
             <div className="absolute inset-0 bg-gradient-to-br from-muted/10 via-transparent to-primary/5 z-0"></div>
             
-            {/* Primary Background Image - Responsive with better face positioning */}
-            <img 
-              src={heroImages[currentHeroImageIndex]} 
-              alt="Happy couple in warm connection" 
-              className="absolute inset-0 w-full h-full object-cover animate-fade-in transition-opacity duration-1000 z-0"
-              style={{
-                objectPosition: window.innerWidth >= 768 && window.innerWidth < 1024 
-                  ? 'center 20%' // Tablet: better positioning to avoid face cropping
-                  : window.innerWidth < 768 
-                    ? 'center 15%' // Mobile: centered with slight upward bias for face visibility
-                    : 'center 30%' // Desktop: lower positioning
-              }}
-              onError={(e) => {
-                console.error('Hero image failed to load:', heroImages[currentHeroImageIndex]);
-              }}
-              onLoad={(e) => {
-                console.log('Hero image loaded and displayed:', heroImages[currentHeroImageIndex]);
-              }}
-            />
+            {/* Primary Background Image - Fully Responsive */}
+            <picture className="absolute inset-0 w-full h-full z-0">
+              <img 
+                src={heroImages[currentHeroImageIndex]} 
+                alt="Happy couple in warm connection" 
+                className="w-full h-full object-cover animate-fade-in transition-opacity duration-1000
+                          object-[center_15%] sm:object-[center_20%] lg:object-[center_30%]"
+                loading="eager"
+                onError={(e) => {
+                  console.error('Hero image failed to load:', heroImages[currentHeroImageIndex]);
+                }}
+                onLoad={(e) => {
+                  console.log('Hero image loaded and displayed:', heroImages[currentHeroImageIndex]);
+                }}
+              />
+            </picture>
             
             {/* Responsive overlay - lighter on tablet to avoid masking */}
             <div className="absolute inset-0 bg-gradient-to-b from-background/3 via-transparent to-pink-500/2 md:from-background/5 md:to-pink-500/3 z-10"></div>

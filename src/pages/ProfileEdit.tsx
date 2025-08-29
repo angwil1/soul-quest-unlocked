@@ -288,13 +288,14 @@ const ProfileEdit = () => {
               {profile?.photos && profile.photos.length > 0 && (
                 <div>
                   <h4 className="font-medium mb-2">Additional Photos</h4>
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
                     {profile.photos.map((photo, index) => (
                       <div key={index} className="relative group">
                         <img 
                           src={photo} 
                           alt={`Profile photo ${index + 1}`}
-                          className="w-full aspect-square object-cover rounded-lg border border-border"
+                          className="w-full aspect-[3/4] sm:aspect-square object-cover object-center rounded-lg border border-border"
+                          loading="lazy"
                         />
                         <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center">
                           <div className="flex flex-col gap-1">
