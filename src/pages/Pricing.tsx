@@ -55,7 +55,7 @@ const Pricing = () => {
       icon: "",
       price: "$39",
       period: "/year",
-      description: "An invitation to co-create our community",
+      description: "An invitation to co-create our community.",
       features: [
         "Lifetime access to all Complete Plus features",
         "\"Complete Beyond\" badge on profile (optional)",
