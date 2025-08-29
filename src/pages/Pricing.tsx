@@ -35,8 +35,8 @@ const Pricing = () => {
       popular: false
     },
     {
-      name: "Complete Plus 💖",
-      icon: "",
+      name: "Complete Plus",
+      icon: "✨",
       price: "$12",
       period: "/month", 
       description: "Offers the upgrade logic for better connections",
