@@ -18,7 +18,7 @@ export const FirstLightModal = ({ isOpen, onClose }: FirstLightModalProps) => {
 
   const handleBrowsePrompts = () => {
     onClose();
-    navigate('/matches');
+    navigate('/browse');
   };
 
   return (
