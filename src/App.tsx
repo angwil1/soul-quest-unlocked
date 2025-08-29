@@ -14,7 +14,6 @@ import BrowseProfiles from "./pages/BrowseProfiles";
 
 import Questions from "./pages/Questions";
 import QuizResults from "./pages/QuizResults";
-import SampleProfiles from "./pages/SampleProfiles";
 import Pricing from "./pages/Pricing";
 import PremiumDashboard from "./pages/PremiumDashboard";
 import ConnectionDNA from "./pages/ConnectionDNA";
@@ -52,12 +51,6 @@ const App = () => (
             <Route path="/matches" element={<Matches />} />
             <Route path="/browse" element={<BrowseProfiles />} />
             <Route path="/browse-profiles" element={<BrowseProfiles />} />
-            
-            <Route path="/messages" element={<Messages />} />
-            
-            <Route path="/questions" element={<Questions />} />
-            <Route path="/quiz-results" element={<QuizResults />} />
-            <Route path="/sample-profiles" element={<SampleProfiles />} />
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/premium-dashboard" element={<PremiumDashboard />} />
             <Route path="/connection-dna" element={<ConnectionDNA />} />

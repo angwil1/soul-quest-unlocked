@@ -30,7 +30,7 @@ export const AppWrapper: React.FC<AppWrapperProps> = ({ children }) => {
         '/matches',
         '/questions', 
         '/quiz-results',
-        '/sample-profiles',
+        '/browse',
         '/pricing',
         '/connection-dna',
         '/memory-vault',

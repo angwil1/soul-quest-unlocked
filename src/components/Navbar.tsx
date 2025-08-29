@@ -52,7 +52,7 @@ export const Navbar = () => {
     { name: "Browse", href: "/browse" },
     { name: "Matches", href: "/matches" },  
     { name: "Messages", href: "/messages" },
-    { name: "Sample Profiles", href: "/sample-profiles" },
+    { name: "Sample Profiles", href: "/browse" },
     { name: "FAQ", href: "/faq" },
   ];
 

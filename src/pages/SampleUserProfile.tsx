@@ -42,7 +42,7 @@ const SampleUserProfile = () => {
   };
 
   const handleBlock = () => {
-    navigate('/sample-profiles');
+    navigate('/browse');
   };
 
   return (

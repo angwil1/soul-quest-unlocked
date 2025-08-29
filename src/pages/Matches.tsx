@@ -113,7 +113,7 @@ const Matches = () => {
                       variant="outline"
                       size="sm"
                       className="flex-1"
-                      onClick={() => navigate(`/sample-profiles/${profile.id}`)}
+                      onClick={() => navigate(`/sample-user-profile/${profile.id}`)}
                     >
                       View Profile
                     </Button>
