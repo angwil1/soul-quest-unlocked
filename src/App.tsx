@@ -73,7 +73,7 @@ const App = () => (
             
             <Route path="/feature-test" element={<FeatureTest />} />
             <Route path="/safety" element={<SafetyCenter />} />
-            <Route path="/sample-user" element={<SampleUserProfile />} />
+            <Route path="/sample-user-profile/:profileId" element={<SampleUserProfile />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AppWrapper>

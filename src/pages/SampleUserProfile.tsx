@@ -2,30 +2,35 @@ import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { ReportUser } from '@/components/ReportUser';
 import { BlockUser } from '@/components/BlockUser';
-import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, MessageCircle, Heart, Shield, MapPin, Briefcase } from 'lucide-react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { ArrowLeft, MessageCircle, Heart, Shield, MapPin, Briefcase, Eye } from 'lucide-react';
+import { founderCuratedProfiles } from '@/data/sampleProfiles';
 
 const SampleUserProfile = () => {
   const navigate = useNavigate();
+  const { profileId } = useParams();
   const [isLiked, setIsLiked] = useState(false);
 
-  // Sample user data to demonstrate safety features
-  const sampleUser = {
-    id: "sample-user-123",
-    name: "Taylor Chen",
-    age: 26,
-    bio: "Love exploring new cities, trying different cuisines, and weekend hiking trips. Looking for someone genuine to share adventures with!",
-    location: "Portland, OR",
-    occupation: "Software Engineer",
-    interests: ["Hiking", "Photography", "Cooking", "Travel", "Tech", "Art"],
-    photos: [
-      "https://images.unsplash.com/photo-1494790108755-2616b612b6c5?w=400",
-      "https://images.unsplash.com/photo-1531384441138-2736e62e0919?w=400"
-    ],
-    verified: true
-  };
+  // Find the profile from the sample data
+  const profile = founderCuratedProfiles.find(p => p.id === profileId);
+
+  // Fallback if profile not found
+  if (!profile) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <Card className="p-8 text-center">
+          <h2 className="text-2xl font-semibold mb-4">Profile Not Found</h2>
+          <p className="text-muted-foreground mb-4">The profile you're looking for doesn't exist.</p>
+          <Button onClick={() => navigate('/browse')}>
+            Back to Browse
+          </Button>
+        </Card>
+      </div>
+    );
+  }
 
   const handleLike = () => {
     setIsLiked(!isLiked);
@@ -45,14 +50,14 @@ const SampleUserProfile = () => {
       {/* Header */}
       <div className="bg-card border-b">
         <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
-          <Button variant="ghost" onClick={() => navigate('/sample-profiles')}>
+          <Button variant="ghost" onClick={() => navigate('/browse')}>
             <ArrowLeft className="h-4 w-4 mr-2" />
-            Back to Profiles
+            Back to Browse
           </Button>
           <div className="flex items-center gap-2">
             <Badge variant="secondary" className="bg-green-100 text-green-800">
               <Shield className="h-3 w-3 mr-1" />
-              Age Verified
+              Sample Profile
             </Badge>
           </div>
         </div>
@@ -68,21 +73,53 @@ const SampleUserProfile = () => {
                 <div className="space-y-4">
                   {/* Main Photo */}
                   <div className="aspect-square rounded-lg overflow-hidden bg-muted">
-                    <img 
-                      src={sampleUser.photos[0]} 
-                      alt={sampleUser.name}
-                      className="w-full h-full object-cover"
-                    />
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <div className="relative cursor-pointer group">
+                          <img 
+                            src={profile.photos[0]} 
+                            alt={profile.name}
+                            className="w-full h-full object-cover"
+                          />
+                          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+                            <Eye className="h-8 w-8 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
+                          </div>
+                        </div>
+                      </DialogTrigger>
+                      <DialogContent className="max-w-3xl">
+                        <img 
+                          src={profile.photos[0]} 
+                          alt={profile.name}
+                          className="w-full h-auto rounded-lg"
+                        />
+                      </DialogContent>
+                    </Dialog>
                   </div>
                   
                   {/* Additional Photos */}
-                  {sampleUser.photos.slice(1).map((photo, index) => (
+                  {profile.photos.slice(1).map((photo, index) => (
                     <div key={index} className="aspect-square rounded-lg overflow-hidden bg-muted">
-                      <img 
-                        src={photo} 
-                        alt={`${sampleUser.name} photo ${index + 2}`}
-                        className="w-full h-full object-cover"
-                      />
+                      <Dialog>
+                        <DialogTrigger asChild>
+                          <div className="relative cursor-pointer group">
+                            <img 
+                              src={photo} 
+                              alt={`${profile.name} photo ${index + 2}`}
+                              className="w-full h-full object-cover"
+                            />
+                            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+                              <Eye className="h-8 w-8 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
+                            </div>
+                          </div>
+                        </DialogTrigger>
+                        <DialogContent className="max-w-3xl">
+                          <img 
+                            src={photo} 
+                            alt={`${profile.name} photo ${index + 2}`}
+                            className="w-full h-auto rounded-lg"
+                          />
+                        </DialogContent>
+                      </Dialog>
                     </div>
                   ))}
                 </div>
@@ -97,29 +134,27 @@ const SampleUserProfile = () => {
               <CardHeader>
                 <div className="flex items-start justify-between">
                   <div>
-                    <CardTitle className="text-2xl">{sampleUser.name}, {sampleUser.age}</CardTitle>
+                    <CardTitle className="text-2xl">{profile.name}, {profile.age}</CardTitle>
                     <div className="flex items-center gap-4 text-muted-foreground mt-2">
                       <div className="flex items-center gap-1">
                         <MapPin className="h-4 w-4" />
-                        {sampleUser.location}
+                        {profile.location}
                       </div>
                       <div className="flex items-center gap-1">
                         <Briefcase className="h-4 w-4" />
-                        {sampleUser.occupation}
+                        {profile.occupation}
                       </div>
                     </div>
                   </div>
-                  {sampleUser.verified && (
-                    <Badge variant="secondary" className="bg-green-100 text-green-800">
-                      <Shield className="h-3 w-3 mr-1" />
-                      Verified
-                    </Badge>
-                  )}
+                  <Badge variant="secondary" className="bg-purple-100 text-purple-800">
+                    <Shield className="h-3 w-3 mr-1" />
+                    {profile.vibeTag}
+                  </Badge>
                 </div>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground leading-relaxed">
-                  {sampleUser.bio}
+                  {profile.bio}
                 </p>
               </CardContent>
             </Card>
@@ -131,7 +166,7 @@ const SampleUserProfile = () => {
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2">
-                  {sampleUser.interests.map((interest) => (
+                  {profile.interests.map((interest) => (
                     <Badge key={interest} variant="secondary">
                       {interest}
                     </Badge>
@@ -171,12 +206,12 @@ const SampleUserProfile = () => {
               <CardContent>
                 <div className="flex gap-3">
                   <ReportUser 
-                    reportedUserId={sampleUser.id}
-                    reportedUserName={sampleUser.name}
+                    reportedUserId={profile.id}
+                    reportedUserName={profile.name}
                   />
                   <BlockUser 
-                    blockedUserId={sampleUser.id}
-                    blockedUserName={sampleUser.name}
+                    blockedUserId={profile.id}
+                    blockedUserName={profile.name}
                     onBlock={handleBlock}
                   />
                 </div>
