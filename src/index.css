@@ -8,65 +8,65 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Beachy + Peachy Background */
-    --background: 30 25% 96%;
-    --foreground: 180 40% 15%;
+    /* AI Dating - Modern neutral background */
+    --background: 240 8% 96%;
+    --foreground: 240 12% 15%;
 
-    /* Card colors - warm beige tones */
-    --card: 30 25% 98%;
-    --card-foreground: 180 40% 15%;
+    /* Card colors - clean modern */
+    --card: 240 8% 98%;
+    --card-foreground: 240 12% 15%;
 
-    --popover: 30 25% 98%;
-    --popover-foreground: 180 40% 15%;
+    --popover: 240 8% 98%;
+    --popover-foreground: 240 12% 15%;
 
-    /* Primary: Dark teal from palette */
-    --primary: 180 40% 25%;
-    --primary-foreground: 30 25% 96%;
-    --primary-glow: 180 40% 45%;
+    /* Primary: Deep purple-blue for AI tech sophistication */
+    --primary: 250 40% 35%;
+    --primary-foreground: 240 8% 96%;
+    --primary-glow: 250 40% 55%;
 
-    /* Secondary: Light coral/peach */
-    --secondary: 15 80% 85%;
-    --secondary-foreground: 180 40% 20%;
+    /* Secondary: Warm coral for romance/connection */
+    --secondary: 15 75% 80%;
+    --secondary-foreground: 240 12% 20%;
 
-    /* Muted: Soft beige tones */
-    --muted: 30 25% 90%;
-    --muted-foreground: 180 25% 40%;
+    /* Muted: Neutral grays */
+    --muted: 240 8% 90%;
+    --muted-foreground: 240 6% 45%;
 
-    /* Accent: Darker coral from palette */
-    --accent: 10 70% 65%;
-    --accent-foreground: 30 25% 96%;
+    /* Accent: Vibrant purple for AI highlights */
+    --accent: 260 60% 60%;
+    --accent-foreground: 240 8% 96%;
 
-    /* Destructive: Warm coral red */
+    /* Destructive: Modern red */
     --destructive: 5 75% 60%;
-    --destructive-foreground: 30 25% 96%;
+    --destructive-foreground: 240 8% 96%;
 
-    /* Borders and inputs - soft beige */
-    --border: 30 25% 85%;
-    --input: 30 25% 90%;
-    --ring: 180 40% 35%;
+    /* Borders and inputs */
+    --border: 240 8% 85%;
+    --input: 240 8% 90%;
+    --ring: 250 40% 45%;
 
     --radius: 0.75rem;
 
-    /* Beachy + Peachy gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(180 40% 25%), hsl(180 40% 35%));
-    --gradient-secondary: linear-gradient(135deg, hsl(15 80% 85%), hsl(10 70% 75%));
-    --gradient-hero: linear-gradient(135deg, hsl(180 40% 25%) 0%, hsl(15 80% 75%) 50%, hsl(10 70% 65%) 100%);
-    --gradient-launch: linear-gradient(135deg, hsl(180 40% 20%) 0%, hsl(15 80% 70%) 50%, hsl(10 70% 60%) 100%);
+    /* AI Dating gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(250 40% 35%), hsl(260 50% 50%));
+    --gradient-secondary: linear-gradient(135deg, hsl(15 75% 80%), hsl(25 70% 75%));
+    --gradient-hero: linear-gradient(135deg, hsl(250 40% 35%) 0%, hsl(260 50% 50%) 30%, hsl(15 75% 70%) 100%);
+    --gradient-launch: linear-gradient(135deg, hsl(250 40% 30%) 0%, hsl(260 60% 55%) 50%, hsl(15 75% 65%) 100%);
     
-    /* Beachy shadows with teal and coral tones */
-    --shadow-primary: 0 10px 30px -10px hsl(180 40% 25% / 0.2);
-    --shadow-secondary: 0 4px 20px -4px hsl(30 25% 70% / 0.15);
-    --shadow-launch: 0 10px 30px -10px hsl(10 70% 65% / 0.3);
+    /* Modern shadows */
+    --shadow-primary: 0 10px 30px -10px hsl(250 40% 35% / 0.25);
+    --shadow-secondary: 0 4px 20px -4px hsl(240 8% 70% / 0.15);
+    --shadow-launch: 0 10px 30px -10px hsl(260 60% 60% / 0.3);
 
-    /* Sidebar colors - beachy theme */
-    --sidebar-background: 30 25% 96%;
-    --sidebar-foreground: 180 40% 15%;
-    --sidebar-primary: 180 40% 25%;
-    --sidebar-primary-foreground: 30 25% 96%;
-    --sidebar-accent: 15 80% 85%;
-    --sidebar-accent-foreground: 180 40% 20%;
-    --sidebar-border: 30 25% 85%;
-    --sidebar-ring: 180 40% 35%;
+    /* Sidebar colors */
+    --sidebar-background: 240 8% 96%;
+    --sidebar-foreground: 240 12% 15%;
+    --sidebar-primary: 250 40% 35%;
+    --sidebar-primary-foreground: 240 8% 96%;
+    --sidebar-accent: 15 75% 80%;
+    --sidebar-accent-foreground: 240 12% 20%;
+    --sidebar-border: 240 8% 85%;
+    --sidebar-ring: 250 40% 45%;
 }
 
 /* Mobile-specific styles */
@@ -83,56 +83,56 @@ body {
 }
 
   .dark {
-    /* Dark beachy + peachy theme */
-    --background: 180 40% 8%;
-    --foreground: 30 25% 95%;
+    /* AI Dating Dark Mode */
+    --background: 240 12% 8%;
+    --foreground: 240 8% 95%;
 
-    --card: 180 40% 12%;
-    --card-foreground: 30 25% 95%;
+    --card: 240 12% 12%;
+    --card-foreground: 240 8% 95%;
 
-    --popover: 180 40% 12%;
-    --popover-foreground: 30 25% 95%;
+    --popover: 240 12% 12%;
+    --popover-foreground: 240 8% 95%;
 
-    /* Primary: Lighter teal for dark mode */
-    --primary: 180 50% 55%;
-    --primary-foreground: 180 40% 8%;
-    --primary-glow: 180 50% 75%;
+    /* Primary: Brighter purple for dark mode */
+    --primary: 250 50% 65%;
+    --primary-foreground: 240 12% 8%;
+    --primary-glow: 250 50% 75%;
 
     /* Secondary: Muted coral for dark mode */
-    --secondary: 15 60% 25%;
-    --secondary-foreground: 30 25% 95%;
+    --secondary: 15 60% 30%;
+    --secondary-foreground: 240 8% 95%;
 
-    /* Muted: Dark teal-gray */
-    --muted: 180 30% 18%;
-    --muted-foreground: 30 15% 70%;
+    /* Muted: Dark grays */
+    --muted: 240 12% 18%;
+    --muted-foreground: 240 8% 70%;
 
-    /* Accent: Warm coral for dark mode */
-    --accent: 10 65% 60%;
-    --accent-foreground: 180 40% 8%;
+    /* Accent: Bright purple for dark mode */
+    --accent: 260 70% 70%;
+    --accent-foreground: 240 12% 8%;
 
-    /* Destructive: Bright coral red for dark mode */
+    /* Destructive: Bright red for dark mode */
     --destructive: 5 70% 65%;
-    --destructive-foreground: 30 25% 95%;
+    --destructive-foreground: 240 8% 95%;
 
-    /* Dark borders with teal tint */
-    --border: 180 30% 18%;
-    --input: 180 30% 18%;
-    --ring: 180 50% 55%;
+    /* Dark borders */
+    --border: 240 12% 18%;
+    --input: 240 12% 18%;
+    --ring: 250 50% 65%;
 
-    /* Dark beachy gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(180 50% 55%), hsl(180 45% 65%));
-    --gradient-secondary: linear-gradient(135deg, hsl(180 30% 18%), hsl(15 40% 22%));
-    --gradient-hero: linear-gradient(135deg, hsl(180 50% 55%) 0%, hsl(15 60% 60%) 50%, hsl(10 65% 55%) 100%);
+    /* AI Dating dark gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(250 50% 65%), hsl(260 60% 70%));
+    --gradient-secondary: linear-gradient(135deg, hsl(240 12% 18%), hsl(15 40% 25%));
+    --gradient-hero: linear-gradient(135deg, hsl(250 50% 65%) 0%, hsl(260 60% 70%) 30%, hsl(15 60% 60%) 100%);
 
-    /* Dark sidebar colors - beachy theme */
-    --sidebar-background: 180 40% 8%;
-    --sidebar-foreground: 30 25% 95%;
-    --sidebar-primary: 180 50% 55%;
-    --sidebar-primary-foreground: 180 40% 8%;
-    --sidebar-accent: 180 30% 18%;
-    --sidebar-accent-foreground: 30 25% 95%;
-    --sidebar-border: 180 30% 18%;
-    --sidebar-ring: 180 50% 55%;
+    /* Dark sidebar colors */
+    --sidebar-background: 240 12% 8%;
+    --sidebar-foreground: 240 8% 95%;
+    --sidebar-primary: 250 50% 65%;
+    --sidebar-primary-foreground: 240 12% 8%;
+    --sidebar-accent: 240 12% 18%;
+    --sidebar-accent-foreground: 240 8% 95%;
+    --sidebar-border: 240 12% 18%;
+    --sidebar-ring: 250 50% 65%;
   }
 }
 
