@@ -79,23 +79,20 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
         <div className="flex flex-col md:flex-row items-center justify-between gap-2 md:gap-4">
           {/* Left side - Main message */}
           <div className="text-center md:text-left">
-            <div className="flex items-center justify-center md:justify-start gap-2 mb-1 md:mb-2">
-              <Sparkles className="h-4 w-4 md:h-5 md:w-5 text-pink-500 animate-pulse" />
-              <Badge variant="secondary" className="bg-white/20 text-white border-white/30 text-xs">
-                Quiet Start During Launch
-              </Badge>
-            </div>
-            
             <h3 className="text-base md:text-xl font-bold text-white mb-1 md:mb-2">
-              AI Complete Me offers Quiet Start during launch! 💫
+              Quiet Start During Launch
             </h3>
             
             <p className="text-white/90 text-xs md:text-base mb-2 md:mb-3 leading-tight">
-              Take the compatibility quiz to unlock your profile—no email, no payment, just connection.
+              AI Complete Me invites you to begin quietly. 💫 No email. No payment. Just connection.
             </p>
             
-            <div className="text-white/80 text-xs md:text-sm">
+            <div className="text-white/80 text-xs md:text-sm mb-2">
               ✨ All identities welcome. All journeys respected.
+            </div>
+            
+            <div className="text-white/80 text-xs md:text-sm">
+              ⏳ This quiet window won't last forever.
             </div>
           </div>
 
