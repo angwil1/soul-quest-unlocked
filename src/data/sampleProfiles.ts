@@ -25,23 +25,7 @@ export interface SampleProfile {
 
 export const founderCuratedProfiles: SampleProfile[] = [];
 
-export const conversationStarters = [
-  "What book made you cry in public?",
-  "How do you hold space for your own healing?", 
-  "What's your secret ritual for connecting with nature?",
-  "What question do you wish someone would ask you?",
-  "What does your soul crave that your mind can't name?",
-  "How does the ocean make you feel?",
-  "What lyric lives in your bones?",
-  "What place has changed you the most?",
-  "What does the earth whisper to you?",
-  "What would you whisper to your younger self?",
-  "How do you find meaning in mundane moments?",
-  "What story is your heart trying to tell?",
-  "What does freedom mean to your soul?",
-  "How do you celebrate your own growth?",
-  "What adventure is calling your name?"
-];
+export const conversationStarters = [];
 
 export const vibeTags = [
   "Wistful Explorer",
