@@ -7,7 +7,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ArrowLeft, Heart, MapPin, Briefcase, Sparkles, Copy, RefreshCw, Volume2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { founderCuratedProfiles, conversationStarters, vibeTags, poeticMicrocopy } from '@/data/sampleProfiles';
+import { founderCuratedProfiles, vibeTags, poeticMicrocopy } from '@/data/sampleProfiles';
 import { useToast } from '@/hooks/use-toast';
 import { SoundtrackPlayer } from '@/components/SoundtrackPlayer';
 
