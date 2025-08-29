@@ -79,7 +79,7 @@ const SampleUserProfile = () => {
                           <img 
                             src={profile.photos[0]} 
                             alt={profile.name}
-                            className="w-full h-full object-cover"
+                            className="w-full h-full object-cover blur-sm"
                           />
                           <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
                             <Eye className="h-8 w-8 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -105,7 +105,7 @@ const SampleUserProfile = () => {
                             <img 
                               src={photo} 
                               alt={`${profile.name} photo ${index + 2}`}
-                              className="w-full h-full object-cover"
+                              className="w-full h-full object-cover blur-sm"
                             />
                             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
                               <Eye className="h-8 w-8 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
