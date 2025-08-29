@@ -80,7 +80,6 @@ const BrowseProfiles = () => {
                     <CardTitle className="text-xl">
                       {profile.name}, {profile.age}
                     </CardTitle>
-                    <Badge variant="outline">{profile.vibeTag}</Badge>
                   </div>
                   <div className="space-y-1 text-sm text-muted-foreground">
                     <div className="flex items-center gap-1">
