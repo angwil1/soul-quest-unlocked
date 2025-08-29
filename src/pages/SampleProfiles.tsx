@@ -5,11 +5,10 @@ import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { ArrowLeft, Heart, MapPin, Briefcase, Sparkles, Copy, RefreshCw, Volume2 } from 'lucide-react';
+import { ArrowLeft, Heart, MapPin, Briefcase, Sparkles, Copy, RefreshCw } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { founderCuratedProfiles, vibeTags, poeticMicrocopy } from '@/data/sampleProfiles';
 import { useToast } from '@/hooks/use-toast';
-import { SoundtrackPlayer } from '@/components/SoundtrackPlayer';
 
 const SampleProfiles = () => {
   const navigate = useNavigate();
@@ -241,19 +240,6 @@ const SampleProfiles = () => {
                   <div className="flex items-center gap-2">
                     <Briefcase className="h-4 w-4 text-muted-foreground" />
                     <span>{selectedProfile.occupation}</span>
-                  </div>
-                </div>
-
-                <div className="p-4 bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-950 dark:to-pink-950 rounded-lg">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Volume2 className="h-4 w-4 text-purple-600" />
-                    <span className="font-medium text-purple-800 dark:text-purple-200">Emotional Soundtrack</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <p className="text-sm text-purple-700 dark:text-purple-300 flex-1">
-                      {selectedProfile.emotionalSoundtrack}
-                    </p>
-                    <SoundtrackPlayer text={selectedProfile.emotionalSoundtrack} />
                   </div>
                 </div>
 
