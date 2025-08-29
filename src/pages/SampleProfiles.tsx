@@ -31,10 +31,10 @@ const SampleProfiles = () => {
             <div className="text-center">
               <h1 className="text-2xl font-bold flex items-center gap-2">
                 <Sparkles className="h-6 w-6 text-purple-600" />
-                Founder-Curated Sample Profiles
+                AI Dating Sample Profiles
               </h1>
               <p className="text-sm text-muted-foreground">
-                Poetic demos crafted to spark your authentic self
+                Inspiring examples to help you create your perfect profile
               </p>
             </div>
             <div className="w-24" />
@@ -169,13 +169,13 @@ const SampleProfiles = () => {
           <div className="text-center">
             <h1 className="text-2xl font-bold flex items-center gap-2">
               <Sparkles className="h-6 w-6 text-purple-600" />
-              Founder-Curated Sample Profiles
+              AI Dating Sample Profiles
             </h1>
             <p className="text-sm text-muted-foreground">
-              Poetic demos crafted to spark your authentic self
+              Inspiring examples to help you create your perfect profile
             </p>
             <p className="text-xs text-muted-foreground mt-2 max-w-2xl mx-auto">
-              These are not real users. They're poetic examples curated by the founder to help you imagine connection beyond the scroll.
+              These are sample profiles to help you understand what makes a great AI dating profile.
             </p>
           </div>
           <Dialog open={showInspiration} onOpenChange={setShowInspiration}>
@@ -308,12 +308,12 @@ const SampleProfiles = () => {
             <div className="relative">
               <div className="absolute top-4 right-4 z-10">
                 <Badge className="bg-gradient-to-r from-purple-600 to-pink-600 text-white text-sm px-3 py-1">
-                  ✨ Poetic Demo Profile
+                  ✨ Sample Profile
                 </Badge>
               </div>
               <div className="absolute top-12 right-4 z-10">
                 <Badge variant="outline" className="bg-background/90 text-xs">
-                  Created to spark your inspiration
+                  AI Dating Example
                 </Badge>
               </div>
             </div>
