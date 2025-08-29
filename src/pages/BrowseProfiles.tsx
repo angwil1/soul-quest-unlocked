@@ -45,19 +45,23 @@ const BrowseProfiles = () => {
             
             return (
               <Card key={profile.id} className="overflow-hidden hover:shadow-lg transition-shadow">
-                <div className="relative">
+                <div className="relative overflow-hidden group">
                   <div className="aspect-[4/3] bg-gradient-to-br from-primary/20 to-secondary/20">
                     <Avatar className="w-full h-full rounded-none">
                       <AvatarImage 
                         src={profile.photos[0]} 
                         alt={profile.name}
-                        className="object-cover"
+                        className="object-cover transition-transform duration-500 group-hover:scale-110"
                       />
                       <AvatarFallback className="w-full h-full rounded-none text-4xl">
                         {profile.name.split(' ').map(n => n[0]).join('')}
                       </AvatarFallback>
                     </Avatar>
                   </div>
+                  {/* Gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-70 group-hover:opacity-50 transition-opacity duration-300" />
+                  {/* Subtle shine effect */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   <Badge 
                     className="absolute top-3 right-3 bg-primary text-primary-foreground"
                   >
