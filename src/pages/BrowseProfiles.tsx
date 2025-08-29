@@ -58,10 +58,10 @@ const BrowseProfiles = () => {
                       </AvatarFallback>
                     </Avatar>
                   </div>
-                  {/* Dark shaded overlay */}
-                  <div className="absolute inset-0 bg-black/30" />
+                  {/* Soft blur overlay */}
+                  <div className="absolute inset-0 bg-black/20 backdrop-blur-[1px]" />
                   {/* Bottom shadow for text readability */}
-                  <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/70 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-black/60 to-transparent" />
                   <Badge 
                     className="absolute top-3 right-3 bg-primary text-primary-foreground"
                   >
