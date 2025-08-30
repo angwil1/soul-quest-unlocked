@@ -23,14 +23,16 @@ import coupleAmbientClear from '@/assets/couple-ambient-clear.jpg';
 import coupleHeroOptimized from '@/assets/couple-hero-optimized.jpg';
 import coupleHeroCoolTones from '@/assets/couple-hero-cool-tones.jpg';
 import coupleHeroCool2 from '@/assets/couple-hero-cool-2.jpg';
+import coupleHeroMobile1 from '@/assets/couple-hero-mobile-1.jpg';
+import coupleHeroMobile2 from '@/assets/couple-hero-mobile-2.jpg';
 import coupleClaspedHands from '/lovable-uploads/3a5c5b31-1df1-48ad-accf-4a340d4e914f.png';
 import { AmbientCoupleCarousel } from '@/components/AmbientCoupleCarousel';
 import { SoulfulInvitation } from '@/components/SoulfulInvitation';
 
-// Hero image rotation array - emotionally engaging images with proper positioning
+// Hero image rotation array - mobile-optimized images with proper positioning
 const heroImages = [
-  coupleHeroCoolTones, // Cool toned couple with soft daylight and nature background
-  coupleHeroCool2 // Another cool-toned couple with serene forest/meadow background
+  coupleHeroMobile1, // Mobile-optimized cool toned couple with soft daylight
+  coupleHeroMobile2 // Mobile-optimized romantic couple with serene forest background
 ];
 
 // Conditional captions for specific images
@@ -200,19 +202,19 @@ const Index = () => {
             
             {/* Primary Background Image - Fully Responsive */}
             <picture className="absolute inset-0 w-full h-full z-0">
-              <img 
-                src={heroImages[currentHeroImageIndex]} 
-                alt="Happy couple in warm connection" 
-                className="w-full h-full object-cover animate-fade-in transition-opacity duration-1000
-                          object-[center_15%] sm:object-[center_20%] lg:object-[center_30%]"
-                loading="eager"
-                onError={(e) => {
-                  console.error('Hero image failed to load:', heroImages[currentHeroImageIndex]);
-                }}
-                onLoad={(e) => {
-                  console.log('Hero image loaded and displayed:', heroImages[currentHeroImageIndex]);
-                }}
-              />
+                <img 
+                  src={heroImages[currentHeroImageIndex]} 
+                  alt="Happy couple in warm connection" 
+                  className="w-full h-full object-cover animate-fade-in transition-opacity duration-1000
+                            object-center sm:object-[center_25%] lg:object-[center_30%]"
+                  loading="eager"
+                  onError={(e) => {
+                    console.error('Hero image failed to load:', heroImages[currentHeroImageIndex]);
+                  }}
+                  onLoad={(e) => {
+                    console.log('Hero image loaded and displayed:', heroImages[currentHeroImageIndex]);
+                  }}
+                />
             </picture>
             
             {/* Ultra-gentle overlay - barely visible on mobile */}
