@@ -208,7 +208,7 @@ const Index = () => {
                   src={heroImages[currentHeroImageIndex]} 
                   alt="Happy couple in warm connection" 
                   className="w-full h-full object-cover animate-fade-in transition-opacity duration-1000
-                            object-center sm:object-[center_25%] lg:object-[center_30%]"
+                            object-[center_20%] sm:object-[center_30%] md:object-[center_35%] lg:object-[center_40%] xl:object-[center_45%]"
                   loading="eager"
                   onError={(e) => {
                     console.error('Hero image failed to load:', heroImages[currentHeroImageIndex]);
