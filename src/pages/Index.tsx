@@ -173,7 +173,7 @@ const Index = () => {
         <Navbar />
         
         {/* EMOTIONALLY INTELLIGENT HERO DESIGN */}
-        <section className="relative min-h-[100vh] min-h-[100dvh] flex items-center justify-center">
+        <section className="relative overflow-hidden min-h-[100vh] min-h-[100dvh] flex items-center justify-center bg-white">
           
           {/* Already have account - Top Right */}
           <div className="absolute top-4 right-4 z-30 animate-fade-in">
