@@ -30,7 +30,7 @@ const Pricing = () => {
       restrictedFeatures: [
         "Video chat"
       ],
-      buttonText: "Current Plan",
+      buttonText: "Start Quietly – Free",
       plan: null,
       popular: false
     },
@@ -46,7 +46,7 @@ const Pricing = () => {
         "Priority matching",
         "All Quiet Start features"
       ],
-      buttonText: "Get Complete Plus",
+      buttonText: "Upgrade to Complete Plus – $12/mo",
       plan: "unlocked-plus",
       popular: false
     },
@@ -63,7 +63,7 @@ const Pricing = () => {
         "Memory Vault: revisit favorite moments, prompts, and saved matches",
         "Connection DNA: evolving emotional intelligence for deeper match potential"
       ],
-      buttonText: "Get Complete Beyond",
+      buttonText: "Go Beyond – $39/year",
       plan: "unlocked-beyond",
       popular: false,
       hoverTexts: {
@@ -126,7 +126,7 @@ const Pricing = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {plans.map((plan) => {
               const isCurrentPlan = getCurrentPlan() === plan.name.replace(" 💖", "").replace(" 🌌", "");
               const isFree = plan.name === "Quiet Start";
@@ -180,14 +180,26 @@ const Pricing = () => {
                       ))}
                     </ul>
 
-                    <Button 
-                      className="w-full mt-6"
-                      variant={plan.popular ? "default" : "outline"}
-                      disabled={loading || isCurrentPlan || isFree}
-                      onClick={() => handleSubscribe(plan.plan)}
-                    >
-                      {isCurrentPlan ? "Current Plan" : plan.buttonText}
-                    </Button>
+                    <div className="flex justify-center mt-6">
+                      <button
+                        className={`w-full px-6 py-3 rounded-lg font-medium text-center transition-all duration-300 transform ${
+                          isCurrentPlan 
+                            ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 cursor-default" 
+                            : isFree
+                            ? "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200 hover:bg-purple-200 dark:hover:bg-purple-800 hover:shadow-lg hover:shadow-purple-200 dark:hover:shadow-purple-900/50 hover:scale-[1.02] cursor-default"
+                            : "bg-gradient-to-r from-purple-100 to-pink-100 text-purple-800 dark:from-purple-900 dark:to-pink-900 dark:text-purple-200 hover:from-purple-200 hover:to-pink-200 dark:hover:from-purple-800 dark:hover:to-pink-800 hover:shadow-lg hover:shadow-purple-200 dark:hover:shadow-purple-900/50 hover:scale-[1.02] border border-purple-200 dark:border-purple-700 hover:border-purple-300 dark:hover:border-purple-600"
+                        }`}
+                        disabled={loading || isCurrentPlan || isFree}
+                        onClick={() => handleSubscribe(plan.plan)}
+                      >
+                        <span className="relative">
+                          {isCurrentPlan ? "Current Plan" : plan.buttonText}
+                          {!isCurrentPlan && !isFree && (
+                            <span className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-400 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
+                          )}
+                        </span>
+                      </button>
+                    </div>
                   </CardContent>
                 </Card>
               );
