@@ -281,14 +281,6 @@ const Index = () => {
                   </div>
                 </div>
                 
-                {/* DRAMATIC DESCRIPTION - Mobile only, positioned to not block images */}
-                <div className="mb-4 sm:mb-6 md:hidden">
-                  <p className="text-xs text-white font-bold max-w-xs mx-auto leading-relaxed animate-fade-in bg-gradient-to-r from-red-500 to-pink-500 p-2 rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300" style={{ animationDelay: '0.3s' }}>
-                    🚀 <span className="text-yellow-300 bg-black px-1 py-0.5 rounded-md text-xs">NO MORE BORING SWIPES!</span> 🚀
-                    <br/>
-                    <span className="block mt-1 text-xs">Find your <span className="text-yellow-300 underline decoration-1 decoration-yellow-300">SOULMATE</span> with AI!</span>
-                  </p>
-                </div>
                 
                 
 
@@ -373,6 +365,15 @@ const Index = () => {
         {/* Simple Features Section */}
         <section className="py-20 bg-gradient-to-br from-background to-primary/5">
           <div className="max-w-4xl mx-auto px-4 text-center">
+            {/* DRAMATIC DESCRIPTION - Promotional section */}
+            <div className="mb-12 md:hidden">
+              <p className="text-sm text-white font-bold max-w-xs mx-auto leading-relaxed animate-fade-in bg-gradient-to-r from-red-500 to-pink-500 p-3 rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
+                🚀 <span className="text-yellow-300 bg-black px-2 py-1 rounded-lg text-xs">NO MORE BORING SWIPES!</span> 🚀
+                <br/>
+                <span className="block mt-1 text-sm">Find your <span className="text-yellow-300 underline decoration-1 decoration-yellow-300">SOULMATE</span> with AI!</span>
+              </p>
+            </div>
+            
             <h2 className="text-3xl font-light text-foreground mb-12">
               Connection beyond the surface
             </h2>
