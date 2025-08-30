@@ -28,9 +28,9 @@ const BrowseProfiles = () => {
             Back to Profile
           </Button>
           <div className="text-center">
-            <h1 className="text-2xl font-bold">Browse Sample Profiles</h1>
+            <h1 className="text-2xl font-bold">Explore Profiles</h1>
             <p className="text-sm text-muted-foreground">
-              Explore sample profiles to see what's possible
+              Discover sample profiles to see what's possible
             </p>
           </div>
           <div className="w-24" /> {/* Spacer */}

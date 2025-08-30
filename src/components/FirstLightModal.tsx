@@ -38,7 +38,7 @@ export const FirstLightModal = ({ isOpen, onClose }: FirstLightModalProps) => {
           <div className="space-y-4">
             <div className="flex items-center justify-start gap-3 text-left">
               <span className="text-primary text-xl">✓</span>
-              <span className="text-foreground">Browse sample prompts</span>
+              <span className="text-foreground">Explore sample prompts</span>
             </div>
             <div className="flex items-center justify-start gap-3 text-left">
               <span className="text-primary text-xl">✓</span>
@@ -68,7 +68,7 @@ export const FirstLightModal = ({ isOpen, onClose }: FirstLightModalProps) => {
               className="w-full"
               size="lg"
             >
-              Browse Sample Prompts
+              Explore Sample Prompts
             </Button>
           </div>
         </div>

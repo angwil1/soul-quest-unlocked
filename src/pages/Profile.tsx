@@ -136,7 +136,7 @@ const Profile = () => {
                   variant="outline" 
                   className="w-full"
                 >
-                  View Sample Profiles
+                  Explore Sample Profiles
                 </Button>
                 
                 <Button 

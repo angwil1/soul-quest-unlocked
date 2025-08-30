@@ -49,9 +49,9 @@ export const Navbar = () => {
   }, [user]);
 
   const navigation = [
-    { name: "Browse", href: "/browse" },
+    { name: "Discover Matches", href: "/browse" },
     { name: "Matches", href: "/matches" },  
-    { name: "Messages", href: "/messages" },
+    { name: "Conversations", href: "/messages" },
     { name: "Sample Profiles", href: "/browse" },
     { name: "FAQ", href: "/faq" },
   ];
@@ -155,7 +155,7 @@ export const Navbar = () => {
                 className="flex items-center gap-2"
               >
                 <Search className="h-4 w-4" />
-                Search
+                Filter Results
               </Button>
             )}
             {user ? (
@@ -221,7 +221,7 @@ export const Navbar = () => {
                     className="w-full justify-start flex items-center gap-2"
                   >
                     <Search className="h-4 w-4" />
-                    Search
+                    Filter Results
                   </Button>
                 </div>
               )}
@@ -305,7 +305,7 @@ export const Navbar = () => {
             <div className="flex flex-col gap-3 pt-2">
               <Button onClick={handleSearch} className="w-full h-12 text-base font-semibold">
                 <Search className="h-4 w-4 mr-2" />
-                Start Searching
+                Find Matches
               </Button>
               <Button 
                 variant="outline" 
