@@ -10,7 +10,8 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { useToast } from '@/hooks/use-toast';
 import { Navbar } from '@/components/Navbar';
 import { VideoCallButton } from '@/components/VideoCallButton';
-import { ArrowLeft, Send, Crown } from 'lucide-react';
+import { AIDigestSidebar } from '@/components/AIDigestSidebar';
+import { ArrowLeft, Send, Crown, PanelRightOpen, PanelRightClose } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
 
@@ -46,6 +47,7 @@ const Messages = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState('');
   const [loading, setLoading] = useState(true);
+  const [showAIDigest, setShowAIDigest] = useState(true);
 
   // Redirect to auth if not authenticated
   useEffect(() => {
@@ -228,6 +230,21 @@ const Messages = () => {
             <h1 className="text-3xl font-bold">Messages</h1>
           </div>
           <div className="flex items-center gap-4">
+            {/* AI Digest Toggle */}
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setShowAIDigest(!showAIDigest)}
+              className="flex items-center gap-2"
+            >
+              {showAIDigest ? (
+                <PanelRightClose className="h-4 w-4" />
+              ) : (
+                <PanelRightOpen className="h-4 w-4" />
+              )}
+              AI Digest
+            </Button>
+            
             {/* Message Limits Display */}
             {!isPremium && (
               <div className="flex items-center gap-2 px-3 py-2 bg-muted rounded-lg">
@@ -261,7 +278,7 @@ const Messages = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 h-[600px]">
+        <div className={`grid gap-6 h-[600px] ${showAIDigest ? 'grid-cols-1 md:grid-cols-4' : 'grid-cols-1 md:grid-cols-3'}`}>
           {/* Matches List */}
           <Card className="md:col-span-1">
             <CardHeader>
@@ -301,7 +318,7 @@ const Messages = () => {
           </Card>
 
           {/* Chat Area */}
-          <Card className="md:col-span-2">
+          <Card className={`${showAIDigest ? 'md:col-span-2' : 'md:col-span-2'}`}>
             <CardHeader>
               <CardTitle>
                 {selectedMatch 
@@ -387,6 +404,17 @@ const Messages = () => {
               )}
             </CardContent>
           </Card>
+
+          {/* AI Digest Sidebar */}
+          {showAIDigest && (
+            <Card className="md:col-span-1">
+              <AIDigestSidebar 
+                selectedMatch={selectedMatch}
+                otherUserId={selectedMatch ? matches.find(m => m.id === selectedMatch)?.other_user.id || null : null}
+                otherUserName={selectedMatch ? matches.find(m => m.id === selectedMatch)?.other_user.name || 'Unknown' : 'Unknown'}
+              />
+            </Card>
+          )}
         </div>
       </div>
     </div>
