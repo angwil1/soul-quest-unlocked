@@ -264,18 +264,18 @@ const Index = () => {
                   {/* Poetic Headline */}
                   <div className="space-y-6">
                     <h1 className="text-4xl sm:text-5xl lg:text-6xl font-light leading-tight tracking-wide">
-                      <span className="block mb-3 text-foreground">
+                      <span className="block mb-3 text-white drop-shadow-2xl" style={{ textShadow: '2px 2px 8px rgba(0,0,0,0.8), 0 0 16px rgba(0,0,0,0.6)' }}>
                         Beyond the surface,
                       </span>
-                      <span className="block mb-3 bg-gradient-to-r from-primary via-purple-500 to-pink-500 bg-clip-text text-transparent font-medium">
+                      <span className="block mb-3 bg-gradient-to-r from-primary via-purple-500 to-pink-500 bg-clip-text text-transparent font-medium drop-shadow-2xl" style={{ textShadow: '2px 2px 8px rgba(0,0,0,0.8)' }}>
                         beneath the noise
                       </span>
-                      <span className="block text-muted-foreground text-3xl sm:text-4xl lg:text-5xl">
+                      <span className="block text-white text-3xl sm:text-4xl lg:text-5xl drop-shadow-2xl" style={{ textShadow: '2px 2px 8px rgba(0,0,0,0.8), 0 0 16px rgba(0,0,0,0.6)' }}>
                         real connection awaits
                       </span>
                     </h1>
                     
-                    <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed font-light">
+                    <p className="text-lg sm:text-xl text-white max-w-2xl mx-auto leading-relaxed font-light drop-shadow-lg" style={{ textShadow: '2px 2px 6px rgba(0,0,0,0.8), 0 0 12px rgba(0,0,0,0.5)' }}>
                       A space for meaningful encounters, authentic stories, and the kind of love that changes everything.
                     </p>
                   </div>
