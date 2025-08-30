@@ -134,13 +134,13 @@ const Pricing = () => {
               return (
                 <Card 
                   key={plan.name} 
-                  className={`relative backdrop-blur-sm ${
+                  className={`relative bg-white dark:bg-gray-800 border-t-4 ${
                     isFree
-                      ? "bg-gradient-to-br from-purple-50/80 via-purple-100/60 to-purple-200/40 dark:from-purple-950/30 dark:via-purple-900/20 dark:to-purple-950/40 border-2 border-purple-300/60 dark:border-purple-600/50 shadow-purple-100/50 dark:shadow-purple-900/20"
+                      ? "border-t-purple-500 shadow-lg" 
                       : plan.popular 
-                      ? "border-primary shadow-lg scale-105 bg-gradient-to-br from-primary/10 via-secondary/10 to-accent/10" 
-                      : "border-border bg-white/70 dark:bg-gray-800/70 hover:bg-gradient-to-br hover:from-purple-50 hover:to-pink-50 dark:hover:from-purple-900/30 dark:hover:to-pink-900/30"
-                  } ${isCurrentPlan && !isFree ? "border-green-500 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950 dark:to-emerald-950" : ""} transition-all duration-300 hover:shadow-lg`}
+                      ? "border-t-purple-600 shadow-lg scale-105" 
+                      : "border-t-purple-400 shadow-md hover:shadow-lg"
+                  } ${isCurrentPlan && !isFree ? "border-t-green-500" : ""} transition-all duration-300`}
                 >
                   {isFree && (
                     <>
@@ -165,7 +165,7 @@ const Pricing = () => {
                   ) : null}
                   
                   <CardHeader className="text-center pb-4">
-                    <CardTitle className="text-xl font-bold flex items-center justify-center gap-2">
+                    <CardTitle className="text-xl font-bold flex items-center justify-center gap-2 text-gray-800 dark:text-gray-200">
                       {isFree ? (
                         <>
                           <span className="text-2xl">🌱</span>
@@ -186,29 +186,29 @@ const Pricing = () => {
                       ) : (
                         <>
                           <span className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">{plan.price}</span>
-                          <span className="text-muted-foreground">{plan.period}</span>
+                          <span className="text-neutral-700 dark:text-neutral-300">{plan.period}</span>
                         </>
                       )}
                     </div>
-                    <p className="text-sm text-muted-foreground italic">
+                    <p className="text-sm text-neutral-700 dark:text-neutral-300 italic">
                       {plan.description}
                     </p>
                   </CardHeader>
 
                   <CardContent className="space-y-4">
                     <div className="text-left">
-                      <p className="text-sm font-medium mb-3 text-muted-foreground">Includes:</p>
+                      <p className="text-sm font-medium mb-3 text-neutral-700 dark:text-neutral-300">Includes:</p>
                       <ul className="space-y-3">
                         {plan.features.map((feature) => (
                           <li key={feature} className="flex items-center gap-2">
                             <span className="text-green-500">✅</span>
-                            <span className="text-sm">{feature}</span>
+                            <span className="text-sm text-neutral-700 dark:text-neutral-300">{feature}</span>
                           </li>
                         ))}
                         {plan.restrictedFeatures?.map((feature) => (
                           <li key={feature} className="flex items-center gap-2">
                             <span className="text-red-500">❌</span>
-                            <span className="text-sm text-muted-foreground">{feature}</span>
+                            <span className="text-sm text-neutral-500 dark:text-neutral-400">{feature}</span>
                           </li>
                         ))}
                       </ul>
@@ -216,22 +216,17 @@ const Pricing = () => {
 
                     <div className="flex justify-center mt-6">
                       <button
-                        className={`w-full px-6 py-3 rounded-lg font-medium text-center transition-all duration-300 transform ${
+                        className={`w-full px-6 py-3 rounded-md font-medium text-center transition-all duration-300 ${
                           isCurrentPlan 
                             ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 cursor-default" 
                             : isFree
-                            ? "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200 hover:bg-purple-200 dark:hover:bg-purple-800 hover:shadow-lg hover:shadow-purple-200 dark:hover:shadow-purple-900/50 hover:scale-[1.02] cursor-default"
-                            : "bg-gradient-to-r from-purple-100 to-pink-100 text-purple-800 dark:from-purple-900 dark:to-pink-900 dark:text-purple-200 hover:from-purple-200 hover:to-pink-200 dark:hover:from-purple-800 dark:hover:to-pink-800 hover:shadow-lg hover:shadow-purple-200 dark:hover:shadow-purple-900/50 hover:scale-[1.02] border border-purple-200 dark:border-purple-700 hover:border-purple-300 dark:hover:border-purple-600"
+                            ? "bg-purple-600 text-white hover:bg-purple-700 cursor-default"
+                            : "bg-purple-600 text-white hover:bg-purple-700"
                         }`}
                         disabled={loading || isCurrentPlan || isFree}
                         onClick={() => handleSubscribe(plan.plan)}
                       >
-                        <span className="relative">
-                          {isCurrentPlan ? "Current Plan" : plan.buttonText}
-                          {!isCurrentPlan && !isFree && (
-                            <span className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-400 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
-                          )}
-                        </span>
+                        {isCurrentPlan ? "Current Plan" : plan.buttonText}
                       </button>
                     </div>
                   </CardContent>
