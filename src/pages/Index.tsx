@@ -19,7 +19,7 @@ import { Testimonials } from '@/components/Testimonials';
 import { HowItWorks } from '@/components/HowItWorks';
 import HeroSection from '@/components/HeroSection';
 import { PageLoadingSkeleton } from '@/components/LoadingSkeleton';
-import { Heart, Shield } from 'lucide-react';
+import { Heart, Shield, Star } from 'lucide-react';
 
 
 const Index = () => {
@@ -152,32 +152,132 @@ const Index = () => {
         {/* Soulful Invitation Section */}
         <SoulfulInvitation />
 
-        {/* Simple Features Section */}
-        <section className="py-20 bg-gradient-to-br from-background to-primary/5">
-          <div className="max-w-4xl mx-auto px-4 text-center">
-            {/* DRAMATIC DESCRIPTION - Promotional section - visible on all screens */}
-            <div className="mb-12">
-              <p className="text-sm md:text-lg text-white font-bold max-w-xs md:max-w-2xl mx-auto leading-relaxed animate-fade-in bg-gradient-to-r from-primary to-purple-600 p-3 rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
-                🚀 <span className="text-yellow-300 bg-black px-2 py-1 rounded-lg text-xs md:text-sm">NO MORE BORING SWIPES!</span> 🚀
-                <br/>
-                <span className="block mt-1 text-sm md:text-lg">Find your <span className="text-yellow-300 underline decoration-1 md:decoration-2 decoration-yellow-300">SOULMATE</span> with AI!</span>
-              </p>
+        {/* Enhanced Features Section */}
+        <section className="py-20 bg-gradient-to-br from-background via-primary/5 to-purple-500/10 relative overflow-hidden">
+          {/* Background Elements */}
+          <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-br from-primary/10 to-purple-500/5 rounded-full blur-xl animate-float"></div>
+          <div className="absolute bottom-20 right-10 w-40 h-40 bg-gradient-to-br from-purple-500/10 to-pink-500/5 rounded-full blur-xl animate-float" style={{ animationDelay: '1s' }}></div>
+          
+          <div className="max-w-6xl mx-auto px-4 text-center relative z-10">
+            {/* Enhanced Promotional Banner */}
+            <div className="mb-16 animate-fade-in">
+              <div className="inline-block relative">
+                <div className="bg-gradient-to-r from-primary via-purple-600 to-pink-600 p-1 rounded-2xl shadow-2xl hover:shadow-primary/25 transition-all duration-500 hover:scale-105 transform">
+                  <div className="bg-background/95 backdrop-blur-sm rounded-xl px-8 py-6">
+                    <div className="flex items-center justify-center gap-3 mb-3">
+                      <div className="animate-pulse">🚀</div>
+                      <span className="text-xs md:text-sm font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent uppercase tracking-wider">
+                        Revolutionary Dating
+                      </span>
+                      <div className="animate-pulse">🚀</div>
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <div className="text-lg md:text-2xl font-bold text-foreground">
+                        <span className="bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 bg-clip-text text-transparent">
+                          NO MORE BORING SWIPES!
+                        </span>
+                      </div>
+                      <div className="text-sm md:text-lg text-muted-foreground">
+                        Find your{' '}
+                        <span className="font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
+                          SOULMATE
+                        </span>{' '}
+                        with AI-powered intelligence
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Floating badges */}
+                <div className="absolute -top-3 -right-3 bg-gradient-to-r from-green-500 to-emerald-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg animate-pulse">
+                  NEW
+                </div>
+              </div>
             </div>
             
-            <h2 className="text-3xl font-serif font-light text-foreground mb-12">
-              Connection beyond the surface
-            </h2>
-            <div className="grid md:grid-cols-2 gap-8">
-              <Card className="p-6 bg-gradient-to-br from-primary/5 to-purple-500/5 border-primary/20">
-                <Heart className="h-8 w-8 text-primary mb-4 mx-auto" />
-                <h3 className="font-medium mb-2">Emotional Intelligence</h3>
-                <p className="text-sm text-muted-foreground">AI-powered matching based on authentic compatibility</p>
-              </Card>
-              <Card className="p-6 bg-gradient-to-br from-purple-500/5 to-pink-500/5 border-purple-500/20">
-                <Shield className="h-8 w-8 text-purple-500 mb-4 mx-auto" />
-                <h3 className="font-medium mb-2">Privacy First</h3>
-                <p className="text-sm text-muted-foreground">Your data protected with military-grade encryption</p>
-              </Card>
+            {/* Section Title */}
+            <div className="mb-16 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+              <h2 className="text-4xl md:text-5xl font-serif font-light text-foreground mb-4">
+                Connection beyond the surface
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Experience dating reimagined with emotional intelligence, authentic connections, and meaningful relationships
+              </p>
+            </div>
+
+            {/* Enhanced Feature Grid */}
+            <div className="grid md:grid-cols-3 gap-8 mb-16">
+              {[
+                {
+                  icon: Heart,
+                  title: "Emotional Intelligence",
+                  description: "AI analyzes compatibility based on values, personality, and emotional depth",
+                  gradient: "from-primary/10 to-purple-500/10",
+                  borderColor: "border-primary/20",
+                  iconColor: "text-primary",
+                  delay: "0.3s"
+                },
+                {
+                  icon: Shield,
+                  title: "Privacy & Safety First",
+                  description: "Military-grade encryption protects your data with advanced verification systems",
+                  gradient: "from-purple-500/10 to-pink-500/10",
+                  borderColor: "border-purple-500/20",
+                  iconColor: "text-purple-500",
+                  delay: "0.4s"
+                },
+                {
+                  icon: Star,
+                  title: "Quality Over Quantity",
+                  description: "Curated matches based on deep compatibility, not superficial attraction",
+                  gradient: "from-pink-500/10 to-primary/10",
+                  borderColor: "border-pink-500/20",
+                  iconColor: "text-pink-500",
+                  delay: "0.5s"
+                }
+              ].map((feature, index) => {
+                const IconComponent = feature.icon;
+                return (
+                  <Card 
+                    key={index}
+                    className={`p-8 bg-gradient-to-br ${feature.gradient} ${feature.borderColor} hover:scale-105 hover:shadow-xl transition-all duration-500 group cursor-pointer animate-fade-in`}
+                    style={{ animationDelay: feature.delay }}
+                  >
+                    <div className="text-center space-y-4">
+                      <div className={`inline-flex p-4 rounded-full bg-background/50 ${feature.iconColor} group-hover:scale-110 transition-transform duration-300`}>
+                        <IconComponent className="h-8 w-8" />
+                      </div>
+                      <h3 className="font-semibold text-lg text-foreground group-hover:text-primary transition-colors duration-300">
+                        {feature.title}
+                      </h3>
+                      <p className="text-muted-foreground text-sm leading-relaxed">
+                        {feature.description}
+                      </p>
+                    </div>
+                  </Card>
+                );
+              })}
+            </div>
+
+            {/* Stats Section */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 animate-fade-in" style={{ animationDelay: '0.6s' }}>
+              {[
+                { number: "94%", label: "Success Rate", icon: "💝" },
+                { number: "10K+", label: "Happy Couples", icon: "👫" },
+                { number: "4.8★", label: "User Rating", icon: "⭐" },
+                { number: "24/7", label: "Support", icon: "🛡️" }
+              ].map((stat, index) => (
+                <div key={index} className="text-center p-4 rounded-xl bg-background/50 backdrop-blur-sm border border-border/50 hover:border-primary/30 transition-all duration-300 hover:scale-105">
+                  <div className="text-2xl mb-2">{stat.icon}</div>
+                  <div className="text-2xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent mb-1">
+                    {stat.number}
+                  </div>
+                  <div className="text-xs text-muted-foreground font-medium">
+                    {stat.label}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </section>
