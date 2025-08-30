@@ -52,6 +52,7 @@ export const Navbar = () => {
     { name: "Discover Matches", href: "/browse" },
     { name: "Matches", href: "/matches" },  
     { name: "Conversations", href: "/messages" },
+    { name: "Memory Vault", href: "/memory-vault" },
     { name: "Pricing", href: "/pricing" },
     { name: "Sample Profiles", href: "/browse" },
     { name: "FAQ", href: "/faq" },
