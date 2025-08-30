@@ -5,6 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { ReportUser } from '@/components/ReportUser';
 import { BlockUser } from '@/components/BlockUser';
+import { SaveToVaultButton } from '@/components/SaveToVaultButton';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ArrowLeft, MessageCircle, Heart, Shield, MapPin, Briefcase, Eye } from 'lucide-react';
 import { founderCuratedProfiles } from '@/data/sampleProfiles';
@@ -150,10 +151,23 @@ const SampleUserProfile = () => {
                       </div>
                     </div>
                   </div>
-                  <Badge variant="secondary" className="bg-green-100 text-green-800">
-                    <Shield className="h-3 w-3 mr-1" />
-                    Sample Profile
-                  </Badge>
+                  <div className="flex items-center gap-2">
+                    <SaveToVaultButton
+                      type="match"
+                      data={{
+                        matched_user_id: profile.id,
+                        notes: `${profile.name} - Sample Profile`,
+                        tags: ['sample-profile', 'viewed']
+                      }}
+                      variant="outline"
+                      size="sm"
+                      className="h-8"
+                    />
+                    <Badge variant="secondary" className="bg-green-100 text-green-800">
+                      <Shield className="h-3 w-3 mr-1" />
+                      Sample Profile
+                    </Badge>
+                  </div>
                 </div>
               </CardHeader>
               <CardContent>
