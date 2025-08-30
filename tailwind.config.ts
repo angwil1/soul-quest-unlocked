@@ -97,11 +97,27 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'gentle-pulse': {
+					'0%, 100%': { 
+						transform: 'scale(1)', 
+						boxShadow: '0 0 0 0 rgba(255, 255, 255, 0.7)' 
+					},
+					'50%': { 
+						transform: 'scale(1.02)', 
+						boxShadow: '0 0 0 4px rgba(255, 255, 255, 0.3)' 
+					}
+				},
+				'progress-fill': {
+					'0%': { width: '0%' },
+					'100%': { width: '100%' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'gentle-pulse': 'gentle-pulse 2s ease-in-out infinite',
+				'progress-fill': 'progress-fill 1s ease-out'
 			}
 		}
 	},

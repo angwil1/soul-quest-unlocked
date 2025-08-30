@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { Progress } from '@/components/ui/progress';
 import { Sparkles, Clock, Users, Heart, X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
@@ -19,15 +20,18 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
   const navigate = useNavigate();
   const [isDismissed, setIsDismissed] = useState(false);
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0 });
+  const [progress, setProgress] = useState(0);
 
-  // Calculate time remaining (60 days from launch - using a fixed launch date for demo)
+  // Calculate time remaining and progress (60 days from launch - using a fixed launch date for demo)
   useEffect(() => {
     const launchDate = new Date('2024-08-16'); // Launch date
     const endDate = new Date(launchDate.getTime() + (60 * 24 * 60 * 60 * 1000)); // 60 days later
+    const totalDuration = 60 * 24 * 60 * 60 * 1000; // 60 days in milliseconds
     
     const timer = setInterval(() => {
       const now = new Date().getTime();
       const distance = endDate.getTime() - now;
+      const elapsed = totalDuration - distance;
       
       if (distance > 0) {
         const days = Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -35,6 +39,10 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         
         setTimeLeft({ days, hours, minutes });
+        
+        // Calculate progress percentage (how much time has elapsed)
+        const progressPercentage = Math.min(100, Math.max(0, (elapsed / totalDuration) * 100));
+        setProgress(progressPercentage);
       }
     }, 1000);
 
@@ -106,6 +114,18 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
               </div>
             </div>
 
+            {/* Progress Bar */}
+            <div className="w-full max-w-48 space-y-2">
+              <div className="flex items-center justify-between text-xs text-white/70">
+                <span>Quiet window progress</span>
+                <span>{Math.round(progress)}%</span>
+              </div>
+              <Progress 
+                value={progress} 
+                className="h-2 bg-white/20 [&>div]:bg-gradient-to-r [&>div]:from-white/80 [&>div]:to-white/60" 
+              />
+            </div>
+
             {/* Features */}
             <div className="flex flex-wrap justify-center gap-1 md:gap-2 text-xs text-white/90">
               <div className="flex items-center gap-1">
@@ -125,7 +145,7 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
                 onClick={handleQuizStart}
                 variant="secondary"
                 size="sm"
-                className="bg-white text-black hover:bg-white/90 font-medium text-xs md:text-sm px-3 py-1.5"
+                className="bg-white text-black hover:bg-white/90 font-medium text-xs md:text-sm px-3 py-1.5 animate-gentle-pulse"
               >
                 Start Quiz - Quiet Start ✨
               </Button>
