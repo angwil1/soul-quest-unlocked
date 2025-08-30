@@ -191,10 +191,10 @@ const Index = () => {
           {/* Simplified, breathing room design */}
           <div className="relative w-full h-full">
             {/* Gentle background fade - softer on mobile */}
-            <div className="absolute inset-0 bg-gradient-to-br from-purple-50/20 via-transparent to-purple-100/10 z-0"></div>
+            <div className="absolute inset-0 bg-purple-100/20 opacity-30 z-0"></div>
             
-            {/* Subtle bottom fade for warmth without covering content */}
-            <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-purple-100/30 to-transparent z-0"></div>
+            {/* Bottom gradient fade for warmth without covering content */}
+            <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-purple-100 to-transparent z-0"></div>
             
             {/* Primary Background Image - Fully Responsive */}
             <picture className="absolute inset-0 w-full h-full z-0">
@@ -234,8 +234,8 @@ const Index = () => {
               </div>
             )}
 
-            {/* Poetic Hero Section with Breathing Room */}
-            <div className="relative z-20 max-w-7xl mx-auto px-4 py-12 sm:py-20 text-center">
+            {/* Poetic Hero Section with Breathing Room - proper z-index layering */}
+            <div className="relative z-10 max-w-7xl mx-auto px-4 py-16 sm:px-6 sm:py-24 text-center">
               <div className="space-y-16 sm:space-y-20 lg:space-y-24 animate-fade-in">
                 {/* Repositioned Launch Banner - Subtle Integration */}
                 <div className="flex justify-center">
