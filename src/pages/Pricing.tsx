@@ -135,13 +135,20 @@ const Pricing = () => {
                 <Card 
                   key={plan.name} 
                   className={`relative backdrop-blur-sm ${
-                    plan.popular 
+                    isFree
+                      ? "bg-gradient-to-br from-purple-50/80 via-purple-100/60 to-purple-200/40 dark:from-purple-950/30 dark:via-purple-900/20 dark:to-purple-950/40 border-2 border-purple-300/60 dark:border-purple-600/50 shadow-purple-100/50 dark:shadow-purple-900/20"
+                      : plan.popular 
                       ? "border-primary shadow-lg scale-105 bg-gradient-to-br from-primary/10 via-secondary/10 to-accent/10" 
                       : "border-border bg-white/70 dark:bg-gray-800/70 hover:bg-gradient-to-br hover:from-purple-50 hover:to-pink-50 dark:hover:from-purple-900/30 dark:hover:to-pink-900/30"
-                  } ${isCurrentPlan ? "border-green-500 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950 dark:to-emerald-950" : ""} transition-all duration-300 hover:shadow-lg`}
+                  } ${isCurrentPlan && !isFree ? "border-green-500 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950 dark:to-emerald-950" : ""} transition-all duration-300 hover:shadow-lg`}
                 >
-                  {isCurrentPlan ? (
-                    <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-green-500 to-emerald-500 text-white">
+                  {isFree && (
+                    <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-purple-400 to-purple-500 text-white text-xs px-3 py-1">
+                      Launch Window
+                    </Badge>
+                  )}
+                  {isCurrentPlan && !isFree ? (
+                    <Badge className="absolute -top-3 right-4 bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300 text-xs px-2 py-1 border border-green-200 dark:border-green-800">
                       Current Plan
                     </Badge>
                   ) : plan.popular ? (
