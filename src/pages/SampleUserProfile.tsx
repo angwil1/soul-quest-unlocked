@@ -137,10 +137,10 @@ const SampleUserProfile = () => {
             {/* Basic Info */}
             <Card>
               <CardHeader>
-                <div className="flex items-start justify-between">
-                  <div>
+                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+                  <div className="flex-1">
                     <CardTitle className="text-2xl">{profile.name}, {profile.age}</CardTitle>
-                    <div className="flex items-center gap-4 text-muted-foreground mt-2">
+                    <div className="flex flex-wrap items-center gap-4 text-muted-foreground mt-2">
                       <div className="flex items-center gap-1">
                         <MapPin className="h-4 w-4" />
                         {profile.location}
@@ -151,7 +151,7 @@ const SampleUserProfile = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 flex-shrink-0">
                     <SaveToVaultButton
                       type="match"
                       data={{
@@ -161,9 +161,8 @@ const SampleUserProfile = () => {
                       }}
                       variant="outline"
                       size="sm"
-                      className="h-8"
                     />
-                    <Badge variant="secondary" className="bg-green-100 text-green-800">
+                    <Badge variant="secondary" className="bg-green-100 text-green-800 whitespace-nowrap">
                       <Shield className="h-3 w-3 mr-1" />
                       Sample Profile
                     </Badge>
