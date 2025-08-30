@@ -115,11 +115,11 @@ const Pricing = () => {
         <div className="bg-white dark:bg-gray-900 py-16 px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <h1 className="text-2xl sm:text-3xl font-semibold mb-4 text-gray-800 dark:text-gray-200" style={{ color: '#6B4C8A' }}>
+              <h1 className="text-2xl sm:text-3xl font-bold mb-4 text-purple-700 dark:text-purple-400">
                 AI Complete Me Pricing Plans
               </h1>
-              <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400 mb-2">Gentle by design. Emotionally intelligent by intention.</p>
-              <p className="text-gray-600 dark:text-gray-400 mb-6">
+              <p className="text-base sm:text-lg text-gray-700 dark:text-gray-300 font-normal mb-2">Gentle by design. Emotionally intelligent by intention.</p>
+              <p className="text-gray-700 dark:text-gray-300 font-normal mb-6">
                 Choose the plan that resonates with your journey toward deeper connection.
               </p>
               <div className="inline-block rounded-lg px-6 py-3 text-sm border" style={{ backgroundColor: '#F4F0FA', borderColor: '#6B4C8A', color: '#6B4C8A' }}>
