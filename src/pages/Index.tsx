@@ -309,7 +309,7 @@ const Index = () => {
                   
                   {/* DRAMATIC DESCRIPTION - Tablet only, positioned below buttons */}
                   <div className="hidden md:block lg:hidden mt-6">
-                    <p className="text-lg text-white font-bold max-w-2xl mx-auto leading-relaxed animate-fade-in bg-gradient-to-r from-red-500 to-pink-500 p-3 rounded-xl shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-500" style={{ animationDelay: '0.3s' }}>
+                    <p className="text-lg text-white font-bold max-w-2xl mx-auto leading-relaxed animate-fade-in bg-gradient-to-r from-pink-500 to-pink-600 p-3 rounded-xl shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-500" style={{ animationDelay: '0.3s' }}>
                       🚀 <span className="text-yellow-300 bg-black px-2 py-1 rounded-lg text-sm">NO MORE BORING SWIPES!</span> 🚀
                       <br/>
                       <span className="text-lg">Find your <span className="text-yellow-300 underline decoration-2 decoration-yellow-300">SOULMATE</span> with AI!</span>
@@ -367,7 +367,7 @@ const Index = () => {
           <div className="max-w-4xl mx-auto px-4 text-center">
             {/* DRAMATIC DESCRIPTION - Promotional section */}
             <div className="mb-12 md:hidden">
-              <p className="text-sm text-white font-bold max-w-xs mx-auto leading-relaxed animate-fade-in bg-gradient-to-r from-red-500 to-pink-500 p-3 rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
+              <p className="text-sm text-white font-bold max-w-xs mx-auto leading-relaxed animate-fade-in bg-gradient-to-r from-pink-500 to-pink-600 p-3 rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
                 🚀 <span className="text-yellow-300 bg-black px-2 py-1 rounded-lg text-xs">NO MORE BORING SWIPES!</span> 🚀
                 <br/>
                 <span className="block mt-1 text-sm">Find your <span className="text-yellow-300 underline decoration-1 decoration-yellow-300">SOULMATE</span> with AI!</span>
