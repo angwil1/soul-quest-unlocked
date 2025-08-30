@@ -210,8 +210,8 @@ const Index = () => {
               />
             </picture>
             
-            {/* Responsive overlay - lighter on tablet to avoid masking */}
-            <div className="absolute inset-0 bg-gradient-to-b from-background/3 via-transparent to-pink-500/2 md:from-background/5 md:to-pink-500/3 z-10"></div>
+            {/* Responsive overlay - minimal on mobile to prevent content covering */}
+            <div className="absolute inset-0 bg-gradient-to-b from-background/2 via-transparent to-background/1 md:from-background/5 md:to-pink-500/3 z-5"></div>
             
             {/* Responsive Floating Background Elements */}
             <div className="absolute top-10 sm:top-20 left-4 sm:left-20 w-32 sm:w-72 h-32 sm:h-72 bg-gradient-to-br from-primary/10 to-purple-600/10 rounded-full blur-2xl sm:blur-3xl animate-pulse z-10"></div>
