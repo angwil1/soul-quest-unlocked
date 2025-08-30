@@ -21,13 +21,14 @@ import datingBackground from '@/assets/dating-background.jpg';
 import coupleHero1 from '@/assets/couple-hero-1.jpg';
 import coupleAmbientClear from '@/assets/couple-ambient-clear.jpg';
 import coupleHeroOptimized from '@/assets/couple-hero-optimized.jpg';
+import coupleHeroCoolTones from '@/assets/couple-hero-cool-tones.jpg';
 import coupleClaspedHands from '/lovable-uploads/3a5c5b31-1df1-48ad-accf-4a340d4e914f.png';
 import { AmbientCoupleCarousel } from '@/components/AmbientCoupleCarousel';
 import { SoulfulInvitation } from '@/components/SoulfulInvitation';
 
 // Hero image rotation array - emotionally engaging images with proper positioning
 const heroImages = [
-  coupleHeroOptimized, // Emotionally engaging couple with centered face positioning
+  coupleHeroCoolTones, // Cool toned couple with soft daylight and nature background
   '/lovable-uploads/91ef8e13-28c7-4171-b1e7-1795b85fbbbf.png' // Beautiful sunset couple with warm golden hour lighting
 ];
 
