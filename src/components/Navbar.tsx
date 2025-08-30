@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Menu, X, Search, Filter, LogOut, User } from "lucide-react";
+import { Menu, X, Search, Filter, LogOut, User, Archive } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -9,6 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Card, CardContent } from "@/components/ui/card";
 import SearchFilters from "@/components/SearchFilters";
 import { supabase } from "@/integrations/supabase/client";
+import { useMemoryVault } from "@/hooks/useMemoryVault";
 
 export const Navbar = () => {
   const { user, signOut } = useAuth();
@@ -21,6 +22,33 @@ export const Navbar = () => {
   const [searchPreference, setSearchPreference] = useState('');
   const [zipCode, setZipCode] = useState('');
   const [hasCompletedQuiz, setHasCompletedQuiz] = useState(false);
+  const [newMemoriesCount, setNewMemoriesCount] = useState(0);
+  const { getNewMemoriesCount } = useMemoryVault();
+
+  // Check for new memories
+  useEffect(() => {
+    const checkNewMemories = async () => {
+      if (!user) {
+        setNewMemoriesCount(0);
+        return;
+      }
+
+      try {
+        const count = await getNewMemoriesCount();
+        setNewMemoriesCount(count);
+      } catch (error) {
+        console.error('Error checking new memories:', error);
+        setNewMemoriesCount(0);
+      }
+    };
+
+    checkNewMemories();
+    
+    // Check every 5 minutes
+    const interval = setInterval(checkNewMemories, 5 * 60 * 1000);
+    
+    return () => clearInterval(interval);
+  }, [user, getNewMemoriesCount]);
 
   // Check if user has completed quiz
   useEffect(() => {
@@ -139,9 +167,14 @@ export const Navbar = () => {
                   isActive(item.href)
                     ? "text-primary"
                     : "text-muted-foreground"
-                }`}
+                } ${item.name === "Memory Vault" ? "relative" : ""}`}
               >
                 {item.name}
+                {item.name === "Memory Vault" && newMemoriesCount > 0 && (
+                  <span className="absolute -top-2 -right-2 h-5 w-5 rounded-full bg-primary text-xs text-white flex items-center justify-center">
+                    {newMemoriesCount > 9 ? '9+' : newMemoriesCount}
+                  </span>
+                )}
               </Link>
             ))}
           </div>
@@ -204,10 +237,17 @@ export const Navbar = () => {
                     isActive(item.href)
                       ? "text-primary bg-muted"
                       : "text-muted-foreground"
-                  }`}
+                  } ${item.name === "Memory Vault" ? "relative" : ""}`}
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  {item.name}
+                  <div className="flex items-center justify-between">
+                    <span>{item.name}</span>
+                    {item.name === "Memory Vault" && newMemoriesCount > 0 && (
+                      <span className="ml-2 h-5 w-5 rounded-full bg-primary text-xs text-white flex items-center justify-center">
+                        {newMemoriesCount > 9 ? '9+' : newMemoriesCount}
+                      </span>
+                    )}
+                  </div>
                 </Link>
               ))}
               {/* Only show search in mobile if user has completed quiz */}

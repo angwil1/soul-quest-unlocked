@@ -230,6 +230,39 @@ export const useMemoryVault = () => {
     }
   }, [user]);
 
+  const getNewMemoriesCount = useCallback(async () => {
+    if (!user) return 0;
+
+    try {
+      // Check for memories added in the last 24 hours that haven't been marked as seen
+      const twentyFourHoursAgo = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+      
+      const [matchesRes, promptsRes, momentsRes] = await Promise.all([
+        supabase
+          .from('memory_vault_matches')
+          .select('id', { count: 'exact' })
+          .eq('user_id', user.id)
+          .gte('created_at', twentyFourHoursAgo),
+        supabase
+          .from('memory_vault_prompts')
+          .select('id', { count: 'exact' })
+          .eq('user_id', user.id)
+          .gte('created_at', twentyFourHoursAgo),
+        supabase
+          .from('memory_vault_moments')
+          .select('id', { count: 'exact' })
+          .eq('user_id', user.id)
+          .gte('created_at', twentyFourHoursAgo)
+      ]);
+
+      const totalNewMemories = (matchesRes.count || 0) + (promptsRes.count || 0) + (momentsRes.count || 0);
+      return totalNewMemories;
+    } catch (error) {
+      console.error('Error getting new memories count:', error);
+      return 0;
+    }
+  }, [user]);
+
   const getVaultStats = useCallback(async () => {
     if (!user) return { matches: 0, prompts: 0, moments: 0 };
 
@@ -258,6 +291,7 @@ export const useMemoryVault = () => {
     saveMoment,
     removeFromVault,
     checkIfSaved,
-    getVaultStats
+    getVaultStats,
+    getNewMemoriesCount
   };
 };
