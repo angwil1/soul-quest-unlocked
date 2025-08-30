@@ -243,9 +243,9 @@ const Index = () => {
             {/* Poetic Hero Section with Breathing Room - proper z-index layering */}
             <div className="relative z-10 max-w-7xl mx-auto px-4 py-16 sm:px-6 sm:py-24 text-center">
               <div className="space-y-16 sm:space-y-20 lg:space-y-24 animate-fade-in">
-                {/* Repositioned Launch Banner - Subtle Integration */}
+                {/* Repositioned Launch Banner - Smaller, Less Intrusive */}
                 <div className="flex justify-center">
-                  <div className="w-full max-w-2xl">
+                  <div className="w-full max-w-sm md:max-w-md">
                     <LaunchBanner showDismiss={true} variant="homepage" />
                   </div>
                 </div>
