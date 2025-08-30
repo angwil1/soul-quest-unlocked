@@ -190,8 +190,11 @@ const Index = () => {
 
           {/* Simplified, breathing room design */}
           <div className="relative w-full h-full">
-            {/* Minimal background overlay */}
-            <div className="absolute inset-0 bg-gradient-to-br from-muted/10 via-transparent to-primary/5 z-0"></div>
+            {/* Gentle background fade - softer on mobile */}
+            <div className="absolute inset-0 bg-gradient-to-br from-purple-50/20 via-transparent to-purple-100/10 z-0"></div>
+            
+            {/* Subtle bottom fade for warmth without covering content */}
+            <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-purple-100/30 to-transparent z-0"></div>
             
             {/* Primary Background Image - Fully Responsive */}
             <picture className="absolute inset-0 w-full h-full z-0">
@@ -213,9 +216,9 @@ const Index = () => {
             {/* Responsive overlay - minimal on mobile to prevent content covering */}
             <div className="absolute inset-0 bg-gradient-to-b from-background/2 via-transparent to-background/1 md:from-background/5 md:to-pink-500/3 z-5"></div>
             
-            {/* Responsive Floating Background Elements */}
-            <div className="absolute top-10 sm:top-20 left-4 sm:left-20 w-32 sm:w-72 h-32 sm:h-72 bg-gradient-to-br from-primary/10 to-purple-600/10 rounded-full blur-2xl sm:blur-3xl animate-pulse z-10"></div>
-            <div className="absolute bottom-10 sm:bottom-20 right-4 sm:right-20 w-48 sm:w-96 h-48 sm:h-96 bg-gradient-to-br from-pink-600/10 to-primary/10 rounded-full blur-2xl sm:blur-3xl animate-pulse z-10" style={{ animationDelay: '1s' }}></div>
+            {/* Softer floating background elements - less dominant on mobile */}
+            <div className="absolute top-10 sm:top-20 left-4 sm:left-20 w-24 sm:w-72 h-24 sm:h-72 bg-gradient-to-br from-purple-200/20 to-purple-300/15 rounded-full blur-xl sm:blur-3xl animate-pulse z-1"></div>
+            <div className="absolute bottom-10 sm:bottom-20 right-4 sm:right-20 w-32 sm:w-96 h-32 sm:h-96 bg-gradient-to-br from-purple-300/15 to-purple-200/20 rounded-full blur-xl sm:blur-3xl animate-pulse z-1" style={{ animationDelay: '1s' }}></div>
 
             {/* JSX-Based Conditional Captions */}
             {imageSpecificCaptions[heroImages[currentHeroImageIndex]] && (
