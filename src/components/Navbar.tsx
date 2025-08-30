@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Menu, X, Search, Filter, LogOut, User, Archive } from "lucide-react";
+import { Menu, X, Search, Filter, LogOut, User, Archive, Dna, ChevronDown } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -10,6 +10,13 @@ import { Card, CardContent } from "@/components/ui/card";
 import SearchFilters from "@/components/SearchFilters";
 import { supabase } from "@/integrations/supabase/client";
 import { useMemoryVault } from "@/hooks/useMemoryVault";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export const Navbar = () => {
   const { user, signOut } = useAuth();
@@ -23,6 +30,7 @@ export const Navbar = () => {
   const [zipCode, setZipCode] = useState('');
   const [hasCompletedQuiz, setHasCompletedQuiz] = useState(false);
   const [newMemoriesCount, setNewMemoriesCount] = useState(0);
+  const [isUnlockedBeyond, setIsUnlockedBeyond] = useState(false);
   const { getNewMemoriesCount } = useMemoryVault();
 
   // Check for new memories
@@ -50,30 +58,42 @@ export const Navbar = () => {
     return () => clearInterval(interval);
   }, [user, getNewMemoriesCount]);
 
-  // Check if user has completed quiz
+  // Check if user has completed quiz and subscription status
   useEffect(() => {
-    const checkQuizCompletion = async () => {
+    const checkUserStatus = async () => {
       if (!user) {
         setHasCompletedQuiz(false);
+        setIsUnlockedBeyond(false);
         return;
       }
 
       try {
-        const { data } = await supabase
+        // Check quiz completion
+        const { data: quizData } = await supabase
           .from('user_events')
           .select('*')
           .eq('user_id', user.id)
           .eq('event_type', 'quiz_completed')
           .limit(1);
         
-        setHasCompletedQuiz(data && data.length > 0);
+        setHasCompletedQuiz(quizData && quizData.length > 0);
+
+        // Check subscription status - for now just checking if profile exists with beyond features
+        const { data: profileData } = await supabase
+          .from('profiles')
+          .select('unlocked_beyond_badge_enabled')
+          .eq('id', user.id)
+          .single();
+        
+        setIsUnlockedBeyond(profileData?.unlocked_beyond_badge_enabled || false);
       } catch (error) {
-        console.error('Error checking quiz completion:', error);
+        console.error('Error checking user status:', error);
         setHasCompletedQuiz(false);
+        setIsUnlockedBeyond(false);
       }
     };
 
-    checkQuizCompletion();
+    checkUserStatus();
   }, [user]);
 
   const navigation = [
@@ -195,16 +215,41 @@ export const Navbar = () => {
             )}
             {user ? (
               <div className="flex items-center space-x-4">
-                <Link to="/profile">
-                  <Button variant="ghost" size="sm" className="flex items-center gap-2">
-                    <User className="h-4 w-4" />
-                    Profile
-                  </Button>
-                </Link>
-                <Button variant="outline" size="sm" onClick={signOut} className="flex items-center gap-2">
-                  <LogOut className="h-4 w-4" />
-                  Sign Out
-                </Button>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" size="sm" className="flex items-center gap-2">
+                      <User className="h-4 w-4" />
+                      Profile
+                      <ChevronDown className="h-3 w-3" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="w-56">
+                    <DropdownMenuItem asChild>
+                      <Link to="/profile" className="flex items-center">
+                        <User className="h-4 w-4 mr-2" />
+                        View Profile
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem 
+                      onClick={() => {
+                        if (isUnlockedBeyond) {
+                          navigate('/connection-dna');
+                        } else {
+                          navigate('/pricing');
+                        }
+                      }}
+                      className="flex items-center"
+                    >
+                      <Dna className="h-4 w-4 mr-2" />
+                      Connection DNA Profile
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem onClick={signOut} className="flex items-center">
+                      <LogOut className="h-4 w-4 mr-2" />
+                      Sign Out
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               </div>
             ) : (
               <Link to="/auth">
@@ -276,6 +321,22 @@ export const Navbar = () => {
                         View Profile
                       </Button>
                     </Link>
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      className="w-full justify-start flex items-center gap-3"
+                      onClick={() => {
+                        setIsMenuOpen(false);
+                        if (isUnlockedBeyond) {
+                          navigate('/connection-dna');
+                        } else {
+                          navigate('/pricing');
+                        }
+                      }}
+                    >
+                      <Dna className="h-4 w-4" />
+                      Connection DNA Profile
+                    </Button>
                     <Button 
                       variant="destructive" 
                       size="sm" 

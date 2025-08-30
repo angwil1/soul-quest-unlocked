@@ -48,8 +48,32 @@ const ConnectionDNA = () => {
   const [insights, setInsights] = useState<DNAInsight[]>([]);
   const [loading, setLoading] = useState(true);
   const [analyzing, setAnalyzing] = useState(false);
+  const [isUnlockedBeyond, setIsUnlockedBeyond] = useState(false);
 
-  const isUnlockedBeyond = false; // Simplified without subscription
+  // Check subscription status
+  useEffect(() => {
+    const checkSubscription = async () => {
+      if (!user) {
+        setIsUnlockedBeyond(false);
+        return;
+      }
+
+      try {
+        const { data: profileData } = await supabase
+          .from('profiles')
+          .select('unlocked_beyond_badge_enabled')
+          .eq('id', user.id)
+          .single();
+        
+        setIsUnlockedBeyond(profileData?.unlocked_beyond_badge_enabled || false);
+      } catch (error) {
+        console.error('Error checking subscription:', error);
+        setIsUnlockedBeyond(false);
+      }
+    };
+
+    checkSubscription();
+  }, [user]);
 
   useEffect(() => {
     if (user && isUnlockedBeyond) {
@@ -177,8 +201,7 @@ const ConnectionDNA = () => {
             <div className="text-6xl mb-6">🧬</div>
             <h1 className="text-4xl font-bold mb-4">Connection DNA</h1>
             <p className="text-xl text-muted-foreground mb-8">
-              Connection DNA is an exclusive feature for Unlocked Beyond subscribers. 
-              Discover your evolving emotional intelligence for deeper match potential.
+              Connection DNA is part of Complete Beyond. Upgrade to explore your evolving compatibility profile.
             </p>
             <div className="bg-card rounded-lg p-6 mb-8">
               <h3 className="text-lg font-semibold mb-4">What Connection DNA reveals:</h3>
@@ -207,7 +230,7 @@ const ConnectionDNA = () => {
             </div>
             <Button onClick={() => window.location.href = '/pricing'} size="lg">
               <Crown className="h-4 w-4 mr-2" />
-              Upgrade to Unlocked Beyond
+              Upgrade to Complete Beyond
             </Button>
           </div>
         </div>
