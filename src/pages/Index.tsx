@@ -306,15 +306,6 @@ const Index = () => {
                     {/* Message bubble tail */}
                     <div className="absolute -bottom-0.5 sm:-bottom-1 lg:-bottom-0.5 left-1.5 sm:left-3 lg:left-2 w-2 sm:w-3 lg:w-2 h-2 sm:h-3 lg:h-2 bg-gradient-to-r from-primary to-purple-600 transform rotate-45 rounded-sm"></div>
                   </div>
-                  
-                  {/* DRAMATIC DESCRIPTION - Tablet only, positioned below buttons */}
-                  <div className="hidden md:block lg:hidden mt-6">
-                    <p className="text-lg text-white font-bold max-w-2xl mx-auto leading-relaxed animate-fade-in bg-gradient-to-r from-primary to-purple-600 p-3 rounded-xl shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-500" style={{ animationDelay: '0.3s' }}>
-                      🚀 <span className="text-yellow-300 bg-black px-2 py-1 rounded-lg text-sm">NO MORE BORING SWIPES!</span> 🚀
-                      <br/>
-                      <span className="text-lg">Find your <span className="text-yellow-300 underline decoration-2 decoration-yellow-300">SOULMATE</span> with AI!</span>
-                    </p>
-                  </div>
                 </div>
 
               </div>
@@ -365,12 +356,12 @@ const Index = () => {
         {/* Simple Features Section */}
         <section className="py-20 bg-gradient-to-br from-background to-primary/5">
           <div className="max-w-4xl mx-auto px-4 text-center">
-            {/* DRAMATIC DESCRIPTION - Promotional section */}
-            <div className="mb-12 md:hidden">
-              <p className="text-sm text-white font-bold max-w-xs mx-auto leading-relaxed animate-fade-in bg-gradient-to-r from-primary to-purple-600 p-3 rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
-                🚀 <span className="text-yellow-300 bg-black px-2 py-1 rounded-lg text-xs">NO MORE BORING SWIPES!</span> 🚀
+            {/* DRAMATIC DESCRIPTION - Promotional section - visible on all screens */}
+            <div className="mb-12">
+              <p className="text-sm md:text-lg text-white font-bold max-w-xs md:max-w-2xl mx-auto leading-relaxed animate-fade-in bg-gradient-to-r from-primary to-purple-600 p-3 rounded-xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
+                🚀 <span className="text-yellow-300 bg-black px-2 py-1 rounded-lg text-xs md:text-sm">NO MORE BORING SWIPES!</span> 🚀
                 <br/>
-                <span className="block mt-1 text-sm">Find your <span className="text-yellow-300 underline decoration-1 decoration-yellow-300">SOULMATE</span> with AI!</span>
+                <span className="block mt-1 text-sm md:text-lg">Find your <span className="text-yellow-300 underline decoration-1 md:decoration-2 decoration-yellow-300">SOULMATE</span> with AI!</span>
               </p>
             </div>
             
