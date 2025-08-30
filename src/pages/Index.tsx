@@ -178,6 +178,13 @@ const Index = () => {
       <div className="min-h-screen bg-gradient-to-br from-background via-muted/5 to-background">
         <Navbar />
         
+        {/* Launch Banner Section - Above everything */}
+        <section className="py-4 bg-gradient-to-br from-primary/5 to-purple-500/5">
+          <div className="max-w-2xl mx-auto px-4">
+            <LaunchBanner showDismiss={true} variant="homepage" />
+          </div>
+        </section>
+        
         {/* EMOTIONALLY INTELLIGENT HERO DESIGN */}
         <section className="relative overflow-hidden min-h-[100vh] min-h-[100dvh] flex items-center justify-center bg-white">
           
@@ -352,13 +359,6 @@ const Index = () => {
                 </div>
               </div>
             </div>
-          </div>
-        </section>
-
-        {/* Launch Banner Section - Separate from hero to avoid covering images */}
-        <section className="py-8 bg-gradient-to-br from-primary/5 to-purple-500/5">
-          <div className="max-w-2xl mx-auto px-4">
-            <LaunchBanner showDismiss={true} variant="homepage" />
           </div>
         </section>
 
