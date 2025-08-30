@@ -25,6 +25,7 @@ import coupleHeroCoolTones from '@/assets/couple-hero-cool-tones.jpg';
 import coupleHeroCool2 from '@/assets/couple-hero-cool-2.jpg';
 import coupleHeroMobile1 from '@/assets/couple-hero-mobile-1.jpg';
 import coupleHeroMobile2 from '@/assets/couple-hero-mobile-2.jpg';
+import coupleHeroMobile3 from '@/assets/couple-hero-mobile-3.jpg';
 import coupleClaspedHands from '/lovable-uploads/3a5c5b31-1df1-48ad-accf-4a340d4e914f.png';
 import { AmbientCoupleCarousel } from '@/components/AmbientCoupleCarousel';
 import { SoulfulInvitation } from '@/components/SoulfulInvitation';
@@ -32,7 +33,8 @@ import { SoulfulInvitation } from '@/components/SoulfulInvitation';
 // Hero image rotation array - mobile-optimized images with proper positioning
 const heroImages = [
   coupleHeroMobile1, // Mobile-optimized cool toned couple with soft daylight
-  coupleHeroMobile2 // Mobile-optimized romantic couple with serene forest background
+  coupleHeroMobile2, // Mobile-optimized romantic couple with serene forest background
+  coupleHeroMobile3 // Mobile-optimized diverse couple with cool tones and nature background
 ];
 
 // Conditional captions for specific images
