@@ -143,9 +143,16 @@ const Pricing = () => {
                   } ${isCurrentPlan && !isFree ? "border-green-500 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950 dark:to-emerald-950" : ""} transition-all duration-300 hover:shadow-lg`}
                 >
                   {isFree && (
-                    <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-purple-400 to-purple-500 text-white text-xs px-3 py-1">
-                      Launch Window
-                    </Badge>
+                    <>
+                      <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-purple-400 to-purple-500 text-white text-xs px-3 py-1">
+                        Launch Window
+                      </Badge>
+                      {isCurrentPlan && (
+                        <Badge className="absolute -top-3 right-4 bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300 text-xs px-2 py-1 border border-green-200 dark:border-green-800">
+                          Current Plan
+                        </Badge>
+                      )}
+                    </>
                   )}
                   {isCurrentPlan && !isFree ? (
                     <Badge className="absolute -top-3 right-4 bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300 text-xs px-2 py-1 border border-green-200 dark:border-green-800">
@@ -159,12 +166,29 @@ const Pricing = () => {
                   
                   <CardHeader className="text-center pb-4">
                     <CardTitle className="text-xl font-bold flex items-center justify-center gap-2">
-                      <span className="text-2xl">{plan.icon}</span>
-                      {plan.name}
+                      {isFree ? (
+                        <>
+                          <span className="text-2xl">🌱</span>
+                          <span>Quiet Start</span>
+                        </>
+                      ) : (
+                        <>
+                          <span className="text-2xl">{plan.icon}</span>
+                          {plan.name}
+                        </>
+                      )}
                     </CardTitle>
                     <div className="flex items-baseline justify-center gap-1">
-                      <span className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">{plan.price}</span>
-                      <span className="text-muted-foreground">{plan.period}</span>
+                      {isFree ? (
+                        <span className="text-lg font-medium text-purple-600 dark:text-purple-400">
+                          Launch Window – $0/month
+                        </span>
+                      ) : (
+                        <>
+                          <span className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">{plan.price}</span>
+                          <span className="text-muted-foreground">{plan.period}</span>
+                        </>
+                      )}
                     </div>
                     <p className="text-sm text-muted-foreground italic">
                       {plan.description}
@@ -172,20 +196,23 @@ const Pricing = () => {
                   </CardHeader>
 
                   <CardContent className="space-y-4">
-                    <ul className="space-y-3">
-                      {plan.features.map((feature) => (
-                        <li key={feature} className="flex items-center gap-2">
-                          <span className="text-emerald-500 font-bold">✓</span>
-                          <span className="text-sm">{feature}</span>
-                        </li>
-                      ))}
-                      {plan.restrictedFeatures?.map((feature) => (
-                        <li key={feature} className="flex items-center gap-2">
-                          <span className="text-rose-500 font-bold">✗</span>
-                          <span className="text-sm text-muted-foreground line-through">{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
+                    <div className="text-left">
+                      <p className="text-sm font-medium mb-3 text-muted-foreground">Includes:</p>
+                      <ul className="space-y-3">
+                        {plan.features.map((feature) => (
+                          <li key={feature} className="flex items-center gap-2">
+                            <span className="text-green-500">✅</span>
+                            <span className="text-sm">{feature}</span>
+                          </li>
+                        ))}
+                        {plan.restrictedFeatures?.map((feature) => (
+                          <li key={feature} className="flex items-center gap-2">
+                            <span className="text-red-500">❌</span>
+                            <span className="text-sm text-muted-foreground">{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
 
                     <div className="flex justify-center mt-6">
                       <button
