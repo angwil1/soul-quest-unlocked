@@ -29,6 +29,9 @@ import coupleHeroMobile3 from '@/assets/couple-hero-mobile-3.jpg';
 import coupleClaspedHands from '/lovable-uploads/3a5c5b31-1df1-48ad-accf-4a340d4e914f.png';
 import { AmbientCoupleCarousel } from '@/components/AmbientCoupleCarousel';
 import { SoulfulInvitation } from '@/components/SoulfulInvitation';
+import { WaitlistSignup } from '@/components/WaitlistSignup';
+import { Testimonials } from '@/components/Testimonials';
+import { HowItWorks } from '@/components/HowItWorks';
 
 // Hero image rotation array - mobile-optimized images with proper positioning
 const heroImages = [
@@ -263,7 +266,7 @@ const Index = () => {
 
                   {/* Poetic Headline */}
                   <div className="space-y-6">
-                    <h1 className="text-4xl sm:text-5xl lg:text-6xl font-light leading-tight tracking-wide">
+                    <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-light leading-tight tracking-wide">
                       <span className="block mb-3 text-white drop-shadow-2xl" style={{ textShadow: '2px 2px 8px rgba(0,0,0,0.8), 0 0 16px rgba(0,0,0,0.6)' }}>
                         Beyond the surface,
                       </span>
@@ -345,10 +348,19 @@ const Index = () => {
           </div>
         </section>
 
+        {/* How It Works Section */}
+        <HowItWorks />
+
         {/* Ambient Couple Carousel Section */}
         <section className="py-20 bg-gradient-to-br from-muted/20 to-background">
           <AmbientCoupleCarousel />
         </section>
+
+        {/* Testimonials Section */}
+        <Testimonials />
+
+        {/* Waitlist Signup Section */}
+        <WaitlistSignup />
 
         {/* Soulful Invitation Section */}
         <SoulfulInvitation />
@@ -365,7 +377,7 @@ const Index = () => {
               </p>
             </div>
             
-            <h2 className="text-3xl font-light text-foreground mb-12">
+            <h2 className="text-3xl font-serif font-light text-foreground mb-12">
               Connection beyond the surface
             </h2>
             <div className="grid md:grid-cols-2 gap-8">
