@@ -240,14 +240,9 @@ const Index = () => {
               </div>
             )}
 
-            {/* Launch Banner - Positioned at top to avoid covering images */}
-            <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-30 w-full max-w-xs sm:max-w-sm px-4">
-              <LaunchBanner showDismiss={true} variant="homepage" />
-            </div>
-
             {/* Poetic Hero Section with Breathing Room - proper z-index layering */}
             <div className="relative z-10 max-w-7xl mx-auto px-4 py-16 sm:px-6 sm:py-24 text-center">
-              <div className="space-y-16 sm:space-y-20 lg:space-y-24 animate-fade-in mt-16 sm:mt-20">
+              <div className="space-y-16 sm:space-y-20 lg:space-y-24 animate-fade-in">
                 
                 {/* Poetic Hero Content */}
                 <div className="space-y-8 sm:space-y-10 lg:space-y-12">
@@ -357,6 +352,13 @@ const Index = () => {
                 </div>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* Launch Banner Section - Separate from hero to avoid covering images */}
+        <section className="py-8 bg-gradient-to-br from-primary/5 to-purple-500/5">
+          <div className="max-w-2xl mx-auto px-4">
+            <LaunchBanner showDismiss={true} variant="homepage" />
           </div>
         </section>
 
