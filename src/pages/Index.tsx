@@ -213,8 +213,8 @@ const Index = () => {
               />
             </picture>
             
-            {/* Responsive overlay - minimal on mobile to prevent content covering */}
-            <div className="absolute inset-0 bg-gradient-to-b from-background/2 via-transparent to-background/1 md:from-background/5 md:to-pink-500/3 z-5"></div>
+            {/* Ultra-gentle overlay - barely visible on mobile */}
+            <div className="absolute inset-0 bg-gradient-to-t from-purple-50/5 via-transparent to-transparent md:bg-gradient-to-b md:from-background/5 md:to-purple-100/8 z-5"></div>
             
             {/* Softer floating background elements - less dominant on mobile */}
             <div className="absolute top-10 sm:top-20 left-4 sm:left-20 w-24 sm:w-72 h-24 sm:h-72 bg-gradient-to-br from-purple-200/20 to-purple-300/15 rounded-full blur-xl sm:blur-3xl animate-pulse z-1"></div>
@@ -247,7 +247,7 @@ const Index = () => {
                 {/* Poetic Hero Content */}
                 <div className="space-y-8 sm:space-y-10 lg:space-y-12">
                   {/* Emotional Badge */}
-                  <div className="inline-flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-primary/10 to-purple-600/10 border border-primary/20 backdrop-blur-sm">
+                  <div className="inline-flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-primary/5 to-purple-600/5 md:from-primary/10 md:to-purple-600/10 border border-primary/10 md:border-primary/20 backdrop-blur-sm">
                     <Heart className="h-5 w-5 mr-3 text-primary" />
                     <span className="text-sm font-medium text-primary">
                       Where souls recognize each other
