@@ -196,11 +196,11 @@ const Index = () => {
 
           {/* Simplified, breathing room design */}
           <div className="relative w-full h-full">
-            {/* Gentle background fade - softer on mobile, minimal on desktop */}
-            <div className="absolute inset-0 bg-purple-100/20 opacity-30 md:opacity-10 lg:opacity-5 z-0"></div>
+            {/* Gentle background fade - mobile only, hidden on desktop */}
+            <div className="absolute inset-0 bg-purple-100/20 opacity-30 md:opacity-0 z-0"></div>
             
-            {/* Bottom gradient fade for warmth without covering content - mobile only */}
-            <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-purple-100/20 to-transparent md:from-purple-100/10 lg:from-purple-100/5 z-0"></div>
+            {/* Bottom gradient fade - mobile only, hidden on desktop */}
+            <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-purple-100/20 to-transparent md:hidden z-0"></div>
             
             {/* Primary Background Image - Fully Responsive */}
             <picture className="absolute inset-0 w-full h-full z-0">
@@ -219,8 +219,8 @@ const Index = () => {
                 />
             </picture>
             
-            {/* Ultra-gentle overlay - barely visible on mobile */}
-            <div className="absolute inset-0 bg-gradient-to-t from-purple-50/5 via-transparent to-transparent md:bg-gradient-to-b md:from-background/5 md:to-purple-100/8 z-5"></div>
+            {/* Ultra-gentle overlay - mobile only, hidden on desktop */}
+            <div className="absolute inset-0 bg-gradient-to-t from-purple-50/5 via-transparent to-transparent md:hidden z-5"></div>
             
             {/* Softer floating background elements - less dominant on mobile */}
             <div className="absolute top-10 sm:top-20 left-4 sm:left-20 w-24 sm:w-72 h-24 sm:h-72 bg-gradient-to-br from-purple-200/20 to-purple-300/15 rounded-full blur-xl sm:blur-3xl animate-pulse z-1"></div>
