@@ -18,7 +18,6 @@ import { WaitlistSignup } from '@/components/WaitlistSignup';
 import { Testimonials } from '@/components/Testimonials';
 import { HowItWorks } from '@/components/HowItWorks';
 import HeroSection from '@/components/HeroSection';
-import FAQ from '@/components/FAQ';
 import { PageLoadingSkeleton } from '@/components/LoadingSkeleton';
 import { Heart, Shield } from 'lucide-react';
 
@@ -146,9 +145,6 @@ const Index = () => {
 
         {/* Testimonials Section */}
         <Testimonials />
-
-        {/* FAQ Section */}
-        <FAQ />
 
         {/* Waitlist Signup Section */}
         <WaitlistSignup />
