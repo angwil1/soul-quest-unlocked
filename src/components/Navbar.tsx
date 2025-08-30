@@ -32,6 +32,10 @@ export const Navbar = () => {
   const [newMemoriesCount, setNewMemoriesCount] = useState(0);
   const [isUnlockedBeyond, setIsUnlockedBeyond] = useState(false);
   const { getNewMemoriesCount } = useMemoryVault();
+  
+  // Debug logging
+  console.log('Navbar: user authenticated?', !!user);
+  console.log('Navbar: isUnlockedBeyond?', isUnlockedBeyond);
 
   // Check for new memories
   useEffect(() => {
