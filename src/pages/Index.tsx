@@ -180,7 +180,7 @@ const Index = () => {
         
         {/* Launch Banner Section - Above everything */}
         <section className="py-4 bg-gradient-to-br from-primary/5 to-purple-500/5">
-          <div className="max-w-2xl mx-auto px-4">
+          <div className="max-w-2xl mx-auto px-4 md:max-w-full md:px-6 lg:px-8">
             <LaunchBanner showDismiss={true} variant="homepage" />
           </div>
         </section>
