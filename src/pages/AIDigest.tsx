@@ -41,17 +41,227 @@ const AIDigest = () => {
       <div className="min-h-screen bg-background">
         <Navbar />
         <div className="p-4 max-w-4xl mx-auto">
-          <Card>
-            <CardHeader>
-              <CardTitle>Authentication Required</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p>Please sign in to view your AI digest summaries.</p>
-              <Button onClick={() => navigate('/auth')} className="mt-4">
-                Sign In
-              </Button>
-            </CardContent>
-          </Card>
+          <div className="mb-8">
+            <h1 className="text-3xl font-bold flex items-center gap-3 mb-2">
+              <Crown className="h-8 w-8 text-primary" />
+              AI Digest Summaries
+              <Badge variant="secondary" className="ml-2">Preview</Badge>
+            </h1>
+            <p className="text-muted-foreground text-lg">
+              See how AI-powered insights help you make better connections
+            </p>
+          </div>
+
+          {/* Demo Content */}
+          <Tabs defaultValue="today" className="w-full">
+            <TabsList className="grid w-full grid-cols-2">
+              <TabsTrigger value="today" className="flex items-center gap-2">
+                <Clock className="h-4 w-4" />
+                Today's Digest
+              </TabsTrigger>
+              <TabsTrigger value="history" className="flex items-center gap-2">
+                <Calendar className="h-4 w-4" />
+                History
+              </TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="today" className="space-y-6">
+              {/* Demo Notice */}
+              <Card className="border-primary/20 bg-gradient-to-r from-primary/5 to-background">
+                <CardContent className="pt-6">
+                  <div className="flex items-center gap-2 text-primary mb-2">
+                    <Sparkles className="h-5 w-5" />
+                    <span className="font-medium">Preview Mode</span>
+                  </div>
+                  <p className="text-sm text-muted-foreground">
+                    This is a demo of what your personalized AI Digest would look like with your real matches and conversations.
+                  </p>
+                </CardContent>
+              </Card>
+
+              {/* Demo Greeting */}
+              <Card className="bg-gradient-to-br from-primary/5 to-background border-primary/20">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Sparkles className="h-5 w-5 text-primary" />
+                    Daily Greeting
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-lg leading-relaxed">
+                    Good morning! You've been making some wonderful connections lately. Your authentic communication style is really resonating with matches who share your love for adventure and meaningful conversations. Today looks especially promising!
+                  </p>
+                </CardContent>
+              </Card>
+
+              {/* Demo New Compatible Profiles */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Users className="h-5 w-5 text-primary" />
+                    New Compatible Profiles
+                  </CardTitle>
+                  <CardDescription>
+                    Fresh matches with high compatibility potential
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="p-4 border rounded-lg">
+                    <div className="flex justify-between items-start mb-2">
+                      <h4 className="font-semibold">Alex M.</h4>
+                      <Badge variant="secondary">92% match</Badge>
+                    </div>
+                    <p className="text-sm text-muted-foreground">
+                      Shares your passion for hiking and photography. Both value deep conversations and personal growth. Strong compatibility in communication styles and life goals.
+                    </p>
+                  </div>
+                  <div className="p-4 border rounded-lg">
+                    <div className="flex justify-between items-start mb-2">
+                      <h4 className="font-semibold">Jordan K.</h4>
+                      <Badge variant="secondary">87% match</Badge>
+                    </div>
+                    <p className="text-sm text-muted-foreground">
+                      Fellow book lover and coffee enthusiast. Your humor styles align perfectly, and you both prioritize work-life balance and family values.
+                    </p>
+                  </div>
+                  <div className="p-4 border rounded-lg">
+                    <div className="flex justify-between items-start mb-2">
+                      <h4 className="font-semibold">Casey R.</h4>
+                      <Badge variant="secondary">84% match</Badge>
+                    </div>
+                    <p className="text-sm text-muted-foreground">
+                      Creative type who loves art museums and live music. Your adventurous spirits are well-matched, with complementary personality traits.
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Demo AI Insights */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <TrendingUp className="h-5 w-5 text-primary" />
+                    AI Insights
+                  </CardTitle>
+                  <CardDescription>
+                    Personalized observations about your dating patterns
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    <div className="flex items-start gap-3">
+                      <div className="h-2 w-2 bg-primary rounded-full mt-2 flex-shrink-0" />
+                      <p className="text-sm leading-relaxed">
+                        Your response rate increases 40% when you mention shared hobbies in your opening messages
+                      </p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <div className="h-2 w-2 bg-primary rounded-full mt-2 flex-shrink-0" />
+                      <p className="text-sm leading-relaxed">
+                        You tend to connect best with people who have similar communication patterns - thoughtful and detailed
+                      </p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <div className="h-2 w-2 bg-primary rounded-full mt-2 flex-shrink-0" />
+                      <p className="text-sm leading-relaxed">
+                        Your matches appreciate when you ask open-ended questions about their passions and goals
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Demo Conversation Starters */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <MessageCircle className="h-5 w-5 text-primary" />
+                    AI Conversation Starters
+                  </CardTitle>
+                  <CardDescription>
+                    Personalized opening lines for your best matches
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="p-4 bg-muted/50 rounded-lg">
+                    <div className="flex justify-between items-center mb-2">
+                      <h5 className="font-medium">For Alex M.</h5>
+                      <Button variant="outline" size="sm" disabled>
+                        Preview Only
+                      </Button>
+                    </div>
+                    <p className="text-sm text-muted-foreground italic">
+                      "I saw you love hiking! I just discovered this amazing trail with incredible views. What's been your favorite hiking spot recently?"
+                    </p>
+                  </div>
+                  <div className="p-4 bg-muted/50 rounded-lg">
+                    <div className="flex justify-between items-center mb-2">
+                      <h5 className="font-medium">For Jordan K.</h5>
+                      <Button variant="outline" size="sm" disabled>
+                        Preview Only
+                      </Button>
+                    </div>
+                    <p className="text-sm text-muted-foreground italic">
+                      "Your book collection looks impressive! I'm always looking for my next great read. What book completely changed your perspective recently?"
+                    </p>
+                  </div>
+                  <div className="p-4 bg-muted/50 rounded-lg">
+                    <div className="flex justify-between items-center mb-2">
+                      <h5 className="font-medium">For Casey R.</h5>
+                      <Button variant="outline" size="sm" disabled>
+                        Preview Only
+                      </Button>
+                    </div>
+                    <p className="text-sm text-muted-foreground italic">
+                      "I love that you're into live music! There's something magical about experiencing music with a crowd. What's the best concert you've been to this year?"
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Demo Motivation */}
+              <Card className="bg-gradient-to-br from-secondary/5 to-background border-secondary/20">
+                <CardContent className="pt-6">
+                  <p className="text-center text-lg leading-relaxed font-medium">
+                    "You're building genuine connections by being your authentic self. Keep asking thoughtful questions and sharing your passions - it's working beautifully! 🌟"
+                  </p>
+                </CardContent>
+              </Card>
+
+              {/* Call to Action */}
+              <Card className="border-primary/20 bg-gradient-to-r from-primary/5 to-background text-center">
+                <CardContent className="pt-6 space-y-4">
+                  <h3 className="text-xl font-semibold">Ready to get your personalized AI Digest?</h3>
+                  <p className="text-muted-foreground">
+                    Sign up to get real insights about your matches and conversations
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                    <Button onClick={() => navigate('/auth')} size="lg">
+                      Sign Up to Get Started
+                    </Button>
+                    <Button onClick={() => navigate('/pricing')} variant="outline" size="lg">
+                      View Pricing
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            <TabsContent value="history" className="space-y-4">
+              <Card>
+                <CardContent className="p-8 text-center">
+                  <Calendar className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+                  <h3 className="text-lg font-semibold mb-2">Historical Digest Tracking</h3>
+                  <p className="text-muted-foreground mb-6">
+                    See how your dating patterns evolve over time with detailed historical insights and progress tracking.
+                  </p>
+                  <Button onClick={() => navigate('/auth')}>
+                    Sign Up to See Your History
+                  </Button>
+                </CardContent>
+              </Card>
+            </TabsContent>
+          </Tabs>
         </div>
       </div>
     );
