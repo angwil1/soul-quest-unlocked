@@ -110,9 +110,9 @@ const QuickStart = () => {
             <CardContent className="space-y-8">
               <div className="grid md:grid-cols-3 gap-8">
                 <div className="relative group">
-                  <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-primary/5 to-purple-500/5 border-2 border-primary/20 hover:border-primary/40 hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                  <div className="text-center p-6 rounded-2xl bg-gradient-to-br from-primary/5 to-purple-500/5 border-2 border-primary/20 hover:border-primary/40 hover:shadow-xl transition-all duration-300 transform hover:scale-105 h-full flex flex-col">
                     <div className="relative">
-                      <div className="w-16 h-16 rounded-full bg-gradient-to-r from-primary to-purple-600 text-white flex items-center justify-center text-2xl font-bold mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform">
+                      <div className="w-16 h-16 rounded-full bg-gradient-to-r from-primary to-purple-600 text-white flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform">
                         {user ? <CheckCircle className="h-8 w-8" /> : "1"}
                       </div>
                       {user && (
@@ -121,8 +121,8 @@ const QuickStart = () => {
                         </div>
                       )}
                     </div>
-                    <h3 className="font-bold text-xl mb-3 text-foreground">Create Your Account</h3>
-                    <p className="text-muted-foreground mb-6 leading-relaxed">
+                    <h3 className="font-bold text-lg mb-3 text-foreground">Create Your Account</h3>
+                    <p className="text-muted-foreground mb-4 leading-relaxed text-sm px-2 flex-grow">
                       Sign up with your email and set your basic preferences to get started on your journey
                     </p>
                     <div className="flex items-center justify-center gap-2 mb-6">
@@ -154,9 +154,9 @@ const QuickStart = () => {
                 </div>
                 
                 <div className="relative group">
-                  <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-purple-500/5 to-pink-500/5 border-2 border-purple-500/20 hover:border-purple-500/40 hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                  <div className="text-center p-6 rounded-2xl bg-gradient-to-br from-purple-500/5 to-pink-500/5 border-2 border-purple-500/20 hover:border-purple-500/40 hover:shadow-xl transition-all duration-300 transform hover:scale-105 h-full flex flex-col">
                     <div className="relative">
-                      <div className="w-16 h-16 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white flex items-center justify-center text-2xl font-bold mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform">
+                      <div className="w-16 h-16 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform">
                         {user && isProfileComplete ? <CheckCircle className="h-8 w-8" /> : "2"}
                       </div>
                       {user && isProfileComplete && (
@@ -165,8 +165,8 @@ const QuickStart = () => {
                         </div>
                       )}
                     </div>
-                    <h3 className="font-bold text-xl mb-3 text-foreground">Complete Your Profile</h3>
-                    <p className="text-muted-foreground mb-6 leading-relaxed">
+                    <h3 className="font-bold text-lg mb-3 text-foreground">Complete Your Profile</h3>
+                    <p className="text-muted-foreground mb-4 leading-relaxed text-sm px-2 flex-grow">
                       Add photos, verify your age, and fill out your profile details to attract quality matches
                     </p>
                     <div className="flex items-center justify-center gap-2 mb-6">
@@ -205,9 +205,9 @@ const QuickStart = () => {
                 </div>
                 
                 <div className="relative group">
-                  <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-pink-500/5 to-primary/5 border-2 border-pink-500/20 hover:border-pink-500/40 hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                  <div className="text-center p-6 rounded-2xl bg-gradient-to-br from-pink-500/5 to-primary/5 border-2 border-pink-500/20 hover:border-pink-500/40 hover:shadow-xl transition-all duration-300 transform hover:scale-105 h-full flex flex-col">
                     <div className="relative">
-                      <div className={`w-16 h-16 rounded-full text-white flex items-center justify-center text-2xl font-bold mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform ${
+                      <div className={`w-16 h-16 rounded-full text-white flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform ${
                         canTakeQuiz 
                           ? "bg-gradient-to-r from-pink-500 to-primary" 
                           : "bg-muted text-muted-foreground"
@@ -215,8 +215,8 @@ const QuickStart = () => {
                         {canTakeQuiz ? "3" : <Lock className="h-8 w-8" />}
                       </div>
                     </div>
-                    <h3 className="font-bold text-xl mb-3 text-foreground">Take the Quiz</h3>
-                    <p className="text-muted-foreground mb-6 leading-relaxed">
+                    <h3 className="font-bold text-lg mb-3 text-foreground">Take the Quiz</h3>
+                    <p className="text-muted-foreground mb-4 leading-relaxed text-sm px-2 flex-grow">
                       Complete our comprehensive personality and compatibility assessment to find your perfect matches
                     </p>
                     <div className="flex items-center justify-center gap-2 mb-6">
