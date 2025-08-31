@@ -41,7 +41,7 @@ export const ReferralSection: React.FC<ReferralSectionProps> = ({
             <h3 className="text-lg font-semibold text-foreground">Share the Journey</h3>
           </div>
           <p className="text-sm text-muted-foreground max-w-sm mx-auto">
-            Invite someone to begin their Soul Quest. You'll receive a wellness kit—while supplies last.
+            Invite someone to begin their Soul Quest. You'll earn a wellness gift that ships after 90 days of active connection.
           </p>
         </div>
 
@@ -59,6 +59,14 @@ export const ReferralSection: React.FC<ReferralSectionProps> = ({
           </div>
 
           {/* Progress Example */}
+          {successfulReferrals >= 1 && (
+            <div className="bg-green-50 border border-green-200 rounded-lg p-3 text-center">
+              <p className="text-sm text-green-700 font-medium">
+                You've earned a wellness gift. It will ship after 90 days of active connection.
+              </p>
+            </div>
+          )}
+          
           {successfulReferrals >= 2 && successfulReferrals < 5 && (
             <div className="bg-purple-50 border border-purple-200 rounded-lg p-3 text-center">
               <p className="text-sm text-purple-700 font-medium">
