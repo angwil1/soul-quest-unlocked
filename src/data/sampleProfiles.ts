@@ -137,6 +137,44 @@ export const founderCuratedProfiles: SampleProfile[] = [
     personalityType: "",
     loveLanguage: "",
     vibeGallery: []
+  },
+  {
+    id: "sample-7",
+    name: "Dev",
+    age: 28,
+    bio: "Software engineer who loves cricket, cooking traditional recipes, and exploring fusion cuisines. Always up for philosophical discussions over chai.",
+    vibeTag: "Cultural Bridge",
+    location: "San Francisco, CA",
+    occupation: "Software Engineer",
+    emotionalSoundtrack: "",
+    tiktokUrl: "",
+    photos: ["/src/assets/dev-profile-main.jpg"],
+    interests: ["Cricket", "Cooking", "Philosophy", "Travel"],
+    conversationStarters: [],
+    poeticMicrocopy: "",
+    aestheticPreference: "",
+    personalityType: "",
+    loveLanguage: "",
+    vibeGallery: []
+  },
+  {
+    id: "sample-8",
+    name: "Marcus",
+    age: 31,
+    bio: "Jazz musician and music teacher who believes in the power of rhythm to bring people together. Love exploring different neighborhoods and finding hidden gems.",
+    vibeTag: "Soulful Connector",
+    location: "New Orleans, LA",
+    occupation: "Music Teacher",
+    emotionalSoundtrack: "",
+    tiktokUrl: "",
+    photos: ["/src/assets/marcus-profile-main.jpg"],
+    interests: ["Jazz", "Teaching", "Architecture", "Food Culture"],
+    conversationStarters: [],
+    poeticMicrocopy: "",
+    aestheticPreference: "",
+    personalityType: "",
+    loveLanguage: "",
+    vibeGallery: []
   }
 ];
 
