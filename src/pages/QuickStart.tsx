@@ -105,11 +105,8 @@ const QuickStart = () => {
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="grid md:grid-cols-3 gap-6">
-                <div 
-                  className="text-center p-6 rounded-lg bg-muted/50 border hover:border-primary/50 hover:bg-primary/5 cursor-pointer transition-all duration-200 group"
-                  onClick={() => handleStepClick(1)}
-                >
-                  <div className="w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-2xl font-bold mx-auto mb-4 group-hover:scale-110 transition-transform">
+                <div className="text-center p-6 rounded-lg bg-muted/50 border">
+                  <div className="w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-2xl font-bold mx-auto mb-4">
                     {user ? <CheckCircle className="h-6 w-6" /> : "1"}
                   </div>
                   <h3 className="font-semibold mb-2">Create Your Account</h3>
@@ -122,27 +119,16 @@ const QuickStart = () => {
                       </>
                     ) : (
                       <>
-                        <User className="h-4 w-4 text-primary" />
-                        <span className="text-xs text-primary font-medium">Click to start</span>
+                        <User className="h-4 w-4 text-muted-foreground" />
+                        <span className="text-xs text-muted-foreground font-medium">Step 1</span>
                       </>
                     )}
                   </div>
                 </div>
                 
-                <div 
-                  className={`text-center p-6 rounded-lg border transition-all duration-200 group ${
-                    !user 
-                      ? "bg-muted/50 hover:border-primary/50 hover:bg-primary/5 cursor-pointer" 
-                      : "bg-green-50 border-green-200 cursor-default"
-                  }`}
-                  onClick={() => handleStepClick(2)}
-                >
-                  <div className={`w-12 h-12 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 transition-transform ${
-                    !user 
-                      ? "bg-primary text-primary-foreground group-hover:scale-110" 
-                      : "bg-green-500 text-white"
-                  }`}>
-                    {user && isProfileComplete ? <CheckCircle className="h-6 w-6" /> : (user ? "2" : "2")}
+                <div className="text-center p-6 rounded-lg bg-muted/50 border">
+                  <div className="w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+                    {user && isProfileComplete ? <CheckCircle className="h-6 w-6" /> : "2"}
                   </div>
                   <h3 className="font-semibold mb-2">Complete Your Profile</h3>
                   <p className="text-sm text-muted-foreground mb-4">Add photos, verify your age, and fill out your profile details</p>
@@ -152,74 +138,32 @@ const QuickStart = () => {
                         <CheckCircle className="h-5 w-5 text-green-500" />
                         <span className="text-xs text-green-600 font-medium">Complete</span>
                       </>
-                    ) : user ? (
-                      <>
-                        <UserCheck className="h-4 w-4 text-primary" />
-                        <span className="text-xs text-primary font-medium">Click to complete</span>
-                      </>
                     ) : (
                       <>
                         <UserCheck className="h-4 w-4 text-muted-foreground" />
-                        <span className="text-xs text-muted-foreground font-medium">Account required</span>
+                        <span className="text-xs text-muted-foreground font-medium">Step 2</span>
                       </>
                     )}
                   </div>
                 </div>
                 
-                <div 
-                  className={`text-center p-6 rounded-lg border transition-all duration-200 group ${
-                    canTakeQuiz 
-                      ? "bg-muted/50 hover:border-primary/50 hover:bg-primary/5 cursor-pointer" 
-                      : "bg-muted/30 border-muted cursor-not-allowed opacity-60"
-                  }`}
-                  onClick={() => handleStepClick(3)}
-                >
-                  <div className={`w-12 h-12 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4 transition-transform ${
-                    canTakeQuiz 
-                      ? "bg-primary text-primary-foreground group-hover:scale-110" 
-                      : "bg-muted text-muted-foreground"
-                  }`}>
-                    {canTakeQuiz ? "3" : <Lock className="h-6 w-6" />}
+                <div className="text-center p-6 rounded-lg bg-muted/50 border">
+                  <div className="w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+                    3
                   </div>
                   <h3 className="font-semibold mb-2">Take the Quiz</h3>
                   <p className="text-sm text-muted-foreground mb-4">Complete our comprehensive personality and compatibility assessment</p>
                   <div className="flex items-center justify-center gap-2">
-                    {canTakeQuiz ? (
-                      <>
-                        <Brain className="h-4 w-4 text-primary" />
-                        <span className="text-xs text-primary font-medium">Click to begin</span>
-                      </>
-                    ) : (
-                      <>
-                        <Lock className="h-4 w-4 text-muted-foreground" />
-                        <span className="text-xs text-muted-foreground font-medium">Complete steps 1 & 2 first</span>
-                      </>
-                    )}
+                    <Brain className="h-4 w-4 text-muted-foreground" />
+                    <span className="text-xs text-muted-foreground font-medium">Step 3</span>
                   </div>
                 </div>
               </div>
               
-              <div className="flex justify-center mt-8">
-                {canTakeQuiz ? (
-                  <Button 
-                    size="lg" 
-                    className="gap-2"
-                    onClick={() => navigate('/questions')}
-                  >
-                    <Brain className="h-4 w-4" />
-                    Start Quiz
-                  </Button>
-                ) : (
-                  <Button 
-                    size="lg" 
-                    className="gap-2" 
-                    disabled 
-                    onClick={() => handleStepClick(3)}
-                  >
-                    <Lock className="h-4 w-4" />
-                    Complete Steps 1 & 2 First
-                  </Button>
-                )}
+              <div className="text-center mt-8">
+                <p className="text-sm text-muted-foreground mb-4">
+                  Ready to find meaningful connections? Start your journey below.
+                </p>
               </div>
             </CardContent>
           </Card>
