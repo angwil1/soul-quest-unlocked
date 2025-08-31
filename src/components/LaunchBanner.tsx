@@ -108,24 +108,24 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
             {/* Left side - Main message */}
             <div className="text-center md:text-left flex-1">
               <h3 className="text-base md:text-lg lg:text-xl font-bold text-white mb-1 md:mb-2">
-                🎁 Quiet Start Offer
+                🔒 Sacred Window Closed
               </h3>
               
               <p className="text-white/90 text-xs md:text-sm lg:text-base mb-2 md:mb-3 leading-tight max-w-2xl">
-                The first 500 Soul Questers receive 3 months of Complete Plus + a wellness keepsake. Kits also available for referrers—until all 500 are claimed.
+                The Quiet Start window has closed. Thank you to our first 500 Soul Questers who claimed their wellness kits and Complete Plus membership.
               </p>
               
               <div className="space-y-1 text-white/80 text-xs md:text-sm">
                 <div>
-                  🍃 Mini Wellness Kit: Calming tea sachet, soft-touch lip balm, and a poetic postcard to mark your beginning
+                  ✅ Wellness Kits: All 500 kits have been claimed by our founding members
                 </div>
                 
                 <div>
-                  🤝 Referral Rewards: Invite someone to join. Earn bonus months, unlock badges, and receive more gifts—while supplies last
+                  🌟 Thank You: To those who joined us in this sacred beginning
                 </div>
                 
                 <div>
-                  ⏳ Limited to First 500 Users: Quiet window closes soon. You're invited.
+                  💫 What's Next: Stay tuned for future connection experiences
                 </div>
               </div>
             </div>
@@ -209,9 +209,10 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
                   onClick={handleQuizStart}
                   variant="secondary"
                   size="sm"
-                  className="bg-white text-black hover:bg-white/90 font-medium text-xs md:text-sm px-2 sm:px-3 md:px-4 py-1.5 hover-scale animate-pulse w-full sm:w-auto md:w-full lg:w-auto"
+                  className="bg-white/80 text-black hover:bg-white/60 font-medium text-xs md:text-sm px-2 sm:px-3 md:px-4 py-1.5 w-full sm:w-auto md:w-full lg:w-auto"
+                  disabled
                 >
-                  Claim Quiet Start Offer ✨
+                  Sacred Window Closed 🔒
                 </Button>
               )}
             </div>
