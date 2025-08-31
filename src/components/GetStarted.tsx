@@ -7,7 +7,8 @@ export const GetStarted = () => {
   const navigate = useNavigate();
 
   const handleGetStarted = () => {
-    navigate('/auth');
+    navigate('/quick-start');
+    setTimeout(() => window.scrollTo(0, 0), 0);
   };
 
   return (
