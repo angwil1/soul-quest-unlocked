@@ -92,19 +92,19 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
             </h3>
             
             <p className="text-white/90 text-xs md:text-base mb-2 md:mb-3 leading-tight">
-              First 500 users receive 3 months free + wellness kit. Kits also available for referrers—until all 500 are claimed.
+              The first 500 Soul Questers receive 3 months of Complete Plus + a wellness keepsake. Kits also available for referrers—until all 500 are claimed.
             </p>
             
             <div className="text-white/80 text-xs md:text-sm mb-1">
-              🍃 Mini wellness kit: herbal tea, lip balm, poetic postcard
+              🍃 Mini Wellness Kit: Calming tea sachet, soft-touch lip balm, and a poetic postcard to mark your beginning
             </div>
             
             <div className="text-white/80 text-xs md:text-sm mb-1">
-              🤝 Refer friends: wellness kit while supplies last + bonus months
+              🤝 Referral Rewards: Invite someone to join. Earn bonus months, unlock badges, and receive more gifts—while supplies last
             </div>
             
             <div className="text-white/80 text-xs md:text-sm">
-              ⏳ Limited to first 500 users only
+              ⏳ Limited to First 500 Users: Quiet window closes soon. You're invited.
             </div>
           </div>
 
@@ -118,11 +118,10 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
               </div>
             </div>
 
-            {/* Progress Bar */}
             <div className="w-full max-w-48 space-y-2">
               <div className="flex items-center justify-between text-xs text-white/70">
-                <span>Quiet window progress</span>
-                <span>{Math.round(progress)}%</span>
+                <span>Quiet Window Progress</span>
+                <span>🔒 0% claimed</span>
               </div>
               <Progress 
                 value={progress} 
@@ -133,14 +132,12 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
             {/* Features */}
             <div className="flex flex-wrap justify-center gap-1 md:gap-2 text-xs text-white/90">
               <div className="flex items-center gap-1">
-                <Heart className="h-3 w-3" />
-                <span>3 Months Free</span>
+                <span>🎁 3 Months Free</span>
               </div>
               <div className="flex items-center gap-1">
-                <Sparkles className="h-3 w-3" />
-                <span>Wellness Kit</span>
+                <span>🍃 Wellness Kit</span>
               </div>
-              <span>Referral Rewards</span>
+              <span>🤝 Referral Rewards</span>
             </div>
 
             {/* CTA Button */}
