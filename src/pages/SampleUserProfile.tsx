@@ -80,7 +80,7 @@ const SampleUserProfile = () => {
                           <img 
                             src={profile.photos[0]} 
                             alt={profile.name}
-                            className="w-full h-full object-cover object-center"
+                            className="w-full h-full object-cover object-center blur-sm hover:blur-none transition-all duration-500"
                             loading="eager"
                           />
                           <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
@@ -92,7 +92,7 @@ const SampleUserProfile = () => {
                         <img 
                           src={profile.photos[0]} 
                           alt={profile.name}
-                          className="w-full h-auto max-h-[80vh] object-contain rounded-lg"
+                          className="w-full h-auto max-h-[80vh] object-contain rounded-lg blur-sm hover:blur-none transition-all duration-500"
                         />
                       </DialogContent>
                     </Dialog>
@@ -108,7 +108,7 @@ const SampleUserProfile = () => {
                               <img 
                                 src={photo} 
                                 alt={`${profile.name} photo ${index + 2}`}
-                                className="w-full h-full object-cover object-center"
+                                className="w-full h-full object-cover object-center blur-sm hover:blur-none transition-all duration-500"
                                 loading="lazy"
                               />
                               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
@@ -120,7 +120,7 @@ const SampleUserProfile = () => {
                             <img 
                               src={photo} 
                               alt={`${profile.name} photo ${index + 2}`}
-                              className="w-full h-auto max-h-[80vh] object-contain rounded-lg"
+                              className="w-full h-auto max-h-[80vh] object-contain rounded-lg blur-sm hover:blur-none transition-all duration-500"
                             />
                           </DialogContent>
                         </Dialog>
