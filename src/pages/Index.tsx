@@ -161,6 +161,23 @@ const Index = () => {
             </div>
           </section>
         )}
+        
+        {/* Test Profile Setup Button */}
+        <section className="py-4">
+          <div className="max-w-4xl mx-auto px-4 text-center">
+            <Button 
+              onClick={() => window.location.href = '/profile/setup'}
+              variant="outline"
+              size="lg"
+              className="bg-primary/10 hover:bg-primary/20 border-primary/20 border-2 hover:border-primary/40 transition-all duration-300"
+            >
+              🧪 Test Profile Setup Flow
+            </Button>
+            <p className="text-xs text-muted-foreground mt-2">
+              Click to test the 6-step profile completion process
+            </p>
+          </div>
+        </section>
 
         {/* How It Works Section */}
         <HowItWorks />
