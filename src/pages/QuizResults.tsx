@@ -22,7 +22,7 @@ interface MatchPreview {
 }
 
 const QuizResults = () => {
-  const { user } = useAuth();
+  const { user, signOut } = useAuth();
   const navigate = useNavigate();
   const { trackQuizCompletion } = useEmailJourneys();
   const { toast } = useToast();
@@ -421,6 +421,16 @@ const QuizResults = () => {
 
         {/* Action Buttons */}
         <div className="flex gap-4 justify-center mb-8">
+          <Button
+            onClick={async () => {
+              await signOut();
+              navigate('/auth');
+            }}
+            variant="outline"
+            className="text-muted-foreground hover:text-foreground"
+          >
+            Log Out & Test Signup Flow
+          </Button>
           <Button onClick={handleViewMatches} size="lg" className="flex-1 max-w-xs bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90">
             <Heart className="h-4 w-4 mr-2" />
             Find Your Matches
