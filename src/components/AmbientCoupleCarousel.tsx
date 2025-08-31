@@ -7,8 +7,6 @@ import coupleAmbientClear from '@/assets/couple-ambient-clear.jpg';
 import coupleLgbtqAmbient from '@/assets/couple-lgbtq-ambient.jpg';
 import coupleDigital from '@/assets/couple-digital.jpg';
 import couplePoetic from '@/assets/couple-poetic-inclusive.jpg';
-import devProfile from '@/assets/dev-profile-main.jpg';
-import marcusProfile from '@/assets/marcus-profile-main.jpg';
 
 interface CoupleImage {
   src: string;
@@ -23,19 +21,9 @@ const ambientCoupleImages: CoupleImage[] = [
     alt: "Couple sharing an intimate, peaceful moment together"
   },
   {
-    src: devProfile,
-    caption: "Authentic connections across cultures",
-    alt: "Dev, a South Asian software engineer with a warm smile"
-  },
-  {
     src: coupleHero1,
     caption: "Love finds us in the spaces between words",
     alt: "Two people connecting deeply in natural light"
-  },
-  {
-    src: marcusProfile,
-    caption: "Music brings souls together",
-    alt: "Marcus, a Black jazz musician with a confident smile"
   },
   {
     src: coupleLgbtqAmbient,

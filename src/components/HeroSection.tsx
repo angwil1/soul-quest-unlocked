@@ -5,11 +5,15 @@ import { Heart, Users, ArrowRight } from 'lucide-react';
 import coupleHeroMobile1 from '@/assets/couple-hero-mobile-1.jpg';
 import coupleHeroMobile2 from '@/assets/couple-hero-mobile-2.jpg';
 import coupleHeroMobile3 from '@/assets/couple-hero-mobile-3.jpg';
+import devProfile from '@/assets/dev-profile-main.jpg';
+import marcusProfile from '@/assets/marcus-profile-main.jpg';
 
 const heroImages = [
   coupleHeroMobile1,
   coupleHeroMobile2, 
-  coupleHeroMobile3
+  coupleHeroMobile3,
+  devProfile,
+  marcusProfile
 ];
 
 const HeroSection = () => {
