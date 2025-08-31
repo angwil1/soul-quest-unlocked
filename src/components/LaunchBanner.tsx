@@ -68,7 +68,7 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
   }, []);
 
   const handleQuizStart = () => {
-    navigate('/questions');
+    navigate('/auth');
   };
 
   const handleDismiss = () => {
