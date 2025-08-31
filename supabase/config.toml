@@ -71,3 +71,6 @@ verify_jwt = true
 
 [functions.generate-ai-digest]
 verify_jwt = true
+
+[functions.check-subscription]
+verify_jwt = true
