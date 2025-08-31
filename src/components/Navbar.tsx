@@ -205,8 +205,8 @@ export const Navbar = () => {
 
           {/* Desktop Auth Buttons */}
           <div className="hidden md:flex items-center space-x-4">
-            {/* Only show search if user has completed quiz */}
-            {user && hasCompletedQuiz && (
+            {/* Only show search on matches/browse pages */}
+            {user && hasCompletedQuiz && (location.pathname === '/matches' || location.pathname === '/browse') && (
               <Button
                 variant="ghost"
                 size="sm"
@@ -299,8 +299,8 @@ export const Navbar = () => {
                   </div>
                 </Link>
               ))}
-              {/* Only show search in mobile if user has completed quiz */}
-              {user && hasCompletedQuiz && (
+              {/* Only show search on matches/browse pages */}
+              {user && hasCompletedQuiz && (location.pathname === '/matches' || location.pathname === '/browse') && (
                 <div className="px-3 py-2 border-t border-border mt-2">
                   <Button
                     variant="ghost"
