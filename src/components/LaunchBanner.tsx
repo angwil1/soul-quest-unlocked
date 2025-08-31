@@ -92,7 +92,7 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
             </h3>
             
             <p className="text-white/90 text-xs md:text-base mb-2 md:mb-3 leading-tight">
-              First 500 users get 3 months Complete Plus free + wellness kit
+              First 500 users receive 3 months free + wellness kit. Kits also available for referrers—until all 500 are claimed.
             </p>
             
             <div className="text-white/80 text-xs md:text-sm mb-1">
@@ -100,7 +100,7 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
             </div>
             
             <div className="text-white/80 text-xs md:text-sm mb-1">
-              🤝 Refer friends: +1 month per referral, badges & more kits
+              🤝 Refer friends: wellness kit while supplies last + bonus months
             </div>
             
             <div className="text-white/80 text-xs md:text-sm">
