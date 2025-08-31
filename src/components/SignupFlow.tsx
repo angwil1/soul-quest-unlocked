@@ -105,15 +105,6 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
       const result = await signUp(email, password);
       
       if (!result?.error) {
-        // Create initial tracking record
-        await supabase
-          .from('quiet_start_signups')
-          .insert({
-            user_id: user?.id || '', // Will be updated when user is available
-            email: email,
-            signup_step: 'email_signup'
-          });
-
         toast({
           title: "Account created!",
           description: "Please verify your age to continue.",
