@@ -1532,9 +1532,11 @@ export type Database = {
           shipping_address_line2: string | null
           shipping_city: string | null
           shipping_country: string | null
+          shipping_eligible_at: string | null
           shipping_name: string | null
           shipping_postal_code: string | null
           shipping_state: string | null
+          shipping_status: string | null
           signup_step: string
           updated_at: string
           user_id: string
@@ -1552,9 +1554,11 @@ export type Database = {
           shipping_address_line2?: string | null
           shipping_city?: string | null
           shipping_country?: string | null
+          shipping_eligible_at?: string | null
           shipping_name?: string | null
           shipping_postal_code?: string | null
           shipping_state?: string | null
+          shipping_status?: string | null
           signup_step?: string
           updated_at?: string
           user_id: string
@@ -1572,9 +1576,11 @@ export type Database = {
           shipping_address_line2?: string | null
           shipping_city?: string | null
           shipping_country?: string | null
+          shipping_eligible_at?: string | null
           shipping_name?: string | null
           shipping_postal_code?: string | null
           shipping_state?: string | null
+          shipping_status?: string | null
           signup_step?: string
           updated_at?: string
           user_id?: string
@@ -2031,6 +2037,10 @@ export type Database = {
         Args: { p_user_id: string }
         Returns: boolean
       }
+      check_shipping_eligibility: {
+        Args: { p_user_id: string }
+        Returns: Json
+      }
       check_user_message_limit_access: {
         Args: { p_user_id: string }
         Returns: boolean
@@ -2180,6 +2190,10 @@ export type Database = {
           p_user_agent?: string
         }
         Returns: undefined
+      }
+      mark_kit_shipped: {
+        Args: { p_user_id: string }
+        Returns: boolean
       }
       perform_sensitive_action: {
         Args: { p_action_details: Json }
