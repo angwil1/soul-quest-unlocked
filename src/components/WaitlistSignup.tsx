@@ -1,32 +1,98 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
 import { Mail, Users, Sparkles } from 'lucide-react';
 
 export const WaitlistSignup = () => {
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [waitlistCount, setWaitlistCount] = useState(2847); // Start with existing number
   const { toast } = useToast();
+
+  // Fetch waitlist count on component mount
+  useEffect(() => {
+    fetchWaitlistCount();
+  }, []);
+
+  const fetchWaitlistCount = async () => {
+    try {
+      const { count, error } = await supabase
+        .from('waitlist')
+        .select('*', { count: 'exact', head: true });
+      
+      if (error) {
+        console.error('Error fetching waitlist count:', error);
+        return;
+      }
+      
+      // Add the base number to the actual count to maintain the existing number
+      setWaitlistCount(2847 + (count || 0));
+    } catch (error) {
+      console.error('Error fetching waitlist count:', error);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email.trim()) return;
 
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      toast({
+        title: "Invalid Email",
+        description: "Please enter a valid email address.",
+        variant: "destructive"
+      });
+      return;
+    }
+
     setIsSubmitting(true);
     
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    toast({
-      title: "You're on the list! 🎉",
-      description: "We'll notify you when we launch. Get ready for meaningful connections!",
-      duration: 4000,
-    });
-    
-    setEmail('');
-    setIsSubmitting(false);
+    try {
+      const { error } = await supabase
+        .from('waitlist')
+        .insert([{ 
+          email: email.toLowerCase().trim(),
+          referral_source: 'homepage_waitlist',
+          user_agent: navigator.userAgent
+        }]);
+
+      if (error) {
+        if (error.code === '23505') { // Unique constraint violation
+          toast({
+            title: "Already on the list! 📋",
+            description: "This email is already signed up. We'll notify you when we launch!",
+            variant: "default"
+          });
+        } else {
+          throw error;
+        }
+      } else {
+        toast({
+          title: "You're on the list! 🎉",
+          description: "We'll notify you when we launch. Get ready for meaningful connections!",
+          duration: 4000,
+        });
+        
+        // Update the count
+        setWaitlistCount(prev => prev + 1);
+      }
+      
+      setEmail('');
+    } catch (error) {
+      console.error('Error adding to waitlist:', error);
+      toast({
+        title: "Something went wrong",
+        description: "Please try again or contact support if the issue persists.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -82,7 +148,7 @@ export const WaitlistSignup = () => {
             <div className="mt-6 flex items-center justify-center text-sm text-muted-foreground">
               <Users className="h-4 w-4 mr-1" />
               <span className="bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent font-medium">
-                2,847 people already signed up
+                {waitlistCount.toLocaleString()} people already signed up
               </span>
             </div>
           </Card>
