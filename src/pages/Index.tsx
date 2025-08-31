@@ -280,9 +280,9 @@ const Index = () => {
             {/* Stats Section */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 animate-fade-in" style={{ animationDelay: '0.6s' }}>
               {[
-                { number: "94%", label: "Success Rate", icon: "💝" },
-                { number: "10K+", label: "Happy Couples", icon: "👫" },
-                { number: "4.8★", label: "User Rating", icon: "⭐" },
+                { number: "NEW", label: "Platform Launch", icon: "🚀" },
+                { number: "AI", label: "Powered Matching", icon: "🧠" },
+                { number: "100%", label: "Privacy First", icon: "🔒" },
                 { number: "24/7", label: "Support", icon: "🛡️" }
               ].map((stat, index) => (
                 <div key={index} className="text-center p-4 rounded-xl bg-background/50 backdrop-blur-sm border border-border/50 hover:border-primary/30 transition-all duration-300 hover:scale-105">
