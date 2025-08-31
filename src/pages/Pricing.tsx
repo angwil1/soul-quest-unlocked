@@ -109,12 +109,28 @@ const Pricing = () => {
 
     // Check if user has Quiet Start benefits (first 500 users)
     if (quietStartStatus?.benefits_claimed) {
+      // Calculate trial expiration (90 days from signup)
+      const signupDate = new Date(quietStartStatus.created_at);
+      const trialExpiresAt = new Date(signupDate.getTime() + (90 * 24 * 60 * 60 * 1000)); // 90 days
+      const now = new Date();
+      
+      if (now < trialExpiresAt) {
+        // Still in free trial period
+        const daysRemaining = Math.ceil((trialExpiresAt.getTime() - now.getTime()) / (24 * 60 * 60 * 1000));
+        toast({
+          title: "Quiet Start Trial Active",
+          description: `You have ${daysRemaining} days remaining in your free trial. No payment needed yet!`,
+        });
+        navigate('/premium-dashboard');
+        return;
+      }
+      
+      // Trial expired, allow them to subscribe
       toast({
-        title: "Quiet Start Member",
-        description: "As one of our first 500 members, you have free access to all premium features! No payment needed.",
+        title: "Free Trial Ended",
+        description: "Your 90-day free trial has ended. Subscribe now to continue accessing premium features!",
       });
-      navigate('/premium-dashboard');
-      return;
+      // Continue with normal PayPal flow below
     }
 
     setLoading(true);
@@ -193,6 +209,28 @@ const Pricing = () => {
               <div className="inline-block rounded-lg px-6 py-3 text-sm border" style={{ backgroundColor: '#F4F0FA', borderColor: '#6B4C8A', color: '#6B4C8A' }}>
                 💡 Spend $12/month or unlock everything for just $39/year—a quiet nudge toward completeness.
               </div>
+              
+              {/* Show trial status for Quiet Start users */}
+              {quietStartStatus?.benefits_claimed && (() => {
+                const signupDate = new Date(quietStartStatus.created_at);
+                const trialExpiresAt = new Date(signupDate.getTime() + (90 * 24 * 60 * 60 * 1000));
+                const now = new Date();
+                const daysRemaining = Math.ceil((trialExpiresAt.getTime() - now.getTime()) / (24 * 60 * 60 * 1000));
+                
+                if (now < trialExpiresAt) {
+                  return (
+                    <div className="mt-4 inline-block rounded-lg px-6 py-3 text-sm border" style={{ backgroundColor: '#E8F5E8', borderColor: '#4A7C59', color: '#2D5016' }}>
+                      🌱 <strong>Quiet Start Trial:</strong> {daysRemaining} days of free premium access remaining!
+                    </div>
+                  );
+                } else {
+                  return (
+                    <div className="mt-4 inline-block rounded-lg px-6 py-3 text-sm border" style={{ backgroundColor: '#FFF3E0', borderColor: '#E65100', color: '#BF360C' }}>
+                      ⏰ <strong>Trial Expired:</strong> Your 90-day free trial has ended. Subscribe below to continue!
+                    </div>
+                  );
+                }
+              })()}
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
