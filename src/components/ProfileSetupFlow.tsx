@@ -191,8 +191,8 @@ export const ProfileSetupFlow: React.FC = () => {
         description: "Welcome to AI Complete Me. Let's find your perfect match!",
       });
 
-      // Navigate based on subscription status
-      navigate('/matches');
+      // Wait a moment for the profile to be saved and reload the profile data
+      window.location.href = '/matches';
     } catch (error: any) {
       toast({
         title: "Error",
