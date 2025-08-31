@@ -37,10 +37,18 @@ serve(async (req) => {
       throw new Error('Invalid plan selected');
     }
 
-    // PayPal API credentials
+    // PayPal API credentials with enhanced debugging
     const clientId = Deno.env.get('PAYPAL_CLIENT_ID');
     const clientSecret = Deno.env.get('PAYPAL_CLIENT_SECRET');
-    // Default to sandbox if no environment specified
+    
+    console.log('PayPal credentials check:', {
+      clientId: clientId ? `${clientId.substring(0, 8)}...` : 'missing',
+      clientSecret: clientSecret ? 'present' : 'missing',
+      clientIdLength: clientId?.length,
+      clientSecretLength: clientSecret?.length
+    });
+    
+    // Force sandbox environment for now
     const isProduction = false;
     
     if (!clientId || !clientSecret) {
