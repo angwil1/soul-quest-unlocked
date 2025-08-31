@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Instagram, Twitter, Facebook, Share2, CreditCard } from "lucide-react";
+import { Instagram, Twitter, Facebook, Share2, CreditCard, Linkedin, MessageCircle, Copy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 
@@ -8,27 +8,46 @@ export const Footer = () => {
   
   const shareWebpage = (platform: string) => {
     const currentUrl = window.location.href;
+    const shareText = "Check out AI Complete Me - Revolutionary dating with emotional intelligence! Find your soulmate through AI-powered deep compatibility matching. 💕";
+    const shareTitle = "AI Complete Me - Find Your Perfect Match";
     
     switch (platform) {
       case "tiktok":
-        navigator.clipboard.writeText(currentUrl);
+        navigator.clipboard.writeText(`${shareText} ${currentUrl}`);
         toast({
           title: "Link copied!",
-          description: "Share this page on TikTok",
+          description: "Paste this in your TikTok video description or comments",
         });
         break;
       case "instagram":
-        navigator.clipboard.writeText(currentUrl);
+        navigator.clipboard.writeText(`${shareText} ${currentUrl}`);
         toast({
           title: "Link copied!",
-          description: "Share this page on Instagram",
+          description: "Paste this in your Instagram story or bio",
         });
         break;
       case "twitter":
-        window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(currentUrl)}`, '_blank');
+        const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(currentUrl)}&hashtags=dating,AI,soulmate,relationships`;
+        window.open(twitterUrl, '_blank');
         break;
       case "facebook":
-        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`, '_blank');
+        const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}&quote=${encodeURIComponent(shareText)}`;
+        window.open(facebookUrl, '_blank');
+        break;
+      case "linkedin":
+        const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(currentUrl)}`;
+        window.open(linkedinUrl, '_blank');
+        break;
+      case "whatsapp":
+        const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(`${shareText} ${currentUrl}`)}`;
+        window.open(whatsappUrl, '_blank');
+        break;
+      case "copy":
+        navigator.clipboard.writeText(`${shareText} ${currentUrl}`);
+        toast({
+          title: "Link copied to clipboard!",
+          description: "Share anywhere you'd like",
+        });
         break;
     }
   };
@@ -119,35 +138,33 @@ export const Footer = () => {
               
               {/* Share This Page */}
               <div className="border-t border-border pt-4">
-                <p className="text-sm text-foreground/70 mb-3 font-medium">Share this page:</p>
+                <p className="text-sm text-foreground/70 mb-3 font-medium">Share AI Complete Me:</p>
                 <div className="flex flex-wrap gap-2">
                   <Button
                     variant="outline"
                     size="sm"
-                    onClick={() => shareWebpage('tiktok')}
-                    className="text-xs"
+                    onClick={() => shareWebpage('copy')}
+                    className="text-xs bg-primary/5 border-primary/20 hover:bg-primary/10"
                   >
-                    <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M19.321 5.562a5.124 5.124 0 0 1-.443-.258 6.228 6.228 0 0 1-1.137-.966c-.849-.969-1.166-2.18-1.166-3.338h-3.154v13.729c0 2.051-1.668 3.719-3.719 3.719s-3.719-1.668-3.719-3.719 1.668-3.719 3.719-3.719c.394 0 .774.062 1.133.175V7.515a6.881 6.881 0 0 0-1.133-.094c-3.773 0-6.834 3.061-6.834 6.834s3.061 6.834 6.834 6.834 6.834-3.061 6.834-6.834V9.725a9.345 9.345 0 0 0 5.44 1.748V8.318a6.248 6.248 0 0 1-2.655-2.756z"/>
-                    </svg>
-                    TikTok
+                    <Copy className="w-4 h-4 mr-1" />
+                    Copy Link
                   </Button>
                   
                   <Button
                     variant="outline"
                     size="sm"
-                    onClick={() => shareWebpage('instagram')}
-                    className="text-xs"
+                    onClick={() => shareWebpage('whatsapp')}
+                    className="text-xs hover:bg-green-50 hover:border-green-200"
                   >
-                    <Instagram className="w-4 h-4 mr-1" />
-                    Instagram
+                    <MessageCircle className="w-4 h-4 mr-1" />
+                    WhatsApp
                   </Button>
                   
                   <Button
                     variant="outline"
                     size="sm"
                     onClick={() => shareWebpage('twitter')}
-                    className="text-xs"
+                    className="text-xs hover:bg-blue-50 hover:border-blue-200"
                   >
                     <Twitter className="w-4 h-4 mr-1" />
                     Twitter
@@ -157,12 +174,43 @@ export const Footer = () => {
                     variant="outline"
                     size="sm"
                     onClick={() => shareWebpage('facebook')}
-                    className="text-xs"
+                    className="text-xs hover:bg-blue-50 hover:border-blue-200"
                   >
                     <Facebook className="w-4 h-4 mr-1" />
                     Facebook
                   </Button>
                   
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => shareWebpage('linkedin')}
+                    className="text-xs hover:bg-blue-50 hover:border-blue-200"
+                  >
+                    <Linkedin className="w-4 h-4 mr-1" />
+                    LinkedIn
+                  </Button>
+                  
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => shareWebpage('instagram')}
+                    className="text-xs hover:bg-purple-50 hover:border-purple-200"
+                  >
+                    <Instagram className="w-4 h-4 mr-1" />
+                    Instagram
+                  </Button>
+                  
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => shareWebpage('tiktok')}
+                    className="text-xs hover:bg-gray-50 hover:border-gray-200"
+                  >
+                    <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M19.321 5.562a5.124 5.124 0 0 1-.443-.258 6.228 6.228 0 0 1-1.137-.966c-.849-.969-1.166-2.18-1.166-3.338h-3.154v13.729c0 2.051-1.668 3.719-3.719 3.719s-3.719-1.668-3.719-3.719 1.668-3.719 3.719-3.719c.394 0 .774.062 1.133.175V7.515a6.881 6.881 0 0 0-1.133-.094c-3.773 0-6.834 3.061-6.834 6.834s3.061 6.834 6.834 6.834 6.834-3.061 6.834-6.834V9.725a9.345 9.345 0 0 0 5.44 1.748V8.318a6.248 6.248 0 0 1-2.655-2.756z"/>
+                    </svg>
+                    TikTok
+                  </Button>
                 </div>
               </div>
             </div>
