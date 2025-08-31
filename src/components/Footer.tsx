@@ -104,30 +104,14 @@ export const Footer = () => {
                   <span>Google Pay</span>
                 </div>
                 
-                {/* Venmo */}
+                {/* Credit Cards (via PayPal) */}
                 <div className="flex items-center gap-1 px-2 py-1 bg-background border border-border rounded text-xs font-medium">
-                  <svg className="w-4 h-4" fill="#3d95ce" viewBox="0 0 24 24">
-                    <path d="M19.83 4.2c.63.87.97 1.96.97 3.25 0 3.17-1.87 7.17-4.67 10.37H11.1L9.55 4.2h3.75l.85 8.27c.97-1.56 2.17-4.02 2.17-6.28 0-.68-.15-1.27-.39-1.71L19.83 4.2zm-15.48 0L2 19.8h3.68l2.02-15.6H4.35z"/>
-                  </svg>
-                  <span>Venmo</span>
+                  <CreditCard className="w-4 h-4" />
+                  <span>Cards via PayPal</span>
                 </div>
                 
-                {/* Visa */}
-                <div className="flex items-center gap-1 px-2 py-1 bg-background border border-border rounded text-xs font-medium">
-                  <svg className="w-4 h-4" fill="#1a1f71" viewBox="0 0 24 24">
-                    <path d="M9.112 8.262L7.03 15.748H5.227L4.18 10.815c-.063-.246-.118-.337-.31-.44-.314-.168-.833-.326-1.287-.423L1.718 8.262h1.97c.251 0 .477.167.534.458l.488 2.595L6.302 8.26h1.81zm6.415 0L14.7 15.748h-1.706l.826-7.486h1.697zm3.498 4.833c.007-1.967-2.725-2.075-2.705-2.952.006-.267.26-.551.817-.624.276-.036.739-.064 1.35.237l.241-1.122c-.328-.12-.75-.235-1.275-.235-1.347 0-2.295.717-2.304 1.744-.008.759.677 1.182 1.194 1.434.532.259.71.425.708.656-.004.354-.424.51-.817.516-.686.01-1.084-.185-1.402-.333l-.247 1.155c.318.146.907.273 1.518.279 1.432 0 2.37-.708 2.372-1.805zm4.318 2.653h1.415L23.11 8.262h-1.31c-.287 0-.53.166-.638.421L18.83 15.748h1.432l.284-.786h1.75l.165.786zm-1.52-1.873l.719-1.984.413 1.984h-1.132z"/>
-                  </svg>
-                  <span>Visa</span>
-                </div>
-                
-                {/* Mastercard */}
-                <div className="flex items-center gap-1 px-2 py-1 bg-background border border-border rounded text-xs font-medium">
-                  <svg className="w-4 h-4" viewBox="0 0 24 24">
-                    <circle cx="7" cy="12" r="7" fill="#eb001b"/>
-                    <circle cx="17" cy="12" r="7" fill="#f79e1b"/>
-                    <path d="M12 5.5a6.5 6.5 0 0 0 0 13c1.46 0 2.82-.48 3.91-1.29A6.97 6.97 0 0 1 12 12c0-1.96.8-3.73 2.09-5.00A6.48 6.48 0 0 0 12 5.5z" fill="#ff5f00"/>
-                  </svg>
-                  <span>Mastercard</span>
+                <div className="text-xs text-muted-foreground ml-2">
+                  • Secure checkout • Mobile optimized
                 </div>
               </div>
             </div>
