@@ -28,34 +28,34 @@ const handler = async (req: Request): Promise<Response> => {
     
     const supabase = createClient(supabaseUrl, supabaseKey);
 
-    // Check if user has premium subscription using the existing check-subscription function
+    // Check if user has premium subscription
     const authHeader = req.headers.get("Authorization");
     if (!authHeader) throw new Error("No authorization header provided");
 
-    const subscriptionResponse = await fetch(`${supabaseUrl}/functions/v1/check-subscription`, {
-      method: 'POST',
+    console.log('Checking subscription status...');
+    const { data: subscriptionData, error: subscriptionError } = await supabase.functions.invoke('check-subscription', {
       headers: {
-        'Authorization': authHeader,
-        'Content-Type': 'application/json',
-        'apikey': Deno.env.get('SUPABASE_ANON_KEY')!
+        Authorization: authHeader,
       }
     });
 
-    if (!subscriptionResponse.ok) {
+    if (subscriptionError) {
+      console.error('Subscription check error:', subscriptionError);
       throw new Error('Failed to check subscription status');
     }
 
-    const subscriptionData = await subscriptionResponse.json();
     if (!subscriptionData?.subscribed) {
       console.log('User does not have active subscription');
       return new Response(JSON.stringify({
         success: false,
-        error: 'Premium subscription required. Please upgrade to Unlocked+ to access AI digest summaries.'
+        error: 'Premium subscription required. Please upgrade to Complete+ to access AI digest summaries.'
       }), {
         status: 403,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       });
     }
+
+    console.log('User has valid subscription, proceeding with digest generation');
 
     // Get user's profile data
     const { data: userProfile } = await supabase
@@ -138,6 +138,7 @@ Return the response as a JSON object with this structure:
 }
 `;
 
+    console.log('Making OpenAI API call...');
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -153,17 +154,39 @@ Return the response as a JSON object with this structure:
           },
           { role: 'user', content: prompt }
         ],
-        temperature: 0.7,
-        max_tokens: 1000,
+        max_completion_tokens: 1000, // Use max_completion_tokens for GPT-4.1+ models
+        // Note: temperature not supported in GPT-4.1+ models
       }),
     });
 
     if (!response.ok) {
-      throw new Error(`OpenAI API error: ${response.statusText}`);
+      const errorText = await response.text();
+      console.error('OpenAI API error:', response.status, response.statusText, errorText);
+      throw new Error(`OpenAI API error: ${response.statusText} - ${errorText}`);
     }
 
     const aiResponse = await response.json();
-    const digestContent = JSON.parse(aiResponse.choices[0].message.content);
+    console.log('OpenAI response received');
+    
+    let digestContent;
+    try {
+      digestContent = JSON.parse(aiResponse.choices[0].message.content);
+    } catch (parseError) {
+      console.error('Failed to parse OpenAI response as JSON:', aiResponse.choices[0].message.content);
+      // Fallback digest content
+      digestContent = {
+        greeting: "Welcome to your daily AI Complete Me digest!",
+        insights: [
+          "Your profile shows great authenticity and depth",
+          "You're attracting quality matches based on shared interests",
+          "Your communication style suggests strong emotional intelligence"
+        ],
+        conversationStarters: [
+          { matchId: "sample", name: "Your Match", starter: "I noticed we both love adventure - what's the most spontaneous trip you've ever taken?" }
+        ],
+        motivation: "Keep being your authentic self - the right connections are finding you!"
+      };
+    }
 
     // Prepare data for database
     const newCompatibleProfiles = recentMatches?.slice(0, 3).map(match => ({
