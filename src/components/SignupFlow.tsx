@@ -11,7 +11,7 @@ import { WelcomeConfirmation } from '@/components/WelcomeConfirmation';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 
-export type SignupStep = 'details' | 'age-verification' | 'email-confirmation' | 'profile-setup' | 'complete';
+export type SignupStep = 'details' | 'age-verification' | 'email-confirmation' | 'profile-setup' | 'shipping-address' | 'complete';
 
 interface SignupFlowProps {
   onComplete: () => void;
@@ -51,9 +51,8 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
         .single();
         
       if (profile && profile.name) {
-        // Profile is complete, show welcome
-        setCurrentStep('complete');
-        setShowWelcome(true);
+        // Profile is complete, check if address is collected
+        checkAddressCollection();
       } else {
         setCurrentStep('profile-setup');
       }
@@ -63,12 +62,36 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
     }
   };
 
+  const checkAddressCollection = async () => {
+    if (!user) return;
+    
+    try {
+      const { data: signup } = await supabase
+        .from('quiet_start_signups')
+        .select('*')
+        .eq('user_id', user.id)
+        .single();
+        
+      if (signup?.shipping_address_line1) {
+        // Address collected, show welcome
+        setCurrentStep('complete');
+        setShowWelcome(true);
+      } else {
+        setCurrentStep('shipping-address');
+      }
+    } catch (error) {
+      console.error('Error checking address:', error);
+      setCurrentStep('shipping-address');
+    }
+  };
+
   const getProgressPercentage = () => {
     switch (currentStep) {
-      case 'details': return 20;
-      case 'age-verification': return 40;
-      case 'email-confirmation': return 60;
-      case 'profile-setup': return 80;
+      case 'details': return 15;
+      case 'age-verification': return 30;
+      case 'email-confirmation': return 45;
+      case 'profile-setup': return 60;
+      case 'shipping-address': return 80;
       case 'complete': return 100;
       default: return 0;
     }
@@ -133,6 +156,55 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
     const name = formData.get('name') as string;
     
     try {
+      // Update profile with name
+      const { error: profileError } = await supabase
+        .from('profiles')
+        .upsert({
+          id: user.id,
+          name: name,
+          Avatar_url: null
+        });
+        
+      if (profileError) throw profileError;
+      
+      // Update signup progress
+      await supabase
+        .from('quiet_start_signups')
+        .update({ signup_step: 'profile_completed' })
+        .eq('user_id', user.id);
+      
+      toast({
+        title: "Profile saved!",
+        description: "Now let's get your shipping address for the wellness kit.",
+      });
+      
+      setCurrentStep('shipping-address');
+      
+    } catch (error) {
+      console.error('Profile setup error:', error);
+      toast({
+        title: "Error",
+        description: "Failed to save profile. Please try again.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  const handleWelcomeComplete = () => {
+    setShowWelcome(false);
+    onComplete();
+  };
+
+  const handleShippingAddress = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!user) return;
+    
+    setIsLoading(true);
+    
+    const formData = new FormData(e.target as HTMLFormElement);
+    
+    try {
       // Get next available kit number
       const { data: kitNumber } = await supabase.rpc('get_next_kit_number');
       
@@ -145,25 +217,22 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
         return;
       }
       
-      // Update profile with name
-      const { error: profileError } = await supabase
-        .from('profiles')
-        .upsert({
-          id: user.id,
-          name: name,
-          Avatar_url: null
-        });
-        
-      if (profileError) throw profileError;
-      
-      // Mark benefits as claimed and assign kit number
+      // Save shipping address and claim benefits
       const { error: signupError } = await supabase
         .from('quiet_start_signups')
         .update({
           signup_step: 'completed',
           benefits_claimed: true,
           claimed_at: new Date().toISOString(),
-          kit_number: kitNumber
+          kit_number: kitNumber,
+          shipping_name: formData.get('shipping_name') as string,
+          shipping_address_line1: formData.get('address_line1') as string,
+          shipping_address_line2: formData.get('address_line2') as string,
+          shipping_city: formData.get('city') as string,
+          shipping_state: formData.get('state') as string,
+          shipping_postal_code: formData.get('postal_code') as string,
+          shipping_country: formData.get('country') as string || 'United States',
+          address_collected_at: new Date().toISOString()
         })
         .eq('user_id', user.id);
         
@@ -188,27 +257,22 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
       
       toast({
         title: "Benefits claimed!",
-        description: `You're Quiet Start user #${kitNumber}! Welcome to your Soul Quest journey.`,
+        description: `You're Quiet Start user #${kitNumber}! Your wellness kit will be shipped to your address.`,
       });
       
       setCurrentStep('complete');
       setShowWelcome(true);
       
     } catch (error) {
-      console.error('Profile setup error:', error);
+      console.error('Shipping address error:', error);
       toast({
         title: "Error",
-        description: "Failed to claim benefits. Please try again.",
+        description: "Failed to save shipping address. Please try again.",
         variant: "destructive"
       });
     } finally {
       setIsLoading(false);
     }
-  };
-
-  const handleWelcomeComplete = () => {
-    setShowWelcome(false);
-    onComplete();
   };
 
   if (showWelcome) {
@@ -355,21 +419,137 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
                 />
               </div>
               
+              <div className="bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 rounded-lg p-4">
+                <h4 className="text-sm font-semibold text-blue-800 mb-2 flex items-center gap-2">
+                  <Gift className="h-4 w-4" />
+                  Next: Shipping Address
+                </h4>
+                <p className="text-xs text-blue-700">
+                  After saving your profile, we'll collect your shipping address for the wellness kit delivery.
+                </p>
+              </div>
+              
+              <Button 
+                type="submit" 
+                className="w-full h-12 text-lg font-semibold bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700" 
+                disabled={isLoading}
+              >
+                {isLoading ? 'Saving profile...' : 'Continue to Shipping Address'}
+              </Button>
+            </form>
+          </CardContent>
+        </Card>
+      )}
+
+      {currentStep === 'shipping-address' && (
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Gift className="h-5 w-5 text-primary" />
+              Shipping Address for Your Wellness Kit
+            </CardTitle>
+            <CardDescription>
+              Where should we send your complimentary wellness kit?
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={handleShippingAddress} className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="shipping_name">Full Name</Label>
+                <Input
+                  id="shipping_name"
+                  name="shipping_name"
+                  type="text"
+                  placeholder="Full name for shipping"
+                  required
+                />
+              </div>
+              
+              <div className="space-y-2">
+                <Label htmlFor="address_line1">Address Line 1</Label>
+                <Input
+                  id="address_line1"
+                  name="address_line1"
+                  type="text"
+                  placeholder="Street address"
+                  required
+                />
+              </div>
+              
+              <div className="space-y-2">
+                <Label htmlFor="address_line2">Address Line 2 (Optional)</Label>
+                <Input
+                  id="address_line2"
+                  name="address_line2"
+                  type="text"
+                  placeholder="Apartment, suite, etc."
+                />
+              </div>
+              
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="city">City</Label>
+                  <Input
+                    id="city"
+                    name="city"
+                    type="text"
+                    placeholder="City"
+                    required
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="state">State</Label>
+                  <Input
+                    id="state"
+                    name="state"
+                    type="text"
+                    placeholder="State"
+                    required
+                  />
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="postal_code">ZIP Code</Label>
+                  <Input
+                    id="postal_code"
+                    name="postal_code"
+                    type="text"
+                    placeholder="ZIP code"
+                    required
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="country">Country</Label>
+                  <Input
+                    id="country"
+                    name="country"
+                    type="text"
+                    defaultValue="United States"
+                    required
+                  />
+                </div>
+              </div>
+              
               <div className="bg-gradient-to-r from-emerald-50 to-blue-50 border border-emerald-200 rounded-lg p-4">
                 <h4 className="text-sm font-semibold text-emerald-800 mb-2 flex items-center gap-2">
                   <Gift className="h-4 w-4" />
-                  Ready to Claim
+                  Final Step - Claim Your Benefits
                 </h4>
-                <div className="grid grid-cols-2 gap-3 text-xs">
+                <div className="grid grid-cols-2 gap-3 text-xs mb-2">
                   <div className="bg-white/70 rounded p-2 text-center">
                     <div className="font-semibold text-primary">3 Months Free</div>
                     <div className="text-muted-foreground">Complete Plus</div>
                   </div>
                   <div className="bg-white/70 rounded p-2 text-center">
                     <div className="font-semibold text-purple-600">Wellness Kit</div>
-                    <div className="text-muted-foreground">Physical gift</div>
+                    <div className="text-muted-foreground">Shipped free</div>
                   </div>
                 </div>
+                <p className="text-xs text-emerald-700">
+                  🍃 Calming tea sachet • 💄 Soft-touch lip balm • 💌 Poetic postcard
+                </p>
               </div>
               
               <Button 
@@ -377,7 +557,7 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
                 className="w-full h-12 text-lg font-semibold bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700" 
                 disabled={isLoading}
               >
-                {isLoading ? 'Claiming your benefits...' : 'Complete & Claim Benefits 🎁'}
+                {isLoading ? 'Claiming your wellness kit...' : 'Complete & Claim Benefits 🎁'}
               </Button>
             </form>
           </CardContent>

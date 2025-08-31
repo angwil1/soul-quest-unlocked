@@ -1521,36 +1521,60 @@ export type Database = {
       }
       quiet_start_signups: {
         Row: {
+          address_collected_at: string | null
           benefits_claimed: boolean
           claimed_at: string | null
           created_at: string
           email: string
           id: string
           kit_number: number | null
+          shipping_address_line1: string | null
+          shipping_address_line2: string | null
+          shipping_city: string | null
+          shipping_country: string | null
+          shipping_name: string | null
+          shipping_postal_code: string | null
+          shipping_state: string | null
           signup_step: string
           updated_at: string
           user_id: string
           wellness_kit_address: Json | null
         }
         Insert: {
+          address_collected_at?: string | null
           benefits_claimed?: boolean
           claimed_at?: string | null
           created_at?: string
           email: string
           id?: string
           kit_number?: number | null
+          shipping_address_line1?: string | null
+          shipping_address_line2?: string | null
+          shipping_city?: string | null
+          shipping_country?: string | null
+          shipping_name?: string | null
+          shipping_postal_code?: string | null
+          shipping_state?: string | null
           signup_step?: string
           updated_at?: string
           user_id: string
           wellness_kit_address?: Json | null
         }
         Update: {
+          address_collected_at?: string | null
           benefits_claimed?: boolean
           claimed_at?: string | null
           created_at?: string
           email?: string
           id?: string
           kit_number?: number | null
+          shipping_address_line1?: string | null
+          shipping_address_line2?: string | null
+          shipping_city?: string | null
+          shipping_country?: string | null
+          shipping_name?: string | null
+          shipping_postal_code?: string | null
+          shipping_state?: string | null
           signup_step?: string
           updated_at?: string
           user_id?: string
