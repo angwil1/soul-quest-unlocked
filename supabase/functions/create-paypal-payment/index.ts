@@ -49,7 +49,7 @@ serve(async (req) => {
     });
     
     // Force sandbox environment for now
-    const isProduction = false;
+    const isProduction = true; // Set to true for live PayPal credentials
     
     if (!clientId || !clientSecret) {
       throw new Error('PayPal credentials not configured');
