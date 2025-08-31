@@ -51,13 +51,16 @@ serve(async (req) => {
       ? 'https://api-m.paypal.com' 
       : 'https://api-m.sandbox.paypal.com';
 
-    // Get PayPal access token
+    // Get PayPal access token using proper Deno base64 encoding
+    const credentials = new TextEncoder().encode(`${clientId}:${clientSecret}`);
+    const base64Credentials = btoa(String.fromCharCode(...credentials));
+    
     const tokenResponse = await fetch(`${paypalApiUrl}/v1/oauth2/token`, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Accept-Language': 'en_US',
-        'Authorization': `Basic ${btoa(`${clientId}:${clientSecret}`)}`,
+        'Authorization': `Basic ${base64Credentials}`,
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       body: 'grant_type=client_credentials'
