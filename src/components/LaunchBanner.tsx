@@ -140,8 +140,7 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
               {/* Claimed Progress Bar */}
               <div className="w-full max-w-48 space-y-2">
                 <div className="flex items-center justify-between text-xs text-white/70">
-                  <span>Gifts Claimed</span>
-                  <span>{claimedCount} of 500</span>
+                  <span>Wellness Kits Claimed: {claimedCount} of 500</span>
                 </div>
                 <Progress 
                   value={(claimedCount / 500) * 100} 
