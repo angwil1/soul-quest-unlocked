@@ -7,6 +7,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 import { Sparkles, Clock, Users, Heart, X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useQuietStartProgress } from '@/hooks/useQuietStartProgress';
+import { SignupFlow } from '@/components/SignupFlow';
 
 interface LaunchBannerProps {
   className?: string;
@@ -24,6 +25,7 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0 });
   const [progress, setProgress] = useState(0);
   const [poeticPhrase, setPoeticPhrase] = useState("");
+  const [showSignupFlow, setShowSignupFlow] = useState(false);
   const { claimedCount } = useQuietStartProgress();
 
   // Calculate time remaining and progress (60 days from launch - using a fixed launch date for demo)
@@ -69,7 +71,12 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
   }, []);
 
   const handleQuizStart = () => {
-    navigate('/auth');
+    setShowSignupFlow(true);
+  };
+
+  const handleSignupComplete = () => {
+    setShowSignupFlow(false);
+    navigate('/profile-setup');
   };
 
   const handleDismiss = () => {
@@ -90,7 +97,9 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
   if (isDismissed) return null;
 
   return (
-    <TooltipProvider>
+    <>
+      {showSignupFlow && <SignupFlow onComplete={handleSignupComplete} />}
+      <TooltipProvider>
       <Card className={`relative overflow-hidden bg-gradient-launch border-pink-500/30 shadow-launch ${className}`}>
         {showDismiss && (
           <Button
@@ -218,6 +227,7 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
           </div>
         </CardContent>
       </Card>
-    </TooltipProvider>
+      </TooltipProvider>
+    </>
   );
 };

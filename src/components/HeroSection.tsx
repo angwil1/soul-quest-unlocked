@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Heart, Users, ArrowRight } from 'lucide-react';
+import { SignupFlow } from '@/components/SignupFlow';
 import coupleHeroMobile1 from '@/assets/couple-hero-mobile-1.jpg';
 import coupleHeroMobile2 from '@/assets/couple-hero-mobile-2.jpg';
 import coupleHeroMobile3 from '@/assets/couple-hero-mobile-3.jpg';
@@ -20,6 +21,7 @@ const HeroSection = () => {
   const navigate = useNavigate();
   const [currentHeroImageIndex, setCurrentHeroImageIndex] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [showSignupFlow, setShowSignupFlow] = useState(false);
 
   // Hero image rotation effect
   useEffect(() => {
@@ -38,8 +40,19 @@ const HeroSection = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  const handleGetStarted = () => {
+    setShowSignupFlow(true);
+  };
+
+  const handleSignupComplete = () => {
+    setShowSignupFlow(false);
+    navigate('/profile-setup');
+  };
+
   return (
-    <section className="relative overflow-hidden min-h-[100vh] min-h-[100dvh] flex items-center justify-center bg-white">
+    <>
+      {showSignupFlow && <SignupFlow onComplete={handleSignupComplete} />}
+      <section className="relative overflow-hidden min-h-[100vh] min-h-[100dvh] flex items-center justify-center bg-white">
       
       {/* Already have account - Top Right */}
       <div className="absolute top-4 right-4 z-30 animate-fade-in">
@@ -121,7 +134,7 @@ const HeroSection = () => {
               </Button>
 
               <div 
-                onClick={() => navigate('/auth')}
+                onClick={handleGetStarted}
                 className="cursor-pointer relative bg-gradient-to-r from-primary via-purple-600 to-pink-600 text-white px-2 sm:px-4 lg:px-4 py-1.5 sm:py-3 lg:py-2 rounded-xl sm:rounded-2xl lg:rounded-xl rounded-bl-sm shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-xs sm:text-base lg:text-sm font-medium max-w-fit hover:shadow-primary/25"
               >
                 <Heart className="h-2.5 w-2.5 sm:h-4 w-4 lg:h-3 lg:w-3 mr-0.5 sm:mr-2 lg:mr-1 inline animate-pulse" />
@@ -168,6 +181,7 @@ const HeroSection = () => {
         </div>
       </div>
     </section>
+    </>
   );
 };
 
