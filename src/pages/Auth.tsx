@@ -8,7 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useAuth } from '@/hooks/useAuth';
 import { useEffect } from 'react';
 import { Navbar } from '@/components/Navbar';
-import { AgeVerification } from '@/components/AgeVerification';
+import { SignupFlow } from '@/components/SignupFlow';
 import { supabase } from '@/integrations/supabase/client';
 
 const Auth = () => {
@@ -16,44 +16,37 @@ const Auth = () => {
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [resetLoading, setResetLoading] = useState(false);
-  const [showAgeVerification, setShowAgeVerification] = useState(false);
-  const [pendingSignup, setPendingSignup] = useState<{email: string, password: string} | null>(null);
-  const { signIn, signUp, user } = useAuth();
+  const [showSignupFlow, setShowSignupFlow] = useState(false);
+  const { signIn, user } = useAuth();
   const navigate = useNavigate();
 
-  // Only redirect if already authenticated and NOT from a fresh signup
+  // Only redirect if already authenticated
   useEffect(() => {
-    if (user && !pendingSignup) {
-      // Check if we're on the auth page and user is already authenticated
-      if (window.location.pathname === '/auth') {
-        // Check if user has completed quiz by checking if they have quiz answers
-        const checkQuizCompletion = async () => {
-          try {
-            const { data } = await supabase
-              .from('user_events')
-              .select('*')
-              .eq('user_id', user.id)
-              .eq('event_type', 'quiz_completed')
-              .limit(1);
-            
-            if (data && data.length > 0) {
-              // User has completed quiz, go to main page
-              navigate('/');
-            } else {
-              // User hasn't completed quiz, send to quiz
-              navigate('/questions');
-            }
-          } catch (error) {
-            console.error('Error checking quiz completion:', error);
-            // Default to quiz if error
+    if (user && !showSignupFlow) {
+      // Check if user has completed quiz
+      const checkQuizCompletion = async () => {
+        try {
+          const { data } = await supabase
+            .from('user_events')
+            .select('*')
+            .eq('user_id', user.id)
+            .eq('event_type', 'quiz_completed')
+            .limit(1);
+          
+          if (data && data.length > 0) {
+            navigate('/');
+          } else {
             navigate('/questions');
           }
-        };
-        
-        checkQuizCompletion();
-      }
+        } catch (error) {
+          console.error('Error checking quiz completion:', error);
+          navigate('/questions');
+        }
+      };
+      
+      checkQuizCompletion();
     }
-  }, [user, navigate, pendingSignup]);
+  }, [user, navigate, showSignupFlow]);
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -72,15 +65,12 @@ const Auth = () => {
           .limit(1);
         
         if (data && data.length > 0) {
-          // User has completed quiz, go to main page
           navigate('/');
         } else {
-          // User hasn't completed quiz, send to quiz
           navigate('/questions');
         }
       } catch (error) {
         console.error('Error checking quiz completion:', error);
-        // Default to quiz if error
         navigate('/questions');
       }
     }
@@ -88,53 +78,13 @@ const Auth = () => {
     setIsLoading(false);
   };
 
-  const handleSignUp = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    // Check if age verification is already done
-    const ageVerified = localStorage.getItem('ageVerified') === 'true';
-    
-    if (ageVerified) {
-      // Age already verified, proceed with signup immediately
-      setIsLoading(true);
-      const result = await signUp(email, password);
-      setIsLoading(false);
-      
-      // Check if signup was successful and redirect to quiz
-      if (!result?.error) {
-        navigate('/questions');
-      }
-    } else {
-      // Need age verification first
-      setPendingSignup({ email, password });
-      setShowAgeVerification(true);
-    }
+  const handleStartSignup = () => {
+    setShowSignupFlow(true);
   };
 
-  const handleAgeVerificationComplete = async () => {
-    console.log("Age verification complete callback triggered");
-    console.log("Pending signup:", pendingSignup);
-    
-    if (!pendingSignup) {
-      console.error("No pending signup found!");
-      setShowAgeVerification(false);
-      return;
-    }
-    
-    setIsLoading(true);
-    setShowAgeVerification(false);
-    
-    console.log("Attempting signup with:", pendingSignup.email);
-    const result = await signUp(pendingSignup.email, pendingSignup.password);
-    console.log("Signup result:", result);
-    
-    // Check if signup was successful and redirect to quiz
-    if (!result?.error) {
-      navigate('/questions');
-    }
-    
-    setPendingSignup(null);
-    setIsLoading(false);
+  const handleSignupComplete = () => {
+    setShowSignupFlow(false);
+    navigate('/questions');
   };
 
   const handlePasswordReset = async () => {
@@ -146,7 +96,6 @@ const Auth = () => {
     setResetLoading(true);
     
     try {
-      const { supabase } = await import('@/integrations/supabase/client');
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
         redirectTo: `${window.location.origin}/reset-password`,
       });
@@ -163,6 +112,17 @@ const Auth = () => {
     }
   };
 
+  if (showSignupFlow) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Navbar />
+        <div className="flex flex-col items-center justify-center p-4 pt-20">
+          <SignupFlow onComplete={handleSignupComplete} />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -174,109 +134,93 @@ const Auth = () => {
           </Button>
         </div>
         
-      <Card className="w-full max-w-md">
-        <CardHeader className="text-center">
-          <CardTitle className="text-2xl font-bold">Welcome to AI Complete Me</CardTitle>
-          <CardDescription>Sign in to your account or create a new one</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <Tabs defaultValue="signin" className="w-full">
-            <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="signin">Sign In</TabsTrigger>
-              <TabsTrigger value="signup">Sign Up</TabsTrigger>
-            </TabsList>
-            
-            <TabsContent value="signin">
-              <form onSubmit={handleSignIn} className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="signin-email">Email</Label>
-                  <Input
-                    id="signin-email"
-                    type="email"
-                    placeholder="your@email.com"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="signin-password">Password</Label>
-                  <Input
-                    id="signin-password"
-                    type="password"
-                    placeholder="Your password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                  />
-                </div>
-                <Button 
-                  type="submit" 
-                  className="w-full h-12 text-lg font-semibold" 
-                  disabled={isLoading}
-                >
-                  {isLoading ? 'Signing in...' : 'Sign In'}
-                </Button>
-                
-                <div className="text-center">
+        <Card className="w-full max-w-md">
+          <CardHeader className="text-center">
+            <CardTitle className="text-2xl font-bold">Welcome to AI Complete Me</CardTitle>
+            <CardDescription>Sign in to your account or create a new one</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Tabs defaultValue="signin" className="w-full">
+              <TabsList className="grid w-full grid-cols-2">
+                <TabsTrigger value="signin">Sign In</TabsTrigger>
+                <TabsTrigger value="signup">Sign Up</TabsTrigger>
+              </TabsList>
+              
+              <TabsContent value="signin">
+                <form onSubmit={handleSignIn} className="space-y-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="signin-email">Email</Label>
+                    <Input
+                      id="signin-email"
+                      type="email"
+                      placeholder="your@email.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="signin-password">Password</Label>
+                    <Input
+                      id="signin-password"
+                      type="password"
+                      placeholder="Your password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                    />
+                  </div>
                   <Button 
-                    type="button"
-                    variant="link" 
-                    onClick={handlePasswordReset}
-                    disabled={resetLoading}
-                    className="text-sm"
+                    type="submit" 
+                    className="w-full h-12 text-lg font-semibold" 
+                    disabled={isLoading}
                   >
-                    {resetLoading ? 'Sending...' : 'Forgot Password?'}
+                    {isLoading ? 'Signing in...' : 'Sign In'}
                   </Button>
+                  
+                  <div className="text-center">
+                    <Button 
+                      type="button"
+                      variant="link" 
+                      onClick={handlePasswordReset}
+                      disabled={resetLoading}
+                      className="text-sm"
+                    >
+                      {resetLoading ? 'Sending...' : 'Forgot Password?'}
+                    </Button>
+                  </div>
+                </form>
+              </TabsContent>
+              
+              <TabsContent value="signup">
+                <div className="space-y-4">
+                  <div className="bg-gradient-to-r from-primary/5 to-purple-600/5 border border-primary/20 rounded-lg p-4 text-center space-y-3">
+                    <h3 className="font-semibold text-primary">🎁 Quiet Start Offer</h3>
+                    <p className="text-sm text-muted-foreground">
+                      Join the first 500 Soul Questers and receive:
+                    </p>
+                    <div className="space-y-1 text-xs text-muted-foreground">
+                      <div>✨ 3 months of Complete Plus free</div>
+                      <div>🍃 Mini wellness kit delivered</div>
+                      <div>🎯 Priority matching & premium features</div>
+                    </div>
+                  </div>
+                  
+                  <Button 
+                    onClick={handleStartSignup}
+                    className="w-full h-12 text-lg font-semibold bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90"
+                  >
+                    Start Your Soul Quest Journey
+                  </Button>
+                  
+                  <p className="text-xs text-muted-foreground text-center">
+                    Complete our guided signup to claim your benefits
+                  </p>
                 </div>
-              </form>
-            </TabsContent>
-            
-            <TabsContent value="signup">
-              <form onSubmit={handleSignUp} className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="signup-email">Email</Label>
-                  <Input
-                    id="signup-email"
-                    type="email"
-                    placeholder="your@email.com"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="signup-password">Password</Label>
-                  <Input
-                    id="signup-password"
-                    type="password"
-                    placeholder="Choose a strong password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                    minLength={6}
-                  />
-                </div>
-                <Button 
-                  type="submit" 
-                  className="w-full h-12 text-lg font-semibold" 
-                  disabled={isLoading}
-                >
-                  {isLoading ? 'Creating account...' : 'Sign Up'}
-                </Button>
-              </form>
-            </TabsContent>
-          </Tabs>
-        </CardContent>
-      </Card>
-      
-      {/* Age Verification Modal */}
-      {showAgeVerification && (
-        <AgeVerification 
-          onVerificationComplete={handleAgeVerificationComplete}
-          forceOpen={true}
-        />
-      )}
+              </TabsContent>
+            </Tabs>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
