@@ -70,6 +70,8 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
 
   const handleQuizStart = () => {
     navigate('/quick-start');
+    // Scroll to top after navigation
+    setTimeout(() => window.scrollTo(0, 0), 0);
   };
 
   const handleDismiss = () => {
