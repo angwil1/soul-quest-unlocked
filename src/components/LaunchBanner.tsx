@@ -130,23 +130,23 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
             {/* Right side - Features and countdown */}
             <div className="flex flex-col items-center gap-2 md:gap-3 min-w-0">
               {/* Poetic Countdown */}
-              <div className="flex items-center gap-2 text-white text-center">
+              <div className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 text-white text-center">
                 <Clock className="h-3 w-3 md:h-4 md:w-4 animate-pulse" />
-                <div className="text-xs md:text-sm font-medium italic">
+                <div className="text-xs md:text-sm font-medium italic text-center leading-tight">
                   {poeticPhrase}
                 </div>
               </div>
 
               {/* Claimed Progress Bar */}
-              <div className="w-full max-w-48 space-y-2">
-                <div className="flex items-center justify-between text-xs text-white/70">
+              <div className="w-full max-w-60 sm:max-w-48 space-y-2">
+                <div className="text-center text-xs text-white/70">
                   <span>Wellness Kits Claimed: {claimedCount} of 500</span>
                 </div>
                 <Progress 
                   value={(claimedCount / 500) * 100} 
-                  className="h-3 bg-white/20 [&>div]:bg-gradient-to-r [&>div]:from-emerald-400/80 [&>div]:to-emerald-300/60 [&>div]:animate-pulse" 
+                  className="h-2 sm:h-3 bg-white/20 [&>div]:bg-gradient-to-r [&>div]:from-emerald-400/80 [&>div]:to-emerald-300/60 [&>div]:animate-pulse" 
                 />
-                <div className="text-center text-xs text-emerald-200 font-medium">
+                <div className="text-center text-xs text-emerald-200 font-medium leading-tight">
                   {claimedCount === 0 
                     ? "The journey begins now." 
                     : claimedCount < 50 
@@ -156,38 +156,48 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
                 </div>
               </div>
 
-              {/* Features with Tooltips */}
-              <div className="flex flex-wrap justify-center gap-1 md:gap-2 text-xs text-white/90">
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <div className="flex items-center gap-1 cursor-help hover-scale">
-                      <span>🎁 3 Months Free</span>
-                    </div>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>Complete Plus membership with all premium features</p>
-                  </TooltipContent>
-                </Tooltip>
+              {/* Features with Mobile-Optimized Tooltips */}
+              <div className="flex flex-wrap justify-center gap-1 text-xs text-white/90">
+                {/* On mobile, we'll show simple text without tooltips */}
+                <div className="sm:hidden flex flex-wrap justify-center gap-2 text-xs">
+                  <span>🎁 3 Months Free</span>
+                  <span>🍃 Wellness Kit</span>
+                  <span>🤝 Referral Rewards</span>
+                </div>
                 
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <div className="flex items-center gap-1 cursor-help hover-scale">
-                      <span>🍃 Wellness Kit</span>
-                    </div>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>Physical care package delivered to your door</p>
-                  </TooltipContent>
-                </Tooltip>
-                
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <span className="cursor-help hover-scale">🤝 Referral Rewards</span>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>Earn bonus months and unlock special badges</p>
-                  </TooltipContent>
-                </Tooltip>
+                {/* On larger screens, show tooltips */}
+                <div className="hidden sm:flex flex-wrap justify-center gap-1 md:gap-2">
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <div className="flex items-center gap-1 cursor-help hover-scale">
+                        <span>🎁 3 Months Free</span>
+                      </div>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Complete Plus membership with all premium features</p>
+                    </TooltipContent>
+                  </Tooltip>
+                  
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <div className="flex items-center gap-1 cursor-help hover-scale">
+                        <span>🍃 Wellness Kit</span>
+                      </div>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Physical care package delivered to your door</p>
+                    </TooltipContent>
+                  </Tooltip>
+                  
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <span className="cursor-help hover-scale">🤝 Referral Rewards</span>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Earn bonus months and unlock special badges</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </div>
               </div>
 
               {/* CTA Button */}
@@ -196,7 +206,7 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
                   onClick={handleQuizStart}
                   variant="secondary"
                   size="sm"
-                  className="bg-white text-black hover:bg-white/90 font-medium text-xs md:text-sm px-3 py-1.5 hover-scale animate-pulse"
+                  className="bg-white text-black hover:bg-white/90 font-medium text-xs md:text-sm px-2 sm:px-3 py-1.5 hover-scale animate-pulse w-full sm:w-auto"
                 >
                   Claim Quiet Start Offer ✨
                 </Button>
