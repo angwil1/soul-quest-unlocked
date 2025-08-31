@@ -23,6 +23,11 @@ const Auth = () => {
   // Only redirect if already authenticated
   useEffect(() => {
     if (user && !showSignupFlow) {
+      // Don't interfere if user is already on profile setup page
+      if (window.location.pathname === '/profile/setup') {
+        return;
+      }
+      
       // Check if user has a complete profile first
       const checkProfile = async () => {
         try {

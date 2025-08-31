@@ -24,6 +24,7 @@ export const AppWrapper: React.FC<AppWrapperProps> = ({ children }) => {
       // Don't show modal on these pages
       const excludedPaths = [
         '/profile',
+        '/profile/setup',
         '/',
         '/messages',
         '/reset-password',
