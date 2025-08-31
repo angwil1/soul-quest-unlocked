@@ -3,6 +3,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { Sparkles, Clock, Users, Heart, X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
@@ -21,6 +22,8 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
   const [isDismissed, setIsDismissed] = useState(false);
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0 });
   const [progress, setProgress] = useState(0);
+  const [claimedCount, setClaimedCount] = useState(127); // Simulated claimed count
+  const [poeticPhrase, setPoeticPhrase] = useState("");
 
   // Calculate time remaining and progress (60 days from launch - using a fixed launch date for demo)
   useEffect(() => {
@@ -40,9 +43,24 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
         
         setTimeLeft({ days, hours, minutes });
         
+        // Set poetic phrases based on time left
+        if (days > 30) {
+          setPoeticPhrase("The invitation extends its gentle hand...");
+        } else if (days > 14) {
+          setPoeticPhrase("Your moment approaches softly...");
+        } else if (days > 7) {
+          setPoeticPhrase("The quiet window whispers your name...");
+        } else if (days > 1) {
+          setPoeticPhrase("Few heartbeats remain in this sacred pause...");
+        } else {
+          setPoeticPhrase("The quiet window is closing. Don't miss your moment.");
+        }
+        
         // Calculate progress percentage (how much time has elapsed)
         const progressPercentage = Math.min(100, Math.max(0, (elapsed / totalDuration) * 100));
         setProgress(progressPercentage);
+      } else {
+        setPoeticPhrase("This sacred window has closed.");
       }
     }, 1000);
 
@@ -71,89 +89,118 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
   if (isDismissed) return null;
 
   return (
-    <Card className={`relative overflow-hidden bg-gradient-launch border-pink-500/30 shadow-launch ${className}`}>
-      {showDismiss && (
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={handleDismiss}
-          className="absolute top-2 right-2 h-6 w-6 p-0 text-white/80 hover:text-white hover:bg-white/20 z-10"
-        >
-          <X className="h-3 w-3" />
-        </Button>
-      )}
-      
-      <CardContent className="p-3 md:p-6">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-2 md:gap-4">
-          {/* Left side - Main message */}
-          <div className="text-center md:text-left">
-            <h3 className="text-base md:text-xl font-bold text-white mb-1 md:mb-2">
-              🎁 Quiet Start Offer
-            </h3>
-            
-            <p className="text-white/90 text-xs md:text-base mb-2 md:mb-3 leading-tight">
-              The first 500 Soul Questers receive 3 months of Complete Plus + a wellness keepsake. Kits also available for referrers—until all 500 are claimed.
-            </p>
-            
-            <div className="text-white/80 text-xs md:text-sm mb-1">
-              🍃 Mini Wellness Kit: Calming tea sachet, soft-touch lip balm, and a poetic postcard to mark your beginning
+    <TooltipProvider>
+      <Card className={`relative overflow-hidden bg-gradient-launch border-pink-500/30 shadow-launch ${className}`}>
+        {showDismiss && (
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={handleDismiss}
+            className="absolute top-2 right-2 h-6 w-6 p-0 text-white/80 hover:text-white hover:bg-white/20 z-10"
+          >
+            <X className="h-3 w-3" />
+          </Button>
+        )}
+        
+        <CardContent className="p-3 md:p-6">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-2 md:gap-4">
+            {/* Left side - Main message */}
+            <div className="text-center md:text-left">
+              <h3 className="text-base md:text-xl font-bold text-white mb-1 md:mb-2">
+                🎁 Quiet Start Offer
+              </h3>
+              
+              <p className="text-white/90 text-xs md:text-base mb-2 md:mb-3 leading-tight">
+                The first 500 Soul Questers receive 3 months of Complete Plus + a wellness keepsake. Kits also available for referrers—until all 500 are claimed.
+              </p>
+              
+              <div className="text-white/80 text-xs md:text-sm mb-1">
+                🍃 Mini Wellness Kit: Calming tea sachet, soft-touch lip balm, and a poetic postcard to mark your beginning
+              </div>
+              
+              <div className="text-white/80 text-xs md:text-sm mb-1">
+                🤝 Referral Rewards: Invite someone to join. Earn bonus months, unlock badges, and receive more gifts—while supplies last
+              </div>
+              
+              <div className="text-white/80 text-xs md:text-sm">
+                ⏳ Limited to First 500 Users: Quiet window closes soon. You're invited.
+              </div>
             </div>
-            
-            <div className="text-white/80 text-xs md:text-sm mb-1">
-              🤝 Referral Rewards: Invite someone to join. Earn bonus months, unlock badges, and receive more gifts—while supplies last
-            </div>
-            
-            <div className="text-white/80 text-xs md:text-sm">
-              ⏳ Limited to First 500 Users: Quiet window closes soon. You're invited.
+
+            {/* Right side - Features and countdown */}
+            <div className="flex flex-col items-center gap-2 md:gap-3 min-w-0">
+              {/* Poetic Countdown */}
+              <div className="flex items-center gap-2 text-white text-center">
+                <Clock className="h-3 w-3 md:h-4 md:w-4 animate-pulse" />
+                <div className="text-xs md:text-sm font-medium italic">
+                  {poeticPhrase}
+                </div>
+              </div>
+
+              {/* Claimed Progress Bar */}
+              <div className="w-full max-w-48 space-y-2">
+                <div className="flex items-center justify-between text-xs text-white/70">
+                  <span>Soul Questers Joined</span>
+                  <span>{claimedCount} of 500 claimed</span>
+                </div>
+                <Progress 
+                  value={(claimedCount / 500) * 100} 
+                  className="h-3 bg-white/20 [&>div]:bg-gradient-to-r [&>div]:from-emerald-400/80 [&>div]:to-emerald-300/60 [&>div]:animate-pulse" 
+                />
+                <div className="text-center text-xs text-emerald-200 font-medium">
+                  {500 - claimedCount} spots remaining
+                </div>
+              </div>
+
+              {/* Features with Tooltips */}
+              <div className="flex flex-wrap justify-center gap-1 md:gap-2 text-xs text-white/90">
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <div className="flex items-center gap-1 cursor-help hover-scale">
+                      <span>🎁 3 Months Free</span>
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Complete Plus membership with all premium features</p>
+                  </TooltipContent>
+                </Tooltip>
+                
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <div className="flex items-center gap-1 cursor-help hover-scale">
+                      <span>🍃 Wellness Kit</span>
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Physical care package delivered to your door</p>
+                  </TooltipContent>
+                </Tooltip>
+                
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <span className="cursor-help hover-scale">🤝 Referral Rewards</span>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Earn bonus months and unlock special badges</p>
+                  </TooltipContent>
+                </Tooltip>
+              </div>
+
+              {/* CTA Button */}
+              {variant === 'homepage' && (
+                <Button 
+                  onClick={handleQuizStart}
+                  variant="secondary"
+                  size="sm"
+                  className="bg-white text-black hover:bg-white/90 font-medium text-xs md:text-sm px-3 py-1.5 hover-scale animate-pulse"
+                >
+                  Claim Quiet Start Offer ✨
+                </Button>
+              )}
             </div>
           </div>
-
-          {/* Right side - Features and countdown */}
-          <div className="flex flex-col items-center gap-2 md:gap-3 min-w-0">
-            {/* Countdown */}
-            <div className="flex items-center gap-2 text-white">
-              <Clock className="h-3 w-3 md:h-4 md:w-4" />
-              <div className="text-xs md:text-sm font-medium">
-                {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m left
-              </div>
-            </div>
-
-            <div className="w-full max-w-48 space-y-2">
-              <div className="flex items-center justify-between text-xs text-white/70">
-                <span>Quiet Window Progress</span>
-                <span>🔒 0% claimed</span>
-              </div>
-              <Progress 
-                value={progress} 
-                className="h-2 bg-white/20 [&>div]:bg-gradient-to-r [&>div]:from-white/80 [&>div]:to-white/60" 
-              />
-            </div>
-
-            {/* Features */}
-            <div className="flex flex-wrap justify-center gap-1 md:gap-2 text-xs text-white/90">
-              <div className="flex items-center gap-1">
-                <span>🎁 3 Months Free</span>
-              </div>
-              <div className="flex items-center gap-1">
-                <span>🍃 Wellness Kit</span>
-              </div>
-              <span>🤝 Referral Rewards</span>
-            </div>
-
-            {/* CTA Button */}
-            {variant === 'homepage' && (
-              <Button 
-                onClick={handleQuizStart}
-                variant="secondary"
-                size="sm"
-                className="bg-white text-black hover:bg-white/90 font-medium text-xs md:text-sm px-3 py-1.5 animate-gentle-pulse"
-              >
-                Claim Quiet Start Offer ✨
-              </Button>
-            )}
-          </div>
-        </div>
-      </CardContent>
-    </Card>
+        </CardContent>
+      </Card>
+    </TooltipProvider>
   );
 };
