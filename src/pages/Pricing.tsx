@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { useAuth } from "@/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
@@ -8,6 +9,9 @@ import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 import { useToast } from "@/hooks/use-toast";
 import { useState, useEffect } from "react";
+import { Smartphone } from "lucide-react";
+import { MobileOptimizedPayment } from "@/components/MobileOptimizedPayment";
+import { useMobilePayments } from "@/hooks/useMobilePayments";
 
 const Pricing = () => {
   const { user } = useAuth();
@@ -17,6 +21,9 @@ const Pricing = () => {
   const [loading, setLoading] = useState(false);
   const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
   const [quietStartStatus, setQuietStartStatus] = useState<any>(null);
+  const [showMobilePayment, setShowMobilePayment] = useState(false);
+  const [mobilePaymentPlan, setMobilePaymentPlan] = useState<any>(null);
+  const { deviceInfo, paymentMethods } = useMobilePayments();
 
   const plans = [
     {
@@ -220,6 +227,14 @@ const Pricing = () => {
     return subscription.subscription_tier || "Unknown";
   };
 
+  const handleMobilePayment = (plan: any) => {
+    setMobilePaymentPlan(plan);
+    setShowMobilePayment(true);
+  };
+
+  const isMobileDevice = deviceInfo?.platform === 'ios' || deviceInfo?.platform === 'android';
+  const hasMobilePayments = paymentMethods.some(p => p.type === 'apple-pay' || p.type === 'google-pay');
+
   return (
     <>
       <Navbar />
@@ -350,31 +365,62 @@ const Pricing = () => {
                       </div>
 
                       <div className="flex justify-center mt-6">
-                        <button
-                          className={`w-full px-6 py-3 rounded-md font-medium text-center transition-all duration-300 ${
-                            isCurrentPlan 
-                              ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 cursor-default" 
-                              : isFree
-                              ? "bg-purple-600 text-white hover:bg-purple-700 cursor-default"
-                              : "bg-purple-600 text-white hover:bg-purple-700 disabled:opacity-50"
-                          }`}
-                          disabled={loading || isCurrentPlan || isFree}
-                          onClick={() => handleSubscribe(plan.plan)}
-                        >
-                          {loading && loadingPlan === plan.plan ? (
-                            <span className="flex items-center justify-center gap-2">
-                              <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
-                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"/>
-                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/>
-                              </svg>
-                              Processing...
-                            </span>
-                          ) : isCurrentPlan ? (
-                            "Current Plan"
-                          ) : (
-                            plan.buttonText
+                        <div className="w-full space-y-2">
+                          <button
+                            className={`w-full px-6 py-3 rounded-md font-medium text-center transition-all duration-300 ${
+                              isCurrentPlan 
+                                ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 cursor-default" 
+                                : isFree
+                                ? "bg-purple-600 text-white hover:bg-purple-700 cursor-default"
+                                : "bg-purple-600 text-white hover:bg-purple-700 disabled:opacity-50"
+                            }`}
+                            disabled={loading || isCurrentPlan || isFree}
+                            onClick={() => handleSubscribe(plan.plan)}
+                          >
+                            {loading && loadingPlan === plan.plan ? (
+                              <span className="flex items-center justify-center gap-2">
+                                <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
+                                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"/>
+                                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/>
+                                </svg>
+                                Processing...
+                              </span>
+                            ) : isCurrentPlan ? (
+                              "Current Plan"
+                            ) : (
+                              plan.buttonText
+                            )}
+                          </button>
+
+                          {/* Mobile Payment Option */}
+                          {isMobileDevice && !isFree && !isCurrentPlan && (
+                            <Dialog open={showMobilePayment && mobilePaymentPlan?.name === plan.name} onOpenChange={setShowMobilePayment}>
+                              <DialogTrigger asChild>
+                                <Button 
+                                  onClick={() => handleMobilePayment(plan)}
+                                  variant="outline" 
+                                  className="w-full text-sm flex items-center gap-2 border-purple-200 text-purple-700 hover:bg-purple-50"
+                                >
+                                  <Smartphone size={16} />
+                                  Mobile Pay
+                                  {hasMobilePayments && (
+                                    <Badge variant="secondary" className="ml-1 bg-green-100 text-green-700 text-xs">
+                                      Fast
+                                    </Badge>
+                                  )}
+                                </Button>
+                              </DialogTrigger>
+                              <DialogContent className="sm:max-w-md">
+                                <MobileOptimizedPayment
+                                  planName={plan.name}
+                                  amount={parseFloat(plan.price.replace('$', ''))}
+                                  planId={plan.plan}
+                                  onClose={() => setShowMobilePayment(false)}
+                                />
+                              </DialogContent>
+                            </Dialog>
                           )}
-                        </button>
+                        </div>
                       </div>
                     </CardContent>
                   </Card>
@@ -386,6 +432,11 @@ const Pricing = () => {
               <p className="text-sm text-gray-600 dark:text-gray-400">
                 All plans include our core matching experience. Cancel anytime.
               </p>
+              {isMobileDevice && (
+                <p className="text-xs text-gray-500 dark:text-gray-500 mt-2">
+                  📱 Mobile payments available • Apple Pay & Google Pay supported
+                </p>
+              )}
             </div>
           </div>
         </div>
