@@ -1588,6 +1588,51 @@ export type Database = {
         }
         Relationships: []
       }
+      quiz_results: {
+        Row: {
+          communication_style: Json
+          compatibility_factors: Json
+          completed_at: string | null
+          created_at: string | null
+          id: string
+          lifestyle_preferences: Json
+          love_languages: Json
+          overall_score: number | null
+          personality_scores: Json
+          relationship_goals: Json
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          communication_style?: Json
+          compatibility_factors?: Json
+          completed_at?: string | null
+          created_at?: string | null
+          id?: string
+          lifestyle_preferences?: Json
+          love_languages?: Json
+          overall_score?: number | null
+          personality_scores?: Json
+          relationship_goals?: Json
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          communication_style?: Json
+          compatibility_factors?: Json
+          completed_at?: string | null
+          created_at?: string | null
+          id?: string
+          lifestyle_preferences?: Json
+          love_languages?: Json
+          overall_score?: number | null
+          personality_scores?: Json
+          relationship_goals?: Json
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       rate_limits: {
         Row: {
           created_at: string | null
