@@ -7,7 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 import { useToast } from "@/hooks/use-toast";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Pricing = () => {
   const { user } = useAuth();
@@ -16,6 +16,7 @@ const Pricing = () => {
   const subscription = null; // Simplified without subscription
   const [loading, setLoading] = useState(false);
   const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
+  const [quietStartStatus, setQuietStartStatus] = useState<any>(null);
 
   const plans = [
     {
@@ -77,6 +78,27 @@ const Pricing = () => {
     }
   ];
 
+  // Check if user is part of Quiet Start program
+  useEffect(() => {
+    const checkQuietStartStatus = async () => {
+      if (!user) return;
+
+      try {
+        const { data: quietStart } = await supabase
+          .from('quiet_start_signups')
+          .select('*')
+          .eq('user_id', user.id)
+          .single();
+
+        setQuietStartStatus(quietStart);
+      } catch (error) {
+        console.log('No Quiet Start record found');
+      }
+    };
+
+    checkQuietStartStatus();
+  }, [user]);
+
   const handleSubscribe = async (plan: string | null) => {
     if (!user) {
       navigate('/auth');
@@ -84,6 +106,16 @@ const Pricing = () => {
     }
     
     if (!plan) return;
+
+    // Check if user has Quiet Start benefits (first 500 users)
+    if (quietStartStatus?.benefits_claimed) {
+      toast({
+        title: "Quiet Start Member",
+        description: "As one of our first 500 members, you have free access to all premium features! No payment needed.",
+      });
+      navigate('/premium-dashboard');
+      return;
+    }
 
     setLoading(true);
     setLoadingPlan(plan);
