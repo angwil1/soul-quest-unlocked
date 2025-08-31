@@ -11,7 +11,7 @@ import { WelcomeConfirmation } from '@/components/WelcomeConfirmation';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 
-export type SignupStep = 'details' | 'age-verification' | 'email-confirmation' | 'profile-setup' | 'shipping-address' | 'complete';
+export type SignupStep = 'details' | 'email-confirmation' | 'profile-setup' | 'shipping-address' | 'complete';
 
 interface SignupFlowProps {
   onComplete: () => void;
@@ -21,24 +21,40 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
   const [currentStep, setCurrentStep] = useState<SignupStep>('details');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [dateOfBirth, setDateOfBirth] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [showAgeVerification, setShowAgeVerification] = useState(false);
   const [showWelcome, setShowWelcome] = useState(false);
   const [isEmailConfirmed, setIsEmailConfirmed] = useState(false);
   const { signUp, user, session } = useAuth();
   const { toast } = useToast();
 
-  // Check if user is already confirmed
+  // Store age verification when user is confirmed
   useEffect(() => {
-    if (user && session) {
-      // Check if email is confirmed
-      if (user.email_confirmed_at) {
-        setIsEmailConfirmed(true);
-        // Check if they've completed profile setup
-        checkProfileCompletion();
+    const storeAgeVerification = async () => {
+      if (user && dateOfBirth && !isEmailConfirmed) {
+        try {
+          console.log('🔒 Storing age verification in database');
+          const { error } = await supabase.rpc('verify_user_age', {
+            p_date_of_birth: dateOfBirth
+          });
+          
+          if (error) {
+            console.error('Age verification storage error:', error);
+          } else {
+            console.log('✅ Age verification stored successfully');
+          }
+        } catch (error) {
+          console.error('Age verification storage error:', error);
+        }
       }
+    };
+
+    if (user && session && user.email_confirmed_at) {
+      setIsEmailConfirmed(true);
+      storeAgeVerification();
+      checkProfileCompletion();
     }
-  }, [user, session]);
+  }, [user, session, dateOfBirth, isEmailConfirmed]);
 
   const checkProfileCompletion = async () => {
     if (!user) return;
@@ -87,9 +103,8 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
 
   const getProgressPercentage = () => {
     switch (currentStep) {
-      case 'details': return 15;
-      case 'age-verification': return 30;
-      case 'email-confirmation': return 45;
+      case 'details': return 20;
+      case 'email-confirmation': return 40;
       case 'profile-setup': return 60;
       case 'shipping-address': return 80;
       case 'complete': return 100;
@@ -97,20 +112,54 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
     }
   };
 
+  const calculateAge = (birthDate: string): number => {
+    const today = new Date();
+    const birth = new Date(birthDate);
+    let age = today.getFullYear() - birth.getFullYear();
+    const monthDiff = today.getMonth() - birth.getMonth();
+    
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+      age--;
+    }
+    
+    return age;
+  };
+
   const handleEmailSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     
     try {
+      // Validate age first
+      if (!dateOfBirth) {
+        toast({
+          title: "Date of birth required",
+          description: "Please enter your date of birth to continue.",
+          variant: "destructive"
+        });
+        setIsLoading(false);
+        return;
+      }
+
+      const age = calculateAge(dateOfBirth);
+      if (age < 18) {
+        toast({
+          title: "Age requirement not met",
+          description: "You must be 18 or older to use this platform.",
+          variant: "destructive"
+        });
+        setIsLoading(false);
+        return;
+      }
+
       const result = await signUp(email, password);
       
       if (!result?.error) {
         toast({
           title: "Account created!",
-          description: "Please verify your age to continue.",
+          description: "Please check your email to verify your account.",
         });
-        setCurrentStep('age-verification');
-        setShowAgeVerification(true);
+        setCurrentStep('email-confirmation');
       }
     } catch (error) {
       console.error('Signup error:', error);
@@ -120,21 +169,8 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
   };
 
   const handleAgeVerificationComplete = async () => {
-    setShowAgeVerification(false);
+    // This function is no longer needed since age is verified during signup
     setCurrentStep('email-confirmation');
-    
-    // Update signup progress
-    if (user) {
-      await supabase
-        .from('quiet_start_signups')
-        .update({ signup_step: 'age_verified' })
-        .eq('user_id', user.id);
-    }
-    
-    toast({
-      title: "Age verified!",
-      description: "Check your email for a confirmation link to complete your account setup.",
-    });
   };
 
   const handleProfileSetup = async (e: React.FormEvent) => {
@@ -376,6 +412,20 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
                   minLength={6}
                 />
               </div>
+              <div className="space-y-2">
+                <Label htmlFor="dateOfBirth">Date of Birth</Label>
+                <Input
+                  id="dateOfBirth"
+                  type="date"
+                  value={dateOfBirth}
+                  onChange={(e) => setDateOfBirth(e.target.value)}
+                  max={new Date(Date.now() - 567648000000).toISOString().split('T')[0]} // 18 years ago
+                  required
+                />
+                <p className="text-xs text-muted-foreground">
+                  You must be 18 or older to use this platform
+                </p>
+              </div>
               
               <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-3 space-y-2">
                 <h4 className="text-sm font-semibold text-emerald-800 flex items-center gap-2">
@@ -394,7 +444,7 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
                 className="w-full h-12 text-lg font-semibold bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90" 
                 disabled={isLoading}
               >
-                {isLoading ? 'Creating your account...' : 'Continue to Age Verification'}
+                {isLoading ? 'Creating your account...' : 'Create Account & Continue'}
               </Button>
             </form>
           </CardContent>
@@ -599,14 +649,6 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
             </form>
           </CardContent>
         </Card>
-      )}
-
-      {/* Age Verification Modal */}
-      {showAgeVerification && (
-        <AgeVerification 
-          onVerificationComplete={handleAgeVerificationComplete}
-          forceOpen={true}
-        />
       )}
     </div>
   );
