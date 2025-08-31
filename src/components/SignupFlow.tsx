@@ -492,10 +492,10 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Gift className="h-5 w-5 text-primary" />
-              Shipping Address for Your Wellness Kit
+              Wellness Kit Address
             </CardTitle>
             <CardDescription>
-              Where should we send your complimentary wellness kit?
+              We'll send your wellness kit after you've been actively connected for 3 months. This ensures it's a meaningful keepsake of your journey.
             </CardDescription>
           </CardHeader>
           <CardContent>
