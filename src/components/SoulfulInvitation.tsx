@@ -2,13 +2,23 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Heart, ArrowRight, Sparkles } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { SignupFlow } from '@/components/SignupFlow';
+import { useState } from 'react';
 import profileSilhouette from '@/assets/profile-silhouette.jpg';
 
 export const SoulfulInvitation = () => {
   const navigate = useNavigate();
+  const [showSignupFlow, setShowSignupFlow] = useState(false);
+
+  const handleSignupComplete = () => {
+    setShowSignupFlow(false);
+    navigate('/profile-setup');
+  };
 
   return (
-    <section className="py-20 px-4">
+    <>
+      {showSignupFlow && <SignupFlow onComplete={handleSignupComplete} />}
+      <section className="py-20 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-foreground mb-6">
@@ -78,10 +88,7 @@ export const SoulfulInvitation = () => {
             <div className="space-y-4">
               <Button 
                 size="lg"
-                onClick={() => {
-                  navigate('/quick-start');
-                  setTimeout(() => window.scrollTo(0, 0), 0);
-                }}
+                onClick={() => setShowSignupFlow(true)}
                 className="w-full bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90 text-white font-medium"
               >
                 Begin Your Story
@@ -101,5 +108,6 @@ export const SoulfulInvitation = () => {
         </div>
       </div>
     </section>
+    </>
   );
 };
