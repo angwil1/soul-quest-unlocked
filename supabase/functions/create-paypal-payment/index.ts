@@ -88,7 +88,7 @@ serve(async (req) => {
             payer_selected: "PAYPAL",
             payee_preferred: "IMMEDIATE_PAYMENT_REQUIRED"
           },
-          return_url: `${req.headers.get('origin')}/subscription-success`,
+          return_url: `${req.headers.get('origin')}/payment-success`,
           cancel_url: `${req.headers.get('origin')}/pricing`
         }
       };

@@ -34,6 +34,7 @@ import TestQuietStart from "./pages/TestQuietStart";
 import TestSubscriptionFeatures from "./pages/TestSubscriptionFeatures";
 import NotFound from "./pages/NotFound";
 import ResetPassword from "./pages/ResetPassword";
+import PaymentSuccess from "./pages/PaymentSuccess";
 
 
 const queryClient = new QueryClient();
@@ -55,6 +56,7 @@ const App = () => (
             <Route path="/browse" element={<BrowseProfiles />} />
             <Route path="/browse-profiles" element={<BrowseProfiles />} />
             <Route path="/pricing" element={<Pricing />} />
+            <Route path="/payment-success" element={<PaymentSuccess />} />
             <Route path="/premium-dashboard" element={<PremiumDashboard />} />
             <Route path="/connection-dna" element={<ConnectionDNA />} />
             <Route path="/memory-vault" element={<MemoryVault />} />

@@ -6,12 +6,16 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
+import { useToast } from "@/hooks/use-toast";
+import { useState } from "react";
 
 const Pricing = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
+  const { toast } = useToast();
   const subscription = null; // Simplified without subscription
-  const loading = false;
+  const [loading, setLoading] = useState(false);
+  const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
 
   const plans = [
     {
@@ -81,7 +85,15 @@ const Pricing = () => {
     
     if (!plan) return;
 
+    setLoading(true);
+    setLoadingPlan(plan);
+
     try {
+      toast({
+        title: "Creating PayPal payment...",
+        description: "Please wait while we set up your payment.",
+      });
+
       const { data, error } = await supabase.functions.invoke('create-paypal-payment', {
         body: { 
           plan, 
@@ -91,15 +103,39 @@ const Pricing = () => {
 
       if (error) {
         console.error('PayPal payment error:', error);
+        toast({
+          title: "Payment Error",
+          description: "Failed to create PayPal payment. Please try again.",
+          variant: "destructive",
+        });
         return;
       }
 
       if (data?.approvalUrl) {
-        // Redirect to PayPal for payment approval
-        window.open(data.approvalUrl, '_blank');
+        toast({
+          title: "Redirecting to PayPal",
+          description: "You'll be redirected to complete your payment securely.",
+        });
+        
+        // Redirect to PayPal for payment approval (same window)
+        window.location.href = data.approvalUrl;
+      } else {
+        toast({
+          title: "Payment Error",
+          description: "No payment URL received. Please try again.",
+          variant: "destructive",
+        });
       }
     } catch (error) {
       console.error('Error creating PayPal payment:', error);
+      toast({
+        title: "Payment Error",
+        description: "An unexpected error occurred. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+      setLoadingPlan(null);
     }
   };
 
@@ -222,12 +258,24 @@ const Pricing = () => {
                               ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200 cursor-default" 
                               : isFree
                               ? "bg-purple-600 text-white hover:bg-purple-700 cursor-default"
-                              : "bg-purple-600 text-white hover:bg-purple-700"
+                              : "bg-purple-600 text-white hover:bg-purple-700 disabled:opacity-50"
                           }`}
                           disabled={loading || isCurrentPlan || isFree}
                           onClick={() => handleSubscribe(plan.plan)}
                         >
-                          {isCurrentPlan ? "Current Plan" : plan.buttonText}
+                          {loading && loadingPlan === plan.plan ? (
+                            <span className="flex items-center justify-center gap-2">
+                              <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
+                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"/>
+                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/>
+                              </svg>
+                              Processing...
+                            </span>
+                          ) : isCurrentPlan ? (
+                            "Current Plan"
+                          ) : (
+                            plan.buttonText
+                          )}
                         </button>
                       </div>
                     </CardContent>
