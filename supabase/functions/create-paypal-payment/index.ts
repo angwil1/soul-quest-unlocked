@@ -64,90 +64,58 @@ serve(async (req) => {
     });
 
     if (!tokenResponse.ok) {
-      throw new Error('Failed to get PayPal access token');
+      const errorText = await tokenResponse.text();
+      console.error('PayPal token response error:', {
+        status: tokenResponse.status,
+        statusText: tokenResponse.statusText,
+        body: errorText,
+        clientId: clientId ? 'present' : 'missing',
+        clientSecret: clientSecret ? 'present' : 'missing'
+      });
+      throw new Error(`Failed to get PayPal access token: ${tokenResponse.status} ${errorText}`);
     }
 
     const { access_token } = await tokenResponse.json();
 
-    let paypalOrder;
-
-    if (pricing.recurring) {
-      // Create PayPal subscription
-      const subscriptionData = {
-        plan_id: `${plan}-${pricing.period}`, // You'll need to create these plans in PayPal dashboard
-        subscriber: {
-          name: {
-            given_name: "Subscriber",
-            surname: "User"
-          }
+    // Always create one-time payments for now (subscriptions require pre-created plans)
+    const orderData = {
+      intent: 'CAPTURE',
+      purchase_units: [{
+        amount: {
+          currency_code: pricing.currency,
+          value: pricing.amount
         },
-        application_context: {
-          brand_name: "AI Complete Me",
-          user_action: "SUBSCRIBE_NOW",
-          payment_method: {
-            payer_selected: "PAYPAL",
-            payee_preferred: "IMMEDIATE_PAYMENT_REQUIRED"
-          },
-          return_url: `${req.headers.get('origin')}/payment-success`,
-          cancel_url: `${req.headers.get('origin')}/pricing`
-        }
-      };
-
-      const subscriptionResponse = await fetch(`${paypalApiUrl}/v1/billing/subscriptions`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${access_token}`,
-          'Accept': 'application/json',
-          'Prefer': 'return=representation'
-        },
-        body: JSON.stringify(subscriptionData)
-      });
-
-      if (!subscriptionResponse.ok) {
-        const error = await subscriptionResponse.text();
-        console.error('PayPal subscription error:', error);
-        throw new Error('Failed to create PayPal subscription');
+        description: `AI Complete Me - ${plan}`
+      }],
+      application_context: {
+        brand_name: "AI Complete Me",
+        landing_page: "NO_PREFERENCE",
+        user_action: "PAY_NOW",
+        return_url: `${req.headers.get('origin')}/payment-success`,
+        cancel_url: `${req.headers.get('origin')}/pricing`
       }
+    };
 
-      paypalOrder = await subscriptionResponse.json();
-    } else {
-      // Create one-time payment order
-      const orderData = {
-        intent: 'CAPTURE',
-        purchase_units: [{
-          amount: {
-            currency_code: pricing.currency,
-            value: pricing.amount
-          },
-          description: `AI Complete Me - ${plan}`
-        }],
-        application_context: {
-          brand_name: "AI Complete Me",
-          landing_page: "NO_PREFERENCE",
-          user_action: "PAY_NOW",
-          return_url: `${req.headers.get('origin')}/payment-success`,
-          cancel_url: `${req.headers.get('origin')}/pricing`
-        }
-      };
+    const orderResponse = await fetch(`${paypalApiUrl}/v2/checkout/orders`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${access_token}`,
+      },
+      body: JSON.stringify(orderData)
+    });
 
-      const orderResponse = await fetch(`${paypalApiUrl}/v2/checkout/orders`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${access_token}`,
-        },
-        body: JSON.stringify(orderData)
+    if (!orderResponse.ok) {
+      const error = await orderResponse.text();
+      console.error('PayPal order error:', {
+        status: orderResponse.status,
+        statusText: orderResponse.statusText,
+        body: error
       });
-
-      if (!orderResponse.ok) {
-        const error = await orderResponse.text();
-        console.error('PayPal order error:', error);
-        throw new Error('Failed to create PayPal order');
-      }
-
-      paypalOrder = await orderResponse.json();
+      throw new Error(`Failed to create PayPal order: ${orderResponse.status}`);
     }
+
+    const paypalOrder = await orderResponse.json();
 
     // Store payment record in database
     const { error: dbError } = await supabaseClient
@@ -159,7 +127,7 @@ serve(async (req) => {
         amount: pricing.amount,
         currency: pricing.currency,
         status: 'pending',
-        is_recurring: pricing.recurring
+        is_recurring: false // Always one-time payments for now
       });
 
     if (dbError) {
