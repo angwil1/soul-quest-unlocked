@@ -36,21 +36,29 @@ export const useProfileSetup = () => {
   }, [user]);
 
   const checkProfileCompletion = async () => {
-    if (!user) return;
+    if (!user) {
+      setLoading(false);
+      return;
+    }
 
     try {
+      console.log('Checking profile for user:', user.id);
       const { data: profile, error } = await supabase
         .from('profiles')
         .select('*')
         .eq('id', user.id)
-        .single();
+        .maybeSingle();
 
-      if (error && error.code !== 'PGRST116') {
+      if (error) {
         console.error('Error checking profile:', error);
+        setLoading(false);
         return;
       }
 
+      console.log('Profile data found:', profile);
+
       if (!profile) {
+        console.log('No profile found - setting incomplete status');
         setProfileStatus({
           isComplete: false,
           hasBasicInfo: false,
@@ -61,6 +69,7 @@ export const useProfileSetup = () => {
           hasValues: false,
           completionPercentage: 0
         });
+        setLoading(false);
         return;
       }
 
@@ -73,6 +82,15 @@ export const useProfileSetup = () => {
       const hasPersonality = !!(profile.personality_type);
       const hasValues = !!(profile.looking_for);
 
+      console.log('Profile completion check:', {
+        hasBasicInfo,
+        hasBio,
+        hasInterests, 
+        hasPhotos,
+        hasPersonality,
+        hasValues
+      });
+
       const completedItems = [
         hasBasicInfo,
         hasBio,
@@ -84,6 +102,8 @@ export const useProfileSetup = () => {
 
       const completionPercentage = Math.round((completedItems / 6) * 100);
       const isComplete = completionPercentage === 100;
+
+      console.log('Profile completion:', completionPercentage + '%', 'Complete:', isComplete);
 
       setProfileStatus({
         isComplete,
