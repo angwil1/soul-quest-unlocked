@@ -23,9 +23,22 @@ const Auth = () => {
   // Only redirect if already authenticated
   useEffect(() => {
     if (user && !showSignupFlow) {
-      // Check if user has completed quiz
-      const checkQuizCompletion = async () => {
+      // Check if user has a complete profile first
+      const checkProfile = async () => {
         try {
+          const { data: profile } = await supabase
+            .from('profiles')
+            .select('*')
+            .eq('id', user.id)
+            .single();
+          
+          // If no profile or incomplete profile, go to setup
+          if (!profile || !profile.name || !profile.location || !profile.bio) {
+            navigate('/profile/setup');
+            return;
+          }
+          
+          // If profile complete, check quiz completion
           const { data } = await supabase
             .from('user_events')
             .select('*')
@@ -39,12 +52,12 @@ const Auth = () => {
             navigate('/questions');
           }
         } catch (error) {
-          console.error('Error checking quiz completion:', error);
-          navigate('/questions');
+          console.error('Error checking profile/quiz completion:', error);
+          navigate('/profile/setup');
         }
       };
       
-      checkQuizCompletion();
+      checkProfile();
     }
   }, [user, navigate, showSignupFlow]);
 
@@ -55,24 +68,7 @@ const Auth = () => {
     const { error } = await signIn(email, password);
     
     if (!error) {
-      // After successful login, check if user has completed quiz
-      try {
-        const { data } = await supabase
-          .from('user_events')
-          .select('*')
-          .eq('user_id', user?.id || '')
-          .eq('event_type', 'quiz_completed')
-          .limit(1);
-        
-        if (data && data.length > 0) {
-          navigate('/');
-        } else {
-          navigate('/questions');
-        }
-      } catch (error) {
-        console.error('Error checking quiz completion:', error);
-        navigate('/questions');
-      }
+      // Navigation will be handled by the useEffect hook that checks profile completion
     }
     
     setIsLoading(false);
@@ -84,7 +80,7 @@ const Auth = () => {
 
   const handleSignupComplete = () => {
     setShowSignupFlow(false);
-    navigate('/questions');
+    navigate('/profile/setup');
   };
 
   const handlePasswordReset = async () => {
