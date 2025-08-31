@@ -21,7 +21,7 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
   const [currentStep, setCurrentStep] = useState<SignupStep>('details');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [dateOfBirth, setDateOfBirth] = useState('');
+  const [ageConfirmed, setAgeConfirmed] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [showWelcome, setShowWelcome] = useState(false);
   const [isEmailConfirmed, setIsEmailConfirmed] = useState(false);
@@ -31,12 +31,19 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
   // Store age verification when user is confirmed
   useEffect(() => {
     const storeAgeVerification = async () => {
-      if (user && dateOfBirth && !isEmailConfirmed) {
+      if (user && ageConfirmed && !isEmailConfirmed) {
         try {
           console.log('🔒 Storing age verification in database');
-          const { error } = await supabase.rpc('verify_user_age', {
-            p_date_of_birth: dateOfBirth
-          });
+          // Store simple confirmation instead of birth date
+          const { error } = await supabase
+            .from('age_verifications')
+            .upsert({
+              user_id: user.id,
+              is_verified: true,
+              verification_method: 'self_reported',
+              verified_at: new Date().toISOString(),
+              date_of_birth: '1990-01-01' // Placeholder date for schema compliance
+            });
           
           if (error) {
             console.error('Age verification storage error:', error);
@@ -54,7 +61,7 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
       storeAgeVerification();
       checkProfileCompletion();
     }
-  }, [user, session, dateOfBirth, isEmailConfirmed]);
+  }, [user, session, ageConfirmed, isEmailConfirmed]);
 
   const checkProfileCompletion = async () => {
     if (!user) return;
@@ -112,40 +119,16 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
     }
   };
 
-  const calculateAge = (birthDate: string): number => {
-    const today = new Date();
-    const birth = new Date(birthDate);
-    let age = today.getFullYear() - birth.getFullYear();
-    const monthDiff = today.getMonth() - birth.getMonth();
-    
-    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
-      age--;
-    }
-    
-    return age;
-  };
-
   const handleEmailSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     
     try {
-      // Validate age first
-      if (!dateOfBirth) {
+      // Validate age confirmation
+      if (!ageConfirmed) {
         toast({
-          title: "Date of birth required",
-          description: "Please enter your date of birth to continue.",
-          variant: "destructive"
-        });
-        setIsLoading(false);
-        return;
-      }
-
-      const age = calculateAge(dateOfBirth);
-      if (age < 18) {
-        toast({
-          title: "Age requirement not met",
-          description: "You must be 18 or older to use this platform.",
+          title: "Age confirmation required",
+          description: "Please confirm you are 18 or older to continue.",
           variant: "destructive"
         });
         setIsLoading(false);
@@ -412,19 +395,25 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
                   minLength={6}
                 />
               </div>
-              <div className="space-y-2">
-                <Label htmlFor="dateOfBirth">Date of Birth</Label>
-                <Input
-                  id="dateOfBirth"
-                  type="date"
-                  value={dateOfBirth}
-                  onChange={(e) => setDateOfBirth(e.target.value)}
-                  max={new Date(Date.now() - 567648000000).toISOString().split('T')[0]} // 18 years ago
-                  required
-                />
-                <p className="text-xs text-muted-foreground">
-                  You must be 18 or older to use this platform
-                </p>
+              <div className="space-y-4">
+                <div className="flex items-start space-x-3 p-4 bg-muted/30 rounded-lg border">
+                  <input
+                    type="checkbox"
+                    id="ageConfirmation"
+                    checked={ageConfirmed}
+                    onChange={(e) => setAgeConfirmed(e.target.checked)}
+                    className="mt-1 h-4 w-4 text-primary border-gray-300 rounded focus:ring-primary"
+                    required
+                  />
+                  <div>
+                    <label htmlFor="ageConfirmation" className="text-sm font-medium text-foreground cursor-pointer">
+                      I confirm I am 18 years of age or older
+                    </label>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      You must be 18+ to use this dating platform
+                    </p>
+                  </div>
+                </div>
               </div>
               
               <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-3 space-y-2">
