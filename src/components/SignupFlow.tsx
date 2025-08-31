@@ -196,6 +196,49 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
     onComplete();
   };
 
+  const validateAddress = (formData: FormData) => {
+    const name = formData.get('shipping_name') as string;
+    const address1 = formData.get('address_line1') as string;
+    const city = formData.get('city') as string;
+    const state = formData.get('state') as string;
+    const postalCode = formData.get('postal_code') as string;
+    const country = formData.get('country') as string || 'United States';
+
+    // Check for fake address patterns
+    const fakePatterns = [
+      /fake/i, /test/i, /dummy/i, /placeholder/i, /example/i,
+      /123\s+fake/i, /999\s+test/i, /111\s+main/i,
+      /^123\s+(main|elm|oak|first)/i,
+      /asdf|qwerty|zxcv/i
+    ];
+
+    const addressToCheck = `${name} ${address1} ${city}`;
+    for (const pattern of fakePatterns) {
+      if (pattern.test(addressToCheck)) {
+        throw new Error('Please provide a valid address. Fake or test addresses are not accepted.');
+      }
+    }
+
+    // Validate US postal codes
+    if (country.toLowerCase().includes('united states') || country.toLowerCase().includes('usa')) {
+      const zipRegex = /^\d{5}(-\d{4})?$/;
+      if (!zipRegex.test(postalCode)) {
+        throw new Error('Please enter a valid US ZIP code (e.g., 12345 or 12345-6789).');
+      }
+    }
+
+    // Basic field length validation
+    if (name.length < 2) throw new Error('Please enter a valid full name.');
+    if (address1.length < 5) throw new Error('Please enter a complete street address.');
+    if (city.length < 2) throw new Error('Please enter a valid city name.');
+    if (state.length < 2) throw new Error('Please enter a valid state.');
+
+    // Check for suspicious patterns in city/state
+    if (/^\d+$/.test(city) || /^\d+$/.test(state)) {
+      throw new Error('City and state cannot be only numbers.');
+    }
+  };
+
   const handleShippingAddress = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!user) return;
@@ -205,6 +248,9 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
     const formData = new FormData(e.target as HTMLFormElement);
     
     try {
+      // Validate address before processing
+      validateAddress(formData);
+      
       // Get next available kit number
       const { data: kitNumber } = await supabase.rpc('get_next_kit_number');
       
