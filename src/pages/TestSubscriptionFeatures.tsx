@@ -69,10 +69,27 @@ const TestSubscriptionFeatures = () => {
   };
 
   const testAIDigest = async () => {
-    const { data, error } = await supabase.functions.invoke('generate-ai-digest', {
-      body: { userId: user?.id }
-    });
-    return !error && data;
+    try {
+      const { data: session } = await supabase.auth.getSession();
+      if (!session.session) return false;
+
+      const { data, error } = await supabase.functions.invoke('generate-ai-digest', {
+        body: { userId: user?.id },
+        headers: {
+          Authorization: `Bearer ${session.session.access_token}`,
+        },
+      });
+      
+      if (error) {
+        console.error('AI Digest test error:', error);
+        return false;
+      }
+      
+      return !error && data;
+    } catch (error) {
+      console.error('AI Digest test failed:', error);
+      return false;
+    }
   };
 
   const testVideoCall = async () => {
