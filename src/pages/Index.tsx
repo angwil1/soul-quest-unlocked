@@ -13,6 +13,7 @@ import { LaunchBanner } from '@/components/LaunchBanner';
 import { AgeVerification } from '@/components/AgeVerification';
 import SearchFilters from '@/components/SearchFilters';
 import { AmbientCoupleCarousel } from '@/components/AmbientCoupleCarousel';
+import { CommunityPreview } from '@/components/CommunityPreview';
 import { SoulfulInvitation } from '@/components/SoulfulInvitation';
 import { GetStarted } from '@/components/GetStarted';
 import { Testimonials } from '@/components/Testimonials';
@@ -154,6 +155,9 @@ const Index = () => {
 
         {/* How It Works Section */}
         <HowItWorks />
+
+        {/* Community Preview Section */}
+        <CommunityPreview />
 
         {/* Ambient Couple Carousel Section */}
         <section className="py-20 bg-gradient-to-br from-muted/20 to-background">
