@@ -72,7 +72,7 @@ const QuickStart = () => {
           });
           navigate('/profile/edit');
         } else {
-          navigate('/profile/edit');
+          navigate('/questions');
         }
         break;
     }
@@ -181,8 +181,8 @@ const QuickStart = () => {
                   }`}>
                     {canTakeQuiz ? "3" : <Lock className="h-6 w-6" />}
                   </div>
-                  <h3 className="font-semibold mb-2">Complete Your Profile</h3>
-                  <p className="text-sm text-muted-foreground mb-4">Complete our AI assessment to find compatible matches</p>
+                  <h3 className="font-semibold mb-2">Take the Quiz</h3>
+                  <p className="text-sm text-muted-foreground mb-4">Complete our comprehensive personality and compatibility assessment</p>
                   <div className="flex items-center justify-center gap-2">
                     {canTakeQuiz ? (
                       <>
@@ -201,12 +201,14 @@ const QuickStart = () => {
               
               <div className="flex justify-center mt-8">
                 {canTakeQuiz ? (
-                  <Link to="/profile/edit">
-                    <Button size="lg" className="gap-2">
-                      <Brain className="h-4 w-4" />
-                      Complete Profile
-                    </Button>
-                  </Link>
+                  <Button 
+                    size="lg" 
+                    className="gap-2"
+                    onClick={() => navigate('/questions')}
+                  >
+                    <Brain className="h-4 w-4" />
+                    Start Quiz
+                  </Button>
                 ) : (
                   <Button 
                     size="lg" 
@@ -234,15 +236,19 @@ const QuickStart = () => {
                 <div className="space-y-3">
                   <div className="flex gap-3">
                     <div className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold">1</div>
-                    <p className="text-sm">AI analyzes your profile responses</p>
+                    <p className="text-sm">Take our 25+ question compatibility quiz</p>
                   </div>
                   <div className="flex gap-3">
                     <div className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold">2</div>
-                    <p className="text-sm">Matches based on emotional compatibility</p>
+                    <p className="text-sm">AI analyzes your personality, values, and communication style</p>
                   </div>
                   <div className="flex gap-3">
                     <div className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold">3</div>
-                    <p className="text-sm">Suggests conversation starters and connection tips</p>
+                    <p className="text-sm">Generates compatibility scores with other users</p>
+                  </div>
+                  <div className="flex gap-3">
+                    <div className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold">4</div>
+                    <p className="text-sm">Provides conversation starters and connection insights</p>
                   </div>
                 </div>
               </CardContent>
@@ -258,16 +264,16 @@ const QuickStart = () => {
               <CardContent className="space-y-4">
                 <div className="space-y-3">
                   <div className="p-3 rounded-lg bg-muted/30 border border-muted">
-                    <p className="text-sm font-medium">Be Authentic</p>
-                    <p className="text-xs text-muted-foreground">Share your real interests and personality</p>
+                    <p className="text-sm font-medium">Answer Thoughtfully</p>
+                    <p className="text-xs text-muted-foreground">The quiz takes 10-15 minutes - honest answers give better matches</p>
                   </div>
                   <div className="p-3 rounded-lg bg-muted/30 border border-muted">
-                    <p className="text-sm font-medium">Complete Your Profile</p>
-                    <p className="text-xs text-muted-foreground">More details lead to better matches</p>
+                    <p className="text-sm font-medium">Upload Quality Photos</p>
+                    <p className="text-xs text-muted-foreground">Clear, recent photos help others connect with you</p>
                   </div>
                   <div className="p-3 rounded-lg bg-muted/30 border border-muted">
-                    <p className="text-sm font-medium">Take Your Time</p>
-                    <p className="text-xs text-muted-foreground">Quality connections develop gradually</p>
+                    <p className="text-sm font-medium">Claim Your Quiet Start</p>
+                    <p className="text-xs text-muted-foreground">First 500 users get 3 months free + wellness kit</p>
                   </div>
                 </div>
               </CardContent>
@@ -332,11 +338,13 @@ const QuickStart = () => {
               Join thousands of users finding meaningful connections
             </p>
             <div className="flex justify-center gap-4">
-              <Link to="/auth">
-                <Button size="lg" className="gap-2">
-                  Get Started <ArrowRight className="h-4 w-4" />
-                </Button>
-              </Link>
+              <Button 
+                size="lg" 
+                className="gap-2"
+                onClick={() => navigate('/auth')}
+              >
+                Start Your Journey <ArrowRight className="h-4 w-4" />
+              </Button>
               <Link to="/faq">
                 <Button variant="outline" size="lg">View FAQ</Button>
               </Link>
