@@ -2,8 +2,6 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Heart, Brain, MessageCircle, Sparkles, ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { SignupFlow } from '@/components/SignupFlow';
-import { useState } from 'react';
 
 const steps = [
   {
@@ -31,17 +29,9 @@ const steps = [
 
 export const HowItWorks = () => {
   const navigate = useNavigate();
-  const [showSignupFlow, setShowSignupFlow] = useState(false);
-
-  const handleSignupComplete = () => {
-    setShowSignupFlow(false);
-    navigate('/profile-setup');
-  };
 
   return (
-    <>
-      {showSignupFlow && <SignupFlow onComplete={handleSignupComplete} />}
-      <section className="py-20 bg-gradient-to-br from-muted/5 to-background">
+    <section className="py-20 bg-gradient-to-br from-muted/5 to-background">
       <div className="max-w-6xl mx-auto px-4">
         <div className="text-center mb-16 animate-fade-in">
           <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-primary/10 to-purple-600/10 border border-primary/20 mb-6">
@@ -95,7 +85,10 @@ export const HowItWorks = () => {
 
         <div className="text-center animate-fade-in" style={{ animationDelay: '0.6s' }}>
           <Button 
-            onClick={() => setShowSignupFlow(true)}
+            onClick={() => {
+              navigate('/quick-start');
+              setTimeout(() => window.scrollTo(0, 0), 0);
+            }}
             size="lg"
             className="bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90 text-white font-medium px-8 py-3 rounded-xl"
           >
@@ -110,6 +103,5 @@ export const HowItWorks = () => {
         </div>
       </div>
     </section>
-    </>
   );
 };

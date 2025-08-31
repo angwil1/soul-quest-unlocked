@@ -2,26 +2,17 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { useNavigate } from 'react-router-dom';
 import { Heart, Sparkles, ArrowRight, Users } from 'lucide-react';
-import { SignupFlow } from '@/components/SignupFlow';
-import { useState } from 'react';
 
 export const GetStarted = () => {
   const navigate = useNavigate();
-  const [showSignupFlow, setShowSignupFlow] = useState(false);
 
   const handleGetStarted = () => {
-    setShowSignupFlow(true);
-  };
-
-  const handleSignupComplete = () => {
-    setShowSignupFlow(false);
-    navigate('/profile-setup');
+    navigate('/quick-start');
+    setTimeout(() => window.scrollTo(0, 0), 0);
   };
 
   return (
-    <>
-      {showSignupFlow && <SignupFlow onComplete={handleSignupComplete} />}
-      <section className="py-20 bg-gradient-to-br from-primary/5 via-purple-500/5 to-pink-500/5">
+    <section className="py-20 bg-gradient-to-br from-primary/5 via-purple-500/5 to-pink-500/5">
       <div className="max-w-4xl mx-auto px-4 text-center">
         <div className="animate-fade-in">
           <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-primary/10 to-purple-600/10 border border-primary/20 mb-8">
@@ -71,6 +62,5 @@ export const GetStarted = () => {
         </div>
       </div>
     </section>
-    </>
   );
 };
