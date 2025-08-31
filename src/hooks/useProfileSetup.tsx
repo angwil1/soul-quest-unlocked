@@ -68,9 +68,10 @@ export const useProfileSetup = () => {
       const hasBasicInfo = !!(profile.name && profile.age && profile.location);
       const hasBio = !!(profile.bio && profile.bio.length >= 50);
       const hasInterests = !!(profile.interests && profile.interests.length >= 3);
-      const hasPhotos = !!(profile.avatar_url); // Simplified for now
-      const hasPersonality = !!(profile.personality_type); // Using existing field
-      const hasValues = !!(profile.looking_for); // Using existing field as placeholder
+      // For now, consider photos complete if user went through the flow (personality_type exists)
+      const hasPhotos = !!(profile.personality_type); // Photos step comes before personality step
+      const hasPersonality = !!(profile.personality_type);
+      const hasValues = !!(profile.looking_for);
 
       const completedItems = [
         hasBasicInfo,
