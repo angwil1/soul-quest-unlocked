@@ -58,26 +58,14 @@ export const ReferralSection: React.FC<ReferralSectionProps> = ({
             </div>
           </div>
 
-          {/* Progress to Next Reward */}
-          <div className="space-y-2">
-            <div className="flex justify-between items-center text-xs">
-              <span className="text-muted-foreground">
-                Progress to {successfulReferrals < 1 ? 'Wellness Kit' : successfulReferrals < 5 ? 'Founding Badge' : 'Next Milestone'}
-              </span>
-              <span className="text-primary font-medium">
-                {successfulReferrals % 5}/5
-              </span>
-            </div>
-            <Progress value={progressToNextReward} className="h-2" />
-            
-            {successfulReferrals >= 1 && (
-              <p className="text-xs text-green-600 font-medium">
-                {successfulReferrals === 1 && '🎉 Wellness kit unlocked!'}
-                {successfulReferrals >= 2 && successfulReferrals < 5 && `${5 - (successfulReferrals % 5)} more for Founding Connector badge`}
-                {successfulReferrals >= 5 && '🏆 Founding Connector badge earned!'}
+          {/* Progress Example */}
+          {successfulReferrals >= 2 && successfulReferrals < 5 && (
+            <div className="bg-purple-50 border border-purple-200 rounded-lg p-3 text-center">
+              <p className="text-sm text-purple-700 font-medium">
+                You've invited {referralCount} people. One more unlocks your IRL gift.
               </p>
-            )}
-          </div>
+            </div>
+          )}
         </div>
 
         {/* Rewards */}

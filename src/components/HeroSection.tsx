@@ -93,14 +93,8 @@ const HeroSection = () => {
               {/* Hero Headline */}
               <div className="space-y-6">
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-light leading-tight tracking-wide">
-                  <span className="block mb-3 text-white drop-shadow-2xl animate-fade-in" style={{ textShadow: '2px 2px 8px rgba(0,0,0,0.8), 0 0 16px rgba(0,0,0,0.6)', animationDelay: '0.1s' }}>
+                  <span className="block text-white drop-shadow-2xl animate-fade-in" style={{ textShadow: '2px 2px 8px rgba(0,0,0,0.8), 0 0 16px rgba(0,0,0,0.6)', animationDelay: '0.1s' }}>
                     AI Complete Me is live.
-                  </span>
-                  <span className="block mb-3 bg-gradient-to-r from-primary via-purple-500 to-pink-500 bg-clip-text text-transparent font-medium drop-shadow-2xl animate-fade-in" style={{ textShadow: '2px 2px 8px rgba(0,0,0,0.8)', animationDelay: '0.2s' }}>
-                    No swipes. No noise.
-                  </span>
-                  <span className="block text-white text-3xl sm:text-4xl lg:text-5xl drop-shadow-2xl animate-fade-in" style={{ textShadow: '2px 2px 8px rgba(0,0,0,0.8), 0 0 16px rgba(0,0,0,0.6)', animationDelay: '0.3s' }}>
-                    Just real connection.
                   </span>
                 </h1>
                 

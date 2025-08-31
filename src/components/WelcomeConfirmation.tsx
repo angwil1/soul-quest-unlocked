@@ -29,15 +29,9 @@ export const WelcomeConfirmation: React.FC<WelcomeConfirmationProps> = ({ isOpen
             </h2>
             
             <div className="space-y-3">
-              <div className="flex items-center justify-center gap-2 text-primary font-medium">
-                <Sparkles className="h-4 w-4" />
-                <span>You've unlocked 3 months of Complete Plus</span>
-              </div>
-              
-              <div className="flex items-center justify-center gap-2 text-muted-foreground">
-                <Gift className="h-4 w-4" />
-                <span>Your wellness gift is on its way</span>
-              </div>
+              <p className="text-primary font-medium">
+                You've unlocked 3 months of Complete Plus. Your gift of care is on its way.
+              </p>
             </div>
 
             <p className="text-sm text-muted-foreground leading-relaxed">
