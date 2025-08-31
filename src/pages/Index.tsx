@@ -27,6 +27,8 @@ const Index = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
   const [showFirstLightModal, setShowFirstLightModal] = useState(false);
+  const [showAgeVerification, setShowAgeVerification] = useState(false);
+  const [isAgeVerified, setIsAgeVerified] = useState(false);
   const [isNewUser, setIsNewUser] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
@@ -75,6 +77,21 @@ const Index = () => {
   };
 
 
+  // Check age verification on page load
+  useEffect(() => {
+    const checkAgeVerification = () => {
+      const localVerification = localStorage.getItem('ageVerified');
+      if (localVerification === 'true') {
+        setIsAgeVerified(true);
+      } else {
+        // Show age verification modal if not verified
+        setShowAgeVerification(true);
+      }
+    };
+    
+    checkAgeVerification();
+  }, []);
+
   // Page loading effect
   useEffect(() => {
     const timer = setTimeout(() => setIsPageLoading(false), 1000);
@@ -82,11 +99,11 @@ const Index = () => {
   }, []);
 
   useEffect(() => {
-    if (user && !localStorage.getItem('hasSeenFirstLight')) {
+    if (user && !localStorage.getItem('hasSeenFirstLight') && isAgeVerified) {
       setIsNewUser(true);
       setShowFirstLightModal(true);
     }
-  }, [user]);
+  }, [user, isAgeVerified]);
 
   // Check if user has completed quiz
   useEffect(() => {
@@ -284,6 +301,14 @@ const Index = () => {
         
         <Footer />
         
+        <AgeVerification 
+          forceOpen={showAgeVerification}
+          onVerificationComplete={() => {
+            setShowAgeVerification(false);
+            setIsAgeVerified(true);
+          }}
+        />
+        
         <FirstLightModal 
           isOpen={showFirstLightModal} 
           onClose={() => {
@@ -293,8 +318,6 @@ const Index = () => {
         />
         
         <FloatingQuizButton />
-        
-        <AgeVerification />
       </div>
     );
 };
