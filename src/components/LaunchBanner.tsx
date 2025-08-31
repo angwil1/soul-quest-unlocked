@@ -88,19 +88,23 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
           {/* Left side - Main message */}
           <div className="text-center md:text-left">
             <h3 className="text-base md:text-xl font-bold text-white mb-1 md:mb-2">
-              Quiet Start During Launch
+              🎁 Quiet Start Offer
             </h3>
             
             <p className="text-white/90 text-xs md:text-base mb-2 md:mb-3 leading-tight">
-              AI Complete Me invites you to begin quietly. 💫 No email. No payment. Just connection.
+              First 500 users get 3 months Complete Plus free + wellness kit
             </p>
             
-            <div className="text-white/80 text-xs md:text-sm mb-2">
-              ✨ All identities welcome. All journeys respected.
+            <div className="text-white/80 text-xs md:text-sm mb-1">
+              🍃 Mini wellness kit: herbal tea, lip balm, poetic postcard
+            </div>
+            
+            <div className="text-white/80 text-xs md:text-sm mb-1">
+              🤝 Refer friends: +1 month per referral, badges & more kits
             </div>
             
             <div className="text-white/80 text-xs md:text-sm">
-              ⏳ This quiet window won't last forever.
+              ⏳ Limited to first 500 users only
             </div>
           </div>
 
@@ -130,13 +134,13 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
             <div className="flex flex-wrap justify-center gap-1 md:gap-2 text-xs text-white/90">
               <div className="flex items-center gap-1">
                 <Heart className="h-3 w-3" />
-                <span>Compatibility Quiz</span>
+                <span>3 Months Free</span>
               </div>
               <div className="flex items-center gap-1">
-                <Users className="h-3 w-3" />
-                <span>Basic Matching</span>
+                <Sparkles className="h-3 w-3" />
+                <span>Wellness Kit</span>
               </div>
-              <span>All Preferences</span>
+              <span>Referral Rewards</span>
             </div>
 
             {/* CTA Button */}
@@ -147,7 +151,7 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
                 size="sm"
                 className="bg-white text-black hover:bg-white/90 font-medium text-xs md:text-sm px-3 py-1.5 animate-gentle-pulse"
               >
-                Start Quiz - Quiet Start ✨
+                Claim Quiet Start Offer ✨
               </Button>
             )}
           </div>
