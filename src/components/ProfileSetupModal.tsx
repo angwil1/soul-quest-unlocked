@@ -66,13 +66,23 @@ export const ProfileSetupModal: React.FC<ProfileSetupModalProps> = ({ isOpen, on
           <X className="h-3 w-3" />
         </Button>
 
-        <DialogHeader className="text-center space-y-1 pb-1">
+        <DialogHeader className="text-center space-y-2 pb-3">
           <DialogTitle className="text-base font-semibold text-foreground leading-tight">
-            Quick setup
+            Welcome to AI Complete Me
           </DialogTitle>
-          <p className="text-muted-foreground text-xs">
-            Help us find your matches
-          </p>
+          <div className="space-y-2">
+            <p className="text-muted-foreground text-xs">
+              Help us find your matches
+            </p>
+            <div className="bg-primary/5 border border-primary/20 rounded-lg p-3">
+              <p className="text-xs text-primary font-medium mb-1">
+                🎁 Quiet Start Gift
+              </p>
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                As part of our Quiet Start, you'll receive a keepsake of care. We'll ask for your shipping info after signup.
+              </p>
+            </div>
+          </div>
         </DialogHeader>
         
         <div className="space-y-3 py-2">

@@ -90,22 +90,22 @@ const HeroSection = () => {
                 </span>
               </div>
 
-              {/* Poetic Headline */}
+              {/* Hero Headline */}
               <div className="space-y-6">
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-light leading-tight tracking-wide">
                   <span className="block mb-3 text-white drop-shadow-2xl animate-fade-in" style={{ textShadow: '2px 2px 8px rgba(0,0,0,0.8), 0 0 16px rgba(0,0,0,0.6)', animationDelay: '0.1s' }}>
-                    Beyond the surface,
+                    AI Complete Me is live.
                   </span>
                   <span className="block mb-3 bg-gradient-to-r from-primary via-purple-500 to-pink-500 bg-clip-text text-transparent font-medium drop-shadow-2xl animate-fade-in" style={{ textShadow: '2px 2px 8px rgba(0,0,0,0.8)', animationDelay: '0.2s' }}>
-                    beneath the noise
+                    No swipes. No noise.
                   </span>
                   <span className="block text-white text-3xl sm:text-4xl lg:text-5xl drop-shadow-2xl animate-fade-in" style={{ textShadow: '2px 2px 8px rgba(0,0,0,0.8), 0 0 16px rgba(0,0,0,0.6)', animationDelay: '0.3s' }}>
-                    real connection awaits
+                    Just real connection.
                   </span>
                 </h1>
                 
                 <p className="text-lg sm:text-xl text-white max-w-2xl mx-auto leading-relaxed font-light drop-shadow-lg animate-fade-in" style={{ textShadow: '2px 2px 6px rgba(0,0,0,0.8), 0 0 12px rgba(0,0,0,0.5)', animationDelay: '0.4s' }}>
-                  A space for meaningful encounters, authentic stories, and the kind of love that changes everything.
+                  First 500 receive 3 months free + a wellness keepsake.
                 </p>
               </div>
             </div>
@@ -123,11 +123,11 @@ const HeroSection = () => {
               </Button>
 
               <div 
-                onClick={() => navigate('/quick-start')}
+                onClick={() => navigate('/auth')}
                 className="cursor-pointer relative bg-gradient-to-r from-primary via-purple-600 to-pink-600 text-white px-2 sm:px-4 lg:px-4 py-1.5 sm:py-3 lg:py-2 rounded-xl sm:rounded-2xl lg:rounded-xl rounded-bl-sm shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-xs sm:text-base lg:text-sm font-medium max-w-fit hover:shadow-primary/25"
               >
                 <Heart className="h-2.5 w-2.5 sm:h-4 w-4 lg:h-3 lg:w-3 mr-0.5 sm:mr-2 lg:mr-1 inline animate-pulse" />
-                Start Your Journey
+                Get Started
                 <ArrowRight className="h-2.5 w-2.5 sm:h-4 w-4 lg:h-3 lg:w-3 ml-0.5 sm:ml-2 lg:ml-1 inline" />
                 {/* Message bubble tail */}
                 <div className="absolute -bottom-0.5 sm:-bottom-1 lg:-bottom-0.5 left-1.5 sm:left-3 lg:left-2 w-2 sm:w-3 lg:w-2 h-2 sm:h-3 lg:h-2 bg-gradient-to-r from-primary to-purple-600 transform rotate-45 rounded-sm"></div>
