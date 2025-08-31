@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AppWrapper } from "@/components/AppWrapper";
+import { AgeGate } from "@/components/AgeGate";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
 import Profile from "./pages/Profile";
@@ -40,12 +41,57 @@ import PaymentSuccess from "./pages/PaymentSuccess";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <BrowserRouter>
-        <AppWrapper>
+const App = () => {
+  const [ageVerified, setAgeVerified] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Check if age has been verified
+    const ageConfirmed = localStorage.getItem('ageConfirmed');
+    const ageConfirmedDate = localStorage.getItem('ageConfirmedDate');
+    
+    // Age confirmation expires after 30 days for additional security
+    if (ageConfirmed === 'true' && ageConfirmedDate) {
+      const confirmationDate = new Date(ageConfirmedDate);
+      const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
+      
+      if (confirmationDate > thirtyDaysAgo) {
+        setAgeVerified(true);
+      } else {
+        // Expired, clear storage
+        localStorage.removeItem('ageConfirmed');
+        localStorage.removeItem('ageConfirmedDate');
+      }
+    }
+    
+    setLoading(false);
+  }, []);
+
+  const handleAgeConfirmed = () => {
+    setAgeVerified(true);
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-muted-foreground">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!ageVerified) {
+    return <AgeGate onAgeConfirmed={handleAgeConfirmed} />;
+  }
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <BrowserRouter>
+          <AppWrapper>
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/auth" element={<Auth />} />
@@ -84,6 +130,7 @@ const App = () => (
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
-);
+  );
+};
 
 export default App;
