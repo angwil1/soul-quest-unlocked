@@ -22,7 +22,7 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
   const [isDismissed, setIsDismissed] = useState(false);
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0 });
   const [progress, setProgress] = useState(0);
-  const [claimedCount, setClaimedCount] = useState(127); // Simulated claimed count
+  const [claimedCount, setClaimedCount] = useState(0); // Start at zero for launch
   const [poeticPhrase, setPoeticPhrase] = useState("");
 
   // Calculate time remaining and progress (60 days from launch - using a fixed launch date for demo)
@@ -140,15 +140,20 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
               {/* Claimed Progress Bar */}
               <div className="w-full max-w-48 space-y-2">
                 <div className="flex items-center justify-between text-xs text-white/70">
-                  <span>Soul Questers Joined</span>
-                  <span>{claimedCount} of 500 claimed</span>
+                  <span>Gifts Claimed</span>
+                  <span>{claimedCount} of 500</span>
                 </div>
                 <Progress 
                   value={(claimedCount / 500) * 100} 
                   className="h-3 bg-white/20 [&>div]:bg-gradient-to-r [&>div]:from-emerald-400/80 [&>div]:to-emerald-300/60 [&>div]:animate-pulse" 
                 />
                 <div className="text-center text-xs text-emerald-200 font-medium">
-                  {500 - claimedCount} spots remaining
+                  {claimedCount === 0 
+                    ? "The journey begins now." 
+                    : claimedCount < 50 
+                      ? "You're part of the first wave of connection." 
+                      : `${500 - claimedCount} spots remaining`
+                  }
                 </div>
               </div>
 
