@@ -9,6 +9,7 @@ import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { PriorityMatchingWidget } from '@/components/PriorityMatchingWidget';
 import { VideoCallButton } from '@/components/VideoCallButton';
+import { ShippingProgressTracker } from '@/components/ShippingProgressTracker';
 import { Crown, Sparkles, Settings, BarChart3 } from 'lucide-react';
 
 const PremiumDashboard = () => {
@@ -122,6 +123,9 @@ const PremiumDashboard = () => {
 
         {/* Premium Features Grid */}
         <div className="grid gap-6 mb-8">
+          {/* Shipping Progress Tracker */}
+          <ShippingProgressTracker />
+          
           {/* Priority Matching Widget */}
           <PriorityMatchingWidget />
 

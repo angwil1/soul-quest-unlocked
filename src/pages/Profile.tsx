@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { ShippingProgressTracker } from '@/components/ShippingProgressTracker';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Edit, MapPin, Briefcase, Heart } from 'lucide-react';
 import profileSilhouette from '@/assets/profile-silhouette.jpg';
@@ -116,6 +117,9 @@ const Profile = () => {
                 </div>
               </CardContent>
             </Card>
+
+            {/* Shipping Progress Tracker */}
+            <ShippingProgressTracker />
 
             {/* Quick Actions */}
             <Card>
