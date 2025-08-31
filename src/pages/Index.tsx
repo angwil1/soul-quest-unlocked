@@ -14,7 +14,7 @@ import { AgeVerification } from '@/components/AgeVerification';
 import SearchFilters from '@/components/SearchFilters';
 import { AmbientCoupleCarousel } from '@/components/AmbientCoupleCarousel';
 import { SoulfulInvitation } from '@/components/SoulfulInvitation';
-import { WaitlistSignup } from '@/components/WaitlistSignup';
+import { GetStarted } from '@/components/GetStarted';
 import { Testimonials } from '@/components/Testimonials';
 import { HowItWorks } from '@/components/HowItWorks';
 import HeroSection from '@/components/HeroSection';
@@ -163,8 +163,8 @@ const Index = () => {
         {/* Testimonials Section */}
         <Testimonials />
 
-        {/* Waitlist Signup Section */}
-        <WaitlistSignup />
+        {/* Get Started Section */}
+        <GetStarted />
 
         {/* Soulful Invitation Section */}
         <SoulfulInvitation />
