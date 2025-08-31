@@ -9,7 +9,6 @@ import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { FloatingQuizButton } from '@/components/FloatingQuizButton';
 import { FirstLightModal } from '@/components/FirstLightModal';
-import { LaunchBanner } from '@/components/LaunchBanner';
 import { AgeVerification } from '@/components/AgeVerification';
 import SearchFilters from '@/components/SearchFilters';
 import { AmbientCoupleCarousel } from '@/components/AmbientCoupleCarousel';
@@ -141,13 +140,6 @@ const Index = () => {
   return (
       <div className="min-h-screen bg-gradient-to-br from-background via-muted/5 to-background">
         <Navbar />
-        
-        {/* Launch Banner Section - Above everything */}
-        <section className="py-4 bg-gradient-to-br from-primary/5 to-purple-500/5">
-          <div className="max-w-2xl mx-auto px-4 md:max-w-full md:px-6 lg:px-8">
-            <LaunchBanner showDismiss={true} variant="homepage" />
-          </div>
-        </section>
         
         {/* EMOTIONALLY INTELLIGENT HERO DESIGN */}
         <HeroSection />
