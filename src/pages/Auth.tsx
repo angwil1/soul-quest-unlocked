@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { useAuth } from '@/hooks/useAuth';
 import { useEffect } from 'react';
 import { Navbar } from '@/components/Navbar';
@@ -9,8 +11,12 @@ import { SignupFlow } from '@/components/SignupFlow';
 import { supabase } from '@/integrations/supabase/client';
 
 const Auth = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [showSignIn, setShowSignIn] = useState(false);
   const [showSignupFlow, setShowSignupFlow] = useState(false);
-  const { user } = useAuth();
+  const { signIn, user } = useAuth();
   const navigate = useNavigate();
 
   // Only redirect if already authenticated
@@ -59,6 +65,19 @@ const Auth = () => {
     }
   }, [user, navigate, showSignupFlow]);
 
+  const handleSignIn = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    
+    const { error } = await signIn(email, password);
+    
+    if (!error) {
+      // Navigation will be handled by the useEffect hook that checks profile completion
+    }
+    
+    setIsLoading(false);
+  };
+
   const handleStartSignup = () => {
     setShowSignupFlow(true);
   };
@@ -82,7 +101,68 @@ const Auth = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      <div className="flex flex-col items-center justify-center p-4 pt-20">        
+      <div className="flex flex-col items-center justify-center p-4 pt-20">
+        {/* Top Sign In Area */}
+        <div className="w-full max-w-md mb-6">
+          {!showSignIn ? (
+            <Button 
+              onClick={() => setShowSignIn(true)}
+              variant="outline" 
+              className="w-full h-14 text-xl font-bold"
+            >
+              Already have an account? Sign In
+            </Button>
+          ) : (
+            <Card>
+              <CardHeader className="pb-4">
+                <CardTitle className="text-lg">Sign In</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <form onSubmit={handleSignIn} className="space-y-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="signin-email">Email</Label>
+                    <Input
+                      id="signin-email"
+                      type="email"
+                      placeholder="your@email.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="signin-password">Password</Label>
+                    <Input
+                      id="signin-password"
+                      type="password"
+                      placeholder="Your password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <div className="flex gap-2">
+                    <Button 
+                      type="submit" 
+                      className="flex-1" 
+                      disabled={isLoading}
+                    >
+                      {isLoading ? 'Signing in...' : 'Sign In'}
+                    </Button>
+                    <Button 
+                      type="button"
+                      variant="outline"
+                      onClick={() => setShowSignIn(false)}
+                    >
+                      Cancel
+                    </Button>
+                  </div>
+                </form>
+              </CardContent>
+            </Card>
+          )}
+        </div>
+        
         <Card className="w-full max-w-md">
           <CardHeader className="text-center">
             <CardTitle className="text-2xl font-bold">Join AI Complete Me</CardTitle>
