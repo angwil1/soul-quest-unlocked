@@ -65,7 +65,7 @@ const HeroSection = () => {
            <img 
              src={heroImages[currentHeroImageIndex]} 
              alt="Loving couples celebrating authentic connections" 
-             className={`w-full h-full object-cover transition-all duration-1000 object-[center_20%] sm:object-[center_30%] md:object-[center_35%] lg:object-[center_40%] xl:object-[center_45%] ${
+             className={`w-full h-full object-cover transition-all duration-1000 object-[center_15%] sm:object-[center_25%] md:object-[center_30%] lg:object-[center_35%] xl:object-[center_40%] ${
                isLoaded ? 'animate-fade-in' : 'opacity-0'
              }`}
              loading="eager"
@@ -81,28 +81,28 @@ const HeroSection = () => {
         <div className="absolute bottom-10 sm:bottom-20 right-4 sm:right-20 w-32 sm:w-96 h-32 sm:h-96 bg-gradient-to-br from-purple-300/15 to-purple-200/20 rounded-full blur-xl sm:blur-3xl animate-pulse z-1" style={{ animationDelay: '1s' }}></div>
 
         {/* Hero Content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 py-16 sm:px-6 sm:py-24 text-center">
-          <div className="space-y-16 sm:space-y-20 lg:space-y-24 animate-fade-in">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 py-8 sm:py-16 md:py-24 text-center">
+          <div className="space-y-12 sm:space-y-16 lg:space-y-20 animate-fade-in">
             
             {/* Poetic Hero Content */}
-            <div className="space-y-8 sm:space-y-10 lg:space-y-12">
+            <div className="space-y-6 sm:space-y-8 lg:space-y-10 mt-8 sm:mt-12">
               {/* Emotional Badge */}
-              <div className="inline-flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-primary/5 to-purple-600/5 md:from-primary/10 md:to-purple-600/10 border border-primary/10 md:border-primary/20 backdrop-blur-sm hover:scale-105 transition-transform duration-300">
-                <Heart className="h-5 w-5 mr-3 text-primary animate-pulse" />
-                <span className="text-sm font-medium text-primary">
+              <div className="inline-flex items-center px-4 py-2 sm:px-6 sm:py-3 rounded-full bg-gradient-to-r from-primary/10 to-purple-600/10 md:from-primary/15 md:to-purple-600/15 border border-primary/20 md:border-primary/30 backdrop-blur-sm hover:scale-105 transition-transform duration-300">
+                <Heart className="h-4 w-4 sm:h-5 sm:w-5 mr-2 sm:mr-3 text-primary animate-pulse" />
+                <span className="text-xs sm:text-sm font-medium text-primary">
                   Where souls recognize each other
                 </span>
               </div>
 
               {/* Hero Headline */}
-              <div className="space-y-6">
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-light leading-tight tracking-wide">
-                  <span className="block text-white drop-shadow-2xl animate-fade-in" style={{ textShadow: '2px 2px 8px rgba(0,0,0,0.8), 0 0 16px rgba(0,0,0,0.6)', animationDelay: '0.1s' }}>
+              <div className="space-y-4 sm:space-y-6">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-light leading-tight tracking-wide">
+                  <span className="block text-white drop-shadow-2xl animate-fade-in" style={{ textShadow: '2px 2px 8px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.8)', animationDelay: '0.1s' }}>
                     AI Complete Me is live.
                   </span>
                 </h1>
                 
-                <p className="text-lg sm:text-xl text-white max-w-2xl mx-auto leading-relaxed font-light drop-shadow-lg animate-fade-in" style={{ textShadow: '2px 2px 6px rgba(0,0,0,0.8), 0 0 12px rgba(0,0,0,0.5)', animationDelay: '0.4s' }}>
+                <p className="text-base sm:text-lg md:text-xl text-white max-w-xl sm:max-w-2xl mx-auto leading-relaxed font-light drop-shadow-lg animate-fade-in px-4" style={{ textShadow: '2px 2px 6px rgba(0,0,0,0.9), 0 0 16px rgba(0,0,0,0.7)', animationDelay: '0.4s' }}>
                   First 500 users receive 3 months free + a wellness kit. Kits also available for referrers—until all 500 are claimed.
                 </p>
               </div>
