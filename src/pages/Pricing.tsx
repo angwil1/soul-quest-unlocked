@@ -100,23 +100,37 @@ const Pricing = () => {
   }, [user]);
 
   const handleSubscribe = async (plan: string | null) => {
+    console.log('[PayPal Debug] handleSubscribe called with plan:', plan);
+    
     if (!user) {
+      console.log('[PayPal Debug] No user found, redirecting to auth');
       navigate('/auth');
       return;
     }
     
-    if (!plan) return;
+    console.log('[PayPal Debug] User found:', user.id);
+    
+    if (!plan) {
+      console.log('[PayPal Debug] No plan provided, returning');
+      return;
+    }
 
     // Check if user has Quiet Start benefits (first 500 users)
     if (quietStartStatus?.benefits_claimed) {
+      console.log('[PayPal Debug] User has Quiet Start benefits:', quietStartStatus);
+      
       // Calculate trial expiration (90 days from signup)
       const signupDate = new Date(quietStartStatus.created_at);
       const trialExpiresAt = new Date(signupDate.getTime() + (90 * 24 * 60 * 60 * 1000)); // 90 days
       const now = new Date();
       
+      console.log('[PayPal Debug] Trial expires at:', trialExpiresAt, 'Current time:', now);
+      
       if (now < trialExpiresAt) {
         // Still in free trial period
         const daysRemaining = Math.ceil((trialExpiresAt.getTime() - now.getTime()) / (24 * 60 * 60 * 1000));
+        console.log('[PayPal Debug] Still in trial, days remaining:', daysRemaining);
+        
         toast({
           title: "Quiet Start Trial Active",
           description: `You have ${daysRemaining} days remaining in your free trial. No payment needed yet!`,
@@ -126,6 +140,7 @@ const Pricing = () => {
       }
       
       // Trial expired, allow them to subscribe
+      console.log('[PayPal Debug] Trial expired, proceeding with PayPal');
       toast({
         title: "Free Trial Ended",
         description: "Your 90-day free trial has ended. Subscribe now to continue accessing premium features!",
@@ -133,6 +148,7 @@ const Pricing = () => {
       // Continue with normal PayPal flow below
     }
 
+    console.log('[PayPal Debug] Setting loading state and calling PayPal function');
     setLoading(true);
     setLoadingPlan(plan);
 
@@ -142,6 +158,11 @@ const Pricing = () => {
         description: "Please wait while we set up your payment.",
       });
 
+      console.log('[PayPal Debug] Invoking create-paypal-payment function with:', { 
+        plan, 
+        userId: user.id 
+      });
+
       const { data, error } = await supabase.functions.invoke('create-paypal-payment', {
         body: { 
           plan, 
@@ -149,8 +170,10 @@ const Pricing = () => {
         }
       });
 
+      console.log('[PayPal Debug] PayPal function response:', { data, error });
+
       if (error) {
-        console.error('PayPal payment error:', error);
+        console.error('[PayPal Debug] PayPal payment error:', error);
         toast({
           title: "Payment Error",
           description: "Failed to create PayPal payment. Please try again.",
@@ -160,14 +183,18 @@ const Pricing = () => {
       }
 
       if (data?.approvalUrl) {
+        console.log('[PayPal Debug] Got approval URL:', data.approvalUrl);
+        
         toast({
           title: "Redirecting to PayPal",
           description: "You'll be redirected to complete your payment securely.",
         });
         
         // Redirect to PayPal for payment approval (same window)
+        console.log('[PayPal Debug] Redirecting to PayPal...');
         window.location.href = data.approvalUrl;
       } else {
+        console.error('[PayPal Debug] No approval URL in response:', data);
         toast({
           title: "Payment Error",
           description: "No payment URL received. Please try again.",
@@ -175,13 +202,14 @@ const Pricing = () => {
         });
       }
     } catch (error) {
-      console.error('Error creating PayPal payment:', error);
+      console.error('[PayPal Debug] Exception in PayPal payment:', error);
       toast({
         title: "Payment Error",
         description: "An unexpected error occurred. Please try again.",
         variant: "destructive",
       });
     } finally {
+      console.log('[PayPal Debug] Cleaning up loading state');
       setLoading(false);
       setLoadingPlan(null);
     }
