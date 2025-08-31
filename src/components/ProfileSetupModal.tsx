@@ -41,7 +41,7 @@ export const ProfileSetupModal: React.FC<ProfileSetupModalProps> = ({ isOpen, on
       });
       
       onComplete();
-      navigate("/matches");
+      navigate("/questions");
     } catch (error) {
       console.error("Error saving profile:", error);
     } finally {

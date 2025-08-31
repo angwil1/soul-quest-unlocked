@@ -28,8 +28,6 @@ export const AppWrapper: React.FC<AppWrapperProps> = ({ children }) => {
         '/messages',
         '/reset-password',
         '/matches',
-        '/questions', 
-        '/quiz-results',
         '/browse',
         '/pricing',
         '/connection-dna',
