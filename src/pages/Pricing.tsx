@@ -186,13 +186,13 @@ const Pricing = () => {
         console.log('[PayPal Debug] Got approval URL:', data.approvalUrl);
         
         toast({
-          title: "Redirecting to PayPal",
-          description: "You'll be redirected to complete your payment securely.",
+          title: "Opening PayPal",
+          description: "A new tab will open for secure PayPal payment.",
         });
         
-        // Redirect to PayPal for payment approval (same window)
-        console.log('[PayPal Debug] Redirecting to PayPal...');
-        window.location.href = data.approvalUrl;
+        // Open PayPal in new tab (more reliable)
+        console.log('[PayPal Debug] Opening PayPal in new tab...');
+        window.open(data.approvalUrl, '_blank');
       } else {
         console.error('[PayPal Debug] No approval URL in response:', data);
         toast({
