@@ -61,7 +61,7 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
         const progressPercentage = Math.min(100, Math.max(0, (elapsed / totalDuration) * 100));
         setProgress(progressPercentage);
       } else {
-        setPoeticPhrase("This sacred window has closed.");
+        setPoeticPhrase("The quiet window whispers your name...");
       }
     }, 1000);
 
