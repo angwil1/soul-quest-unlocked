@@ -5,15 +5,15 @@ import { Heart, Users, ArrowRight } from 'lucide-react';
 import coupleHeroMobile1 from '@/assets/couple-hero-mobile-1.jpg';
 import coupleHeroMobile2 from '@/assets/couple-hero-mobile-2.jpg';
 import coupleHeroMobile3 from '@/assets/couple-hero-mobile-3.jpg';
-import coupleLgbtqMaleDiverse from '@/assets/couple-lgbtq-male-diverse.jpg';
-import coupleLgbtqMaleCultural from '@/assets/couple-lgbtq-male-cultural.jpg';
+import coupleLgbtqMobile1 from '@/assets/couple-hero-mobile-lgbtq-1.jpg';
+import coupleLgbtqMobile2 from '@/assets/couple-hero-mobile-lgbtq-2.jpg';
 
 const heroImages = [
   coupleHeroMobile1,
   coupleHeroMobile2, 
   coupleHeroMobile3,
-  coupleLgbtqMaleDiverse,
-  coupleLgbtqMaleCultural
+  coupleLgbtqMobile1,
+  coupleLgbtqMobile2
 ];
 
 const HeroSection = () => {
