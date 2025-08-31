@@ -6,14 +6,14 @@ import coupleHeroMobile1 from '@/assets/couple-hero-mobile-1.jpg';
 import coupleHeroMobile2 from '@/assets/couple-hero-mobile-2.jpg';
 import coupleHeroMobile3 from '@/assets/couple-hero-mobile-3.jpg';
 import coupleLgbtqMobile1 from '@/assets/couple-hero-mobile-lgbtq-1.jpg';
-import coupleLgbtqFemaleRomantic from '@/assets/couple-hero-mobile-lgbtq-female-romantic.jpg';
+import coupleLgbtqFemaleNew from '@/assets/couple-hero-mobile-lgbtq-female-new.jpg';
 
 const heroImages = [
   coupleHeroMobile1,
   coupleHeroMobile2, 
   coupleHeroMobile3,
   coupleLgbtqMobile1,
-  coupleLgbtqFemaleRomantic
+  coupleLgbtqFemaleNew
 ];
 
 const HeroSection = () => {
