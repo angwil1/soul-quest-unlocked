@@ -6,6 +6,7 @@ import { Progress } from '@/components/ui/progress';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { Sparkles, Clock, Users, Heart, X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useQuietStartProgress } from '@/hooks/useQuietStartProgress';
 
 interface LaunchBannerProps {
   className?: string;
@@ -22,8 +23,8 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
   const [isDismissed, setIsDismissed] = useState(false);
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0 });
   const [progress, setProgress] = useState(0);
-  const [claimedCount, setClaimedCount] = useState(0); // Start at zero for launch
   const [poeticPhrase, setPoeticPhrase] = useState("");
+  const { claimedCount } = useQuietStartProgress();
 
   // Calculate time remaining and progress (60 days from launch - using a fixed launch date for demo)
   useEffect(() => {

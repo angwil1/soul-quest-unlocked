@@ -82,6 +82,15 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
       const result = await signUp(email, password);
       
       if (!result?.error) {
+        // Create initial tracking record
+        await supabase
+          .from('quiet_start_signups')
+          .insert({
+            user_id: user?.id || '', // Will be updated when user is available
+            email: email,
+            signup_step: 'email_signup'
+          });
+
         toast({
           title: "Account created!",
           description: "Please verify your age to continue.",
@@ -100,6 +109,14 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
     setShowAgeVerification(false);
     setCurrentStep('email-confirmation');
     
+    // Update signup progress
+    if (user) {
+      await supabase
+        .from('quiet_start_signups')
+        .update({ signup_step: 'age_verified' })
+        .eq('user_id', user.id);
+    }
+    
     toast({
       title: "Age verified!",
       description: "Check your email for a confirmation link to complete your account setup.",
@@ -116,8 +133,20 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
     const name = formData.get('name') as string;
     
     try {
+      // Get next available kit number
+      const { data: kitNumber } = await supabase.rpc('get_next_kit_number');
+      
+      if (kitNumber === null) {
+        toast({
+          title: "Offer Expired",
+          description: "Sorry, all 500 wellness kits have been claimed.",
+          variant: "destructive"
+        });
+        return;
+      }
+      
       // Update profile with name
-      const { error } = await supabase
+      const { error: profileError } = await supabase
         .from('profiles')
         .upsert({
           id: user.id,
@@ -125,9 +154,22 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
           Avatar_url: null
         });
         
-      if (error) throw error;
+      if (profileError) throw profileError;
       
-      // Mark as Quiet Start user and grant benefits
+      // Mark benefits as claimed and assign kit number
+      const { error: signupError } = await supabase
+        .from('quiet_start_signups')
+        .update({
+          signup_step: 'completed',
+          benefits_claimed: true,
+          claimed_at: new Date().toISOString(),
+          kit_number: kitNumber
+        })
+        .eq('user_id', user.id);
+        
+      if (signupError) throw signupError;
+      
+      // Mark as Quiet Start user
       await supabase
         .from('user_events')
         .insert({
@@ -135,6 +177,7 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
           event_type: 'quiet_start_claimed',
           event_data: {
             email: user.email,
+            kit_number: kitNumber,
             claimed_at: new Date().toISOString(),
             benefits: {
               months_free: 3,
@@ -144,8 +187,8 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
         });
       
       toast({
-        title: "Profile complete!",
-        description: "Welcome to your Soul Quest journey.",
+        title: "Benefits claimed!",
+        description: `You're Quiet Start user #${kitNumber}! Welcome to your Soul Quest journey.`,
       });
       
       setCurrentStep('complete');
@@ -155,7 +198,7 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
       console.error('Profile setup error:', error);
       toast({
         title: "Error",
-        description: "Failed to complete profile setup. Please try again.",
+        description: "Failed to claim benefits. Please try again.",
         variant: "destructive"
       });
     } finally {

@@ -1519,6 +1519,45 @@ export type Database = {
         }
         Relationships: []
       }
+      quiet_start_signups: {
+        Row: {
+          benefits_claimed: boolean
+          claimed_at: string | null
+          created_at: string
+          email: string
+          id: string
+          kit_number: number | null
+          signup_step: string
+          updated_at: string
+          user_id: string
+          wellness_kit_address: Json | null
+        }
+        Insert: {
+          benefits_claimed?: boolean
+          claimed_at?: string | null
+          created_at?: string
+          email: string
+          id?: string
+          kit_number?: number | null
+          signup_step?: string
+          updated_at?: string
+          user_id: string
+          wellness_kit_address?: Json | null
+        }
+        Update: {
+          benefits_claimed?: boolean
+          claimed_at?: string | null
+          created_at?: string
+          email?: string
+          id?: string
+          kit_number?: number | null
+          signup_step?: string
+          updated_at?: string
+          user_id?: string
+          wellness_kit_address?: Json | null
+        }
+        Relationships: []
+      }
       rate_limits: {
         Row: {
           created_at: string | null
@@ -2075,6 +2114,10 @@ export type Database = {
           view_count: number | null
           visibility_boost: number | null
         }[]
+      }
+      get_next_kit_number: {
+        Args: Record<PropertyKey, never>
+        Returns: number
       }
       get_premium_matches: {
         Args: {
