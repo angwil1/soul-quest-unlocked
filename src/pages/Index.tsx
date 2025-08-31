@@ -19,6 +19,7 @@ import { Testimonials } from '@/components/Testimonials';
 import { HowItWorks } from '@/components/HowItWorks';
 import HeroSection from '@/components/HeroSection';
 import { PageLoadingSkeleton } from '@/components/LoadingSkeleton';
+import { ProfileCompletionPrompt } from '@/components/ProfileCompletionPrompt';
 import { Heart, Shield, Star } from 'lucide-react';
 
 
@@ -151,6 +152,15 @@ const Index = () => {
         
         {/* EMOTIONALLY INTELLIGENT HERO DESIGN */}
         <HeroSection />
+
+        {/* Profile Completion Prompt for Logged In Users */}
+        {user && (
+          <section className="py-8 bg-gradient-to-br from-muted/20 to-background">
+            <div className="max-w-4xl mx-auto px-4">
+              <ProfileCompletionPrompt />
+            </div>
+          </section>
+        )}
 
         {/* How It Works Section */}
         <HowItWorks />

@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import Auth from "./pages/Auth";
 import Profile from "./pages/Profile";
 import ProfileEdit from "./pages/ProfileEdit";
+import ProfileSetup from "./pages/ProfileSetup";
 import Matches from "./pages/Matches";
 import Messages from "./pages/Messages";
 import BrowseProfiles from "./pages/BrowseProfiles";
@@ -51,6 +52,7 @@ const App = () => (
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/profile/edit" element={<ProfileEdit />} />
+            <Route path="/profile/setup" element={<ProfileSetup />} />
             <Route path="/matches" element={<Matches />} />
             <Route path="/messages" element={<Messages />} />
             <Route path="/browse" element={<BrowseProfiles />} />
