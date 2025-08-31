@@ -32,6 +32,19 @@ export default function CookieStatement() {
                 <li><strong>Security Cookies:</strong> To protect against fraud and ensure secure connections</li>
               </ul>
               
+              <h3 className="text-xl font-semibold">Data Collection for Legal Compliance</h3>
+              <p>
+                In addition to essential cookies, we collect minimal personal information required by law:
+              </p>
+              <ul className="list-disc pl-6 space-y-2">
+                <li><strong>Date of Birth:</strong> Collected during registration solely for age verification to comply with legal requirements that restrict access to users 18 and older</li>
+                <li><strong>Email Address:</strong> Required for account creation and secure login</li>
+                <li><strong>Profile Information:</strong> Only what you choose to share in your dating profile</li>
+              </ul>
+              <p className="text-sm text-muted-foreground">
+                <strong>Privacy Promise:</strong> Your date of birth is used only for age verification and legal compliance. We do not use it for advertising, marketing, or any other purpose beyond ensuring you meet the minimum age requirement for our platform.
+              </p>
+              
               <h3 className="text-xl font-semibold">What We Don't Use</h3>
               <p>
                 Unlike many other platforms, AI Complete Me does not use:
