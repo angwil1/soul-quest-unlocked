@@ -126,7 +126,10 @@ const HeroSection = () => {
               <Button 
                 variant="ghost" 
                 size="sm"
-                onClick={() => navigate('/quick-start')}
+                onClick={() => {
+                  navigate('/quick-start');
+                  setTimeout(() => window.scrollTo(0, 0), 0);
+                }}
                 className="w-full px-2 sm:px-8 lg:px-12 py-1 sm:py-4 lg:py-6 text-xs sm:text-lg lg:text-xl text-white hover:text-white/80 font-medium hover:bg-white/10 transform hover:scale-105 transition-all duration-300 rounded-lg sm:rounded-xl lg:rounded-2xl backdrop-blur-sm border border-white/20 hover:border-white/30"
               >
                 <Users className="h-2.5 w-2.5 sm:h-5 w-5 lg:h-6 lg:w-6 mr-0.5 sm:mr-2 lg:mr-3" />

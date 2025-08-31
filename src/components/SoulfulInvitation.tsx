@@ -78,7 +78,10 @@ export const SoulfulInvitation = () => {
             <div className="space-y-4">
               <Button 
                 size="lg"
-                onClick={() => navigate('/quick-start')}
+                onClick={() => {
+                  navigate('/quick-start');
+                  setTimeout(() => window.scrollTo(0, 0), 0);
+                }}
                 className="w-full bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90 text-white font-medium"
               >
                 Begin Your Story

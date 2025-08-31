@@ -85,7 +85,10 @@ export const HowItWorks = () => {
 
         <div className="text-center animate-fade-in" style={{ animationDelay: '0.6s' }}>
           <Button 
-            onClick={() => navigate('/quick-start')}
+            onClick={() => {
+              navigate('/quick-start');
+              setTimeout(() => window.scrollTo(0, 0), 0);
+            }}
             size="lg"
             className="bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90 text-white font-medium px-8 py-3 rounded-xl"
           >
