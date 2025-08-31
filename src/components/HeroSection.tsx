@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Heart, Users, ArrowRight } from 'lucide-react';
-import { SignupFlow } from '@/components/SignupFlow';
 import coupleHeroMobile1 from '@/assets/couple-hero-mobile-1.jpg';
 import coupleHeroMobile2 from '@/assets/couple-hero-mobile-2.jpg';
 import coupleHeroMobile3 from '@/assets/couple-hero-mobile-3.jpg';
@@ -21,7 +20,6 @@ const HeroSection = () => {
   const navigate = useNavigate();
   const [currentHeroImageIndex, setCurrentHeroImageIndex] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [showSignupFlow, setShowSignupFlow] = useState(false);
 
   // Hero image rotation effect
   useEffect(() => {
@@ -41,18 +39,12 @@ const HeroSection = () => {
   }, []);
 
   const handleGetStarted = () => {
-    setShowSignupFlow(true);
-  };
-
-  const handleSignupComplete = () => {
-    setShowSignupFlow(false);
-    navigate('/profile-setup');
+    navigate('/quick-start');
+    setTimeout(() => window.scrollTo(0, 0), 0);
   };
 
   return (
-    <>
-      {showSignupFlow && <SignupFlow onComplete={handleSignupComplete} />}
-      <section className="relative overflow-hidden min-h-[100vh] min-h-[100dvh] flex items-center justify-center bg-white">
+    <section className="relative overflow-hidden min-h-[100vh] min-h-[100dvh] flex items-center justify-center bg-white">
       
       {/* Already have account - Top Right */}
       <div className="absolute top-4 right-4 z-30 animate-fade-in">
@@ -184,7 +176,6 @@ const HeroSection = () => {
         </div>
       </div>
     </section>
-    </>
   );
 };
 
