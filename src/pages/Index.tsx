@@ -10,7 +10,6 @@ import { Footer } from '@/components/Footer';
 import { FloatingQuizButton } from '@/components/FloatingQuizButton';
 import { FirstLightModal } from '@/components/FirstLightModal';
 import { LaunchBanner } from '@/components/LaunchBanner';
-import { AgeVerification } from '@/components/AgeVerification';
 import SearchFilters from '@/components/SearchFilters';
 import { AmbientCoupleCarousel } from '@/components/AmbientCoupleCarousel';
 import { SoulfulInvitation } from '@/components/SoulfulInvitation';
@@ -28,8 +27,7 @@ const Index = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
   const [showFirstLightModal, setShowFirstLightModal] = useState(false);
-  const [showAgeVerification, setShowAgeVerification] = useState(false);
-  const [isAgeVerified, setIsAgeVerified] = useState(false);
+  const [isAgeVerified, setIsAgeVerified] = useState(true); // Allow access, age verification happens during signup
   const [isNewUser, setIsNewUser] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
@@ -78,20 +76,7 @@ const Index = () => {
   };
 
 
-  // Check age verification on page load
-  useEffect(() => {
-    const checkAgeVerification = () => {
-      const localVerification = localStorage.getItem('ageVerified');
-      if (localVerification === 'true') {
-        setIsAgeVerified(true);
-      } else {
-        // Show age verification modal if not verified
-        setShowAgeVerification(true);
-      }
-    };
-    
-    checkAgeVerification();
-  }, []);
+  // Age verification is now handled during signup flow
 
   // Page loading effect
   useEffect(() => {
@@ -302,13 +287,7 @@ const Index = () => {
         
         <Footer />
         
-        <AgeVerification 
-          forceOpen={showAgeVerification}
-          onVerificationComplete={() => {
-            setShowAgeVerification(false);
-            setIsAgeVerified(true);
-          }}
-        />
+        {/* Age verification is now handled during signup flow */}
         
         <FirstLightModal 
           isOpen={showFirstLightModal} 

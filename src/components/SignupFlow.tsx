@@ -6,7 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Progress } from '@/components/ui/progress';
 import { CheckCircle, Clock, Gift, Heart, Mail } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
-import { AgeVerification } from '@/components/AgeVerification';
+// Age verification now handled in signup form
 import { WelcomeConfirmation } from '@/components/WelcomeConfirmation';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
@@ -168,10 +168,7 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
     }
   };
 
-  const handleAgeVerificationComplete = async () => {
-    // This function is no longer needed since age is verified during signup
-    setCurrentStep('email-confirmation');
-  };
+  // Age verification now handled directly in signup form
 
   const handleProfileSetup = async (e: React.FormEvent) => {
     e.preventDefault();
