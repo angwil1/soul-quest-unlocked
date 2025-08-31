@@ -99,7 +99,7 @@ const HeroSection = () => {
                 </h1>
                 
                 <p className="text-lg sm:text-xl text-white max-w-2xl mx-auto leading-relaxed font-light drop-shadow-lg animate-fade-in" style={{ textShadow: '2px 2px 6px rgba(0,0,0,0.8), 0 0 12px rgba(0,0,0,0.5)', animationDelay: '0.4s' }}>
-                  First 500 receive 3 months free + a wellness keepsake.
+                  First 500 users receive 3 months free + a wellness kit. Kits also available for referrers—until all 500 are claimed.
                 </p>
               </div>
             </div>

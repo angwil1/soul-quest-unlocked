@@ -41,7 +41,7 @@ export const ReferralSection: React.FC<ReferralSectionProps> = ({
             <h3 className="text-lg font-semibold text-foreground">Share the Journey</h3>
           </div>
           <p className="text-sm text-muted-foreground max-w-sm mx-auto">
-            Invite someone to begin their Soul Quest. You'll receive a bonus month—and a gift of connection.
+            Invite someone to begin their Soul Quest. You'll receive a wellness kit—while supplies last.
           </p>
         </div>
 
