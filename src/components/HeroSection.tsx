@@ -5,11 +5,15 @@ import { Heart, Users, ArrowRight } from 'lucide-react';
 import coupleHeroMobile1 from '@/assets/couple-hero-mobile-1.jpg';
 import coupleHeroMobile2 from '@/assets/couple-hero-mobile-2.jpg';
 import coupleHeroMobile3 from '@/assets/couple-hero-mobile-3.jpg';
+import coupleLgbtqMaleDiverse from '@/assets/couple-lgbtq-male-diverse.jpg';
+import coupleLgbtqMaleCultural from '@/assets/couple-lgbtq-male-cultural.jpg';
 
 const heroImages = [
   coupleHeroMobile1,
   coupleHeroMobile2, 
-  coupleHeroMobile3
+  coupleHeroMobile3,
+  coupleLgbtqMaleDiverse,
+  coupleLgbtqMaleCultural
 ];
 
 const HeroSection = () => {
@@ -58,15 +62,15 @@ const HeroSection = () => {
         
         {/* Primary Background Image */}
         <picture className="absolute inset-0 w-full h-full z-0">
-          <img 
-            src={heroImages[currentHeroImageIndex]} 
-            alt="Happy couple in warm connection" 
-            className={`w-full h-full object-cover transition-all duration-1000 object-[center_20%] sm:object-[center_30%] md:object-[center_35%] lg:object-[center_40%] xl:object-[center_45%] ${
-              isLoaded ? 'animate-fade-in' : 'opacity-0'
-            }`}
-            loading="eager"
-            onLoad={() => setIsLoaded(true)}
-          />
+           <img 
+             src={heroImages[currentHeroImageIndex]} 
+             alt="Loving couples celebrating authentic connections" 
+             className={`w-full h-full object-cover transition-all duration-1000 object-[center_20%] sm:object-[center_30%] md:object-[center_35%] lg:object-[center_40%] xl:object-[center_45%] ${
+               isLoaded ? 'animate-fade-in' : 'opacity-0'
+             }`}
+             loading="eager"
+             onLoad={() => setIsLoaded(true)}
+           />
         </picture>
         
         {/* Overlay */}
