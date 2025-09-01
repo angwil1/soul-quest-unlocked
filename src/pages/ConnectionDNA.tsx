@@ -44,11 +44,88 @@ const ConnectionDNA = () => {
   const { user } = useAuth();
   const { toast } = useToast();
 
-  const [dnaProfile, setDnaProfile] = useState<DNAProfile | null>(null);
-  const [insights, setInsights] = useState<DNAInsight[]>([]);
-  const [loading, setLoading] = useState(true);
+  // Sample data for demo
+  const [dnaProfile, setDnaProfile] = useState<DNAProfile | null>({
+    id: '1',
+    emotional_intelligence_score: 78,
+    interaction_quality_score: 85,
+    empathy_score: 72,
+    vulnerability_comfort: 68,
+    communication_style: {
+      primary: 'Supportive',
+      secondary: 'Direct',
+      traits: ['active_listener', 'empathetic', 'clear_communicator']
+    },
+    emotional_patterns: {
+      response_time: 'thoughtful',
+      emotional_range: 'balanced',
+      stress_indicators: ['quick_responses', 'shorter_messages']
+    },
+    personality_markers: {
+      openness: 82,
+      conscientiousness: 75,
+      extraversion: 68,
+      agreeableness: 88,
+      neuroticism: 35
+    },
+    love_language_primary: 'quality_time',
+    love_language_secondary: 'words_of_affirmation',
+    conflict_resolution_style: 'collaborative',
+    last_analysis_at: new Date().toISOString()
+  });
+  const [insights, setInsights] = useState<DNAInsight[]>([
+    {
+      id: '1',
+      insight_type: 'communication_improvement',
+      title: 'Enhance Emotional Validation',
+      description: 'Your empathy score shows great potential. Focus on acknowledging your matches\' feelings before offering solutions.',
+      actionable_steps: [
+        'Start responses with "I can understand how that feels"',
+        'Ask follow-up questions about emotions',
+        'Share your own similar experiences when appropriate'
+      ],
+      priority_level: 'high',
+      category: 'communication',
+      confidence_level: 0.87,
+      is_read: false,
+      created_at: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString()
+    },
+    {
+      id: '2',
+      insight_type: 'vulnerability_growth',
+      title: 'Comfort with Vulnerability',
+      description: 'Your vulnerability comfort level suggests you might benefit from gradually sharing more personal experiences to deepen connections.',
+      actionable_steps: [
+        'Share one meaningful memory per week',
+        'Express your authentic feelings about dates',
+        'Ask deeper questions about values and dreams'
+      ],
+      priority_level: 'medium',
+      category: 'emotional_growth',
+      confidence_level: 0.75,
+      is_read: false,
+      created_at: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString()
+    },
+    {
+      id: '3',
+      insight_type: 'communication_strength',
+      title: 'Natural Conversation Flow',
+      description: 'Your interaction quality score is excellent! You naturally create engaging conversations that make others feel heard.',
+      actionable_steps: [
+        'Continue your supportive communication style',
+        'Use your natural listening skills as a strength',
+        'Help others open up by sharing first'
+      ],
+      priority_level: 'low',
+      category: 'strengths',
+      confidence_level: 0.92,
+      is_read: true,
+      created_at: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString()
+    }
+  ]);
+  const [loading, setLoading] = useState(false);
   const [analyzing, setAnalyzing] = useState(false);
-  const [hasAICompleteMe, setHasAICompleteMe] = useState(false);
+  const [hasAICompleteMe, setHasAICompleteMe] = useState(true); // Demo: showing premium experience
 
   // Check subscription status
   useEffect(() => {
