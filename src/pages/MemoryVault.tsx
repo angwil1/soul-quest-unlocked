@@ -158,9 +158,7 @@ const MemoryVault = () => {
   const isUnlockedBeyond = true; // Demo: showing premium experience
 
   useEffect(() => {
-    if (user && isUnlockedBeyond) {
-      fetchVaultData();
-    }
+    // Skip database fetch since we're using demo data
     setLoading(false);
   }, [user, isUnlockedBeyond]);
 
