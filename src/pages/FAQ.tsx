@@ -169,61 +169,63 @@ const FAQ = () => {
       
       {/* Header with Back Button and Actions */}
       <header className="bg-card border-b" role="banner">
-        <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
-          <Button 
-            variant="ghost" 
-            onClick={() => navigate('/')}
-            className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
-            aria-label="Go back to homepage"
-          >
-            <ArrowLeft className="h-4 w-4 mr-2" aria-hidden="true" />
-            Back to Home
-          </Button>
-          
-          <div className="flex items-center gap-3">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <Button 
-              variant="outline" 
-              size="sm"
-              onClick={() => navigate('/contact')}
-              className="flex items-center gap-2 focus:ring-2 focus:ring-primary focus:ring-offset-2"
-              aria-label="Contact support for additional help"
+              variant="ghost" 
+              onClick={() => navigate('/')}
+              className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              aria-label="Go back to homepage"
             >
-              <Mail className="h-4 w-4" aria-hidden="true" />
-              Contact Support
+              <ArrowLeft className="h-4 w-4 mr-2" aria-hidden="true" />
+              Back to Home
             </Button>
-            <Button 
-              variant="outline" 
-              size="sm"
-              onClick={() => navigate('/accessibility')}
-              className="flex items-center gap-2 focus:ring-2 focus:ring-primary focus:ring-offset-2"
-              aria-label="View full accessibility statement"
-            >
-              <HelpCircle className="h-4 w-4" aria-hidden="true" />
-              Accessibility Statement
-            </Button>
+            
+            <div className="flex flex-col xs:flex-row items-start xs:items-center gap-2 xs:gap-3 w-full sm:w-auto">
+              <Button 
+                variant="outline" 
+                size="sm"
+                onClick={() => navigate('/contact')}
+                className="flex items-center gap-2 focus:ring-2 focus:ring-primary focus:ring-offset-2 w-full xs:w-auto justify-center"
+                aria-label="Contact support for additional help"
+              >
+                <Mail className="h-4 w-4" aria-hidden="true" />
+                <span className="sm:inline">Contact Support</span>
+              </Button>
+              <Button 
+                variant="outline" 
+                size="sm"
+                onClick={() => navigate('/accessibility')}
+                className="flex items-center gap-2 focus:ring-2 focus:ring-primary focus:ring-offset-2 w-full xs:w-auto justify-center"
+                aria-label="View full accessibility statement"
+              >
+                <HelpCircle className="h-4 w-4" aria-hidden="true" />
+                <span className="sm:inline">Accessibility Statement</span>
+              </Button>
+            </div>
           </div>
         </div>
       </header>
       
       <main 
         id="main-content"
-        className="container mx-auto px-4 py-12"
+        className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12"
         role="main"
         aria-labelledby="faq-title"
       >
         <div className="max-w-4xl mx-auto">
-          <header className="text-center mb-8">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <BookOpen className="h-8 w-8 text-primary" aria-hidden="true" />
+          <header className="text-center mb-6 sm:mb-8">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 mb-4">
+              <BookOpen className="h-6 w-6 sm:h-8 sm:w-8 text-primary" aria-hidden="true" />
               <h1 
                 id="faq-title"
-                className="text-4xl font-bold text-foreground"
+                className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground text-center"
               >
                 Frequently Asked Questions
               </h1>
             </div>
             <p 
-              className="text-xl text-muted-foreground mb-6"
+              className="text-base sm:text-lg lg:text-xl text-muted-foreground mb-4 sm:mb-6 px-4"
               role="text"
               aria-describedby="faq-title"
             >
@@ -364,120 +366,120 @@ const FAQ = () => {
               </p>
             </div>
             
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {/* Navigation & Controls */}
-              <Card className="p-6 hover:shadow-md transition-shadow">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
-                    <span className="text-lg">⌨️</span>
+              <Card className="p-4 sm:p-6 hover:shadow-md transition-shadow">
+                <div className="flex items-center gap-3 mb-3 sm:mb-4">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-base sm:text-lg">⌨️</span>
                   </div>
-                  <h3 className="font-semibold text-foreground">Navigation & Controls</h3>
+                  <h3 className="font-semibold text-foreground text-sm sm:text-base">Navigation & Controls</h3>
                 </div>
-                <div className="space-y-3 text-sm text-muted-foreground">
+                <div className="space-y-2 sm:space-y-3 text-xs sm:text-sm text-muted-foreground">
                   <div>
-                    <span className="font-medium text-foreground">Keyboard Navigation:</span>
-                    <p className="mt-1">Tab to navigate, Enter/Space to activate, Arrow keys in menus</p>
+                    <span className="font-medium text-foreground text-xs sm:text-sm">Keyboard Navigation:</span>
+                    <p className="mt-0.5 sm:mt-1 leading-relaxed">Tab to navigate, Enter/Space to activate, Arrow keys in menus</p>
                   </div>
                   <div>
-                    <span className="font-medium text-foreground">Skip Links:</span>
-                    <p className="mt-1">Jump directly to main content, bypassing navigation</p>
+                    <span className="font-medium text-foreground text-xs sm:text-sm">Skip Links:</span>
+                    <p className="mt-0.5 sm:mt-1 leading-relaxed">Jump directly to main content, bypassing navigation</p>
                   </div>
                   <div>
-                    <span className="font-medium text-foreground">Focus Indicators:</span>
-                    <p className="mt-1">Clear visual focus rings show your current position</p>
+                    <span className="font-medium text-foreground text-xs sm:text-sm">Focus Indicators:</span>
+                    <p className="mt-0.5 sm:mt-1 leading-relaxed">Clear visual focus rings show your current position</p>
                   </div>
                 </div>
               </Card>
               
               {/* Assistive Technology */}
-              <Card className="p-6 hover:shadow-md transition-shadow">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
-                    <span className="text-lg">🔊</span>
+              <Card className="p-4 sm:p-6 hover:shadow-md transition-shadow">
+                <div className="flex items-center gap-3 mb-3 sm:mb-4">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-base sm:text-lg">🔊</span>
                   </div>
-                  <h3 className="font-semibold text-foreground">Assistive Technology</h3>
+                  <h3 className="font-semibold text-foreground text-sm sm:text-base">Assistive Technology</h3>
                 </div>
-                <div className="space-y-3 text-sm text-muted-foreground">
+                <div className="space-y-2 sm:space-y-3 text-xs sm:text-sm text-muted-foreground">
                   <div>
-                    <span className="font-medium text-foreground">Screen Readers:</span>
-                    <p className="mt-1">NVDA, JAWS, VoiceOver, TalkBack compatibility</p>
+                    <span className="font-medium text-foreground text-xs sm:text-sm">Screen Readers:</span>
+                    <p className="mt-0.5 sm:mt-1 leading-relaxed">NVDA, JAWS, VoiceOver, TalkBack compatibility</p>
                   </div>
                   <div>
-                    <span className="font-medium text-foreground">Voice Control:</span>
-                    <p className="mt-1">Dragon NaturallySpeaking, Voice Control support</p>
+                    <span className="font-medium text-foreground text-xs sm:text-sm">Voice Control:</span>
+                    <p className="mt-0.5 sm:mt-1 leading-relaxed">Dragon NaturallySpeaking, Voice Control support</p>
                   </div>
                   <div>
-                    <span className="font-medium text-foreground">Switch Navigation:</span>
-                    <p className="mt-1">Compatible with switch devices and eye-tracking</p>
+                    <span className="font-medium text-foreground text-xs sm:text-sm">Switch Navigation:</span>
+                    <p className="mt-0.5 sm:mt-1 leading-relaxed">Compatible with switch devices and eye-tracking</p>
                   </div>
                 </div>
               </Card>
               
               {/* Visual & Cognitive */}
-              <Card className="p-6 hover:shadow-md transition-shadow">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 bg-secondary/20 rounded-full flex items-center justify-center">
-                    <span className="text-lg">👁️</span>
+              <Card className="p-4 sm:p-6 hover:shadow-md transition-shadow">
+                <div className="flex items-center gap-3 mb-3 sm:mb-4">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 bg-secondary/20 rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-base sm:text-lg">👁️</span>
                   </div>
-                  <h3 className="font-semibold text-foreground">Visual & Cognitive</h3>
+                  <h3 className="font-semibold text-foreground text-sm sm:text-base">Visual & Cognitive</h3>
                 </div>
-                <div className="space-y-3 text-sm text-muted-foreground">
+                <div className="space-y-2 sm:space-y-3 text-xs sm:text-sm text-muted-foreground">
                   <div>
-                    <span className="font-medium text-foreground">High Contrast:</span>
-                    <p className="mt-1">Enhanced contrast ratios, dark mode support</p>
+                    <span className="font-medium text-foreground text-xs sm:text-sm">High Contrast:</span>
+                    <p className="mt-0.5 sm:mt-1 leading-relaxed">Enhanced contrast ratios, dark mode support</p>
                   </div>
                   <div>
-                    <span className="font-medium text-foreground">Text Scaling:</span>
-                    <p className="mt-1">Browser zoom up to 200% without horizontal scrolling</p>
+                    <span className="font-medium text-foreground text-xs sm:text-sm">Text Scaling:</span>
+                    <p className="mt-0.5 sm:mt-1 leading-relaxed">Browser zoom up to 200% without horizontal scrolling</p>
                   </div>
                   <div>
-                    <span className="font-medium text-foreground">Clear Language:</span>
-                    <p className="mt-1">Simple, consistent interface language and structure</p>
+                    <span className="font-medium text-foreground text-xs sm:text-sm">Clear Language:</span>
+                    <p className="mt-0.5 sm:mt-1 leading-relaxed">Simple, consistent interface language and structure</p>
                   </div>
                 </div>
               </Card>
               
               {/* Content & Structure */}
-              <Card className="p-6 hover:shadow-md transition-shadow">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 bg-accent/20 rounded-full flex items-center justify-center">
-                    <span className="text-lg">🏗️</span>
+              <Card className="p-4 sm:p-6 hover:shadow-md transition-shadow">
+                <div className="flex items-center gap-3 mb-3 sm:mb-4">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 bg-accent/20 rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-base sm:text-lg">🏗️</span>
                   </div>
-                  <h3 className="font-semibold text-foreground">Content & Structure</h3>
+                  <h3 className="font-semibold text-foreground text-sm sm:text-base">Content & Structure</h3>
                 </div>
-                <div className="space-y-3 text-sm text-muted-foreground">
+                <div className="space-y-2 sm:space-y-3 text-xs sm:text-sm text-muted-foreground">
                   <div>
-                    <span className="font-medium text-foreground">Semantic HTML:</span>
-                    <p className="mt-1">Proper headings, landmarks, and ARIA labels</p>
+                    <span className="font-medium text-foreground text-xs sm:text-sm">Semantic HTML:</span>
+                    <p className="mt-0.5 sm:mt-1 leading-relaxed">Proper headings, landmarks, and ARIA labels</p>
                   </div>
                   <div>
-                    <span className="font-medium text-foreground">Alternative Text:</span>
-                    <p className="mt-1">Descriptive alt text for all images and media</p>
+                    <span className="font-medium text-foreground text-xs sm:text-sm">Alternative Text:</span>
+                    <p className="mt-0.5 sm:mt-1 leading-relaxed">Descriptive alt text for all images and media</p>
                   </div>
                   <div>
-                    <span className="font-medium text-foreground">Live Regions:</span>
-                    <p className="mt-1">Screen reader announcements for dynamic content</p>
+                    <span className="font-medium text-foreground text-xs sm:text-sm">Live Regions:</span>
+                    <p className="mt-0.5 sm:mt-1 leading-relaxed">Screen reader announcements for dynamic content</p>
                   </div>
                 </div>
               </Card>
             </div>
 
             {/* Contact Card */}
-            <Card className="p-8 bg-gradient-to-r from-primary/5 via-primary/10 to-purple-500/5 border-primary/20">
-              <div className="text-center space-y-4">
-                <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto">
-                  <span className="text-2xl">💬</span>
+            <Card className="p-4 sm:p-6 lg:p-8 bg-gradient-to-r from-primary/5 via-primary/10 to-accent/5 border-primary/20">
+              <div className="text-center space-y-3 sm:space-y-4">
+                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto">
+                  <span className="text-xl sm:text-2xl">💬</span>
                 </div>
-                <h3 className="text-xl font-semibold text-primary">Need Help or Have Feedback?</h3>
-                <p className="text-muted-foreground max-w-2xl mx-auto">
+                <h3 className="text-lg sm:text-xl font-semibold text-primary">Need Help or Have Feedback?</h3>
+                <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto px-2 leading-relaxed">
                   Contact our accessibility team at 
                   <span className="font-semibold text-foreground"> accessibility@aicomplete.me</span> or through our accessible contact form. 
                   We're committed to resolving accessibility barriers and providing accommodations.
                 </p>
-                <div className="pt-2">
+                <div className="pt-1 sm:pt-2">
                   <Button 
                     variant="outline" 
-                    className="bg-background hover:bg-muted focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                    className="bg-background hover:bg-muted focus:ring-2 focus:ring-primary focus:ring-offset-2 text-sm sm:text-base px-4 sm:px-6"
                     aria-label="Contact accessibility team for support"
                   >
                     Contact Accessibility Team
