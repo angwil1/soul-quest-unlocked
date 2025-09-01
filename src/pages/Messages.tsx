@@ -324,8 +324,35 @@ const Messages = () => {
                     Loading matches...
                   </div>
                 ) : matches.length === 0 ? (
-                  <div className="p-4 text-center text-muted-foreground">
-                    No matches yet. Start matching to begin chatting!
+                  <div className="p-4 text-center text-muted-foreground space-y-4">
+                    <p>No matches yet. Start matching to begin chatting!</p>
+                    <Button 
+                      onClick={async () => {
+                        if (user) {
+                          try {
+                            await supabase.rpc('create_sample_matches_for_user', { 
+                              target_user_id: user.id 
+                            });
+                            toast({
+                              title: "Sample matches created!",
+                              description: "You now have some test matches to try messaging."
+                            });
+                            loadMatches(); // Refresh the matches list
+                          } catch (error) {
+                            console.error('Error creating sample matches:', error);
+                            toast({
+                              title: "Error",
+                              description: "Failed to create sample matches. Please try again.",
+                              variant: "destructive"
+                            });
+                          }
+                        }
+                      }}
+                      variant="outline"
+                      size="sm"
+                    >
+                      Create Sample Matches for Testing
+                    </Button>
                   </div>
                 ) : (
                   matches.map((match) => (
