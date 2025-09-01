@@ -106,7 +106,6 @@ export const Navbar = () => {
     { name: "Conversations", href: "/messages" },
     { name: "Memory Vault", href: "/memory-vault" },
     { name: "Pricing", href: "/pricing" },
-    { name: "Sample Profiles", href: "/browse" },
     { name: "FAQ", href: "/faq" },
   ];
 
