@@ -21,8 +21,8 @@ export const VideoCallButton = ({
 }: VideoCallButtonProps) => {
   const { toast } = useToast();
   const [showVideoCall, setShowVideoCall] = useState(false);
-  const isUnlockedPlus = false;
-  const isUnlockedBeyond = false;
+  const isUnlockedPlus = true; // Enable for testing
+  const isUnlockedBeyond = true; // Enable for testing
 
   const hasVideoAccess = isUnlockedPlus || isUnlockedBeyond;
 
