@@ -25,7 +25,11 @@ const Auth = () => {
 
   // Only redirect if already authenticated
   useEffect(() => {
-    if (user && !showSignupFlow) {
+    // Don't redirect if we're on a password reset flow
+    const urlParams = new URLSearchParams(window.location.search);
+    const isPasswordReset = urlParams.get('type') === 'recovery';
+    
+    if (user && !showSignupFlow && !isPasswordReset) {
       // Don't interfere if user is already on profile setup page
       if (window.location.pathname === '/profile/setup') {
         return;
