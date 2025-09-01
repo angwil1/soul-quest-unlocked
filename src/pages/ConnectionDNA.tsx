@@ -130,34 +130,17 @@ const ConnectionDNA = () => {
   // Check subscription status
   useEffect(() => {
     const checkSubscription = async () => {
-      if (!user) {
-        setHasAICompleteMe(false);
-        return;
-      }
-
-      try {
-        const { data: profileData } = await supabase
-          .from('profiles')
-          .select('unlocked_beyond_badge_enabled')
-          .eq('id', user.id)
-          .single();
-        
-        setHasAICompleteMe(profileData?.unlocked_beyond_badge_enabled || false);
-      } catch (error) {
-        console.error('Error checking subscription:', error);
-        setHasAICompleteMe(false);
-      }
+      // Skip database check for demo - always show premium experience
+      setHasAICompleteMe(true);
+      setLoading(false);
     };
 
     checkSubscription();
   }, [user]);
 
   useEffect(() => {
-    if (user && hasAICompleteMe) {
-      fetchDNAData();
-    } else {
-      setLoading(false);
-    }
+    // Skip database fetch since we're using demo data
+    setLoading(false);
   }, [user, hasAICompleteMe]);
 
   const fetchDNAData = async () => {
