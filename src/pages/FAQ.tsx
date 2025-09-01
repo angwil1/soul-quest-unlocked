@@ -422,52 +422,56 @@ const FAQ = () => {
                 </div>
               </Card>
 
-              {/* Second Row - Visual & Content */}
-              <div className="grid gap-8 lg:gap-12 grid-cols-1 lg:grid-cols-2">
+              {/* Visual & Cognitive + Content & Structure - Fixed Layout */}
+              <div className="space-y-8">
                 {/* Visual & Cognitive */}
-                <Card className="p-8 lg:p-12 hover:shadow-xl transition-all duration-300 border-2">
-                  <div className="flex items-center gap-6 mb-6">
-                    <div className="w-16 h-16 lg:w-20 lg:h-20 bg-accent/20 rounded-full flex items-center justify-center flex-shrink-0">
-                      <span className="text-2xl lg:text-3xl">👁️</span>
+                <Card className="p-8 lg:p-12 hover:shadow-xl transition-all duration-300 border-2 overflow-hidden">
+                  <div className="flex flex-col lg:flex-row lg:items-start gap-6 lg:gap-8">
+                    <div className="flex items-center gap-4 lg:flex-col lg:items-center lg:text-center lg:min-w-[180px] flex-shrink-0">
+                      <div className="w-16 h-16 lg:w-20 lg:h-20 bg-accent/20 rounded-full flex items-center justify-center">
+                        <span className="text-2xl lg:text-3xl">👁️</span>
+                      </div>
+                      <h3 className="font-bold text-foreground text-xl lg:text-2xl break-words">Visual & Cognitive</h3>
                     </div>
-                    <h3 className="font-bold text-foreground text-xl lg:text-2xl">Visual & Cognitive</h3>
-                  </div>
-                  <div className="space-y-6 text-base lg:text-lg text-muted-foreground">
-                    <div>
-                      <span className="font-semibold text-foreground text-lg block mb-3">High Contrast:</span>
-                      <p className="leading-relaxed">Enhanced contrast ratios and comprehensive dark mode support</p>
-                    </div>
-                    <div>
-                      <span className="font-semibold text-foreground text-lg block mb-3">Text Scaling:</span>
-                      <p className="leading-relaxed">Browser zoom support up to 200% without horizontal scrolling</p>
-                    </div>
-                    <div>
-                      <span className="font-semibold text-foreground text-lg block mb-3">Clear Language:</span>
-                      <p className="leading-relaxed">Simple, consistent interface language and logical page structure</p>
+                    <div className="flex-1 min-w-0 space-y-6 lg:space-y-0 lg:grid lg:gap-8 lg:grid-cols-3">
+                      <div className="space-y-3 min-w-0">
+                        <span className="font-semibold text-foreground text-lg block break-words">High Contrast</span>
+                        <p className="text-base text-muted-foreground leading-relaxed break-words">Enhanced contrast ratios and comprehensive dark mode support</p>
+                      </div>
+                      <div className="space-y-3 min-w-0">
+                        <span className="font-semibold text-foreground text-lg block break-words">Text Scaling</span>
+                        <p className="text-base text-muted-foreground leading-relaxed break-words">Browser zoom support up to 200% without horizontal scrolling</p>
+                      </div>
+                      <div className="space-y-3 min-w-0">
+                        <span className="font-semibold text-foreground text-lg block break-words">Clear Language</span>
+                        <p className="text-base text-muted-foreground leading-relaxed break-words">Simple, consistent interface language and logical page structure</p>
+                      </div>
                     </div>
                   </div>
                 </Card>
 
                 {/* Content & Structure */}
-                <Card className="p-8 lg:p-12 hover:shadow-xl transition-all duration-300 border-2">
-                  <div className="flex items-center gap-6 mb-6">
-                    <div className="w-16 h-16 lg:w-20 lg:h-20 bg-primary/15 rounded-full flex items-center justify-center flex-shrink-0">
-                      <span className="text-2xl lg:text-3xl">🏗️</span>
+                <Card className="p-8 lg:p-12 hover:shadow-xl transition-all duration-300 border-2 overflow-hidden">
+                  <div className="flex flex-col lg:flex-row lg:items-start gap-6 lg:gap-8">
+                    <div className="flex items-center gap-4 lg:flex-col lg:items-center lg:text-center lg:min-w-[180px] flex-shrink-0">
+                      <div className="w-16 h-16 lg:w-20 lg:h-20 bg-primary/15 rounded-full flex items-center justify-center">
+                        <span className="text-2xl lg:text-3xl">🏗️</span>
+                      </div>
+                      <h3 className="font-bold text-foreground text-xl lg:text-2xl break-words">Content & Structure</h3>
                     </div>
-                    <h3 className="font-bold text-foreground text-xl lg:text-2xl">Content & Structure</h3>
-                  </div>
-                  <div className="space-y-6 text-base lg:text-lg text-muted-foreground">
-                    <div>
-                      <span className="font-semibold text-foreground text-lg block mb-3">Semantic HTML:</span>
-                      <p className="leading-relaxed">Proper headings hierarchy, landmarks, and comprehensive ARIA labels</p>
-                    </div>
-                    <div>
-                      <span className="font-semibold text-foreground text-lg block mb-3">Alternative Text:</span>
-                      <p className="leading-relaxed">Descriptive alt text for all images, icons, and multimedia content</p>
-                    </div>
-                    <div>
-                      <span className="font-semibold text-foreground text-lg block mb-3">Live Regions:</span>
-                      <p className="leading-relaxed">Real-time screen reader announcements for dynamic content updates</p>
+                    <div className="flex-1 min-w-0 space-y-6 lg:space-y-0 lg:grid lg:gap-8 lg:grid-cols-3">
+                      <div className="space-y-3 min-w-0">
+                        <span className="font-semibold text-foreground text-lg block break-words">Semantic HTML</span>
+                        <p className="text-base text-muted-foreground leading-relaxed break-words">Proper headings hierarchy, landmarks, and comprehensive ARIA labels</p>
+                      </div>
+                      <div className="space-y-3 min-w-0">
+                        <span className="font-semibold text-foreground text-lg block break-words">Alternative Text</span>
+                        <p className="text-base text-muted-foreground leading-relaxed break-words">Descriptive alt text for all images, icons, and multimedia content</p>
+                      </div>
+                      <div className="space-y-3 min-w-0">
+                        <span className="font-semibold text-foreground text-lg block break-words">Live Regions</span>
+                        <p className="text-base text-muted-foreground leading-relaxed break-words">Real-time screen reader announcements for dynamic content updates</p>
+                      </div>
                     </div>
                   </div>
                 </Card>
