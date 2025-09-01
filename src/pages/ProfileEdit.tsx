@@ -284,8 +284,8 @@ const ProfileEdit = () => {
                 />
               </div>
 
-              {/* Additional Photos */}
-              {profile?.photos && profile.photos.length > 0 && (
+              {/* Additional Photos - only show as grid if more than one photo */}
+              {profile?.photos && profile.photos.length > 1 && (
                 <div>
                   <h4 className="font-medium mb-2">Additional Photos</h4>
                   <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
@@ -319,6 +319,33 @@ const ProfileEdit = () => {
                         </div>
                       </div>
                     ))}
+                  </div>
+                </div>
+              )}
+              
+              {/* Single photo management - show if exactly one photo */}
+              {profile?.photos && profile.photos.length === 1 && (
+                <div>
+                  <h4 className="font-medium mb-2">Your Photo</h4>
+                  <div className="flex justify-center">
+                    <div className="relative group w-32 h-32">
+                      <img 
+                        src={profile.photos[0]} 
+                        alt="Profile photo"
+                        className="w-full h-full object-cover object-center rounded-lg border border-border"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center">
+                        <Button
+                          size="sm"
+                          variant="destructive"
+                          onClick={() => removePhoto(profile.photos[0])}
+                          className="text-xs"
+                        >
+                          <X className="h-3 w-3" />
+                        </Button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               )}
