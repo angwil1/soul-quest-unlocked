@@ -1025,10 +1025,10 @@ export type Database = {
           delivered_at: string | null
           id: string
           is_deleted: boolean | null
-          match_id: string | null
+          match_id: string
           message_text: string
           read_at: string | null
-          sender_id: string | null
+          sender_id: string
           visibility_boost: boolean | null
         }
         Insert: {
@@ -1036,10 +1036,10 @@ export type Database = {
           delivered_at?: string | null
           id?: string
           is_deleted?: boolean | null
-          match_id?: string | null
+          match_id: string
           message_text: string
           read_at?: string | null
-          sender_id?: string | null
+          sender_id: string
           visibility_boost?: boolean | null
         }
         Update: {
@@ -1047,10 +1047,10 @@ export type Database = {
           delivered_at?: string | null
           id?: string
           is_deleted?: boolean | null
-          match_id?: string | null
+          match_id?: string
           message_text?: string
           read_at?: string | null
-          sender_id?: string | null
+          sender_id?: string
           visibility_boost?: boolean | null
         }
         Relationships: [
