@@ -220,15 +220,34 @@ const Messages = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <a 
+        href="#main-content" 
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-primary-foreground px-4 py-2 rounded-md z-50"
+      >
+        Skip to main content
+      </a>
+      
       <Navbar />
-      <div className="container mx-auto p-4 max-w-6xl">
+      
+      <main 
+        id="main-content"
+        className="container mx-auto p-4 max-w-6xl"
+        role="main"
+        aria-labelledby="messages-heading"
+      >
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-4">
-            <Button variant="ghost" onClick={() => navigate('/')}>
-              <ArrowLeft className="h-4 w-4" />
+            <Button 
+              variant="ghost" 
+              onClick={() => navigate('/')}
+              className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              aria-label="Go back to homepage"
+            >
+              <ArrowLeft className="h-4 w-4" aria-hidden="true" />
             </Button>
-            <h1 className="text-3xl font-bold">Messages</h1>
+            <h1 id="messages-heading" className="text-3xl font-bold">Messages</h1>
           </div>
+          
           <div className="flex items-center gap-4">
             {/* Create Sample Matches Button for Testing */}
             <Button
@@ -258,7 +277,8 @@ const Messages = () => {
                   });
                 }
               }}
-              className="flex items-center gap-2 bg-green-50 hover:bg-green-100 text-green-700 border-green-200"
+              className="flex items-center gap-2 bg-green-50 hover:bg-green-100 text-green-700 border-green-200 focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              aria-label="Create test matches for demonstration purposes"
             >
               🧪 Create Test Matches
             </Button>
@@ -268,19 +288,25 @@ const Messages = () => {
               variant="ghost"
               size="sm"
               onClick={() => setShowAIDigest(!showAIDigest)}
-              className="flex items-center gap-2"
+              className="flex items-center gap-2 focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              aria-label={showAIDigest ? "Hide AI Digest sidebar" : "Show AI Digest sidebar"}
+              aria-expanded={showAIDigest}
             >
               {showAIDigest ? (
-                <PanelRightClose className="h-4 w-4" />
+                <PanelRightClose className="h-4 w-4" aria-hidden="true" />
               ) : (
-                <PanelRightOpen className="h-4 w-4" />
+                <PanelRightOpen className="h-4 w-4" aria-hidden="true" />
               )}
               AI Digest
             </Button>
             
             {/* Message Limits Display */}
             {!isPremium && (
-              <div className="flex items-center gap-2 px-3 py-2 bg-muted rounded-lg">
+              <div 
+                className="flex items-center gap-2 px-3 py-2 bg-muted rounded-lg"
+                role="status"
+                aria-label={`${remainingMessages} messages remaining today`}
+              >
                 <span className="text-sm font-medium">
                   {remainingMessages} messages left today
                 </span>
@@ -288,43 +314,53 @@ const Messages = () => {
                   <Button 
                     size="sm" 
                     onClick={() => navigate('/pricing')}
-                    className="ml-2"
+                    className="ml-2 focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                    aria-label="Upgrade to premium for unlimited messages"
                   >
-                    <Crown className="h-4 w-4 mr-1" />
+                    <Crown className="h-4 w-4 mr-1" aria-hidden="true" />
                     Upgrade
                   </Button>
                 )}
               </div>
             )}
             {isPremium && (
-              <div className="flex items-center gap-2 px-3 py-2 bg-primary/10 text-primary rounded-lg">
-                <Crown className="h-4 w-4" />
+              <div 
+                className="flex items-center gap-2 px-3 py-2 bg-primary/10 text-primary rounded-lg"
+                role="status"
+                aria-label="Premium user with unlimited messages"
+              >
+                <Crown className="h-4 w-4" aria-hidden="true" />
                 <span className="text-sm font-medium">Premium • Unlimited</span>
               </div>
             )}
+            
             <VideoCallButton 
               matchName="Your Match" 
               variant="default" 
               size="lg"
-              className="bg-primary text-primary-foreground font-semibold px-6 py-3 text-lg min-h-[52px]"
+              className="bg-primary text-primary-foreground font-semibold px-6 py-3 text-lg min-h-[52px] focus:ring-2 focus:ring-primary focus:ring-offset-2"
             />
           </div>
         </div>
 
         <div className={`grid gap-6 h-[600px] ${showAIDigest ? 'grid-cols-1 md:grid-cols-4' : 'grid-cols-1 md:grid-cols-3'}`}>
           {/* Matches List */}
-          <Card className="md:col-span-1">
+          <Card 
+            className="md:col-span-1"
+            role="region"
+            aria-labelledby="matches-list-title"
+          >
             <CardHeader>
-              <CardTitle>Your Matches</CardTitle>
+              <CardTitle id="matches-list-title">Your Matches</CardTitle>
             </CardHeader>
             <CardContent className="p-0">
               <ScrollArea className="h-[500px]">
                 {loading ? (
-                  <div className="p-4 text-center text-muted-foreground">
+                  <div className="p-4 text-center text-muted-foreground" role="status" aria-live="polite">
                     Loading matches...
                   </div>
                 ) : matches.length === 0 ? (
-                  <div className="p-4 text-center text-muted-foreground space-y-4">
+                  <div className="p-4 text-center text-muted-foreground space-y-4" role="region" aria-label="No matches available">
                     <p>No matches yet. Start matching to begin chatting!</p>
                     <Button 
                       onClick={async () => {
@@ -350,37 +386,55 @@ const Messages = () => {
                       }}
                       variant="outline"
                       size="sm"
+                      className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                      aria-label="Create sample matches for testing the messaging feature"
                     >
                       Create Sample Matches for Testing
                     </Button>
                   </div>
                 ) : (
-                  matches.map((match) => (
-                    <div
-                      key={match.id}
-                      className={`p-4 border-b cursor-pointer hover:bg-muted/50 transition-colors ${
-                        selectedMatch === match.id ? 'bg-muted' : ''
-                      }`}
-                      onClick={() => handleMatchSelect(match.id)}
-                    >
-                      <div className="font-medium">{match.other_user.name}</div>
-                      <div className="text-sm text-muted-foreground truncate">
-                        {match.latest_message}
+                  <div role="listbox" aria-label="Your matches" aria-activedescendant={selectedMatch ? `match-${selectedMatch}` : undefined}>
+                    {matches.map((match) => (
+                      <div
+                        key={match.id}
+                        id={`match-${match.id}`}
+                        role="option"
+                        tabIndex={0}
+                        aria-selected={selectedMatch === match.id}
+                        className={`p-4 border-b cursor-pointer hover:bg-muted/50 transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-inset ${
+                          selectedMatch === match.id ? 'bg-muted' : ''
+                        }`}
+                        onClick={() => handleMatchSelect(match.id)}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            handleMatchSelect(match.id);
+                          }
+                        }}
+                      >
+                        <div className="font-medium">{match.other_user.name}</div>
+                        <div className="text-sm text-muted-foreground truncate">
+                          {match.latest_message}
+                        </div>
+                        <div className="text-xs text-muted-foreground mt-1">
+                          {format(new Date(match.created_at), 'MMM d, h:mm a')}
+                        </div>
                       </div>
-                      <div className="text-xs text-muted-foreground mt-1">
-                        {format(new Date(match.created_at), 'MMM d, h:mm a')}
-                      </div>
-                    </div>
-                  ))
+                    ))}
+                  </div>
                 )}
               </ScrollArea>
             </CardContent>
           </Card>
 
           {/* Chat Area */}
-          <Card className={`${showAIDigest ? 'md:col-span-2' : 'md:col-span-2'}`}>
+          <Card 
+            className={`${showAIDigest ? 'md:col-span-2' : 'md:col-span-2'}`}
+            role="region"
+            aria-labelledby="chat-area-title"
+          >
             <CardHeader>
-              <CardTitle>
+              <CardTitle id="chat-area-title">
                 {selectedMatch 
                   ? matches.find(m => m.id === selectedMatch)?.other_user.name 
                   : 'Select a match to chat'}
@@ -390,12 +444,19 @@ const Messages = () => {
               {selectedMatch ? (
                 <>
                   {/* Messages */}
-                  <ScrollArea className="flex-1 mb-4">
+                  <ScrollArea 
+                    className="flex-1 mb-4"
+                    role="log"
+                    aria-label="Chat messages"
+                    aria-live="polite"
+                  >
                     <div className="space-y-4 p-4">
                       {messages.map((message) => (
                         <div
                           key={message.id}
                           className={`flex ${message.sender_id === user.id ? 'justify-end' : 'justify-start'}`}
+                          role="group"
+                          aria-label={`Message from ${message.sender_id === user.id ? 'you' : matches.find(m => m.id === selectedMatch)?.other_user.name || 'other user'} at ${format(new Date(message.created_at), 'h:mm a')}`}
                         >
                           <div
                             className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
@@ -415,7 +476,7 @@ const Messages = () => {
                   </ScrollArea>
 
                   {/* Message Input */}
-                   <div className="flex gap-2">
+                   <div className="flex gap-2" role="group" aria-label="Send message">
                      <Input
                        value={newMessage}
                        onChange={(e) => setNewMessage(e.target.value)}
@@ -431,33 +492,46 @@ const Messages = () => {
                          }
                        }}
                        disabled={!canSendMessage}
+                       className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                       aria-label="Type your message"
+                       aria-describedby="send-button"
                      />
                      <Button 
+                       id="send-button"
                        onClick={sendMessage} 
                        disabled={!canSendMessage || !newMessage.trim()}
+                       className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                       aria-label="Send message"
                      >
-                       <Send className="h-4 w-4" />
+                       <Send className="h-4 w-4" aria-hidden="true" />
                      </Button>
                    </div>
                 </>
               ) : (
                 <>
-                  <div className="flex-1 flex items-center justify-center text-muted-foreground">
+                  <div 
+                    className="flex-1 flex items-center justify-center text-muted-foreground"
+                    role="status"
+                  >
                     Select a match to start messaging
                   </div>
                   
                   {/* Message Input - Always Show */}
-                  <div className="flex gap-2">
+                  <div className="flex gap-2" role="group" aria-label="Message input (disabled)">
                     <Input
                       value={newMessage}
                       onChange={(e) => setNewMessage(e.target.value)}
                       placeholder="Select a match first to send a message..."
                       disabled={true}
+                      className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                      aria-label="Message input - select a match first"
                     />
                     <Button 
                       disabled={true}
+                      className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                      aria-label="Send message (disabled - select a match first)"
                     >
-                      <Send className="h-4 w-4" />
+                      <Send className="h-4 w-4" aria-hidden="true" />
                     </Button>
                   </div>
                 </>
@@ -467,7 +541,11 @@ const Messages = () => {
 
           {/* AI Digest Sidebar */}
           {showAIDigest && (
-            <Card className="md:col-span-1">
+            <Card 
+              className="md:col-span-1"
+              role="complementary"
+              aria-labelledby="ai-digest-title"
+            >
               <AIDigestSidebar 
                 selectedMatch={selectedMatch}
                 otherUserId={selectedMatch ? matches.find(m => m.id === selectedMatch)?.other_user.id || null : null}
@@ -476,7 +554,7 @@ const Messages = () => {
             </Card>
           )}
         </div>
-      </div>
+      </main>
     </div>
   );
 };

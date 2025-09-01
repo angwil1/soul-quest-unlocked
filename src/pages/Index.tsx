@@ -116,37 +116,59 @@ const Index = () => {
   // Always show the beautiful homepage regardless of login status
   return (
       <div className="min-h-screen bg-gradient-to-br from-background via-muted/5 to-background">
+        <a 
+          href="#main-content" 
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-primary-foreground px-4 py-2 rounded-md z-50"
+        >
+          Skip to main content
+        </a>
+        
         <Navbar />
         
         {/* Launch Banner Section - Above everything */}
-        <section className="py-4 bg-gradient-to-br from-primary/5 to-purple-500/5">
+        <section 
+          className="py-4 bg-gradient-to-br from-primary/5 to-purple-500/5"
+          role="banner"
+          aria-label="Launch announcement banner"
+        >
           <div className="max-w-2xl mx-auto px-4 md:max-w-full md:px-6 lg:px-8">
             <LaunchBanner showDismiss={true} variant="homepage" />
           </div>
         </section>
         
-        {/* EMOTIONALLY INTELLIGENT HERO DESIGN */}
-        <HeroSection />
+        <main id="main-content" role="main">
+          {/* EMOTIONALLY INTELLIGENT HERO DESIGN */}
+          <HeroSection />
 
-        {/* How It Works Section */}
-        <HowItWorks />
+          {/* How It Works Section */}
+          <HowItWorks />
 
-        {/* Ambient Couple Carousel Section */}
-        <section className="py-20 bg-gradient-to-br from-muted/20 to-background">
-          <AmbientCoupleCarousel />
-        </section>
+          {/* Ambient Couple Carousel Section */}
+          <section 
+            className="py-20 bg-gradient-to-br from-muted/20 to-background"
+            aria-labelledby="couples-section"
+          >
+            <h2 id="couples-section" className="sr-only">
+              Inspiring couple connections showcase
+            </h2>
+            <AmbientCoupleCarousel />
+          </section>
 
-        {/* Testimonials Section */}
-        <Testimonials />
+          {/* Testimonials Section */}
+          <Testimonials />
 
-        {/* Get Started Section */}
-        <GetStarted />
+          {/* Get Started Section */}
+          <GetStarted />
 
-        {/* Soulful Invitation Section */}
-        <SoulfulInvitation />
+          {/* Soulful Invitation Section */}
+          <SoulfulInvitation />
 
-        {/* Enhanced Features Section */}
-        <section className="py-20 bg-gradient-to-br from-background via-primary/5 to-purple-500/10 relative overflow-hidden">
+          {/* Enhanced Features Section */}
+          <section 
+            className="py-20 bg-gradient-to-br from-background via-primary/5 to-purple-500/10 relative overflow-hidden"
+            aria-labelledby="features-section"
+            role="region"
+          >
           {/* Background Elements */}
           <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-br from-primary/10 to-purple-500/5 rounded-full blur-xl animate-float"></div>
           <div className="absolute bottom-20 right-10 w-40 h-40 bg-gradient-to-br from-purple-500/10 to-pink-500/5 rounded-full blur-xl animate-float" style={{ animationDelay: '1s' }}></div>
@@ -191,10 +213,17 @@ const Index = () => {
             
             {/* Section Title */}
             <div className="mb-16 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-              <h2 className="text-4xl md:text-5xl font-serif font-light text-foreground mb-4">
+              <h2 
+                id="features-section"
+                className="text-4xl md:text-5xl font-serif font-light text-foreground mb-4"
+              >
                 Connection beyond the surface
               </h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              <p 
+                className="text-lg text-muted-foreground max-w-2xl mx-auto"
+                role="text"
+                aria-describedby="features-section"
+              >
                 Experience dating reimagined with emotional intelligence, authentic connections, and meaningful relationships
               </p>
             </div>
@@ -234,17 +263,29 @@ const Index = () => {
                 return (
                   <Card 
                     key={index}
-                    className={`p-8 bg-gradient-to-br ${feature.gradient} ${feature.borderColor} hover:scale-105 hover:shadow-xl transition-all duration-500 group cursor-pointer animate-fade-in`}
+                    className={`p-8 bg-gradient-to-br ${feature.gradient} ${feature.borderColor} hover:scale-105 hover:shadow-xl transition-all duration-500 group cursor-pointer animate-fade-in focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2`}
                     style={{ animationDelay: feature.delay }}
+                    tabIndex={0}
+                    role="article"
+                    aria-labelledby={`feature-title-${index}`}
                   >
                     <div className="text-center space-y-4">
-                      <div className={`inline-flex p-4 rounded-full bg-background/50 ${feature.iconColor} group-hover:scale-110 transition-transform duration-300`}>
+                      <div 
+                        className={`inline-flex p-4 rounded-full bg-background/50 ${feature.iconColor} group-hover:scale-110 transition-transform duration-300`}
+                        aria-hidden="true"
+                      >
                         <IconComponent className="h-8 w-8" />
                       </div>
-                      <h3 className="font-semibold text-lg text-foreground group-hover:text-primary transition-colors duration-300">
+                      <h3 
+                        id={`feature-title-${index}`}
+                        className="font-semibold text-lg text-foreground group-hover:text-primary transition-colors duration-300"
+                      >
                         {feature.title}
                       </h3>
-                      <p className="text-muted-foreground text-sm leading-relaxed">
+                      <p 
+                        className="text-muted-foreground text-sm leading-relaxed"
+                        role="text"
+                      >
                         {feature.description}
                       </p>
                     </div>
@@ -254,26 +295,45 @@ const Index = () => {
             </div>
 
             {/* Stats Section */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 animate-fade-in" style={{ animationDelay: '0.6s' }}>
+            <div 
+              className="grid grid-cols-2 md:grid-cols-4 gap-6 animate-fade-in" 
+              style={{ animationDelay: '0.6s' }}
+              role="region"
+              aria-label="Platform statistics"
+            >
               {[
                 { number: "NEW", label: "Platform Launch", icon: "🚀" },
                 { number: "AI", label: "Powered Matching", icon: "🧠" },
                 { number: "100%", label: "Privacy First", icon: "🔒" },
                 { number: "24/7", label: "Support", icon: "🛡️" }
               ].map((stat, index) => (
-                <div key={index} className="text-center p-4 rounded-xl bg-background/50 backdrop-blur-sm border border-border/50 hover:border-primary/30 transition-all duration-300 hover:scale-105">
-                  <div className="text-2xl mb-2">{stat.icon}</div>
-                  <div className="text-2xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent mb-1">
+                <div 
+                  key={index} 
+                  className="text-center p-4 rounded-xl bg-background/50 backdrop-blur-sm border border-border/50 hover:border-primary/30 transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                  tabIndex={0}
+                  role="article"
+                  aria-labelledby={`stat-number-${index}`}
+                  aria-describedby={`stat-label-${index}`}
+                >
+                  <div className="text-2xl mb-2" aria-hidden="true">{stat.icon}</div>
+                  <div 
+                    id={`stat-number-${index}`}
+                    className="text-2xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent mb-1"
+                  >
                     {stat.number}
                   </div>
-                  <div className="text-xs text-muted-foreground font-medium">
+                  <div 
+                    id={`stat-label-${index}`}
+                    className="text-xs text-muted-foreground font-medium"
+                  >
                     {stat.label}
                   </div>
                 </div>
               ))}
             </div>
           </div>
-        </section>
+          </section>
+        </main>
         
         <Footer />
         
