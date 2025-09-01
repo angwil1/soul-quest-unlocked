@@ -54,27 +54,43 @@ const Profile = () => {
           <div className="lg:col-span-1">
             <Card>
               <CardContent className="p-6">
-                {/* Main Photo */}
-                <div className="w-32 h-32 rounded-lg overflow-hidden bg-muted mx-auto mb-4">
-                  <img 
-                    src={profile.avatar_url || profile.photos?.[0] || profileSilhouette} 
-                    alt="Profile"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
+                {/* Single photo - compact display */}
+                {(!profile.photos || profile.photos.length <= 1) && (
+                  <div className="flex justify-center">
+                    <div className="w-24 h-24 rounded-lg overflow-hidden bg-muted">
+                      <img 
+                        src={profile.avatar_url || profile.photos?.[0] || profileSilhouette} 
+                        alt="Profile"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
+                )}
                 
-                {/* Additional Photos - only show if there are more photos */}
+                {/* Multiple photos - full layout */}
                 {profile.photos && profile.photos.length > 1 && (
-                  <div className="grid grid-cols-3 gap-2 justify-center">
-                    {profile.photos.slice(1).map((photo, index) => (
-                      <div key={index} className="w-20 h-20 rounded-lg overflow-hidden bg-muted">
-                        <img 
-                          src={photo} 
-                          alt={`Photo ${index + 2}`}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                    ))}
+                  <div className="space-y-4">
+                    {/* Main Photo */}
+                    <div className="w-32 h-32 rounded-lg overflow-hidden bg-muted mx-auto">
+                      <img 
+                        src={profile.avatar_url || profile.photos[0]} 
+                        alt="Profile"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    
+                    {/* Additional Photos */}
+                    <div className="grid grid-cols-3 gap-2 justify-center">
+                      {profile.photos.slice(1).map((photo, index) => (
+                        <div key={index} className="w-20 h-20 rounded-lg overflow-hidden bg-muted">
+                          <img 
+                            src={photo} 
+                            alt={`Photo ${index + 2}`}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 )}
               </CardContent>
