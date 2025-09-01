@@ -330,43 +330,46 @@ const FAQ = () => {
             </CardContent>
           </Card>
 
-          <section className="text-center mt-12" aria-labelledby="support-heading">
-            <h2 
-              id="support-heading"
-              className="text-2xl font-bold mb-4 text-foreground"
-            >
-              Still have questions?
-            </h2>
-            <p 
-              className="text-muted-foreground mb-6"
-              role="text"
-            >
-              Can't find what you're looking for? Contact our support team for personalized assistance.
-            </p>
-            <Button 
-              variant="outline"
-              className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
-              aria-label="Contact our support team for help with questions not covered in the FAQ"
-            >
-              Contact Support
-            </Button>
+          <section className="text-center mt-8 sm:mt-12 lg:mt-16" aria-labelledby="support-heading">
+            <div className="max-w-2xl mx-auto px-4">
+              <h2 
+                id="support-heading"
+                className="text-xl sm:text-2xl lg:text-3xl font-bold mb-4 sm:mb-6 text-foreground"
+              >
+                Still have questions?
+              </h2>
+              <p 
+                className="text-sm sm:text-base lg:text-lg text-muted-foreground mb-6 sm:mb-8 leading-relaxed"
+                role="text"
+              >
+                Can't find what you're looking for? Contact our support team for personalized assistance.
+              </p>
+              <Button 
+                variant="outline"
+                size="lg"
+                className="focus:ring-2 focus:ring-primary focus:ring-offset-2 px-6 sm:px-8 py-2 sm:py-3"
+                aria-label="Contact our support team for help with questions not covered in the FAQ"
+              >
+                Contact Support
+              </Button>
+            </div>
           </section>
 
-          <section className="mt-16 space-y-8" aria-labelledby="accessibility-comprehensive-info">
-            <div className="text-center">
+          <section className="mt-12 sm:mt-16 lg:mt-20 space-y-6 sm:space-y-8 lg:space-y-12" aria-labelledby="accessibility-comprehensive-info">
+            <div className="text-center max-w-4xl mx-auto px-4">
               <h2 
                 id="accessibility-comprehensive-info"
-                className="text-2xl font-bold mb-4 text-foreground"
+                className="text-xl sm:text-2xl lg:text-3xl font-bold mb-4 sm:mb-6 text-foreground"
               >
                 🌟 Complete Accessibility Information
               </h2>
-              <p className="text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              <p className="text-sm sm:text-base lg:text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
                 AI Complete Me is designed to be fully accessible to users with disabilities. 
                 We follow WCAG 2.1 AA guidelines and continuously improve based on your feedback.
               </p>
             </div>
             
-            <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-4 sm:gap-6 lg:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 max-w-7xl mx-auto px-4">
               {/* Navigation & Controls */}
               <Card className="p-4 sm:p-6 hover:shadow-md transition-shadow h-full">
                 <div className="flex items-start gap-3 mb-3 sm:mb-4">
@@ -465,28 +468,31 @@ const FAQ = () => {
             </div>
 
             {/* Contact Card */}
-            <Card className="p-4 sm:p-6 lg:p-8 bg-gradient-to-r from-primary/5 via-primary/10 to-accent/5 border-primary/20">
-              <div className="text-center space-y-3 sm:space-y-4">
-                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto">
-                  <span className="text-xl sm:text-2xl">💬</span>
+            <div className="max-w-4xl mx-auto px-4">
+              <Card className="p-6 sm:p-8 lg:p-12 bg-gradient-to-r from-primary/5 via-primary/10 to-accent/5 border-primary/20">
+                <div className="text-center space-y-4 sm:space-y-6 lg:space-y-8">
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto">
+                    <span className="text-2xl sm:text-3xl lg:text-4xl">💬</span>
+                  </div>
+                  <h3 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-primary">Need Help or Have Feedback?</h3>
+                  <p className="text-base sm:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+                    Contact our accessibility team at 
+                    <span className="font-semibold text-foreground"> accessibility@aicomplete.me</span> or through our accessible contact form. 
+                    We're committed to resolving accessibility barriers and providing accommodations.
+                  </p>
+                  <div className="pt-2 sm:pt-4">
+                    <Button 
+                      variant="outline" 
+                      size="lg"
+                      className="bg-background hover:bg-muted focus:ring-2 focus:ring-primary focus:ring-offset-2 text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4"
+                      aria-label="Contact accessibility team for support"
+                    >
+                      Contact Accessibility Team
+                    </Button>
+                  </div>
                 </div>
-                <h3 className="text-lg sm:text-xl font-semibold text-primary">Need Help or Have Feedback?</h3>
-                <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto px-2 leading-relaxed">
-                  Contact our accessibility team at 
-                  <span className="font-semibold text-foreground"> accessibility@aicomplete.me</span> or through our accessible contact form. 
-                  We're committed to resolving accessibility barriers and providing accommodations.
-                </p>
-                <div className="pt-1 sm:pt-2">
-                  <Button 
-                    variant="outline" 
-                    className="bg-background hover:bg-muted focus:ring-2 focus:ring-primary focus:ring-offset-2 text-sm sm:text-base px-4 sm:px-6"
-                    aria-label="Contact accessibility team for support"
-                  >
-                    Contact Accessibility Team
-                  </Button>
-                </div>
-              </div>
-            </Card>
+              </Card>
+            </div>
           </section>
         </div>
       </main>
