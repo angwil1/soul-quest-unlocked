@@ -72,8 +72,8 @@ const SampleUserProfile = () => {
             <Card>
               <CardContent className="p-6">
                 <div className="space-y-4">
-                   {/* Main Photo - Responsive */}
-                  <div className="aspect-[3/4] sm:aspect-square rounded-lg overflow-hidden bg-muted">
+                   {/* Main Photo - More reasonable size */}
+                  <div className="w-full max-w-xs mx-auto aspect-[4/5] rounded-lg overflow-hidden bg-muted">
                     <Dialog>
                       <DialogTrigger asChild>
                         <div className="relative cursor-pointer group">
@@ -98,10 +98,10 @@ const SampleUserProfile = () => {
                     </Dialog>
                   </div>
                   
-                  {/* Additional Photos - Responsive Grid */}
-                  <div className="grid grid-cols-2 gap-2 sm:grid-cols-1 sm:gap-4">
+                  {/* Additional Photos - Compact Grid */}
+                  <div className="grid grid-cols-3 gap-2 max-w-xs mx-auto">
                     {profile.photos.slice(1).map((photo, index) => (
-                      <div key={index} className="aspect-[3/4] sm:aspect-square rounded-lg overflow-hidden bg-muted">
+                      <div key={index} className="aspect-square rounded-lg overflow-hidden bg-muted">
                         <Dialog>
                           <DialogTrigger asChild>
                             <div className="relative cursor-pointer group">
@@ -112,7 +112,7 @@ const SampleUserProfile = () => {
                                 loading="lazy"
                               />
                               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
-                                <Eye className="h-6 w-6 sm:h-8 sm:w-8 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
+                                <Eye className="h-4 w-4 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
                               </div>
                             </div>
                           </DialogTrigger>
