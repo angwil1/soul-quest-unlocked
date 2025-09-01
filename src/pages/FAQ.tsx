@@ -357,134 +357,181 @@ const FAQ = () => {
 
           {/* Accessibility Information */}
           <section className="mt-16" aria-labelledby="accessibility-info">
-            <div className="max-w-4xl mx-auto">
-              <h2 
-                id="accessibility-info"
-                className="text-3xl font-bold text-center mb-8 text-foreground"
-              >
-                🌟 Accessibility Information
-              </h2>
-              <p className="text-lg text-muted-foreground text-center mb-12 max-w-3xl mx-auto">
-                AI Complete Me is designed to be fully accessible to users with disabilities. 
-                We follow WCAG 2.1 AA guidelines and continuously improve based on your feedback.
-              </p>
+            <div className="w-full max-w-4xl mx-auto px-4">
+              <div className="text-center mb-12">
+                <h2 
+                  id="accessibility-info"
+                  className="text-3xl font-bold mb-4 text-foreground"
+                >
+                  🌟 Accessibility Information
+                </h2>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                  AI Complete Me is designed to be fully accessible to users with disabilities. 
+                  We follow WCAG 2.1 AA guidelines and continuously improve based on your feedback.
+                </p>
+              </div>
 
-              <div className="space-y-6">
-                <Card className="max-w-full">
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <span>⌨️</span>
-                      Navigation & Controls
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div>
-                      <h4 className="font-semibold mb-2">Keyboard Navigation</h4>
-                      <p className="text-muted-foreground">Tab to navigate between elements, Enter or Space to activate buttons and links, Arrow keys for menu navigation</p>
-                    </div>
-                    <div>
-                      <h4 className="font-semibold mb-2">Skip Links</h4>
-                      <p className="text-muted-foreground">Jump directly to main content, bypassing repetitive navigation elements</p>
-                    </div>
-                    <div>
-                      <h4 className="font-semibold mb-2">Focus Indicators</h4>
-                      <p className="text-muted-foreground">Clear visual focus rings that show your current position on the page</p>
-                    </div>
-                  </CardContent>
-                </Card>
+              <div className="space-y-8">
+                {/* Single column layout for all accessibility cards */}
+                <div className="w-full">
+                  <Card className="w-full">
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-3 text-xl">
+                        <span className="text-2xl">⌨️</span>
+                        Navigation & Controls
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-6">
+                        <div className="space-y-2">
+                          <h4 className="font-semibold text-lg">Keyboard Navigation</h4>
+                          <p className="text-muted-foreground leading-relaxed">
+                            Tab to navigate between elements, Enter or Space to activate buttons and links, Arrow keys for menu navigation
+                          </p>
+                        </div>
+                        <div className="space-y-2">
+                          <h4 className="font-semibold text-lg">Skip Links</h4>
+                          <p className="text-muted-foreground leading-relaxed">
+                            Jump directly to main content, bypassing repetitive navigation elements
+                          </p>
+                        </div>
+                        <div className="space-y-2">
+                          <h4 className="font-semibold text-lg">Focus Indicators</h4>
+                          <p className="text-muted-foreground leading-relaxed">
+                            Clear visual focus rings that show your current position on the page
+                          </p>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
 
-                <Card className="max-w-full">
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <span>🔊</span>
-                      Assistive Technology
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div>
-                      <h4 className="font-semibold mb-2">Screen Readers</h4>
-                      <p className="text-muted-foreground">Full compatibility with NVDA, JAWS, VoiceOver, and TalkBack screen readers</p>
-                    </div>
-                    <div>
-                      <h4 className="font-semibold mb-2">Voice Control</h4>
-                      <p className="text-muted-foreground">Works seamlessly with Dragon NaturallySpeaking and Voice Control software</p>
-                    </div>
-                    <div>
-                      <h4 className="font-semibold mb-2">Switch Navigation</h4>
-                      <p className="text-muted-foreground">Compatible with switch devices, eye-tracking systems, and alternative input methods</p>
-                    </div>
-                  </CardContent>
-                </Card>
+                <div className="w-full">
+                  <Card className="w-full">
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-3 text-xl">
+                        <span className="text-2xl">🔊</span>
+                        Assistive Technology
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-6">
+                        <div className="space-y-2">
+                          <h4 className="font-semibold text-lg">Screen Readers</h4>
+                          <p className="text-muted-foreground leading-relaxed">
+                            Full compatibility with NVDA, JAWS, VoiceOver, and TalkBack screen readers
+                          </p>
+                        </div>
+                        <div className="space-y-2">
+                          <h4 className="font-semibold text-lg">Voice Control</h4>
+                          <p className="text-muted-foreground leading-relaxed">
+                            Works seamlessly with Dragon NaturallySpeaking and Voice Control software
+                          </p>
+                        </div>
+                        <div className="space-y-2">
+                          <h4 className="font-semibold text-lg">Switch Navigation</h4>
+                          <p className="text-muted-foreground leading-relaxed">
+                            Compatible with switch devices, eye-tracking systems, and alternative input methods
+                          </p>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
 
-                <Card className="max-w-full">
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <span>👁️</span>
-                      Visual & Cognitive
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div>
-                      <h4 className="font-semibold mb-2">High Contrast</h4>
-                      <p className="text-muted-foreground">Enhanced contrast ratios and comprehensive dark mode support</p>
-                    </div>
-                    <div>
-                      <h4 className="font-semibold mb-2">Text Scaling</h4>
-                      <p className="text-muted-foreground">Browser zoom support up to 200% without horizontal scrolling</p>
-                    </div>
-                    <div>
-                      <h4 className="font-semibold mb-2">Clear Language</h4>
-                      <p className="text-muted-foreground">Simple, consistent interface language and logical page structure</p>
-                    </div>
-                  </CardContent>
-                </Card>
+                <div className="w-full">
+                  <Card className="w-full">
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-3 text-xl">
+                        <span className="text-2xl">👁️</span>
+                        Visual & Cognitive Support
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-6">
+                        <div className="space-y-2">
+                          <h4 className="font-semibold text-lg">High Contrast</h4>
+                          <p className="text-muted-foreground leading-relaxed">
+                            Enhanced contrast ratios and comprehensive dark mode support
+                          </p>
+                        </div>
+                        <div className="space-y-2">
+                          <h4 className="font-semibold text-lg">Text Scaling</h4>
+                          <p className="text-muted-foreground leading-relaxed">
+                            Browser zoom support up to 200% without horizontal scrolling
+                          </p>
+                        </div>
+                        <div className="space-y-2">
+                          <h4 className="font-semibold text-lg">Clear Language</h4>
+                          <p className="text-muted-foreground leading-relaxed">
+                            Simple, consistent interface language and logical page structure
+                          </p>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
 
-                <Card className="max-w-full">
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <span>🏗️</span>
-                      Content & Structure
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div>
-                      <h4 className="font-semibold mb-2">Semantic HTML</h4>
-                      <p className="text-muted-foreground">Proper headings hierarchy, landmarks, and comprehensive ARIA labels</p>
-                    </div>
-                    <div>
-                      <h4 className="font-semibold mb-2">Alternative Text</h4>
-                      <p className="text-muted-foreground">Descriptive alt text for all images, icons, and multimedia content</p>
-                    </div>
-                    <div>
-                      <h4 className="font-semibold mb-2">Live Regions</h4>
-                      <p className="text-muted-foreground">Real-time screen reader announcements for dynamic content updates</p>
-                    </div>
-                  </CardContent>
-                </Card>
+                <div className="w-full">
+                  <Card className="w-full">
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-3 text-xl">
+                        <span className="text-2xl">🏗️</span>
+                        Content & Structure
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-6">
+                        <div className="space-y-2">
+                          <h4 className="font-semibold text-lg">Semantic HTML</h4>
+                          <p className="text-muted-foreground leading-relaxed">
+                            Proper headings hierarchy, landmarks, and comprehensive ARIA labels
+                          </p>
+                        </div>
+                        <div className="space-y-2">
+                          <h4 className="font-semibold text-lg">Alternative Text</h4>
+                          <p className="text-muted-foreground leading-relaxed">
+                            Descriptive alt text for all images, icons, and multimedia content
+                          </p>
+                        </div>
+                        <div className="space-y-2">
+                          <h4 className="font-semibold text-lg">Live Regions</h4>
+                          <p className="text-muted-foreground leading-relaxed">
+                            Real-time screen reader announcements for dynamic content updates
+                          </p>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
               </div>
 
               {/* Contact Card */}
-              <Card className="mt-12 bg-gradient-to-r from-primary/5 to-accent/5 border-primary/20">
-                <CardContent className="p-8 text-center">
-                  <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                    <span className="text-2xl">💬</span>
-                  </div>
-                  <h3 className="text-2xl font-semibold text-primary mb-4">Need Help or Have Feedback?</h3>
-                  <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-                    Contact our accessibility team at 
-                    <span className="font-semibold text-foreground"> accessibility@aicomplete.me</span> or through our accessible contact form. 
-                    We're committed to resolving accessibility barriers and providing accommodations.
-                  </p>
-                  <Button 
-                    variant="outline" 
-                    size="lg"
-                    className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
-                    aria-label="Contact accessibility team for support"
-                  >
-                    Contact Accessibility Team
-                  </Button>
-                </CardContent>
-              </Card>
+              <div className="w-full mt-12">
+                <Card className="bg-gradient-to-r from-primary/5 to-accent/5 border-primary/20">
+                  <CardContent className="p-8 text-center">
+                    <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                      <span className="text-2xl">💬</span>
+                    </div>
+                    <h3 className="text-2xl font-semibold text-primary mb-4">Need Help or Have Feedback?</h3>
+                    <div className="max-w-2xl mx-auto mb-6">
+                      <p className="text-muted-foreground">
+                        Contact our accessibility team at{' '}
+                        <span className="font-semibold text-foreground">accessibility@aicomplete.me</span>{' '}
+                        or through our accessible contact form. We're committed to resolving accessibility barriers and providing accommodations.
+                      </p>
+                    </div>
+                    <Button 
+                      variant="outline" 
+                      size="lg"
+                      className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                      aria-label="Contact accessibility team for support"
+                    >
+                      Contact Accessibility Team
+                    </Button>
+                  </CardContent>
+                </Card>
+              </div>
             </div>
           </section>
         </div>
