@@ -202,22 +202,39 @@ export const ProfileSetupFlow: React.FC = () => {
   };
 
   const validateStep = () => {
-    switch (currentStep) {
-      case 1:
-        return profileData.name && profileData.age && profileData.location;
-      case 2:
-        return profileData.bio.length >= 50;
-      case 3:
-        return profileData.interests.length >= 3;
-      case 4:
-        return profileData.photos.length >= 2;
-      case 5:
-        return Object.keys(profileData.personality).length >= personalityQuestions.length;
-      case 6:
-        return profileData.values.length >= 3;
-      default:
-        return true;
-    }
+    const isValid = (() => {
+      switch (currentStep) {
+        case 1:
+          return profileData.name && profileData.age && profileData.location;
+        case 2:
+          return profileData.bio.length >= 50;
+        case 3:
+          return profileData.interests.length >= 3;
+        case 4:
+          return profileData.photos.length >= 2;
+        case 5:
+          return Object.keys(profileData.personality).length >= personalityQuestions.length;
+        case 6:
+          return profileData.values.length >= 3;
+        default:
+          return true;
+      }
+    })();
+    
+    // Debug logging
+    console.log('Profile Setup Debug:', {
+      currentStep,
+      isValid,
+      profileData: {
+        bioLength: profileData.bio.length,
+        interestsCount: profileData.interests.length,
+        photosCount: profileData.photos.length,
+        personalityAnswers: Object.keys(profileData.personality).length,
+        valuesCount: profileData.values.length
+      }
+    });
+    
+    return isValid;
   };
 
   const handleComplete = async () => {
@@ -334,8 +351,10 @@ export const ProfileSetupFlow: React.FC = () => {
                 className="mt-1 min-h-[120px]"
                 maxLength={500}
               />
-              <div className="text-right text-sm text-muted-foreground mt-1">
-                {profileData.bio.length}/500 characters (minimum 50)
+              <div className="text-right text-sm mt-1">
+                <span className={profileData.bio.length >= 50 ? "text-green-600" : "text-muted-foreground"}>
+                  {profileData.bio.length}/500 characters (minimum 50 required)
+                </span>
               </div>
             </div>
 
