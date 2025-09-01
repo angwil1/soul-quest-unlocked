@@ -43,7 +43,7 @@ const AIDigest = () => {
         <div className="p-4 max-w-4xl mx-auto">
           <div className="mb-8">
             <h1 className="text-3xl font-bold flex items-center gap-3 mb-2">
-              <Crown className="h-8 w-8 text-primary" />
+              <Crown className="h-8 w-8 text-primary" aria-hidden="true" />
               AI Digest Summaries
               <Badge variant="secondary" className="ml-2">Preview</Badge>
             </h1>
@@ -54,23 +54,33 @@ const AIDigest = () => {
 
           {/* Demo Content */}
           <Tabs defaultValue="today" className="w-full">
-            <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="today" className="flex items-center gap-2">
-                <Clock className="h-4 w-4" />
+            <TabsList className="grid w-full grid-cols-2" role="tablist" aria-label="AI Digest sections">
+              <TabsTrigger 
+                value="today" 
+                className="flex items-center gap-2 focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                role="tab"
+                aria-controls="today-panel"
+              >
+                <Clock className="h-4 w-4" aria-hidden="true" />
                 Today's Digest
               </TabsTrigger>
-              <TabsTrigger value="history" className="flex items-center gap-2">
-                <Calendar className="h-4 w-4" />
+              <TabsTrigger 
+                value="history" 
+                className="flex items-center gap-2 focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                role="tab"
+                aria-controls="history-panel"
+              >
+                <Calendar className="h-4 w-4" aria-hidden="true" />
                 History
               </TabsTrigger>
             </TabsList>
 
-            <TabsContent value="today" className="space-y-6">
+            <TabsContent value="today" className="space-y-6" role="tabpanel" id="today-panel">
               {/* Demo Notice */}
               <Card className="border-primary/20 bg-gradient-to-r from-primary/5 to-background">
                 <CardContent className="pt-6">
                   <div className="flex items-center gap-2 text-primary mb-2">
-                    <Sparkles className="h-5 w-5" />
+                    <Sparkles className="h-5 w-5" aria-hidden="true" />
                     <span className="font-medium">Preview Mode</span>
                   </div>
                   <p className="text-sm text-muted-foreground">
@@ -80,61 +90,65 @@ const AIDigest = () => {
               </Card>
 
               {/* Demo Greeting */}
-              <Card className="bg-gradient-to-br from-primary/5 to-background border-primary/20">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Sparkles className="h-5 w-5 text-primary" />
-                    Daily Greeting
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-lg leading-relaxed">
-                    Good morning! You've been making some wonderful connections lately. Your authentic communication style is really resonating with matches who share your love for adventure and meaningful conversations. Today looks especially promising!
-                  </p>
-                </CardContent>
-              </Card>
+              <section aria-labelledby="greeting-heading">
+                <Card className="bg-gradient-to-br from-primary/5 to-background border-primary/20">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2" id="greeting-heading">
+                      <Sparkles className="h-5 w-5 text-primary" aria-hidden="true" />
+                      Daily Greeting
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-lg leading-relaxed">
+                      Good morning! You've been making some wonderful connections lately. Your authentic communication style is really resonating with matches who share your love for adventure and meaningful conversations. Today looks especially promising!
+                    </p>
+                  </CardContent>
+                </Card>
+              </section>
 
               {/* Demo New Compatible Profiles */}
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Users className="h-5 w-5 text-primary" />
-                    New Compatible Profiles
-                  </CardTitle>
-                  <CardDescription>
-                    Fresh matches with high compatibility potential
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="p-4 border rounded-lg">
-                    <div className="flex justify-between items-start mb-2">
-                      <h4 className="font-semibold">Alex M.</h4>
-                      <Badge variant="secondary">92% match</Badge>
+              <section aria-labelledby="profiles-heading">
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2" id="profiles-heading">
+                      <Users className="h-5 w-5 text-primary" aria-hidden="true" />
+                      New Compatible Profiles
+                    </CardTitle>
+                    <CardDescription>
+                      Fresh matches with high compatibility potential
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="p-4 border rounded-lg" tabIndex={0} role="article" aria-labelledby="alex-profile">
+                      <div className="flex justify-between items-start mb-2">
+                        <h4 className="font-semibold" id="alex-profile">Alex M.</h4>
+                        <Badge variant="secondary" aria-label="92 percent compatibility match">92% match</Badge>
+                      </div>
+                      <p className="text-sm text-muted-foreground">
+                        Shares your passion for hiking and photography. Both value deep conversations and personal growth. Strong compatibility in communication styles and life goals.
+                      </p>
                     </div>
-                    <p className="text-sm text-muted-foreground">
-                      Shares your passion for hiking and photography. Both value deep conversations and personal growth. Strong compatibility in communication styles and life goals.
-                    </p>
-                  </div>
-                  <div className="p-4 border rounded-lg">
-                    <div className="flex justify-between items-start mb-2">
-                      <h4 className="font-semibold">Jordan K.</h4>
-                      <Badge variant="secondary">87% match</Badge>
+                    <div className="p-4 border rounded-lg" tabIndex={0} role="article" aria-labelledby="jordan-profile">
+                      <div className="flex justify-between items-start mb-2">
+                        <h4 className="font-semibold" id="jordan-profile">Jordan K.</h4>
+                        <Badge variant="secondary" aria-label="87 percent compatibility match">87% match</Badge>
+                      </div>
+                      <p className="text-sm text-muted-foreground">
+                        Fellow book lover and coffee enthusiast. Your humor styles align perfectly, and you both prioritize work-life balance and family values.
+                      </p>
                     </div>
-                    <p className="text-sm text-muted-foreground">
-                      Fellow book lover and coffee enthusiast. Your humor styles align perfectly, and you both prioritize work-life balance and family values.
-                    </p>
-                  </div>
-                  <div className="p-4 border rounded-lg">
-                    <div className="flex justify-between items-start mb-2">
-                      <h4 className="font-semibold">Casey R.</h4>
-                      <Badge variant="secondary">84% match</Badge>
+                    <div className="p-4 border rounded-lg" tabIndex={0} role="article" aria-labelledby="casey-profile">
+                      <div className="flex justify-between items-start mb-2">
+                        <h4 className="font-semibold" id="casey-profile">Casey R.</h4>
+                        <Badge variant="secondary" aria-label="84 percent compatibility match">84% match</Badge>
+                      </div>
+                      <p className="text-sm text-muted-foreground">
+                        Creative type who loves art museums and live music. Your adventurous spirits are well-matched, with complementary personality traits.
+                      </p>
                     </div>
-                    <p className="text-sm text-muted-foreground">
-                      Creative type who loves art museums and live music. Your adventurous spirits are well-matched, with complementary personality traits.
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
+              </section>
 
               {/* Demo AI Insights */}
               <Card>

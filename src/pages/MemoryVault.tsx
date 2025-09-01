@@ -291,96 +291,125 @@ const MemoryVault = () => {
       
       <div className="container mx-auto px-4 pt-20 pb-8 max-w-4xl">
         {/* Simple Header */}
-        <div className="text-center mb-8">
+        <header className="text-center mb-8">
           <h1 className="text-3xl font-bold mb-2">My Saved Items</h1>
           <p className="text-muted-foreground">Your favorite moments, conversations, and connections</p>
-        </div>
+        </header>
 
         {/* Simple Add Button */}
         <div className="flex justify-center mb-6">
           <Dialog>
             <DialogTrigger asChild>
-              <Button size="lg">
-                <Plus className="h-4 w-4 mr-2" />
+              <Button 
+                size="lg"
+                aria-describedby="add-moment-description"
+                className="focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+              >
+                <Plus className="h-4 w-4 mr-2" aria-hidden="true" />
                 Save a Moment
               </Button>
             </DialogTrigger>
-            <DialogContent>
+            <div id="add-moment-description" className="sr-only">
+              Opens a dialog to save a new memory or moment to your vault
+            </div>
+            <DialogContent role="dialog" aria-labelledby="add-moment-title" aria-describedby="add-moment-desc">
               <DialogHeader>
-                <DialogTitle>Save a Moment</DialogTitle>
-                <DialogDescription>What would you like to remember?</DialogDescription>
+                <DialogTitle id="add-moment-title">Save a Moment</DialogTitle>
+                <DialogDescription id="add-moment-desc">What would you like to remember?</DialogDescription>
               </DialogHeader>
               <div className="space-y-4">
                 <Input
                   placeholder="What happened?"
                   value={newMoment.title}
                   onChange={(e) => setNewMoment({...newMoment, title: e.target.value})}
+                  aria-label="Moment title"
+                  className="focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                 />
                 <Textarea
                   placeholder="Tell me more about it..."
                   value={newMoment.description}
                   onChange={(e) => setNewMoment({...newMoment, description: e.target.value})}
+                  aria-label="Moment description"
+                  className="focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                 />
-                <Button onClick={addMoment} className="w-full">
+                <Button 
+                  onClick={addMoment} 
+                  className="w-full focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                  aria-describedby="save-button-help"
+                >
                   Save It
                 </Button>
+                <div id="save-button-help" className="sr-only">
+                  Saves your moment to the memory vault for future reference
+                </div>
               </div>
             </DialogContent>
           </Dialog>
         </div>
 
         {/* Simple List */}
-        <div className="space-y-4">
+        <main className="space-y-4">
           {/* Moments */}
           {moments.length > 0 && (
-            <div>
-              <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                <Star className="h-5 w-5" />
+            <section aria-labelledby="moments-heading">
+              <h2 id="moments-heading" className="text-xl font-semibold mb-4 flex items-center gap-2">
+                <Star className="h-5 w-5" aria-hidden="true" />
                 My Moments
+                <span className="sr-only">({moments.length} saved moments)</span>
               </h2>
-              <div className="space-y-3">
+              <div className="space-y-3" role="list" aria-label="Saved moments">
                 {moments.map((moment) => (
-                  <Card key={moment.id} className="hover:shadow-md transition-shadow">
+                  <Card key={moment.id} className="hover:shadow-md transition-shadow" role="listitem">
                     <CardContent className="p-4">
                       <div className="flex justify-between items-start">
                         <div className="flex-1">
-                          <h3 className="font-medium mb-1">{moment.title}</h3>
+                          <h3 className="font-medium mb-1" id={`moment-${moment.id}`}>{moment.title}</h3>
                           {moment.description && (
-                            <p className="text-sm text-muted-foreground">{moment.description}</p>
+                            <p className="text-sm text-muted-foreground" aria-describedby={`moment-${moment.id}`}>
+                              {moment.description}
+                            </p>
                           )}
                         </div>
                         <Button
                           variant="ghost"
                           size="sm"
                           onClick={() => deleteItem('memory_vault_moments', moment.id)}
-                          className="ml-2"
+                          className="ml-2 focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                          aria-label={`Delete moment "${moment.title}"`}
+                          aria-describedby="delete-help"
                         >
-                          <Trash2 className="h-4 w-4" />
+                          <Trash2 className="h-4 w-4" aria-hidden="true" />
                         </Button>
                       </div>
                     </CardContent>
                   </Card>
                 ))}
               </div>
-            </div>
+              <div id="delete-help" className="sr-only">
+                Clicking delete will permanently remove this item from your memory vault
+              </div>
+            </section>
           )}
 
           {/* Conversation Starters */}
           {prompts.length > 0 && (
-            <div>
-              <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                <MessageSquare className="h-5 w-5" />
+            <section aria-labelledby="prompts-heading">
+              <h2 id="prompts-heading" className="text-xl font-semibold mb-4 flex items-center gap-2">
+                <MessageSquare className="h-5 w-5" aria-hidden="true" />
                 Conversation Starters
+                <span className="sr-only">({prompts.length} saved conversation starters)</span>
               </h2>
-              <div className="space-y-3">
+              <div className="space-y-3" role="list" aria-label="Saved conversation starters">
                 {prompts.map((prompt) => (
-                  <Card key={prompt.id} className="hover:shadow-md transition-shadow">
+                  <Card key={prompt.id} className="hover:shadow-md transition-shadow" role="listitem">
                     <CardContent className="p-4">
                       <div className="flex justify-between items-start">
                         <div className="flex-1">
-                          <p className="font-medium mb-1">"{prompt.prompt_text}"</p>
+                          <p className="font-medium mb-1" id={`prompt-${prompt.id}`}>
+                            "{prompt.prompt_text}"
+                          </p>
                           {prompt.response_text && (
-                            <p className="text-sm text-muted-foreground italic">
+                            <p className="text-sm text-muted-foreground italic" aria-describedby={`prompt-${prompt.id}`}>
                               Sample: {prompt.response_text}
                             </p>
                           )}
@@ -389,33 +418,37 @@ const MemoryVault = () => {
                           variant="ghost"
                           size="sm"
                           onClick={() => deleteItem('memory_vault_prompts', prompt.id)}
-                          className="ml-2"
+                          className="ml-2 focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                          aria-label={`Delete conversation starter "${prompt.prompt_text}"`}
                         >
-                          <Trash2 className="h-4 w-4" />
+                          <Trash2 className="h-4 w-4" aria-hidden="true" />
                         </Button>
                       </div>
                     </CardContent>
                   </Card>
                 ))}
               </div>
-            </div>
+            </section>
           )}
 
           {/* Saved Profiles */}
           {matches.length > 0 && (
-            <div>
-              <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                <Heart className="h-5 w-5" />
+            <section aria-labelledby="profiles-heading">
+              <h2 id="profiles-heading" className="text-xl font-semibold mb-4 flex items-center gap-2">
+                <Heart className="h-5 w-5" aria-hidden="true" />
                 Saved Profiles
+                <span className="sr-only">({matches.length} saved profiles)</span>
               </h2>
-              <div className="space-y-3">
+              <div className="space-y-3" role="list" aria-label="Saved profiles">
                 {matches.map((match) => (
-                  <Card key={match.id} className="hover:shadow-md transition-shadow">
+                  <Card key={match.id} className="hover:shadow-md transition-shadow" role="listitem">
                     <CardContent className="p-4">
                       <div className="flex justify-between items-start">
                         <div className="flex-1">
-                          <h3 className="font-medium mb-1">{match.notes.split(' - ')[0]}</h3>
-                          <p className="text-sm text-muted-foreground">
+                          <h3 className="font-medium mb-1" id={`profile-${match.id}`}>
+                            {match.notes.split(' - ')[0]}
+                          </h3>
+                          <p className="text-sm text-muted-foreground" aria-describedby={`profile-${match.id}`}>
                             {match.notes.includes(' - ') ? match.notes.split(' - ').slice(1).join(' - ') : match.notes}
                           </p>
                         </div>
@@ -423,48 +456,55 @@ const MemoryVault = () => {
                           variant="ghost"
                           size="sm"
                           onClick={() => deleteItem('memory_vault_matches', match.id)}
-                          className="ml-2"
+                          className="ml-2 focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                          aria-label={`Delete saved profile "${match.notes.split(' - ')[0]}"`}
                         >
-                          <Trash2 className="h-4 w-4" />
+                          <Trash2 className="h-4 w-4" aria-hidden="true" />
                         </Button>
                       </div>
                     </CardContent>
                   </Card>
                 ))}
               </div>
-            </div>
+            </section>
           )}
 
           {/* Empty State */}
           {moments.length === 0 && prompts.length === 0 && matches.length === 0 && (
             <Card>
               <CardContent className="text-center py-12">
-                <div className="text-4xl mb-4">💫</div>
+                <div className="text-4xl mb-4" role="img" aria-label="Star emoji">💫</div>
                 <h3 className="text-lg font-semibold mb-2">Start saving your special moments</h3>
                 <p className="text-muted-foreground mb-4">
                   Keep track of great conversations, connections, and memories
                 </p>
                 <Dialog>
                   <DialogTrigger asChild>
-                    <Button>Save Your First Moment</Button>
+                    <Button className="focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                      Save Your First Moment
+                    </Button>
                   </DialogTrigger>
-                  <DialogContent>
+                  <DialogContent role="dialog" aria-labelledby="empty-moment-title" aria-describedby="empty-moment-desc">
                     <DialogHeader>
-                      <DialogTitle>Save a Moment</DialogTitle>
-                      <DialogDescription>What would you like to remember?</DialogDescription>
+                      <DialogTitle id="empty-moment-title">Save a Moment</DialogTitle>
+                      <DialogDescription id="empty-moment-desc">What would you like to remember?</DialogDescription>
                     </DialogHeader>
                     <div className="space-y-4">
                       <Input
                         placeholder="What happened?"
                         value={newMoment.title}
                         onChange={(e) => setNewMoment({...newMoment, title: e.target.value})}
+                        aria-label="Moment title"
+                        className="focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                       />
                       <Textarea
                         placeholder="Tell me more about it..."
                         value={newMoment.description}
                         onChange={(e) => setNewMoment({...newMoment, description: e.target.value})}
+                        aria-label="Moment description"
+                        className="focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                       />
-                      <Button onClick={addMoment} className="w-full">
+                      <Button onClick={addMoment} className="w-full focus:ring-2 focus:ring-offset-2 focus:ring-primary">
                         Save It
                       </Button>
                     </div>
@@ -473,7 +513,7 @@ const MemoryVault = () => {
               </CardContent>
             </Card>
           )}
-        </div>
+        </main>
       </div>
     </div>
   );
