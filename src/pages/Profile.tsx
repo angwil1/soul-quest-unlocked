@@ -9,12 +9,21 @@ import { Progress } from '@/components/ui/progress';
 import profileSilhouette from '@/assets/profile-silhouette.jpg';
 import { useProfile } from '@/hooks/useProfile';
 import { PageLoadingSkeleton } from '@/components/LoadingSkeleton';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useAuth } from '@/hooks/useAuth';
 
 const Profile = () => {
   const navigate = useNavigate();
+  const { user, loading: authLoading } = useAuth();
   const { profile, loading } = useProfile();
   const [isShareMenuOpen, setIsShareMenuOpen] = useState(false);
+
+  // Redirect to auth if not logged in
+  useEffect(() => {
+    if (!authLoading && !user) {
+      navigate('/auth');
+    }
+  }, [authLoading, user, navigate]);
 
   // Calculate profile completion percentage
   const calculateProfileCompletion = () => {
@@ -47,8 +56,13 @@ const Profile = () => {
     }
   };
 
-  if (loading) {
+  if (authLoading || loading) {
     return <PageLoadingSkeleton />;
+  }
+
+  // Don't render anything if redirecting to auth
+  if (!user) {
+    return null;
   }
 
   if (!profile) {

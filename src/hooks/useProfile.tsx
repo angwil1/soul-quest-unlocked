@@ -44,6 +44,10 @@ export const useProfile = () => {
   useEffect(() => {
     if (user) {
       fetchProfile();
+    } else if (!user) {
+      // Clear loading state when there's no user
+      setLoading(false);
+      setProfile(null);
     }
   }, [user]);
 
