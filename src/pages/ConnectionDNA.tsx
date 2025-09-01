@@ -48,13 +48,13 @@ const ConnectionDNA = () => {
   const [insights, setInsights] = useState<DNAInsight[]>([]);
   const [loading, setLoading] = useState(true);
   const [analyzing, setAnalyzing] = useState(false);
-  const [isUnlockedBeyond, setIsUnlockedBeyond] = useState(false);
+  const [hasAICompleteMe, setHasAICompleteMe] = useState(false);
 
   // Check subscription status
   useEffect(() => {
     const checkSubscription = async () => {
       if (!user) {
-        setIsUnlockedBeyond(false);
+        setHasAICompleteMe(false);
         return;
       }
 
@@ -65,10 +65,10 @@ const ConnectionDNA = () => {
           .eq('id', user.id)
           .single();
         
-        setIsUnlockedBeyond(profileData?.unlocked_beyond_badge_enabled || false);
+        setHasAICompleteMe(profileData?.unlocked_beyond_badge_enabled || false);
       } catch (error) {
         console.error('Error checking subscription:', error);
-        setIsUnlockedBeyond(false);
+        setHasAICompleteMe(false);
       }
     };
 
@@ -76,12 +76,12 @@ const ConnectionDNA = () => {
   }, [user]);
 
   useEffect(() => {
-    if (user && isUnlockedBeyond) {
+    if (user && hasAICompleteMe) {
       fetchDNAData();
     } else {
       setLoading(false);
     }
-  }, [user, isUnlockedBeyond]);
+  }, [user, hasAICompleteMe]);
 
   const fetchDNAData = async () => {
     try {
@@ -192,7 +192,7 @@ const ConnectionDNA = () => {
     );
   }
 
-  if (!isUnlockedBeyond) {
+  if (!hasAICompleteMe) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-secondary/5">
         <Navbar />
@@ -201,7 +201,7 @@ const ConnectionDNA = () => {
             <div className="text-6xl mb-6">🧬</div>
             <h1 className="text-4xl font-bold mb-4">Connection DNA</h1>
             <p className="text-xl text-muted-foreground mb-8">
-              Connection DNA is part of Complete Beyond. Upgrade to explore your evolving compatibility profile.
+              Connection DNA is part of AI Complete Me. Upgrade to explore your evolving compatibility profile.
             </p>
             <div className="bg-card rounded-lg p-6 mb-8">
               <h3 className="text-lg font-semibold mb-4">What Connection DNA reveals:</h3>
@@ -230,7 +230,7 @@ const ConnectionDNA = () => {
             </div>
             <Button onClick={() => window.location.href = '/pricing'} size="lg">
               <Crown className="h-4 w-4 mr-2" />
-              Upgrade to Complete Beyond
+              Upgrade to AI Complete Me
             </Button>
           </div>
         </div>
