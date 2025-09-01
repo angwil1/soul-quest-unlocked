@@ -369,102 +369,108 @@ const FAQ = () => {
               </p>
             </div>
             
-            <div className="grid gap-6 sm:gap-8 lg:gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 max-w-7xl mx-auto px-4">
-              {/* Navigation & Controls */}
-              <Card className="p-6 sm:p-8 lg:p-10 hover:shadow-lg transition-shadow h-full">
-                <div className="flex items-start gap-4 mb-4 sm:mb-6">
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
-                    <span className="text-lg sm:text-xl lg:text-2xl">⌨️</span>
+            <div className="max-w-6xl mx-auto px-4 space-y-8">
+              {/* First Row - Navigation & Assistive Tech */}
+              <div className="grid gap-8 lg:gap-12 grid-cols-1 lg:grid-cols-2">
+                {/* Navigation & Controls */}
+                <Card className="p-8 lg:p-12 hover:shadow-xl transition-all duration-300 border-2">
+                  <div className="flex items-center gap-6 mb-6">
+                    <div className="w-16 h-16 lg:w-20 lg:h-20 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+                      <span className="text-2xl lg:text-3xl">⌨️</span>
+                    </div>
+                    <h3 className="font-bold text-foreground text-xl lg:text-2xl">Navigation & Controls</h3>
                   </div>
-                  <h3 className="font-semibold text-foreground text-base sm:text-lg lg:text-xl break-words">Navigation & Controls</h3>
-                </div>
-                <div className="space-y-4 sm:space-y-5 text-sm sm:text-base text-muted-foreground">
-                  <div>
-                    <span className="font-medium text-foreground text-sm sm:text-base block mb-2">Keyboard Navigation:</span>
-                    <p className="leading-relaxed break-words">Tab to navigate, Enter/Space to activate, Arrow keys in menus</p>
+                  <div className="space-y-6 text-base lg:text-lg text-muted-foreground">
+                    <div>
+                      <span className="font-semibold text-foreground text-lg block mb-3">Keyboard Navigation:</span>
+                      <p className="leading-relaxed">Tab to navigate between elements, Enter or Space to activate buttons and links, Arrow keys for menu navigation</p>
+                    </div>
+                    <div>
+                      <span className="font-semibold text-foreground text-lg block mb-3">Skip Links:</span>
+                      <p className="leading-relaxed">Jump directly to main content, bypassing repetitive navigation elements</p>
+                    </div>
+                    <div>
+                      <span className="font-semibold text-foreground text-lg block mb-3">Focus Indicators:</span>
+                      <p className="leading-relaxed">Clear visual focus rings that show your current position on the page</p>
+                    </div>
                   </div>
-                  <div>
-                    <span className="font-medium text-foreground text-sm sm:text-base block mb-2">Skip Links:</span>
-                    <p className="leading-relaxed break-words">Jump directly to main content, bypassing navigation</p>
+                </Card>
+
+                {/* Assistive Technology */}
+                <Card className="p-8 lg:p-12 hover:shadow-xl transition-all duration-300 border-2">
+                  <div className="flex items-center gap-6 mb-6">
+                    <div className="w-16 h-16 lg:w-20 lg:h-20 bg-secondary/20 rounded-full flex items-center justify-center flex-shrink-0">
+                      <span className="text-2xl lg:text-3xl">🔊</span>
+                    </div>
+                    <h3 className="font-bold text-foreground text-xl lg:text-2xl">Assistive Technology</h3>
                   </div>
-                  <div>
-                    <span className="font-medium text-foreground text-sm sm:text-base block mb-2">Focus Indicators:</span>
-                    <p className="leading-relaxed break-words">Clear visual focus rings show your current position</p>
+                  <div className="space-y-6 text-base lg:text-lg text-muted-foreground">
+                    <div>
+                      <span className="font-semibold text-foreground text-lg block mb-3">Screen Readers:</span>
+                      <p className="leading-relaxed">Full compatibility with NVDA, JAWS, VoiceOver, and TalkBack screen readers</p>
+                    </div>
+                    <div>
+                      <span className="font-semibold text-foreground text-lg block mb-3">Voice Control:</span>
+                      <p className="leading-relaxed">Works seamlessly with Dragon NaturallySpeaking and Voice Control software</p>
+                    </div>
+                    <div>
+                      <span className="font-semibold text-foreground text-lg block mb-3">Switch Navigation:</span>
+                      <p className="leading-relaxed">Compatible with switch devices, eye-tracking systems, and alternative input methods</p>
+                    </div>
                   </div>
-                </div>
-              </Card>
-              
-              {/* Assistive Technology */}
-              <Card className="p-6 sm:p-8 lg:p-10 hover:shadow-lg transition-shadow h-full">
-                <div className="flex items-start gap-4 mb-4 sm:mb-6">
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
-                    <span className="text-lg sm:text-xl lg:text-2xl">🔊</span>
+                </Card>
+              </div>
+
+              {/* Second Row - Visual & Content */}
+              <div className="grid gap-8 lg:gap-12 grid-cols-1 lg:grid-cols-2">
+                {/* Visual & Cognitive */}
+                <Card className="p-8 lg:p-12 hover:shadow-xl transition-all duration-300 border-2">
+                  <div className="flex items-center gap-6 mb-6">
+                    <div className="w-16 h-16 lg:w-20 lg:h-20 bg-accent/20 rounded-full flex items-center justify-center flex-shrink-0">
+                      <span className="text-2xl lg:text-3xl">👁️</span>
+                    </div>
+                    <h3 className="font-bold text-foreground text-xl lg:text-2xl">Visual & Cognitive</h3>
                   </div>
-                  <h3 className="font-semibold text-foreground text-base sm:text-lg lg:text-xl break-words">Assistive Technology</h3>
-                </div>
-                <div className="space-y-4 sm:space-y-5 text-sm sm:text-base text-muted-foreground">
-                  <div>
-                    <span className="font-medium text-foreground text-sm sm:text-base block mb-2">Screen Readers:</span>
-                    <p className="leading-relaxed break-words">NVDA, JAWS, VoiceOver, TalkBack compatibility</p>
+                  <div className="space-y-6 text-base lg:text-lg text-muted-foreground">
+                    <div>
+                      <span className="font-semibold text-foreground text-lg block mb-3">High Contrast:</span>
+                      <p className="leading-relaxed">Enhanced contrast ratios and comprehensive dark mode support</p>
+                    </div>
+                    <div>
+                      <span className="font-semibold text-foreground text-lg block mb-3">Text Scaling:</span>
+                      <p className="leading-relaxed">Browser zoom support up to 200% without horizontal scrolling</p>
+                    </div>
+                    <div>
+                      <span className="font-semibold text-foreground text-lg block mb-3">Clear Language:</span>
+                      <p className="leading-relaxed">Simple, consistent interface language and logical page structure</p>
+                    </div>
                   </div>
-                  <div>
-                    <span className="font-medium text-foreground text-sm sm:text-base block mb-2">Voice Control:</span>
-                    <p className="leading-relaxed break-words">Dragon NaturallySpeaking, Voice Control support</p>
+                </Card>
+
+                {/* Content & Structure */}
+                <Card className="p-8 lg:p-12 hover:shadow-xl transition-all duration-300 border-2">
+                  <div className="flex items-center gap-6 mb-6">
+                    <div className="w-16 h-16 lg:w-20 lg:h-20 bg-primary/15 rounded-full flex items-center justify-center flex-shrink-0">
+                      <span className="text-2xl lg:text-3xl">🏗️</span>
+                    </div>
+                    <h3 className="font-bold text-foreground text-xl lg:text-2xl">Content & Structure</h3>
                   </div>
-                  <div>
-                    <span className="font-medium text-foreground text-sm sm:text-base block mb-2">Switch Navigation:</span>
-                    <p className="leading-relaxed break-words">Compatible with switch devices and eye-tracking</p>
+                  <div className="space-y-6 text-base lg:text-lg text-muted-foreground">
+                    <div>
+                      <span className="font-semibold text-foreground text-lg block mb-3">Semantic HTML:</span>
+                      <p className="leading-relaxed">Proper headings hierarchy, landmarks, and comprehensive ARIA labels</p>
+                    </div>
+                    <div>
+                      <span className="font-semibold text-foreground text-lg block mb-3">Alternative Text:</span>
+                      <p className="leading-relaxed">Descriptive alt text for all images, icons, and multimedia content</p>
+                    </div>
+                    <div>
+                      <span className="font-semibold text-foreground text-lg block mb-3">Live Regions:</span>
+                      <p className="leading-relaxed">Real-time screen reader announcements for dynamic content updates</p>
+                    </div>
                   </div>
-                </div>
-              </Card>
-              
-              {/* Visual & Cognitive */}
-              <Card className="p-6 sm:p-8 lg:p-10 hover:shadow-lg transition-shadow h-full">
-                <div className="flex items-start gap-4 mb-4 sm:mb-6">
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-secondary/20 rounded-full flex items-center justify-center flex-shrink-0">
-                    <span className="text-lg sm:text-xl lg:text-2xl">👁️</span>
-                  </div>
-                  <h3 className="font-semibold text-foreground text-base sm:text-lg lg:text-xl break-words">Visual & Cognitive</h3>
-                </div>
-                <div className="space-y-4 sm:space-y-5 text-sm sm:text-base text-muted-foreground">
-                  <div>
-                    <span className="font-medium text-foreground text-sm sm:text-base block mb-2">High Contrast:</span>
-                    <p className="leading-relaxed break-words">Enhanced contrast ratios, dark mode support</p>
-                  </div>
-                  <div>
-                    <span className="font-medium text-foreground text-sm sm:text-base block mb-2">Text Scaling:</span>
-                    <p className="leading-relaxed break-words">Browser zoom up to 200% without horizontal scrolling</p>
-                  </div>
-                  <div>
-                    <span className="font-medium text-foreground text-sm sm:text-base block mb-2">Clear Language:</span>
-                    <p className="leading-relaxed break-words">Simple, consistent interface language and structure</p>
-                  </div>
-                </div>
-              </Card>
-              
-              {/* Content & Structure */}
-              <Card className="p-6 sm:p-8 lg:p-10 hover:shadow-lg transition-shadow h-full">
-                <div className="flex items-start gap-4 mb-4 sm:mb-6">
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-accent/20 rounded-full flex items-center justify-center flex-shrink-0">
-                    <span className="text-lg sm:text-xl lg:text-2xl">🏗️</span>
-                  </div>
-                  <h3 className="font-semibold text-foreground text-base sm:text-lg lg:text-xl break-words">Content & Structure</h3>
-                </div>
-                <div className="space-y-4 sm:space-y-5 text-sm sm:text-base text-muted-foreground">
-                  <div>
-                    <span className="font-medium text-foreground text-sm sm:text-base block mb-2">Semantic HTML:</span>
-                    <p className="leading-relaxed break-words">Proper headings, landmarks, and ARIA labels</p>
-                  </div>
-                  <div>
-                    <span className="font-medium text-foreground text-sm sm:text-base block mb-2">Alternative Text:</span>
-                    <p className="leading-relaxed break-words">Descriptive alt text for all images and media</p>
-                  </div>
-                  <div>
-                    <span className="font-medium text-foreground text-sm sm:text-base block mb-2">Live Regions:</span>
-                    <p className="leading-relaxed break-words">Screen reader announcements for dynamic content</p>
-                  </div>
-                </div>
-              </Card>
+                </Card>
+              </div>
             </div>
 
             {/* Contact Card */}
