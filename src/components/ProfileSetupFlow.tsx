@@ -207,7 +207,7 @@ export const ProfileSetupFlow: React.FC = () => {
         case 1:
           return profileData.name && profileData.age && profileData.location;
         case 2:
-          return profileData.bio.length >= 50;
+          return profileData.bio.length >= 20;
         case 3:
           return profileData.interests.length >= 3;
         case 4:
@@ -352,8 +352,8 @@ export const ProfileSetupFlow: React.FC = () => {
                 maxLength={500}
               />
               <div className="text-right text-sm mt-1">
-                <span className={profileData.bio.length >= 50 ? "text-green-600" : "text-muted-foreground"}>
-                  {profileData.bio.length}/500 characters (minimum 50 required)
+                <span className={profileData.bio.length >= 20 ? "text-green-600" : "text-muted-foreground"}>
+                  {profileData.bio.length}/500 characters (minimum 20 required)
                 </span>
               </div>
             </div>
