@@ -42,19 +42,8 @@ const Auth = () => {
             return;
           }
           
-          // If profile complete, check quiz completion
-          const { data } = await supabase
-            .from('user_events')
-            .select('*')
-            .eq('user_id', user.id)
-            .eq('event_type', 'quiz_completed')
-            .limit(1);
-          
-          if (data && data.length > 0) {
-            navigate('/');
-          } else {
-            navigate('/questions');
-          }
+          // For existing users with complete profiles, go to home instead of forcing quiz
+          navigate('/');
         } catch (error) {
           console.error('Error checking profile/quiz completion:', error);
           navigate('/profile/setup');
