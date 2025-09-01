@@ -38,8 +38,8 @@ const SampleUserProfile = () => {
   };
 
   const handleMessage = () => {
-    // In a real app, this would navigate to chat
-    alert("Message feature would open here!");
+    // Navigate to messages page
+    navigate('/messages');
   };
 
   const handleBlock = () => {
