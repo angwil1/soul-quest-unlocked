@@ -5,22 +5,31 @@ import { ShippingProgressTracker } from '@/components/ShippingProgressTracker';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Edit, MapPin, Briefcase, Heart } from 'lucide-react';
 import profileSilhouette from '@/assets/profile-silhouette.jpg';
+import { useProfile } from '@/hooks/useProfile';
+import { PageLoadingSkeleton } from '@/components/LoadingSkeleton';
 
 const Profile = () => {
   const navigate = useNavigate();
+  const { profile, loading } = useProfile();
 
-  // Demo profile data
-  const profile = {
-    name: "Alex Johnson",
-    age: 28,
-    bio: "Adventure seeker and coffee enthusiast. Love hiking, photography, and exploring new places. Looking for genuine connections and someone to share new experiences with.",
-    location: "San Francisco, CA",
-    occupation: "Product Designer",
-    interests: ["Photography", "Hiking", "Coffee", "Travel", "Music", "Art"],
-    photos: [
-      profileSilhouette
-    ]
-  };
+  if (loading) {
+    return <PageLoadingSkeleton />;
+  }
+
+  if (!profile) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <Card className="w-full max-w-md">
+          <CardContent className="p-6 text-center">
+            <p className="text-muted-foreground mb-4">No profile found</p>
+            <Button onClick={() => navigate('/profile/edit')}>
+              Create Profile
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -49,7 +58,7 @@ const Profile = () => {
                   {/* Main Photo */}
                   <div className="aspect-square rounded-lg overflow-hidden bg-muted">
                     <img 
-                      src={profile.photos[0]} 
+                      src={profile.avatar_url || profile.photos?.[0] || profileSilhouette} 
                       alt="Profile"
                       className="w-full h-full object-cover"
                     />
@@ -57,7 +66,7 @@ const Profile = () => {
                   
                   {/* Additional Photos */}
                   <div className="grid grid-cols-2 gap-2">
-                    {profile.photos.slice(1).map((photo, index) => (
+                    {profile.photos?.slice(1).map((photo, index) => (
                       <div key={index} className="aspect-square rounded-lg overflow-hidden bg-muted">
                         <img 
                           src={photo} 
@@ -79,25 +88,28 @@ const Profile = () => {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 flex-wrap">
-                  {profile.name}, {profile.age}
-                  <Badge className="bg-gradient-to-r from-purple-600 to-pink-500 text-white">
-                    ✨ Demo Profile
-                  </Badge>
+                  {profile.name || 'Your Profile'}{profile.age ? `, ${profile.age}` : ''}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <p className="text-muted-foreground">{profile.bio}</p>
+                {profile.bio && (
+                  <p className="text-muted-foreground">{profile.bio}</p>
+                )}
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="flex items-center gap-2">
-                    <MapPin className="h-4 w-4 text-muted-foreground" />
-                    <span>{profile.location}</span>
-                  </div>
+                  {profile.location && (
+                    <div className="flex items-center gap-2">
+                      <MapPin className="h-4 w-4 text-muted-foreground" />
+                      <span>{profile.location}</span>
+                    </div>
+                  )}
                   
-                  <div className="flex items-center gap-2">
-                    <Briefcase className="h-4 w-4 text-muted-foreground" />
-                    <span>{profile.occupation}</span>
-                  </div>
+                  {profile.occupation && (
+                    <div className="flex items-center gap-2">
+                      <Briefcase className="h-4 w-4 text-muted-foreground" />
+                      <span>{profile.occupation}</span>
+                    </div>
+                  )}
                 </div>
               </CardContent>
             </Card>
@@ -109,11 +121,15 @@ const Profile = () => {
               </CardHeader>
               <CardContent>
                 <div className="flex flex-wrap gap-2">
-                  {profile.interests.map((interest, index) => (
-                    <Badge key={index} variant="secondary">
-                      {interest}
-                    </Badge>
-                  ))}
+                  {profile.interests?.length ? (
+                    profile.interests.map((interest, index) => (
+                      <Badge key={index} variant="secondary">
+                        {interest}
+                      </Badge>
+                    ))
+                  ) : (
+                    <p className="text-muted-foreground">No interests added yet</p>
+                  )}
                 </div>
               </CardContent>
             </Card>
