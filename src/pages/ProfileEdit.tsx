@@ -325,26 +325,24 @@ const ProfileEdit = () => {
               
               {/* Single photo management - show if exactly one photo */}
               {profile?.photos && profile.photos.length === 1 && (
-                <div>
-                  <h4 className="font-medium mb-2">Your Photo</h4>
-                  <div className="flex justify-center">
-                    <div className="relative group w-32 h-32">
-                      <img 
-                        src={profile.photos[0]} 
-                        alt="Profile photo"
-                        className="w-full h-full object-cover object-center rounded-lg border border-border"
-                        loading="lazy"
-                      />
-                      <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center">
-                        <Button
-                          size="sm"
-                          variant="destructive"
-                          onClick={() => removePhoto(profile.photos[0])}
-                          className="text-xs"
-                        >
-                          <X className="h-3 w-3" />
-                        </Button>
-                      </div>
+                <div className="flex flex-col items-center space-y-2">
+                  <h4 className="font-medium">Your Photo</h4>
+                  <div className="relative group w-24 h-24">
+                    <img 
+                      src={profile.photos[0]} 
+                      alt="Profile photo"
+                      className="w-full h-full object-cover object-center rounded-lg border border-border"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center">
+                      <Button
+                        size="sm"
+                        variant="destructive"
+                        onClick={() => removePhoto(profile.photos[0])}
+                        className="text-xs p-1 h-6 w-6"
+                      >
+                        <X className="h-3 w-3" />
+                      </Button>
                     </div>
                   </div>
                 </div>
@@ -535,7 +533,6 @@ const ProfileEdit = () => {
               )}
             </CardContent>
           </Card>
-
 
         </form>
       </div>
