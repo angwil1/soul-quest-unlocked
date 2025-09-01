@@ -49,9 +49,81 @@ const MemoryVault = () => {
   const { user } = useAuth();
   const { toast } = useToast();
 
-  const [matches, setMatches] = useState<VaultMatch[]>([]);
-  const [prompts, setPrompts] = useState<VaultPrompt[]>([]);
-  const [moments, setMoments] = useState<VaultMoment[]>([]);
+  // Sample data for demo
+  const [matches, setMatches] = useState<VaultMatch[]>([
+    {
+      id: '1',
+      matched_user_id: 'sample-4',
+      notes: 'Taylor Brooks - Sample Profile. Really interesting person with great sustainability focus!',
+      tags: ['sample-profile', 'viewed', 'environmental'],
+      saved_at: '2024-01-15T10:30:00Z'
+    },
+    {
+      id: '2', 
+      matched_user_id: 'sample-2',
+      notes: 'Casey Chen - Love their dog photos and outdoor adventures',
+      tags: ['sample-profile', 'dog-lover', 'adventurous'],
+      saved_at: '2024-01-10T14:20:00Z'
+    }
+  ]);
+  const [prompts, setPrompts] = useState<VaultPrompt[]>([
+    {
+      id: '1',
+      prompt_text: 'What\'s a small act of kindness that completely changed your day?',
+      response_text: 'A stranger helped me carry groceries when my bag broke. It reminded me how simple gestures can create ripple effects of positivity.',
+      prompt_source: 'daily-reflection',
+      notes: 'This question always leads to amazing conversations',
+      tags: ['kindness', 'reflection', 'conversation-starter'],
+      saved_at: '2024-01-12T09:15:00Z'
+    },
+    {
+      id: '2',
+      prompt_text: 'If you could have dinner with anyone from history, who would it be and what would you ask them?',
+      response_text: '',
+      prompt_source: 'quiz-question', 
+      notes: 'Great icebreaker question',
+      tags: ['history', 'icebreaker', 'deep-conversation'],
+      saved_at: '2024-01-08T16:45:00Z'
+    }
+  ]);
+  const [moments, setMoments] = useState<VaultMoment[]>([
+    {
+      id: '1',
+      moment_type: 'reflection',
+      title: 'First Match Connection',
+      description: 'Had my first really meaningful conversation on the app today. We talked for hours about travel dreams and life goals.',
+      content: {},
+      notes: 'Remember to ask about their trip to New Zealand next time',
+      tags: ['first-match', 'meaningful', 'travel'],
+      is_favorite: true,
+      saved_at: '2024-01-14T20:30:00Z',
+      moment_date: '2024-01-14T20:30:00Z'
+    },
+    {
+      id: '2',
+      moment_type: 'milestone',
+      title: 'Completed Profile Setup',
+      description: 'Finally took the time to really craft my profile. Added photos I love and wrote a bio that feels authentic.',
+      content: {},
+      notes: 'Profile views increased 3x after this update',
+      tags: ['profile', 'milestone', 'authentic'],
+      is_favorite: false,
+      saved_at: '2024-01-05T11:00:00Z', 
+      moment_date: '2024-01-05T11:00:00Z'
+    },
+    {
+      id: '3',
+      moment_type: 'insight',
+      title: 'Dating App Breakthrough',
+      description: 'Realized I was focusing too much on perfect messages. Started being more genuine and conversations became so much more natural.',
+      content: {},
+      notes: 'Authenticity > perfection',
+      tags: ['insight', 'authenticity', 'breakthrough'],
+      is_favorite: true,
+      saved_at: '2024-01-02T13:45:00Z',
+      moment_date: '2024-01-02T13:45:00Z'
+    }
+  ]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedTab, setSelectedTab] = useState('moments');
@@ -65,7 +137,7 @@ const MemoryVault = () => {
     tags: ''
   });
 
-  const isUnlockedBeyond = false; // Simplified without subscription
+  const isUnlockedBeyond = true; // Demo: showing premium experience
 
   useEffect(() => {
     if (user && isUnlockedBeyond) {
