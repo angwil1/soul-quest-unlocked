@@ -10,6 +10,7 @@ import { Navbar } from '@/components/Navbar';
 import { SignupFlow } from '@/components/SignupFlow';
 import { supabase } from '@/integrations/supabase/client';
 import { ArrowLeft, UserPlus, LogIn } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
 const Auth = () => {
   const [email, setEmail] = useState('');
@@ -17,8 +18,10 @@ const Auth = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showSignIn, setShowSignIn] = useState(false);
   const [showSignupFlow, setShowSignupFlow] = useState(false);
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
   const { signIn, user } = useAuth();
   const navigate = useNavigate();
+  const { toast } = useToast();
 
   // Only redirect if already authenticated
   useEffect(() => {
@@ -86,6 +89,40 @@ const Auth = () => {
   const handleSignupComplete = () => {
     setShowSignupFlow(false);
     navigate('/profile/setup');
+  };
+
+  const handleForgotPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) {
+      toast({
+        title: "Email Required",
+        description: "Please enter your email address to reset your password.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    setIsLoading(true);
+    
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/reset-password`
+    });
+
+    if (error) {
+      toast({
+        title: "Reset Failed",
+        description: error.message,
+        variant: "destructive"
+      });
+    } else {
+      toast({
+        title: "Reset Email Sent",
+        description: "Check your email for password reset instructions.",
+      });
+      setShowForgotPassword(false);
+    }
+    
+    setIsLoading(false);
   };
 
   if (showSignupFlow) {
@@ -193,6 +230,47 @@ const Auth = () => {
             >
               Already have an account? Sign In
             </Button>
+          ) : showForgotPassword ? (
+            <Card role="form" aria-labelledby="forgot-password-title">
+              <CardHeader className="pb-4">
+                <CardTitle id="forgot-password-title" className="text-lg">Reset Password</CardTitle>
+                <CardDescription>Enter your email to receive reset instructions</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <form onSubmit={handleForgotPassword} className="space-y-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="forgot-email">Email Address</Label>
+                    <Input
+                      id="forgot-email"
+                      type="email"
+                      placeholder="your@email.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                      className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                      autoComplete="email"
+                    />
+                  </div>
+                  <div className="flex gap-2">
+                    <Button 
+                      type="submit" 
+                      className="flex-1 focus:ring-2 focus:ring-primary focus:ring-offset-2" 
+                      disabled={isLoading}
+                    >
+                      {isLoading ? 'Sending...' : 'Send Reset Email'}
+                    </Button>
+                    <Button 
+                      type="button"
+                      variant="outline"
+                      onClick={() => setShowForgotPassword(false)}
+                      className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                    >
+                      Back
+                    </Button>
+                  </div>
+                </form>
+              </CardContent>
+            </Card>
           ) : (
             <Card role="form" aria-labelledby="signin-card-title">
               <CardHeader className="pb-4">
@@ -230,7 +308,7 @@ const Auth = () => {
                       className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
                       autoComplete="current-password"
                     />
-                    <div id="signin-password-error" className="sr-only" aria-live="polite">
+                     <div id="signin-password-error" className="sr-only" aria-live="polite">
                       {/* Error messages would go here */}
                     </div>
                   </div>
@@ -253,9 +331,20 @@ const Auth = () => {
                       Cancel
                     </Button>
                   </div>
-                  <div id="signin-status" className="sr-only" aria-live="polite">
-                    {isLoading ? 'Processing sign in...' : ''}
-                  </div>
+                   <div id="signin-status" className="sr-only" aria-live="polite">
+                     {isLoading ? 'Processing sign in...' : ''}
+                   </div>
+                   
+                   <div className="text-center">
+                     <Button 
+                       type="button"
+                       variant="link"
+                       onClick={() => setShowForgotPassword(true)}
+                       className="text-sm"
+                     >
+                       Forgot Password?
+                     </Button>
+                   </div>
                 </form>
               </CardContent>
             </Card>
