@@ -305,17 +305,25 @@ const ConnectionDNA = () => {
       <div className="container mx-auto px-4 pt-20 pb-8 max-w-6xl">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="text-6xl mb-4">🧬</div>
+          <div className="text-6xl mb-4" role="img" aria-label="DNA molecule icon">🧬</div>
           <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-2">
             Connection DNA
           </h1>
           <p className="text-xl text-muted-foreground mb-4">
             Your evolving emotional intelligence for deeper connections
           </p>
-          <Button onClick={runAnalysis} disabled={analyzing}>
-            <RefreshCw className={`h-4 w-4 mr-2 ${analyzing ? 'animate-spin' : ''}`} />
+          <Button 
+            onClick={runAnalysis} 
+            disabled={analyzing}
+            aria-describedby="analysis-description"
+            className="focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+          >
+            <RefreshCw className={`h-4 w-4 mr-2 ${analyzing ? 'animate-spin' : ''}`} aria-hidden="true" />
             {analyzing ? 'Analyzing...' : 'Update Analysis'}
           </Button>
+          <div id="analysis-description" className="sr-only">
+            Updates your Connection DNA profile based on recent interactions and provides new insights
+          </div>
         </div>
 
         {!dnaProfile ? (
@@ -334,96 +342,133 @@ const ConnectionDNA = () => {
           </Card>
         ) : (
           <Tabs defaultValue="overview" className="space-y-6">
-            <TabsList className="grid w-full grid-cols-3">
-              <TabsTrigger value="overview">
-                <Brain className="h-4 w-4 mr-2" />
+            <TabsList className="grid w-full grid-cols-3" role="tablist" aria-label="Connection DNA sections">
+              <TabsTrigger 
+                value="overview"
+                role="tab"
+                aria-controls="overview-panel"
+                className="focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+              >
+                <Brain className="h-4 w-4 mr-2" aria-hidden="true" />
                 Overview
               </TabsTrigger>
-              <TabsTrigger value="insights">
-                <Lightbulb className="h-4 w-4 mr-2" />
-                Insights ({insights.filter(i => !i.is_read).length})
+              <TabsTrigger 
+                value="insights"
+                role="tab"
+                aria-controls="insights-panel"
+                className="focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+              >
+                <Lightbulb className="h-4 w-4 mr-2" aria-hidden="true" />
+                <span>Insights</span>
+                <span className="ml-1" aria-label={`${insights.filter(i => !i.is_read).length} unread insights`}>
+                  ({insights.filter(i => !i.is_read).length})
+                </span>
               </TabsTrigger>
-              <TabsTrigger value="growth">
-                <TrendingUp className="h-4 w-4 mr-2" />
+              <TabsTrigger 
+                value="growth"
+                role="tab"
+                aria-controls="growth-panel"
+                className="focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+              >
+                <TrendingUp className="h-4 w-4 mr-2" aria-hidden="true" />
                 Growth
               </TabsTrigger>
             </TabsList>
 
             <TabsContent value="overview" className="space-y-6">
               {/* Emotional Intelligence Scores */}
-              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-                <Card>
-                  <CardHeader className="pb-3">
-                    <CardTitle className="text-sm flex items-center gap-2">
-                      <Brain className="h-4 w-4 text-purple-500" />
-                      Emotional IQ
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="text-2xl font-bold mb-2 text-purple-600">
-                      {Math.round(dnaProfile.emotional_intelligence_score)}
-                    </div>
-                    <Progress value={dnaProfile.emotional_intelligence_score} className="mb-2" />
-                    <p className="text-xs text-muted-foreground">
-                      {getScoreDescription(dnaProfile.emotional_intelligence_score)}
-                    </p>
-                  </CardContent>
-                </Card>
+              <section aria-labelledby="scores-heading">
+                <h2 id="scores-heading" className="sr-only">Emotional Intelligence Scores</h2>
+                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+                  <Card>
+                    <CardHeader className="pb-3">
+                      <CardTitle className="text-sm flex items-center gap-2">
+                        <Brain className="h-4 w-4 text-purple-500" aria-hidden="true" />
+                        Emotional IQ
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="text-2xl font-bold mb-2 text-purple-600" aria-label={`Emotional IQ score: ${Math.round(dnaProfile.emotional_intelligence_score)} out of 100`}>
+                        {Math.round(dnaProfile.emotional_intelligence_score)}
+                      </div>
+                      <Progress 
+                        value={dnaProfile.emotional_intelligence_score} 
+                        className="mb-2" 
+                        aria-label={`Emotional IQ progress: ${Math.round(dnaProfile.emotional_intelligence_score)}%`}
+                      />
+                      <p className="text-xs text-muted-foreground">
+                        {getScoreDescription(dnaProfile.emotional_intelligence_score)}
+                      </p>
+                    </CardContent>
+                  </Card>
 
-                <Card>
-                  <CardHeader className="pb-3">
-                    <CardTitle className="text-sm flex items-center gap-2">
-                      <Heart className="h-4 w-4 text-red-500" />
-                      Empathy
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="text-2xl font-bold mb-2 text-red-600">
-                      {Math.round(dnaProfile.empathy_score)}
-                    </div>
-                    <Progress value={dnaProfile.empathy_score} className="mb-2" />
-                    <p className="text-xs text-muted-foreground">
-                      {getScoreDescription(dnaProfile.empathy_score)}
-                    </p>
-                  </CardContent>
-                </Card>
+                  <Card>
+                    <CardHeader className="pb-3">
+                      <CardTitle className="text-sm flex items-center gap-2">
+                        <Heart className="h-4 w-4 text-red-500" aria-hidden="true" />
+                        Empathy
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="text-2xl font-bold mb-2 text-red-600" aria-label={`Empathy score: ${Math.round(dnaProfile.empathy_score)} out of 100`}>
+                        {Math.round(dnaProfile.empathy_score)}
+                      </div>
+                      <Progress 
+                        value={dnaProfile.empathy_score} 
+                        className="mb-2"
+                        aria-label={`Empathy progress: ${Math.round(dnaProfile.empathy_score)}%`}
+                      />
+                      <p className="text-xs text-muted-foreground">
+                        {getScoreDescription(dnaProfile.empathy_score)}
+                      </p>
+                    </CardContent>
+                  </Card>
 
-                <Card>
-                  <CardHeader className="pb-3">
-                    <CardTitle className="text-sm flex items-center gap-2">
-                      <MessageSquare className="h-4 w-4 text-blue-500" />
-                      Communication
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="text-2xl font-bold mb-2 text-blue-600">
-                      {Math.round(dnaProfile.interaction_quality_score)}
-                    </div>
-                    <Progress value={dnaProfile.interaction_quality_score} className="mb-2" />
-                    <p className="text-xs text-muted-foreground">
-                      {getScoreDescription(dnaProfile.interaction_quality_score)}
-                    </p>
-                  </CardContent>
-                </Card>
+                  <Card>
+                    <CardHeader className="pb-3">
+                      <CardTitle className="text-sm flex items-center gap-2">
+                        <MessageSquare className="h-4 w-4 text-blue-500" aria-hidden="true" />
+                        Communication
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="text-2xl font-bold mb-2 text-blue-600" aria-label={`Communication score: ${Math.round(dnaProfile.interaction_quality_score)} out of 100`}>
+                        {Math.round(dnaProfile.interaction_quality_score)}
+                      </div>
+                      <Progress 
+                        value={dnaProfile.interaction_quality_score} 
+                        className="mb-2"
+                        aria-label={`Communication progress: ${Math.round(dnaProfile.interaction_quality_score)}%`}
+                      />
+                      <p className="text-xs text-muted-foreground">
+                        {getScoreDescription(dnaProfile.interaction_quality_score)}
+                      </p>
+                    </CardContent>
+                  </Card>
 
-                <Card>
-                  <CardHeader className="pb-3">
-                    <CardTitle className="text-sm flex items-center gap-2">
-                      <Target className="h-4 w-4 text-green-500" />
-                      Vulnerability
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="text-2xl font-bold mb-2 text-green-600">
-                      {Math.round(dnaProfile.vulnerability_comfort)}
-                    </div>
-                    <Progress value={dnaProfile.vulnerability_comfort} className="mb-2" />
-                    <p className="text-xs text-muted-foreground">
-                      {getScoreDescription(dnaProfile.vulnerability_comfort)}
-                    </p>
-                  </CardContent>
-                </Card>
-              </div>
+                  <Card>
+                    <CardHeader className="pb-3">
+                      <CardTitle className="text-sm flex items-center gap-2">
+                        <Target className="h-4 w-4 text-green-500" aria-hidden="true" />
+                        Vulnerability
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="text-2xl font-bold mb-2 text-green-600" aria-label={`Vulnerability comfort score: ${Math.round(dnaProfile.vulnerability_comfort)} out of 100`}>
+                        {Math.round(dnaProfile.vulnerability_comfort)}
+                      </div>
+                      <Progress 
+                        value={dnaProfile.vulnerability_comfort} 
+                        className="mb-2"
+                        aria-label={`Vulnerability comfort progress: ${Math.round(dnaProfile.vulnerability_comfort)}%`}
+                      />
+                      <p className="text-xs text-muted-foreground">
+                        {getScoreDescription(dnaProfile.vulnerability_comfort)}
+                      </p>
+                    </CardContent>
+                  </Card>
+                </div>
+              </section>
 
               {/* Love Language & Communication Style */}
               <div className="grid gap-6 md:grid-cols-2">
