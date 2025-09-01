@@ -69,21 +69,39 @@ const MemoryVault = () => {
   const [prompts, setPrompts] = useState<VaultPrompt[]>([
     {
       id: '1',
-      prompt_text: 'What\'s a small act of kindness that completely changed your day?',
-      response_text: 'A stranger helped me carry groceries when my bag broke. It reminded me how simple gestures can create ripple effects of positivity.',
-      prompt_source: 'daily-reflection',
-      notes: 'This question always leads to amazing conversations',
-      tags: ['kindness', 'reflection', 'conversation-starter'],
+      prompt_text: 'What\'s something you\'ve learned about yourself through dating that surprised you?',
+      response_text: 'I discovered I\'m much more of a homebody than I thought. I used to think I wanted someone super adventurous, but I actually love cozy nights in with deep conversations.',
+      prompt_source: 'ai-compatibility',
+      notes: 'Perfect for understanding relationship preferences and self-awareness',
+      tags: ['self-discovery', 'dating-insights', 'compatibility'],
       saved_at: '2024-01-12T09:15:00Z'
     },
     {
       id: '2',
-      prompt_text: 'If you could have dinner with anyone from history, who would it be and what would you ask them?',
-      response_text: '',
-      prompt_source: 'quiz-question', 
-      notes: 'Great icebreaker question',
-      tags: ['history', 'icebreaker', 'deep-conversation'],
+      prompt_text: 'If we matched, what\'s one thing you\'d want me to know about how you show affection?',
+      response_text: 'I\'m a big acts of service person - I show love by doing little thoughtful things like making coffee in the morning or remembering important details.',
+      prompt_source: 'connection-builder', 
+      notes: 'Great for understanding love languages early',
+      tags: ['love-language', 'affection', 'connection'],
       saved_at: '2024-01-08T16:45:00Z'
+    },
+    {
+      id: '3',
+      prompt_text: 'What\'s a relationship green flag that instantly makes you more interested in someone?',
+      response_text: '',
+      prompt_source: 'ai-generated', 
+      notes: 'Excellent conversation starter - reveals values and priorities',
+      tags: ['green-flags', 'values', 'attraction'],
+      saved_at: '2024-01-05T14:30:00Z'
+    },
+    {
+      id: '4',
+      prompt_text: 'Describe your ideal lazy Sunday with a romantic partner.',
+      response_text: 'Sleeping in, making breakfast together, maybe a farmers market, then reading books in the same room while it rains outside.',
+      prompt_source: 'lifestyle-compatibility',
+      notes: 'Perfect for understanding relationship dynamics and lifestyle compatibility',
+      tags: ['lifestyle', 'romantic', 'compatibility'],
+      saved_at: '2024-01-03T11:20:00Z'
     }
   ]);
   const [moments, setMoments] = useState<VaultMoment[]>([
