@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -7,10 +7,19 @@ import { ArrowLeft, Heart, MapPin, Briefcase, Sparkles, Eye, Bookmark, Zap } fro
 import { useNavigate } from 'react-router-dom';
 import { founderCuratedProfiles } from '@/data/sampleProfiles';
 import { SaveToVaultButton } from '@/components/SaveToVaultButton';
+import { useAuth } from '@/hooks/useAuth';
 
 const BrowseProfiles = () => {
   const navigate = useNavigate();
+  const { user, loading } = useAuth();
   const [likedProfiles, setLikedProfiles] = useState<Set<string>>(new Set());
+
+  // Redirect to quick setup if not authenticated
+  useEffect(() => {
+    if (!loading && !user) {
+      navigate('/quick-start');
+    }
+  }, [user, loading, navigate]);
 
   const handleLike = (profileId: string) => {
     setLikedProfiles(prev => new Set([...prev, profileId]));

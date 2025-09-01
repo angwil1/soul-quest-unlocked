@@ -183,24 +183,43 @@ export const Navbar = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                to={item.href}
-                className={`text-sm font-medium transition-colors hover:text-primary ${
-                  isActive(item.href)
-                    ? "text-primary"
-                    : "text-muted-foreground"
-                } ${item.name === "Memory Vault" ? "relative" : ""}`}
-              >
-                {item.name}
-                {item.name === "Memory Vault" && newMemoriesCount > 0 && (
-                  <span className="absolute -top-2 -right-2 h-5 w-5 rounded-full bg-primary text-xs text-white flex items-center justify-center">
-                    {newMemoriesCount > 9 ? '9+' : newMemoriesCount}
-                  </span>
-                )}
-              </Link>
-            ))}
+            {navigation.map((item) => {
+              // Handle authentication-required links
+              if (item.name === "Browse Profiles" && !user) {
+                return (
+                  <Link
+                    key={item.name}
+                    to="/quick-start"
+                    className={`text-sm font-medium transition-colors hover:text-primary ${
+                      isActive(item.href)
+                        ? "text-primary"
+                        : "text-muted-foreground"
+                    }`}
+                  >
+                    {item.name}
+                  </Link>
+                );
+              }
+              
+              return (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  className={`text-sm font-medium transition-colors hover:text-primary ${
+                    isActive(item.href)
+                      ? "text-primary"
+                      : "text-muted-foreground"
+                  } ${item.name === "Memory Vault" ? "relative" : ""}`}
+                >
+                  {item.name}
+                  {item.name === "Memory Vault" && newMemoriesCount > 0 && (
+                    <span className="absolute -top-2 -right-2 h-5 w-5 rounded-full bg-primary text-xs text-white flex items-center justify-center">
+                      {newMemoriesCount > 9 ? '9+' : newMemoriesCount}
+                    </span>
+                  )}
+                </Link>
+              );
+            })}
           </div>
 
           {/* Desktop Auth Buttons */}
@@ -278,27 +297,32 @@ export const Navbar = () => {
         {isMenuOpen && (
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-border">
-              {navigation.map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  className={`block px-3 py-2 text-base font-medium transition-colors hover:text-primary ${
-                    isActive(item.href)
-                      ? "text-primary bg-muted"
-                      : "text-muted-foreground"
-                  } ${item.name === "Memory Vault" ? "relative" : ""}`}
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  <div className="flex items-center justify-between">
-                    <span>{item.name}</span>
-                    {item.name === "Memory Vault" && newMemoriesCount > 0 && (
-                      <span className="ml-2 h-5 w-5 rounded-full bg-primary text-xs text-white flex items-center justify-center">
-                        {newMemoriesCount > 9 ? '9+' : newMemoriesCount}
-                      </span>
-                    )}
-                  </div>
-                </Link>
-              ))}
+              {navigation.map((item) => {
+                // Handle authentication-required links
+                const linkTo = (item.name === "Browse Profiles" && !user) ? "/quick-start" : item.href;
+                
+                return (
+                  <Link
+                    key={item.name}
+                    to={linkTo}
+                    className={`block px-3 py-2 text-base font-medium transition-colors hover:text-primary ${
+                      isActive(item.href)
+                        ? "text-primary bg-muted"
+                        : "text-muted-foreground"
+                    } ${item.name === "Memory Vault" ? "relative" : ""}`}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <div className="flex items-center justify-between">
+                      <span>{item.name}</span>
+                      {item.name === "Memory Vault" && newMemoriesCount > 0 && (
+                        <span className="ml-2 h-5 w-5 rounded-full bg-primary text-xs text-white flex items-center justify-center">
+                          {newMemoriesCount > 9 ? '9+' : newMemoriesCount}
+                        </span>
+                      )}
+                    </div>
+                  </Link>
+                );
+              })}
               {/* Only show search on matches/browse pages */}
               {user && hasCompletedQuiz && (location.pathname === '/matches' || location.pathname === '/browse') && (
                 <div className="px-3 py-2 border-t border-border mt-2">
