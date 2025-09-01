@@ -15,24 +15,24 @@ export const AppWrapper: React.FC<AppWrapperProps> = ({ children }) => {
   const [hasShownModal, setHasShownModal] = useState(false);
   const location = useLocation();
 
-  // Profile setup modal is now handled by QuizResults page
-  // Only show on very specific pages where it makes sense
+  // Profile setup modal should only show after signup or login
+  // NOT when trying to view profiles or navigate around
   useEffect(() => {
     if (!authLoading && !profileLoading && user && profile && !hasShownModal) {
-      // Only show modal on these specific pages where profile setup is needed
-      const allowedPaths = [
-        '/matches',
-        '/browse',
-        '/messages'
-      ];
+      // Only show modal immediately after login/signup on the main pages
+      const isMainAppPage = ['/matches', '/browse', '/messages'].includes(location.pathname);
       
-      const shouldShow = allowedPaths.some(path => location.pathname.startsWith(path));
-      
-      if (shouldShow) {
+      if (isMainAppPage) {
         const needsProfileSetup = !profile.gender || !profile.looking_for || !profile.location;
         if (needsProfileSetup) {
-          setShowProfileSetup(true);
-          setHasShownModal(true);
+          // Only show on first visit to main app pages, not when navigating between them
+          const hasJustLoggedIn = !sessionStorage.getItem('profile_setup_checked');
+          
+          if (hasJustLoggedIn) {
+            setShowProfileSetup(true);
+            setHasShownModal(true);
+            sessionStorage.setItem('profile_setup_checked', 'true');
+          }
         }
       }
     }
