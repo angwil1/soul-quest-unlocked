@@ -53,7 +53,7 @@ const Profile = () => {
           {/* Profile Photos */}
           <div className="lg:col-span-1">
             <Card>
-              <CardContent className="p-6">
+              <CardContent className={`${(!profile.photos || profile.photos.length <= 1) ? 'p-4' : 'p-6'}`}>
                 {/* Single photo - compact display */}
                 {(!profile.photos || profile.photos.length <= 1) && (
                   <div className="flex justify-center">
