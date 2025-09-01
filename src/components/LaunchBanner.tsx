@@ -120,7 +120,7 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
               
               <div className="space-y-1 text-white/80 text-xs md:text-sm">
                 <div>
-                  🍃 Mini Wellness Kit: Calming tea sachet, soft-touch lip balm, and a poetic postcard to mark your beginning
+                  🍃 Mini Wellness Kit
                 </div>
                 
                 <div>
