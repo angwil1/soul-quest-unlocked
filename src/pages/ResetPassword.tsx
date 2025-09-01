@@ -13,6 +13,7 @@ const ResetPassword = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [isValidSession, setIsValidSession] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [searchParams] = useSearchParams();
@@ -32,10 +33,22 @@ const ResetPassword = () => {
 
     if (accessToken && refreshToken && type === 'recovery') {
       console.log('ResetPassword page - Setting session with tokens');
+      
       // Set the session with the tokens from the URL
       supabase.auth.setSession({
         access_token: accessToken,
         refresh_token: refreshToken
+      }).then(() => {
+        console.log('ResetPassword page - Session set successfully');
+        setIsValidSession(true);
+      }).catch((error) => {
+        console.error('ResetPassword page - Error setting session:', error);
+        toast({
+          title: "Session Error",
+          description: "Could not validate reset session. Please request a new reset link.",
+          variant: "destructive"
+        });
+        navigate('/auth');
       });
     } else {
       console.log('ResetPassword page - Invalid reset link, redirecting to auth');
@@ -47,6 +60,36 @@ const ResetPassword = () => {
       navigate('/auth');
     }
   }, [searchParams, navigate, toast]);
+
+  // Prevent any auth redirects while on this page
+  useEffect(() => {
+    console.log('ResetPassword page - Preventing auth redirects');
+    
+    // Set a flag to prevent redirects
+    sessionStorage.setItem('password_reset_in_progress', 'true');
+    
+    return () => {
+      sessionStorage.removeItem('password_reset_in_progress');
+    };
+  }, []);
+
+  if (!isValidSession) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Navbar />
+        <div className="flex items-center justify-center p-4 pt-20">
+          <Card className="w-full max-w-md">
+            <CardContent className="pt-6">
+              <div className="text-center">
+                <Lock className="mx-auto h-12 w-12 text-muted-foreground mb-4" />
+                <p className="text-muted-foreground">Validating reset session...</p>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    );
+  }
 
   const handleResetPassword = async (e: React.FormEvent) => {
     e.preventDefault();

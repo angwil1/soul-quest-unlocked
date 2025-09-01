@@ -18,6 +18,25 @@ export const AppWrapper: React.FC<AppWrapperProps> = ({ children }) => {
   // Profile setup modal should only show after signup or login
   // NOT when trying to view profiles or navigate around
   useEffect(() => {
+    console.log('AppWrapper - useEffect triggered:', {
+      authLoading,
+      profileLoading,
+      hasUser: !!user,
+      hasProfile: !!profile,
+      hasShownModal,
+      pathname: location.pathname,
+      search: location.search
+    });
+
+    // Don't interfere with password recovery
+    const urlParams = new URLSearchParams(location.search);
+    const isRecovery = urlParams.get('type') === 'recovery';
+    
+    if (isRecovery) {
+      console.log('AppWrapper - Skipping logic due to recovery flow');
+      return;
+    }
+    
     if (!authLoading && !profileLoading && user && profile && !hasShownModal) {
       // Only show modal immediately after login/signup on the main pages
       const isMainAppPage = ['/matches', '/browse', '/messages'].includes(location.pathname);

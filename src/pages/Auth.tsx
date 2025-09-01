@@ -28,13 +28,15 @@ const Auth = () => {
     // Don't redirect if we're on a password reset flow
     const urlParams = new URLSearchParams(window.location.search);
     const isPasswordReset = urlParams.get('type') === 'recovery';
+    const isPasswordResetInProgress = sessionStorage.getItem('password_reset_in_progress') === 'true';
     
     console.log('Auth page - URL params:', Object.fromEntries(urlParams.entries()));
     console.log('Auth page - isPasswordReset:', isPasswordReset);
+    console.log('Auth page - isPasswordResetInProgress:', isPasswordResetInProgress);
     console.log('Auth page - user exists:', !!user);
     console.log('Auth page - current pathname:', window.location.pathname);
     
-    if (user && !showSignupFlow && !isPasswordReset) {
+    if (user && !showSignupFlow && !isPasswordReset && !isPasswordResetInProgress) {
       // Don't interfere if user is already on profile setup page
       if (window.location.pathname === '/profile/setup') {
         return;
