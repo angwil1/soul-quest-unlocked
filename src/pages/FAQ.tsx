@@ -1,10 +1,16 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { Input } from "@/components/ui/input";
+import { Link, useNavigate } from "react-router-dom";
 import { Navbar } from "@/components/Navbar";
+import { ArrowLeft, Search, BookOpen, HelpCircle, Mail } from "lucide-react";
+import { useState } from "react";
 
 const FAQ = () => {
+  const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState("");
+  
   const faqs = [
     {
       question: "What's included in each tier?",
@@ -144,6 +150,12 @@ const FAQ = () => {
     }
   ];
 
+  // Filter FAQs based on search query
+  const filteredFaqs = faqs.filter(faq => 
+    faq.question.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    faq.answer.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted">
       <a 
@@ -155,6 +167,44 @@ const FAQ = () => {
       
       <Navbar />
       
+      {/* Header with Back Button and Actions */}
+      <header className="bg-card border-b" role="banner">
+        <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
+          <Button 
+            variant="ghost" 
+            onClick={() => navigate('/')}
+            className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
+            aria-label="Go back to homepage"
+          >
+            <ArrowLeft className="h-4 w-4 mr-2" aria-hidden="true" />
+            Back to Home
+          </Button>
+          
+          <div className="flex items-center gap-3">
+            <Button 
+              variant="outline" 
+              size="sm"
+              onClick={() => navigate('/contact')}
+              className="flex items-center gap-2 focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              aria-label="Contact support for additional help"
+            >
+              <Mail className="h-4 w-4" aria-hidden="true" />
+              Contact Support
+            </Button>
+            <Button 
+              variant="outline" 
+              size="sm"
+              onClick={() => navigate('/accessibility')}
+              className="flex items-center gap-2 focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              aria-label="View full accessibility statement"
+            >
+              <HelpCircle className="h-4 w-4" aria-hidden="true" />
+              Accessibility Statement
+            </Button>
+          </div>
+        </div>
+      </header>
+      
       <main 
         id="main-content"
         className="container mx-auto px-4 py-12"
@@ -162,76 +212,119 @@ const FAQ = () => {
         aria-labelledby="faq-title"
       >
         <div className="max-w-4xl mx-auto">
-          <header className="text-center mb-12">
-            <h1 
-              id="faq-title"
-              className="text-4xl font-bold text-foreground mb-4"
-            >
-              Frequently Asked Questions
-            </h1>
+          <header className="text-center mb-8">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <BookOpen className="h-8 w-8 text-primary" aria-hidden="true" />
+              <h1 
+                id="faq-title"
+                className="text-4xl font-bold text-foreground"
+              >
+                Frequently Asked Questions
+              </h1>
+            </div>
             <p 
-              className="text-xl text-muted-foreground"
+              className="text-xl text-muted-foreground mb-6"
               role="text"
               aria-describedby="faq-title"
             >
               Everything you need to know about AI Complete Me
             </p>
+            
+            {/* Search Bar */}
+            <div className="max-w-md mx-auto">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" aria-hidden="true" />
+                <Input
+                  type="text"
+                  placeholder="Search frequently asked questions..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-10 focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                  aria-label="Search through FAQ questions and answers"
+                />
+              </div>
+              {searchQuery && (
+                <p className="text-sm text-muted-foreground mt-2" role="status" aria-live="polite">
+                  {filteredFaqs.length} {filteredFaqs.length === 1 ? 'question' : 'questions'} found
+                </p>
+              )}
+            </div>
           </header>
 
           <Card role="region" aria-labelledby="faq-section-title">
             <CardHeader>
               <CardTitle 
                 id="faq-section-title"
-                className="text-2xl"
+                className="text-2xl flex items-center gap-2"
               >
-                Common Questions
+                {searchQuery ? `Search Results (${filteredFaqs.length})` : 'Common Questions'}
               </CardTitle>
               <CardDescription>
-                Browse through our most frequently asked questions or use keyboard navigation to explore. 
-                Use Tab to navigate between questions, Enter or Space to expand answers.
+                {searchQuery 
+                  ? `Showing ${filteredFaqs.length} questions matching "${searchQuery}"`
+                  : 'Browse through our most frequently asked questions or use the search above to find specific topics. Use Tab to navigate between questions, Enter or Space to expand answers.'
+                }
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <Accordion 
-                type="single" 
-                collapsible 
-                className="w-full"
-                role="region"
-                aria-labelledby="faq-section-title"
-              >
-                {faqs.map((faq, index) => (
-                  <AccordionItem 
-                    key={index} 
-                    value={`item-${index}`}
-                    className="border-b border-border"
+              {filteredFaqs.length === 0 ? (
+                <div className="text-center py-8" role="status">
+                  <Search className="h-12 w-12 text-muted-foreground mx-auto mb-4" aria-hidden="true" />
+                  <h3 className="text-lg font-semibold text-foreground mb-2">No questions found</h3>
+                  <p className="text-muted-foreground mb-4">
+                    We couldn't find any questions matching "{searchQuery}". Try different keywords or browse all questions.
+                  </p>
+                  <Button 
+                    variant="outline" 
+                    onClick={() => setSearchQuery("")}
+                    className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                    aria-label="Clear search and show all questions"
                   >
-                    <AccordionTrigger 
-                      className="text-left hover:no-underline focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md px-2 py-4 transition-colors"
-                      aria-expanded="false"
-                      aria-controls={`faq-content-${index}`}
-                      id={`faq-question-${index}`}
-                      aria-describedby={`faq-hint-${index}`}
+                    Show All Questions
+                  </Button>
+                </div>
+              ) : (
+                <Accordion 
+                  type="single" 
+                  collapsible 
+                  className="w-full"
+                  role="region"
+                  aria-labelledby="faq-section-title"
+                >
+                  {filteredFaqs.map((faq, index) => (
+                    <AccordionItem 
+                      key={index} 
+                      value={`item-${index}`}
+                      className="border-b border-border"
                     >
-                      <span className="font-medium text-foreground">
-                        {faq.question}
-                      </span>
-                      <span id={`faq-hint-${index}`} className="sr-only">
-                        Press Enter or Space to expand answer
-                      </span>
-                    </AccordionTrigger>
-                    <AccordionContent 
-                      className="text-muted-foreground pb-6 pt-2 px-2"
-                      id={`faq-content-${index}`}
-                      aria-labelledby={`faq-question-${index}`}
-                      role="region"
-                    >
-                      <div className="whitespace-pre-line leading-relaxed">
-                        {faq.answer}
-                      </div>
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
+                      <AccordionTrigger 
+                        className="text-left hover:no-underline focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-md px-2 py-4 transition-colors"
+                        aria-expanded="false"
+                        aria-controls={`faq-content-${index}`}
+                        id={`faq-question-${index}`}
+                        aria-describedby={`faq-hint-${index}`}
+                      >
+                        <span className="font-medium text-foreground">
+                          {faq.question}
+                        </span>
+                        <span id={`faq-hint-${index}`} className="sr-only">
+                          Press Enter or Space to expand answer
+                        </span>
+                      </AccordionTrigger>
+                      <AccordionContent 
+                        className="text-muted-foreground pb-6 pt-2 px-2"
+                        id={`faq-content-${index}`}
+                        aria-labelledby={`faq-question-${index}`}
+                        role="region"
+                      >
+                        <div className="whitespace-pre-line leading-relaxed">
+                          {faq.answer}
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
+              )}
             </CardContent>
           </Card>
 
