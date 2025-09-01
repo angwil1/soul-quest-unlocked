@@ -365,6 +365,18 @@ export const Navbar = () => {
                       <Dna className="h-4 w-4" />
                       Connection DNA Profile
                     </Button>
+                    <div className="border-t border-border pt-3 space-y-2">
+                      <Link to="/privacy" onClick={() => setIsMenuOpen(false)}>
+                        <Button variant="ghost" size="sm" className="w-full justify-start text-xs text-muted-foreground">
+                          Privacy Policy
+                        </Button>
+                      </Link>
+                      <Link to="/terms" onClick={() => setIsMenuOpen(false)}>
+                        <Button variant="ghost" size="sm" className="w-full justify-start text-xs text-muted-foreground">
+                          Terms of Service
+                        </Button>
+                      </Link>
+                    </div>
                     <Button 
                       variant="destructive" 
                       size="sm" 
@@ -376,9 +388,23 @@ export const Navbar = () => {
                     </Button>
                   </div>
                 ) : (
-                  <Link to="/auth" onClick={() => setIsMenuOpen(false)}>
-                    <Button size="sm" className="w-full">Sign In</Button>
-                  </Link>
+                  <>
+                    <Link to="/auth" onClick={() => setIsMenuOpen(false)}>
+                      <Button size="sm" className="w-full mb-3">Sign In</Button>
+                    </Link>
+                    <div className="space-y-2">
+                      <Link to="/privacy" onClick={() => setIsMenuOpen(false)}>
+                        <Button variant="ghost" size="sm" className="w-full justify-start text-xs text-muted-foreground">
+                          Privacy Policy
+                        </Button>
+                      </Link>
+                      <Link to="/terms" onClick={() => setIsMenuOpen(false)}>
+                        <Button variant="ghost" size="sm" className="w-full justify-start text-xs text-muted-foreground">
+                          Terms of Service
+                        </Button>
+                      </Link>
+                    </div>
+                  </>
                 )}
               </div>
             </div>

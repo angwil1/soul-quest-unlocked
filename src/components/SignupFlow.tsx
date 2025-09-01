@@ -6,6 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Progress } from '@/components/ui/progress';
 import { CheckCircle, Clock, Gift, Heart, Mail } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
+import { Link } from 'react-router-dom';
 // Age verification now handled in signup form
 import { WelcomeConfirmation } from '@/components/WelcomeConfirmation';
 import { supabase } from '@/integrations/supabase/client';
@@ -434,6 +435,17 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
                   <li>• Mini wellness kit delivered to your door</li>
                   <li>• Priority matching and enhanced connection tools</li>
                 </ul>
+              </div>
+
+              <div className="text-center text-xs text-muted-foreground">
+                By creating an account, you agree to our{' '}
+                <Link to="/terms" className="text-primary hover:underline">
+                  Terms of Service
+                </Link>{' '}
+                and{' '}
+                <Link to="/privacy" className="text-primary hover:underline">
+                  Privacy Policy
+                </Link>
               </div>
               
               <Button 
