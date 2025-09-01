@@ -41,7 +41,7 @@ export const ReferralSection: React.FC<ReferralSectionProps> = ({
             <h3 className="text-lg font-semibold text-foreground">Share the Journey</h3>
           </div>
           <p className="text-sm text-muted-foreground max-w-sm mx-auto">
-            Invite someone to begin their Soul Quest. You'll earn a wellness gift that ships after 90 days of active connection.
+            Invite someone to begin their Soul Quest. You'll earn a wellness gift that ships after 90 days of membership.
           </p>
         </div>
 
@@ -62,7 +62,7 @@ export const ReferralSection: React.FC<ReferralSectionProps> = ({
           {successfulReferrals >= 1 && (
             <div className="bg-green-50 border border-green-200 rounded-lg p-3 text-center">
               <p className="text-sm text-green-700 font-medium">
-                You've earned a wellness gift. It will ship after 90 days of active connection.
+                You've earned a wellness gift. It will ship after 90 days of membership.
               </p>
             </div>
           )}

@@ -30,7 +30,7 @@ export const WelcomeConfirmation: React.FC<WelcomeConfirmationProps> = ({ isOpen
             
             <div className="space-y-3">
               <p className="text-primary font-medium">
-                You've unlocked 3 months of Complete Plus. Your wellness gift will ship after 90 days of soulful connection.
+                You've unlocked 3 months of Complete Plus. Your wellness gift will ship after 90 days of membership.
               </p>
             </div>
 
