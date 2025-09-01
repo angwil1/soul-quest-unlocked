@@ -19,7 +19,7 @@ interface ProfileData {
   location: string;
   bio: string;
   interests: string[];
-  photos: File[];
+  photos: string[];  // Changed from File[] to string[] for photo URLs
   lookingFor: string;
   ageRange: { min: number; max: number };
   distance: number;
@@ -43,6 +43,7 @@ export const ProfileSetupFlow: React.FC = () => {
     values: []
   });
   const [loading, setLoading] = useState(false);
+  const [uploadingPhotos, setUploadingPhotos] = useState(false);
   const { user } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -122,12 +123,72 @@ export const ProfileSetupFlow: React.FC = () => {
     }));
   };
 
-  const handlePhotoUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const uploadPhoto = async (file: File): Promise<string | null> => {
+    if (!user) return null;
+
+    try {
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${user.id}/${Date.now()}.${fileExt}`;
+      
+      const { error: uploadError } = await supabase.storage
+        .from('profile-photos')
+        .upload(fileName, file);
+
+      if (uploadError) throw uploadError;
+
+      const { data: { publicUrl } } = supabase.storage
+        .from('profile-photos')
+        .getPublicUrl(fileName);
+
+      return publicUrl;
+    } catch (error) {
+      console.error('Upload error:', error);
+      toast({
+        title: "Upload failed",
+        description: "Failed to upload photo. Please try again.",
+        variant: "destructive",
+      });
+      return null;
+    }
+  };
+
+  const handlePhotoUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(event.target.files || []);
-    setProfileData(prev => ({
-      ...prev,
-      photos: [...prev.photos, ...files].slice(0, 6) // Max 6 photos
-    }));
+    if (files.length === 0) return;
+
+    if (profileData.photos.length + files.length > 6) {
+      toast({
+        title: "Too many photos",
+        description: "Maximum 6 photos allowed.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setUploadingPhotos(true);
+    
+    const newPhotoUrls: string[] = [];
+    
+    for (const file of files) {
+      const photoUrl = await uploadPhoto(file);
+      if (photoUrl) {
+        newPhotoUrls.push(photoUrl);
+      }
+    }
+
+    if (newPhotoUrls.length > 0) {
+      setProfileData(prev => ({
+        ...prev,
+        photos: [...prev.photos, ...newPhotoUrls].slice(0, 6)
+      }));
+      
+      toast({
+        title: "Photos uploaded",
+        description: `${newPhotoUrls.length} photo(s) uploaded successfully.`,
+      });
+    }
+
+    setUploadingPhotos(false);
   };
 
   const handlePersonalityAnswer = (questionId: string, answer: string) => {
@@ -164,7 +225,7 @@ export const ProfileSetupFlow: React.FC = () => {
 
     setLoading(true);
     try {
-      // Save profile data to Supabase
+      // Save profile data to Supabase with photo URLs
       const { error } = await supabase
         .from('profiles')
         .upsert({
@@ -174,13 +235,14 @@ export const ProfileSetupFlow: React.FC = () => {
           location: profileData.location,
           bio: profileData.bio,
           interests: profileData.interests,
+          photos: profileData.photos, // Save all photo URLs
           looking_for: profileData.lookingFor,
           age_preference_min: profileData.ageRange.min,
           age_preference_max: profileData.ageRange.max,
           distance_preference: profileData.distance,
           personality_type: JSON.stringify(profileData.personality),
           communication_style: profileData.personality.communication_style || 'friendly',
-          avatar_url: '', // Will be handled separately for photo uploads
+          avatar_url: profileData.photos[0] || '', // Set first photo as avatar
           created_at: new Date().toISOString()
         });
 
@@ -191,8 +253,8 @@ export const ProfileSetupFlow: React.FC = () => {
         description: "Welcome to AI Complete Me. Let's find your perfect match!",
       });
 
-      // Wait a moment for the profile to be saved and reload the profile data
-      window.location.href = '/matches';
+      // Navigate to matches page
+      navigate('/matches');
     } catch (error: any) {
       toast({
         title: "Error",
@@ -334,23 +396,51 @@ export const ProfileSetupFlow: React.FC = () => {
 
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               {Array.from({ length: 6 }).map((_, index) => (
-                <div key={index} className="aspect-square border-2 border-dashed border-muted rounded-lg flex items-center justify-center">
+                <div key={index} className="aspect-square border-2 border-dashed border-muted rounded-lg flex items-center justify-center relative">
                   {profileData.photos[index] ? (
-                    <img
-                      src={URL.createObjectURL(profileData.photos[index])}
-                      alt={`Profile ${index + 1}`}
-                      className="w-full h-full object-cover rounded-lg"
-                    />
+                    <>
+                      <img
+                        src={profileData.photos[index]}
+                        alt={`Profile ${index + 1}`}
+                        className="w-full h-full object-cover rounded-lg"
+                      />
+                      <button
+                        onClick={() => {
+                          setProfileData(prev => ({
+                            ...prev,
+                            photos: prev.photos.filter((_, i) => i !== index)
+                          }));
+                        }}
+                        className="absolute top-2 right-2 bg-red-500 text-white rounded-full p-1 w-6 h-6 flex items-center justify-center text-xs hover:bg-red-600"
+                      >
+                        ×
+                      </button>
+                      {index === 0 && (
+                        <div className="absolute bottom-2 left-2 bg-primary text-primary-foreground text-xs px-2 py-1 rounded-full">
+                          Main
+                        </div>
+                      )}
+                    </>
                   ) : (
                     <label className="cursor-pointer flex flex-col items-center gap-2 p-4">
-                      <Camera className="h-8 w-8 text-muted-foreground" />
-                      <span className="text-sm text-muted-foreground">Add Photo</span>
+                      {uploadingPhotos ? (
+                        <div className="text-center">
+                          <Upload className="h-6 w-6 text-primary animate-pulse mx-auto mb-2" />
+                          <span className="text-sm text-muted-foreground">Uploading...</span>
+                        </div>
+                      ) : (
+                        <>
+                          <Camera className="h-8 w-8 text-muted-foreground" />
+                          <span className="text-sm text-muted-foreground">Add Photo</span>
+                        </>
+                      )}
                       <input
                         type="file"
                         accept="image/*"
                         onChange={handlePhotoUpload}
                         className="hidden"
                         multiple
+                        disabled={uploadingPhotos}
                       />
                     </label>
                   )}
@@ -457,11 +547,13 @@ export const ProfileSetupFlow: React.FC = () => {
               {currentStep === totalSteps ? (
                 <Button
                   onClick={handleComplete}
-                  disabled={!validateStep() || loading}
+                  disabled={!validateStep() || loading || uploadingPhotos}
                   className="bg-primary hover:bg-primary/90"
                 >
                   {loading ? (
                     "Saving..."
+                  ) : uploadingPhotos ? (
+                    "Uploading Photos..."
                   ) : (
                     <>
                       Complete Profile
