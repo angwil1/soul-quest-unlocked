@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { ArrowLeft, Heart, MapPin, Briefcase, Sparkles, Eye, Bookmark } from 'lucide-react';
+import { ArrowLeft, Heart, MapPin, Briefcase, Sparkles, Eye, Bookmark, Zap } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { founderCuratedProfiles } from '@/data/sampleProfiles';
 import { SaveToVaultButton } from '@/components/SaveToVaultButton';
@@ -33,7 +33,10 @@ const BrowseProfiles = () => {
               Discover sample profiles to see what's possible
             </p>
           </div>
-          <div className="w-24" /> {/* Spacer */}
+          <Button onClick={() => navigate('/swipe')} className="flex items-center gap-2">
+            <Zap className="h-4 w-4" />
+            Swipe Mode
+          </Button>
         </div>
       </div>
 

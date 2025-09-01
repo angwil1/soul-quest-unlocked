@@ -13,6 +13,7 @@ import ProfileSetup from "./pages/ProfileSetup";
 import Matches from "./pages/Matches";
 import Messages from "./pages/Messages";
 import BrowseProfiles from "./pages/BrowseProfiles";
+import SwipeMode from "./pages/SwipeMode";
 
 import Questions from "./pages/Questions";
 import QuizResults from "./pages/QuizResults";
@@ -102,6 +103,7 @@ const App = () => {
             <Route path="/matches" element={<Matches />} />
             <Route path="/messages" element={<Messages />} />
             <Route path="/browse" element={<BrowseProfiles />} />
+            <Route path="/swipe" element={<SwipeMode />} />
             <Route path="/browse-profiles" element={<BrowseProfiles />} />
             <Route path="/questions" element={<Questions />} />
             <Route path="/quiz-results" element={<QuizResults />} />

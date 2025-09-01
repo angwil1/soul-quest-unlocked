@@ -1369,6 +1369,8 @@ export type Database = {
       profiles: {
         Row: {
           age: number | null
+          age_max: number | null
+          age_min: number | null
           age_preference_max: number | null
           age_preference_min: number | null
           avatar_url: string | null
@@ -1387,6 +1389,7 @@ export type Database = {
           id: string
           interests: string[] | null
           is_premium: boolean | null
+          is_profile_complete: boolean | null
           last_online: string | null
           location: string | null
           looking_for: string | null
@@ -1405,6 +1408,8 @@ export type Database = {
         }
         Insert: {
           age?: number | null
+          age_max?: number | null
+          age_min?: number | null
           age_preference_max?: number | null
           age_preference_min?: number | null
           avatar_url?: string | null
@@ -1423,6 +1428,7 @@ export type Database = {
           id?: string
           interests?: string[] | null
           is_premium?: boolean | null
+          is_profile_complete?: boolean | null
           last_online?: string | null
           location?: string | null
           looking_for?: string | null
@@ -1441,6 +1447,8 @@ export type Database = {
         }
         Update: {
           age?: number | null
+          age_max?: number | null
+          age_min?: number | null
           age_preference_max?: number | null
           age_preference_min?: number | null
           avatar_url?: string | null
@@ -1459,6 +1467,7 @@ export type Database = {
           id?: string
           interests?: string[] | null
           is_premium?: boolean | null
+          is_profile_complete?: boolean | null
           last_online?: string | null
           location?: string | null
           looking_for?: string | null
@@ -1785,6 +1794,30 @@ export type Database = {
           subscription_end?: string | null
           subscription_tier?: string | null
           updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      swipe_interactions: {
+        Row: {
+          created_at: string | null
+          id: string
+          swipe_direction: string
+          swiped_user_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          swipe_direction: string
+          swiped_user_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          swipe_direction?: string
+          swiped_user_id?: string
           user_id?: string
         }
         Relationships: []

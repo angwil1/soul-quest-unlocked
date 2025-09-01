@@ -101,6 +101,7 @@ export const Navbar = () => {
   }, [user]);
 
   const navigation = [
+    { name: "Discover", href: "/swipe" },
     { name: "Browse Profiles", href: "/browse" },
     { name: "Matches", href: "/matches" },  
     { name: "Messages", href: "/messages" },
