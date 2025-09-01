@@ -103,7 +103,7 @@ export const Navbar = () => {
   const navigation = [
     { name: "Browse Profiles", href: "/browse" },
     { name: "Matches", href: "/matches" },  
-    { name: "Conversations", href: "/messages" },
+    { name: "Messages", href: "/messages" },
     { name: "Memory Vault", href: "/memory-vault" },
     { name: "Pricing", href: "/pricing" },
     { name: "FAQ", href: "/faq" },
