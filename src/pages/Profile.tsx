@@ -3,14 +3,49 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ShippingProgressTracker } from '@/components/ShippingProgressTracker';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, Edit, MapPin, Briefcase, Heart } from 'lucide-react';
+import { ArrowLeft, Edit, MapPin, Briefcase, Heart, Settings, Share2, Eye, Users, MoreVertical } from 'lucide-react';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import { Progress } from '@/components/ui/progress';
 import profileSilhouette from '@/assets/profile-silhouette.jpg';
 import { useProfile } from '@/hooks/useProfile';
 import { PageLoadingSkeleton } from '@/components/LoadingSkeleton';
+import { useState } from 'react';
 
 const Profile = () => {
   const navigate = useNavigate();
   const { profile, loading } = useProfile();
+  const [isShareMenuOpen, setIsShareMenuOpen] = useState(false);
+
+  // Calculate profile completion percentage
+  const calculateProfileCompletion = () => {
+    if (!profile) return 0;
+    
+    let completed = 0;
+    const totalFields = 6;
+    
+    if (profile.name) completed++;
+    if (profile.bio) completed++;
+    if (profile.location) completed++;
+    if (profile.occupation) completed++;
+    if (profile.interests?.length) completed++;
+    if (profile.photos?.length || profile.avatar_url) completed++;
+    
+    return Math.round((completed / totalFields) * 100);
+  };
+
+  const handleShareProfile = () => {
+    if (navigator.share) {
+      navigator.share({
+        title: `${profile?.name || 'User'}'s Profile - AI Complete Me`,
+        text: `Check out ${profile?.name || 'this user'}'s profile on AI Complete Me`,
+        url: window.location.href,
+      });
+    } else {
+      // Fallback: copy to clipboard
+      navigator.clipboard.writeText(window.location.href);
+      // Could add toast notification here
+    }
+  };
 
   if (loading) {
     return <PageLoadingSkeleton />;
@@ -56,14 +91,76 @@ const Profile = () => {
             <ArrowLeft className="h-4 w-4 mr-2" aria-hidden="true" />
             Back
           </Button>
-          <Button 
-            onClick={() => navigate('/profile/edit')}
-            className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
-            aria-label="Edit your profile information"
-          >
-            <Edit className="h-4 w-4 mr-2" aria-hidden="true" />
-            Edit Profile
-          </Button>
+          
+          <div className="flex items-center gap-3">
+            <Button 
+              variant="outline" 
+              size="sm"
+              onClick={() => navigate('/matches')}
+              className="flex items-center gap-2 focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              aria-label="View your matches"
+            >
+              <Users className="h-4 w-4" aria-hidden="true" />
+              My Matches
+            </Button>
+            
+            <Button 
+              variant="outline" 
+              size="sm"
+              onClick={() => navigate('/browse-profiles')}
+              className="flex items-center gap-2 focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              aria-label="Browse sample profiles"
+            >
+              <Eye className="h-4 w-4" aria-hidden="true" />
+              Browse Profiles
+            </Button>
+            
+            <DropdownMenu open={isShareMenuOpen} onOpenChange={setIsShareMenuOpen}>
+              <DropdownMenuTrigger asChild>
+                <Button 
+                  variant="outline"
+                  size="sm" 
+                  className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                  aria-label="More profile options"
+                  aria-expanded={isShareMenuOpen}
+                >
+                  <MoreVertical className="h-4 w-4" aria-hidden="true" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-48">
+                <DropdownMenuItem 
+                  onClick={handleShareProfile}
+                  className="flex items-center gap-2 focus:bg-muted cursor-pointer"
+                >
+                  <Share2 className="h-4 w-4" aria-hidden="true" />
+                  Share Profile
+                </DropdownMenuItem>
+                <DropdownMenuItem 
+                  onClick={() => navigate('/privacy')}
+                  className="flex items-center gap-2 focus:bg-muted cursor-pointer"
+                >
+                  <Settings className="h-4 w-4" aria-hidden="true" />
+                  Privacy Settings
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem 
+                  onClick={() => navigate('/faq')}
+                  className="flex items-center gap-2 focus:bg-muted cursor-pointer"
+                >
+                  Help & FAQ
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+            
+            <Button 
+              onClick={() => navigate('/profile/edit')}
+              className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              aria-label="Edit your profile information"
+            >
+              <Edit className="h-4 w-4 mr-2" aria-hidden="true" />
+              Edit Profile
+            </Button>
+          </div>
         </div>
       </header>
 
@@ -131,6 +228,46 @@ const Profile = () => {
           {/* Profile Details */}
           <section className="lg:col-span-2 space-y-6" aria-labelledby="details-heading">
             <h2 id="details-heading" className="sr-only">Profile Details</h2>
+            
+            {/* Profile Completion Progress */}
+            <Card role="region" aria-labelledby="completion-title">
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <CardTitle id="completion-title" className="text-lg">Profile Completion</CardTitle>
+                  <Badge variant="secondary" className="text-sm">
+                    {calculateProfileCompletion()}% Complete
+                  </Badge>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  <Progress 
+                    value={calculateProfileCompletion()} 
+                    className="h-2"
+                    aria-label={`Profile is ${calculateProfileCompletion()}% complete`}
+                  />
+                  <p className="text-sm text-muted-foreground">
+                    {calculateProfileCompletion() === 100 
+                      ? "🎉 Your profile is complete! You're ready to find amazing matches."
+                      : calculateProfileCompletion() >= 80
+                      ? "Almost there! A few more details will help you get better matches."
+                      : "Complete your profile to improve match quality and visibility."
+                    }
+                  </p>
+                  {calculateProfileCompletion() < 100 && (
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      onClick={() => navigate('/profile/edit')}
+                      className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                      aria-label="Continue completing your profile"
+                    >
+                      Complete Profile
+                    </Button>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
             
             {/* Basic Info */}
             <Card role="region" aria-labelledby="basic-info-title">
