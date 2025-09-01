@@ -54,19 +54,19 @@ const Profile = () => {
           <div className="lg:col-span-1">
             <Card>
               <CardContent className="p-6">
-                <div className="space-y-4">
-                  {/* Main Photo */}
-                  <div className="w-32 h-32 rounded-lg overflow-hidden bg-muted mx-auto">
-                    <img 
-                      src={profile.avatar_url || profile.photos?.[0] || profileSilhouette} 
-                      alt="Profile"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  
-                  {/* Additional Photos */}
+                {/* Main Photo */}
+                <div className="w-32 h-32 rounded-lg overflow-hidden bg-muted mx-auto mb-4">
+                  <img 
+                    src={profile.avatar_url || profile.photos?.[0] || profileSilhouette} 
+                    alt="Profile"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                
+                {/* Additional Photos - only show if there are more photos */}
+                {profile.photos && profile.photos.length > 1 && (
                   <div className="grid grid-cols-3 gap-2 justify-center">
-                    {profile.photos?.slice(1).map((photo, index) => (
+                    {profile.photos.slice(1).map((photo, index) => (
                       <div key={index} className="w-20 h-20 rounded-lg overflow-hidden bg-muted">
                         <img 
                           src={photo} 
@@ -76,7 +76,7 @@ const Profile = () => {
                       </div>
                     ))}
                   </div>
-                </div>
+                )}
               </CardContent>
             </Card>
           </div>
