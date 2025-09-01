@@ -56,7 +56,7 @@ const Profile = () => {
               <CardContent className="p-6">
                 <div className="space-y-4">
                   {/* Main Photo */}
-                  <div className="aspect-square rounded-lg overflow-hidden bg-muted">
+                  <div className="w-32 h-32 rounded-lg overflow-hidden bg-muted mx-auto">
                     <img 
                       src={profile.avatar_url || profile.photos?.[0] || profileSilhouette} 
                       alt="Profile"
@@ -65,9 +65,9 @@ const Profile = () => {
                   </div>
                   
                   {/* Additional Photos */}
-                  <div className="grid grid-cols-2 gap-2">
+                  <div className="grid grid-cols-3 gap-2 justify-center">
                     {profile.photos?.slice(1).map((photo, index) => (
-                      <div key={index} className="aspect-square rounded-lg overflow-hidden bg-muted">
+                      <div key={index} className="w-20 h-20 rounded-lg overflow-hidden bg-muted">
                         <img 
                           src={photo} 
                           alt={`Photo ${index + 2}`}
