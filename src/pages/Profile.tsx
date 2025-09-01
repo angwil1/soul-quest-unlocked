@@ -56,7 +56,7 @@ const Profile = () => {
             {(!profile.photos || profile.photos.length <= 1) && (
               <Card className="w-fit mx-auto">
                 <CardContent className="p-3">
-                  <div className="w-24 h-24 rounded-lg overflow-hidden bg-muted">
+                  <div className="w-20 h-28 rounded-lg overflow-hidden bg-muted">
                     <img 
                       src={profile.avatar_url || profile.photos?.[0] || profileSilhouette} 
                       alt="Profile"
