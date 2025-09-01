@@ -49,7 +49,7 @@ const Auth = () => {
             .from('profiles')
             .select('*')
             .eq('id', user.id)
-            .single();
+            .maybeSingle();
           
           // If no profile or incomplete profile, go to setup
           if (!profile || !profile.name || !profile.location || !profile.bio) {
