@@ -230,6 +230,39 @@ const Messages = () => {
             <h1 className="text-3xl font-bold">Messages</h1>
           </div>
           <div className="flex items-center gap-4">
+            {/* Create Sample Matches Button for Testing */}
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={async () => {
+                if (!user) return;
+                try {
+                  const { error } = await supabase.rpc('create_sample_matches_for_user', {
+                    target_user_id: user.id
+                  });
+                  if (error) throw error;
+                  
+                  toast({
+                    title: "Sample matches created!",
+                    description: "You now have some matches to test messaging with"
+                  });
+                  
+                  // Refresh the matches list
+                  loadMatches();
+                } catch (error) {
+                  console.error('Error creating sample matches:', error);
+                  toast({
+                    title: "Error",
+                    description: "Failed to create sample matches",
+                    variant: "destructive"
+                  });
+                }
+              }}
+              className="flex items-center gap-2 bg-green-50 hover:bg-green-100 text-green-700 border-green-200"
+            >
+              🧪 Create Test Matches
+            </Button>
+            
             {/* AI Digest Toggle */}
             <Button
               variant="ghost"
