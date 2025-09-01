@@ -29,6 +29,11 @@ const Auth = () => {
     const urlParams = new URLSearchParams(window.location.search);
     const isPasswordReset = urlParams.get('type') === 'recovery';
     
+    console.log('Auth page - URL params:', Object.fromEntries(urlParams.entries()));
+    console.log('Auth page - isPasswordReset:', isPasswordReset);
+    console.log('Auth page - user exists:', !!user);
+    console.log('Auth page - current pathname:', window.location.pathname);
+    
     if (user && !showSignupFlow && !isPasswordReset) {
       // Don't interfere if user is already on profile setup page
       if (window.location.pathname === '/profile/setup') {
