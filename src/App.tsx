@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AppWrapper } from "@/components/AppWrapper";
 import { AgeGate } from "@/components/AgeGate";
+import ScrollToTop from "@/components/ScrollToTop";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
 import Profile from "./pages/Profile";
@@ -92,6 +93,7 @@ const App = () => {
       <TooltipProvider>
         <Toaster />
         <BrowserRouter>
+          <ScrollToTop />
           <AppWrapper>
           <Routes>
             <Route path="/" element={<Index />} />
