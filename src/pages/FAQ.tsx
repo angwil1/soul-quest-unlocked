@@ -369,57 +369,58 @@ const FAQ = () => {
               </p>
             </div>
             
-            <div className="max-w-6xl mx-auto px-4 space-y-8">
-              {/* First Row - Navigation & Assistive Tech */}
-              <div className="grid gap-8 lg:gap-12 grid-cols-1 lg:grid-cols-2">
-                {/* Navigation & Controls */}
-                <Card className="p-8 lg:p-12 hover:shadow-xl transition-all duration-300 border-2">
-                  <div className="flex items-center gap-6 mb-6">
-                    <div className="w-16 h-16 lg:w-20 lg:h-20 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
-                      <span className="text-2xl lg:text-3xl">⌨️</span>
+            <div className="max-w-7xl mx-auto px-4 space-y-12">
+              {/* Navigation & Controls - Full Width */}
+              <Card className="p-12 lg:p-16 hover:shadow-2xl transition-all duration-300 border-2 bg-gradient-to-r from-primary/5 to-primary/10">
+                <div className="flex flex-col lg:flex-row lg:items-start gap-8 lg:gap-12">
+                  <div className="flex items-center gap-6 lg:flex-col lg:items-center lg:text-center lg:min-w-[200px]">
+                    <div className="w-20 h-20 lg:w-24 lg:h-24 bg-primary/15 rounded-full flex items-center justify-center flex-shrink-0">
+                      <span className="text-3xl lg:text-4xl">⌨️</span>
                     </div>
-                    <h3 className="font-bold text-foreground text-xl lg:text-2xl">Navigation & Controls</h3>
+                    <h3 className="font-bold text-foreground text-2xl lg:text-3xl">Navigation & Controls</h3>
                   </div>
-                  <div className="space-y-6 text-base lg:text-lg text-muted-foreground">
-                    <div>
-                      <span className="font-semibold text-foreground text-lg block mb-3">Keyboard Navigation:</span>
-                      <p className="leading-relaxed">Tab to navigate between elements, Enter or Space to activate buttons and links, Arrow keys for menu navigation</p>
+                  <div className="flex-1 grid gap-8 lg:gap-12 lg:grid-cols-3">
+                    <div className="space-y-4">
+                      <span className="font-semibold text-foreground text-xl block">Keyboard Navigation</span>
+                      <p className="text-lg text-muted-foreground leading-relaxed">Tab to navigate between elements, Enter or Space to activate buttons and links, Arrow keys for menu navigation</p>
                     </div>
-                    <div>
-                      <span className="font-semibold text-foreground text-lg block mb-3">Skip Links:</span>
-                      <p className="leading-relaxed">Jump directly to main content, bypassing repetitive navigation elements</p>
+                    <div className="space-y-4">
+                      <span className="font-semibold text-foreground text-xl block">Skip Links</span>
+                      <p className="text-lg text-muted-foreground leading-relaxed">Jump directly to main content, bypassing repetitive navigation elements</p>
                     </div>
-                    <div>
-                      <span className="font-semibold text-foreground text-lg block mb-3">Focus Indicators:</span>
-                      <p className="leading-relaxed">Clear visual focus rings that show your current position on the page</p>
+                    <div className="space-y-4">
+                      <span className="font-semibold text-foreground text-xl block">Focus Indicators</span>
+                      <p className="text-lg text-muted-foreground leading-relaxed">Clear visual focus rings that show your current position on the page</p>
                     </div>
                   </div>
-                </Card>
+                </div>
+              </Card>
 
-                {/* Assistive Technology */}
-                <Card className="p-8 lg:p-12 hover:shadow-xl transition-all duration-300 border-2">
-                  <div className="flex items-center gap-6 mb-6">
-                    <div className="w-16 h-16 lg:w-20 lg:h-20 bg-secondary/20 rounded-full flex items-center justify-center flex-shrink-0">
-                      <span className="text-2xl lg:text-3xl">🔊</span>
+              {/* Assistive Technology - Full Width */}
+              <Card className="p-12 lg:p-16 hover:shadow-2xl transition-all duration-300 border-2 bg-gradient-to-r from-secondary/5 to-accent/10">
+                <div className="flex flex-col lg:flex-row lg:items-start gap-8 lg:gap-12">
+                  <div className="flex items-center gap-6 lg:flex-col lg:items-center lg:text-center lg:min-w-[200px]">
+                    <div className="w-20 h-20 lg:w-24 lg:h-24 bg-secondary/20 rounded-full flex items-center justify-center flex-shrink-0">
+                      <span className="text-3xl lg:text-4xl">🔊</span>
                     </div>
-                    <h3 className="font-bold text-foreground text-xl lg:text-2xl">Assistive Technology</h3>
+                    <h3 className="font-bold text-foreground text-2xl lg:text-3xl">Assistive Technology</h3>
                   </div>
-                  <div className="space-y-6 text-base lg:text-lg text-muted-foreground">
-                    <div>
-                      <span className="font-semibold text-foreground text-lg block mb-3">Screen Readers:</span>
-                      <p className="leading-relaxed">Full compatibility with NVDA, JAWS, VoiceOver, and TalkBack screen readers</p>
+                  <div className="flex-1 grid gap-8 lg:gap-12 lg:grid-cols-3">
+                    <div className="space-y-4">
+                      <span className="font-semibold text-foreground text-xl block">Screen Readers</span>
+                      <p className="text-lg text-muted-foreground leading-relaxed">Full compatibility with NVDA, JAWS, VoiceOver, and TalkBack screen readers</p>
                     </div>
-                    <div>
-                      <span className="font-semibold text-foreground text-lg block mb-3">Voice Control:</span>
-                      <p className="leading-relaxed">Works seamlessly with Dragon NaturallySpeaking and Voice Control software</p>
+                    <div className="space-y-4">
+                      <span className="font-semibold text-foreground text-xl block">Voice Control</span>
+                      <p className="text-lg text-muted-foreground leading-relaxed">Works seamlessly with Dragon NaturallySpeaking and Voice Control software</p>
                     </div>
-                    <div>
-                      <span className="font-semibold text-foreground text-lg block mb-3">Switch Navigation:</span>
-                      <p className="leading-relaxed">Compatible with switch devices, eye-tracking systems, and alternative input methods</p>
+                    <div className="space-y-4">
+                      <span className="font-semibold text-foreground text-xl block">Switch Navigation</span>
+                      <p className="text-lg text-muted-foreground leading-relaxed">Compatible with switch devices, eye-tracking systems, and alternative input methods</p>
                     </div>
                   </div>
-                </Card>
-              </div>
+                </div>
+              </Card>
 
               {/* Second Row - Visual & Content */}
               <div className="grid gap-8 lg:gap-12 grid-cols-1 lg:grid-cols-2">
