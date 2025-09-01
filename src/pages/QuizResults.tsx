@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
+import { useProfile } from '@/hooks/useProfile';
 import { useMessageLimits } from '@/hooks/useMessageLimits';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -11,6 +12,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { useEmailJourneys } from '@/hooks/useEmailJourneys';
 import { useToast } from '@/hooks/use-toast';
 import { InviteKindredSoul } from '@/components/InviteKindredSoul';
+import { ProfileSetupModal } from '@/components/ProfileSetupModal';
 
 interface MatchPreview {
   id: string;
@@ -23,6 +25,7 @@ interface MatchPreview {
 
 const QuizResults = () => {
   const { user, signOut } = useAuth();
+  const { profile, loading: profileLoading } = useProfile();
   const navigate = useNavigate();
   const { trackQuizCompletion } = useEmailJourneys();
   const { toast } = useToast();
@@ -32,6 +35,7 @@ const QuizResults = () => {
   const [showUpgradePrompt, setShowUpgradePrompt] = useState(false);
   const [emailSent, setEmailSent] = useState(true);
   const [resending, setResending] = useState(false);
+  const [showProfileSetup, setShowProfileSetup] = useState(false);
 
   useEffect(() => {
     loadMatchPreviews();
@@ -43,6 +47,19 @@ const QuizResults = () => {
       duration: 4000,
     });
   }, [toast]);
+
+  // Show profile setup modal after quiz completion if needed
+  useEffect(() => {
+    if (!profileLoading && user && profile) {
+      const needsProfileSetup = !profile.gender || !profile.looking_for || !profile.location;
+      if (needsProfileSetup) {
+        // Small delay to let the page load first
+        setTimeout(() => {
+          setShowProfileSetup(true);
+        }, 1000);
+      }
+    }
+  }, [user, profile, profileLoading]);
 
   const loadMatchPreviews = async () => {
     try {
@@ -181,6 +198,10 @@ const QuizResults = () => {
     } finally {
       setResending(false);
     }
+  };
+
+  const handleProfileSetupComplete = () => {
+    setShowProfileSetup(false);
   };
 
   if (loading) {
@@ -452,6 +473,11 @@ const QuizResults = () => {
           </p>
         </div>
       </div>
+      
+      <ProfileSetupModal 
+        isOpen={showProfileSetup} 
+        onComplete={handleProfileSetupComplete} 
+      />
     </div>
   );
 };

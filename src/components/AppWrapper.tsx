@@ -15,45 +15,20 @@ export const AppWrapper: React.FC<AppWrapperProps> = ({ children }) => {
   const [hasShownModal, setHasShownModal] = useState(false);
   const location = useLocation();
 
-  // Show profile setup when needed (exclude from most pages)
+  // Profile setup modal is now handled by QuizResults page
+  // Only show on very specific pages where it makes sense
   useEffect(() => {
     if (!authLoading && !profileLoading && user && profile && !hasShownModal) {
-      // Don't show modal on these pages
-      const excludedPaths = [
-        '/profile',
-        '/profile/setup',
-        '/',
-        '/messages',
-        '/reset-password',
+      // Only show modal on these specific pages where profile setup is needed
+      const allowedPaths = [
         '/matches',
         '/browse',
-        '/pricing',
-        '/connection-dna',
-        '/memory-vault',
-        '/ai-digest',
-        '/mission',
-        '/faq',
-        '/quiz-results',
-        '/privacy',
-        '/terms',
-        '/cookies',
-        '/accessibility',
-        '/safety',
-        '/sample-user',
-        '/auth',
-        '/feature-test'
+        '/messages'
       ];
       
-      const shouldExclude = excludedPaths.some(path => 
-        path === '/' ? location.pathname === '/' : location.pathname.startsWith(path)
-      );
+      const shouldShow = allowedPaths.some(path => location.pathname.startsWith(path));
       
-      // Always exclude the profile setup modal from messages page
-      if (location.pathname === '/messages') {
-        return;
-      }
-      
-      if (!shouldExclude) {
+      if (shouldShow) {
         const needsProfileSetup = !profile.gender || !profile.looking_for || !profile.location;
         if (needsProfileSetup) {
           setShowProfileSetup(true);
