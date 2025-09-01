@@ -1,0 +1,8 @@
+-- First create sample user profiles that we'll use for testing
+INSERT INTO public.profiles (id, name, bio, age, location, interests, avatar_url) 
+VALUES 
+  ('10000000-1111-1111-1111-111111111111', 'Sage', 'Nature lover who enjoys farmers markets and sustainable living. Always looking for the next adventure in the great outdoors!', 28, 'Portland, OR', '["Photography", "Sustainability", "Farmers Markets"]', 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=400&h=400&fit=crop&crop=face'),
+  ('20000000-2222-2222-2222-222222222222', 'River', 'Dog parent to the cutest golden retriever named Mochi! Love coffee dates and long walks in the park.', 25, 'Seattle, WA', '["Dogs", "Coffee", "Outdoor Activities"]', 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face'),
+  ('30000000-3333-3333-3333-333333333333', 'Atlas', 'Local musician and coffee enthusiast. You can find me performing at various venues around town or discovering new cafes.', 30, 'Austin, TX', '["Music", "Coffee", "Live Performances"]', 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face'),
+  ('40000000-4444-4444-4444-444444444444', 'Echo', 'Mindfulness practitioner and hiking enthusiast. Believe in connecting authentically and living in the present moment.', 27, 'Boulder, CO', '["Mindfulness", "Hiking", "Meditation"]', 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face')
+ON CONFLICT (id) DO NOTHING;
