@@ -2152,6 +2152,10 @@ export type Database = {
         Args: { p_matched_user_id: string; p_user_id: string }
         Returns: string
       }
+      create_sample_matches_for_user: {
+        Args: { target_user_id: string }
+        Returns: undefined
+      }
       create_signup_event_for_user: {
         Args: { p_user_id: string }
         Returns: undefined
