@@ -392,7 +392,7 @@ const FAQ = () => {
               {/* Assistive Technology */}
               <Card className="p-6 hover:shadow-md transition-shadow">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                  <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
                     <span className="text-lg">🔊</span>
                   </div>
                   <h3 className="font-semibold text-foreground">Assistive Technology</h3>
@@ -416,7 +416,7 @@ const FAQ = () => {
               {/* Visual & Cognitive */}
               <Card className="p-6 hover:shadow-md transition-shadow">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                  <div className="w-10 h-10 bg-secondary/20 rounded-full flex items-center justify-center">
                     <span className="text-lg">👁️</span>
                   </div>
                   <h3 className="font-semibold text-foreground">Visual & Cognitive</h3>
@@ -440,7 +440,7 @@ const FAQ = () => {
               {/* Content & Structure */}
               <Card className="p-6 hover:shadow-md transition-shadow">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
+                  <div className="w-10 h-10 bg-accent/20 rounded-full flex items-center justify-center">
                     <span className="text-lg">🏗️</span>
                   </div>
                   <h3 className="font-semibold text-foreground">Content & Structure</h3>
