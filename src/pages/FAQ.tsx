@@ -366,99 +366,99 @@ const FAQ = () => {
               </p>
             </div>
             
-            <div className="grid gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
               {/* Navigation & Controls */}
-              <Card className="p-4 sm:p-6 hover:shadow-md transition-shadow">
-                <div className="flex items-center gap-3 mb-3 sm:mb-4">
+              <Card className="p-4 sm:p-6 hover:shadow-md transition-shadow h-full">
+                <div className="flex items-start gap-3 mb-3 sm:mb-4">
                   <div className="w-8 h-8 sm:w-10 sm:h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
                     <span className="text-base sm:text-lg">⌨️</span>
                   </div>
-                  <h3 className="font-semibold text-foreground text-sm sm:text-base">Navigation & Controls</h3>
+                  <h3 className="font-semibold text-foreground text-sm sm:text-base break-words">Navigation & Controls</h3>
                 </div>
                 <div className="space-y-2 sm:space-y-3 text-xs sm:text-sm text-muted-foreground">
                   <div>
-                    <span className="font-medium text-foreground text-xs sm:text-sm">Keyboard Navigation:</span>
-                    <p className="mt-0.5 sm:mt-1 leading-relaxed">Tab to navigate, Enter/Space to activate, Arrow keys in menus</p>
+                    <span className="font-medium text-foreground text-xs sm:text-sm block">Keyboard Navigation:</span>
+                    <p className="mt-0.5 sm:mt-1 leading-relaxed break-words">Tab to navigate, Enter/Space to activate, Arrow keys in menus</p>
                   </div>
                   <div>
-                    <span className="font-medium text-foreground text-xs sm:text-sm">Skip Links:</span>
-                    <p className="mt-0.5 sm:mt-1 leading-relaxed">Jump directly to main content, bypassing navigation</p>
+                    <span className="font-medium text-foreground text-xs sm:text-sm block">Skip Links:</span>
+                    <p className="mt-0.5 sm:mt-1 leading-relaxed break-words">Jump directly to main content, bypassing navigation</p>
                   </div>
                   <div>
-                    <span className="font-medium text-foreground text-xs sm:text-sm">Focus Indicators:</span>
-                    <p className="mt-0.5 sm:mt-1 leading-relaxed">Clear visual focus rings show your current position</p>
+                    <span className="font-medium text-foreground text-xs sm:text-sm block">Focus Indicators:</span>
+                    <p className="mt-0.5 sm:mt-1 leading-relaxed break-words">Clear visual focus rings show your current position</p>
                   </div>
                 </div>
               </Card>
               
               {/* Assistive Technology */}
-              <Card className="p-4 sm:p-6 hover:shadow-md transition-shadow">
-                <div className="flex items-center gap-3 mb-3 sm:mb-4">
+              <Card className="p-4 sm:p-6 hover:shadow-md transition-shadow h-full">
+                <div className="flex items-start gap-3 mb-3 sm:mb-4">
                   <div className="w-8 h-8 sm:w-10 sm:h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
                     <span className="text-base sm:text-lg">🔊</span>
                   </div>
-                  <h3 className="font-semibold text-foreground text-sm sm:text-base">Assistive Technology</h3>
+                  <h3 className="font-semibold text-foreground text-sm sm:text-base break-words">Assistive Technology</h3>
                 </div>
                 <div className="space-y-2 sm:space-y-3 text-xs sm:text-sm text-muted-foreground">
                   <div>
-                    <span className="font-medium text-foreground text-xs sm:text-sm">Screen Readers:</span>
-                    <p className="mt-0.5 sm:mt-1 leading-relaxed">NVDA, JAWS, VoiceOver, TalkBack compatibility</p>
+                    <span className="font-medium text-foreground text-xs sm:text-sm block">Screen Readers:</span>
+                    <p className="mt-0.5 sm:mt-1 leading-relaxed break-words">NVDA, JAWS, VoiceOver, TalkBack compatibility</p>
                   </div>
                   <div>
-                    <span className="font-medium text-foreground text-xs sm:text-sm">Voice Control:</span>
-                    <p className="mt-0.5 sm:mt-1 leading-relaxed">Dragon NaturallySpeaking, Voice Control support</p>
+                    <span className="font-medium text-foreground text-xs sm:text-sm block">Voice Control:</span>
+                    <p className="mt-0.5 sm:mt-1 leading-relaxed break-words">Dragon NaturallySpeaking, Voice Control support</p>
                   </div>
                   <div>
-                    <span className="font-medium text-foreground text-xs sm:text-sm">Switch Navigation:</span>
-                    <p className="mt-0.5 sm:mt-1 leading-relaxed">Compatible with switch devices and eye-tracking</p>
+                    <span className="font-medium text-foreground text-xs sm:text-sm block">Switch Navigation:</span>
+                    <p className="mt-0.5 sm:mt-1 leading-relaxed break-words">Compatible with switch devices and eye-tracking</p>
                   </div>
                 </div>
               </Card>
               
               {/* Visual & Cognitive */}
-              <Card className="p-4 sm:p-6 hover:shadow-md transition-shadow">
-                <div className="flex items-center gap-3 mb-3 sm:mb-4">
+              <Card className="p-4 sm:p-6 hover:shadow-md transition-shadow h-full">
+                <div className="flex items-start gap-3 mb-3 sm:mb-4">
                   <div className="w-8 h-8 sm:w-10 sm:h-10 bg-secondary/20 rounded-full flex items-center justify-center flex-shrink-0">
                     <span className="text-base sm:text-lg">👁️</span>
                   </div>
-                  <h3 className="font-semibold text-foreground text-sm sm:text-base">Visual & Cognitive</h3>
+                  <h3 className="font-semibold text-foreground text-sm sm:text-base break-words">Visual & Cognitive</h3>
                 </div>
                 <div className="space-y-2 sm:space-y-3 text-xs sm:text-sm text-muted-foreground">
                   <div>
-                    <span className="font-medium text-foreground text-xs sm:text-sm">High Contrast:</span>
-                    <p className="mt-0.5 sm:mt-1 leading-relaxed">Enhanced contrast ratios, dark mode support</p>
+                    <span className="font-medium text-foreground text-xs sm:text-sm block">High Contrast:</span>
+                    <p className="mt-0.5 sm:mt-1 leading-relaxed break-words">Enhanced contrast ratios, dark mode support</p>
                   </div>
                   <div>
-                    <span className="font-medium text-foreground text-xs sm:text-sm">Text Scaling:</span>
-                    <p className="mt-0.5 sm:mt-1 leading-relaxed">Browser zoom up to 200% without horizontal scrolling</p>
+                    <span className="font-medium text-foreground text-xs sm:text-sm block">Text Scaling:</span>
+                    <p className="mt-0.5 sm:mt-1 leading-relaxed break-words">Browser zoom up to 200% without horizontal scrolling</p>
                   </div>
                   <div>
-                    <span className="font-medium text-foreground text-xs sm:text-sm">Clear Language:</span>
-                    <p className="mt-0.5 sm:mt-1 leading-relaxed">Simple, consistent interface language and structure</p>
+                    <span className="font-medium text-foreground text-xs sm:text-sm block">Clear Language:</span>
+                    <p className="mt-0.5 sm:mt-1 leading-relaxed break-words">Simple, consistent interface language and structure</p>
                   </div>
                 </div>
               </Card>
               
               {/* Content & Structure */}
-              <Card className="p-4 sm:p-6 hover:shadow-md transition-shadow">
-                <div className="flex items-center gap-3 mb-3 sm:mb-4">
+              <Card className="p-4 sm:p-6 hover:shadow-md transition-shadow h-full">
+                <div className="flex items-start gap-3 mb-3 sm:mb-4">
                   <div className="w-8 h-8 sm:w-10 sm:h-10 bg-accent/20 rounded-full flex items-center justify-center flex-shrink-0">
                     <span className="text-base sm:text-lg">🏗️</span>
                   </div>
-                  <h3 className="font-semibold text-foreground text-sm sm:text-base">Content & Structure</h3>
+                  <h3 className="font-semibold text-foreground text-sm sm:text-base break-words">Content & Structure</h3>
                 </div>
                 <div className="space-y-2 sm:space-y-3 text-xs sm:text-sm text-muted-foreground">
                   <div>
-                    <span className="font-medium text-foreground text-xs sm:text-sm">Semantic HTML:</span>
-                    <p className="mt-0.5 sm:mt-1 leading-relaxed">Proper headings, landmarks, and ARIA labels</p>
+                    <span className="font-medium text-foreground text-xs sm:text-sm block">Semantic HTML:</span>
+                    <p className="mt-0.5 sm:mt-1 leading-relaxed break-words">Proper headings, landmarks, and ARIA labels</p>
                   </div>
                   <div>
-                    <span className="font-medium text-foreground text-xs sm:text-sm">Alternative Text:</span>
-                    <p className="mt-0.5 sm:mt-1 leading-relaxed">Descriptive alt text for all images and media</p>
+                    <span className="font-medium text-foreground text-xs sm:text-sm block">Alternative Text:</span>
+                    <p className="mt-0.5 sm:mt-1 leading-relaxed break-words">Descriptive alt text for all images and media</p>
                   </div>
                   <div>
-                    <span className="font-medium text-foreground text-xs sm:text-sm">Live Regions:</span>
-                    <p className="mt-0.5 sm:mt-1 leading-relaxed">Screen reader announcements for dynamic content</p>
+                    <span className="font-medium text-foreground text-xs sm:text-sm block">Live Regions:</span>
+                    <p className="mt-0.5 sm:mt-1 leading-relaxed break-words">Screen reader announcements for dynamic content</p>
                   </div>
                 </div>
               </Card>
