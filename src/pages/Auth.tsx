@@ -9,7 +9,7 @@ import { useEffect } from 'react';
 import { Navbar } from '@/components/Navbar';
 import { SignupFlow } from '@/components/SignupFlow';
 import { supabase } from '@/integrations/supabase/client';
-import { ArrowLeft, UserPlus, LogIn, Github } from 'lucide-react';
+import { ArrowLeft, UserPlus, LogIn } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 const Auth = () => {
@@ -100,35 +100,6 @@ const Auth = () => {
   const handleSignupComplete = () => {
     setShowSignupFlow(false);
     navigate('/profile/setup');
-  };
-
-  const handleGitHubSignIn = async () => {
-    try {
-      setIsLoading(true);
-      
-      const { error } = await supabase.auth.signInWithOAuth({
-        provider: 'github',
-        options: {
-          redirectTo: `${window.location.origin}/profile/setup`
-        }
-      });
-
-      if (error) {
-        toast({
-          title: "GitHub Sign In Failed",
-          description: error.message,
-          variant: "destructive"
-        });
-      }
-    } catch (error) {
-      toast({
-        title: "GitHub Sign In Failed",
-        description: "An unexpected error occurred. Please try again.",
-        variant: "destructive"
-      });
-    } finally {
-      setIsLoading(false);
-    }
   };
 
   const handleForgotPassword = async (e: React.FormEvent) => {
@@ -262,38 +233,9 @@ const Auth = () => {
       >
         <h1 id="auth-heading" className="sr-only">Authentication</h1>
         
-        {/* GitHub Sign In - Primary Option */}
-        <section className="w-full max-w-md mb-6" aria-labelledby="github-signin-section">
-          <h2 id="github-signin-section" className="sr-only">Sign In with GitHub</h2>
-          
-          <Card className="border-2 border-primary/20">
-            <CardContent className="pt-6">
-              <Button
-                onClick={handleGitHubSignIn}
-                disabled={isLoading}
-                className="w-full h-14 text-lg font-semibold bg-gray-900 hover:bg-gray-800 text-white"
-                aria-describedby="github-signin-description"
-              >
-                <Github className="h-5 w-5 mr-3" />
-                {isLoading ? 'Connecting...' : 'Continue with GitHub'}
-              </Button>
-              <p id="github-signin-description" className="text-xs text-muted-foreground text-center mt-3">
-                Sign in with your GitHub account to access AI Complete Me
-              </p>
-            </CardContent>
-          </Card>
-        </section>
-
-        {/* Divider */}
-        <div className="w-full max-w-md flex items-center mb-6">
-          <div className="flex-1 border-t border-muted"></div>
-          <span className="px-4 text-sm text-muted-foreground">or</span>
-          <div className="flex-1 border-t border-muted"></div>
-        </div>
-        
         {/* Top Sign In Area */}
         <section className="w-full max-w-md mb-6" aria-labelledby="signin-section">
-          <h2 id="signin-section" className="sr-only">Sign In with Email</h2>
+          <h2 id="signin-section" className="sr-only">Sign In to Existing Account</h2>
           
           {!showSignIn ? (
             <Button 
