@@ -8,7 +8,6 @@ import { supabase } from '@/integrations/supabase/client';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { FloatingQuizButton } from '@/components/FloatingQuizButton';
-import { FirstLightModal } from '@/components/FirstLightModal';
 import { LaunchBanner } from '@/components/LaunchBanner';
 import SearchFilters from '@/components/SearchFilters';
 import { AmbientCoupleCarousel } from '@/components/AmbientCoupleCarousel';
@@ -26,8 +25,6 @@ const Index = () => {
   const { user, loading } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
-  const [showFirstLightModal, setShowFirstLightModal] = useState(false);
-  const [isAgeVerified, setIsAgeVerified] = useState(true); // Allow access, age verification happens during signup
   const [isNewUser, setIsNewUser] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
@@ -83,13 +80,6 @@ const Index = () => {
     const timer = setTimeout(() => setIsPageLoading(false), 1000);
     return () => clearTimeout(timer);
   }, []);
-
-  useEffect(() => {
-    if (user && !localStorage.getItem('hasSeenFirstLight') && isAgeVerified) {
-      setIsNewUser(true);
-      setShowFirstLightModal(true);
-    }
-  }, [user, isAgeVerified]);
 
   // Check if user has completed quiz
   useEffect(() => {
@@ -286,16 +276,6 @@ const Index = () => {
         </section>
         
         <Footer />
-        
-        {/* Age verification is now handled during signup flow */}
-        
-        <FirstLightModal 
-          isOpen={showFirstLightModal} 
-          onClose={() => {
-            setShowFirstLightModal(false);
-            localStorage.setItem('hasSeenFirstLight', 'true');
-          }}
-        />
         
         <FloatingQuizButton />
       </div>
