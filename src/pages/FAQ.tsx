@@ -330,16 +330,16 @@ const FAQ = () => {
             </CardContent>
           </Card>
 
-          <section className="text-center mt-8 sm:mt-12 lg:mt-16" aria-labelledby="support-heading">
-            <div className="max-w-2xl mx-auto px-4">
+          <section className="text-center mt-8 sm:mt-12 lg:mt-20" aria-labelledby="support-heading">
+            <div className="max-w-4xl mx-auto px-4">
               <h2 
                 id="support-heading"
-                className="text-xl sm:text-2xl lg:text-3xl font-bold mb-4 sm:mb-6 text-foreground"
+                className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-6 sm:mb-8 text-foreground"
               >
                 Still have questions?
               </h2>
               <p 
-                className="text-sm sm:text-base lg:text-lg text-muted-foreground mb-6 sm:mb-8 leading-relaxed"
+                className="text-base sm:text-lg lg:text-xl text-muted-foreground mb-8 sm:mb-10 leading-relaxed max-w-2xl mx-auto"
                 role="text"
               >
                 Can't find what you're looking for? Contact our support team for personalized assistance.
@@ -347,7 +347,7 @@ const FAQ = () => {
               <Button 
                 variant="outline"
                 size="lg"
-                className="focus:ring-2 focus:ring-primary focus:ring-offset-2 px-6 sm:px-8 py-2 sm:py-3"
+                className="focus:ring-2 focus:ring-primary focus:ring-offset-2 px-8 sm:px-12 py-3 sm:py-4 text-base sm:text-lg"
                 aria-label="Contact our support team for help with questions not covered in the FAQ"
               >
                 Contact Support
@@ -355,136 +355,136 @@ const FAQ = () => {
             </div>
           </section>
 
-          <section className="mt-12 sm:mt-16 lg:mt-20 space-y-6 sm:space-y-8 lg:space-y-12" aria-labelledby="accessibility-comprehensive-info">
-            <div className="text-center max-w-4xl mx-auto px-4">
+          <section className="mt-16 sm:mt-20 lg:mt-24 space-y-8 sm:space-y-12 lg:space-y-16" aria-labelledby="accessibility-comprehensive-info">
+            <div className="text-center max-w-5xl mx-auto px-4">
               <h2 
                 id="accessibility-comprehensive-info"
-                className="text-xl sm:text-2xl lg:text-3xl font-bold mb-4 sm:mb-6 text-foreground"
+                className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-6 sm:mb-8 text-foreground"
               >
                 🌟 Complete Accessibility Information
               </h2>
-              <p className="text-sm sm:text-base lg:text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              <p className="text-base sm:text-lg lg:text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
                 AI Complete Me is designed to be fully accessible to users with disabilities. 
                 We follow WCAG 2.1 AA guidelines and continuously improve based on your feedback.
               </p>
             </div>
             
-            <div className="grid gap-4 sm:gap-6 lg:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 max-w-7xl mx-auto px-4">
+            <div className="grid gap-6 sm:gap-8 lg:gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 max-w-7xl mx-auto px-4">
               {/* Navigation & Controls */}
-              <Card className="p-4 sm:p-6 hover:shadow-md transition-shadow h-full">
-                <div className="flex items-start gap-3 mb-3 sm:mb-4">
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
-                    <span className="text-base sm:text-lg">⌨️</span>
+              <Card className="p-6 sm:p-8 lg:p-10 hover:shadow-lg transition-shadow h-full">
+                <div className="flex items-start gap-4 mb-4 sm:mb-6">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-lg sm:text-xl lg:text-2xl">⌨️</span>
                   </div>
-                  <h3 className="font-semibold text-foreground text-sm sm:text-base break-words">Navigation & Controls</h3>
+                  <h3 className="font-semibold text-foreground text-base sm:text-lg lg:text-xl break-words">Navigation & Controls</h3>
                 </div>
-                <div className="space-y-2 sm:space-y-3 text-xs sm:text-sm text-muted-foreground">
+                <div className="space-y-4 sm:space-y-5 text-sm sm:text-base text-muted-foreground">
                   <div>
-                    <span className="font-medium text-foreground text-xs sm:text-sm block">Keyboard Navigation:</span>
-                    <p className="mt-0.5 sm:mt-1 leading-relaxed break-words">Tab to navigate, Enter/Space to activate, Arrow keys in menus</p>
+                    <span className="font-medium text-foreground text-sm sm:text-base block mb-2">Keyboard Navigation:</span>
+                    <p className="leading-relaxed break-words">Tab to navigate, Enter/Space to activate, Arrow keys in menus</p>
                   </div>
                   <div>
-                    <span className="font-medium text-foreground text-xs sm:text-sm block">Skip Links:</span>
-                    <p className="mt-0.5 sm:mt-1 leading-relaxed break-words">Jump directly to main content, bypassing navigation</p>
+                    <span className="font-medium text-foreground text-sm sm:text-base block mb-2">Skip Links:</span>
+                    <p className="leading-relaxed break-words">Jump directly to main content, bypassing navigation</p>
                   </div>
                   <div>
-                    <span className="font-medium text-foreground text-xs sm:text-sm block">Focus Indicators:</span>
-                    <p className="mt-0.5 sm:mt-1 leading-relaxed break-words">Clear visual focus rings show your current position</p>
+                    <span className="font-medium text-foreground text-sm sm:text-base block mb-2">Focus Indicators:</span>
+                    <p className="leading-relaxed break-words">Clear visual focus rings show your current position</p>
                   </div>
                 </div>
               </Card>
               
               {/* Assistive Technology */}
-              <Card className="p-4 sm:p-6 hover:shadow-md transition-shadow h-full">
-                <div className="flex items-start gap-3 mb-3 sm:mb-4">
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
-                    <span className="text-base sm:text-lg">🔊</span>
+              <Card className="p-6 sm:p-8 lg:p-10 hover:shadow-lg transition-shadow h-full">
+                <div className="flex items-start gap-4 mb-4 sm:mb-6">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-lg sm:text-xl lg:text-2xl">🔊</span>
                   </div>
-                  <h3 className="font-semibold text-foreground text-sm sm:text-base break-words">Assistive Technology</h3>
+                  <h3 className="font-semibold text-foreground text-base sm:text-lg lg:text-xl break-words">Assistive Technology</h3>
                 </div>
-                <div className="space-y-2 sm:space-y-3 text-xs sm:text-sm text-muted-foreground">
+                <div className="space-y-4 sm:space-y-5 text-sm sm:text-base text-muted-foreground">
                   <div>
-                    <span className="font-medium text-foreground text-xs sm:text-sm block">Screen Readers:</span>
-                    <p className="mt-0.5 sm:mt-1 leading-relaxed break-words">NVDA, JAWS, VoiceOver, TalkBack compatibility</p>
+                    <span className="font-medium text-foreground text-sm sm:text-base block mb-2">Screen Readers:</span>
+                    <p className="leading-relaxed break-words">NVDA, JAWS, VoiceOver, TalkBack compatibility</p>
                   </div>
                   <div>
-                    <span className="font-medium text-foreground text-xs sm:text-sm block">Voice Control:</span>
-                    <p className="mt-0.5 sm:mt-1 leading-relaxed break-words">Dragon NaturallySpeaking, Voice Control support</p>
+                    <span className="font-medium text-foreground text-sm sm:text-base block mb-2">Voice Control:</span>
+                    <p className="leading-relaxed break-words">Dragon NaturallySpeaking, Voice Control support</p>
                   </div>
                   <div>
-                    <span className="font-medium text-foreground text-xs sm:text-sm block">Switch Navigation:</span>
-                    <p className="mt-0.5 sm:mt-1 leading-relaxed break-words">Compatible with switch devices and eye-tracking</p>
+                    <span className="font-medium text-foreground text-sm sm:text-base block mb-2">Switch Navigation:</span>
+                    <p className="leading-relaxed break-words">Compatible with switch devices and eye-tracking</p>
                   </div>
                 </div>
               </Card>
               
               {/* Visual & Cognitive */}
-              <Card className="p-4 sm:p-6 hover:shadow-md transition-shadow h-full">
-                <div className="flex items-start gap-3 mb-3 sm:mb-4">
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 bg-secondary/20 rounded-full flex items-center justify-center flex-shrink-0">
-                    <span className="text-base sm:text-lg">👁️</span>
+              <Card className="p-6 sm:p-8 lg:p-10 hover:shadow-lg transition-shadow h-full">
+                <div className="flex items-start gap-4 mb-4 sm:mb-6">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-secondary/20 rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-lg sm:text-xl lg:text-2xl">👁️</span>
                   </div>
-                  <h3 className="font-semibold text-foreground text-sm sm:text-base break-words">Visual & Cognitive</h3>
+                  <h3 className="font-semibold text-foreground text-base sm:text-lg lg:text-xl break-words">Visual & Cognitive</h3>
                 </div>
-                <div className="space-y-2 sm:space-y-3 text-xs sm:text-sm text-muted-foreground">
+                <div className="space-y-4 sm:space-y-5 text-sm sm:text-base text-muted-foreground">
                   <div>
-                    <span className="font-medium text-foreground text-xs sm:text-sm block">High Contrast:</span>
-                    <p className="mt-0.5 sm:mt-1 leading-relaxed break-words">Enhanced contrast ratios, dark mode support</p>
+                    <span className="font-medium text-foreground text-sm sm:text-base block mb-2">High Contrast:</span>
+                    <p className="leading-relaxed break-words">Enhanced contrast ratios, dark mode support</p>
                   </div>
                   <div>
-                    <span className="font-medium text-foreground text-xs sm:text-sm block">Text Scaling:</span>
-                    <p className="mt-0.5 sm:mt-1 leading-relaxed break-words">Browser zoom up to 200% without horizontal scrolling</p>
+                    <span className="font-medium text-foreground text-sm sm:text-base block mb-2">Text Scaling:</span>
+                    <p className="leading-relaxed break-words">Browser zoom up to 200% without horizontal scrolling</p>
                   </div>
                   <div>
-                    <span className="font-medium text-foreground text-xs sm:text-sm block">Clear Language:</span>
-                    <p className="mt-0.5 sm:mt-1 leading-relaxed break-words">Simple, consistent interface language and structure</p>
+                    <span className="font-medium text-foreground text-sm sm:text-base block mb-2">Clear Language:</span>
+                    <p className="leading-relaxed break-words">Simple, consistent interface language and structure</p>
                   </div>
                 </div>
               </Card>
               
               {/* Content & Structure */}
-              <Card className="p-4 sm:p-6 hover:shadow-md transition-shadow h-full">
-                <div className="flex items-start gap-3 mb-3 sm:mb-4">
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 bg-accent/20 rounded-full flex items-center justify-center flex-shrink-0">
-                    <span className="text-base sm:text-lg">🏗️</span>
+              <Card className="p-6 sm:p-8 lg:p-10 hover:shadow-lg transition-shadow h-full">
+                <div className="flex items-start gap-4 mb-4 sm:mb-6">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-accent/20 rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-lg sm:text-xl lg:text-2xl">🏗️</span>
                   </div>
-                  <h3 className="font-semibold text-foreground text-sm sm:text-base break-words">Content & Structure</h3>
+                  <h3 className="font-semibold text-foreground text-base sm:text-lg lg:text-xl break-words">Content & Structure</h3>
                 </div>
-                <div className="space-y-2 sm:space-y-3 text-xs sm:text-sm text-muted-foreground">
+                <div className="space-y-4 sm:space-y-5 text-sm sm:text-base text-muted-foreground">
                   <div>
-                    <span className="font-medium text-foreground text-xs sm:text-sm block">Semantic HTML:</span>
-                    <p className="mt-0.5 sm:mt-1 leading-relaxed break-words">Proper headings, landmarks, and ARIA labels</p>
+                    <span className="font-medium text-foreground text-sm sm:text-base block mb-2">Semantic HTML:</span>
+                    <p className="leading-relaxed break-words">Proper headings, landmarks, and ARIA labels</p>
                   </div>
                   <div>
-                    <span className="font-medium text-foreground text-xs sm:text-sm block">Alternative Text:</span>
-                    <p className="mt-0.5 sm:mt-1 leading-relaxed break-words">Descriptive alt text for all images and media</p>
+                    <span className="font-medium text-foreground text-sm sm:text-base block mb-2">Alternative Text:</span>
+                    <p className="leading-relaxed break-words">Descriptive alt text for all images and media</p>
                   </div>
                   <div>
-                    <span className="font-medium text-foreground text-xs sm:text-sm block">Live Regions:</span>
-                    <p className="mt-0.5 sm:mt-1 leading-relaxed break-words">Screen reader announcements for dynamic content</p>
+                    <span className="font-medium text-foreground text-sm sm:text-base block mb-2">Live Regions:</span>
+                    <p className="leading-relaxed break-words">Screen reader announcements for dynamic content</p>
                   </div>
                 </div>
               </Card>
             </div>
 
             {/* Contact Card */}
-            <div className="max-w-4xl mx-auto px-4">
-              <Card className="p-6 sm:p-8 lg:p-12 bg-gradient-to-r from-primary/5 via-primary/10 to-accent/5 border-primary/20">
-                <div className="text-center space-y-4 sm:space-y-6 lg:space-y-8">
-                  <div className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto">
-                    <span className="text-2xl sm:text-3xl lg:text-4xl">💬</span>
+            <div className="max-w-5xl mx-auto px-4 mt-12 sm:mt-16 lg:mt-20">
+              <Card className="p-8 sm:p-12 lg:p-16 bg-gradient-to-r from-primary/5 via-primary/10 to-accent/5 border-primary/20 shadow-xl">
+                <div className="text-center space-y-6 sm:space-y-8 lg:space-y-10">
+                  <div className="w-20 h-20 sm:w-24 sm:h-24 lg:w-32 lg:h-32 bg-primary/10 rounded-full flex items-center justify-center mx-auto">
+                    <span className="text-3xl sm:text-4xl lg:text-5xl">💬</span>
                   </div>
-                  <h3 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-primary">Need Help or Have Feedback?</h3>
-                  <p className="text-base sm:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+                  <h3 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-primary">Need Help or Have Feedback?</h3>
+                  <p className="text-lg sm:text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
                     Contact our accessibility team at 
                     <span className="font-semibold text-foreground"> accessibility@aicomplete.me</span> or through our accessible contact form. 
                     We're committed to resolving accessibility barriers and providing accommodations.
                   </p>
-                  <div className="pt-2 sm:pt-4">
+                  <div className="pt-4 sm:pt-6">
                     <Button 
                       variant="outline" 
                       size="lg"
-                      className="bg-background hover:bg-muted focus:ring-2 focus:ring-primary focus:ring-offset-2 text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4"
+                      className="bg-background hover:bg-muted focus:ring-2 focus:ring-primary focus:ring-offset-2 text-lg sm:text-xl px-8 sm:px-12 py-4 sm:py-5"
                       aria-label="Contact accessibility team for support"
                     >
                       Contact Accessibility Team
