@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { useProfile } from '@/hooks/useProfile';
 import { ProfileSetupModal } from '@/components/ProfileSetupModal';
-import SearchFilters from '@/components/SearchFilters';
-import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { useLocation } from 'react-router-dom';
 
 interface AppWrapperProps {
@@ -14,7 +12,6 @@ export const AppWrapper: React.FC<AppWrapperProps> = ({ children }) => {
   const { user, loading: authLoading } = useAuth();
   const { profile, loading: profileLoading } = useProfile();
   const [showProfileSetup, setShowProfileSetup] = useState(false);
-  const [showSearchFilters, setShowSearchFilters] = useState(false);
   const [hasShownModal, setHasShownModal] = useState(false);
   const location = useLocation();
 
@@ -36,6 +33,7 @@ export const AppWrapper: React.FC<AppWrapperProps> = ({ children }) => {
         '/ai-digest',
         '/mission',
         '/faq',
+        '/quiz-results',
         '/privacy',
         '/terms',
         '/cookies',
@@ -76,19 +74,6 @@ export const AppWrapper: React.FC<AppWrapperProps> = ({ children }) => {
         isOpen={showProfileSetup} 
         onComplete={handleProfileSetupComplete} 
       />
-      <Sheet open={showSearchFilters} onOpenChange={setShowSearchFilters}>
-        <SheetContent side="bottom" className="max-h-[80vh] overflow-y-auto">
-          <SheetHeader>
-            <SheetTitle>Set Your Preferences</SheetTitle>
-          </SheetHeader>
-          <div className="py-4">
-            <SearchFilters
-              onPreferenceChange={() => {}}
-              onZipCodeChange={() => {}}
-            />
-          </div>
-        </SheetContent>
-      </Sheet>
     </>
   );
 };
