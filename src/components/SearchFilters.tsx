@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -6,6 +7,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Sparkles, Crown, ArrowRight, Settings, MapPin, Heart, Filter } from 'lucide-react';
+import { useAuth } from '@/hooks/useAuth';
 
 interface SearchFiltersProps {
   onFiltersChange?: (filters: string[]) => void;
@@ -15,6 +17,8 @@ interface SearchFiltersProps {
 }
 
 const SearchFilters = ({ onFiltersChange, onUpgradePrompt, onPreferenceChange, onZipCodeChange }: SearchFiltersProps) => {
+  const { user } = useAuth();
+  const navigate = useNavigate();
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
   const [searchPreference, setSearchPreference] = useState('');
   const [zipCode, setZipCode] = useState('');
@@ -32,6 +36,24 @@ const SearchFilters = ({ onFiltersChange, onUpgradePrompt, onPreferenceChange, o
 
     setSelectedFilters(newFilters);
     onFiltersChange?.(newFilters);
+  };
+
+  const handleLookingForClick = () => {
+    if (!user) {
+      // Redirect non-authenticated users to quick setup
+      navigate('/quick-start');
+      return;
+    }
+    // For authenticated users, handle normally
+  };
+
+  const handleLocationClick = () => {
+    if (!user) {
+      // Redirect non-authenticated users to quick setup  
+      navigate('/quick-start');
+      return;
+    }
+    // For authenticated users, handle normally
   };
 
   return (
@@ -68,12 +90,24 @@ const SearchFilters = ({ onFiltersChange, onUpgradePrompt, onPreferenceChange, o
                 <Heart className="h-4 w-4 text-primary" />
                 I'm looking for
               </label>
-              <Select value={searchPreference} onValueChange={(value) => {
-                setSearchPreference(value);
-                onPreferenceChange?.(value);
-              }}>
+              <Select 
+                value={searchPreference} 
+                onValueChange={(value) => {
+                  if (!user) {
+                    handleLookingForClick();
+                    return;
+                  }
+                  setSearchPreference(value);
+                  onPreferenceChange?.(value);
+                }}
+                onOpenChange={(open) => {
+                  if (open && !user) {
+                    handleLookingForClick();
+                  }
+                }}
+              >
                 <SelectTrigger className="w-full h-11">
-                  <SelectValue placeholder="Choose your preference" />
+                  <SelectValue placeholder={user ? "Choose your preference" : "Create account to start matching"} />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="men">Men</SelectItem>
@@ -92,14 +126,24 @@ const SearchFilters = ({ onFiltersChange, onUpgradePrompt, onPreferenceChange, o
               </label>
               <Input
                 type="text"
-                placeholder="Enter zip code (e.g., 10001)"
+                placeholder={user ? "Enter zip code (e.g., 10001)" : "Sign up to start matching"}
                 value={zipCode}
                 onChange={(e) => {
+                  if (!user) {
+                    handleLocationClick();
+                    return;
+                  }
                   setZipCode(e.target.value);
                   onZipCodeChange?.(e.target.value);
                 }}
+                onClick={() => {
+                  if (!user) {
+                    handleLocationClick();
+                  }
+                }}
+                readOnly={!user}
                 maxLength={10}
-                className="w-full h-11"
+                className={`w-full h-11 ${!user ? 'cursor-pointer' : ''}`}
               />
             </div>
           </div>
