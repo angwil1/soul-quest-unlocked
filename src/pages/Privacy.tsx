@@ -82,7 +82,22 @@ const Privacy = () => {
             </section>
 
             <section>
-              <h2 className="text-xl font-semibold mb-3">7. Contact Us</h2>
+              <h2 className="text-xl font-semibold mb-3">8. Data Sharing for App Store Compliance</h2>
+              <p>
+                For Google Play Store billing and subscription management, we may share minimal necessary data with Google:
+              </p>
+              <ul className="list-disc pl-6 space-y-2">
+                <li>User ID and subscription status for billing verification</li>
+                <li>Purchase confirmation data required by Google Play Store policies</li>
+                <li>Anonymous usage analytics to improve app store recommendations (optional)</li>
+              </ul>
+              <p>
+                This data sharing is limited to what's required for app store functionality and billing. No personal dating or profile information is shared with Google or other third parties.
+              </p>
+            </section>
+
+            <section>
+              <h2 className="text-xl font-semibold mb-3">9. Contact Us</h2>
               <p>
                 For questions or privacy requests:<br />
                 📧 support@aicompleteme.com<br />

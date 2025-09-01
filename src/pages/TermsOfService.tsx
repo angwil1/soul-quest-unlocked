@@ -63,14 +63,18 @@ const TermsOfService = () => {
             </section>
 
             <section>
-              <h2 className="text-xl font-semibold mb-3">5. Premium Subscriptions</h2>
+              <h2 className="text-xl font-semibold mb-3">5. Premium Subscriptions & Billing</h2>
               <ul className="list-disc pl-6 space-y-2">
-                <li><strong>Billing:</strong> Subscriptions are billed monthly or annually as selected</li>
-                <li><strong>Cancellation:</strong> You may cancel at any time through your account settings</li>
-                <li><strong>Refunds:</strong> No refunds for partial months unless required by law</li>
-                <li><strong>Auto-renewal:</strong> Subscriptions automatically renew until canceled</li>
-                <li><strong>Price Changes:</strong> We may adjust pricing with 30 days notice</li>
+                <li><strong>Billing:</strong> Subscriptions are billed monthly or annually as selected through Google Play Store</li>
+                <li><strong>Cancellation:</strong> You may cancel at any time through your Google Play Store account settings</li>
+                <li><strong>Refunds:</strong> Refunds are handled according to Google Play Store refund policies</li>
+                <li><strong>Auto-renewal:</strong> Subscriptions automatically renew until canceled through Google Play Store</li>
+                <li><strong>Price Changes:</strong> We may adjust pricing with 30 days advance notice through the store</li>
+                <li><strong>Currency:</strong> All prices are displayed in your local currency through Google Play Store</li>
               </ul>
+              <p className="text-sm text-muted-foreground mt-2">
+                For billing support, subscription management, and refunds, please contact Google Play Store customer service or manage through your Google Play account.
+              </p>
             </section>
 
             <section>
@@ -123,7 +127,23 @@ const TermsOfService = () => {
             </section>
 
             <section>
-              <h2 className="text-xl font-semibold mb-3">13. Contact Information</h2>
+              <h2 className="text-xl font-semibold mb-3">14. Content Rating & Age Restrictions</h2>
+              <p>
+                AI Complete Me is rated for mature audiences (17+) and is intended for adults 18 years and older. The app contains:
+              </p>
+              <ul className="list-disc pl-6 space-y-2">
+                <li>Dating and relationship content suitable for mature audiences</li>
+                <li>User-generated content that may include mature themes</li>
+                <li>Communication features between consenting adults</li>
+                <li>Profile photos and personal information sharing capabilities</li>
+              </ul>
+              <p>
+                This app is not intended for users under 18 years of age. Age verification is required and enforced upon first app access.
+              </p>
+            </section>
+
+            <section>
+              <h2 className="text-xl font-semibold mb-3">15. Contact Information</h2>
               <p>
                 If you have any questions about these Terms, please contact us at:<br />
                 📧 support@aicompleteme.com<br />
