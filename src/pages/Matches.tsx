@@ -17,9 +17,14 @@ const Matches = () => {
 
   // Check if user is authenticated and redirect if not
   useEffect(() => {
-    if (!user) {
-      navigate('/auth');
-    }
+    // Only redirect to auth if we're sure there's no user and not just loading
+    const timer = setTimeout(() => {
+      if (!user) {
+        navigate('/auth');
+      }
+    }, 1000); // Give 1 second for auth state to settle
+
+    return () => clearTimeout(timer);
   }, [user, navigate]);
 
   const handleLike = (profileId: string) => {

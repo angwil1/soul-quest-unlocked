@@ -27,7 +27,18 @@ const Auth = () => {
         return;
       }
       
-      // Check if user has a complete profile first
+      // Only do profile completion check if user came directly to auth page
+      // Not if they were redirected here from matches page
+      const referrer = document.referrer;
+      const isFromMatches = referrer.includes('/matches') || referrer.includes('/profile');
+      
+      if (isFromMatches) {
+        // User was redirected from matches/profile, just send them back to home
+        navigate('/');
+        return;
+      }
+      
+      // Check if user has a complete profile first (only for direct auth page visits)
       const checkProfile = async () => {
         try {
           const { data: profile } = await supabase
@@ -42,7 +53,7 @@ const Auth = () => {
             return;
           }
           
-          // For existing users with complete profiles, go to home instead of forcing quiz
+          // For existing users with complete profiles, go to home
           navigate('/');
         } catch (error) {
           console.error('Error checking profile/quiz completion:', error);
