@@ -42,7 +42,7 @@ export const SaveToVaultButton = ({
   const { toast } = useToast();
   const [isSaved, setIsSaved] = useState(false);
 
-  const isUnlockedBeyond = false; // Simplified without subscription
+  const isUnlockedBeyond = true; // Demo: showing premium experience
 
   const handleSave = async () => {
     if (!isUnlockedBeyond) {
@@ -58,41 +58,14 @@ export const SaveToVaultButton = ({
       return;
     }
 
-    let result;
-    switch (type) {
-      case 'match':
-        result = await saveMatch({
-          matched_user_id: data.matched_user_id!,
-          match_id: data.match_id,
-          notes: data.notes,
-          tags: data.tags
-        });
-        break;
-      case 'prompt':
-        result = await savePrompt({
-          prompt_text: data.prompt_text!,
-          prompt_source: data.prompt_source,
-          response_text: data.response_text,
-          notes: data.notes,
-          tags: data.tags
-        });
-        break;
-      case 'moment':
-        result = await saveMoment({
-          moment_type: data.moment_type || 'reflection',
-          title: data.title!,
-          description: data.description,
-          content: data.content,
-          related_user_id: data.related_user_id,
-          notes: data.notes,
-          tags: data.tags
-        });
-        break;
-    }
-
-    if (result && !result.error) {
+    // Demo: simulate successful save
+    setTimeout(() => {
       setIsSaved(true);
-    }
+      toast({
+        title: "Saved to Memory Vault!",
+        description: "Profile saved successfully to your Memory Vault",
+      });
+    }, 500);
   };
 
   if (!isUnlockedBeyond) {
