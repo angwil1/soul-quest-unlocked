@@ -52,23 +52,25 @@ const Profile = () => {
           
           {/* Profile Photos */}
           <div className="lg:col-span-1">
-            <Card>
-              <CardContent className={`${(!profile.photos || profile.photos.length <= 1) ? 'p-4' : 'p-6'}`}>
-                {/* Single photo - compact display */}
-                {(!profile.photos || profile.photos.length <= 1) && (
-                  <div className="flex justify-center">
-                    <div className="w-16 h-16 rounded-lg overflow-hidden bg-muted">
-                      <img 
-                        src={profile.avatar_url || profile.photos?.[0] || profileSilhouette} 
-                        alt="Profile"
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
+            {/* Compact card for single photo */}
+            {(!profile.photos || profile.photos.length <= 1) && (
+              <Card className="w-fit mx-auto">
+                <CardContent className="p-3">
+                  <div className="w-20 h-20 rounded-lg overflow-hidden bg-muted">
+                    <img 
+                      src={profile.avatar_url || profile.photos?.[0] || profileSilhouette} 
+                      alt="Profile"
+                      className="w-full h-full object-cover"
+                    />
                   </div>
-                )}
-                
-                {/* Multiple photos - full layout */}
-                {profile.photos && profile.photos.length > 1 && (
+                </CardContent>
+              </Card>
+            )}
+            
+            {/* Full size card for multiple photos */}
+            {profile.photos && profile.photos.length > 1 && (
+              <Card>
+                <CardContent className="p-6">
                   <div className="space-y-4">
                     {/* Main Photo */}
                     <div className="w-32 h-32 rounded-lg overflow-hidden bg-muted mx-auto">
@@ -92,9 +94,9 @@ const Profile = () => {
                       ))}
                     </div>
                   </div>
-                )}
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            )}
           </div>
 
           {/* Profile Details */}
