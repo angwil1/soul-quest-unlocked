@@ -113,11 +113,16 @@ const Auth = () => {
 
     setIsLoading(true);
     
+    // Use the exact current domain with the reset path
+    const resetUrl = `${window.location.protocol}//${window.location.host}/reset-password`;
+    console.log('Sending reset email with redirectTo:', resetUrl);
+    
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/reset-password`
+      redirectTo: resetUrl
     });
 
     if (error) {
+      console.error('Reset password error:', error);
       toast({
         title: "Reset Failed",
         description: error.message,
