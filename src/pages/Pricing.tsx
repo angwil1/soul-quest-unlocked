@@ -9,7 +9,7 @@ import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 import { useToast } from "@/hooks/use-toast";
 import { useState, useEffect } from "react";
-import { Smartphone } from "lucide-react";
+import { Smartphone, ArrowLeft, CreditCard } from "lucide-react";
 import { MobileOptimizedPayment } from "@/components/MobileOptimizedPayment";
 import { useMobilePayments } from "@/hooks/useMobilePayments";
 
@@ -237,8 +237,43 @@ const Pricing = () => {
 
   return (
     <>
+      <a 
+        href="#main-content" 
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-primary-foreground px-4 py-2 rounded-md z-50"
+      >
+        Skip to main content
+      </a>
+      
       <Navbar />
-      <div className="min-h-screen bg-white dark:bg-gray-900">
+      
+      {/* Header with Back Button */}
+      <header className="bg-white dark:bg-gray-800 border-b" role="banner">
+        <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+          <Button 
+            variant="ghost" 
+            onClick={() => navigate('/')}
+            className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
+            aria-label="Go back to homepage"
+          >
+            <ArrowLeft className="h-4 w-4 mr-2" aria-hidden="true" />
+            Back to Home
+          </Button>
+          
+          <div className="flex items-center gap-3">
+            <Button 
+              variant="outline" 
+              size="sm"
+              onClick={() => navigate('/faq')}
+              className="flex items-center gap-2 focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              aria-label="View frequently asked questions about pricing"
+            >
+              Pricing FAQ
+            </Button>
+          </div>
+        </div>
+      </header>
+      
+      <main id="main-content" className="min-h-screen bg-white dark:bg-gray-900">
         <div className="bg-white dark:bg-gray-900 py-16 px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
@@ -440,8 +475,8 @@ const Pricing = () => {
             </div>
           </div>
         </div>
-        <Footer />
-      </div>
+      </main>
+      <Footer />
     </>
   );
 };

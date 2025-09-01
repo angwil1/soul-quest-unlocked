@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 import { Navbar } from '@/components/Navbar';
 import { SignupFlow } from '@/components/SignupFlow';
 import { supabase } from '@/integrations/supabase/client';
+import { ArrowLeft, UserPlus, LogIn } from 'lucide-react';
 
 const Auth = () => {
   const [email, setEmail] = useState('');
@@ -96,7 +97,37 @@ const Auth = () => {
         >
           Skip to main content
         </a>
+        
         <Navbar />
+        
+        {/* Header with Back Button */}
+        <header className="bg-card border-b" role="banner">
+          <div className="max-w-md mx-auto px-4 py-4 flex items-center justify-between">
+            <Button 
+              variant="ghost" 
+              onClick={() => navigate('/')}
+              className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              aria-label="Go back to homepage"
+            >
+              <ArrowLeft className="h-4 w-4 mr-2" aria-hidden="true" />
+              Back to Home
+            </Button>
+            
+            <div className="flex items-center gap-2">
+              <Button 
+                variant="outline" 
+                size="sm"
+                onClick={() => setShowSignupFlow(false)}
+                className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                aria-label="Cancel signup and return to sign in"
+              >
+                <LogIn className="h-4 w-4 mr-1" aria-hidden="true" />
+                Sign In Instead
+              </Button>
+            </div>
+          </div>
+        </header>
+        
         <main id="main-content" className="flex flex-col items-center justify-center p-4 pt-20">
           <SignupFlow onComplete={handleSignupComplete} />
         </main>
@@ -112,7 +143,35 @@ const Auth = () => {
       >
         Skip to main content
       </a>
+      
       <Navbar />
+      
+      {/* Header with Back Button */}
+      <header className="bg-card border-b" role="banner">
+        <div className="max-w-md mx-auto px-4 py-4 flex items-center justify-between">
+          <Button 
+            variant="ghost" 
+            onClick={() => navigate('/')}
+            className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
+            aria-label="Go back to homepage"
+          >
+            <ArrowLeft className="h-4 w-4 mr-2" aria-hidden="true" />
+            Back to Home
+          </Button>
+          
+          <div className="flex items-center gap-2">
+            <Button 
+              variant="outline" 
+              size="sm"
+              onClick={() => navigate('/faq')}
+              className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              aria-label="View frequently asked questions"
+            >
+              Help & FAQ
+            </Button>
+          </div>
+        </div>
+      </header>
       <main 
         id="main-content" 
         className="flex flex-col items-center justify-center p-4 pt-20"
