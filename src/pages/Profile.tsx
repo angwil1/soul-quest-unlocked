@@ -57,7 +57,7 @@ const Profile = () => {
                 {/* Single photo - compact display */}
                 {(!profile.photos || profile.photos.length <= 1) && (
                   <div className="flex justify-center">
-                    <div className="w-24 h-24 rounded-lg overflow-hidden bg-muted">
+                    <div className="w-16 h-16 rounded-lg overflow-hidden bg-muted">
                       <img 
                         src={profile.avatar_url || profile.photos?.[0] || profileSilhouette} 
                         alt="Profile"
