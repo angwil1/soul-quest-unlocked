@@ -129,14 +129,34 @@ const FAQ = () => {
     {
       question: "How can I adjust the app for my accessibility needs?",
       answer: "You can customize AI Complete Me for your needs through: Your device's accessibility settings for text size, contrast, and screen reader preferences, keyboard shortcuts for navigation and actions, alternative input methods support, high contrast mode in your browser or device settings, and voice control compatibility. If you need specific accommodations or encounter accessibility barriers, please contact our support team for assistance."
+    },
+    {
+      question: "What assistive technologies does AI Complete Me support?",
+      answer: "AI Complete Me is compatible with all major assistive technologies including: Screen readers (NVDA, JAWS, VoiceOver, TalkBack), Voice control software (Dragon NaturallySpeaking, Voice Control), Switch navigation devices, Eye-tracking systems, Keyboard alternatives and on-screen keyboards, Browser zoom up to 200%, and High contrast/dark mode extensions. Our development team regularly tests with these technologies to ensure seamless compatibility."
+    },
+    {
+      question: "How do I report accessibility issues or request accommodations?",
+      answer: "If you encounter any accessibility barriers or need specific accommodations, please contact our accessibility team at accessibility@aicomplete.me or use our accessible contact form. We are committed to resolving accessibility issues promptly and providing alternative access methods when needed. Your feedback helps us improve the experience for all users with disabilities."
+    },
+    {
+      question: "Are there keyboard shortcuts for navigating AI Complete Me?",
+      answer: "Yes! AI Complete Me includes comprehensive keyboard navigation: Tab/Shift+Tab to move between elements, Enter/Space to activate buttons and links, Arrow keys in menus and accordions, Escape to close dialogs and menus, Alt+S to skip to main content, and Alt+M to access the main navigation menu. All interactive elements are reachable via keyboard, and focus indicators clearly show your current position."
     }
   ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted">
+      <a 
+        href="#main-content" 
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-primary-foreground px-4 py-2 rounded-md z-50"
+      >
+        Skip to main content
+      </a>
+      
       <Navbar />
       
       <main 
+        id="main-content"
         className="container mx-auto px-4 py-12"
         role="main"
         aria-labelledby="faq-title"
@@ -158,7 +178,7 @@ const FAQ = () => {
             </p>
           </header>
 
-          <Card>
+          <Card role="region" aria-labelledby="faq-section-title">
             <CardHeader>
               <CardTitle 
                 id="faq-section-title"
@@ -167,7 +187,8 @@ const FAQ = () => {
                 Common Questions
               </CardTitle>
               <CardDescription>
-                Browse through our most frequently asked questions or use keyboard navigation to explore.
+                Browse through our most frequently asked questions or use keyboard navigation to explore. 
+                Use Tab to navigate between questions, Enter or Space to expand answers.
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -189,9 +210,13 @@ const FAQ = () => {
                       aria-expanded="false"
                       aria-controls={`faq-content-${index}`}
                       id={`faq-question-${index}`}
+                      aria-describedby={`faq-hint-${index}`}
                     >
                       <span className="font-medium text-foreground">
                         {faq.question}
+                      </span>
+                      <span id={`faq-hint-${index}`} className="sr-only">
+                        Press Enter or Space to expand answer
                       </span>
                     </AccordionTrigger>
                     <AccordionContent 
@@ -232,30 +257,99 @@ const FAQ = () => {
             </Button>
           </section>
 
-          <section className="mt-16 p-6 bg-muted/50 rounded-lg" aria-labelledby="accessibility-info">
+          <section className="mt-16 p-6 bg-muted/50 rounded-lg" aria-labelledby="accessibility-comprehensive-info">
             <h2 
-              id="accessibility-info"
+              id="accessibility-comprehensive-info"
               className="text-xl font-semibold mb-3 text-foreground"
             >
-              Accessibility Information
+              Complete Accessibility Information
             </h2>
-            <p className="text-muted-foreground mb-4 leading-relaxed">
-              This FAQ page and all AI Complete Me features are designed to be accessible to users with disabilities. 
-              We follow WCAG 2.1 AA guidelines and continuously improve our accessibility.
+            <p className="text-muted-foreground mb-6 leading-relaxed">
+              This FAQ page and all AI Complete Me features are designed to be fully accessible to users with disabilities. 
+              We follow WCAG 2.1 AA guidelines and continuously improve our accessibility based on user feedback.
             </p>
-            <div className="grid gap-3 text-sm text-muted-foreground">
-              <div className="flex items-start gap-2">
-                <span className="font-medium min-w-0 flex-shrink-0">Keyboard Navigation:</span>
-                <span>Use Tab to navigate, Enter/Space to activate, Arrow keys in accordion</span>
+            
+            <div className="grid gap-6 md:grid-cols-2">
+              <div className="space-y-4">
+                <h3 className="font-semibold text-foreground">Navigation & Controls</h3>
+                <div className="space-y-3 text-sm text-muted-foreground">
+                  <div className="flex items-start gap-2">
+                    <span className="font-medium min-w-0 flex-shrink-0">Keyboard Navigation:</span>
+                    <span>Tab to navigate, Enter/Space to activate, Arrow keys in menus</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <span className="font-medium min-w-0 flex-shrink-0">Skip Links:</span>
+                    <span>Jump directly to main content, bypassing navigation</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <span className="font-medium min-w-0 flex-shrink-0">Focus Indicators:</span>
+                    <span>Clear visual focus rings show your current position</span>
+                  </div>
+                </div>
               </div>
-              <div className="flex items-start gap-2">
-                <span className="font-medium min-w-0 flex-shrink-0">Screen Readers:</span>
-                <span>Full compatibility with NVDA, JAWS, VoiceOver, and other assistive technologies</span>
+              
+              <div className="space-y-4">
+                <h3 className="font-semibold text-foreground">Assistive Technology Support</h3>
+                <div className="space-y-3 text-sm text-muted-foreground">
+                  <div className="flex items-start gap-2">
+                    <span className="font-medium min-w-0 flex-shrink-0">Screen Readers:</span>
+                    <span>NVDA, JAWS, VoiceOver, TalkBack compatibility</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <span className="font-medium min-w-0 flex-shrink-0">Voice Control:</span>
+                    <span>Dragon NaturallySpeaking, Voice Control support</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <span className="font-medium min-w-0 flex-shrink-0">Switch Navigation:</span>
+                    <span>Compatible with switch devices and eye-tracking</span>
+                  </div>
+                </div>
               </div>
-              <div className="flex items-start gap-2">
-                <span className="font-medium min-w-0 flex-shrink-0">Visual:</span>
-                <span>High contrast ratios, clear focus indicators, adjustable text sizes</span>
+              
+              <div className="space-y-4">
+                <h3 className="font-semibold text-foreground">Visual & Cognitive</h3>
+                <div className="space-y-3 text-sm text-muted-foreground">
+                  <div className="flex items-start gap-2">
+                    <span className="font-medium min-w-0 flex-shrink-0">High Contrast:</span>
+                    <span>Enhanced contrast ratios, dark mode support</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <span className="font-medium min-w-0 flex-shrink-0">Text Scaling:</span>
+                    <span>Browser zoom up to 200% without horizontal scrolling</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <span className="font-medium min-w-0 flex-shrink-0">Clear Language:</span>
+                    <span>Simple, consistent interface language and structure</span>
+                  </div>
+                </div>
               </div>
+              
+              <div className="space-y-4">
+                <h3 className="font-semibold text-foreground">Content & Structure</h3>
+                <div className="space-y-3 text-sm text-muted-foreground">
+                  <div className="flex items-start gap-2">
+                    <span className="font-medium min-w-0 flex-shrink-0">Semantic HTML:</span>
+                    <span>Proper headings, landmarks, and ARIA labels</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <span className="font-medium min-w-0 flex-shrink-0">Alternative Text:</span>
+                    <span>Descriptive alt text for all images and media</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <span className="font-medium min-w-0 flex-shrink-0">Live Regions:</span>
+                    <span>Screen reader announcements for dynamic content</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-6 p-4 bg-primary/10 rounded-lg border border-primary/20">
+              <h3 className="font-semibold text-primary mb-2">Need Help or Have Feedback?</h3>
+              <p className="text-sm text-muted-foreground">
+                Contact our accessibility team at 
+                <span className="font-medium"> accessibility@aicomplete.me</span> or through our accessible contact form. 
+                We're committed to resolving accessibility barriers and providing accommodations.
+              </p>
             </div>
           </section>
         </div>
