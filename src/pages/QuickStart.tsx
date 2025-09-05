@@ -380,9 +380,19 @@ const QuickStart = () => {
                 <Button 
                   size="lg" 
                   className="gap-2 bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90 text-white shadow-lg hover:shadow-xl px-8 py-6 text-lg"
-                  onClick={() => navigate('/auth')}
+                  onClick={() => {
+                    if (!user) {
+                      navigate('/auth');
+                    } else if (!isProfileComplete) {
+                      navigate('/profile-setup');
+                    } else if (canTakeQuiz) {
+                      navigate('/questions');
+                    } else {
+                      navigate('/profile');
+                    }
+                  }}
                 >
-                  Start Your Journey <ArrowRight className="h-5 w-5" />
+                  {!user ? 'Start Your Journey' : 'Continue Your Journey'} <ArrowRight className="h-5 w-5" />
                 </Button>
                 <Button 
                   variant="outline" 
