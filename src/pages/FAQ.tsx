@@ -521,14 +521,16 @@ const FAQ = () => {
                         or through our accessible contact form. We're committed to resolving accessibility barriers and providing accommodations.
                       </p>
                     </div>
-                    <Button 
-                      variant="outline" 
-                      size="lg"
-                      className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
-                      aria-label="Contact accessibility team for support"
-                    >
-                      Contact Accessibility Team
-                    </Button>
+                    <div className="flex justify-center">
+                      <Button 
+                        variant="outline" 
+                        size="lg"
+                        className="focus:ring-2 focus:ring-primary focus:ring-offset-2 w-full sm:w-auto max-w-xs"
+                        aria-label="Contact accessibility team for support"
+                      >
+                        Contact Accessibility Team
+                      </Button>
+                    </div>
                   </CardContent>
                 </Card>
               </div>
