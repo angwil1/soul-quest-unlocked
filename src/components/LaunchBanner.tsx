@@ -82,6 +82,8 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
   // Check if banner was previously dismissed
   useEffect(() => {
     if (showDismiss) {
+      // Temporarily clear the dismissed state to show the banner again
+      localStorage.removeItem('launchBannerDismissed');
       const dismissed = localStorage.getItem('launchBannerDismissed');
       if (dismissed === 'true') {
         setIsDismissed(true);
