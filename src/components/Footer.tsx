@@ -80,7 +80,7 @@ export const Footer = () => {
               <li><Link to="/accessibility" className="text-foreground/70 hover:text-primary">Accessibility Statement</Link></li>
               <li><Link to="/safety" className="text-foreground/70 hover:text-primary">Safety Center</Link></li>
               <li><Link to="/terms" className="text-foreground/70 hover:text-primary">Terms of Service</Link></li>
-              <li><a href="mailto:support@getunlockedapp.com" className="text-foreground/70 hover:text-primary">Contact</a></li>
+              <li><a href="mailto:support@aicompleteme.com" className="text-foreground/70 hover:text-primary">Contact</a></li>
             </ul>
           </div>
         </div>
