@@ -163,7 +163,6 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
                 {/* On mobile, show simple text without tooltips */}
                 <div className="sm:hidden flex flex-wrap justify-center gap-2 text-xs">
                   <span>🎁 3 Months Free</span>
-                  <span>🍃 Wellness Kit</span>
                   <span>🤝 Referral Rewards</span>
                 </div>
                 
@@ -180,16 +179,6 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
                     </TooltipContent>
                   </Tooltip>
                   
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <div className="flex items-center gap-1 cursor-help hover-scale px-1 py-0.5 rounded hover:bg-white/10 transition-colors">
-                        <span>🍃 Wellness Kit</span>
-                      </div>
-                    </TooltipTrigger>
-                    <TooltipContent side="top" className="max-w-xs">
-                      <p>Physical care package delivered to your door</p>
-                    </TooltipContent>
-                  </Tooltip>
                   
                   <Tooltip>
                     <TooltipTrigger asChild>
