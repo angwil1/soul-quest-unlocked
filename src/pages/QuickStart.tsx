@@ -274,7 +274,7 @@ const QuickStart = () => {
                 <div className="space-y-3">
                   <div className="flex gap-3">
                     <div className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold">1</div>
-                    <p className="text-sm">Take our 25+ question compatibility quiz</p>
+                    <p className="text-sm">Take our 12 question compatibility quiz</p>
                   </div>
                   <div className="flex gap-3">
                     <div className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold">2</div>
