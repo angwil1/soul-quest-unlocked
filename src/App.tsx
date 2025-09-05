@@ -48,22 +48,35 @@ const App = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    console.log('🔞 Checking age verification status...');
     // Check if age has been verified
     const ageConfirmed = localStorage.getItem('ageConfirmed');
     const ageConfirmedDate = localStorage.getItem('ageConfirmedDate');
+    
+    console.log('🔞 Age verification data:', { ageConfirmed, ageConfirmedDate });
     
     // Age confirmation expires after 30 days for additional security
     if (ageConfirmed === 'true' && ageConfirmedDate) {
       const confirmationDate = new Date(ageConfirmedDate);
       const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
       
+      console.log('🔞 Age confirmation dates:', { confirmationDate, thirtyDaysAgo, isValid: confirmationDate > thirtyDaysAgo });
+      
       if (confirmationDate > thirtyDaysAgo) {
+        console.log('✅ Age verification valid - proceeding to app');
         setAgeVerified(true);
       } else {
+        console.log('⚠️ Age verification expired - clearing storage');
         // Expired, clear storage
-        localStorage.removeItem('ageConfirmed');
-        localStorage.removeItem('ageConfirmedDate');
+        try {
+          localStorage.removeItem('ageConfirmed');
+          localStorage.removeItem('ageConfirmedDate');
+        } catch (error) {
+          console.error('Failed to clear expired age verification:', error);
+        }
       }
+    } else {
+      console.log('❌ No valid age verification found');
     }
     
     setLoading(false);

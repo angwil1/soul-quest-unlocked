@@ -12,10 +12,18 @@ export const AgeGate = ({ onAgeConfirmed }: AgeGateProps) => {
   const [showExitWarning, setShowExitWarning] = useState(false);
 
   const handleConfirmAge = () => {
-    // Store age confirmation in localStorage
-    localStorage.setItem('ageConfirmed', 'true');
-    localStorage.setItem('ageConfirmedDate', new Date().toISOString());
-    onAgeConfirmed();
+    console.log('🔞 Age confirmed - storing in localStorage');
+    try {
+      // Store age confirmation in localStorage
+      localStorage.setItem('ageConfirmed', 'true');
+      localStorage.setItem('ageConfirmedDate', new Date().toISOString());
+      console.log('✅ Age confirmation stored successfully');
+      onAgeConfirmed();
+    } catch (error) {
+      console.error('❌ Failed to store age confirmation:', error);
+      // Still proceed - don't block user
+      onAgeConfirmed();
+    }
   };
 
   const handleUnderage = () => {
@@ -50,8 +58,10 @@ export const AgeGate = ({ onAgeConfirmed }: AgeGateProps) => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted flex items-center justify-center p-4">
-      <Card className="max-w-md w-full border-primary/20 bg-white shadow-xl">
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted flex items-center justify-center p-4 relative">
+      {/* Mobile-specific background fix */}
+      <div className="absolute inset-0 bg-background md:bg-transparent"></div>
+      <Card className="max-w-md w-full border-primary/20 bg-card shadow-xl relative z-10">
         <CardHeader className="text-center">
           <div className="mx-auto mb-4 w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center">
             <Shield className="h-8 w-8 text-primary" />
