@@ -371,29 +371,47 @@ const QuickStart = () => {
           </Card>
 
           <div className="text-center">
-            <div className="bg-gradient-to-r from-primary/5 to-purple-500/5 border border-primary/20 rounded-2xl p-8 mb-8">
-              <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">Ready to Begin?</h2>
-              <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-                Join thousands of users finding meaningful connections through AI-powered compatibility matching
-              </p>
-              <div className="flex flex-col sm:flex-row justify-center gap-4">
-                <Button 
-                  size="lg" 
-                  className="gap-2 bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90 text-white shadow-lg hover:shadow-xl px-8 py-6 text-lg"
-                  onClick={() => {
-                    if (!user) {
-                      navigate('/auth');
-                    } else if (!isProfileComplete) {
-                      navigate('/profile-setup');
-                    } else if (canTakeQuiz) {
-                      navigate('/questions');
-                    } else {
-                      navigate('/profile');
-                    }
-                  }}
-                >
-                  {!user ? 'Start Your Journey' : 'Continue Your Journey'} <ArrowRight className="h-5 w-5" />
-                </Button>
+              <div className="bg-gradient-to-r from-primary/5 to-purple-500/5 border border-primary/20 rounded-2xl p-8 mb-8">
+                <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">Ready to Begin?</h2>
+                <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+                  {!user 
+                    ? "Create your account to join thousands of users finding meaningful connections through AI-powered compatibility matching"
+                    : "Continue your journey to find meaningful connections through AI-powered compatibility matching"
+                  }
+                </p>
+                {!user && (
+                  <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg p-4 mb-6 max-w-md mx-auto">
+                    <div className="flex items-center gap-2 text-amber-800 dark:text-amber-200">
+                      <User className="h-4 w-4" />
+                      <span className="text-sm font-medium">Account Required</span>
+                    </div>
+                    <p className="text-xs text-amber-700 dark:text-amber-300 mt-1">
+                      You must create an account before starting your journey
+                    </p>
+                  </div>
+                )}
+                <div className="flex flex-col sm:flex-row justify-center gap-4">
+                  <Button 
+                    size="lg" 
+                    className={`gap-2 shadow-lg hover:shadow-xl px-8 py-6 text-lg ${
+                      !user 
+                        ? "bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90 text-white"
+                        : "bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white"
+                    }`}
+                    onClick={() => {
+                      if (!user) {
+                        navigate('/auth');
+                      } else if (!isProfileComplete) {
+                        navigate('/profile-setup');
+                      } else if (canTakeQuiz) {
+                        navigate('/questions');
+                      } else {
+                        navigate('/profile');
+                      }
+                    }}
+                  >
+                    {!user ? 'Create Account & Start' : 'Continue Your Journey'} <ArrowRight className="h-5 w-5" />
+                  </Button>
                 <Button 
                   variant="outline" 
                   size="lg"
