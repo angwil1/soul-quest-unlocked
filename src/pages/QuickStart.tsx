@@ -82,236 +82,236 @@ const QuickStart = () => {
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted">
       <Navbar />
       
-      <div className="container mx-auto px-4 py-12">
+      <div className="container mx-auto px-4 py-8 md:py-12">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-primary/10 to-purple-600/10 border border-primary/20 mb-6">
+          <div className="text-center mb-8 md:mb-12">
+            <div className="inline-flex items-center px-3 md:px-4 py-2 rounded-full bg-gradient-to-r from-primary/10 to-purple-600/10 border border-primary/20 mb-4 md:mb-6">
               <Heart className="h-4 w-4 mr-2 text-primary" />
-              <span className="text-sm font-medium text-primary">Your Journey to Connection</span>
+              <span className="text-xs md:text-sm font-medium text-primary">Your Journey to Connection</span>
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4 px-4">
               Quick Start Guide
             </h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto px-4 leading-relaxed">
               Get started with AI Complete Me in just 3 simple steps and find your perfect match
             </p>
           </div>
 
-          <Card className="mb-12 bg-gradient-to-br from-background to-muted/5 border-primary/10 shadow-lg">
-            <CardHeader className="text-center pb-8">
-              <CardTitle className="flex items-center justify-center gap-3 text-2xl">
-                <Heart className="h-7 w-7 text-primary animate-pulse" />
+          <Card className="mb-8 md:mb-12 bg-gradient-to-br from-background to-muted/5 border-primary/10 shadow-lg">
+            <CardHeader className="text-center pb-6 md:pb-8 px-4 md:px-6">
+              <CardTitle className="flex items-center justify-center gap-2 md:gap-3 text-xl md:text-2xl">
+                <Heart className="h-6 w-6 md:h-7 md:w-7 text-primary animate-pulse" />
                 Your Journey Begins Here
               </CardTitle>
-              <CardDescription className="text-lg">
+              <CardDescription className="text-base md:text-lg px-2">
                 Follow these steps to create meaningful connections and find your soulmate
               </CardDescription>
             </CardHeader>
-            <CardContent className="p-8">
+            <CardContent className="p-4 md:p-8">
               <div className="space-y-6">
-                {/* Step 1 */}
-                <div className="bg-gradient-to-r from-primary/5 to-purple-500/5 border-2 border-primary/20 rounded-xl p-6 hover:shadow-lg transition-all duration-300">
-                  <div className="flex items-start gap-6">
-                    <div className="flex-shrink-0">
-                      <div className="relative">
-                        <div className="w-16 h-16 rounded-full bg-gradient-to-r from-primary to-purple-600 text-white flex items-center justify-center text-2xl font-bold shadow-lg">
-                          {user ? <CheckCircle className="h-8 w-8" /> : "1"}
-                        </div>
-                        {user && (
-                          <div className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-green-500 flex items-center justify-center">
-                            <CheckCircle className="h-4 w-4 text-white" />
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                    <div className="flex-grow min-w-0">
-                      <h3 className="font-bold text-xl mb-2 text-foreground">Create Your Account</h3>
-                      <p className="text-muted-foreground mb-4 text-sm leading-relaxed">
-                        Sign up with your email and set your basic preferences to get started
-                      </p>
-                      <div className="flex items-center gap-2 mb-4">
-                        {user ? (
-                          <div className="flex items-center gap-2">
-                            <CheckCircle className="h-4 w-4 text-green-500" />
-                            <span className="text-sm text-green-600 font-medium">✓ Complete</span>
-                          </div>
-                        ) : (
-                          <div className="flex items-center gap-2">
-                            <User className="h-4 w-4 text-primary" />
-                            <span className="text-sm text-primary font-medium">Ready to start</span>
-                          </div>
-                        )}
-                      </div>
-                      <Button 
-                        onClick={() => handleStepClick(1)}
-                        className={`w-full sm:w-auto ${
-                          user 
-                            ? "bg-green-500 hover:bg-green-600 text-white" 
-                            : "bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90 text-white"
-                        }`}
-                        disabled={!!user}
-                      >
-                        {user ? "✓ Account Created" : "Create Account"}
-                      </Button>
-                    </div>
-                  </div>
-                </div>
+                 {/* Step 1 */}
+                 <div className="bg-gradient-to-r from-primary/5 to-purple-500/5 border-2 border-primary/20 rounded-xl p-4 md:p-6 hover:shadow-lg transition-all duration-300">
+                   <div className="flex flex-col sm:flex-row items-start gap-4 md:gap-6">
+                     <div className="flex-shrink-0 self-center sm:self-start">
+                       <div className="relative">
+                         <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-gradient-to-r from-primary to-purple-600 text-white flex items-center justify-center text-lg md:text-2xl font-bold shadow-lg">
+                           {user ? <CheckCircle className="h-6 w-6 md:h-8 md:w-8" /> : "1"}
+                         </div>
+                         {user && (
+                           <div className="absolute -top-2 -right-2 w-5 h-5 md:w-6 md:h-6 rounded-full bg-green-500 flex items-center justify-center">
+                             <CheckCircle className="h-3 w-3 md:h-4 md:w-4 text-white" />
+                           </div>
+                         )}
+                       </div>
+                     </div>
+                     <div className="flex-grow min-w-0 text-center sm:text-left">
+                       <h3 className="font-bold text-lg md:text-xl mb-2 text-foreground">Create Your Account</h3>
+                       <p className="text-muted-foreground mb-4 text-sm leading-relaxed">
+                         Sign up with your email and set your basic preferences to get started
+                       </p>
+                       <div className="flex items-center justify-center sm:justify-start gap-2 mb-4">
+                         {user ? (
+                           <div className="flex items-center gap-2">
+                             <CheckCircle className="h-4 w-4 text-green-500" />
+                             <span className="text-sm text-green-600 font-medium">✓ Complete</span>
+                           </div>
+                         ) : (
+                           <div className="flex items-center gap-2">
+                             <User className="h-4 w-4 text-primary" />
+                             <span className="text-sm text-primary font-medium">Ready to start</span>
+                           </div>
+                         )}
+                       </div>
+                       <Button 
+                         onClick={() => handleStepClick(1)}
+                         className={`w-full sm:w-auto min-w-0 ${
+                           user 
+                             ? "bg-green-500 hover:bg-green-600 text-white" 
+                             : "bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90 text-white"
+                         }`}
+                         disabled={!!user}
+                       >
+                         {user ? "✓ Account Created" : "Create Account"}
+                       </Button>
+                     </div>
+                   </div>
+                 </div>
 
-                {/* Step 2 */}
-                <div className="bg-gradient-to-r from-purple-500/5 to-pink-500/5 border-2 border-purple-500/20 rounded-xl p-6 hover:shadow-lg transition-all duration-300">
-                  <div className="flex items-start gap-6">
-                    <div className="flex-shrink-0">
-                      <div className="relative">
-                        <div className="w-16 h-16 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white flex items-center justify-center text-2xl font-bold shadow-lg">
-                          {user && isProfileComplete ? <CheckCircle className="h-8 w-8" /> : "2"}
-                        </div>
-                        {user && isProfileComplete && (
-                          <div className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-green-500 flex items-center justify-center">
-                            <CheckCircle className="h-4 w-4 text-white" />
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                    <div className="flex-grow min-w-0">
-                      <h3 className="font-bold text-xl mb-2 text-foreground">Complete Your Profile</h3>
-                      <p className="text-muted-foreground mb-4 text-sm leading-relaxed">
-                        Add photos, verify your age, and fill out your profile details to attract quality matches
-                      </p>
-                      <div className="flex items-center gap-2 mb-4">
-                        {user && isProfileComplete ? (
-                          <div className="flex items-center gap-2">
-                            <CheckCircle className="h-4 w-4 text-green-500" />
-                            <span className="text-sm text-green-600 font-medium">✓ Complete</span>
-                          </div>
-                        ) : user ? (
-                          <div className="flex items-center gap-2">
-                            <UserCheck className="h-4 w-4 text-purple-500" />
-                            <span className="text-sm text-purple-500 font-medium">Ready to complete</span>
-                          </div>
-                        ) : (
-                          <div className="flex items-center gap-2">
-                            <UserCheck className="h-4 w-4 text-muted-foreground" />
-                            <span className="text-sm text-muted-foreground font-medium">Step 1 required</span>
-                          </div>
-                        )}
-                      </div>
-                      <Button 
-                        onClick={() => handleStepClick(2)}
-                        className={`w-full sm:w-auto ${
-                          user && isProfileComplete 
-                            ? "bg-green-500 hover:bg-green-600 text-white" 
-                            : !user 
-                              ? "bg-muted text-muted-foreground cursor-not-allowed"
-                              : "bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white"
-                        }`}
-                        disabled={!user || (!!user && !!isProfileComplete)}
-                      >
-                        {user && isProfileComplete ? "✓ Profile Complete" : !user ? "Complete Step 1 First" : "Setup Profile"}
-                      </Button>
-                    </div>
-                  </div>
-                </div>
+                 {/* Step 2 */}
+                 <div className="bg-gradient-to-r from-purple-500/5 to-pink-500/5 border-2 border-purple-500/20 rounded-xl p-4 md:p-6 hover:shadow-lg transition-all duration-300">
+                   <div className="flex flex-col sm:flex-row items-start gap-4 md:gap-6">
+                     <div className="flex-shrink-0 self-center sm:self-start">
+                       <div className="relative">
+                         <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white flex items-center justify-center text-lg md:text-2xl font-bold shadow-lg">
+                           {user && isProfileComplete ? <CheckCircle className="h-6 w-6 md:h-8 md:w-8" /> : "2"}
+                         </div>
+                         {user && isProfileComplete && (
+                           <div className="absolute -top-2 -right-2 w-5 h-5 md:w-6 md:h-6 rounded-full bg-green-500 flex items-center justify-center">
+                             <CheckCircle className="h-3 w-3 md:h-4 md:w-4 text-white" />
+                           </div>
+                         )}
+                       </div>
+                     </div>
+                     <div className="flex-grow min-w-0 text-center sm:text-left">
+                       <h3 className="font-bold text-lg md:text-xl mb-2 text-foreground">Complete Your Profile</h3>
+                       <p className="text-muted-foreground mb-4 text-sm leading-relaxed">
+                         Add photos, verify your age, and fill out your profile details to attract quality matches
+                       </p>
+                       <div className="flex items-center justify-center sm:justify-start gap-2 mb-4">
+                         {user && isProfileComplete ? (
+                           <div className="flex items-center gap-2">
+                             <CheckCircle className="h-4 w-4 text-green-500" />
+                             <span className="text-sm text-green-600 font-medium">✓ Complete</span>
+                           </div>
+                         ) : user ? (
+                           <div className="flex items-center gap-2">
+                             <UserCheck className="h-4 w-4 text-purple-500" />
+                             <span className="text-sm text-purple-500 font-medium">Ready to complete</span>
+                           </div>
+                         ) : (
+                           <div className="flex items-center gap-2">
+                             <UserCheck className="h-4 w-4 text-muted-foreground" />
+                             <span className="text-sm text-muted-foreground font-medium">Step 1 required</span>
+                           </div>
+                         )}
+                       </div>
+                       <Button 
+                         onClick={() => handleStepClick(2)}
+                         className={`w-full sm:w-auto min-w-0 text-sm ${
+                           user && isProfileComplete 
+                             ? "bg-green-500 hover:bg-green-600 text-white" 
+                             : !user 
+                               ? "bg-muted text-muted-foreground cursor-not-allowed"
+                               : "bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white"
+                         }`}
+                         disabled={!user || (!!user && !!isProfileComplete)}
+                       >
+                         {user && isProfileComplete ? "✓ Profile Complete" : !user ? "Complete Step 1 First" : "Setup Profile"}
+                       </Button>
+                     </div>
+                   </div>
+                 </div>
 
-                {/* Step 3 */}
-                <div className="bg-gradient-to-r from-pink-500/5 to-primary/5 border-2 border-pink-500/20 rounded-xl p-6 hover:shadow-lg transition-all duration-300">
-                  <div className="flex items-start gap-6">
-                    <div className="flex-shrink-0">
-                      <div className="relative">
-                        <div className={`w-16 h-16 rounded-full text-white flex items-center justify-center text-2xl font-bold shadow-lg ${
-                          canTakeQuiz 
-                            ? "bg-gradient-to-r from-pink-500 to-primary" 
-                            : "bg-muted text-muted-foreground"
-                        }`}>
-                          {canTakeQuiz ? "3" : <Lock className="h-8 w-8" />}
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex-grow min-w-0">
-                      <h3 className="font-bold text-xl mb-2 text-foreground">Take the Quiz</h3>
-                      <p className="text-muted-foreground mb-4 text-sm leading-relaxed">
-                        Complete our comprehensive personality and compatibility assessment to find your perfect matches
-                      </p>
-                      <div className="flex items-center gap-2 mb-4">
-                        {canTakeQuiz ? (
-                          <div className="flex items-center gap-2">
-                            <Brain className="h-4 w-4 text-pink-500" />
-                            <span className="text-sm text-pink-500 font-medium">Ready to begin</span>
-                          </div>
-                        ) : (
-                          <div className="flex items-center gap-2">
-                            <Lock className="h-4 w-4 text-muted-foreground" />
-                            <span className="text-sm text-muted-foreground font-medium">Complete Steps 1 & 2</span>
-                          </div>
-                        )}
-                      </div>
-                      <Button 
-                        onClick={() => handleStepClick(3)}
-                        className={`w-full sm:w-auto ${
-                          canTakeQuiz 
-                            ? "bg-gradient-to-r from-pink-500 to-primary hover:from-pink-600 hover:to-primary/90 text-white"
-                            : "bg-muted text-muted-foreground cursor-not-allowed"
-                        }`}
-                        disabled={!canTakeQuiz}
-                      >
-                        {canTakeQuiz ? "Start Quiz" : "Complete Previous Steps"}
-                      </Button>
-                    </div>
-                  </div>
-                </div>
+                 {/* Step 3 */}
+                 <div className="bg-gradient-to-r from-pink-500/5 to-primary/5 border-2 border-pink-500/20 rounded-xl p-4 md:p-6 hover:shadow-lg transition-all duration-300">
+                   <div className="flex flex-col sm:flex-row items-start gap-4 md:gap-6">
+                     <div className="flex-shrink-0 self-center sm:self-start">
+                       <div className="relative">
+                         <div className={`w-12 h-12 md:w-16 md:h-16 rounded-full text-white flex items-center justify-center text-lg md:text-2xl font-bold shadow-lg ${
+                           canTakeQuiz 
+                             ? "bg-gradient-to-r from-pink-500 to-primary" 
+                             : "bg-muted text-muted-foreground"
+                         }`}>
+                           {canTakeQuiz ? "3" : <Lock className="h-6 w-6 md:h-8 md:w-8" />}
+                         </div>
+                       </div>
+                     </div>
+                     <div className="flex-grow min-w-0 text-center sm:text-left">
+                       <h3 className="font-bold text-lg md:text-xl mb-2 text-foreground">Take the Quiz</h3>
+                       <p className="text-muted-foreground mb-4 text-sm leading-relaxed">
+                         Complete our comprehensive personality and compatibility assessment to find your perfect matches
+                       </p>
+                       <div className="flex items-center justify-center sm:justify-start gap-2 mb-4">
+                         {canTakeQuiz ? (
+                           <div className="flex items-center gap-2">
+                             <Brain className="h-4 w-4 text-pink-500" />
+                             <span className="text-sm text-pink-500 font-medium">Ready to begin</span>
+                           </div>
+                         ) : (
+                           <div className="flex items-center gap-2">
+                             <Lock className="h-4 w-4 text-muted-foreground" />
+                             <span className="text-sm text-muted-foreground font-medium">Complete Steps 1 & 2</span>
+                           </div>
+                         )}
+                       </div>
+                       <Button 
+                         onClick={() => handleStepClick(3)}
+                         className={`w-full sm:w-auto min-w-0 text-sm ${
+                           canTakeQuiz 
+                             ? "bg-gradient-to-r from-pink-500 to-primary hover:from-pink-600 hover:to-primary/90 text-white"
+                             : "bg-muted text-muted-foreground cursor-not-allowed"
+                         }`}
+                         disabled={!canTakeQuiz}
+                       >
+                         {canTakeQuiz ? "Start Quiz" : "Complete Previous Steps"}
+                       </Button>
+                     </div>
+                   </div>
+                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <div className="grid md:grid-cols-2 gap-6 mb-8">
+          <div className="grid md:grid-cols-2 gap-4 md:gap-6 mb-6 md:mb-8">
             <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
+              <CardHeader className="pb-4">
+                <CardTitle className="flex items-center gap-2 text-lg">
                   <Brain className="h-5 w-5 text-primary" />
                   How AI Matching Works
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className="space-y-4 px-4 md:px-6">
                 <div className="space-y-3">
-                  <div className="flex gap-3">
-                    <div className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold">1</div>
-                    <p className="text-sm">Take our 12 question compatibility quiz</p>
+                  <div className="flex gap-3 items-start">
+                    <div className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">1</div>
+                    <p className="text-sm leading-relaxed">Take our 12 question compatibility quiz</p>
                   </div>
-                  <div className="flex gap-3">
-                    <div className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold">2</div>
-                    <p className="text-sm">AI analyzes your personality, values, and communication style</p>
+                  <div className="flex gap-3 items-start">
+                    <div className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">2</div>
+                    <p className="text-sm leading-relaxed">AI analyzes your personality, values, and communication style</p>
                   </div>
-                  <div className="flex gap-3">
-                    <div className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold">3</div>
-                    <p className="text-sm">Generates compatibility scores with other users</p>
+                  <div className="flex gap-3 items-start">
+                    <div className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">3</div>
+                    <p className="text-sm leading-relaxed">Generates compatibility scores with other users</p>
                   </div>
-                  <div className="flex gap-3">
-                    <div className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold">4</div>
-                    <p className="text-sm">Provides conversation starters and connection insights</p>
+                  <div className="flex gap-3 items-start">
+                    <div className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">4</div>
+                    <p className="text-sm leading-relaxed">Provides conversation starters and connection insights</p>
                   </div>
                 </div>
               </CardContent>
             </Card>
 
             <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
+              <CardHeader className="pb-4">
+                <CardTitle className="flex items-center gap-2 text-lg">
                   <Zap className="h-5 w-5 text-primary" />
                   Pro Tips for Success
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className="space-y-3 px-4 md:px-6">
                 <div className="space-y-3">
                   <div className="p-3 rounded-lg bg-muted/30 border border-muted">
-                    <p className="text-sm font-medium">Answer Thoughtfully</p>
-                    <p className="text-xs text-muted-foreground">The quiz takes 10-15 minutes - honest answers give better matches</p>
+                    <p className="text-sm font-medium mb-1">Answer Thoughtfully</p>
+                    <p className="text-xs text-muted-foreground leading-relaxed">The quiz takes 10-15 minutes - honest answers give better matches</p>
                   </div>
                   <div className="p-3 rounded-lg bg-muted/30 border border-muted">
-                    <p className="text-sm font-medium">Upload Quality Photos</p>
-                    <p className="text-xs text-muted-foreground">Clear, recent photos help others connect with you</p>
+                    <p className="text-sm font-medium mb-1">Upload Quality Photos</p>
+                    <p className="text-xs text-muted-foreground leading-relaxed">Clear, recent photos help others connect with you</p>
                   </div>
                   <div className="p-3 rounded-lg bg-muted/30 border border-muted">
-                    <p className="text-sm font-medium">Claim Your Quiet Start</p>
-                    <p className="text-xs text-muted-foreground">First 500 users get 3 months free + wellness kit</p>
+                    <p className="text-sm font-medium mb-1">Claim Your Quiet Start</p>
+                    <p className="text-xs text-muted-foreground leading-relaxed">First 500 users get 3 months free + wellness kit</p>
                   </div>
                 </div>
               </CardContent>
@@ -352,28 +352,28 @@ const QuickStart = () => {
                   <span className="text-green-500">🌿</span>
                   Conversation Starters
                 </h3>
-                <div className="grid md:grid-cols-2 gap-4 text-sm">
-                  <div className="p-4 rounded-lg bg-muted/30 border border-muted">
-                    "Start with a story—not a résumé. Let them feel who you are."
-                  </div>
-                  <div className="p-4 rounded-lg bg-muted/30 border border-muted">
-                    "If you're nervous, say so. Vulnerability builds bridges."
-                  </div>
-                  <div className="p-4 rounded-lg bg-muted/30 border border-muted">
-                    "Don't rush past silence. Emotional resonance often blooms there."
-                  </div>
-                  <div className="p-4 rounded-lg bg-muted/30 border border-muted">
-                    "Ask before sharing deeper layers. Consent is sexy."
-                  </div>
-                </div>
+                 <div className="grid sm:grid-cols-2 gap-4 text-sm">
+                   <div className="p-4 rounded-lg bg-muted/30 border border-muted">
+                     "Start with a story—not a résumé. Let them feel who you are."
+                   </div>
+                   <div className="p-4 rounded-lg bg-muted/30 border border-muted">
+                     "If you're nervous, say so. Vulnerability builds bridges."
+                   </div>
+                   <div className="p-4 rounded-lg bg-muted/30 border border-muted">
+                     "Don't rush past silence. Emotional resonance often blooms there."
+                   </div>
+                   <div className="p-4 rounded-lg bg-muted/30 border border-muted">
+                     "Ask before sharing deeper layers. Consent is sexy."
+                   </div>
+                 </div>
               </div>
             </CardContent>
           </Card>
 
           <div className="text-center">
-              <div className="bg-gradient-to-r from-primary/5 to-purple-500/5 border border-primary/20 rounded-2xl p-8 mb-8">
-                <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">Ready to Begin?</h2>
-                <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+              <div className="bg-gradient-to-r from-primary/5 to-purple-500/5 border border-primary/20 rounded-2xl p-6 md:p-8 mb-6 md:mb-8">
+                <h2 className="text-2xl md:text-3xl font-bold mb-4 bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent px-2">Ready to Begin?</h2>
+                <p className="text-base md:text-lg text-muted-foreground mb-6 md:mb-8 max-w-2xl mx-auto px-4 leading-relaxed">
                   {!user 
                     ? "Sign in to your account or create a new one to join thousands of users finding meaningful connections through AI-powered compatibility matching"
                     : "Continue your journey to find meaningful connections through AI-powered compatibility matching"
@@ -381,19 +381,19 @@ const QuickStart = () => {
                 </p>
                 {!user && (
                   <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4 mb-6 max-w-md mx-auto">
-                    <div className="flex items-center gap-2 text-blue-800 dark:text-blue-200">
+                    <div className="flex items-center justify-center gap-2 text-blue-800 dark:text-blue-200">
                       <User className="h-4 w-4" />
                       <span className="text-sm font-medium">New or Returning User</span>
                     </div>
-                    <p className="text-xs text-blue-700 dark:text-blue-300 mt-1">
+                    <p className="text-xs text-blue-700 dark:text-blue-300 mt-1 text-center">
                       Sign in to your existing account or create a new one to get started
                     </p>
                   </div>
                 )}
-                <div className="flex flex-col sm:flex-row justify-center gap-4">
+                <div className="flex flex-col sm:flex-row justify-center gap-3 md:gap-4">
                   <Button 
                     size="lg" 
-                    className={`gap-2 shadow-lg hover:shadow-xl px-8 py-6 text-lg ${
+                    className={`gap-2 shadow-lg hover:shadow-xl px-6 md:px-8 py-4 md:py-6 text-base md:text-lg min-w-0 ${
                       !user 
                         ? "bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90 text-white"
                         : "bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white"
@@ -411,12 +411,12 @@ const QuickStart = () => {
                       }
                     }}
                   >
-                    {!user ? 'Sign In / Create Account' : 'Continue Your Journey'} <ArrowRight className="h-5 w-5" />
+                    <span className="truncate">{!user ? 'Sign In / Create Account' : 'Continue Your Journey'}</span> <ArrowRight className="h-4 w-4 md:h-5 md:w-5 flex-shrink-0" />
                   </Button>
                 <Button 
                   variant="outline" 
                   size="lg"
-                  className="px-8 py-6 text-lg border-2 hover:bg-muted/50"
+                  className="px-6 md:px-8 py-4 md:py-6 text-base md:text-lg border-2 hover:bg-muted/50 min-w-0"
                   onClick={() => navigate('/faq')}
                 >
                   View FAQ
