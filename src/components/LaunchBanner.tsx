@@ -117,7 +117,7 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
               </h3>
               
               <p className="text-white/90 text-xs md:text-sm lg:text-base mb-2 md:mb-3 leading-tight max-w-2xl">
-                The first 500 Soul Questers receive 3 months min of Complete Plus + a wellness keepsake. Kits also available for referrers—until all 500 are claimed.
+                The first 500 Soul Questers receive 3 months of Complete Plus + a min wellness keepsake. Kits also available for referrers—until all 500 are claimed.
               </p>
               
               <div className="space-y-1 text-white/80 text-xs md:text-sm">
