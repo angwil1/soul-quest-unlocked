@@ -120,10 +120,6 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
               
               <div className="space-y-1 text-white/80 text-xs md:text-sm">
                 <div>
-                  🍃 Mini Wellness Kit
-                </div>
-                
-                <div>
                   🤝 Referral Rewards: Invite someone to join. Earn bonus months, unlock badges, and receive more gifts—while supplies last
                 </div>
                 

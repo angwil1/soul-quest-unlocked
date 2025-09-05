@@ -389,7 +389,6 @@ const Auth = () => {
                   </p>
                   <ul className="space-y-1 text-xs text-muted-foreground" role="list">
                     <li>✨ 3 months of Complete Plus free</li>
-                    <li>🍃 Mini wellness kit delivered</li>
                     <li>🎯 Priority matching & premium features</li>
                   </ul>
                 </div>
