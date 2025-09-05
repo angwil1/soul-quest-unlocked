@@ -1,9 +1,9 @@
 # Google Play Store Configuration for AI Complete Me
 
 ## App Information
-- **App ID:** app.lovable.65aad2fc5b3340308f733783f744043f
+- **App ID:** com.aicompleteme.app
 - **App Name:** AI Complete Me
-- **Package Name:** soul.quest.unlocked
+- **Package Name:** com.aicompleteme.app
 - **Category:** Dating & Social
 - **Content Rating:** Mature 17+ (Dating apps with mature themes)
 - **Target SDK:** 34 (Android 14)
