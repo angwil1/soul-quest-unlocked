@@ -4,14 +4,33 @@ import App from './App.tsx'
 import './index.css'
 
 console.log('🚀 Starting React app...');
+console.log('📱 Platform info:', {
+  userAgent: navigator.userAgent,
+  isAndroid: /android/i.test(navigator.userAgent),
+  viewport: `${window.innerWidth}x${window.innerHeight}`
+});
 
 // Safe Capacitor initialization
 const initializeCapacitorSafely = async () => {
   try {
     console.log('🔧 Initializing Capacitor...');
-    const { initializeCapacitor } = await import("./lib/capacitor");
+    const { initializeCapacitor, isNative, getPlatform } = await import("./lib/capacitor");
+    
+    console.log('📱 Capacitor platform check:', { 
+      isNative: isNative(), 
+      platform: getPlatform() 
+    });
+    
     await initializeCapacitor();
     console.log('✅ Capacitor initialized successfully');
+    
+    // Add Android-specific debugging
+    if (isNative() && getPlatform() === 'android') {
+      console.log('🤖 Android app detected - checking display');
+      document.body.style.visibility = 'visible';
+      document.documentElement.style.visibility = 'visible';
+    }
+    
   } catch (error) {
     console.log('⚠️ Capacitor initialization failed, continuing as web app:', error);
     // Continue as web app - this is expected on desktop
