@@ -5,6 +5,7 @@ const config: CapacitorConfig = {
   appName: 'AI Complete Me',
   webDir: 'dist',
   server: {
+    url: "https://65aad2fc-5b33-4030-8f73-3783f744043f.lovableproject.com?forceHideBadge=true",
     cleartext: true
   },
   plugins: {
