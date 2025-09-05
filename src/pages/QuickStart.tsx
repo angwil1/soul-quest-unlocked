@@ -35,9 +35,9 @@ const QuickStart = () => {
         if (!user) {
           navigate('/auth');
         } else {
-          // User already has account, go to step 2
-          console.log('User exists, navigating to profile setup');
-          navigate('/profile/setup');
+          // User already has account, direct them to edit their profile
+          console.log('User exists, navigating to profile edit');
+          navigate('/profile/edit');
         }
         break;
       case 2:
@@ -51,7 +51,7 @@ const QuickStart = () => {
           });
           navigate('/auth');
         } else {
-          navigate('/profile/setup');
+          navigate('/profile/edit');
         }
         break;
       case 3:
@@ -70,7 +70,7 @@ const QuickStart = () => {
             description: "Please complete your profile before taking the personality quiz.",
             variant: "destructive"
           });
-          navigate('/profile/setup');
+          navigate('/profile/edit');
         } else {
           navigate('/questions');
         }
@@ -402,7 +402,8 @@ const QuickStart = () => {
                       if (!user) {
                         navigate('/auth');
                       } else if (!isProfileComplete) {
-                        navigate('/profile/setup');
+                        // If no profile exists at all, go to setup; otherwise go to edit
+                        navigate(profile ? '/profile/edit' : '/profile/setup');
                       } else if (canTakeQuiz) {
                         navigate('/questions');
                       } else {
