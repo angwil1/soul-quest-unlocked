@@ -58,9 +58,17 @@ export const useProfile = () => {
         .from('profiles')
         .select('*')
         .eq('id', user?.id)
-        .single();
+        .maybeSingle(); // Use maybeSingle() to handle missing profiles
 
       if (error) throw error;
+      
+      // If no profile exists, create one
+      if (!data) {
+        console.log('No profile found, creating new profile for user:', user?.id);
+        await createInitialProfile();
+        return;
+      }
+      
       setProfile(data as Profile);
     } catch (error) {
       console.error('Error fetching profile:', error);
@@ -71,6 +79,36 @@ export const useProfile = () => {
       });
     } finally {
       setLoading(false);
+    }
+  };
+
+  const createInitialProfile = async () => {
+    try {
+      if (!user?.id) return;
+      
+      const { data, error } = await supabase
+        .from('profiles')
+        .insert({
+          id: user.id,
+          created_at: new Date().toISOString()
+        })
+        .select()
+        .single();
+
+      if (error) throw error;
+      setProfile(data as Profile);
+      
+      toast({
+        title: "Welcome!",
+        description: "Your profile has been created. Let's set it up!"
+      });
+    } catch (error) {
+      console.error('Error creating initial profile:', error);
+      toast({
+        title: "Error",
+        description: "Failed to create profile",
+        variant: "destructive"
+      });
     }
   };
 
