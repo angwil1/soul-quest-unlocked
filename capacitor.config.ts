@@ -4,10 +4,7 @@ const config: CapacitorConfig = {
   appId: 'com.aicompleteme.app',
   appName: 'AI Complete Me',
   webDir: 'dist',
-  server: {
-    url: "https://65aad2fc-5b33-4030-8f73-3783f744043f.lovableproject.com?forceHideBadge=true",
-    cleartext: true
-  },
+  // Remove server config for local builds
   plugins: {
     SplashScreen: {
       launchShowDuration: 2000,
