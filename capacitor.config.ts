@@ -27,7 +27,18 @@ const config: CapacitorConfig = {
   },
   android: {
     allowMixedContent: true,
-    backgroundColor: '#8B5CF6'
+    backgroundColor: '#8B5CF6',
+    webContentsDebugging: true,
+    appendUserAgent: 'AI Complete Me',
+    overrideUserAgent: 'AI Complete Me Mobile App',
+    mixedContentMode: 'always_allow',
+    captureInput: true,
+    // Enable fullscreen display
+    fullscreen: true,
+    // Optimize for mobile display
+    themeColor: '#8B5CF6',
+    // Handle display cutouts properly
+    layoutFitsSystemWindows: false
   }
 };
 
