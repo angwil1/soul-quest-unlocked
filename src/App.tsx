@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import { AppWrapper } from "@/components/AppWrapper";
 import { AgeGate } from "@/components/AgeGate";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
@@ -108,7 +108,7 @@ const App = () => {
       <TooltipProvider>
         <Toaster />
         <ErrorBoundary>
-          <BrowserRouter>
+          <HashRouter>
             <AppWrapper>
               <ScrollToTop />
               <Routes>
@@ -146,7 +146,7 @@ const App = () => {
               <Route path="*" element={<NotFound />} />
               </Routes>
             </AppWrapper>
-          </BrowserRouter>
+          </HashRouter>
         </ErrorBoundary>
       </TooltipProvider>
     </QueryClientProvider>
