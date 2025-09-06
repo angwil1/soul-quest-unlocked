@@ -53,7 +53,16 @@ if (rootElement) {
         <App />
       </React.StrictMode>
     );
-    console.log('✅ App rendered successfully');
+console.log('✅ App rendered successfully');
+    
+    // Add mobile-specific debugging
+    if (window.location.protocol === 'capacitor:') {
+      console.log('📱 Running in Capacitor WebView');
+      document.body.style.backgroundColor = 'red'; // Temporary visual check
+      setTimeout(() => {
+        document.body.style.backgroundColor = ''; // Remove after 2 seconds
+      }, 2000);
+    }
   } catch (error) {
     console.error('❌ Failed to render React app:', error);
     rootElement.innerHTML = `
