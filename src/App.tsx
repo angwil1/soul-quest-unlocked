@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AppWrapper } from "@/components/AppWrapper";
 import { AgeGate } from "@/components/AgeGate";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
 import ScrollToTop from "@/components/ScrollToTop";
 
 // Page imports
@@ -106,10 +107,11 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
-        <BrowserRouter>
-          <ScrollToTop />
-          <AppWrapper>
-            <Routes>
+        <ErrorBoundary>
+          <BrowserRouter>
+            <AppWrapper>
+              <ScrollToTop />
+              <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/auth" element={<Auth />} />
               <Route path="/reset-password" element={<ResetPassword />} />
@@ -142,9 +144,10 @@ const App = () => {
               <Route path="/safety" element={<SafetyCenter />} />
               <Route path="/sample-user-profile/:profileId" element={<SampleUserProfile />} />
               <Route path="*" element={<NotFound />} />
-            </Routes>
-          </AppWrapper>
-        </BrowserRouter>
+              </Routes>
+            </AppWrapper>
+          </BrowserRouter>
+        </ErrorBoundary>
       </TooltipProvider>
     </QueryClientProvider>
   );
