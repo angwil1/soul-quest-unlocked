@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Shield, AlertTriangle } from 'lucide-react';
-import { Link } from 'react-router-dom';
 
 interface AgeGateProps {
   onAgeConfirmed: () => void;
@@ -105,12 +104,12 @@ export const AgeGate = ({ onAgeConfirmed }: AgeGateProps) => {
               By clicking "Yes", you confirm that you are at least 18 years old and legally permitted to view adult content in your jurisdiction.
             </p>
             <div className="flex flex-wrap justify-center gap-4 text-xs">
-              <Link to="/privacy" className="text-primary hover:underline">
+              <a href="/privacy" className="text-primary hover:underline">
                 Privacy Policy
-              </Link>
-              <Link to="/terms" className="text-primary hover:underline">
+              </a>
+              <a href="/terms" className="text-primary hover:underline">
                 Terms of Service
-              </Link>
+              </a>
             </div>
           </div>
         </CardContent>
