@@ -2050,33 +2050,6 @@ export type Database = {
         }
         Relationships: []
       }
-      waitlist: {
-        Row: {
-          created_at: string
-          email: string
-          id: string
-          ip_address: unknown | null
-          referral_source: string | null
-          user_agent: string | null
-        }
-        Insert: {
-          created_at?: string
-          email: string
-          id?: string
-          ip_address?: unknown | null
-          referral_source?: string | null
-          user_agent?: string | null
-        }
-        Update: {
-          created_at?: string
-          email?: string
-          id?: string
-          ip_address?: unknown | null
-          referral_source?: string | null
-          user_agent?: string | null
-        }
-        Relationships: []
-      }
     }
     Views: {
       [_ in never]: never
