@@ -11,15 +11,15 @@ const config: CapacitorConfig = {
   plugins: {
     SplashScreen: {
       launchShowDuration: 2000,
-      backgroundColor: '#ffffff',
+      backgroundColor: '#8B5CF6',
       showSpinner: false,
       androidSpinnerStyle: 'small',
       iosSpinnerStyle: 'small',
-      spinnerColor: '#210100ff'
+      spinnerColor: '#ffffff'
     },
     StatusBar: {
       style: 'light',
-      backgroundColor: '#210100ff'
+      backgroundColor: '#8B5CF6'
     },
     Keyboard: {
       resize: 'body'
@@ -30,7 +30,7 @@ const config: CapacitorConfig = {
   },
   android: {
     allowMixedContent: true,
-    backgroundColor: '#210100ff'
+    backgroundColor: '#8B5CF6'
   }
 };
 
