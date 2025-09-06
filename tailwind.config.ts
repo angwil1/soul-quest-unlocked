@@ -105,11 +105,11 @@ export default {
 				'gentle-pulse': {
 					'0%, 100%': { 
 						transform: 'scale(1)', 
-						boxShadow: '0 0 0 0 rgba(255, 255, 255, 0.7)' 
+						boxShadow: '0 0 0 0 hsl(var(--primary) / 0.7)' 
 					},
 					'50%': { 
 						transform: 'scale(1.02)', 
-						boxShadow: '0 0 0 4px rgba(255, 255, 255, 0.3)' 
+						boxShadow: '0 0 0 4px hsl(var(--primary) / 0.3)' 
 					}
 				},
 				'progress-fill': {
