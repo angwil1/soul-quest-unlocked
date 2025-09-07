@@ -65,16 +65,17 @@ const HeroSection = () => {
         <div className="absolute inset-0 bg-purple-100/20 opacity-30 md:opacity-0 z-0"></div>
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-purple-100/20 to-transparent md:hidden z-0"></div>
         
-        {/* Primary Background Image */}
+        {/* Primary Background Image - Android optimized positioning */}
         <picture className="absolute inset-0 w-full h-full z-0">
            <img 
              src={heroImages[currentHeroImageIndex]} 
              alt="Loving couples celebrating authentic connections" 
-             className={`w-full h-full object-cover transition-all duration-1000 object-[center_15%] sm:object-[center_25%] md:object-[center_30%] lg:object-[center_35%] xl:object-[center_40%] ${
+             className={`w-full h-full object-cover transition-all duration-1000 object-center sm:object-[center_20%] md:object-[center_30%] lg:object-[center_35%] xl:object-[center_40%] ${
                isLoaded ? 'animate-fade-in' : 'opacity-0'
              }`}
              loading="eager"
              onLoad={() => setIsLoaded(true)}
+             key={currentHeroImageIndex}
            />
         </picture>
         
