@@ -125,6 +125,33 @@ body {
   .touch-target:active {
     transform: scale(0.98);
   }
+  
+  /* Universal image optimization for all mobile devices */
+  .hero-image {
+    object-position: center center !important;
+    object-fit: cover !important;
+  }
+}
+
+/* iOS-specific optimizations */
+@supports (-webkit-touch-callout: none) {
+  /* iOS Safari specific styles */
+  body {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  
+  /* iOS safe area handling */
+  .ios-safe-area {
+    padding-top: max(env(safe-area-inset-top), 1rem);
+    padding-bottom: max(env(safe-area-inset-bottom), 1rem);
+  }
+  
+  /* Prevent iOS zoom on input focus */
+  input, textarea, select {
+    font-size: 16px !important;
+  }
 }
 
   .dark {
