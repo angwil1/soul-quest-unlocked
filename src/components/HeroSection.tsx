@@ -46,16 +46,16 @@ const HeroSection = () => {
   return (
     <section className="relative overflow-hidden min-h-[100vh] min-h-[100dvh] flex items-center justify-center bg-white">
       
-      {/* Already have account - Top Right */}
+      {/* Already have account - Top Right - Mobile optimized */}
       <div className="absolute top-4 right-4 z-30 animate-fade-in">
-        <p className="text-muted-foreground mb-1 text-xs">Already have an account?</p>
+        <p className="text-muted-foreground mb-2 text-xs sm:text-sm">Already have an account?</p>
         <Button 
           variant="ghost" 
           onClick={() => navigate('/auth')}
-          className="text-muted-foreground hover:text-foreground font-medium text-xs px-2 py-1 rounded-md hover:bg-muted/10 transition-all duration-300 hover:scale-105"
+          className="text-muted-foreground hover:text-foreground font-medium text-sm px-3 py-2 rounded-lg hover:bg-white/20 transition-all duration-300 hover:scale-105 touch-target backdrop-blur-sm border border-white/10"
         >
           Log in
-          <ArrowRight className="h-2.5 w-2.5 ml-0.5" />
+          <ArrowRight className="h-3 w-3 ml-1" />
         </Button>
       </div>
 
@@ -85,59 +85,58 @@ const HeroSection = () => {
         <div className="absolute top-10 sm:top-20 left-4 sm:left-20 w-24 sm:w-72 h-24 sm:h-72 bg-gradient-to-br from-purple-200/20 to-purple-300/15 rounded-full blur-xl sm:blur-3xl animate-pulse z-1"></div>
         <div className="absolute bottom-10 sm:bottom-20 right-4 sm:right-20 w-32 sm:w-96 h-32 sm:h-96 bg-gradient-to-br from-purple-300/15 to-purple-200/20 rounded-full blur-xl sm:blur-3xl animate-pulse z-1" style={{ animationDelay: '1s' }}></div>
 
-        {/* Hero Content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 py-8 sm:py-16 md:py-24 text-center">
-          <div className="space-y-12 sm:space-y-16 lg:space-y-20 animate-fade-in">
+        {/* Hero Content - Mobile optimized */}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 py-12 sm:py-16 md:py-24 text-center">
+          <div className="space-y-8 sm:space-y-12 lg:space-y-16 animate-fade-in">
             
             {/* Poetic Hero Content */}
             <div className="space-y-6 sm:space-y-8 lg:space-y-10 mt-8 sm:mt-12">
-              {/* Emotional Badge */}
-              <div className="inline-flex items-center px-4 py-2 sm:px-6 sm:py-3 rounded-full bg-gradient-to-r from-primary/10 to-purple-600/10 md:from-primary/15 md:to-purple-600/15 border border-primary/20 md:border-primary/30 backdrop-blur-sm hover:scale-105 transition-transform duration-300">
-                <Heart className="h-4 w-4 sm:h-5 sm:w-5 mr-2 sm:mr-3 text-primary animate-pulse" />
-                <span className="text-xs sm:text-sm font-medium text-primary">
+              {/* Emotional Badge - Mobile optimized */}
+              <div className="inline-flex items-center px-4 py-3 sm:px-6 sm:py-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 hover:scale-105 transition-transform duration-300 touch-target">
+                <Heart className="h-4 w-4 sm:h-5 sm:w-5 mr-2 sm:mr-3 text-white animate-pulse" />
+                <span className="text-sm sm:text-base font-medium text-white">
                   Where souls recognize each other
                 </span>
               </div>
 
-              {/* Hero Headline */}
+              {/* Hero Headline - Mobile optimized */}
               <div className="space-y-4 sm:space-y-6">
-                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-light leading-tight tracking-wide">
+                <h1 className="hero-title text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-light leading-tight tracking-wide">
                   <span className="block text-white drop-shadow-2xl animate-fade-in" style={{ textShadow: '2px 2px 8px rgba(0,0,0,0.9), 0 0 20px rgba(0,0,0,0.8)', animationDelay: '0.1s' }}>
                     AI Complete Me is live.
                   </span>
                 </h1>
                 
-                <p className="text-base sm:text-lg md:text-xl text-white max-w-xl sm:max-w-2xl mx-auto leading-relaxed font-light drop-shadow-lg animate-fade-in px-4" style={{ textShadow: '2px 2px 6px rgba(0,0,0,0.9), 0 0 16px rgba(0,0,0,0.7)', animationDelay: '0.4s' }}>
+                <p className="hero-subtitle text-lg sm:text-xl md:text-2xl text-white max-w-2xl sm:max-w-3xl mx-auto leading-relaxed font-light drop-shadow-lg animate-fade-in px-4" style={{ textShadow: '2px 2px 6px rgba(0,0,0,0.9), 0 0 16px rgba(0,0,0,0.7)', animationDelay: '0.4s' }}>
                   First 500 users receive 3 months free + a wellness kit. Kits also available for referrers—until all 500 are claimed.
                 </p>
               </div>
             </div>
 
-            {/* Enhanced CTA Buttons */}
-            <div className="flex flex-col gap-4 sm:gap-6 lg:gap-8 justify-center items-center mb-12 sm:mb-16 lg:mb-20 mt-8 sm:mt-12 lg:mt-24 max-w-xs sm:max-w-md lg:max-w-2xl mx-auto animate-fade-in px-4 md:hidden lg:flex" style={{ animationDelay: '0.5s' }}>
+            {/* Enhanced CTA Buttons - Mobile first design */}
+            <div className="flex flex-col gap-4 sm:gap-6 justify-center items-center mb-12 sm:mb-16 mt-8 sm:mt-12 max-w-sm sm:max-w-md mx-auto animate-fade-in px-4" style={{ animationDelay: '0.5s' }}>
               <Button 
                 variant="ghost" 
-                size="sm"
+                size="lg"
                 onClick={() => {
                   navigate('/quick-start');
                   setTimeout(() => window.scrollTo(0, 0), 0);
                 }}
-                className="w-full px-2 sm:px-8 lg:px-12 py-1 sm:py-4 lg:py-6 text-xs sm:text-lg lg:text-xl text-white hover:text-white/80 font-medium hover:bg-white/10 transform hover:scale-105 transition-all duration-300 rounded-lg sm:rounded-xl lg:rounded-2xl backdrop-blur-sm border border-white/20 hover:border-white/30"
+                className="w-full px-6 py-4 text-base sm:text-lg text-white hover:text-white/90 font-medium hover:bg-white/15 transform hover:scale-105 transition-all duration-300 rounded-xl backdrop-blur-md border border-white/30 hover:border-white/40 touch-target"
               >
-                <Users className="h-2.5 w-2.5 sm:h-5 w-5 lg:h-6 lg:w-6 mr-0.5 sm:mr-2 lg:mr-3" />
+                <Users className="h-5 w-5 mr-3" />
                 See How It Works
               </Button>
 
-              <div 
+              <Button
+                size="lg"
                 onClick={handleGetStarted}
-                className="cursor-pointer relative bg-gradient-to-r from-primary via-purple-600 to-pink-600 text-white px-2 sm:px-4 lg:px-4 py-1.5 sm:py-3 lg:py-2 rounded-xl sm:rounded-2xl lg:rounded-xl rounded-bl-sm shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-xs sm:text-base lg:text-sm font-medium max-w-fit hover:shadow-primary/25"
+                className="w-full px-6 py-4 text-base sm:text-lg bg-gradient-to-r from-primary via-purple-600 to-pink-600 text-white hover:from-primary/90 hover:via-purple-600/90 hover:to-pink-600/90 font-medium shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 rounded-xl touch-target hover:shadow-primary/25"
               >
-                <Heart className="h-2.5 w-2.5 sm:h-4 w-4 lg:h-3 lg:w-3 mr-0.5 sm:mr-2 lg:mr-1 inline animate-pulse" />
+                <Heart className="h-5 w-5 mr-3 animate-pulse" />
                 Get Started
-                <ArrowRight className="h-2.5 w-2.5 sm:h-4 w-4 lg:h-3 lg:w-3 ml-0.5 sm:ml-2 lg:ml-1 inline" />
-                {/* Message bubble tail */}
-                <div className="absolute -bottom-0.5 sm:-bottom-1 lg:-bottom-0.5 left-1.5 sm:left-3 lg:left-2 w-2 sm:w-3 lg:w-2 h-2 sm:h-3 lg:h-2 bg-gradient-to-r from-primary to-purple-600 transform rotate-45 rounded-sm"></div>
-              </div>
+                <ArrowRight className="h-5 w-5 ml-3" />
+              </Button>
             </div>
 
           </div>
@@ -157,20 +156,20 @@ const HeroSection = () => {
           <div className="w-2 h-2 bg-gradient-to-r from-primary to-pink-600 rounded-full"></div>
         </div>
 
-        {/* Enhanced Stats */}
-        <div className="relative z-20 max-w-7xl mx-auto px-4 pb-12">              
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto animate-fade-in" style={{ animationDelay: '0.6s' }}>
-            <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-primary/5 to-purple-600/5 border border-primary/10 backdrop-blur-sm hover:scale-110 hover:shadow-xl transition-all duration-500 hover:bg-primary/10">
-              <div className="text-4xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent mb-3">10,000+</div>
-              <div className="text-muted-foreground font-medium">Meaningful Connections Made</div>
+        {/* Enhanced Stats - Mobile optimized */}
+        <div className="relative z-20 max-w-7xl mx-auto px-4 pb-8 sm:pb-12">              
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 max-w-4xl mx-auto animate-fade-in" style={{ animationDelay: '0.6s' }}>
+            <div className="text-center p-6 sm:p-8 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 hover:scale-105 hover:shadow-xl transition-all duration-500 hover:bg-white/15 touch-target">
+              <div className="text-3xl sm:text-4xl font-bold text-white mb-3">10,000+</div>
+              <div className="text-white/80 font-medium text-sm sm:text-base">Meaningful Connections Made</div>
             </div>
-            <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-purple-600/5 to-pink-600/5 border border-purple-600/10 backdrop-blur-sm hover:scale-110 hover:shadow-xl transition-all duration-500 hover:bg-purple-600/10">
-              <div className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-3">94%</div>
-              <div className="text-muted-foreground font-medium">Match Compatibility Rate</div>
+            <div className="text-center p-6 sm:p-8 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 hover:scale-105 hover:shadow-xl transition-all duration-500 hover:bg-white/15 touch-target">
+              <div className="text-3xl sm:text-4xl font-bold text-white mb-3">94%</div>
+              <div className="text-white/80 font-medium text-sm sm:text-base">Match Compatibility Rate</div>
             </div>
-            <div className="text-center p-8 rounded-2xl bg-gradient-to-br from-pink-600/5 to-primary/5 border border-pink-600/10 backdrop-blur-sm hover:scale-110 hover:shadow-xl transition-all duration-500 hover:bg-pink-600/10">
-              <div className="text-4xl font-bold bg-gradient-to-r from-pink-600 to-primary bg-clip-text text-transparent mb-3">4.8★</div>
-              <div className="text-muted-foreground font-medium">User Satisfaction Score</div>
+            <div className="text-center p-6 sm:p-8 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 hover:scale-105 hover:shadow-xl transition-all duration-500 hover:bg-white/15 touch-target">
+              <div className="text-3xl sm:text-4xl font-bold text-white mb-3">4.8★</div>
+              <div className="text-white/80 font-medium text-sm sm:text-base">User Satisfaction Score</div>
             </div>
           </div>
         </div>

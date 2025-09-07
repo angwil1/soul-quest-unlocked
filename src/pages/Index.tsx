@@ -118,20 +118,20 @@ const Index = () => {
       <div className="min-h-screen bg-gradient-to-br from-background via-muted/5 to-background">
         <a 
           href="#main-content" 
-          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-primary-foreground px-4 py-2 rounded-md z-50"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-primary-foreground px-4 py-2 rounded-md z-50 touch-target"
         >
           Skip to main content
         </a>
         
         <Navbar />
         
-        {/* Launch Banner Section - Above everything */}
+        {/* Launch Banner Section - Mobile optimized */}
         <section 
-          className="py-4 bg-gradient-to-br from-primary/5 to-purple-500/5"
+          className="py-4 md:py-6 bg-gradient-to-br from-primary/5 to-purple-500/5"
           role="banner"
           aria-label="Launch announcement banner"
         >
-          <div className="max-w-2xl mx-auto px-4 md:max-w-full md:px-6 lg:px-8">
+          <div className="max-w-2xl mx-auto px-4 md:max-w-full md:px-6 lg:px-8 mobile-card">
             <LaunchBanner showDismiss={true} variant="homepage" />
           </div>
         </section>
