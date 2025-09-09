@@ -2246,6 +2246,15 @@ export type Database = {
         }
         Returns: undefined
       }
+      log_sensitive_data_access: {
+        Args: {
+          p_action: string
+          p_additional_data?: Json
+          p_table_name: string
+          p_user_id?: string
+        }
+        Returns: undefined
+      }
       mark_kit_shipped: {
         Args: { p_user_id: string }
         Returns: boolean
@@ -2297,6 +2306,10 @@ export type Database = {
       }
       validate_user_input: {
         Args: { input_text: string; max_length?: number }
+        Returns: boolean
+      }
+      validate_user_ownership: {
+        Args: { p_user_id: string }
         Returns: boolean
       }
       verify_user_age: {
