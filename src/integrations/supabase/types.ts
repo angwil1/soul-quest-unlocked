@@ -2067,12 +2067,28 @@ export type Database = {
           match_id: string
         }[]
       }
+      calculate_match_priority: {
+        Args: { p_matched_user_id: string; p_user_id: string }
+        Returns: number
+      }
+      calculate_profile_visibility_score: {
+        Args: { p_user_id: string }
+        Returns: number
+      }
+      calculate_user_engagement_score: {
+        Args: { p_user_id: string }
+        Returns: number
+      }
       can_send_message: {
         Args: { p_user_id: string }
         Returns: boolean
       }
       check_daily_message_limit: {
         Args: { chat_id_param: string; sender_id_param: string }
+        Returns: boolean
+      }
+      check_feature_access: {
+        Args: { p_feature_name: string; p_user_id: string }
         Returns: boolean
       }
       check_rate_limit: {
@@ -2096,6 +2112,10 @@ export type Database = {
         Args: { p_user_id: string }
         Returns: boolean
       }
+      check_user_premium_status: {
+        Args: { p_user_id: string }
+        Returns: boolean
+      }
       check_user_security_level: {
         Args: Record<PropertyKey, never>
         Returns: boolean
@@ -2107,6 +2127,10 @@ export type Database = {
           sender_id_param: string
         }
         Returns: Json
+      }
+      cleanup_expired_sessions: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
       }
       compute_interaction_risk: {
         Args: { p_user_id: string }
@@ -2204,6 +2228,14 @@ export type Database = {
           visibility_boost: number | null
         }[]
       }
+      generate_user_analytics_summary: {
+        Args: { p_user_id: string }
+        Returns: Json
+      }
+      get_match_compatibility_score: {
+        Args: { p_matched_user_id: string; p_user_id: string }
+        Returns: number
+      }
       get_next_kit_number: {
         Args: Record<PropertyKey, never>
         Returns: number
@@ -2228,6 +2260,18 @@ export type Database = {
       get_remaining_messages: {
         Args: { p_user_id: string }
         Returns: number
+      }
+      get_user_daily_message_count: {
+        Args: { p_user_id: string }
+        Returns: number
+      }
+      get_user_message_limit: {
+        Args: { p_user_id: string }
+        Returns: number
+      }
+      get_user_subscription_tier: {
+        Args: { p_user_id: string }
+        Returns: string
       }
       increment_message_count: {
         Args: { p_user_id: string }
@@ -2263,6 +2307,22 @@ export type Database = {
         Args: { p_action_details: Json }
         Returns: boolean
       }
+      process_match_interaction: {
+        Args: {
+          p_interaction_type: string
+          p_matched_user_id: string
+          p_user_id: string
+        }
+        Returns: boolean
+      }
+      process_user_feedback: {
+        Args: { p_feedback_data: Json; p_user_id: string }
+        Returns: boolean
+      }
+      profile_completeness: {
+        Args: { p_user_id: string }
+        Returns: number
+      }
       sanitize_user_content: {
         Args: { input_text: string }
         Returns: string
@@ -2287,6 +2347,10 @@ export type Database = {
         Args: Record<PropertyKey, never>
         Returns: string
       }
+      update_last_active: {
+        Args: { p_user_id: string }
+        Returns: undefined
+      }
       update_match_velocity: {
         Args: { p_user_id: string }
         Returns: {
@@ -2303,6 +2367,22 @@ export type Database = {
           tracked_from: string | null
           user_id: string | null
         }
+      }
+      update_user_activity_status: {
+        Args: { p_activity_data: Json; p_user_id: string }
+        Returns: undefined
+      }
+      validate_age_verification_data: {
+        Args: { p_date_of_birth: string; p_verification_method: string }
+        Returns: boolean
+      }
+      validate_message_content: {
+        Args: { p_message_text: string }
+        Returns: boolean
+      }
+      validate_profile_data: {
+        Args: { p_profile_data: Json }
+        Returns: boolean
       }
       validate_user_input: {
         Args: { input_text: string; max_length?: number }
