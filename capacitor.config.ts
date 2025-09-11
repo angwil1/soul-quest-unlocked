@@ -4,6 +4,9 @@ const config: CapacitorConfig = {
   appId: 'com.aicompleteme.app',
   appName: 'AI Complete Me',
   webDir: 'dist',
+  server: {
+    androidScheme: 'https'
+  },
   plugins: {
     SplashScreen: {
       launchShowDuration: 2000,
@@ -26,7 +29,12 @@ const config: CapacitorConfig = {
   },
   android: {
     backgroundColor: '#8B5CF6',
-    themeColor: '#8B5CF6'
+    themeColor: '#8B5CF6',
+    buildOptions: {
+      keystorePath: './keystore.jks',
+      keystoreAlias: 'aicompleteme-key',
+      releaseType: 'AAB'
+    }
   }
 };
 
