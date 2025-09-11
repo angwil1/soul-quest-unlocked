@@ -1366,6 +1366,39 @@ export type Database = {
         }
         Relationships: []
       }
+      privacy_settings: {
+        Row: {
+          created_at: string | null
+          id: string
+          last_seen_sharing: boolean
+          location_sharing: boolean
+          profile_visibility: string
+          read_receipts: boolean
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          last_seen_sharing?: boolean
+          location_sharing?: boolean
+          profile_visibility?: string
+          read_receipts?: boolean
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          last_seen_sharing?: boolean
+          location_sharing?: boolean
+          profile_visibility?: string
+          read_receipts?: boolean
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           age: number | null
@@ -2059,6 +2092,10 @@ export type Database = {
         Args: Record<PropertyKey, never>
         Returns: undefined
       }
+      are_users_matched: {
+        Args: { user1_id: string; user2_id: string }
+        Returns: boolean
+      }
       calculate_match_intelligence: {
         Args: { input_user_id: string }
         Returns: {
@@ -2129,6 +2166,10 @@ export type Database = {
         Returns: Json
       }
       cleanup_expired_sessions: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
+      cleanup_old_location_data: {
         Args: Record<PropertyKey, never>
         Returns: undefined
       }
