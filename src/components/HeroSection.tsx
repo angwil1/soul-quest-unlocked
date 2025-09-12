@@ -50,7 +50,7 @@ const HeroSection = () => {
     <section className="relative overflow-hidden min-h-[100vh] min-h-[100dvh] flex items-center justify-center bg-white">
       
       {/* Already have account - Top Right - Mobile optimized */}
-      <div className="hidden sm:block absolute top-4 right-4 z-30 animate-fade-in">
+      <div className="hidden">
         <p className="text-muted-foreground mb-2 text-xs sm:text-sm text-right">Already have an account?</p>
         <Button 
           variant="ghost" 
