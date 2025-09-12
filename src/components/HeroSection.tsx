@@ -100,9 +100,9 @@ const HeroSection = () => {
             {/* Poetic Hero Content */}
             <div className="space-y-6 sm:space-y-8 lg:space-y-10 mt-8 sm:mt-12">
               {/* Emotional Badge - Mobile optimized */}
-              <div className="inline-flex items-center px-4 py-3 sm:px-6 sm:py-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 hover:scale-105 transition-transform duration-300 touch-target">
-                <Heart className="h-4 w-4 sm:h-5 sm:w-5 mr-2 sm:mr-3 text-white animate-pulse" />
-                <span className="text-sm sm:text-base font-medium text-white">
+              <div className="inline-flex items-center justify-center px-3 py-2 sm:px-4 sm:py-3 md:px-6 md:py-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 hover:scale-105 transition-transform duration-300 touch-target max-w-xs sm:max-w-sm md:max-w-none mx-auto">
+                <Heart className="h-4 w-4 sm:h-5 sm:w-5 mr-2 sm:mr-3 text-white animate-pulse flex-shrink-0" />
+                <span className="text-xs sm:text-sm md:text-base font-medium text-white text-center leading-tight">
                   Where souls recognize each other
                 </span>
               </div>
