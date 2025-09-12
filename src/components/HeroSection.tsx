@@ -50,12 +50,12 @@ const HeroSection = () => {
     <section className="relative overflow-hidden min-h-[100vh] min-h-[100dvh] flex items-center justify-center bg-white">
       
       {/* Already have account - Top Right - Mobile optimized */}
-      <div className="absolute top-4 right-4 z-30 animate-fade-in">
+      <div className="hidden sm:block absolute top-4 right-4 z-30 animate-fade-in">
         <p className="text-muted-foreground mb-2 text-xs sm:text-sm text-right">Already have an account?</p>
         <Button 
           variant="ghost" 
           onClick={() => navigate('/auth')}
-          className="text-muted-foreground hover:text-foreground font-medium text-sm px-3 py-2 rounded-lg hover:bg-white/20 transition-all duration-300 hover:scale-105 touch-target backdrop-blur-sm border border-white/10 w-full"
+          className="text-muted-foreground hover:text-foreground font-medium text-sm px-3 py-2 rounded-lg hover:bg-white/20 transition-all duration-300 hover:scale-105 touch-target backdrop-blur-sm border border-white/10"
         >
           Log in
           <ArrowRight className="h-3 w-3 ml-1" />
@@ -145,6 +145,16 @@ const HeroSection = () => {
                 Get Started
                 <ArrowRight className="h-5 w-5 ml-3" />
               </Button>
+
+              {/* Mobile-only Sign In link to avoid overlap */}
+              <div className="sm:hidden mt-1">
+                <button
+                  onClick={() => navigate('/auth')}
+                  className="text-sm text-white/90 underline-offset-4 hover:underline transition-colors"
+                >
+                  Already have an account? Log in
+                </button>
+              </div>
             </div>
 
           </div>
