@@ -414,7 +414,7 @@ const Auth = () => {
             Accessible for Everyone
           </h2>
           <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
-            AI Complete Me is designed to be accessible to users with disabilities. 
+            AI Complete Me is accessible to everyone, no matter your abilities or the technology you use. 
             We support screen readers, keyboard navigation, and follow WCAG accessibility guidelines.
           </p>
           <div className="grid gap-2 text-xs text-muted-foreground">
