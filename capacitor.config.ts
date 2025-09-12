@@ -32,7 +32,7 @@ const config: CapacitorConfig = {
     themeColor: '#8B5CF6',
     buildOptions: {
       keystorePath: './myapp.jks',
-      keystoreAlias: 'aicompleteme-key',
+      keystoreAlias: 'aicompleteme',
       releaseType: 'AAB'
     }
   }
