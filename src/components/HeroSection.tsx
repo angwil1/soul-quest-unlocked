@@ -21,13 +21,16 @@ const HeroSection = () => {
   const [currentHeroImageIndex, setCurrentHeroImageIndex] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  // Hero image rotation effect
+  // Hero image rotation effect - Optimized for mobile performance
   useEffect(() => {
+    // Reduce frequency and use requestAnimationFrame for better performance
     const interval = setInterval(() => {
-      setCurrentHeroImageIndex((prevIndex) => 
-        (prevIndex + 1) % heroImages.length
-      );
-    }, 5000);
+      requestAnimationFrame(() => {
+        setCurrentHeroImageIndex((prevIndex) => 
+          (prevIndex + 1) % heroImages.length
+        );
+      });
+    }, 8000); // Increased from 5s to 8s for better performance
 
     return () => clearInterval(interval);
   }, []);
@@ -66,28 +69,29 @@ const HeroSection = () => {
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-purple-100/20 to-transparent md:hidden z-0"></div>
         
         {/* Primary Background Image - Universal mobile optimization for Android & iOS */}
-        <picture className="absolute inset-0 w-full h-full z-0">
-           <img 
-             src={heroImages[currentHeroImageIndex]} 
-             alt="Loving couples celebrating authentic connections" 
-             className={`w-full h-full object-cover transition-all duration-1000 object-center ${
-               isLoaded ? 'animate-fade-in' : 'opacity-0'
-             }`}
-             style={{
-               objectPosition: 'center center'
-             }}
-             loading="eager"
-             onLoad={() => setIsLoaded(true)}
-             key={currentHeroImageIndex}
-           />
-        </picture>
+         <picture className="absolute inset-0 w-full h-full z-0">
+            <img 
+              src={heroImages[currentHeroImageIndex]} 
+              alt="Loving couples celebrating authentic connections" 
+              className={`w-full h-full object-cover transition-all duration-500 object-center ${
+                isLoaded ? 'opacity-100' : 'opacity-0'
+              }`}
+              style={{
+                objectPosition: 'center center',
+                willChange: 'opacity'
+              }}
+              loading="eager"
+              onLoad={() => setIsLoaded(true)}
+              key={currentHeroImageIndex}
+            />
+         </picture>
         
         {/* Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-purple-50/5 via-transparent to-transparent md:hidden z-5"></div>
         
-        {/* Floating background elements */}
-        <div className="absolute top-10 sm:top-20 left-4 sm:left-20 w-24 sm:w-72 h-24 sm:h-72 bg-gradient-to-br from-purple-200/20 to-purple-300/15 rounded-full blur-xl sm:blur-3xl animate-pulse z-1"></div>
-        <div className="absolute bottom-10 sm:bottom-20 right-4 sm:right-20 w-32 sm:w-96 h-32 sm:h-96 bg-gradient-to-br from-purple-300/15 to-purple-200/20 rounded-full blur-xl sm:blur-3xl animate-pulse z-1" style={{ animationDelay: '1s' }}></div>
+        {/* Floating background elements - Simplified for performance */}
+        <div className="absolute top-20 left-20 w-32 h-32 bg-gradient-to-br from-purple-200/10 to-purple-300/5 rounded-full blur-lg animate-pulse z-1" style={{ animationDuration: '4s' }}></div>
+        <div className="absolute bottom-20 right-20 w-40 h-40 bg-gradient-to-br from-purple-300/10 to-purple-200/5 rounded-full blur-lg animate-pulse z-1" style={{ animationDelay: '2s', animationDuration: '4s' }}></div>
 
         {/* Hero Content - Mobile optimized */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 py-12 sm:py-16 md:py-24 text-center">
@@ -146,18 +150,12 @@ const HeroSection = () => {
           </div>
         </div>
 
-        {/* Enhanced Floating Elements */}
-        <div className="absolute top-32 left-16 animate-pulse hover:scale-150 transition-transform duration-500 z-20">
-          <div className="w-4 h-4 bg-gradient-to-r from-primary to-purple-600 rounded-full"></div>
+        {/* Simplified floating elements for mobile performance */}
+        <div className="absolute top-32 left-16 animate-pulse z-20" style={{ animationDuration: '3s' }}>
+          <div className="w-3 h-3 bg-gradient-to-r from-primary to-purple-600 rounded-full"></div>
         </div>
-        <div className="absolute bottom-40 right-20 animate-pulse hover:scale-150 transition-transform duration-500 z-20" style={{ animationDelay: '1s' }}>
-          <div className="w-3 h-3 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full"></div>
-        </div>
-        <div className="absolute top-1/3 right-16 animate-pulse hover:scale-150 transition-transform duration-500 z-20" style={{ animationDelay: '2s' }}>
-          <div className="w-5 h-5 bg-gradient-to-r from-pink-600 to-primary rounded-full"></div>
-        </div>
-        <div className="absolute top-2/3 left-24 animate-pulse hover:scale-150 transition-transform duration-500 z-20" style={{ animationDelay: '1.5s' }}>
-          <div className="w-2 h-2 bg-gradient-to-r from-primary to-pink-600 rounded-full"></div>
+        <div className="absolute bottom-40 right-20 animate-pulse z-20" style={{ animationDelay: '1.5s', animationDuration: '3s' }}>
+          <div className="w-2 h-2 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full"></div>
         </div>
 
         {/* Enhanced Stats - Mobile optimized */}
