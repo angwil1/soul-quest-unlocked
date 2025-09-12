@@ -50,12 +50,12 @@ const HeroSection = () => {
     <section className="relative overflow-hidden min-h-[100vh] min-h-[100dvh] flex items-center justify-center bg-white">
       
       {/* Already have account - Top Right - Mobile optimized */}
-      <div className="absolute top-2 right-4 z-30 animate-fade-in">
-        <p className="text-muted-foreground mb-2 text-xs sm:text-sm">Already have an account?</p>
+      <div className="absolute top-4 right-4 z-30 animate-fade-in">
+        <p className="text-muted-foreground mb-2 text-xs sm:text-sm text-right">Already have an account?</p>
         <Button 
           variant="ghost" 
           onClick={() => navigate('/auth')}
-          className="text-muted-foreground hover:text-foreground font-medium text-sm px-3 py-2 rounded-lg hover:bg-white/20 transition-all duration-300 hover:scale-105 touch-target backdrop-blur-sm border border-white/10"
+          className="text-muted-foreground hover:text-foreground font-medium text-sm px-3 py-2 rounded-lg hover:bg-white/20 transition-all duration-300 hover:scale-105 touch-target backdrop-blur-sm border border-white/10 w-full"
         >
           Log in
           <ArrowRight className="h-3 w-3 ml-1" />
