@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import appIcon from "@/assets/app-icon-512.png";
+import React, { useEffect, useState } from "react";
+import appIcon from "../assets/app-icon-512.png";
 
 const IconPreview: React.FC = () => {
   useEffect(() => {
@@ -15,6 +15,8 @@ const IconPreview: React.FC = () => {
     };
   }, []);
 
+  const [importError, setImportError] = useState(false);
+  const [publicError, setPublicError] = useState(false);
   const cacheBust = `?cb=${Date.now()}`;
 
   return (
@@ -33,9 +35,13 @@ const IconPreview: React.FC = () => {
               width={256}
               height={256}
               loading="eager"
+              onError={() => setImportError(true)}
               className="mx-auto rounded-lg shadow"
             />
             <p className="text-sm text-muted-foreground mt-3 break-all">Path: src/assets/app-icon-512.png</p>
+            {importError && (
+              <p className="text-sm text-destructive mt-2">Failed to load imported icon. The source file might be missing or corrupted.</p>
+            )}
           </article>
 
           <article className="rounded-xl bg-card text-card-foreground shadow p-6">
@@ -46,9 +52,16 @@ const IconPreview: React.FC = () => {
               width={256}
               height={256}
               loading="eager"
+              onError={() => setPublicError(true)}
               className="mx-auto rounded-lg shadow"
             />
-            <p className="text-sm text-muted-foreground mt-3 break-all">Path: public/app-icon-512.png</p>
+            <p className="text-sm text-muted-foreground mt-3 break-all">
+              Path: public/app-icon-512.png —
+              <a className="underline hover:opacity-80" href={`/app-icon-512.png${cacheBust}`} target="_blank" rel="noreferrer">open in new tab</a>
+            </p>
+            {publicError && (
+              <p className="text-sm text-destructive mt-2">Failed to load from public/. The file may not exist at public/app-icon-512.png.</p>
+            )}
           </article>
         </section>
       </main>
