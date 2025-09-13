@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Instagram, Twitter, Facebook, Share2, CreditCard, Linkedin, MessageCircle, Copy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
+import { BETA_CONFIG } from "@/config/betaConfig";
 
 export const Footer = () => {
   const { toast } = useToast();
@@ -89,8 +90,13 @@ export const Footer = () => {
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div>
               <p className="text-sm text-foreground/70">
-                © 2025 AI Complete Me. All rights reserved.
+                © {BETA_CONFIG.copyrightYear} {BETA_CONFIG.businessName}. All rights reserved.
               </p>
+              {BETA_CONFIG.isTestBuild && (
+                <p className="text-xs text-orange-600 font-medium mt-1">
+                  BETA VERSION {BETA_CONFIG.getBuildId()} - For Testing Only - Confidential & Proprietary
+                </p>
+              )}
               
               {/* Payment Methods */}
               <div className="flex items-center gap-2 mt-3 flex-wrap">
