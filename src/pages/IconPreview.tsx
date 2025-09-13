@@ -99,6 +99,20 @@ const IconPreview: React.FC = () => {
           </article>
           </section>
         </main>
+        <footer className="fixed inset-x-0 bottom-0 z-50 bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/80 border-t border-border">
+          <div className="container mx-auto px-4 py-3 flex items-center justify-between gap-3">
+            <div className="text-sm text-muted-foreground">Bottom preview (direct): /app-icon-512.png</div>
+            <a href={`/app-icon-512.png${cacheBust}`} target="_blank" rel="noreferrer" className="shrink-0">
+              <img
+                src={`/app-icon-512.png${cacheBust}`}
+                alt="AI Complete Me app icon 512x512 (bottom preview)"
+                width={64}
+                height={64}
+                className="rounded-md shadow"
+              />
+            </a>
+          </div>
+        </footer>
       </div>
     );
   };
