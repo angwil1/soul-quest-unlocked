@@ -44,6 +44,7 @@ import TestSubscriptionFeatures from "./pages/TestSubscriptionFeatures";
 import NotFound from "./pages/NotFound";
 import ResetPassword from "./pages/ResetPassword";
 import PaymentSuccess from "./pages/PaymentSuccess";
+import IconPreview from "./pages/IconPreview";
 
 const queryClient = new QueryClient();
 
@@ -167,6 +168,7 @@ const App = () => {
               <Route path="/test-subscription-features" element={<TestSubscriptionFeatures />} />
               <Route path="/safety" element={<SafetyCenter />} />
               <Route path="/sample-user-profile/:profileId" element={<SampleUserProfile />} />
+              <Route path="/icon-preview" element={<IconPreview />} />
               <Route path="*" element={<NotFound />} />
               </Routes>
             </AppWrapper>
