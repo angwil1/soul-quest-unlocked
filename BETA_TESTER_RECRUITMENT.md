@@ -1,47 +1,5 @@
 # Beta Tester Recruitment Posts
 
-## 🔥 Reddit Post (r/beta, r/apps, r/dating)
-
-**Title:** [BETA] AI Complete Me - Revolutionary Dating App Seeking 8 More Testers (18+) 
-
-**Post:**
-```
-Hey Reddit! 👋
-
-I'm launching **AI Complete Me**, a dating app that uses AI to find deep compatibility matches (think personality + values, not just photos).
-
-🔍 **Looking for 8 more beta testers** for Google Play Internal Testing.
-
-**What makes this different:**
-- AI analyzes personality compatibility ("Connection DNA")  
-- Focus on meaningful relationships, not hookups
-- LGBTQ+ inclusive design
-- Memory vault for saving special moments
-
-**Requirements:**
-- 18+ only (dating app)
-- Android device  
-- 1-2 weeks of casual testing
-- Honest feedback via simple survey
-- Sign basic confidentiality agreement
-
-**What you get:**
-- Early access to cool AI matching tech
-- Free premium features during beta
-- Input on a potentially game-changing app
-
-**To apply, comment or DM:**
-- Your first name
-- Email address  
-- Age (18+ verification)
-- What you're looking for in dating apps
-
-This is legitimate beta testing for Google Play launch. Serious inquiries only please!
-
-Thanks! 🚀
-```
-
----
 
 ## 💼 LinkedIn Post
 
@@ -158,13 +116,11 @@ This could be the next big thing in dating tech 🚀
 
 ## 🎯 Posting Strategy
 
-**Best Subreddits:**
-- r/beta (main beta testing community)
-- r/AndroidApps 
-- r/startups
-- r/dating_advice
-- r/datingoverthirty
-- r/lgbtq (if relevant)
+**Best Platforms:**
+- LinkedIn professional networks
+- Facebook tech/startup groups
+- Discord/Telegram communities
+- Personal network outreach
 
 **Timing:**
 - Tuesday-Thursday, 10am-2pm EST
@@ -175,4 +131,4 @@ This could be the next big thing in dating tech 🚀
 - Send them your Google Form
 - Set clear expectations about timeline
 
-Ready to post? Start with Reddit r/beta - they're most receptive to beta testing requests!
+Ready to recruit? Start with your professional network - they're most likely to provide quality feedback!
