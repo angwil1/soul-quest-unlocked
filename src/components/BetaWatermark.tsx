@@ -31,31 +31,25 @@ export const BetaWatermark = ({
   }
 
   return (
-    <div className="fixed top-4 right-4 z-50 bg-orange-500/90 text-white p-3 rounded-lg shadow-lg max-w-xs">
-      <div className="flex items-start gap-2">
-        <AlertTriangle className="w-5 h-5 mt-0.5 flex-shrink-0" />
+    <div className="fixed top-2 right-2 z-50 bg-orange-500/90 text-white p-2 rounded-md shadow-md max-w-48">
+      <div className="flex items-start gap-1.5">
+        <AlertTriangle className="w-3 h-3 mt-0.5 flex-shrink-0" />
         <div className="flex-1">
-          <div className="font-semibold text-sm">BETA TEST VERSION</div>
-          <div className="text-xs opacity-90 mt-1">
-            © {new Date().getFullYear()} {businessName}
-          </div>
-          <div className="text-xs opacity-75 mt-1">
-            Version: {buildVersion}
+          <div className="font-medium text-xs">BETA TEST</div>
+          <div className="text-xs opacity-75 mt-0.5">
+            v{buildVersion}
           </div>
           <div className="text-xs opacity-75">
-            Tester ID: {testerId}
-          </div>
-          <div className="text-xs opacity-75 mt-1">
-            Confidential - Do not redistribute
+            ID: {testerId}
           </div>
         </div>
         <Button
           variant="ghost"
           size="sm"
           onClick={() => setIsVisible(false)}
-          className="p-1 h-auto text-white hover:bg-white/20"
+          className="p-0.5 h-auto text-white hover:bg-white/20"
         >
-          <X className="w-4 h-4" />
+          <X className="w-3 h-3" />
         </Button>
       </div>
     </div>
