@@ -38,7 +38,7 @@ const IconPreview: React.FC = () => {
               onError={() => setImportError(true)}
               className="mx-auto rounded-lg shadow"
             />
-            <p className="text-sm text-muted-foreground mt-3 break-all">Path: src/assets/app-icon-512.png</p>
+            <p className="text-sm text-muted-foreground mt-3 break-all">Path: src/assets/app-icon-512.png — Resolved URL: <span className="font-mono">{String(appIcon)}</span></p>
             {importError && (
               <p className="text-sm text-destructive mt-2">Failed to load imported icon. The source file might be missing or corrupted.</p>
             )}
