@@ -17,7 +17,23 @@ const IconPreview: React.FC = () => {
 
   const [importError, setImportError] = useState(false);
   const [publicError, setPublicError] = useState(false);
+  const [importFetch, setImportFetch] = useState<string>("pending");
+  const [publicFetch, setPublicFetch] = useState<string>("pending");
   const cacheBust = `?cb=${Date.now()}`;
+
+  useEffect(() => {
+    // Test fetch for both sources to surface status visibly
+    const importUrl = String(appIcon);
+    const publicUrl = `/app-icon-512.png${cacheBust}`;
+    console.log("IconPreview - testing URLs", { importUrl, publicUrl });
+    fetch(importUrl, { cache: "no-store" })
+      .then(r => setImportFetch(r.ok ? `ok (${r.status})` : `error (${r.status})`))
+      .catch(e => setImportFetch(`error (${e?.message || "fetch failed"})`));
+    fetch(publicUrl, { cache: "no-store" })
+      .then(r => setPublicFetch(r.ok ? `ok (${r.status})` : `error (${r.status})`))
+      .catch(e => setPublicFetch(`error (${e?.message || "fetch failed"})`));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted">
@@ -38,6 +54,7 @@ const IconPreview: React.FC = () => {
               onError={() => setImportError(true)}
               className="mx-auto rounded-lg shadow"
             />
+            <p className="text-xs text-muted-foreground mt-1">Fetch status: <span className="font-mono">{importFetch}</span></p>
             <p className="text-sm text-muted-foreground mt-3 break-all">Path: src/assets/app-icon-512.png — Resolved URL: <span className="font-mono">{String(appIcon)}</span></p>
             {importError && (
               <p className="text-sm text-destructive mt-2">Failed to load imported icon. The source file might be missing or corrupted.</p>
