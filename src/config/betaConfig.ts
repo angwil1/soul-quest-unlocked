@@ -2,7 +2,7 @@
 // Update these values with your actual business information
 
 export const BETA_CONFIG = {
-  businessName: "[Your Business Name]", // Replace with your registered business name
+  businessName: "AI Complete Me", // Your registered business name
   buildVersion: "1.0.1-BETA", 
   isTestBuild: true,
   testerId: "BETA-USER", // This can be updated per build/tester
