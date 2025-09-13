@@ -11,6 +11,12 @@ export const BETA_CONFIG = {
   showBetaWatermark: true,
   trackUsage: true,
   
+  // Beta protection settings
+  disablePremiumFeatures: true,
+  showDummyData: true,
+  limitedFunctionality: true,
+  screenshotWarnings: true,
+  
   // Copyright info
   copyrightYear: new Date().getFullYear(),
   
@@ -18,5 +24,12 @@ export const BETA_CONFIG = {
   getBuildId: () => {
     const timestamp = new Date().toISOString().slice(0, 10);
     return `${BETA_CONFIG.buildVersion}-${timestamp}`;
+  },
+  
+  // Protection messages
+  protectionMessages: {
+    premiumBlocked: "Premium features disabled in beta - Full version coming soon!",
+    dummyData: "Sample data shown for testing purposes only",
+    copyrightWarning: "This app is protected by copyright. Unauthorized copying is prohibited."
   }
 };

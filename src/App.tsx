@@ -9,6 +9,7 @@ import { ErrorBoundary } from "@/components/ErrorBoundary";
 import ScrollToTop from "@/components/ScrollToTop";
 import { BetaWatermark } from "@/components/BetaWatermark";
 import { VersionTracker } from "@/components/VersionTracker";
+import { BetaProtection } from "@/components/BetaProtection";
 import { BETA_CONFIG } from "@/config/betaConfig";
 
 // Page imports
@@ -115,19 +116,24 @@ const App = () => {
             <AppWrapper>
               <ScrollToTop />
               {/* Beta Testing Components */}
-              {BETA_CONFIG.isTestBuild && BETA_CONFIG.showBetaWatermark && (
-                <BetaWatermark 
-                  testerId={BETA_CONFIG.testerId}
-                  buildVersion={BETA_CONFIG.getBuildId()}
-                  businessName={BETA_CONFIG.businessName}
-                />
-              )}
-              {BETA_CONFIG.isTestBuild && BETA_CONFIG.trackUsage && (
-                <VersionTracker 
-                  testerId={BETA_CONFIG.testerId}
-                  buildVersion={BETA_CONFIG.getBuildId()}
-                  businessName={BETA_CONFIG.businessName}
-                />
+              {BETA_CONFIG.isTestBuild && (
+                <>
+                  <BetaProtection />
+                  {BETA_CONFIG.showBetaWatermark && (
+                    <BetaWatermark 
+                      testerId={BETA_CONFIG.testerId}
+                      buildVersion={BETA_CONFIG.getBuildId()}
+                      businessName={BETA_CONFIG.businessName}
+                    />
+                  )}
+                  {BETA_CONFIG.trackUsage && (
+                    <VersionTracker 
+                      testerId={BETA_CONFIG.testerId}
+                      buildVersion={BETA_CONFIG.getBuildId()}
+                      businessName={BETA_CONFIG.businessName}
+                    />
+                  )}
+                </>
               )}
               <Routes>
               <Route path="/" element={<Index />} />
