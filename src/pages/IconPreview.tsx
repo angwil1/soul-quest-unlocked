@@ -63,10 +63,27 @@ const IconPreview: React.FC = () => {
               <p className="text-sm text-destructive mt-2">Failed to load from public/. The file may not exist at public/app-icon-512.png.</p>
             )}
           </article>
-        </section>
-      </main>
-    </div>
-  );
-};
 
-export default IconPreview;
+          <article className="rounded-xl bg-card text-card-foreground shadow p-6">
+            <h2 className="text-xl font-medium mb-4">Raw fallback test (direct HTML img)</h2>
+            <img
+              src={`/app-icon-512.png${cacheBust}`}
+              alt="AI Complete Me app icon 512x512 (raw fallback)"
+              width={256}
+              height={256}
+              loading="eager"
+              onError={() => setPublicError(true)}
+              className="mx-auto rounded-lg shadow"
+            />
+            <p className="text-sm text-muted-foreground mt-3 break-all">
+              Direct path: <code className="font-mono">/app-icon-512.png</code> —
+              <a className="underline hover:opacity-80 ml-1" href={`/app-icon-512.png${cacheBust}`} target="_blank" rel="noreferrer">open raw</a>
+            </p>
+          </article>
+          </section>
+        </main>
+      </div>
+    );
+  };
+  
+  export default IconPreview;
