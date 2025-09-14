@@ -55,13 +55,13 @@ if (rootElement) {
     );
 console.log('✅ App rendered successfully');
     
-    // Add mobile-specific debugging
-    if (window.location.protocol === 'capacitor:') {
-      console.log('📱 Running in Capacitor WebView');
-      document.body.style.backgroundColor = 'red'; // Temporary visual check
-      setTimeout(() => {
-        document.body.style.backgroundColor = ''; // Remove after 2 seconds
-      }, 2000);
+    
+    // Mobile platform detection
+    const { isNative: checkIsNative, getPlatform: checkPlatform } = await import("./lib/capacitor");
+    if (checkIsNative() && checkPlatform() === 'android') {
+      console.log('📱 Running on Android platform');
+      // Ensure proper styling is applied
+      document.documentElement.classList.add('android-platform');
     }
   } catch (error) {
     console.error('❌ Failed to render React app:', error);

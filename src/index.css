@@ -84,6 +84,16 @@ body {
   min-height: 100dvh; /* Dynamic viewport height for mobile */
 }
 
+/* Android platform fixes */
+.android-platform {
+  background-color: hsl(var(--background)) !important;
+}
+
+.android-platform body {
+  background-color: hsl(var(--background)) !important;
+  color: hsl(var(--foreground)) !important;
+}
+
 /* Android-specific optimizations */
 @media (max-width: 768px) {
   /* Minimum touch target size for Android */
