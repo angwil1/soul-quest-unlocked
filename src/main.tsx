@@ -24,11 +24,12 @@ const initializeCapacitorSafely = async () => {
     await initializeCapacitor();
     console.log('✅ Capacitor initialized successfully');
     
-    // Add Android-specific debugging
+    // Add Android-specific styling
     if (isNative() && getPlatform() === 'android') {
-      console.log('🤖 Android app detected - checking display');
+      console.log('🤖 Android app detected - applying platform styles');
       document.body.style.visibility = 'visible';
       document.documentElement.style.visibility = 'visible';
+      document.documentElement.classList.add('android-platform');
     }
     
   } catch (error) {
@@ -54,15 +55,6 @@ if (rootElement) {
       </React.StrictMode>
     );
 console.log('✅ App rendered successfully');
-    
-    
-    // Mobile platform detection
-    const { isNative: checkIsNative, getPlatform: checkPlatform } = await import("./lib/capacitor");
-    if (checkIsNative() && checkPlatform() === 'android') {
-      console.log('📱 Running on Android platform');
-      // Ensure proper styling is applied
-      document.documentElement.classList.add('android-platform');
-    }
   } catch (error) {
     console.error('❌ Failed to render React app:', error);
     rootElement.innerHTML = `
