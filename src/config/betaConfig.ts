@@ -3,19 +3,19 @@
 
 export const BETA_CONFIG = {
   businessName: "AI Complete Me", // Your registered business name
-  buildVersion: "2.0.0-BETA", 
-  isTestBuild: true,
-  testerId: "BETA-USER", // This can be updated per build/tester
+  buildVersion: "2.0.0", 
+  isTestBuild: false, // Set to false for production release
+  testerId: "PRODUCTION", // Production build identifier
   
   // Watermark settings
-  showBetaWatermark: true,
-  trackUsage: true,
+  showBetaWatermark: false, // Disabled for production
+  trackUsage: false, // Disabled for production
   
   // Beta protection settings
-  disablePremiumFeatures: true,
-  showDummyData: true,
-  limitedFunctionality: true,
-  screenshotWarnings: true,
+  disablePremiumFeatures: false, // Enable all features for production
+  showDummyData: false, // Use real data in production
+  limitedFunctionality: false, // Full functionality enabled
+  screenshotWarnings: false, // Disabled for production
   
   // Copyright info
   copyrightYear: new Date().getFullYear(),
