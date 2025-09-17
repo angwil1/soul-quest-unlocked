@@ -60,7 +60,7 @@ export const AgeGate = ({ onAgeConfirmed }: AgeGateProps) => {
     <div className="min-h-screen min-h-[100vh] min-h-[100dvh] bg-gradient-to-br from-background via-background to-muted flex items-center justify-center px-4 py-6 relative overflow-hidden">
       {/* Mobile-specific background fix */}
       <div className="absolute inset-0 bg-background md:bg-transparent"></div>
-      <Card className="max-w-sm sm:max-w-md w-full mx-auto border-primary/20 bg-card shadow-xl relative z-10">
+      <Card className="max-w-sm sm:max-w-md w-full mx-auto border-primary/20 bg-card shadow-xl relative z-10 overflow-hidden">
         <CardHeader className="text-center px-4 sm:px-6 pt-6 pb-4">
           <div className="mx-auto mb-3 w-12 h-12 sm:w-16 sm:h-16 bg-primary/10 rounded-full flex items-center justify-center">
             <Shield className="h-6 w-6 sm:h-8 sm:w-8 text-primary" />
@@ -80,10 +80,10 @@ export const AgeGate = ({ onAgeConfirmed }: AgeGateProps) => {
               Are you 18 years of age or older?
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-3">
+            <div className="flex flex-col sm:flex-row gap-3 w-full">
               <Button 
                 onClick={handleConfirmAge}
-                className="flex-1 bg-green-600 hover:bg-green-700 text-white min-h-[44px] text-sm sm:text-base"
+                className="w-full sm:flex-1 bg-green-600 hover:bg-green-700 text-white min-h-[44px] text-sm sm:text-base"
                 size="lg"
               >
                 Yes, I'm 18+
@@ -91,7 +91,7 @@ export const AgeGate = ({ onAgeConfirmed }: AgeGateProps) => {
               <Button 
                 onClick={handleUnderage}
                 variant="destructive"
-                className="flex-1 min-h-[44px] text-sm sm:text-base"
+                className="w-full sm:flex-1 min-h-[44px] text-sm sm:text-base"
                 size="lg"
               >
                 No, I'm under 18
