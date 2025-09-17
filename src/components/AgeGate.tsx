@@ -80,19 +80,17 @@ export const AgeGate = ({ onAgeConfirmed }: AgeGateProps) => {
               Are you 18 years of age or older?
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-3 w-full">
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 w-full">
               <Button 
                 onClick={handleConfirmAge}
-                className="w-full sm:flex-1 bg-green-600 hover:bg-green-700 text-white min-h-[44px] text-sm sm:text-base whitespace-normal break-words hover:scale-100 active:scale-100"
-                size="lg"
+                className="w-full sm:flex-1 bg-green-600 hover:bg-green-700 text-white h-auto py-2 px-3 text-xs sm:text-base whitespace-normal break-words hover:scale-100 active:scale-100 leading-snug"
               >
                 Yes, I'm 18+
               </Button>
               <Button 
                 onClick={handleUnderage}
                 variant="destructive"
-                className="w-full sm:flex-1 min-h-[40px] h-auto py-2 px-3 text-xs sm:text-base whitespace-normal break-words hover:scale-100 active:scale-100 leading-snug"
-                size="lg"
+                className="w-full sm:flex-1 h-auto py-2 px-3 text-xs sm:text-base whitespace-normal break-words hover:scale-100 active:scale-100 leading-snug"
               >
                 No, I'm under 18
               </Button>
