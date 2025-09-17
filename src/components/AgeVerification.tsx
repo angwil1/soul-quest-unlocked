@@ -264,22 +264,29 @@ export const AgeVerification = ({ onVerificationComplete, forceOpen = false }: A
                     </p>
                   </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="dob">Date of Birth</Label>
+                  <div className="space-y-3">
+                    <Label htmlFor="dob" className="text-sm font-medium">Date of Birth</Label>
                     <Input
                       id="dob"
                       type="date"
                       value={dateOfBirth}
                       onChange={(e) => setDateOfBirth(e.target.value)}
                       max={new Date(Date.now() - 567648000000).toISOString().split('T')[0]} // 18 years ago
+                      className="w-full"
                     />
+                    {!dateOfBirth && (
+                      <p className="text-xs text-muted-foreground mt-1">
+                        Please enter your date of birth to continue
+                      </p>
+                    )}
                   </div>
 
-                  <div className="flex gap-2 pt-4">
+                  <div className="flex gap-2 pt-6">
                     <Button 
                       variant="outline" 
                       onClick={() => setIsOpen(false)}
                       className="flex-1"
+                      disabled={loading}
                     >
                       Cancel
                     </Button>
