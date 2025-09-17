@@ -2,7 +2,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Link, useNavigate } from "react-router-dom";
 import { Navbar } from "@/components/Navbar";
-import { CheckCircle, ArrowRight, Heart, Zap, Brain, User, UserCheck, Lock } from "lucide-react";
+import { CheckCircle, ArrowRight, Heart, Zap, Brain, User, UserCheck, Lock, ArrowLeft } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { useProfile } from "@/hooks/useProfile";
 import { useToast } from "@/hooks/use-toast";
@@ -84,6 +84,16 @@ const QuickStart = () => {
       
       <div className="container mx-auto px-4 py-8 md:py-12">
         <div className="max-w-4xl mx-auto">
+          {/* Back button */}
+          <Button 
+            variant="ghost" 
+            onClick={() => navigate('/')}
+            className="mb-6 hover:bg-muted/50 transition-colors"
+          >
+            <ArrowLeft className="h-4 w-4 mr-2" />
+            Back to Home
+          </Button>
+          
           <div className="text-center mb-8 md:mb-12">
             <div className="inline-flex items-center px-3 md:px-4 py-2 rounded-full bg-gradient-to-r from-primary/10 to-purple-600/10 border border-primary/20 mb-4 md:mb-6">
               <Heart className="h-4 w-4 mr-2 text-primary" />
