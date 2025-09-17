@@ -217,9 +217,9 @@ export const AgeVerification = ({ onVerificationComplete, forceOpen = false }: A
               Verify Age
             </Button>
           </DialogTrigger>
-          <DialogContent className="sm:max-w-md">
-            <DialogHeader>
-              <DialogTitle className="flex items-center gap-2">
+          <DialogContent className="sm:max-w-md mx-4 max-h-[90vh] overflow-y-auto">
+            <DialogHeader className="pb-4">
+              <DialogTitle className="flex items-center gap-2 text-lg">
                 <ShieldCheck className="h-5 w-5" />
                 Age Verification
               </DialogTitle>
@@ -258,26 +258,32 @@ export const AgeVerification = ({ onVerificationComplete, forceOpen = false }: A
               ) : (
                 // Show verification form
                 <>
-                  <div className="bg-blue-50 dark:bg-blue-950 p-4 rounded-lg">
-                    <p className="text-sm text-blue-800 dark:text-blue-200">
+                  <div className="bg-blue-50 dark:bg-blue-950 p-3 sm:p-4 rounded-lg mb-4">
+                    <p className="text-xs sm:text-sm text-blue-800 dark:text-blue-200 leading-relaxed">
                       You must be 18 or older to use this platform. Your date of birth is used only for age verification and is kept private.
                     </p>
                   </div>
 
-                  <div className="space-y-3">
-                    <Label htmlFor="dob" className="text-sm font-medium">Date of Birth</Label>
-                    <Input
-                      id="dob"
-                      type="date"
-                      value={dateOfBirth}
-                      onChange={(e) => setDateOfBirth(e.target.value)}
-                      max={new Date(Date.now() - 567648000000).toISOString().split('T')[0]} // 18 years ago
-                      className="w-full"
-                    />
+                  <div className="space-y-4 mb-6">
+                    <div className="space-y-2">
+                      <Label htmlFor="dob" className="text-sm font-medium block">
+                        Date of Birth
+                      </Label>
+                      <Input
+                        id="dob"
+                        type="date"
+                        value={dateOfBirth}
+                        onChange={(e) => setDateOfBirth(e.target.value)}
+                        max={new Date(Date.now() - 567648000000).toISOString().split('T')[0]} // 18 years ago
+                        className="w-full text-base sm:text-sm"
+                      />
+                    </div>
                     {!dateOfBirth && (
-                      <p className="text-xs text-muted-foreground mt-1">
-                        Please enter your date of birth to continue
-                      </p>
+                      <div className="bg-muted/50 p-3 rounded-md">
+                        <p className="text-xs text-muted-foreground">
+                          Please enter your date of birth to continue
+                        </p>
+                      </div>
                     )}
                   </div>
 
