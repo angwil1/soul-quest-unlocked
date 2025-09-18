@@ -50,12 +50,46 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
       }
     };
 
+    const createInitialSignupRecord = async () => {
+      if (!user) return;
+      
+      try {
+        // Check if record already exists
+        const { data: existing } = await supabase
+          .from('quiet_start_signups')
+          .select('id')
+          .eq('user_id', user.id)
+          .single();
+          
+        if (!existing) {
+          // Create initial signup record
+          const { error } = await supabase
+            .from('quiet_start_signups')
+            .insert({
+              user_id: user.id,
+              email: user.email || email,
+              signup_step: 'email_confirmed'
+            });
+            
+          if (error) {
+            console.error('Error creating signup record:', error);
+          } else {
+            console.log('✅ Initial signup record created');
+          }
+        }
+      } catch (error) {
+        console.error('Error checking/creating signup record:', error);
+      }
+    };
+
     if (user && session && user.email_confirmed_at) {
       setIsEmailConfirmed(true);
-      storeAgeVerification();
-      checkProfileCompletion();
+      createInitialSignupRecord().then(() => {
+        storeAgeVerification();
+        checkProfileCompletion();
+      });
     }
-  }, [user, session, dateOfBirth, isEmailConfirmed]);
+  }, [user, session, dateOfBirth, isEmailConfirmed, email]);
 
   const checkProfileCompletion = async () => {
     if (!user) return;
