@@ -236,11 +236,11 @@ const QuickStart = () => {
                          </div>
                        </div>
                      </div>
-                     <div className="flex-grow min-w-0 text-center sm:text-left">
-                       <h3 className="font-bold text-lg md:text-xl mb-2 text-foreground">Take the Quiz</h3>
-                       <p className="text-muted-foreground mb-4 text-sm leading-relaxed">
-                         Complete our comprehensive personality and compatibility assessment to find your perfect matches
-                       </p>
+                      <div className="flex-grow min-w-0 text-center sm:text-left">
+                        <h3 className="font-bold text-lg md:text-xl mb-2 text-foreground">Complete Onboarding Quiz</h3>
+                        <p className="text-muted-foreground mb-4 text-sm leading-relaxed">
+                          Take our one-time personality quiz to set up your compatibility profile and enable AI matching
+                        </p>
                        <div className="flex items-center justify-center sm:justify-start gap-2 mb-4">
                          {canTakeQuiz ? (
                            <div className="flex items-center gap-2">
@@ -281,24 +281,24 @@ const QuickStart = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4 px-4 md:px-6">
-                <div className="space-y-3">
-                  <div className="flex gap-3 items-start">
-                    <div className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">1</div>
-                    <p className="text-sm leading-relaxed">Take our 12 question compatibility quiz</p>
-                  </div>
-                  <div className="flex gap-3 items-start">
-                    <div className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">2</div>
-                    <p className="text-sm leading-relaxed">AI analyzes your personality, values, and communication style</p>
-                  </div>
-                  <div className="flex gap-3 items-start">
-                    <div className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">3</div>
-                    <p className="text-sm leading-relaxed">Generates compatibility scores with other users</p>
-                  </div>
-                  <div className="flex gap-3 items-start">
-                    <div className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">4</div>
-                    <p className="text-sm leading-relaxed">Provides conversation starters and connection insights</p>
-                  </div>
-                </div>
+                 <div className="space-y-3">
+                   <div className="flex gap-3 items-start">
+                     <div className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">1</div>
+                     <p className="text-sm leading-relaxed">Complete our one-time onboarding quiz during signup</p>
+                   </div>
+                   <div className="flex gap-3 items-start">
+                     <div className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">2</div>
+                     <p className="text-sm leading-relaxed">AI analyzes your personality, values, and communication style</p>
+                   </div>
+                   <div className="flex gap-3 items-start">
+                     <div className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">3</div>
+                     <p className="text-sm leading-relaxed">Your compatibility profile is created for lifetime matching</p>
+                   </div>
+                   <div className="flex gap-3 items-start">
+                     <div className="w-6 h-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">4</div>
+                     <p className="text-sm leading-relaxed">Provides ongoing match suggestions and connection insights</p>
+                   </div>
+                 </div>
               </CardContent>
             </Card>
 
@@ -311,10 +311,10 @@ const QuickStart = () => {
               </CardHeader>
               <CardContent className="space-y-3 px-4 md:px-6">
                 <div className="space-y-3">
-                  <div className="p-3 rounded-lg bg-muted/30 border border-muted">
-                    <p className="text-sm font-medium mb-1">Answer Thoughtfully</p>
-                    <p className="text-xs text-muted-foreground leading-relaxed">The quiz takes 10-15 minutes - honest answers give better matches</p>
-                  </div>
+                   <div className="p-3 rounded-lg bg-muted/30 border border-muted">
+                     <p className="text-sm font-medium mb-1">Complete Onboarding</p>
+                     <p className="text-xs text-muted-foreground leading-relaxed">The one-time quiz sets up your profile for all future matches</p>
+                   </div>
                   <div className="p-3 rounded-lg bg-muted/30 border border-muted">
                     <p className="text-sm font-medium mb-1">Upload Quality Photos</p>
                     <p className="text-xs text-muted-foreground leading-relaxed">Clear, recent photos help others connect with you</p>
