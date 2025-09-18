@@ -44,9 +44,43 @@ export const ProfileSetupFlow: React.FC = () => {
   });
   const [loading, setLoading] = useState(false);
   const [uploadingPhotos, setUploadingPhotos] = useState(false);
+  const [hasCompletedMainQuiz, setHasCompletedMainQuiz] = useState(false);
   const { user } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
+
+  // Check if user completed main compatibility quiz and skip personality step
+  useEffect(() => {
+    const checkQuizCompletion = async () => {
+      if (!user) return;
+
+      try {
+        // Check if user has completed the main compatibility quiz
+        const { data: quizData } = await supabase
+          .from('user_events')
+          .select('*')
+          .eq('user_id', user.id)
+          .eq('event_type', 'quiz_completed')
+          .limit(1);
+        
+        const hasCompletedQuiz = quizData && quizData.length > 0;
+        setHasCompletedMainQuiz(hasCompletedQuiz);
+        
+        // If user has completed the quiz, skip the personality step (step 5)
+        if (hasCompletedQuiz && currentStep === 5) {
+          setCurrentStep(6); // Skip to values step
+          toast({
+            title: "Personality questions skipped",
+            description: "Since you already completed the compatibility quiz, we'll use those results for your personality profile!",
+          });
+        }
+      } catch (error) {
+        console.error('Error checking quiz completion:', error);
+      }
+    };
+
+    checkQuizCompletion();
+  }, [currentStep, user, toast]);
 
   const totalSteps = 6;
   const progress = (currentStep / totalSteps) * 100;
@@ -213,7 +247,8 @@ export const ProfileSetupFlow: React.FC = () => {
         case 4:
           return profileData.photos.length >= 2;
         case 5:
-          return Object.keys(profileData.personality).length >= personalityQuestions.length;
+          // If user completed main quiz, personality questions are optional
+          return hasCompletedMainQuiz || Object.keys(profileData.personality).length >= personalityQuestions.length;
         case 6:
           return profileData.values.length >= 3;
         default:
@@ -225,6 +260,7 @@ export const ProfileSetupFlow: React.FC = () => {
     console.log('Profile Setup Debug:', {
       currentStep,
       isValid,
+      hasCompletedMainQuiz,
       profileData: {
         bioLength: profileData.bio.length,
         interestsCount: profileData.interests.length,
