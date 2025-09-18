@@ -270,7 +270,7 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
     onComplete();
   };
 
-  const validateAddress = (formData: FormData) => {
+  const validateAddress = async (formData: FormData) => {
     const name = formData.get('shipping_name') as string;
     const address1 = formData.get('address_line1') as string;
     const city = formData.get('city') as string;
@@ -278,18 +278,50 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
     const postalCode = formData.get('postal_code') as string;
     const country = formData.get('country') as string || 'United States';
 
-    // Check for fake address patterns
+    // Enhanced fake address pattern detection
     const fakePatterns = [
-      /fake/i, /test/i, /dummy/i, /placeholder/i, /example/i,
-      /123\s+fake/i, /999\s+test/i, /111\s+main/i,
-      /^123\s+(main|elm|oak|first)/i,
-      /asdf|qwerty|zxcv/i
+      /fake/i, /test/i, /dummy/i, /placeholder/i, /example/i, /sample/i,
+      /123\s+fake/i, /999\s+test/i, /111\s+main/i, /000\s+test/i,
+      /^123\s+(main|elm|oak|first|second|third)/i,
+      /^1234\s+(main|elm|oak|first)/i,
+      /asdf|qwerty|zxcv|hjkl|uiop/i,
+      /^(no|none|na|n\/a)\s/i,
+      /lorem\s+ipsum/i,
+      /abc\s+(street|st|avenue|ave|road|rd)/i,
+      /mickey\s+mouse|donald\s+duck|bugs\s+bunny/i,
+      /^(street|address|city|state)$/i
     ];
 
-    const addressToCheck = `${name} ${address1} ${city}`;
+    // Check for repetitive characters (like "aaaa" or "1111")
+    const repetitivePattern = /(.)\1{3,}/;
+    
+    // Check for obviously fake addresses
+    const addressToCheck = `${name} ${address1} ${city} ${state}`.toLowerCase();
+    
     for (const pattern of fakePatterns) {
       if (pattern.test(addressToCheck)) {
         throw new Error('Please provide a valid address. Fake or test addresses are not accepted.');
+      }
+    }
+
+    if (repetitivePattern.test(address1) || repetitivePattern.test(name)) {
+      throw new Error('Please provide a valid address with real information.');
+    }
+
+    // Check for duplicate addresses from this user
+    if (user) {
+      const { data: existingAddress } = await supabase
+        .from('quiet_start_signups')
+        .select('shipping_address_line1, shipping_city, shipping_postal_code')
+        .eq('user_id', user.id)
+        .eq('benefits_claimed', true)
+        .maybeSingle();
+
+      if (existingAddress && (
+        existingAddress.shipping_address_line1?.toLowerCase() === address1.toLowerCase() ||
+        existingAddress.shipping_postal_code === postalCode
+      )) {
+        throw new Error('You have already submitted an address for your wellness kit.');
       }
     }
 
@@ -301,15 +333,25 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
       }
     }
 
-    // Basic field length validation
-    if (name.length < 2) throw new Error('Please enter a valid full name.');
-    if (address1.length < 5) throw new Error('Please enter a complete street address.');
-    if (city.length < 2) throw new Error('Please enter a valid city name.');
-    if (state.length < 2) throw new Error('Please enter a valid state.');
+    // Enhanced field validation
+    if (name.length < 2 || name.length > 100) throw new Error('Please enter a valid full name (2-100 characters).');
+    if (address1.length < 5 || address1.length > 200) throw new Error('Please enter a complete street address (5-200 characters).');
+    if (city.length < 2 || city.length > 100) throw new Error('Please enter a valid city name (2-100 characters).');
+    if (state.length < 2 || state.length > 50) throw new Error('Please enter a valid state (2-50 characters).');
 
     // Check for suspicious patterns in city/state
     if (/^\d+$/.test(city) || /^\d+$/.test(state)) {
       throw new Error('City and state cannot be only numbers.');
+    }
+
+    // Check for minimum word count in address
+    if (address1.split(/\s+/).length < 2) {
+      throw new Error('Please provide a complete street address (street number and name).');
+    }
+
+    // Validate name doesn't contain numbers or special characters (except spaces, hyphens, apostrophes)
+    if (!/^[a-zA-Z\s\-'\.]+$/.test(name)) {
+      throw new Error('Please enter a valid name using only letters, spaces, hyphens, and apostrophes.');
     }
   };
 
@@ -322,8 +364,27 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
     const formData = new FormData(e.target as HTMLFormElement);
     
     try {
-      // Validate address before processing
-      validateAddress(formData);
+      // Validate address before processing (now async)
+      await validateAddress(formData);
+      
+      // Double-check that this user hasn't already claimed benefits
+      const { data: existingClaim } = await supabase
+        .from('quiet_start_signups')
+        .select('benefits_claimed, kit_number')
+        .eq('user_id', user.id)
+        .eq('benefits_claimed', true)
+        .maybeSingle();
+
+      if (existingClaim) {
+        toast({
+          title: "Already Claimed",
+          description: `You've already claimed your wellness kit #${existingClaim.kit_number}!`,
+          variant: "destructive"
+        });
+        setCurrentStep('complete');
+        setShowWelcome(true);
+        return;
+      }
       
       // Get next available kit number
       const { data: kitNumber } = await supabase.rpc('get_next_kit_number');
@@ -334,6 +395,18 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
           description: "Sorry, all 500 wellness kits have been claimed.",
           variant: "destructive"
         });
+        // Still mark as complete but without physical benefits
+        await supabase
+          .from('quiet_start_signups')
+          .update({
+            signup_step: 'completed',
+            benefits_claimed: false,
+            claimed_at: new Date().toISOString()
+          })
+          .eq('user_id', user.id);
+        
+        setCurrentStep('complete');
+        setShowWelcome(true);
         return;
       }
       
