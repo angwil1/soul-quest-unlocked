@@ -249,40 +249,6 @@ const Messages = () => {
           </div>
           
           <div className="flex items-center gap-4">
-            {/* Create Sample Matches Button for Testing */}
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={async () => {
-                if (!user) return;
-                try {
-                  const { error } = await supabase.rpc('create_sample_matches_for_user', {
-                    target_user_id: user.id
-                  });
-                  if (error) throw error;
-                  
-                  toast({
-                    title: "Sample matches created!",
-                    description: "You now have some matches to test messaging with"
-                  });
-                  
-                  // Refresh the matches list
-                  loadMatches();
-                } catch (error) {
-                  console.error('Error creating sample matches:', error);
-                  toast({
-                    title: "Error",
-                    description: "Failed to create sample matches",
-                    variant: "destructive"
-                  });
-                }
-              }}
-              className="flex items-center gap-2 bg-green-50 hover:bg-green-100 text-green-700 border-green-200 focus:ring-2 focus:ring-primary focus:ring-offset-2"
-              aria-label="Create test matches for demonstration purposes"
-            >
-              🧪 Create Test Matches
-            </Button>
-            
             {/* AI Digest Toggle */}
             <Button
               variant="ghost"
@@ -362,35 +328,6 @@ const Messages = () => {
                 ) : matches.length === 0 ? (
                   <div className="p-4 text-center text-muted-foreground space-y-4" role="region" aria-label="No matches available">
                     <p>No matches yet. Start matching to begin chatting!</p>
-                    <Button 
-                      onClick={async () => {
-                        if (user) {
-                          try {
-                            await supabase.rpc('create_sample_matches_for_user', { 
-                              target_user_id: user.id 
-                            });
-                            toast({
-                              title: "Sample matches created!",
-                              description: "You now have some test matches to try messaging."
-                            });
-                            loadMatches(); // Refresh the matches list
-                          } catch (error) {
-                            console.error('Error creating sample matches:', error);
-                            toast({
-                              title: "Error",
-                              description: "Failed to create sample matches. Please try again.",
-                              variant: "destructive"
-                            });
-                          }
-                        }
-                      }}
-                      variant="outline"
-                      size="sm"
-                      className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
-                      aria-label="Create sample matches for testing the messaging feature"
-                    >
-                      Create Sample Matches for Testing
-                    </Button>
                   </div>
                 ) : (
                   <div role="listbox" aria-label="Your matches" aria-activedescendant={selectedMatch ? `match-${selectedMatch}` : undefined}>
