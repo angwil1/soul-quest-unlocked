@@ -99,7 +99,7 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
         .from('profiles')
         .select('*')
         .eq('id', user.id)
-        .single();
+        .maybeSingle();
         
       if (profile && profile.name) {
         // Profile is complete, check if address is collected
@@ -121,17 +121,32 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
         .from('quiet_start_signups')
         .select('*')
         .eq('user_id', user.id)
-        .single();
+        .maybeSingle();
         
       if (signup?.shipping_address_line1) {
         // Address collected, show welcome
         setCurrentStep('complete');
         setShowWelcome(true);
       } else {
-        setCurrentStep('shipping-address');
+        // Check if wellness kits are still available (first 500 only)
+        const { data: kitNumber } = await supabase.rpc('get_next_kit_number');
+        
+        if (kitNumber === null) {
+          // All 500 kits have been claimed - skip address collection
+          toast({
+            title: "Welcome to AI Complete Me! 🎉",
+            description: "You're all set up! While the first 500 wellness kits have been claimed, you still get 3 months of premium features.",
+          });
+          setCurrentStep('complete');
+          setShowWelcome(true);
+        } else {
+          // Kits still available - collect address
+          setCurrentStep('shipping-address');
+        }
       }
     } catch (error) {
       console.error('Error checking address:', error);
+      // Default to showing address collection on error
       setCurrentStep('shipping-address');
     }
   };
