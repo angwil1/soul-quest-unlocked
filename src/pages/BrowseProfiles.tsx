@@ -14,12 +14,13 @@ const BrowseProfiles = () => {
   const { user, loading } = useAuth();
   const [likedProfiles, setLikedProfiles] = useState<Set<string>>(new Set());
 
-  // Redirect to quick setup if not authenticated
+  // Only redirect if user is not authenticated AND this is not a sample profile viewing session
   useEffect(() => {
     if (!loading && !user) {
-      navigate('/quick-start');
+      // Allow viewing sample profiles without authentication
+      console.log('User not authenticated, but allowing sample profile browsing');
     }
-  }, [user, loading, navigate]);
+  }, [user, loading]);
 
   const handleLike = (profileId: string) => {
     setLikedProfiles(prev => new Set([...prev, profileId]));

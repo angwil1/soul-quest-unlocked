@@ -183,43 +183,24 @@ export const Navbar = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            {navigation.map((item) => {
-              // Handle authentication-required links
-              if (item.name === "Browse Profiles" && !user) {
-                return (
-                  <Link
-                    key={item.name}
-                    to="/quick-start"
-                    className={`text-sm font-medium transition-colors hover:text-primary ${
-                      isActive(item.href)
-                        ? "text-primary"
-                        : "text-muted-foreground"
-                    }`}
-                  >
-                    {item.name}
-                  </Link>
-                );
-              }
-              
-              return (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  className={`text-sm font-medium transition-colors hover:text-primary ${
-                    isActive(item.href)
-                      ? "text-primary"
-                      : "text-muted-foreground"
-                  } ${item.name === "Memory Vault" ? "relative" : ""}`}
-                >
-                  {item.name}
-                  {item.name === "Memory Vault" && newMemoriesCount > 0 && (
-                    <span className="absolute -top-2 -right-2 h-5 w-5 rounded-full bg-primary text-xs text-white flex items-center justify-center">
-                      {newMemoriesCount > 9 ? '9+' : newMemoriesCount}
-                    </span>
-                  )}
-                </Link>
-              );
-            })}
+            {navigation.map((item) => (
+              <Link
+                key={item.name}
+                to={item.href}
+                className={`text-sm font-medium transition-colors hover:text-primary ${
+                  isActive(item.href)
+                    ? "text-primary"
+                    : "text-muted-foreground"
+                } ${item.name === "Memory Vault" ? "relative" : ""}`}
+              >
+                {item.name}
+                {item.name === "Memory Vault" && newMemoriesCount > 0 && (
+                  <span className="absolute -top-2 -right-2 h-5 w-5 rounded-full bg-primary text-xs text-white flex items-center justify-center">
+                    {newMemoriesCount > 9 ? '9+' : newMemoriesCount}
+                  </span>
+                )}
+              </Link>
+            ))}
           </div>
 
           {/* Desktop Auth Buttons */}
@@ -299,32 +280,27 @@ export const Navbar = () => {
         {isMenuOpen && (
           <div className="md:hidden animate-fade-in">
             <div className="px-3 pt-4 pb-6 space-y-2 border-t border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
-              {navigation.map((item) => {
-                // Handle authentication-required links
-                const linkTo = (item.name === "Browse Profiles" && !user) ? "/quick-start" : item.href;
-                
-                return (
-                  <Link
-                    key={item.name}
-                    to={linkTo}
-                    className={`block px-4 py-3 text-base font-medium transition-all duration-200 rounded-xl touch-target ${
-                      isActive(item.href)
-                        ? "text-primary bg-primary/10 shadow-sm"
-                        : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
-                    } ${item.name === "Memory Vault" ? "relative" : ""}`}
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    <div className="flex items-center justify-between">
-                      <span>{item.name}</span>
-                      {item.name === "Memory Vault" && newMemoriesCount > 0 && (
-                        <span className="ml-2 h-5 w-5 rounded-full bg-primary text-xs text-white flex items-center justify-center">
-                          {newMemoriesCount > 9 ? '9+' : newMemoriesCount}
-                        </span>
-                      )}
-                    </div>
-                  </Link>
-                );
-              })}
+              {navigation.map((item) => (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  className={`block px-4 py-3 text-base font-medium transition-all duration-200 rounded-xl touch-target ${
+                    isActive(item.href)
+                      ? "text-primary bg-primary/10 shadow-sm"
+                      : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                  } ${item.name === "Memory Vault" ? "relative" : ""}`}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <div className="flex items-center justify-between">
+                    <span>{item.name}</span>
+                    {item.name === "Memory Vault" && newMemoriesCount > 0 && (
+                      <span className="ml-2 h-5 w-5 rounded-full bg-primary text-xs text-white flex items-center justify-center">
+                        {newMemoriesCount > 9 ? '9+' : newMemoriesCount}
+                      </span>
+                    )}
+                  </div>
+                </Link>
+              ))}
               {/* Only show search on matches/browse pages - Android optimized */}
               {user && hasCompletedQuiz && (location.pathname === '/matches' || location.pathname === '/browse') && (
                 <div className="px-4 py-3 border-t border-border mt-3">
