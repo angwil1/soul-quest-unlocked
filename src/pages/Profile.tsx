@@ -121,7 +121,7 @@ const Profile = () => {
             <Button 
               variant="outline" 
               size="sm"
-              onClick={() => navigate('/browse-profiles')}
+              onClick={() => navigate('/browse')}
               className="flex items-center gap-2 focus:ring-2 focus:ring-primary focus:ring-offset-2"
               aria-label="Browse sample profiles"
             >
@@ -360,7 +360,7 @@ const Profile = () => {
                 </Button>
                 
                 <Button 
-                  onClick={() => navigate('/browse-profiles')} 
+                  onClick={() => navigate('/browse')} 
                   variant="outline" 
                   className="w-full focus:ring-2 focus:ring-primary focus:ring-offset-2"
                   aria-label="Explore sample profiles to see examples"
