@@ -38,30 +38,63 @@ const BrowseProfiles = () => {
       
       {/* Header */}
       <header className="bg-card border-b" role="banner">
-        <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-          <Button 
-            variant="ghost" 
-            onClick={() => navigate('/profile')}
-            className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
-            aria-label="Go back to your profile"
-          >
-            <ArrowLeft className="h-4 w-4 mr-2" aria-hidden="true" />
-            Back to Profile
-          </Button>
-          <div className="text-center">
-            <h1 className="text-2xl font-bold">Explore Profiles</h1>
-            <p className="text-sm text-muted-foreground">
-              Discover sample profiles to see what's possible
-            </p>
+        <div className="max-w-6xl mx-auto px-4 py-4">
+          {/* Mobile Layout */}
+          <div className="flex flex-col gap-4 md:hidden">
+            <div className="flex items-center justify-between">
+              <Button 
+                variant="ghost" 
+                onClick={() => navigate('/profile')}
+                className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                aria-label="Go back to your profile"
+              >
+                <ArrowLeft className="h-4 w-4 mr-2" aria-hidden="true" />
+                Back
+              </Button>
+              <Button 
+                onClick={() => navigate('/swipe')} 
+                size="sm"
+                className="flex items-center gap-2 focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                aria-label="Switch to swipe mode for quick browsing"
+              >
+                <Zap className="h-4 w-4" aria-hidden="true" />
+                Swipe Mode
+              </Button>
+            </div>
+            <div className="text-center">
+              <h1 className="text-xl font-bold">Explore Profiles</h1>
+              <p className="text-sm text-muted-foreground">
+                Discover sample profiles to see what's possible
+              </p>
+            </div>
           </div>
-          <Button 
-            onClick={() => navigate('/swipe')} 
-            className="flex items-center gap-2 focus:ring-2 focus:ring-primary focus:ring-offset-2"
-            aria-label="Switch to swipe mode for quick browsing"
-          >
-            <Zap className="h-4 w-4" aria-hidden="true" />
-            Swipe Mode
-          </Button>
+
+          {/* Desktop Layout */}
+          <div className="hidden md:flex items-center justify-between">
+            <Button 
+              variant="ghost" 
+              onClick={() => navigate('/profile')}
+              className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              aria-label="Go back to your profile"
+            >
+              <ArrowLeft className="h-4 w-4 mr-2" aria-hidden="true" />
+              Back to Profile
+            </Button>
+            <div className="text-center">
+              <h1 className="text-2xl font-bold">Explore Profiles</h1>
+              <p className="text-sm text-muted-foreground">
+                Discover sample profiles to see what's possible
+              </p>
+            </div>
+            <Button 
+              onClick={() => navigate('/swipe')} 
+              className="flex items-center gap-2 focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              aria-label="Switch to swipe mode for quick browsing"
+            >
+              <Zap className="h-4 w-4" aria-hidden="true" />
+              Swipe Mode
+            </Button>
+          </div>
         </div>
       </header>
 
