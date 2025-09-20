@@ -12,6 +12,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/integrations/supabase/client';
 import { Camera, Upload, Heart, Star, MapPin, Calendar, ArrowLeft, ArrowRight, CheckCircle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { CameraCapture } from '@/components/CameraCapture';
 
 interface ProfileData {
   name: string;
@@ -45,6 +46,7 @@ export const ProfileSetupFlow: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [uploadingPhotos, setUploadingPhotos] = useState(false);
   const [hasCompletedMainQuiz, setHasCompletedMainQuiz] = useState(false);
+  const [showCamera, setShowCamera] = useState(false);
   const { user } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -219,6 +221,34 @@ export const ProfileSetupFlow: React.FC = () => {
       toast({
         title: "Photos uploaded",
         description: `${newPhotoUrls.length} photo(s) uploaded successfully.`,
+      });
+    }
+
+    setUploadingPhotos(false);
+  };
+
+  const handleCameraCapture = async (file: File) => {
+    if (profileData.photos.length >= 6) {
+      toast({
+        title: "Too many photos",
+        description: "Maximum 6 photos allowed.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setUploadingPhotos(true);
+    
+    const photoUrl = await uploadPhoto(file);
+    if (photoUrl) {
+      setProfileData(prev => ({
+        ...prev,
+        photos: [...prev.photos, photoUrl].slice(0, 6)
+      }));
+      
+      toast({
+        title: "Photo captured",
+        description: "Photo captured and uploaded successfully!",
       });
     }
 
@@ -477,7 +507,7 @@ export const ProfileSetupFlow: React.FC = () => {
                       )}
                     </>
                   ) : (
-                    <label className="cursor-pointer flex flex-col items-center gap-2 p-4">
+                    <div className="flex flex-col items-center gap-2 p-4">
                       {uploadingPhotos ? (
                         <div className="text-center">
                           <Upload className="h-6 w-6 text-primary animate-pulse mx-auto mb-2" />
@@ -487,17 +517,37 @@ export const ProfileSetupFlow: React.FC = () => {
                         <>
                           <Camera className="h-8 w-8 text-muted-foreground" />
                           <span className="text-sm text-muted-foreground">Add Photo</span>
+                          <div className="flex gap-2 mt-2">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => document.getElementById(`photo-upload-${index}`)?.click()}
+                              disabled={uploadingPhotos}
+                            >
+                              <Upload className="h-3 w-3 mr-1" />
+                              Upload
+                            </Button>
+                            <Button
+                              variant="outline"  
+                              size="sm"
+                              onClick={() => setShowCamera(true)}
+                              disabled={uploadingPhotos}
+                            >
+                              <Camera className="h-3 w-3 mr-1" />
+                              Camera
+                            </Button>
+                          </div>
                         </>
                       )}
                       <input
+                        id={`photo-upload-${index}`}
                         type="file"
                         accept="image/*"
                         onChange={handlePhotoUpload}
                         className="hidden"
-                        multiple
                         disabled={uploadingPhotos}
                       />
-                    </label>
+                    </div>
                   )}
                 </div>
               ))}
@@ -628,6 +678,12 @@ export const ProfileSetupFlow: React.FC = () => {
             </div>
           </CardContent>
         </Card>
+        
+        <CameraCapture
+          isOpen={showCamera}
+          onClose={() => setShowCamera(false)}
+          onCapture={handleCameraCapture}
+        />
       </div>
     </div>
   );

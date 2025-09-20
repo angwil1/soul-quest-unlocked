@@ -11,6 +11,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useAuth } from '@/hooks/useAuth';
 import { useProfile, Profile } from '@/hooks/useProfile';
 import { AgeVerification } from '@/components/AgeVerification';
+import { CameraCapture } from '@/components/CameraCapture';
 import { ArrowLeft, Upload, X, Camera, MapPin, Search } from 'lucide-react';
 
 const ProfileEdit = () => {
@@ -22,6 +23,7 @@ const ProfileEdit = () => {
   const [newInterest, setNewInterest] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showAgeVerification, setShowAgeVerification] = useState(false);
+  const [showCamera, setShowCamera] = useState(false);
 
   // Check if user needs age verification
   useEffect(() => {
@@ -96,70 +98,8 @@ const ProfileEdit = () => {
     }
   };
 
-  const handleCameraCapture = async () => {
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ 
-        video: { facingMode: 'user' } 
-      });
-      
-      // Create a video element to show camera preview
-      const video = document.createElement('video');
-      video.srcObject = stream;
-      video.play();
-      
-      // Create a modal for camera capture
-      const modal = document.createElement('div');
-      modal.className = 'fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center p-4';
-      modal.innerHTML = `
-        <div class="bg-white rounded-lg p-6 max-w-md w-full">
-          <h3 class="text-lg font-semibold mb-4">Take Photo</h3>
-          <div class="relative">
-            <video id="camera-preview" class="w-full rounded-lg" autoplay></video>
-            <canvas id="camera-canvas" class="hidden"></canvas>
-          </div>
-          <div class="flex gap-2 mt-4">
-            <button id="capture-btn" class="flex-1 bg-primary text-primary-foreground px-4 py-2 rounded-md">
-              Capture
-            </button>
-            <button id="cancel-btn" class="flex-1 bg-secondary text-secondary-foreground px-4 py-2 rounded-md">
-              Cancel
-            </button>
-          </div>
-        </div>
-      `;
-      
-      document.body.appendChild(modal);
-      const videoElement = modal.querySelector('#camera-preview') as HTMLVideoElement;
-      videoElement.srcObject = stream;
-      
-      const cleanup = () => {
-        stream.getTracks().forEach(track => track.stop());
-        document.body.removeChild(modal);
-      };
-      
-      modal.querySelector('#cancel-btn')?.addEventListener('click', cleanup);
-      
-      modal.querySelector('#capture-btn')?.addEventListener('click', () => {
-        const canvas = modal.querySelector('#camera-canvas') as HTMLCanvasElement;
-        const context = canvas.getContext('2d');
-        
-        canvas.width = videoElement.videoWidth;
-        canvas.height = videoElement.videoHeight;
-        context?.drawImage(videoElement, 0, 0);
-        
-        canvas.toBlob(async (blob) => {
-          if (blob) {
-            const file = new File([blob], `camera-photo-${Date.now()}.jpg`, { type: 'image/jpeg' });
-            await addPhoto(file);
-          }
-          cleanup();
-        }, 'image/jpeg', 0.8);
-      });
-      
-    } catch (error) {
-      console.error('Camera access error:', error);
-      alert('Camera access not available. Please use the upload option instead.');
-    }
+  const handleCameraCapture = (file: File) => {
+    addPhoto(file);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -269,7 +209,7 @@ const ProfileEdit = () => {
                     <Upload className="h-4 w-4 mr-2" />
                     Upload Photo
                   </Button>
-                  <Button variant="outline" size="sm" onClick={handleCameraCapture}>
+                  <Button variant="outline" size="sm" onClick={() => setShowCamera(true)}>
                     <Camera className="h-4 w-4 mr-2" />
                     Take Picture
                   </Button>
@@ -368,7 +308,7 @@ const ProfileEdit = () => {
                         <Upload className="h-4 w-4 mr-2" />
                         Upload
                       </Button>
-                      <Button variant="outline" size="sm" onClick={handleCameraCapture}>
+                      <Button variant="outline" size="sm" onClick={() => setShowCamera(true)}>
                         <Camera className="h-4 w-4 mr-2" />
                         Camera
                       </Button>
@@ -535,6 +475,12 @@ const ProfileEdit = () => {
           </Card>
 
         </form>
+        
+        <CameraCapture
+          isOpen={showCamera}  
+          onClose={() => setShowCamera(false)}
+          onCapture={handleCameraCapture}
+        />
       </div>
     </div>
   );
