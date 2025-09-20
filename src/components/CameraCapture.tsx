@@ -18,6 +18,7 @@ export const CameraCapture: React.FC<CameraCaptureProps> = ({
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const streamRef = useRef<MediaStream | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [isStreaming, setIsStreaming] = useState(false);
   const [facingMode, setFacingMode] = useState<'user' | 'environment'>('user');
   const { toast } = useToast();
@@ -78,6 +79,14 @@ export const CameraCapture: React.FC<CameraCaptureProps> = ({
         description: errorMessage,
         variant: "destructive"
       });
+
+      // Automatic fallback to native photo picker
+      if (fileInputRef.current) {
+        // Ensure attribute present for mobile camera
+        fileInputRef.current.setAttribute('capture', 'environment');
+        fileInputRef.current.click();
+      }
+
     }
   };
 
@@ -255,6 +264,23 @@ export const CameraCapture: React.FC<CameraCaptureProps> = ({
           <p className="text-sm text-muted-foreground text-center">
             Position yourself in the frame and click capture when ready
           </p>
+
+          {/* Hidden native photo picker for fallback */}
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/*"
+            capture="environment"
+            className="hidden"
+            onChange={(e) => {
+              const file = e.target.files?.[0];
+              if (file) {
+                onCapture(file);
+                handleClose();
+                e.currentTarget.value = '';
+              }
+            }}
+          />
         </div>
       </DialogContent>
     </Dialog>
