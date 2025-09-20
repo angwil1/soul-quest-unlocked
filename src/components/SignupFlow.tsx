@@ -222,12 +222,17 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
 
   const handleProfileSetup = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!user) return;
+    console.log('Profile setup form submitted');
+    if (!user) {
+      console.log('No user found, returning');
+      return;
+    }
     
     setIsLoading(true);
     
     const formData = new FormData(e.target as HTMLFormElement);
     const name = formData.get('name') as string;
+    console.log('Name from form:', name);
     
     try {
       // Update profile with name
@@ -252,6 +257,7 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
         description: "Now let's get your shipping address for the wellness kit.",
       });
       
+      console.log('Setting step to shipping-address');
       setCurrentStep('shipping-address');
       
     } catch (error) {
@@ -476,6 +482,8 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
       />
     );
   }
+
+  console.log('Current signup step:', currentStep);
 
   return (
     <div className="w-full max-w-md mx-auto space-y-6">
