@@ -527,6 +527,9 @@ export const ProfileSetupFlow: React.FC = () => {
                               size="sm"
                               onClick={() => {
                                 console.log('Camera button clicked!');
+                                console.log('Navigator.mediaDevices available:', !!navigator.mediaDevices);
+                                console.log('getUserMedia available:', !!navigator.mediaDevices?.getUserMedia);
+                                console.log('Current protocol:', window.location.protocol);
                                 setShowCamera(true);
                               }}
                               disabled={uploadingPhotos}

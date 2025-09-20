@@ -24,11 +24,19 @@ export const CameraCapture: React.FC<CameraCaptureProps> = ({
 
   const startCamera = async (mode: 'user' | 'environment' = 'user') => {
     try {
+      console.log('🎥 Starting camera with mode:', mode);
+      
       // Stop existing stream
       if (streamRef.current) {
         streamRef.current.getTracks().forEach(track => track.stop());
       }
 
+      // Check if getUserMedia is available
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        throw new Error('Camera not supported in this browser');
+      }
+
+      console.log('🎥 Requesting camera access...');
       const stream = await navigator.mediaDevices.getUserMedia({
         video: { 
           facingMode: mode,
@@ -37,17 +45,37 @@ export const CameraCapture: React.FC<CameraCaptureProps> = ({
         }
       });
 
+      console.log('🎥 Camera access granted!', stream);
+
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
         streamRef.current = stream;
         setIsStreaming(true);
         setFacingMode(mode);
+        console.log('🎥 Camera streaming started successfully');
       }
-    } catch (error) {
-      console.error('Camera access error:', error);
+    } catch (error: any) {
+      console.error('🎥 Camera access error:', error);
+      
+      let errorMessage = 'Unable to access camera. ';
+      
+      if (error.name === 'NotAllowedError') {
+        errorMessage += 'Camera permission was denied. Please allow camera access and try again.';
+      } else if (error.name === 'NotFoundError') {
+        errorMessage += 'No camera found on this device.';
+      } else if (error.name === 'NotReadableError') {
+        errorMessage += 'Camera is already in use by another application.';
+      } else if (error.name === 'OverconstrainedError') {
+        errorMessage += 'Camera constraints not supported.';
+      } else if (error.name === 'SecurityError') {
+        errorMessage += 'Camera access blocked for security reasons.';
+      } else {
+        errorMessage += error.message || 'Unknown camera error occurred.';
+      }
+      
       toast({
         title: "Camera Error",
-        description: "Unable to access camera. Please check permissions or use file upload instead.",
+        description: errorMessage,
         variant: "destructive"
       });
     }
@@ -62,31 +90,72 @@ export const CameraCapture: React.FC<CameraCaptureProps> = ({
   };
 
   const capturePhoto = () => {
-    if (!videoRef.current || !canvasRef.current || !streamRef.current) return;
+    console.log('🎥 Attempting to capture photo...');
+    
+    if (!videoRef.current || !canvasRef.current || !streamRef.current) {
+      console.error('🎥 Missing required elements:', {
+        video: !!videoRef.current,
+        canvas: !!canvasRef.current,
+        stream: !!streamRef.current
+      });
+      toast({
+        title: "Capture Error",
+        description: "Camera components not ready. Please try again.",
+        variant: "destructive"
+      });
+      return;
+    }
 
     const canvas = canvasRef.current;
     const video = videoRef.current;
     const context = canvas.getContext('2d');
 
-    if (!context) return;
+    if (!context) {
+      console.error('🎥 Could not get canvas context');
+      toast({
+        title: "Capture Error", 
+        description: "Canvas not supported in this browser.",
+        variant: "destructive"
+      });
+      return;
+    }
 
-    // Set canvas dimensions to match video
-    canvas.width = video.videoWidth;
-    canvas.height = video.videoHeight;
+    try {
+      // Set canvas dimensions to match video
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
 
-    // Draw the video frame to canvas
-    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+      console.log('🎥 Canvas dimensions:', canvas.width, 'x', canvas.height);
 
-    // Convert canvas to blob and create file
-    canvas.toBlob((blob) => {
-      if (blob) {
-        const file = new File([blob], `camera-photo-${Date.now()}.jpg`, { 
-          type: 'image/jpeg' 
-        });
-        onCapture(file);
-        handleClose();
-      }
-    }, 'image/jpeg', 0.8);
+      // Draw the video frame to canvas
+      context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+      // Convert canvas to blob and create file
+      canvas.toBlob((blob) => {
+        if (blob) {
+          console.log('🎥 Photo captured successfully:', blob);
+          const file = new File([blob], `camera-photo-${Date.now()}.jpg`, { 
+            type: 'image/jpeg' 
+          });
+          onCapture(file);
+          handleClose();
+        } else {
+          console.error('🎥 Failed to create blob from canvas');
+          toast({
+            title: "Capture Error",
+            description: "Failed to capture photo. Please try again.",
+            variant: "destructive"
+          });
+        }
+      }, 'image/jpeg', 0.8);
+    } catch (error) {
+      console.error('🎥 Error during photo capture:', error);
+      toast({
+        title: "Capture Error",
+        description: "Failed to capture photo. Please try again.",
+        variant: "destructive"
+      });
+    }
   };
 
   const switchCamera = () => {
