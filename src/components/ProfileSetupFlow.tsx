@@ -556,6 +556,15 @@ export const ProfileSetupFlow: React.FC = () => {
                               <Upload className="h-4 w-4 mr-2" />
                               Upload File
                             </Button>
+                            <Button
+                              variant="secondary"
+                              size="sm"
+                              asChild
+                              disabled={uploadingPhotos}
+                              className="w-full"
+                            >
+                              <label htmlFor={`photo-upload-${index}`} className="cursor-pointer">📷 Open Camera</label>
+                            </Button>
                           </div>
                         </>
                       )}

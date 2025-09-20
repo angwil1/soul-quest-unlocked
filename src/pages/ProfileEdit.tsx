@@ -230,18 +230,11 @@ const ProfileEdit = () => {
                     <Upload className="h-4 w-4 mr-2" />
                     Upload Photo
                   </Button>
-                  <Button variant="outline" size="sm" onClick={() => {
-                    console.log('📸 Take Picture clicked — using simple file input');
-                    const input = document.getElementById('avatar-upload') as HTMLInputElement | null;
-                    if (input) {
-                      input.setAttribute('capture', 'environment');
-                      input.click();
-                    } else {
-                      console.error('📸 File input not found!');
-                    }
-                  }}>
-                    <Camera className="h-4 w-4 mr-2" />
-                    Take Picture
+                  <Button variant="outline" size="sm" asChild>
+                    <label htmlFor="avatar-upload" className="cursor-pointer">
+                      <Camera className="h-4 w-4 mr-2" />
+                      Take Picture
+                    </label>
                   </Button>
                   <Button 
                     variant="default" 
@@ -355,30 +348,25 @@ const ProfileEdit = () => {
                       <Button 
                         variant="outline" 
                         size="sm" 
-                        onClick={() => document.getElementById('additional-upload')?.click()}
+                        asChild
                       >
-                        <Upload className="h-4 w-4 mr-2" />
-                        Upload
+                        <label htmlFor="additional-upload" className="cursor-pointer">
+                          <Upload className="h-4 w-4 mr-2" />
+                          Upload
+                        </label>
                       </Button>
-                      <Button variant="outline" size="sm" onClick={() => {
-                        console.log('📸 Additional camera using simple file input');
-                        const input = document.getElementById('additional-upload') as HTMLInputElement | null;
-                        if (input) {
-                          input.setAttribute('capture', 'environment');
-                          input.click();
-                        } else {
-                          console.error('📸 Additional file input not found!');
-                        }
-                      }}>
-                        <Camera className="h-4 w-4 mr-2" />
-                        Camera
+                      <Button variant="outline" size="sm" asChild>
+                        <label htmlFor="additional-upload" className="cursor-pointer">
+                          <Camera className="h-4 w-4 mr-2" />
+                          Camera
+                        </label>
                       </Button>
                     </div>
                     <input
                       id="additional-upload"
                       type="file"
                       accept="image/*"
-                      capture="user"
+                      capture="environment"
                       onChange={handlePhotoUpload}
                       className="hidden"
                     />
