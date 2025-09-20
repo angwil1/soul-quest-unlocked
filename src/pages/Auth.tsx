@@ -23,60 +23,19 @@ const Auth = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  // Only redirect if already authenticated
+  // Simplified auth redirect for mobile compatibility
   useEffect(() => {
     // Don't redirect if we're on a password reset flow
     const urlParams = new URLSearchParams(window.location.search);
     const isPasswordReset = urlParams.get('type') === 'recovery';
-    const isPasswordResetInProgress = sessionStorage.getItem('password_reset_in_progress') === 'true';
     
-    console.log('Auth page - URL params:', Object.fromEntries(urlParams.entries()));
-    console.log('Auth page - isPasswordReset:', isPasswordReset);
-    console.log('Auth page - isPasswordResetInProgress:', isPasswordResetInProgress);
-    console.log('Auth page - user exists:', !!user);
-    console.log('Auth page - current pathname:', window.location.pathname);
+    console.log('Auth page - user exists:', !!user, 'showSignupFlow:', showSignupFlow, 'isPasswordReset:', isPasswordReset);
     
-    if (user && !showSignupFlow && !isPasswordReset && !isPasswordResetInProgress) {
-      // Don't interfere if user is already on profile setup page
-      if (window.location.pathname === '/profile/setup') {
-        return;
-      }
-      
-      // Only do profile completion check if user came directly to auth page
-      // Not if they were redirected here from matches page
-      const referrer = document.referrer;
-      const isFromMatches = referrer.includes('/matches') || referrer.includes('/profile');
-      
-      if (isFromMatches) {
-        // User was redirected from matches/profile, just send them back to home
-        navigate('/');
-        return;
-      }
-      
-      // Check if user has a complete profile first (only for direct auth page visits)
-      const checkProfile = async () => {
-        try {
-          const { data: profile } = await supabase
-            .from('profiles')
-            .select('*')
-            .eq('id', user.id)
-            .maybeSingle();
-          
-          // If no profile or incomplete profile, go to setup
-          if (!profile || !profile.name || !profile.location || !profile.bio) {
-            navigate('/profile/setup');
-            return;
-          }
-          
-          // For existing users with complete profiles, go to home
-          navigate('/');
-        } catch (error) {
-          console.error('Error checking profile/quiz completion:', error);
-          navigate('/profile/setup');
-        }
-      };
-      
-      checkProfile();
+    if (user && !showSignupFlow && !isPasswordReset) {
+      // Simplified: if user is logged in, go to home page
+      // Let the AppWrapper handle profile setup modal
+      console.log('User authenticated, redirecting to home');
+      navigate('/');
     }
   }, [user, navigate, showSignupFlow]);
 
