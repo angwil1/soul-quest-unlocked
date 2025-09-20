@@ -235,77 +235,157 @@ const Messages = () => {
         role="main"
         aria-labelledby="messages-heading"
       >
-        <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center gap-4">
-            <Button 
-              variant="ghost" 
-              onClick={() => navigate('/')}
-              className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
-              aria-label="Go back to homepage"
-            >
-              <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-            </Button>
-            <h1 id="messages-heading" className="text-3xl font-bold">Messages</h1>
-          </div>
-          
-          <div className="flex items-center gap-4">
-            {/* AI Digest Toggle */}
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setShowAIDigest(!showAIDigest)}
-              className="flex items-center gap-2 focus:ring-2 focus:ring-primary focus:ring-offset-2"
-              aria-label={showAIDigest ? "Hide AI Digest sidebar" : "Show AI Digest sidebar"}
-              aria-expanded={showAIDigest}
-            >
-              {showAIDigest ? (
-                <PanelRightClose className="h-4 w-4" aria-hidden="true" />
-              ) : (
-                <PanelRightOpen className="h-4 w-4" aria-hidden="true" />
-              )}
-              AI Digest
-            </Button>
+        <div className="mb-6">
+          {/* Mobile Header */}
+          <div className="md:hidden">
+            {/* Top row - Title and essential actions */}
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-3">
+                <Button 
+                  variant="ghost" 
+                  size="sm"
+                  onClick={() => navigate('/')}
+                  className="focus:ring-2 focus:ring-primary focus:ring-offset-2 p-2"
+                  aria-label="Go back to homepage"
+                >
+                  <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+                </Button>
+                <h1 id="messages-heading" className="text-xl font-bold">Messages</h1>
+              </div>
+              
+              <VideoCallButton 
+                matchName="Your Match" 
+                variant="default" 
+                size="sm"
+                className="bg-primary text-primary-foreground font-medium px-3 py-2 focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              />
+            </div>
             
-            {/* Message Limits Display */}
-            {!isPremium && (
-              <div 
-                className="flex items-center gap-2 px-3 py-2 bg-muted rounded-lg"
-                role="status"
-                aria-label={`${remainingMessages} messages remaining today`}
+            {/* Bottom row - Secondary actions and status */}
+            <div className="flex items-center justify-between">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setShowAIDigest(!showAIDigest)}
+                className="flex items-center gap-2 focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                aria-label={showAIDigest ? "Hide AI Digest sidebar" : "Show AI Digest sidebar"}
+                aria-expanded={showAIDigest}
               >
-                <span className="text-sm font-medium">
-                  {remainingMessages} messages left today
-                </span>
-                {remainingMessages === 0 && (
-                  <Button 
-                    size="sm" 
-                    onClick={() => navigate('/pricing')}
-                    className="ml-2 focus:ring-2 focus:ring-primary focus:ring-offset-2"
-                    aria-label="Upgrade to premium for unlimited messages"
-                  >
-                    <Crown className="h-4 w-4 mr-1" aria-hidden="true" />
-                    Upgrade
-                  </Button>
+                {showAIDigest ? (
+                  <PanelRightClose className="h-4 w-4" aria-hidden="true" />
+                ) : (
+                  <PanelRightOpen className="h-4 w-4" aria-hidden="true" />
                 )}
-              </div>
-            )}
-            {isPremium && (
-              <div 
-                className="flex items-center gap-2 px-3 py-2 bg-primary/10 text-primary rounded-lg"
-                role="status"
-                aria-label="Premium user with unlimited messages"
+                <span className="text-sm">AI Digest</span>
+              </Button>
+              
+              {/* Compact Message Limits Display */}
+              {!isPremium && (
+                <div 
+                  className="flex items-center gap-1 px-2 py-1 bg-muted rounded text-xs"
+                  role="status"
+                  aria-label={`${remainingMessages} messages remaining today`}
+                >
+                  <span className="font-medium">{remainingMessages} left</span>
+                  {remainingMessages === 0 && (
+                    <Button 
+                      size="sm" 
+                      onClick={() => navigate('/pricing')}
+                      className="ml-1 h-6 px-2 text-xs focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                      aria-label="Upgrade to premium for unlimited messages"
+                    >
+                      <Crown className="h-3 w-3 mr-1" aria-hidden="true" />
+                      Upgrade
+                    </Button>
+                  )}
+                </div>
+              )}
+              {isPremium && (
+                <div 
+                  className="flex items-center gap-1 px-2 py-1 bg-primary/10 text-primary rounded text-xs"
+                  role="status"
+                  aria-label="Premium user with unlimited messages"
+                >
+                  <Crown className="h-3 w-3" aria-hidden="true" />
+                  <span className="font-medium">Premium</span>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Desktop Header */}
+          <div className="hidden md:flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <Button 
+                variant="ghost" 
+                onClick={() => navigate('/')}
+                className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                aria-label="Go back to homepage"
               >
-                <Crown className="h-4 w-4" aria-hidden="true" />
-                <span className="text-sm font-medium">Premium • Unlimited</span>
-              </div>
-            )}
+                <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+              </Button>
+              <h1 id="messages-heading" className="text-3xl font-bold">Messages</h1>
+            </div>
             
-            <VideoCallButton 
-              matchName="Your Match" 
-              variant="default" 
-              size="lg"
-              className="bg-primary text-primary-foreground font-semibold px-6 py-3 text-lg min-h-[52px] focus:ring-2 focus:ring-primary focus:ring-offset-2"
-            />
+            <div className="flex items-center gap-4">
+              {/* AI Digest Toggle */}
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setShowAIDigest(!showAIDigest)}
+                className="flex items-center gap-2 focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                aria-label={showAIDigest ? "Hide AI Digest sidebar" : "Show AI Digest sidebar"}
+                aria-expanded={showAIDigest}
+              >
+                {showAIDigest ? (
+                  <PanelRightClose className="h-4 w-4" aria-hidden="true" />
+                ) : (
+                  <PanelRightOpen className="h-4 w-4" aria-hidden="true" />
+                )}
+                AI Digest
+              </Button>
+              
+              {/* Message Limits Display */}
+              {!isPremium && (
+                <div 
+                  className="flex items-center gap-2 px-3 py-2 bg-muted rounded-lg"
+                  role="status"
+                  aria-label={`${remainingMessages} messages remaining today`}
+                >
+                  <span className="text-sm font-medium">
+                    {remainingMessages} messages left today
+                  </span>
+                  {remainingMessages === 0 && (
+                    <Button 
+                      size="sm" 
+                      onClick={() => navigate('/pricing')}
+                      className="ml-2 focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                      aria-label="Upgrade to premium for unlimited messages"
+                    >
+                      <Crown className="h-4 w-4 mr-1" aria-hidden="true" />
+                      Upgrade
+                    </Button>
+                  )}
+                </div>
+              )}
+              {isPremium && (
+                <div 
+                  className="flex items-center gap-2 px-3 py-2 bg-primary/10 text-primary rounded-lg"
+                  role="status"
+                  aria-label="Premium user with unlimited messages"
+                >
+                  <Crown className="h-4 w-4" aria-hidden="true" />
+                  <span className="text-sm font-medium">Premium • Unlimited</span>
+                </div>
+              )}
+              
+              <VideoCallButton 
+                matchName="Your Match" 
+                variant="default" 
+                size="lg"
+                className="bg-primary text-primary-foreground font-semibold px-6 py-3 text-lg min-h-[52px] focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              />
+            </div>
           </div>
         </div>
 
