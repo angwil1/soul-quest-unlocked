@@ -530,7 +530,15 @@ export const ProfileSetupFlow: React.FC = () => {
                                 console.log('Navigator.mediaDevices available:', !!navigator.mediaDevices);
                                 console.log('getUserMedia available:', !!navigator.mediaDevices?.getUserMedia);
                                 console.log('Current protocol:', window.location.protocol);
-                                setShowCamera(true);
+                                if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                                  setShowCamera(true);
+                                } else {
+                                  const input = document.getElementById(`photo-upload-${index}`) as HTMLInputElement | null;
+                                  if (input) {
+                                    input.setAttribute('capture', 'user');
+                                    input.click();
+                                  }
+                                }
                               }}
                               disabled={uploadingPhotos}
                               className="w-full"
@@ -558,6 +566,7 @@ export const ProfileSetupFlow: React.FC = () => {
                         id={`photo-upload-${index}`}
                         type="file"
                         accept="image/*"
+                        capture="user"
                         onChange={handlePhotoUpload}
                         className="hidden"
                         disabled={uploadingPhotos}

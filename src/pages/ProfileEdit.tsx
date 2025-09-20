@@ -209,7 +209,17 @@ const ProfileEdit = () => {
                     <Upload className="h-4 w-4 mr-2" />
                     Upload Photo
                   </Button>
-                  <Button variant="outline" size="sm" onClick={() => setShowCamera(true)}>
+                  <Button variant="outline" size="sm" onClick={() => {
+                    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                      setShowCamera(true);
+                    } else {
+                      const input = document.getElementById('avatar-upload') as HTMLInputElement | null;
+                      if (input) {
+                        input.setAttribute('capture', 'user');
+                        input.click();
+                      }
+                    }
+                  }}>
                     <Camera className="h-4 w-4 mr-2" />
                     Take Picture
                   </Button>
@@ -219,6 +229,7 @@ const ProfileEdit = () => {
                   id="avatar-upload"
                   type="file"
                   accept="image/*"
+                  capture="user"
                   onChange={handlePhotoUpload}
                   className="hidden"
                 />
@@ -308,7 +319,17 @@ const ProfileEdit = () => {
                         <Upload className="h-4 w-4 mr-2" />
                         Upload
                       </Button>
-                      <Button variant="outline" size="sm" onClick={() => setShowCamera(true)}>
+                      <Button variant="outline" size="sm" onClick={() => {
+                        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                          setShowCamera(true);
+                        } else {
+                          const input = document.getElementById('additional-upload') as HTMLInputElement | null;
+                          if (input) {
+                            input.setAttribute('capture', 'user');
+                            input.click();
+                          }
+                        }
+                      }}>
                         <Camera className="h-4 w-4 mr-2" />
                         Camera
                       </Button>
@@ -317,6 +338,7 @@ const ProfileEdit = () => {
                       id="additional-upload"
                       type="file"
                       accept="image/*"
+                      capture="user"
                       onChange={handlePhotoUpload}
                       className="hidden"
                     />
