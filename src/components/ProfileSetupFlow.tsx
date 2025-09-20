@@ -293,7 +293,7 @@ export const ProfileSetupFlow: React.FC = () => {
         case 1:
           return profileData.name && profileData.age && profileData.location && profileData.occupation && profileData.education;
         case 2:
-          return profileData.bio.length >= 20;
+          return profileData.bio.length >= 10;
         case 3:
           return profileData.interests.length >= 3;
         case 4:
@@ -462,13 +462,13 @@ export const ProfileSetupFlow: React.FC = () => {
                 id="bio"
                 value={profileData.bio}
                 onChange={(e) => setProfileData(prev => ({ ...prev, bio: e.target.value }))}
-                placeholder="Share your interests, what you're passionate about, and what you're looking for in a relationship..."
+                placeholder="Tell us a little about yourself - your interests, what makes you unique..."
                 className="mt-1 min-h-[120px]"
                 maxLength={500}
               />
               <div className="text-right text-sm mt-1">
-                <span className={profileData.bio.length >= 20 ? "text-green-600" : "text-muted-foreground"}>
-                  {profileData.bio.length}/500 characters (minimum 20 required)
+                <span className={profileData.bio.length >= 10 ? "text-green-600" : "text-muted-foreground"}>
+                  {profileData.bio.length}/500 characters (minimum 10 required)
                 </span>
               </div>
             </div>
