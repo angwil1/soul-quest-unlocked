@@ -530,7 +530,7 @@ export const ProfileSetupFlow: React.FC = () => {
                                 console.log('Navigator.mediaDevices available:', !!navigator.mediaDevices);
                                 console.log('getUserMedia available:', !!navigator.mediaDevices?.getUserMedia);
                                 console.log('Current protocol:', window.location.protocol);
-                                if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                                if (false) {
                                   setShowCamera(true);
                                 } else {
                                   const input = document.getElementById(`photo-upload-${index}`) as HTMLInputElement | null;
