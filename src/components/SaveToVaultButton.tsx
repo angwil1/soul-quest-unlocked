@@ -29,6 +29,7 @@ interface SaveToVaultButtonProps {
   variant?: 'default' | 'ghost' | 'outline';
   size?: 'default' | 'sm' | 'lg';
   className?: string;
+  iconOnly?: boolean; // New prop for icon-only display
 }
 
 export const SaveToVaultButton = ({ 
@@ -36,7 +37,8 @@ export const SaveToVaultButton = ({
   data, 
   variant = 'ghost', 
   size = 'sm',
-  className = ''
+  className = '',
+  iconOnly = false
 }: SaveToVaultButtonProps) => {
   const { saveMatch, savePrompt, saveMoment, loading } = useMemoryVault();
   const { toast } = useToast();
@@ -75,10 +77,15 @@ export const SaveToVaultButton = ({
         size={size}
         className={className}
         onClick={handleSave}
+        title={iconOnly ? "Save to Vault (Premium Feature)" : undefined}
       >
-        <Crown className="h-4 w-4 mr-1 text-yellow-500" />
-        Save to Vault
-        <Badge variant="secondary" className="ml-2 text-xs">Pro</Badge>
+        <Crown className={`h-4 w-4 text-yellow-500 ${iconOnly ? '' : 'mr-1'}`} />
+        {!iconOnly && (
+          <>
+            Save to Vault
+            <Badge variant="secondary" className="ml-2 text-xs">Pro</Badge>
+          </>
+        )}
       </Button>
     );
   }
@@ -90,16 +97,17 @@ export const SaveToVaultButton = ({
       className={className}
       onClick={handleSave}
       disabled={loading || isSaved}
+      title={iconOnly ? (isSaved ? "Saved to Vault" : "Save to Vault") : undefined}
     >
       {isSaved ? (
         <>
-          <BookmarkCheck className="h-4 w-4 mr-1 text-green-500" />
-          Saved
+          <BookmarkCheck className={`h-4 w-4 text-green-500 ${iconOnly ? '' : 'mr-1'}`} />
+          {!iconOnly && 'Saved'}
         </>
       ) : (
         <>
-          <BookmarkPlus className="h-4 w-4 mr-1" />
-          Save to Vault
+          <BookmarkPlus className={`h-4 w-4 ${iconOnly ? '' : 'mr-1'}`} />
+          {!iconOnly && 'Save to Vault'}
         </>
       )}
     </Button>

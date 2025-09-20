@@ -170,8 +170,8 @@ const BrowseProfiles = () => {
                     Sample Profile
                   </Badge>
 
-                  {/* Save for Later - Top Right Corner */}
-                  <div className="absolute top-14 right-3">
+                  {/* Save for Later - Improved Design */}
+                  <div className="absolute top-12 right-3">
                     <SaveToVaultButton
                       type="match"
                       data={{
@@ -181,7 +181,8 @@ const BrowseProfiles = () => {
                       }}
                       variant="ghost"
                       size="sm"
-                      className="bg-background/80 backdrop-blur-md hover:bg-background/90 border border-border/30 rounded-full h-8 w-8 p-0 focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                      iconOnly={true}
+                      className="bg-background/90 backdrop-blur-md hover:bg-background/95 border border-border/40 rounded-full h-9 w-9 p-0 shadow-sm hover:shadow-md transition-all duration-200 focus:ring-2 focus:ring-primary focus:ring-offset-2 hover:scale-105"
                     />
                   </div>
                 </div>
