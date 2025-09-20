@@ -228,6 +228,7 @@ export const ProfileSetupFlow: React.FC = () => {
   };
 
   const handleCameraCapture = async (file: File) => {
+    console.log('Camera capture received file:', file);
     if (profileData.photos.length >= 6) {
       toast({
         title: "Too many photos",
@@ -241,6 +242,7 @@ export const ProfileSetupFlow: React.FC = () => {
     
     const photoUrl = await uploadPhoto(file);
     if (photoUrl) {
+      console.log('Photo uploaded successfully:', photoUrl);
       setProfileData(prev => ({
         ...prev,
         photos: [...prev.photos, photoUrl].slice(0, 6)
@@ -250,6 +252,8 @@ export const ProfileSetupFlow: React.FC = () => {
         title: "Photo captured",
         description: "Photo captured and uploaded successfully!",
       });
+    } else {
+      console.error('Failed to upload photo');
     }
 
     setUploadingPhotos(false);
@@ -507,34 +511,42 @@ export const ProfileSetupFlow: React.FC = () => {
                       )}
                     </>
                   ) : (
-                    <div className="flex flex-col items-center gap-2 p-4">
+                    <div className="flex flex-col items-center gap-3 p-4 w-full h-full">
                       {uploadingPhotos ? (
                         <div className="text-center">
-                          <Upload className="h-6 w-6 text-primary animate-pulse mx-auto mb-2" />
+                          <Upload className="h-8 w-8 text-primary animate-pulse mx-auto mb-2" />
                           <span className="text-sm text-muted-foreground">Uploading...</span>
                         </div>
                       ) : (
                         <>
-                          <Camera className="h-8 w-8 text-muted-foreground" />
-                          <span className="text-sm text-muted-foreground">Add Photo</span>
-                          <div className="flex gap-2 mt-2">
+                          <Camera className="h-12 w-12 text-muted-foreground mb-2" />
+                          <span className="text-sm text-muted-foreground text-center">Add Photo</span>
+                          <div className="flex flex-col gap-2 w-full">
+                            <Button
+                              variant="default"
+                              size="sm"
+                              onClick={() => {
+                                console.log('Camera button clicked!');
+                                setShowCamera(true);
+                              }}
+                              disabled={uploadingPhotos}
+                              className="w-full"
+                            >
+                              <Camera className="h-4 w-4 mr-2" />
+                              Take Photo
+                            </Button>
                             <Button
                               variant="outline"
                               size="sm"
-                              onClick={() => document.getElementById(`photo-upload-${index}`)?.click()}
+                              onClick={() => {
+                                console.log('Upload button clicked!');
+                                document.getElementById(`photo-upload-${index}`)?.click();
+                              }}
                               disabled={uploadingPhotos}
+                              className="w-full"
                             >
-                              <Upload className="h-3 w-3 mr-1" />
-                              Upload
-                            </Button>
-                            <Button
-                              variant="outline"  
-                              size="sm"
-                              onClick={() => setShowCamera(true)}
-                              disabled={uploadingPhotos}
-                            >
-                              <Camera className="h-3 w-3 mr-1" />
-                              Camera
+                              <Upload className="h-4 w-4 mr-2" />
+                              Upload File
                             </Button>
                           </div>
                         </>
