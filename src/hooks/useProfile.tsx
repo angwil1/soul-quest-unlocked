@@ -114,9 +114,28 @@ export const useProfile = () => {
 
   const updateProfile = async (updates: Partial<Profile>) => {
     try {
+      // Clean up the updates object - convert empty strings to null for date fields
+      const cleanedUpdates: Partial<Profile> = { ...updates };
+      
+      // Handle date_of_birth specifically - convert empty string to null
+      if ('date_of_birth' in cleanedUpdates && cleanedUpdates.date_of_birth === '') {
+        cleanedUpdates.date_of_birth = null;
+      }
+      
+      // Handle other string fields that should be null instead of empty
+      const stringFieldsToClean: (keyof Profile)[] = ['name', 'bio', 'gender', 'location', 'occupation', 'education', 'looking_for', 'avatar_url', 'zip_code'];
+      
+      stringFieldsToClean.forEach(field => {
+        if (field in cleanedUpdates && cleanedUpdates[field] === '') {
+          (cleanedUpdates as any)[field] = null;
+        }
+      });
+
+      console.log('Updating profile with cleaned data:', cleanedUpdates);
+
       const { error } = await supabase
         .from('profiles')
-        .update({ ...updates, updated_at: new Date().toISOString() })
+        .update({ ...cleanedUpdates, updated_at: new Date().toISOString() })
         .eq('id', user?.id);
 
       if (error) throw error;
@@ -130,6 +149,7 @@ export const useProfile = () => {
 
       return { error: null };
     } catch (error) {
+      console.error('Profile update error:', error);
       toast({
         title: "Error",
         description: "Failed to update profile",
