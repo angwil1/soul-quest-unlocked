@@ -523,7 +523,9 @@ export const ProfileSetupFlow: React.FC = () => {
                               variant="default"
                               size="sm"
                               type="button"
-                              onClick={() => {
+                              onClick={(e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
                                 console.log('Camera button clicked!');
                                 console.log('Navigator.mediaDevices available:', !!navigator.mediaDevices);
                                 console.log('getUserMedia available:', !!navigator.mediaDevices?.getUserMedia);
@@ -548,7 +550,9 @@ export const ProfileSetupFlow: React.FC = () => {
                               variant="outline"
                               size="sm"
                               type="button"
-                              onClick={() => {
+                              onClick={(e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
                                 console.log('Upload button clicked!');
                                 document.getElementById(`photo-upload-${index}`)?.click();
                               }}
