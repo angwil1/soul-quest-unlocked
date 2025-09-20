@@ -180,7 +180,10 @@ const ProfileEdit = () => {
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Profile
           </Button>
-          <Button form="profile-form" type="submit" disabled={isSubmitting}>
+          <Button type="button" disabled={isSubmitting} onClick={() => {
+            const form = document.getElementById('profile-form') as HTMLFormElement | null;
+            form?.requestSubmit();
+          }}>
             {isSubmitting ? 'Saving...' : 'Save Changes'}
           </Button>
         </div>
