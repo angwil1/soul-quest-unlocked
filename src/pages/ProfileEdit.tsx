@@ -92,9 +92,13 @@ const ProfileEdit = () => {
   };
 
   const handlePhotoUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log('📸 Photo upload triggered!');
     const file = event.target.files?.[0];
     if (file) {
+      console.log('📸 File selected:', file.name, file.type, file.size);
       await addPhoto(file);
+    } else {
+      console.log('📸 No file selected');
     }
   };
 
@@ -104,12 +108,21 @@ const ProfileEdit = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log('🔧 Profile form submitted!');
+    console.log('🔧 Form data to save:', formData);
     setIsSubmitting(true);
 
-    const { error } = await updateProfile(formData);
-    
-    if (!error) {
-      navigate('/profile');
+    try {
+      const { error } = await updateProfile(formData);
+      
+      if (!error) {
+        console.log('🔧 Profile saved successfully!');
+        navigate('/profile');
+      } else {
+        console.error('🔧 Profile save error:', error);
+      }
+    } catch (error) {
+      console.error('🔧 Profile save exception:', error);
     }
     
     setIsSubmitting(false);
@@ -205,23 +218,57 @@ const ProfileEdit = () => {
                 </Avatar>
                 
                 <div className="flex gap-2">
-                  <Button variant="outline" size="sm" onClick={() => document.getElementById('avatar-upload')?.click()}>
+                  <Button variant="outline" size="sm" onClick={() => {
+                    console.log('📤 Upload button clicked!');
+                    document.getElementById('avatar-upload')?.click();
+                  }}>
                     <Upload className="h-4 w-4 mr-2" />
                     Upload Photo
                   </Button>
                   <Button variant="outline" size="sm" onClick={() => {
+                    console.log('📸 Camera button clicked!');
+                    console.log('📸 MediaDevices available:', !!navigator.mediaDevices);
+                    console.log('📸 GetUserMedia available:', !!navigator.mediaDevices?.getUserMedia);
+                    
+                    // Try camera modal first, with immediate fallback to native picker
                     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                      console.log('📸 Opening camera modal...');
                       setShowCamera(true);
                     } else {
+                      console.log('📸 Camera not available, using file picker...');
                       const input = document.getElementById('avatar-upload') as HTMLInputElement | null;
                       if (input) {
+                        console.log('📸 Triggering file input with camera capture...');
                         input.setAttribute('capture', 'user');
                         input.click();
+                      } else {
+                        console.error('📸 File input not found!');
                       }
                     }
                   }}>
                     <Camera className="h-4 w-4 mr-2" />
                     Take Picture
+                  </Button>
+                  <Button 
+                    variant="default" 
+                    size="sm" 
+                    onClick={() => {
+                      console.log('📱 Simple camera button clicked!');
+                      const input = document.createElement('input');
+                      input.type = 'file';
+                      input.accept = 'image/*';
+                      input.capture = 'user';
+                      input.onchange = async (e) => {
+                        const file = (e.target as HTMLInputElement).files?.[0];
+                        if (file) {
+                          console.log('📱 File captured:', file.name);
+                          await addPhoto(file);
+                        }
+                      };
+                      input.click();
+                    }}
+                  >
+                    📱 Camera (Simple)
                   </Button>
                 </div>
                 
@@ -320,13 +367,20 @@ const ProfileEdit = () => {
                         Upload
                       </Button>
                       <Button variant="outline" size="sm" onClick={() => {
+                        console.log('📸 Additional camera button clicked!');
+                        
                         if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                          console.log('📸 Opening camera modal for additional photo...');
                           setShowCamera(true);
                         } else {
+                          console.log('📸 Using file picker for additional photo...');
                           const input = document.getElementById('additional-upload') as HTMLInputElement | null;
                           if (input) {
+                            console.log('📸 Triggering additional file input...');
                             input.setAttribute('capture', 'user');
                             input.click();
+                          } else {
+                            console.error('📸 Additional file input not found!');
                           }
                         }
                       }}>
