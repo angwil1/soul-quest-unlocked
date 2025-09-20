@@ -522,6 +522,7 @@ export const ProfileSetupFlow: React.FC = () => {
                             <Button
                               variant="default"
                               size="sm"
+                              type="button"
                               onClick={() => {
                                 console.log('Camera button clicked!');
                                 console.log('Navigator.mediaDevices available:', !!navigator.mediaDevices);
@@ -532,7 +533,7 @@ export const ProfileSetupFlow: React.FC = () => {
                                 } else {
                                   const input = document.getElementById(`photo-upload-${index}`) as HTMLInputElement | null;
                                   if (input) {
-                                    input.setAttribute('capture', 'user');
+                                    input.setAttribute('capture', 'environment');
                                     input.click();
                                   }
                                 }
@@ -546,6 +547,7 @@ export const ProfileSetupFlow: React.FC = () => {
                             <Button
                               variant="outline"
                               size="sm"
+                              type="button"
                               onClick={() => {
                                 console.log('Upload button clicked!');
                                 document.getElementById(`photo-upload-${index}`)?.click();

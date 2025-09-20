@@ -223,7 +223,7 @@ const ProfileEdit = () => {
                 </Avatar>
                 
                 <div className="flex gap-2">
-                  <Button variant="outline" size="sm" onClick={() => {
+                  <Button variant="outline" size="sm" type="button" onClick={() => {
                     console.log('📤 Upload button clicked!');
                     document.getElementById('avatar-upload')?.click();
                   }}>
@@ -239,6 +239,7 @@ const ProfileEdit = () => {
                   <Button 
                     variant="default" 
                     size="sm" 
+                    type="button"
                     onClick={() => {
                       console.log('📱 Simple camera button clicked!');
                       const input = document.createElement('input');
