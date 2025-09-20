@@ -357,8 +357,17 @@ export const ProfileSetupFlow: React.FC = () => {
 
       console.log('✅ Profile setup saved');
 
-      // Navigate to matches page
-      navigate('/matches');
+      // Navigate to matches page or back to signup flow based on context
+      const urlParams = new URLSearchParams(window.location.search);
+      const fromSignup = urlParams.get('from') === 'signup';
+      
+      if (fromSignup) {
+        // User came from signup flow - redirect to continue with shipping
+        window.location.href = '/auth?step=shipping-address';
+      } else {
+        // Regular profile setup completion - go to matches
+        navigate('/matches');
+      }
     } catch (error: any) {
       toast({
         title: "Error",

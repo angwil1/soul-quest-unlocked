@@ -6,13 +6,13 @@ import { Label } from '@/components/ui/label';
 import { Progress } from '@/components/ui/progress';
 import { CheckCircle, Clock, Gift, Heart, Mail } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 // Age verification now handled in signup form
 import { WelcomeConfirmation } from '@/components/WelcomeConfirmation';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 
-export type SignupStep = 'details' | 'email-confirmation' | 'profile-setup' | 'shipping-address' | 'complete';
+export type SignupStep = 'details' | 'email-confirmation' | 'profile-setup' | 'complete-profile' | 'shipping-address' | 'complete';
 
 interface SignupFlowProps {
   onComplete: () => void;
@@ -28,6 +28,28 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
   const [isEmailConfirmed, setIsEmailConfirmed] = useState(false);
   const { signUp, user, session } = useAuth();
   const { toast } = useToast();
+  const navigate = useNavigate();
+
+  // Check for completed profile setup on component mount
+  useEffect(() => {
+    const checkProfileSetupCompletion = async () => {
+      if (!user || !isEmailConfirmed) return;
+      
+      // Check if we just came back from profile setup
+      const urlParams = new URLSearchParams(window.location.search);
+      const step = urlParams.get('step');
+      
+      if (step === 'shipping-address') {
+        setCurrentStep('shipping-address');
+        return;
+      }
+      
+      // Regular profile completion check
+      checkProfileCompletion();
+    };
+    
+    checkProfileSetupCompletion();
+  }, [user, isEmailConfirmed]);
 
   // Store age verification when user is confirmed
   useEffect(() => {
@@ -102,8 +124,14 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
         .maybeSingle();
         
       if (profile && profile.name) {
-        // Profile is complete, check if address is collected
-        checkAddressCollection();
+        // Check if full profile is complete (bio, interests, photos)
+        if (profile.bio && profile.interests?.length >= 3 && profile.photos?.length >= 1) {
+          // Full profile is complete, check if address is collected
+          checkAddressCollection();
+        } else {
+          // Need to complete full profile
+          setCurrentStep('complete-profile');
+        }
       } else {
         setCurrentStep('profile-setup');
       }
@@ -153,10 +181,11 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
 
   const getProgressPercentage = () => {
     switch (currentStep) {
-      case 'details': return 20;
-      case 'email-confirmation': return 40;
-      case 'profile-setup': return 60;
-      case 'shipping-address': return 80;
+      case 'details': return 15;
+      case 'email-confirmation': return 30;
+      case 'profile-setup': return 45;
+      case 'complete-profile': return 65;
+      case 'shipping-address': return 85;
       case 'complete': return 100;
       default: return 0;
     }
@@ -248,11 +277,11 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
         .eq('user_id', user.id);
       
       toast({
-        title: "Profile saved!",
-        description: "Now let's get your shipping address for the wellness kit.",
+        title: "Basic profile saved!",
+        description: "Now let's complete your full profile to find better matches.",
       });
       
-      setCurrentStep('shipping-address');
+      setCurrentStep('complete-profile');
       
     } catch (error) {
       console.error('Profile setup error:', error);
@@ -639,11 +668,11 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
               
               <div className="bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 rounded-lg p-4">
                 <h4 className="text-sm font-semibold text-blue-800 mb-2 flex items-center gap-2">
-                  <Gift className="h-4 w-4" />
-                  Next: Shipping Address
+                  <Heart className="h-4 w-4" />
+                  Next: Complete Your Profile
                 </h4>
                 <p className="text-xs text-blue-700">
-                  After saving your profile, we'll collect your shipping address for the wellness kit delivery.
+                  After saving your basic info, we'll help you create a full profile to find better matches.
                 </p>
               </div>
               
@@ -652,9 +681,58 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
                 className="w-full h-12 text-lg font-semibold bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700" 
                 disabled={isLoading}
               >
-                {isLoading ? 'Saving profile...' : 'Continue to Shipping Address'}
+                {isLoading ? 'Saving basic info...' : 'Continue to Profile Setup'}
               </Button>
             </form>
+          </CardContent>
+        </Card>
+      )}
+
+      {currentStep === 'complete-profile' && (
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Heart className="h-5 w-5 text-primary" />
+              Build Your Profile
+            </CardTitle>
+            <CardDescription>
+              Create a complete profile to find your perfect matches
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              <div className="bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-200 rounded-lg p-4">
+                <h4 className="text-sm font-semibold text-purple-800 mb-2">
+                  Complete Your Full Profile
+                </h4>
+                <p className="text-xs text-purple-700 mb-3">
+                  Add photos, write your bio, and share your interests to get better matches.
+                </p>
+                <ul className="text-xs text-purple-600 space-y-1">
+                  <li>• Add at least 2 photos</li>
+                  <li>• Write a compelling bio</li>
+                  <li>• Select your interests</li>
+                  <li>• Set your preferences</li>
+                </ul>
+              </div>
+              
+              <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
+                <h4 className="text-sm font-semibold text-amber-800 mb-1 flex items-center gap-2">
+                  <Gift className="h-4 w-4" />
+                  After Profile Setup
+                </h4>
+                <p className="text-xs text-amber-700">
+                  Once your profile is complete, we'll collect your shipping address for the wellness kit delivery.
+                </p>
+              </div>
+              
+              <Button 
+                onClick={() => navigate('/profile-setup?from=signup')} 
+                className="w-full h-12 text-lg font-semibold bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
+              >
+                Complete My Profile
+              </Button>
+            </div>
           </CardContent>
         </Card>
       )}
