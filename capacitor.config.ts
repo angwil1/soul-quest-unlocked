@@ -4,11 +4,11 @@ const config: CapacitorConfig = {
   appId: 'com.aicompleteme.app',
   appName: 'AI Complete Me',
   webDir: 'dist',
-  server: {
-    url: 'https://65aad2fc-5b33-4030-8f73-3783f744043f.lovableproject.com?forceHideBadge=true',
-    cleartext: true,
-    androidScheme: 'https'
-  },
+  // server: {
+  //   url: 'https://65aad2fc-5b33-4030-8f73-3783f744043f.lovableproject.com?forceHideBudge=true',
+  //   cleartext: true,
+  //   androidScheme: 'https'
+  // },
   plugins: {
     SplashScreen: {
       launchShowDuration: 2000,
