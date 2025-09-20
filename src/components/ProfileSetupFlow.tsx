@@ -333,12 +333,9 @@ export const ProfileSetupFlow: React.FC = () => {
           created_at: new Date().toISOString()
         });
 
-      if (error) throw error;
+       if (error) throw error;
 
-      toast({
-        title: "Profile Complete! 🎉",
-        description: "Welcome to AI Complete Me. Let's find your perfect match!",
-      });
+      console.log('✅ Profile setup saved');
 
       // Navigate to matches page
       navigate('/matches');
@@ -566,7 +563,7 @@ export const ProfileSetupFlow: React.FC = () => {
                         id={`photo-upload-${index}`}
                         type="file"
                         accept="image/*"
-                        capture="user"
+                        capture="environment"
                         onChange={handlePhotoUpload}
                         className="hidden"
                         disabled={uploadingPhotos}
