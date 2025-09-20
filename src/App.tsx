@@ -59,9 +59,23 @@ const App = () => {
     try {
       const ageConfirmed = localStorage.getItem('ageConfirmed');
       const ageConfirmedDate = localStorage.getItem('ageConfirmedDate');
+      const signupSession = sessionStorage.getItem('signupAgeVerified');
       
-      console.log('🔞 Age verification data:', { ageConfirmed, ageConfirmedDate });
+      console.log('🔞 Age verification data:', { 
+        ageConfirmed, 
+        ageConfirmedDate, 
+        signupSession 
+      });
       
+      // Check session-based verification first (for active signup sessions)
+      if (signupSession === 'true') {
+        console.log('✅ Age verified in current session - proceeding to app');
+        setAgeVerified(true);
+        setLoading(false);
+        return;
+      }
+      
+      // Check localStorage for longer-term verification
       if (ageConfirmed === 'true' && ageConfirmedDate) {
         const confirmationDate = new Date(ageConfirmedDate);
         const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
@@ -71,6 +85,8 @@ const App = () => {
         if (confirmationDate > thirtyDaysAgo) {
           console.log('✅ Age verification valid - proceeding to app');
           setAgeVerified(true);
+          // Also set session storage for this session
+          sessionStorage.setItem('signupAgeVerified', 'true');
         } else {
           console.log('⚠️ Age verification expired - clearing storage');
           localStorage.removeItem('ageConfirmed');
@@ -88,7 +104,16 @@ const App = () => {
 
   const handleAgeConfirmed = () => {
     console.log('✅ Age confirmed callback triggered');
-    setAgeVerified(true);
+    try {
+      // Set both localStorage and sessionStorage
+      localStorage.setItem('ageConfirmed', 'true');
+      localStorage.setItem('ageConfirmedDate', new Date().toISOString());
+      sessionStorage.setItem('signupAgeVerified', 'true');
+      setAgeVerified(true);
+    } catch (error) {
+      console.error('❌ Failed to store age verification:', error);
+      setAgeVerified(true); // Still proceed
+    }
   };
 
   if (loading) {

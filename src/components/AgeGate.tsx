@@ -11,11 +11,12 @@ export const AgeGate = ({ onAgeConfirmed }: AgeGateProps) => {
   const [showExitWarning, setShowExitWarning] = useState(false);
 
   const handleConfirmAge = () => {
-    console.log('🔞 Age confirmed - storing in localStorage');
+    console.log('🔞 Age confirmed - storing in localStorage and sessionStorage');
     try {
-      // Store age confirmation in localStorage
+      // Store age confirmation in both localStorage and sessionStorage
       localStorage.setItem('ageConfirmed', 'true');
       localStorage.setItem('ageConfirmedDate', new Date().toISOString());
+      sessionStorage.setItem('signupAgeVerified', 'true');
       console.log('✅ Age confirmation stored successfully');
       onAgeConfirmed();
     } catch (error) {
