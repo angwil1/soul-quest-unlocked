@@ -177,14 +177,17 @@ const ProfileEdit = () => {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <div className="bg-card border-b">
-        <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
-          <Button variant="ghost" onClick={() => navigate('/profile')}>
+        <div className="max-w-4xl mx-auto px-4 py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <Button variant="ghost" onClick={() => navigate('/profile')} className="self-start sm:self-center">
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Profile
           </Button>
-          <Button type="button" disabled={isSubmitting} onClick={submitProfile}>
-            {isSubmitting ? 'Saving...' : 'Save Changes'}
-          </Button>
+          <div className="flex flex-col items-end">
+            <Button type="button" disabled={isSubmitting} onClick={submitProfile}>
+              {isSubmitting ? 'Saving...' : 'Save Changes'}
+            </Button>
+            <p className="text-xs text-muted-foreground mt-1">All fields required to save</p>
+          </div>
         </div>
       </div>
 

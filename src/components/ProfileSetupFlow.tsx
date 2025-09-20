@@ -646,13 +646,13 @@ export const ProfileSetupFlow: React.FC = () => {
     <div className="min-h-screen bg-gradient-to-br from-background via-muted/5 to-background py-8">
       <div className="max-w-2xl mx-auto px-4">
         <Card>
-          <CardHeader className="text-center">
-            <div className="flex items-center justify-center gap-2 mb-4">
-              <Heart className="h-6 w-6 text-primary" />
-              <CardTitle>Complete Your Profile</CardTitle>
+          <CardHeader className="text-center pb-4">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-2 mb-3">
+              <Heart className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
+              <CardTitle className="text-lg sm:text-xl">Complete Your Profile</CardTitle>
             </div>
-            <Progress value={progress} className="w-full" />
-            <p className="text-sm text-muted-foreground mt-2">
+            <Progress value={progress} className="w-full mb-2" />
+            <p className="text-xs sm:text-sm text-muted-foreground">
               Step {currentStep} of {totalSteps}
             </p>
           </CardHeader>
@@ -660,42 +660,49 @@ export const ProfileSetupFlow: React.FC = () => {
           <CardContent>
             {renderStep()}
 
-            <div className="flex justify-between mt-8">
+            <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mt-8">
               <Button
                 variant="outline"
                 onClick={handleBack}
                 disabled={currentStep === 1}
+                className="w-full sm:w-auto"
               >
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 Back
               </Button>
 
-              {currentStep === totalSteps ? (
-                <Button
-                  onClick={handleComplete}
-                  disabled={!validateStep() || loading || uploadingPhotos}
-                  className="bg-primary hover:bg-primary/90"
-                >
-                  {loading ? (
-                    "Saving..."
-                  ) : uploadingPhotos ? (
-                    "Uploading Photos..."
-                  ) : (
-                    <>
-                      Complete Profile
-                      <CheckCircle className="h-4 w-4 ml-2" />
-                    </>
-                  )}
-                </Button>
-              ) : (
-                <Button
-                  onClick={handleNext}
-                  disabled={!validateStep()}
-                >
-                  Next
-                  <ArrowRight className="h-4 w-4 ml-2" />
-                </Button>
-              )}
+              <div className="flex flex-col items-center sm:items-end">
+                {currentStep === totalSteps ? (
+                  <Button
+                    onClick={handleComplete}
+                    disabled={!validateStep() || loading || uploadingPhotos}
+                    className="bg-primary hover:bg-primary/90 w-full sm:w-auto"
+                  >
+                    {loading ? (
+                      "Saving..."
+                    ) : uploadingPhotos ? (
+                      "Uploading Photos..."
+                    ) : (
+                      <>
+                        Complete Profile
+                        <CheckCircle className="h-4 w-4 ml-2" />
+                      </>
+                    )}
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={handleNext}
+                    disabled={!validateStep()}
+                    className="w-full sm:w-auto"
+                  >
+                    Next
+                    <ArrowRight className="h-4 w-4 ml-2" />
+                  </Button>
+                )}
+                <p className="text-xs text-muted-foreground mt-1 text-center sm:text-right">
+                  All fields required to save
+                </p>
+              </div>
             </div>
           </CardContent>
         </Card>
