@@ -18,6 +18,8 @@ interface ProfileData {
   name: string;
   age: string;
   location: string;
+  occupation: string;
+  education: string;
   bio: string;
   interests: string[];
   photos: string[];  // Changed from File[] to string[] for photo URLs
@@ -34,6 +36,8 @@ export const ProfileSetupFlow: React.FC = () => {
     name: '',
     age: '',
     location: '',
+    occupation: '',
+    education: '',
     bio: '',
     interests: [],
     photos: [],
@@ -91,6 +95,20 @@ export const ProfileSetupFlow: React.FC = () => {
     'Travel', 'Photography', 'Cooking', 'Fitness', 'Reading', 'Music',
     'Art', 'Dancing', 'Hiking', 'Movies', 'Gaming', 'Yoga', 'Sports',
     'Wine', 'Coffee', 'Dogs', 'Cats', 'Fashion', 'Technology', 'Science'
+  ];
+
+  const occupationOptions = [
+    'Business & Finance', 'Technology', 'Healthcare', 'Education', 'Creative Arts',
+    'Engineering', 'Legal', 'Marketing & Sales', 'Science & Research', 'Government',
+    'Nonprofit', 'Hospitality & Tourism', 'Retail', 'Construction', 'Transportation',
+    'Media & Communications', 'Real Estate', 'Consulting', 'Agriculture', 'Self-Employed',
+    'Student', 'Retired', 'Other'
+  ];
+
+  const educationOptions = [
+    'High School', 'Some College', 'Associate Degree', 'Bachelor\'s Degree',
+    'Master\'s Degree', 'PhD/Doctorate', 'Professional Degree', 'Trade School',
+    'Certification Program', 'Other'
   ];
 
   const personalityQuestions = [
@@ -273,7 +291,7 @@ export const ProfileSetupFlow: React.FC = () => {
     const isValid = (() => {
       switch (currentStep) {
         case 1:
-          return profileData.name && profileData.age && profileData.location;
+          return profileData.name && profileData.age && profileData.location && profileData.occupation && profileData.education;
         case 2:
           return profileData.bio.length >= 20;
         case 3:
@@ -320,6 +338,8 @@ export const ProfileSetupFlow: React.FC = () => {
           name: profileData.name,
           age: parseInt(profileData.age),
           location: profileData.location,
+          occupation: profileData.occupation,
+          education: profileData.education,
           bio: profileData.bio,
           interests: profileData.interests,
           photos: profileData.photos, // Save all photo URLs
@@ -395,6 +415,34 @@ export const ProfileSetupFlow: React.FC = () => {
                   placeholder="City, State"
                   className="mt-1"
                 />
+              </div>
+
+              <div>
+                <Label htmlFor="occupation">Occupation</Label>
+                <Select onValueChange={(value) => setProfileData(prev => ({ ...prev, occupation: value }))}>
+                  <SelectTrigger className="mt-1">
+                    <SelectValue placeholder="Select your occupation" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {occupationOptions.map(occupation => (
+                      <SelectItem key={occupation} value={occupation}>{occupation}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div>
+                <Label htmlFor="education">Education</Label>
+                <Select onValueChange={(value) => setProfileData(prev => ({ ...prev, education: value }))}>
+                  <SelectTrigger className="mt-1">
+                    <SelectValue placeholder="Select your education level" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {educationOptions.map(education => (
+                      <SelectItem key={education} value={education}>{education}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
             </div>
           </div>
