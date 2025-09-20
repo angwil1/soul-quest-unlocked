@@ -89,7 +89,7 @@ export const Navbar = () => {
           .eq('id', user.id)
           .single();
         
-        setIsUnlockedBeyond(profileData?.unlocked_beyond_badge_enabled || false);
+        setIsUnlockedBeyond(true); // Demo: Enable Connection DNA access
       } catch (error) {
         console.error('Error checking user status:', error);
         setHasCompletedQuiz(false);

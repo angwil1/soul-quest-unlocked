@@ -59,7 +59,7 @@ export const useConnectionDNA = () => {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
 
-  const isUnlockedBeyond = false; // Simplified without subscription
+  const isUnlockedBeyond = true; // Demo: Enable Connection DNA access
 
   const trackInteraction = async (interactionData: {
     type: string;
