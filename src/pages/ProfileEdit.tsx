@@ -442,22 +442,57 @@ const ProfileEdit = () => {
 
                 <div>
                   <Label htmlFor="occupation">Occupation</Label>
-                  <Input
-                    id="occupation"
-                    value={formData.occupation || ''}
-                    onChange={(e) => handleInputChange('occupation', e.target.value)}
-                    placeholder="Your job title"
-                  />
+                  <Select value={formData.occupation || ''} onValueChange={(value) => handleInputChange('occupation', value)}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select your occupation" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-popover border border-border shadow-md z-50">
+                      <SelectItem value="Business & Finance">Business & Finance</SelectItem>
+                      <SelectItem value="Technology">Technology</SelectItem>
+                      <SelectItem value="Healthcare">Healthcare</SelectItem>
+                      <SelectItem value="Education">Education</SelectItem>
+                      <SelectItem value="Creative Arts">Creative Arts</SelectItem>
+                      <SelectItem value="Engineering">Engineering</SelectItem>
+                      <SelectItem value="Legal">Legal</SelectItem>
+                      <SelectItem value="Marketing & Sales">Marketing & Sales</SelectItem>
+                      <SelectItem value="Science & Research">Science & Research</SelectItem>
+                      <SelectItem value="Government">Government</SelectItem>
+                      <SelectItem value="Nonprofit">Nonprofit</SelectItem>
+                      <SelectItem value="Hospitality & Tourism">Hospitality & Tourism</SelectItem>
+                      <SelectItem value="Retail">Retail</SelectItem>
+                      <SelectItem value="Construction">Construction</SelectItem>
+                      <SelectItem value="Transportation">Transportation</SelectItem>
+                      <SelectItem value="Media & Communications">Media & Communications</SelectItem>
+                      <SelectItem value="Real Estate">Real Estate</SelectItem>
+                      <SelectItem value="Consulting">Consulting</SelectItem>
+                      <SelectItem value="Agriculture">Agriculture</SelectItem>
+                      <SelectItem value="Self-Employed">Self-Employed</SelectItem>
+                      <SelectItem value="Student">Student</SelectItem>
+                      <SelectItem value="Retired">Retired</SelectItem>
+                      <SelectItem value="Other">Other</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
 
                 <div>
                   <Label htmlFor="education">Education</Label>
-                  <Input
-                    id="education"
-                    value={formData.education || ''}
-                    onChange={(e) => handleInputChange('education', e.target.value)}
-                    placeholder="Your education level"
-                  />
+                  <Select value={formData.education || ''} onValueChange={(value) => handleInputChange('education', value)}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select your education level" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-popover border border-border shadow-md z-50">
+                      <SelectItem value="High School">High School</SelectItem>
+                      <SelectItem value="Some College">Some College</SelectItem>
+                      <SelectItem value="Associate Degree">Associate Degree</SelectItem>
+                      <SelectItem value="Bachelor's Degree">Bachelor's Degree</SelectItem>
+                      <SelectItem value="Master's Degree">Master's Degree</SelectItem>
+                      <SelectItem value="PhD/Doctorate">PhD/Doctorate</SelectItem>
+                      <SelectItem value="Professional Degree">Professional Degree</SelectItem>
+                      <SelectItem value="Trade School">Trade School</SelectItem>
+                      <SelectItem value="Certification Program">Certification Program</SelectItem>
+                      <SelectItem value="Other">Other</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
 
                 <div>
