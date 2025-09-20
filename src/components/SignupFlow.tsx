@@ -11,6 +11,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { WelcomeConfirmation } from '@/components/WelcomeConfirmation';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 export type SignupStep = 'details' | 'email-confirmation' | 'profile-setup' | 'complete-profile' | 'shipping-address' | 'complete';
 
@@ -257,14 +258,18 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
     
     const formData = new FormData(e.target as HTMLFormElement);
     const name = formData.get('name') as string;
+    const occupation = formData.get('occupation') as string;
+    const education = formData.get('education') as string;
     
     try {
-      // Update profile with name
+      // Update profile with basic info
       const { error: profileError } = await supabase
         .from('profiles')
         .upsert({
           id: user.id,
           name: name,
+          occupation: occupation,
+          education: education,
           Avatar_url: null
         });
         
@@ -273,7 +278,7 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
       // Update signup progress
       await supabase
         .from('quiet_start_signups')
-        .update({ signup_step: 'profile_completed' })
+        .update({ signup_step: 'basic_profile_completed' })
         .eq('user_id', user.id);
       
       toast({
@@ -664,6 +669,61 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
                   placeholder="How should we address you?"
                   required
                 />
+              </div>
+              
+              <div className="space-y-2">
+                <Label htmlFor="occupation">Occupation</Label>
+                <Select name="occupation" required>
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Select your occupation" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-popover border border-border shadow-lg max-h-[200px]">
+                    <SelectItem value="Business & Finance">Business & Finance</SelectItem>
+                    <SelectItem value="Technology">Technology</SelectItem>
+                    <SelectItem value="Healthcare">Healthcare</SelectItem>
+                    <SelectItem value="Education">Education</SelectItem>
+                    <SelectItem value="Creative Arts">Creative Arts</SelectItem>
+                    <SelectItem value="Engineering">Engineering</SelectItem>
+                    <SelectItem value="Legal">Legal</SelectItem>
+                    <SelectItem value="Marketing & Sales">Marketing & Sales</SelectItem>
+                    <SelectItem value="Science & Research">Science & Research</SelectItem>
+                    <SelectItem value="Government">Government</SelectItem>
+                    <SelectItem value="Nonprofit">Nonprofit</SelectItem>
+                    <SelectItem value="Hospitality & Tourism">Hospitality & Tourism</SelectItem>
+                    <SelectItem value="Retail">Retail</SelectItem>
+                    <SelectItem value="Construction">Construction</SelectItem>
+                    <SelectItem value="Transportation">Transportation</SelectItem>
+                    <SelectItem value="Media & Communications">Media & Communications</SelectItem>
+                    <SelectItem value="Real Estate">Real Estate</SelectItem>
+                    <SelectItem value="Consulting">Consulting</SelectItem>
+                    <SelectItem value="Agriculture">Agriculture</SelectItem>
+                    <SelectItem value="Self-Employed">Self-Employed</SelectItem>
+                    <SelectItem value="Student">Student</SelectItem>
+                    <SelectItem value="Retired">Retired</SelectItem>
+                    <SelectItem value="Other">Other</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              
+              <div className="space-y-2">
+                <Label htmlFor="education">Education Level</Label>
+                <Select name="education" required>
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Select your education level" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-popover border border-border shadow-lg max-h-[200px]">
+                    <SelectItem value="High School">High School</SelectItem>
+                    <SelectItem value="Some College">Some College</SelectItem>
+                    <SelectItem value="Associate Degree">Associate Degree</SelectItem>
+                    <SelectItem value="Bachelor's Degree">Bachelor's Degree</SelectItem>
+                    <SelectItem value="Master's Degree">Master's Degree</SelectItem>
+                    <SelectItem value="PhD/Doctorate">PhD/Doctorate</SelectItem>
+                    <SelectItem value="Professional Degree">Professional Degree</SelectItem>
+                    <SelectItem value="Trade School">Trade School</SelectItem>
+                    <SelectItem value="Certification Program">Certification Program</SelectItem>
+                    <SelectItem value="Other">Other</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
               
               <div className="bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 rounded-lg p-4">
