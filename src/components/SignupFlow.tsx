@@ -41,8 +41,8 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
       const step = urlParams.get('step');
       
       if (step === 'shipping-address') {
-        setCurrentStep('shipping-address');
-        return;
+        console.log('Ignoring forced shipping-address step during signup; will collect later when eligible');
+        // Intentionally not navigating to shipping-address at signup
       }
       
       // Regular profile completion check
@@ -163,46 +163,19 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
     if (!user) return;
     
     try {
-      console.log('📦 Checking address collection for user:', user.id);
-      const { data: signup } = await supabase
-        .from('quiet_start_signups')
-        .select('*')
-        .eq('user_id', user.id)
-        .maybeSingle();
-        
-      console.log('📄 Signup record:', signup);
-        
-      if (signup?.shipping_address_line1) {
-        // Address collected, show welcome
-        console.log('✅ Address already collected - completing signup');
-        setCurrentStep('complete');
-        setShowWelcome(true);
-      } else {
-        // Check if wellness kits are still available (first 500 only)
-        console.log('🎁 Checking kit availability...');
-        const { data: kitNumber } = await supabase.rpc('get_next_kit_number');
-        console.log('🔢 Next kit number:', kitNumber);
-        
-        if (kitNumber === null) {
-          // All 500 kits have been claimed - skip address collection
-          console.log('🚫 All kits claimed - skipping address collection');
-          toast({
-            title: "Welcome to AI Complete Me! 🎉",
-            description: "You're all set up! While the first 500 wellness kits have been claimed, you still get 3 months of premium features.",
-          });
-          setCurrentStep('complete');
-          setShowWelcome(true);
-        } else {
-          // Kits still available - collect address
-          console.log('📋 Kit available - showing address collection');
-          setCurrentStep('shipping-address');
-        }
-      }
+      console.log('📦 Skipping address collection at signup for user:', user.id);
+      // New behavior: Do NOT collect shipping address during signup.
+      // We complete signup now and will collect address only after eligibility (≈3 months).
+      toast({
+        title: "You're all set!",
+        description: "We'll collect your shipping address when you're eligible (about 3 months).",
+      });
+      setCurrentStep('complete');
+      setShowWelcome(true);
     } catch (error) {
-      console.error('Error checking address:', error);
-      // Default to showing address collection on error
-      console.log('❌ Error occurred - defaulting to address collection');
-      setCurrentStep('shipping-address');
+      console.error('Error in address step handling:', error);
+      setCurrentStep('complete');
+      setShowWelcome(true);
     }
   };
 
@@ -808,7 +781,7 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
                   After Profile Setup
                 </h4>
                 <p className="text-xs text-amber-700">
-                  Once your profile is complete, we'll collect your shipping address for the wellness kit delivery.
+                  Once your profile is complete, you're in! We'll invite you to provide a shipping address when you're eligible (about 3 months).
                 </p>
               </div>
               
