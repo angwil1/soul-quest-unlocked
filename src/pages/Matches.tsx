@@ -46,36 +46,38 @@ const Matches = () => {
       
       {/* Header with Back Button and Actions */}
       <header className="bg-card border-b" role="banner">
-        <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
-          <Button 
-            variant="ghost" 
-            onClick={() => navigate('/')}
-            className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
-            aria-label="Go back to homepage"
-          >
-            <ArrowLeft className="h-4 w-4 mr-2" aria-hidden="true" />
-            Back to Home
-          </Button>
-          
-          <div className="flex items-center gap-3">
+        <div className="max-w-4xl mx-auto px-4 py-4">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
             <Button 
-              variant="outline" 
-              size="sm"
-              onClick={() => navigate('/browse')}
-              className="flex items-center gap-2 focus:ring-2 focus:ring-primary focus:ring-offset-2"
-              aria-label="Browse sample profiles to see examples"
+              variant="ghost" 
+              onClick={() => navigate('/')}
+              className="focus:ring-2 focus:ring-primary focus:ring-offset-2 self-start"
+              aria-label="Go back to homepage"
             >
-              <Users className="h-4 w-4" aria-hidden="true" />
-              Browse Profiles
+              <ArrowLeft className="h-4 w-4 mr-2" aria-hidden="true" />
+              Back to Home
             </Button>
-            <Button 
-              onClick={() => navigate('/profile/edit')}
-              className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
-              aria-label="Open profile settings to edit your information"
-            >
-              <Settings className="h-4 w-4 mr-2" aria-hidden="true" />
-              Profile Settings
-            </Button>
+            
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3 w-full sm:w-auto">
+              <Button 
+                variant="outline" 
+                size="sm"
+                onClick={() => navigate('/browse')}
+                className="flex items-center gap-2 focus:ring-2 focus:ring-primary focus:ring-offset-2 w-full sm:w-auto justify-center"
+                aria-label="Browse sample profiles to see examples"
+              >
+                <Users className="h-4 w-4" aria-hidden="true" />
+                Browse Profiles
+              </Button>
+              <Button 
+                onClick={() => navigate('/profile/edit')}
+                className="focus:ring-2 focus:ring-primary focus:ring-offset-2 w-full sm:w-auto justify-center"
+                aria-label="Open profile settings to edit your information"
+              >
+                <Settings className="h-4 w-4 mr-2" aria-hidden="true" />
+                Profile Settings
+              </Button>
+            </div>
           </div>
         </div>
       </header>
