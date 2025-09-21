@@ -222,15 +222,15 @@ const ProfileEdit = () => {
                   </AvatarFallback>
                 </Avatar>
                 
-                <div className="flex gap-2">
-                  <Button variant="outline" size="sm" type="button" onClick={() => {
+                <div className="flex flex-col sm:flex-row gap-2 w-full">
+                  <Button variant="outline" size="sm" type="button" className="flex-1 sm:flex-none" onClick={() => {
                     console.log('📤 Upload button clicked!');
                     document.getElementById('avatar-upload')?.click();
                   }}>
                     <Upload className="h-4 w-4 mr-2" />
                     Upload Photo
                   </Button>
-                  <Button variant="outline" size="sm" asChild>
+                  <Button variant="outline" size="sm" asChild className="flex-1 sm:flex-none">
                     <label htmlFor="avatar-upload" className="cursor-pointer">
                       <Camera className="h-4 w-4 mr-2" />
                       Take Picture
@@ -240,6 +240,7 @@ const ProfileEdit = () => {
                     variant="default" 
                     size="sm" 
                     type="button"
+                    className="flex-1 sm:flex-none"
                     onClick={() => {
                       console.log('📱 Simple camera button clicked!');
                       const input = document.createElement('input');
