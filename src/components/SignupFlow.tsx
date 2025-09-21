@@ -118,22 +118,39 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
     if (!user) return;
     
     try {
+      console.log('🔍 Checking profile completion for user:', user.id);
       const { data: profile } = await supabase
         .from('profiles')
         .select('*')
         .eq('id', user.id)
         .maybeSingle();
         
+      console.log('📋 Profile data:', profile);
+        
       if (profile && profile.name) {
-        // Check if full profile is complete (bio, interests, photos)
-        if (profile.bio && profile.interests?.length >= 3 && profile.photos?.length >= 1) {
+        // Check if full profile is complete (bio, interests, personality_type indicates photos step completed)
+        const hasFullProfile = profile.bio && 
+                              profile.interests?.length >= 3 && 
+                              profile.personality_type; // This indicates photos step was completed
+        
+        console.log('✅ Profile completion status:', {
+          hasBio: !!profile.bio,
+          hasInterests: profile.interests?.length >= 3,
+          hasPersonalityType: !!profile.personality_type,
+          fullProfileComplete: hasFullProfile
+        });
+        
+        if (hasFullProfile) {
           // Full profile is complete, check if address is collected
+          console.log('🎯 Full profile complete - checking address collection');
           checkAddressCollection();
         } else {
           // Need to complete full profile
+          console.log('📝 Profile incomplete - directing to complete-profile step');
           setCurrentStep('complete-profile');
         }
       } else {
+        console.log('👤 No profile found - directing to profile-setup');
         setCurrentStep('profile-setup');
       }
     } catch (error) {
@@ -146,22 +163,29 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
     if (!user) return;
     
     try {
+      console.log('📦 Checking address collection for user:', user.id);
       const { data: signup } = await supabase
         .from('quiet_start_signups')
         .select('*')
         .eq('user_id', user.id)
         .maybeSingle();
         
+      console.log('📄 Signup record:', signup);
+        
       if (signup?.shipping_address_line1) {
         // Address collected, show welcome
+        console.log('✅ Address already collected - completing signup');
         setCurrentStep('complete');
         setShowWelcome(true);
       } else {
         // Check if wellness kits are still available (first 500 only)
+        console.log('🎁 Checking kit availability...');
         const { data: kitNumber } = await supabase.rpc('get_next_kit_number');
+        console.log('🔢 Next kit number:', kitNumber);
         
         if (kitNumber === null) {
           // All 500 kits have been claimed - skip address collection
+          console.log('🚫 All kits claimed - skipping address collection');
           toast({
             title: "Welcome to AI Complete Me! 🎉",
             description: "You're all set up! While the first 500 wellness kits have been claimed, you still get 3 months of premium features.",
@@ -170,12 +194,14 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
           setShowWelcome(true);
         } else {
           // Kits still available - collect address
+          console.log('📋 Kit available - showing address collection');
           setCurrentStep('shipping-address');
         }
       }
     } catch (error) {
       console.error('Error checking address:', error);
       // Default to showing address collection on error
+      console.log('❌ Error occurred - defaulting to address collection');
       setCurrentStep('shipping-address');
     }
   };
