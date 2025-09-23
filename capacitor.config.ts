@@ -31,11 +31,6 @@ const config: CapacitorConfig = {
   android: {
     backgroundColor: '#8B5CF6',
     themeColor: '#8B5CF6',
-    buildOptions: {
-      keystorePath: './myapp.jks',
-      keystoreAlias: 'aicompleteme',
-      releaseType: 'AAB'
-    },
     versionCode: 2,
     versionName: "2.0.0"
   }
