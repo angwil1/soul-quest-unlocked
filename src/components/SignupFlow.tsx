@@ -13,7 +13,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
-export type SignupStep = 'details' | 'email-confirmation' | 'profile-setup' | 'complete-profile' | 'shipping-address' | 'complete';
+export type SignupStep = 'details' | 'email-confirmation' | 'complete-profile' | 'shipping-address' | 'complete';
 
 interface SignupFlowProps {
   onComplete: () => void;
@@ -150,12 +150,12 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
           setCurrentStep('complete-profile');
         }
       } else {
-        console.log('👤 No profile found - directing to profile-setup');
-        setCurrentStep('profile-setup');
+        console.log('👤 No profile found - directing to complete profile setup');
+        navigate('/profile/setup?from=signup');
       }
     } catch (error) {
       console.error('Error checking profile:', error);
-      setCurrentStep('profile-setup');
+      navigate('/profile/setup?from=signup');
     }
   };
 
@@ -183,7 +183,7 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
     switch (currentStep) {
       case 'details': return 15;
       case 'email-confirmation': return 30;
-      case 'profile-setup': return 45;
+      case 'complete-profile': return 45;
       case 'complete-profile': return 65;
       case 'shipping-address': return 85;
       case 'complete': return 100;
@@ -249,55 +249,7 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
 
   // Age verification now handled directly in signup form
 
-  const handleProfileSetup = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!user) return;
-    
-    setIsLoading(true);
-    
-    const formData = new FormData(e.target as HTMLFormElement);
-    const name = formData.get('name') as string;
-    const occupation = formData.get('occupation') as string;
-    const education = formData.get('education') as string;
-    
-    try {
-      // Update profile with basic info
-      const { error: profileError } = await supabase
-        .from('profiles')
-        .upsert({
-          id: user.id,
-          name: name,
-          occupation: occupation,
-          education: education,
-          avatar_url: null
-        });
-        
-      if (profileError) throw profileError;
-      
-      // Update signup progress
-      await supabase
-        .from('quiet_start_signups')
-        .update({ signup_step: 'basic_profile_completed' })
-        .eq('user_id', user.id);
-      
-      toast({
-        title: "Basic profile saved!",
-        description: "Now let's complete your full profile to find better matches.",
-      });
-      
-      setCurrentStep('complete-profile');
-      
-    } catch (error) {
-      console.error('Profile setup error:', error);
-      toast({
-        title: "Error",
-        description: "Failed to save profile. Please try again.",
-        variant: "destructive"
-      });
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  // Removed intermediate profile setup - going directly to full profile setup
   const handleWelcomeComplete = () => {
     setShowWelcome(false);
     onComplete();
@@ -646,106 +598,7 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
         </Card>
       )}
 
-      {currentStep === 'profile-setup' && (
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <CheckCircle className="h-5 w-5 text-green-600" />
-              Complete Your Profile
-            </CardTitle>
-            <CardDescription>
-              Final step to claim your Quiet Start benefits
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleProfileSetup} className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="name">Your Name</Label>
-                <Input
-                  id="name"
-                  name="name"
-                  type="text"
-                  placeholder="How should we address you?"
-                  required
-                />
-              </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="occupation">Occupation</Label>
-                <Select name="occupation" required>
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Select your occupation" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-popover border border-border shadow-lg max-h-[200px]">
-                    <SelectItem value="Business & Finance">Business & Finance</SelectItem>
-                    <SelectItem value="Technology">Technology</SelectItem>
-                    <SelectItem value="Healthcare">Healthcare</SelectItem>
-                    <SelectItem value="Education">Education</SelectItem>
-                    <SelectItem value="Creative Arts">Creative Arts</SelectItem>
-                    <SelectItem value="Engineering">Engineering</SelectItem>
-                    <SelectItem value="Legal">Legal</SelectItem>
-                    <SelectItem value="Marketing & Sales">Marketing & Sales</SelectItem>
-                    <SelectItem value="Science & Research">Science & Research</SelectItem>
-                    <SelectItem value="Government">Government</SelectItem>
-                    <SelectItem value="Nonprofit">Nonprofit</SelectItem>
-                    <SelectItem value="Hospitality & Tourism">Hospitality & Tourism</SelectItem>
-                    <SelectItem value="Retail">Retail</SelectItem>
-                    <SelectItem value="Construction">Construction</SelectItem>
-                    <SelectItem value="Transportation">Transportation</SelectItem>
-                    <SelectItem value="Media & Communications">Media & Communications</SelectItem>
-                    <SelectItem value="Real Estate">Real Estate</SelectItem>
-                    <SelectItem value="Consulting">Consulting</SelectItem>
-                    <SelectItem value="Agriculture">Agriculture</SelectItem>
-                    <SelectItem value="Self-Employed">Self-Employed</SelectItem>
-                    <SelectItem value="Student">Student</SelectItem>
-                    <SelectItem value="Retired">Retired</SelectItem>
-                    <SelectItem value="Other">Other</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="education">Education Level</Label>
-                <Select name="education" required>
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Select your education level" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-popover border border-border shadow-lg max-h-[200px]">
-                    <SelectItem value="High School">High School</SelectItem>
-                    <SelectItem value="Some College">Some College</SelectItem>
-                    <SelectItem value="Associate Degree">Associate Degree</SelectItem>
-                    <SelectItem value="Bachelor's Degree">Bachelor's Degree</SelectItem>
-                    <SelectItem value="Master's Degree">Master's Degree</SelectItem>
-                    <SelectItem value="PhD/Doctorate">PhD/Doctorate</SelectItem>
-                    <SelectItem value="Professional Degree">Professional Degree</SelectItem>
-                    <SelectItem value="Trade School">Trade School</SelectItem>
-                    <SelectItem value="Certification Program">Certification Program</SelectItem>
-                    <SelectItem value="Other">Other</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              
-              <div className="bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 rounded-lg p-4">
-                <h4 className="text-sm font-semibold text-blue-800 mb-2 flex items-center gap-2">
-                  <Heart className="h-4 w-4" />
-                  Next: Complete Your Profile
-                </h4>
-                <p className="text-xs text-blue-700">
-                  After saving your basic info, we'll help you create a full profile to find better matches.
-                </p>
-              </div>
-              
-              <Button 
-                type="submit" 
-                className="w-full h-12 text-lg font-semibold bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700" 
-                disabled={isLoading}
-              >
-                {isLoading ? 'Saving basic info...' : 'Continue to Profile Setup'}
-              </Button>
-            </form>
-          </CardContent>
-        </Card>
-      )}
+      {/* Removed intermediate profile-setup step - going directly to complete profile setup */}
 
       {currentStep === 'complete-profile' && (
         <Card>
@@ -786,7 +639,7 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
               </div>
               
               <Button 
-                onClick={() => navigate('/profile-setup?from=signup')} 
+                onClick={() => navigate('/profile/setup?from=signup')} 
                 className="w-full h-12 text-lg font-semibold bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
               >
                 Complete My Profile
