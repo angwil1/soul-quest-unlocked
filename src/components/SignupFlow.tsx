@@ -269,7 +269,7 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
           name: name,
           occupation: occupation,
           education: education,
-          Avatar_url: null
+          avatar_url: null
         });
         
       if (profileError) throw profileError;
