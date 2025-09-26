@@ -46,14 +46,13 @@ const ProfileEdit = () => {
   // Check if user needs age verification
   useEffect(() => {
     const checkAgeVerification = () => {
-      const ageVerified = localStorage.getItem('ageVerified');
-      const hasDateOfBirth = profile?.date_of_birth; // Check if already has DOB
+      const ageVerified = localStorage.getItem('ageVerified') === 'true';
+      const hasDateOfBirth = !!profile?.date_of_birth; // Check if already has DOB
       const isNewUser = !profile?.name; // Assume new user if no name set
       
-      // Show age verification for new users who haven't verified yet AND don't have DOB
-      if (isNewUser && ageVerified !== 'true' && !hasDateOfBirth) {
-        setShowAgeVerification(true);
-      }
+      // Toggle visibility based on current state
+      const shouldShow = isNewUser && !ageVerified && !hasDateOfBirth;
+      setShowAgeVerification(shouldShow);
     };
 
     if (user && !profileLoading) {
