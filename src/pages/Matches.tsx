@@ -14,6 +14,7 @@ const Matches = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const [likedProfiles, setLikedProfiles] = useState<Set<string>>(new Set());
+  const [visibleMatches, setVisibleMatches] = useState(6);
 
   // Check if user is authenticated and redirect if not
   useEffect(() => {
@@ -29,6 +30,10 @@ const Matches = () => {
 
   const handleLike = (profileId: string) => {
     setLikedProfiles(prev => new Set([...prev, profileId]));
+  };
+
+  const handleDiscoverMore = () => {
+    setVisibleMatches(prev => Math.min(prev + 6, founderCuratedProfiles.length));
   };
 
   const calculateMatchScore = () => Math.floor(Math.random() * 20) + 80; // 80-99% match
@@ -106,7 +111,7 @@ const Matches = () => {
         >
           <h2 id="matches-grid-title" className="sr-only">Available Matches</h2>
           
-          {founderCuratedProfiles.slice(0, 6).map((profile) => {
+          {founderCuratedProfiles.slice(0, visibleMatches).map((profile) => {
             const matchScore = calculateMatchScore();
             const isLiked = likedProfiles.has(profile.id);
             
@@ -229,16 +234,19 @@ const Matches = () => {
         </section>
 
         {/* Load More */}
-        <section className="text-center mt-8" role="region" aria-labelledby="load-more-section">
-          <h2 id="load-more-section" className="sr-only">Load More Matches</h2>
-          <Button 
-            variant="outline"
-            className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
-            aria-label="Discover more compatible matches"
-          >
-            Discover More Matches
-          </Button>
-        </section>
+        {visibleMatches < founderCuratedProfiles.length && (
+          <section className="text-center mt-8" role="region" aria-labelledby="load-more-section">
+            <h2 id="load-more-section" className="sr-only">Load More Matches</h2>
+            <Button 
+              variant="outline"
+              onClick={handleDiscoverMore}
+              className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              aria-label="Discover more compatible matches"
+            >
+              Discover More Matches ({founderCuratedProfiles.length - visibleMatches} remaining)
+            </Button>
+          </section>
+        )}
 
         {/* Accessibility Information */}
         <section className="mt-16 p-6 bg-muted/50 rounded-lg" aria-labelledby="accessibility-info">
