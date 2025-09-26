@@ -443,14 +443,32 @@ const BrowseProfiles = () => {
               These are potential matches in your area. Like profiles to connect and start meaningful conversations.
             </p>
           </div>
-          <Button 
-            onClick={() => navigate('/profile/edit')} 
-            size="lg"
-            className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
-            aria-label="Complete your profile to unlock more personalized matches"
-          >
-            Complete Your Profile
-          </Button>
+          {(() => {
+            const isProfileComplete = profile?.name && profile?.gender && profile?.looking_for;
+            if (isProfileComplete) {
+              return (
+                <Button 
+                  onClick={() => navigate('/matches')} 
+                  size="lg"
+                  className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                  aria-label="Find AI-powered matches tailored to your preferences"
+                >
+                  <Sparkles className="w-4 h-4 mr-2" />
+                  Find My AI Matches
+                </Button>
+              );
+            }
+            return (
+              <Button 
+                onClick={() => navigate('/profile/edit')} 
+                size="lg"
+                className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                aria-label="Complete your profile to unlock more personalized matches"
+              >
+                Complete Your Profile
+              </Button>
+            );
+          })()}
         </section>
 
         {/* Accessibility Information */}
