@@ -129,7 +129,7 @@ export const founderCuratedProfiles: SampleProfile[] = [
     occupation: "Therapist",
     emotionalSoundtrack: "",
     tiktokUrl: "",
-    photos: ["/src/assets/phoenix-profile-1.jpg"],
+    photos: ["/src/assets/phoenix-realistic-profile.jpg"],
     interests: ["Psychology", "Reading", "Hiking"],
     conversationStarters: [],
     poeticMicrocopy: "",
