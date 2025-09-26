@@ -1409,14 +1409,19 @@ export type Database = {
           avatar_url: string | null
           bio: string | null
           communication_style: string | null
+          conflict_resolution: string | null
           created_at: string | null
           date_of_birth: string | null
+          deal_breakers: string[] | null
           distance_preference: number | null
           echo_badge_enabled: boolean | null
           echo_silence_mode: boolean | null
           echo_visibility_level: string | null
           education: string | null
+          emotional_expression: string | null
           emotional_soundtrack: string | null
+          family_plans: string | null
+          future_goals: string | null
           gender: string | null
           height: number | null
           id: string
@@ -1424,8 +1429,11 @@ export type Database = {
           is_premium: boolean | null
           is_profile_complete: boolean | null
           last_online: string | null
+          lifestyle_pace: string | null
+          lifestyle_preferences: string | null
           location: string | null
           looking_for: string | null
+          love_language: string | null
           match_score: number | null
           name: string | null
           occupation: string | null
@@ -1433,9 +1441,11 @@ export type Database = {
           personality_type: string | null
           photos: string[] | null
           relationship_goals: string | null
+          social_energy: string | null
           tiktok_embed_url: string | null
           unlocked_beyond_badge_enabled: boolean | null
           updated_at: string | null
+          values: string[] | null
           vibe_gallery: Json | null
           zip_code: string | null
         }
@@ -1448,14 +1458,19 @@ export type Database = {
           avatar_url?: string | null
           bio?: string | null
           communication_style?: string | null
+          conflict_resolution?: string | null
           created_at?: string | null
           date_of_birth?: string | null
+          deal_breakers?: string[] | null
           distance_preference?: number | null
           echo_badge_enabled?: boolean | null
           echo_silence_mode?: boolean | null
           echo_visibility_level?: string | null
           education?: string | null
+          emotional_expression?: string | null
           emotional_soundtrack?: string | null
+          family_plans?: string | null
+          future_goals?: string | null
           gender?: string | null
           height?: number | null
           id?: string
@@ -1463,8 +1478,11 @@ export type Database = {
           is_premium?: boolean | null
           is_profile_complete?: boolean | null
           last_online?: string | null
+          lifestyle_pace?: string | null
+          lifestyle_preferences?: string | null
           location?: string | null
           looking_for?: string | null
+          love_language?: string | null
           match_score?: number | null
           name?: string | null
           occupation?: string | null
@@ -1472,9 +1490,11 @@ export type Database = {
           personality_type?: string | null
           photos?: string[] | null
           relationship_goals?: string | null
+          social_energy?: string | null
           tiktok_embed_url?: string | null
           unlocked_beyond_badge_enabled?: boolean | null
           updated_at?: string | null
+          values?: string[] | null
           vibe_gallery?: Json | null
           zip_code?: string | null
         }
@@ -1487,14 +1507,19 @@ export type Database = {
           avatar_url?: string | null
           bio?: string | null
           communication_style?: string | null
+          conflict_resolution?: string | null
           created_at?: string | null
           date_of_birth?: string | null
+          deal_breakers?: string[] | null
           distance_preference?: number | null
           echo_badge_enabled?: boolean | null
           echo_silence_mode?: boolean | null
           echo_visibility_level?: string | null
           education?: string | null
+          emotional_expression?: string | null
           emotional_soundtrack?: string | null
+          family_plans?: string | null
+          future_goals?: string | null
           gender?: string | null
           height?: number | null
           id?: string
@@ -1502,8 +1527,11 @@ export type Database = {
           is_premium?: boolean | null
           is_profile_complete?: boolean | null
           last_online?: string | null
+          lifestyle_pace?: string | null
+          lifestyle_preferences?: string | null
           location?: string | null
           looking_for?: string | null
+          love_language?: string | null
           match_score?: number | null
           name?: string | null
           occupation?: string | null
@@ -1511,9 +1539,11 @@ export type Database = {
           personality_type?: string | null
           photos?: string[] | null
           relationship_goals?: string | null
+          social_energy?: string | null
           tiktok_embed_url?: string | null
           unlocked_beyond_badge_enabled?: boolean | null
           updated_at?: string | null
+          values?: string[] | null
           vibe_gallery?: Json | null
           zip_code?: string | null
         }
