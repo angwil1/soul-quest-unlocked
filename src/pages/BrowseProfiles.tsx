@@ -206,33 +206,34 @@ const BrowseProfiles = () => {
                     </SelectContent>
                   </Select>
                 </div>
-                <div className="flex items-center gap-3">
-                  <span className="text-sm text-muted-foreground">Within:</span>
+                <div className="flex items-center gap-3 border rounded-md px-3 py-1 bg-muted/30">
                   <div className="flex items-center gap-2">
+                    <label htmlFor="zip-code" className="text-sm text-muted-foreground">Zip:</label>
+                    <Input
+                      id="zip-code"
+                      type="text"
+                      value={zipCode}
+                      onChange={(e) => handleZipCodeChange(e.target.value)}
+                      placeholder="12345"
+                      className="w-20 h-7 text-xs"
+                      maxLength={5}
+                    />
+                  </div>
+                  <div className="h-4 w-px bg-border"></div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm text-muted-foreground">Within:</span>
                     <Slider
                       value={[distancePreference]}
                       onValueChange={handleDistanceChange}
                       max={100}
                       min={5}
                       step={5}
-                      className="w-20"
+                      className="w-16"
                     />
-                    <Badge variant="secondary" className="text-xs min-w-[60px] text-center">
-                      {distancePreference} miles
-                    </Badge>
+                    <span className="text-xs text-muted-foreground min-w-[50px]">
+                      {distancePreference}mi
+                    </span>
                   </div>
-                </div>
-                <div className="flex items-center gap-2">
-                  <label htmlFor="zip-code" className="text-sm text-muted-foreground">Zip Code:</label>
-                  <Input
-                    id="zip-code"
-                    type="text"
-                    value={zipCode}
-                    onChange={(e) => handleZipCodeChange(e.target.value)}
-                    placeholder="Enter zip code"
-                    className="w-28 h-8 text-xs"
-                    maxLength={5}
-                  />
                 </div>
               </div>
               <div className="text-xs text-muted-foreground ml-auto flex flex-col items-end">
