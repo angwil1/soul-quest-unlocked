@@ -585,24 +585,35 @@ const Messages = () => {
                     Select a match to start messaging
                   </div>
                   
-                  {/* Message Input - Always Show */}
-                  <div className="flex gap-2" role="group" aria-label="Message input (disabled)">
-                    <Input
-                      value={newMessage}
-                      onChange={(e) => setNewMessage(e.target.value)}
-                      placeholder="Select a match first to send a message..."
-                      disabled={true}
-                      className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
-                      aria-label="Message input - select a match first"
-                    />
-                    <Button 
-                      disabled={true}
-                      className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
-                      aria-label="Send message (disabled - select a match first)"
-                    >
-                      <Send className="h-4 w-4" aria-hidden="true" />
-                    </Button>
-                  </div>
+                   {/* Message Input - Always Show */}
+                   <div className="flex gap-2" role="group" aria-label="Message input (disabled)">
+                     <Input
+                       value={newMessage}
+                       onChange={(e) => setNewMessage(e.target.value)}
+                       placeholder="Select a match first to send a message..."
+                       disabled={true}
+                       className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                       aria-label="Message input - select a match first"
+                     />
+                     <Button 
+                       onClick={generateAIEmojis}
+                       disabled={true}
+                       variant="outline"
+                       size="icon"
+                       className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                       aria-label="Generate AI emoji (disabled - select a match first)"
+                       title="Add AI-generated emoji (select a match first)"
+                     >
+                       <Sparkles className="h-4 w-4" aria-hidden="true" />
+                     </Button>
+                     <Button 
+                       disabled={true}
+                       className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                       aria-label="Send message (disabled - select a match first)"
+                     >
+                       <Send className="h-4 w-4" aria-hidden="true" />
+                     </Button>
+                   </div>
                 </>
               )}
             </CardContent>
