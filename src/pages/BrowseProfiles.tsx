@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { ArrowLeft, Heart, MapPin, Briefcase, Sparkles, Eye, Bookmark, Zap } from 'lucide-react';
+import { ArrowLeft, Heart, MapPin, Briefcase, Sparkles, Eye, Bookmark, Zap, ArrowUp } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { founderCuratedProfiles } from '@/data/sampleProfiles';
 import { SaveToVaultButton } from '@/components/SaveToVaultButton';
@@ -29,6 +29,13 @@ const BrowseProfiles = () => {
 
   const handleBrowseMore = () => {
     setVisibleProfiles(prev => Math.min(prev + 6, founderCuratedProfiles.length));
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   };
 
   const calculateMatchScore = () => Math.floor(Math.random() * 20) + 80; // 80-99% match
@@ -282,6 +289,21 @@ const BrowseProfiles = () => {
             </Button>
           </section>
         )}
+
+        {/* Scroll to Top Button */}
+        <section className="text-center mt-12" role="region" aria-labelledby="scroll-top-section">
+          <h3 id="scroll-top-section" className="sr-only">Navigation Helper</h3>
+          <Button 
+            variant="outline"
+            size="lg"
+            onClick={scrollToTop}
+            className="focus:ring-2 focus:ring-primary focus:ring-offset-2 hover-scale"
+            aria-label="Scroll back to top of profiles"
+          >
+            <ArrowUp className="h-4 w-4 mr-2" aria-hidden="true" />
+            Back to Top
+          </Button>
+        </section>
 
         {/* Additional Info */}
         <section className="text-center mt-12 space-y-4" aria-labelledby="info-section">
