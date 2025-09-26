@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Input } from '@/components/ui/input';
 import { ArrowLeft, Heart, MapPin, Briefcase, Sparkles, Eye, Bookmark, Zap, ArrowUp, Filter } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { founderCuratedProfiles, browseProfiles, SampleProfile } from '@/data/sampleProfiles';
@@ -14,14 +15,27 @@ import { useProfile } from '@/hooks/useProfile';
 const BrowseProfiles = () => {
   const navigate = useNavigate();
   const { user, loading } = useAuth();
-  const { profile } = useProfile();
+  const { profile, updateProfile } = useProfile();
   const [likedProfiles, setLikedProfiles] = useState<Set<string>>(new Set());
   const [visibleProfiles, setVisibleProfiles] = useState(6);
   
   // Filter states - initialize from user profile when available
   const [myGender, setMyGender] = useState<'men' | 'women' | 'non-binary'>('women');
   const [lookingFor, setLookingFor] = useState<'men' | 'women' | 'non-binary' | 'casual-friends' | 'anyone'>('men');
+  const [zipCode, setZipCode] = useState<string>('');
   const [filteredProfiles, setFilteredProfiles] = useState<SampleProfile[]>(browseProfiles);
+
+  // Handle zip code update with debouncing
+  const handleZipCodeChange = (value: string) => {
+    setZipCode(value);
+    
+    // Auto-save zip code to profile after user stops typing (debounced)
+    if (profile && value.length === 5 && /^\d{5}$/.test(value)) {
+      setTimeout(() => {
+        updateProfile({ zip_code: value });
+      }, 1000);
+    }
+  };
 
   // Initialize filters from user profile
   useEffect(() => {
@@ -37,6 +51,9 @@ const BrowseProfiles = () => {
       else if (profile.looking_for === 'non-binary') setLookingFor('non-binary');
       else if (profile.looking_for === 'casual-friends') setLookingFor('casual-friends');
       else if (profile.looking_for === 'anyone') setLookingFor('anyone');
+      
+      // Set zip code from profile
+      if (profile.zip_code) setZipCode(profile.zip_code);
     }
   }, [profile]);
 
@@ -191,6 +208,18 @@ const BrowseProfiles = () => {
                     </Badge>
                   </div>
                 )}
+                <div className="flex items-center gap-2">
+                  <label htmlFor="zip-code" className="text-sm text-muted-foreground">Zip Code:</label>
+                  <Input
+                    id="zip-code"
+                    type="text"
+                    value={zipCode}
+                    onChange={(e) => handleZipCodeChange(e.target.value)}
+                    placeholder="Enter zip code"
+                    className="w-28 h-8 text-xs"
+                    maxLength={5}
+                  />
+                </div>
               </div>
               <div className="text-xs text-muted-foreground ml-auto flex flex-col items-end">
                 <div>Showing {Math.min(visibleProfiles, filteredProfiles.length)} of {filteredProfiles.length} profiles</div>
