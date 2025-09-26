@@ -206,33 +206,36 @@ const BrowseProfiles = () => {
                     </SelectContent>
                   </Select>
                 </div>
-                <div className="flex items-center gap-3 border rounded-md px-3 py-1 bg-muted/30">
-                  <div className="flex items-center gap-2">
-                    <label htmlFor="zip-code" className="text-sm text-muted-foreground">Zip:</label>
-                    <Input
-                      id="zip-code"
-                      type="text"
-                      value={zipCode}
-                      onChange={(e) => handleZipCodeChange(e.target.value)}
-                      placeholder="12345"
-                      className="w-20 h-7 text-xs"
-                      maxLength={5}
-                    />
-                  </div>
-                  <div className="h-4 w-px bg-border"></div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-sm text-muted-foreground">Within:</span>
-                    <Slider
-                      value={[distancePreference]}
-                      onValueChange={handleDistanceChange}
-                      max={100}
-                      min={5}
-                      step={5}
-                      className="w-16"
-                    />
-                    <span className="text-xs text-muted-foreground min-w-[50px]">
-                      {distancePreference}mi
-                    </span>
+                <div className="flex flex-col gap-1">
+                  <span className="text-xs text-muted-foreground">Adjust zip code and distance as needed:</span>
+                  <div className="flex items-center gap-3 border rounded-md px-3 py-1 bg-muted/30">
+                    <div className="flex items-center gap-2">
+                      <label htmlFor="zip-code" className="text-sm text-muted-foreground">Zip:</label>
+                      <Input
+                        id="zip-code"
+                        type="text"
+                        value={zipCode}
+                        onChange={(e) => handleZipCodeChange(e.target.value)}
+                        placeholder="12345"
+                        className="w-20 h-7 text-xs"
+                        maxLength={5}
+                      />
+                    </div>
+                    <div className="h-4 w-px bg-border"></div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm text-muted-foreground">Within:</span>
+                      <Slider
+                        value={[distancePreference]}
+                        onValueChange={handleDistanceChange}
+                        max={100}
+                        min={5}
+                        step={5}
+                        className="w-16"
+                      />
+                      <span className="text-xs text-muted-foreground min-w-[50px]">
+                        {distancePreference}mi
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
