@@ -96,89 +96,89 @@ const Profile = () => {
       {/* Header */}
       <header className="bg-card border-b" role="banner">
         <div className="max-w-4xl mx-auto px-4 py-4">
-          {/* Mobile Layout */}
-          <div className="flex md:hidden items-center justify-between mb-3">
+          {/* Mobile Layout - Single Row */}
+          <div className="flex md:hidden items-center justify-between">
             <Button 
               variant="ghost" 
+              size="sm"
               onClick={() => navigate('/')}
-              className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              className="focus:ring-2 focus:ring-primary focus:ring-offset-2 shrink-0"
               aria-label="Go back to homepage"
             >
-              <ArrowLeft className="h-4 w-4 mr-2" aria-hidden="true" />
-              Back
+              <ArrowLeft className="h-4 w-4 mr-1" aria-hidden="true" />
+              <span className="hidden xs:inline">Back</span>
             </Button>
             
-            <Button 
-              onClick={() => navigate('/profile/edit')}
-              size="sm"
-              className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
-              aria-label="Edit your profile information"
-            >
-              <Edit className="h-4 w-4 mr-2" aria-hidden="true" />
-              Edit Profile
-            </Button>
-          </div>
-          
-          {/* Mobile Navigation Buttons */}
-          <div className="flex md:hidden items-center justify-center gap-2 mb-2">
-            <Button 
-              variant="outline" 
-              size="sm"
-              onClick={() => navigate('/matches')}
-              className="flex items-center gap-2 focus:ring-2 focus:ring-primary focus:ring-offset-2 flex-1"
-              aria-label="View your matches"
-            >
-              <Users className="h-4 w-4" aria-hidden="true" />
-              Matches
-            </Button>
-            
-            <Button 
-              variant="outline" 
-              size="sm"
-              onClick={() => navigate('/browse')}
-              className="flex items-center gap-2 focus:ring-2 focus:ring-primary focus:ring-offset-2 flex-1"
-              aria-label="Browse and discover people"
-            >
-              <Eye className="h-4 w-4" aria-hidden="true" />
-              Browse
-            </Button>
-            
-            <DropdownMenu open={isShareMenuOpen} onOpenChange={setIsShareMenuOpen}>
-              <DropdownMenuTrigger asChild>
-                <Button 
-                  variant="outline"
-                  size="sm" 
-                  className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
-                  aria-label="More profile options"
-                  aria-expanded={isShareMenuOpen}
-                >
-                  <MoreVertical className="h-4 w-4" aria-hidden="true" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-48">
-                <DropdownMenuItem 
-                  onClick={handleShareProfile}
-                  className="flex items-center gap-2 focus:bg-muted cursor-pointer"
-                >
-                  <Share2 className="h-4 w-4" aria-hidden="true" />
-                  Share Profile
-                </DropdownMenuItem>
-                <DropdownMenuItem 
-                  onClick={() => navigate('/privacy')}
-                  className="flex items-center gap-2 focus:bg-muted cursor-pointer"
-                >
-                  <Settings className="h-4 w-4" aria-hidden="true" />
-                  Privacy Settings
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem 
-                  onClick={() => navigate('/faq')}
-                  className="flex items-center gap-2 focus:bg-muted cursor-pointer"
-                >
-                  Help & FAQ
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <div className="flex items-center gap-1">
+              <Button 
+                variant="outline" 
+                size="sm"
+                onClick={() => navigate('/matches')}
+                className="focus:ring-2 focus:ring-primary focus:ring-offset-2 px-2"
+                aria-label="View your matches"
+              >
+                <Users className="h-4 w-4 xs:mr-1" aria-hidden="true" />
+                <span className="hidden xs:inline">Matches</span>
+              </Button>
+              
+              <Button 
+                variant="outline" 
+                size="sm"
+                onClick={() => navigate('/browse')}
+                className="focus:ring-2 focus:ring-primary focus:ring-offset-2 px-2"
+                aria-label="Browse and discover people"
+              >
+                <Eye className="h-4 w-4 xs:mr-1" aria-hidden="true" />
+                <span className="hidden xs:inline">Browse</span>
+              </Button>
+              
+              <Button 
+                onClick={() => navigate('/profile/edit')}
+                size="sm"
+                className="focus:ring-2 focus:ring-primary focus:ring-offset-2 px-2"
+                aria-label="Edit your profile information"
+              >
+                <Edit className="h-4 w-4 xs:mr-1" aria-hidden="true" />
+                <span className="hidden xs:inline">Edit</span>
+              </Button>
+              
+              <DropdownMenu open={isShareMenuOpen} onOpenChange={setIsShareMenuOpen}>
+                <DropdownMenuTrigger asChild>
+                  <Button 
+                    variant="outline"
+                    size="sm" 
+                    className="focus:ring-2 focus:ring-primary focus:ring-offset-2 px-2"
+                    aria-label="More profile options"
+                    aria-expanded={isShareMenuOpen}
+                  >
+                    <MoreVertical className="h-4 w-4" aria-hidden="true" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-48">
+                  <DropdownMenuItem 
+                    onClick={handleShareProfile}
+                    className="flex items-center gap-2 focus:bg-muted cursor-pointer"
+                  >
+                    <Share2 className="h-4 w-4" aria-hidden="true" />
+                    Share Profile
+                  </DropdownMenuItem>
+                  <DropdownMenuItem 
+                    onClick={() => navigate('/privacy')}
+                    className="flex items-center gap-2 focus:bg-muted cursor-pointer"
+                  >
+                    <Settings className="h-4 w-4" aria-hidden="true" />
+                    Privacy Settings
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem 
+                    onClick={() => navigate('/faq')}
+                    className="flex items-center gap-2 focus:bg-muted cursor-pointer"
+                  >
+                    Help & FAQ
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
           </div>
           
           {/* Desktop Layout */}
