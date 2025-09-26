@@ -396,15 +396,18 @@ const ProfileEdit = () => {
                   />
                 </div>
                 
-                <div>
-                  <Label htmlFor="date_of_birth">Date of Birth</Label>
-                  <Input
-                    id="date_of_birth"
-                    type="date"
-                    value={formData.date_of_birth || ''}
-                    onChange={(e) => handleInputChange('date_of_birth', e.target.value)}
-                  />
-                </div>
+                {/* Show DOB only if not already provided or verified */}
+                {!(profile?.date_of_birth || (typeof window !== 'undefined' && localStorage.getItem('ageVerified') === 'true')) && (
+                  <div>
+                    <Label htmlFor="date_of_birth">Date of Birth</Label>
+                    <Input
+                      id="date_of_birth"
+                      type="date"
+                      value={formData.date_of_birth || ''}
+                      onChange={(e) => handleInputChange('date_of_birth', e.target.value)}
+                    />
+                  </div>
+                )}
 
                 <div>
                   <Label htmlFor="gender">Gender</Label>
