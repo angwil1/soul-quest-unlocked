@@ -66,34 +66,34 @@ const SampleUserProfile = () => {
             <Card>
               <CardContent className="p-6">
                 <div className="space-y-4">
-                   {/* Main Photo - More reasonable size */}
-                  <div className="w-full max-w-xs mx-auto aspect-[4/5] rounded-lg overflow-hidden bg-muted">
+                   {/* Main Photo - Smaller, more realistic size */}
+                  <div className="w-48 h-64 mx-auto rounded-lg overflow-hidden bg-muted">
                     <Dialog>
                       <DialogTrigger asChild>
                         <div className="relative cursor-pointer group">
                           <img 
                             src={profile.photos[0]} 
                             alt={profile.name}
-                            className="w-full h-full object-cover object-center blur-sm hover:blur-none transition-all duration-500"
+                            className="w-full h-full object-cover object-center"
                             loading="eager"
                           />
-                          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
-                            <Eye className="h-8 w-8 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
+                          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                            <Eye className="h-6 w-6 text-white opacity-0 group-hover:opacity-80 transition-opacity" />
                           </div>
                         </div>
                       </DialogTrigger>
-                      <DialogContent className="max-w-[90vw] max-h-[90vh] w-full">
+                      <DialogContent className="max-w-[80vw] max-h-[80vh] w-full">
                         <img 
                           src={profile.photos[0]} 
                           alt={profile.name}
-                          className="w-full h-auto max-h-[80vh] object-contain rounded-lg blur-sm hover:blur-none transition-all duration-500"
+                          className="w-full h-auto max-h-[70vh] object-contain rounded-lg"
                         />
                       </DialogContent>
                     </Dialog>
                   </div>
                   
-                  {/* Additional Photos - Compact Grid */}
-                  <div className="grid grid-cols-3 gap-2 max-w-xs mx-auto">
+                  {/* Additional Photos - Smaller Grid */}
+                  <div className="grid grid-cols-3 gap-2 w-48 mx-auto">
                     {profile.photos.slice(1).map((photo, index) => (
                       <div key={index} className="aspect-square rounded-lg overflow-hidden bg-muted">
                         <Dialog>
@@ -102,19 +102,19 @@ const SampleUserProfile = () => {
                               <img 
                                 src={photo} 
                                 alt={`${profile.name} photo ${index + 2}`}
-                                className="w-full h-full object-cover object-center blur-sm hover:blur-none transition-all duration-500"
+                                className="w-full h-full object-cover object-center"
                                 loading="lazy"
                               />
-                              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
-                                <Eye className="h-4 w-4 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
+                              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                                <Eye className="h-3 w-3 text-white opacity-0 group-hover:opacity-80 transition-opacity" />
                               </div>
                             </div>
                           </DialogTrigger>
-                          <DialogContent className="max-w-[90vw] max-h-[90vh] w-full">
+                          <DialogContent className="max-w-[80vw] max-h-[80vh] w-full">
                             <img 
                               src={photo} 
                               alt={`${profile.name} photo ${index + 2}`}
-                              className="w-full h-auto max-h-[80vh] object-contain rounded-lg blur-sm hover:blur-none transition-all duration-500"
+                              className="w-full h-auto max-h-[70vh] object-contain rounded-lg"
                             />
                           </DialogContent>
                         </Dialog>
