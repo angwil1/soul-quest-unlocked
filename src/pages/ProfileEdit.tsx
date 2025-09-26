@@ -14,6 +14,24 @@ import { AgeVerification } from '@/components/AgeVerification';
 import { CameraCapture } from '@/components/CameraCapture';
 import { ArrowLeft, Upload, X, Camera, MapPin, Search } from 'lucide-react';
 
+// Helper functions for height conversion
+const heightToInches = (heightStr: string): number => {
+  const match = heightStr.match(/(\d+)'(\d+)"/);
+  if (match) {
+    const feet = parseInt(match[1]);
+    const inches = parseInt(match[2]);
+    return feet * 12 + inches;
+  }
+  return 0;
+};
+
+const inchesToHeight = (inches: number): string => {
+  if (!inches) return '';
+  const feet = Math.floor(inches / 12);
+  const remainingInches = inches % 12;
+  return `${feet}'${remainingInches}"`;
+};
+
 const ProfileEdit = () => {
   const { user, loading: authLoading } = useAuth();
   const { profile, loading: profileLoading, updateProfile, addPhoto, removePhoto, setAsAvatar } = useProfile();
@@ -75,7 +93,13 @@ const ProfileEdit = () => {
   }, [profile]);
 
   const handleInputChange = (field: keyof Profile, value: any) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    if (field === 'height' && typeof value === 'string' && value) {
+      // Convert height string to inches for storage
+      const inches = heightToInches(value);
+      setFormData(prev => ({ ...prev, [field]: inches }));
+    } else {
+      setFormData(prev => ({ ...prev, [field]: value }));
+    }
   };
 
   const handleAddInterest = () => {
@@ -393,6 +417,46 @@ const ProfileEdit = () => {
                       <SelectItem value="woman">Woman</SelectItem>
                       <SelectItem value="non-binary">Non-binary</SelectItem>
                       <SelectItem value="prefer-not-to-say">Prefer not to say</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div>
+                  <Label htmlFor="height">Height</Label>
+                  <Select value={formData.height ? inchesToHeight(formData.height as number) : ''} onValueChange={(value) => handleInputChange('height', value)}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select height" />
+                    </SelectTrigger>
+                    <SelectContent className="max-h-60 overflow-y-auto">
+                      <SelectItem value="4'8&quot;">4'8"</SelectItem>
+                      <SelectItem value="4'9&quot;">4'9"</SelectItem>
+                      <SelectItem value="4'10&quot;">4'10"</SelectItem>
+                      <SelectItem value="4'11&quot;">4'11"</SelectItem>
+                      <SelectItem value="5'0&quot;">5'0"</SelectItem>
+                      <SelectItem value="5'1&quot;">5'1"</SelectItem>
+                      <SelectItem value="5'2&quot;">5'2"</SelectItem>
+                      <SelectItem value="5'3&quot;">5'3"</SelectItem>
+                      <SelectItem value="5'4&quot;">5'4"</SelectItem>
+                      <SelectItem value="5'5&quot;">5'5"</SelectItem>
+                      <SelectItem value="5'6&quot;">5'6"</SelectItem>
+                      <SelectItem value="5'7&quot;">5'7"</SelectItem>
+                      <SelectItem value="5'8&quot;">5'8"</SelectItem>
+                      <SelectItem value="5'9&quot;">5'9"</SelectItem>
+                      <SelectItem value="5'10&quot;">5'10"</SelectItem>
+                      <SelectItem value="5'11&quot;">5'11"</SelectItem>
+                      <SelectItem value="6'0&quot;">6'0"</SelectItem>
+                      <SelectItem value="6'1&quot;">6'1"</SelectItem>
+                      <SelectItem value="6'2&quot;">6'2"</SelectItem>
+                      <SelectItem value="6'3&quot;">6'3"</SelectItem>
+                      <SelectItem value="6'4&quot;">6'4"</SelectItem>
+                      <SelectItem value="6'5&quot;">6'5"</SelectItem>
+                      <SelectItem value="6'6&quot;">6'6"</SelectItem>
+                      <SelectItem value="6'7&quot;">6'7"</SelectItem>
+                      <SelectItem value="6'8&quot;">6'8"</SelectItem>
+                      <SelectItem value="6'9&quot;">6'9"</SelectItem>
+                      <SelectItem value="6'10&quot;">6'10"</SelectItem>
+                      <SelectItem value="6'11&quot;">6'11"</SelectItem>
+                      <SelectItem value="7'0&quot;">7'0"</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
