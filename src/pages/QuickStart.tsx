@@ -72,7 +72,7 @@ const QuickStart = () => {
           });
           navigate('/profile/edit');
         } else {
-          navigate('/questions');
+          navigate('/matches');
         }
         break;
     }
@@ -415,7 +415,7 @@ const QuickStart = () => {
                         // If no profile exists at all, go to setup; otherwise go to edit
                         navigate(profile ? '/profile/edit' : '/profile/setup');
                       } else if (canTakeQuiz) {
-                        navigate('/questions');
+                        navigate('/matches');
                       } else {
                         navigate('/profile');
                       }
