@@ -461,16 +461,6 @@ const ProfileEdit = () => {
                   </Select>
                 </div>
 
-                <div>
-                  <Label htmlFor="height">Height (cm)</Label>
-                  <Input
-                    id="height"
-                    type="number"
-                    value={formData.height || ''}
-                    onChange={(e) => handleInputChange('height', parseInt(e.target.value) || undefined)}
-                    placeholder="170"
-                  />
-                </div>
 
                 <div>
                   <Label htmlFor="location">Location</Label>
