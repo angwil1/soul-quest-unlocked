@@ -68,9 +68,9 @@ const BrowseProfiles = () => {
               </Button>
             </div>
             <div className="text-center">
-              <h1 className="text-lg font-bold sm:text-xl">Explore Profiles</h1>
+              <h1 className="text-lg font-bold sm:text-xl">Discover People</h1>
               <p className="text-xs text-muted-foreground sm:text-sm mt-1">
-                Discover sample profiles to see what's possible
+                Browse potential matches in your area
               </p>
             </div>
           </div>
@@ -87,9 +87,9 @@ const BrowseProfiles = () => {
               Back to Profile
             </Button>
             <div className="text-center">
-              <h1 className="text-2xl font-bold">Explore Profiles</h1>
+              <h1 className="text-2xl font-bold">Discover People</h1>
               <p className="text-sm text-muted-foreground">
-                Discover sample profiles to see what's possible
+                Browse potential matches in your area
               </p>
             </div>
             <Button 
@@ -138,7 +138,7 @@ const BrowseProfiles = () => {
                     <Avatar className="w-full h-full rounded-none">
                       <AvatarImage 
                         src={profile.photos[0]} 
-                        alt={`${profile.name}'s sample profile photo showing ${profile.vibeTag} personality`}
+                        alt={`${profile.name}'s profile photo showing ${profile.vibeTag} personality`}
                         className="object-cover blur-sm group-hover:blur-none transition-all duration-500"
                       />
                       <AvatarFallback className="w-full h-full rounded-none text-4xl">
@@ -166,23 +166,15 @@ const BrowseProfiles = () => {
                       </div>
                     </div>
                   </div>
-                  
-                  {/* Sample Badge */}
-                  <Badge 
-                    className="absolute top-3 left-3 bg-purple-500/90 text-white backdrop-blur-sm border-0"
-                    aria-label="This is a sample profile for demonstration"
-                  >
-                    Sample Profile
-                  </Badge>
 
                   {/* Save for Later - Improved Design */}
-                  <div className="absolute top-12 right-3">
+                  <div className="absolute top-3 left-3">
                     <SaveToVaultButton
                       type="match"
                       data={{
                         matched_user_id: profile.id,
                         notes: `${profile.name} - ${matchScore}% compatibility`,
-                        tags: ['sample-profile', 'browse']
+                        tags: ['discovered-profile', 'browse']
                       }}
                       variant="ghost"
                       size="sm"
@@ -294,19 +286,18 @@ const BrowseProfiles = () => {
         {/* Additional Info */}
         <section className="text-center mt-12 space-y-4" aria-labelledby="info-section">
           <div className="max-w-2xl mx-auto">
-            <h3 id="info-section" className="text-lg font-semibold mb-2">These are Sample Profiles</h3>
+            <h3 id="info-section" className="text-lg font-semibold mb-2">Discover Your Matches</h3>
             <p className="text-sm text-muted-foreground">
-              These profiles are created to demonstrate the platform's features and inspire your own profile creation. 
-              They are not real users.
+              These are potential matches in your area. Like profiles to connect and start meaningful conversations.
             </p>
           </div>
           <Button 
             onClick={() => navigate('/profile/edit')} 
             size="lg"
             className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
-            aria-label="Create your own profile to get started with real matches"
+            aria-label="Complete your profile to unlock more personalized matches"
           >
-            Create Your Profile
+            Complete Your Profile
           </Button>
         </section>
 
