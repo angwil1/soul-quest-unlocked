@@ -11,7 +11,7 @@ import { useToast } from '@/hooks/use-toast';
 import { Navbar } from '@/components/Navbar';
 import { VideoCallButton } from '@/components/VideoCallButton';
 import { AIDigestSidebar } from '@/components/AIDigestSidebar';
-import { ArrowLeft, Send, Crown, PanelRightOpen, PanelRightClose } from 'lucide-react';
+import { ArrowLeft, Send, Crown, PanelRightOpen, PanelRightClose, Sparkles } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
 
@@ -48,6 +48,7 @@ const Messages = () => {
   const [newMessage, setNewMessage] = useState('');
   const [loading, setLoading] = useState(true);
   const [showAIDigest, setShowAIDigest] = useState(true);
+  const [isGeneratingEmojis, setIsGeneratingEmojis] = useState(false);
 
   // Redirect to auth if not authenticated
   useEffect(() => {
@@ -190,6 +191,46 @@ const Messages = () => {
     const success = await sendMessageWithLimits(newMessage.trim(), selectedMatch);
     if (success) {
       setNewMessage('');
+    }
+  };
+
+  const generateAIEmojis = async () => {
+    if (!newMessage.trim() || isGeneratingEmojis) return;
+    
+    setIsGeneratingEmojis(true);
+    try {
+      const { data, error } = await supabase.functions.invoke('generate-ai-emojis', {
+        body: { messageText: newMessage }
+      });
+      
+      if (error) {
+        console.error('Error generating emojis:', error);
+        toast({
+          title: "Error",
+          description: "Failed to generate AI emojis",
+          variant: "destructive",
+        });
+        return;
+      }
+      
+      const emojis = data?.emojis || [];
+      if (emojis.length > 0) {
+        // Add the first emoji to the message
+        setNewMessage(prev => prev + ' ' + emojis[0]);
+        toast({
+          title: "Emoji Added!",
+          description: `Added ${emojis[0]} to your message`,
+        });
+      }
+    } catch (error) {
+      console.error('Error generating emojis:', error);
+      toast({
+        title: "Error",
+        description: "Failed to generate AI emojis",
+        variant: "destructive",
+      });
+    } finally {
+      setIsGeneratingEmojis(false);
     }
   };
 
@@ -492,7 +533,7 @@ const Messages = () => {
                     </div>
                   </ScrollArea>
 
-                  {/* Message Input */}
+                   {/* Message Input */}
                    <div className="flex gap-2" role="group" aria-label="Send message">
                      <Input
                        value={newMessage}
@@ -513,6 +554,17 @@ const Messages = () => {
                        aria-label="Type your message"
                        aria-describedby="send-button"
                      />
+                     <Button 
+                       onClick={generateAIEmojis}
+                       disabled={!canSendMessage || !newMessage.trim() || isGeneratingEmojis}
+                       variant="outline"
+                       size="icon"
+                       className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                       aria-label="Generate AI emoji"
+                       title="Add AI-generated emoji"
+                     >
+                       <Sparkles className={`h-4 w-4 ${isGeneratingEmojis ? 'animate-spin' : ''}`} aria-hidden="true" />
+                     </Button>
                      <Button 
                        id="send-button"
                        onClick={sendMessage} 
