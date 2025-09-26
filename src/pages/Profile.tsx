@@ -455,15 +455,6 @@ const Profile = () => {
                   onClick={() => navigate('/browse')} 
                   variant="outline" 
                   className="w-full focus:ring-2 focus:ring-primary focus:ring-offset-2"
-                  aria-label="Explore sample profiles to see examples"
-                >
-                  Explore Sample Profiles
-                </Button>
-                
-                <Button 
-                  onClick={() => navigate('/matches')} 
-                  variant="outline" 
-                  className="w-full focus:ring-2 focus:ring-primary focus:ring-offset-2"
                   aria-label="Discover community features and connect with others"
                 >
                   Explore Community Features
