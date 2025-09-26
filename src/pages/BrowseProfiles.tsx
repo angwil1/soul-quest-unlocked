@@ -445,13 +445,6 @@ const BrowseProfiles = () => {
           </div>
           {(() => {
             const isProfileComplete = profile?.name && profile?.gender && profile?.looking_for;
-            console.log('BrowseProfiles profile check:', { 
-              profile: profile, 
-              name: profile?.name, 
-              gender: profile?.gender, 
-              looking_for: profile?.looking_for,
-              isProfileComplete 
-            });
             
             if (isProfileComplete) {
               return (
