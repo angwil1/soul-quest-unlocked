@@ -556,17 +556,17 @@ export const ProfileSetupFlow: React.FC = () => {
                       )}
                     </>
                   ) : (
-                    <div className="flex flex-col items-center gap-3 p-4 w-full h-full">
+                    <div className="flex flex-col items-center gap-1 sm:gap-3 p-2 sm:p-4 w-full h-full justify-center">
                       {uploadingPhotos ? (
                         <div className="text-center">
-                          <Upload className="h-8 w-8 text-primary animate-pulse mx-auto mb-2" />
-                          <span className="text-sm text-muted-foreground">Uploading...</span>
+                          <Upload className="h-6 w-6 sm:h-8 sm:w-8 text-primary animate-pulse mx-auto mb-1 sm:mb-2" />
+                          <span className="text-xs sm:text-sm text-muted-foreground">Uploading...</span>
                         </div>
                       ) : (
                         <>
-                          <Camera className="h-12 w-12 text-muted-foreground mb-2" />
-                          <span className="text-sm text-muted-foreground text-center">Add Photo</span>
-                          <div className="flex flex-col gap-2 w-full">
+                          <Camera className="h-8 w-8 sm:h-12 sm:w-12 text-muted-foreground mb-1 sm:mb-2" />
+                          <span className="text-xs sm:text-sm text-muted-foreground text-center">Add Photo</span>
+                          <div className="flex flex-col gap-1 sm:gap-2 w-full">
                             <Button
                               variant="default"
                               size="sm"
@@ -589,9 +589,9 @@ export const ProfileSetupFlow: React.FC = () => {
                                 }
                               }}
                               disabled={uploadingPhotos}
-                              className="w-full"
+                              className="w-full text-xs sm:text-sm py-1 sm:py-2 h-7 sm:h-9"
                             >
-                              <Camera className="h-4 w-4 mr-2" />
+                              <Camera className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
                               Take Photo
                             </Button>
                             <Button
@@ -605,9 +605,9 @@ export const ProfileSetupFlow: React.FC = () => {
                                 document.getElementById(`photo-upload-${index}`)?.click();
                               }}
                               disabled={uploadingPhotos}
-                              className="w-full"
+                              className="w-full text-xs sm:text-sm py-1 sm:py-2 h-7 sm:h-9"
                             >
-                              <Upload className="h-4 w-4 mr-2" />
+                              <Upload className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
                               Upload File
                             </Button>
                             <Button
@@ -615,7 +615,7 @@ export const ProfileSetupFlow: React.FC = () => {
                               size="sm"
                               asChild
                               disabled={uploadingPhotos}
-                              className="w-full"
+                              className="w-full text-xs sm:text-sm py-1 sm:py-2 h-7 sm:h-9"
                             >
                               <label htmlFor={`photo-upload-${index}`} className="cursor-pointer">📷 Open Camera</label>
                             </Button>
