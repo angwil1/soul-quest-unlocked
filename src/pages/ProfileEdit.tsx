@@ -473,6 +473,25 @@ const ProfileEdit = () => {
                 </div>
 
                 <div>
+                  <Label htmlFor="distance_preference">Search Radius</Label>
+                  <Select value={formData.distance_preference?.toString() || ''} onValueChange={(value) => handleInputChange('distance_preference', parseInt(value))}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="How far to search?" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-popover border border-border shadow-md z-50">
+                      <SelectItem value="5">5 miles</SelectItem>
+                      <SelectItem value="10">10 miles</SelectItem>
+                      <SelectItem value="15">15 miles</SelectItem>
+                      <SelectItem value="25">25 miles</SelectItem>
+                      <SelectItem value="50">50 miles</SelectItem>
+                      <SelectItem value="100">100 miles</SelectItem>
+                      <SelectItem value="250">250 miles</SelectItem>
+                      <SelectItem value="500">500+ miles</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div>
                   <Label htmlFor="occupation">Occupation</Label>
                   <Select value={formData.occupation || ''} onValueChange={(value) => handleInputChange('occupation', value)}>
                     <SelectTrigger>
