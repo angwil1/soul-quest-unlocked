@@ -5,7 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ArrowLeft, Heart, MapPin, Briefcase, Sparkles, Eye, Bookmark, Zap, ArrowUp } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { founderCuratedProfiles } from '@/data/sampleProfiles';
+import { founderCuratedProfiles, browseProfiles } from '@/data/sampleProfiles';
 import { SaveToVaultButton } from '@/components/SaveToVaultButton';
 import { useAuth } from '@/hooks/useAuth';
 
@@ -28,7 +28,7 @@ const BrowseProfiles = () => {
   };
 
   const handleBrowseMore = () => {
-    setVisibleProfiles(prev => Math.min(prev + 6, founderCuratedProfiles.length));
+    setVisibleProfiles(prev => Math.min(prev + 6, browseProfiles.length));
   };
 
   const scrollToTop = () => {
@@ -127,7 +127,7 @@ const BrowseProfiles = () => {
         >
           <h3 id="profiles-grid-title" className="sr-only">Available Sample Profiles</h3>
           
-          {founderCuratedProfiles.slice(0, visibleProfiles).map((profile) => {
+          {browseProfiles.slice(0, visibleProfiles).map((profile) => {
             const matchScore = calculateMatchScore();
             const isLiked = likedProfiles.has(profile.id);
             
@@ -275,7 +275,7 @@ const BrowseProfiles = () => {
         </section>
 
         {/* Browse More Button */}
-        {visibleProfiles < founderCuratedProfiles.length && (
+        {visibleProfiles < browseProfiles.length && (
           <section className="text-center mt-8" role="region" aria-labelledby="browse-more-section">
             <h3 id="browse-more-section" className="sr-only">Load More Profiles</h3>
             <Button 
@@ -285,7 +285,7 @@ const BrowseProfiles = () => {
               className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
               aria-label="Browse more profiles to see additional matches"
             >
-              Browse More Profiles ({founderCuratedProfiles.length - visibleProfiles} remaining)
+              Browse More Profiles ({browseProfiles.length - visibleProfiles} remaining)
             </Button>
           </section>
         )}
