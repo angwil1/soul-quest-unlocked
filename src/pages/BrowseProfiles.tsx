@@ -13,6 +13,7 @@ const BrowseProfiles = () => {
   const navigate = useNavigate();
   const { user, loading } = useAuth();
   const [likedProfiles, setLikedProfiles] = useState<Set<string>>(new Set());
+  const [visibleProfiles, setVisibleProfiles] = useState(6);
 
   // Only redirect if user is not authenticated AND this is not a sample profile viewing session
   useEffect(() => {
@@ -24,6 +25,10 @@ const BrowseProfiles = () => {
 
   const handleLike = (profileId: string) => {
     setLikedProfiles(prev => new Set([...prev, profileId]));
+  };
+
+  const handleBrowseMore = () => {
+    setVisibleProfiles(prev => Math.min(prev + 6, founderCuratedProfiles.length));
   };
 
   const calculateMatchScore = () => Math.floor(Math.random() * 20) + 80; // 80-99% match
@@ -115,7 +120,7 @@ const BrowseProfiles = () => {
         >
           <h3 id="profiles-grid-title" className="sr-only">Available Sample Profiles</h3>
           
-          {founderCuratedProfiles.map((profile) => {
+          {founderCuratedProfiles.slice(0, visibleProfiles).map((profile) => {
             const matchScore = calculateMatchScore();
             const isLiked = likedProfiles.has(profile.id);
             
@@ -269,6 +274,22 @@ const BrowseProfiles = () => {
             );
           })}
         </section>
+
+        {/* Browse More Button */}
+        {visibleProfiles < founderCuratedProfiles.length && (
+          <section className="text-center mt-8" role="region" aria-labelledby="browse-more-section">
+            <h3 id="browse-more-section" className="sr-only">Load More Profiles</h3>
+            <Button 
+              variant="outline"
+              size="lg"
+              onClick={handleBrowseMore}
+              className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              aria-label="Browse more profiles to see additional matches"
+            >
+              Browse More Profiles ({founderCuratedProfiles.length - visibleProfiles} remaining)
+            </Button>
+          </section>
+        )}
 
         {/* Additional Info */}
         <section className="text-center mt-12 space-y-4" aria-labelledby="info-section">
