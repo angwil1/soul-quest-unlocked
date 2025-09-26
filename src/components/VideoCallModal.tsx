@@ -129,16 +129,16 @@ const VideoCallModal = ({ isOpen, onClose, matchName, onCallStart }: VideoCallMo
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-4xl h-[80vh] bg-background/95 backdrop-blur-sm border-primary/20">
+      <DialogContent className="w-[95vw] max-w-4xl h-[90vh] md:h-[80vh] bg-background/95 backdrop-blur-sm border-primary/20 p-3 md:p-6">
         <DialogHeader>
-          <DialogTitle className="text-center">
+          <DialogTitle className="text-center text-lg md:text-xl">
             {isCallActive ? `Video call with ${matchName}` : `Ready to connect with ${matchName}?`}
           </DialogTitle>
         </DialogHeader>
 
         <div className="flex flex-col h-full">
           {/* Video Area */}
-          <div className="flex-1 relative bg-gradient-to-br from-primary/5 to-secondary/5 rounded-lg overflow-hidden">
+          <div className="flex-1 relative bg-gradient-to-br from-primary/5 to-secondary/5 rounded-lg overflow-hidden min-h-[200px] md:min-h-[300px]">
             {isCallActive || isCountingDown ? (
               <div className="relative w-full h-full">
                 <video
@@ -153,8 +153,8 @@ const VideoCallModal = ({ isOpen, onClose, matchName, onCallStart }: VideoCallMo
                 {!isVideoEnabled && (
                   <div className="absolute inset-0 flex items-center justify-center bg-gray-900">
                     <div className="text-center text-white">
-                      <VideoOff className="h-16 w-16 mx-auto mb-4 opacity-50" />
-                      <p>Camera is off</p>
+                      <VideoOff className="h-12 w-12 md:h-16 md:w-16 mx-auto mb-4 opacity-50" />
+                      <p className="text-sm md:text-base">Camera is off</p>
                     </div>
                   </div>
                 )}
@@ -163,16 +163,16 @@ const VideoCallModal = ({ isOpen, onClose, matchName, onCallStart }: VideoCallMo
                 {isCountingDown && (
                   <div className="absolute inset-0 flex items-center justify-center bg-black/50">
                     <div className="text-center text-white">
-                      <div className="text-6xl font-bold mb-4">{countdown}</div>
-                      <p className="text-xl">Starting video call...</p>
+                      <div className="text-4xl md:text-6xl font-bold mb-4">{countdown}</div>
+                      <p className="text-lg md:text-xl">Starting video call...</p>
                     </div>
                   </div>
                 )}
 
                 {/* Blur indicator */}
                 {isBlurred && isCallActive && (
-                  <div className="absolute top-4 left-4">
-                    <Badge variant="secondary" className="bg-white/20 text-white">
+                  <div className="absolute top-2 left-2 md:top-4 md:left-4">
+                    <Badge variant="secondary" className="bg-white/20 text-white text-xs">
                       <Eye className="h-3 w-3 mr-1" />
                       Blurred
                     </Badge>
@@ -180,32 +180,32 @@ const VideoCallModal = ({ isOpen, onClose, matchName, onCallStart }: VideoCallMo
                 )}
               </div>
             ) : (
-              <div className="flex flex-col items-center justify-center h-full text-center p-8">
-                <div className="max-w-md mx-auto space-y-6">
-                  <div className="h-32 w-32 bg-gradient-to-br from-primary to-secondary rounded-full mx-auto flex items-center justify-center">
-                    <Video className="h-16 w-16 text-white" />
+              <div className="flex flex-col items-center justify-center h-full text-center p-4 md:p-8">
+                <div className="max-w-md mx-auto space-y-4 md:space-y-6">
+                  <div className="h-20 w-20 md:h-32 md:w-32 bg-gradient-to-br from-primary to-secondary rounded-full mx-auto flex items-center justify-center">
+                    <Video className="h-10 w-10 md:h-16 md:w-16 text-white" />
                   </div>
                   
-                  <div className="space-y-4">
-                    <h3 className="text-2xl font-semibold">Ready for a genuine connection?</h3>
+                  <div className="space-y-3 md:space-y-4">
+                    <h3 className="text-lg md:text-2xl font-semibold">Ready for a genuine connection?</h3>
                     
-                    <div className="h-12 flex items-center justify-center">
-                      <p className="text-lg text-muted-foreground italic transition-opacity duration-500">
+                    <div className="h-10 md:h-12 flex items-center justify-center">
+                      <p className="text-sm md:text-lg text-muted-foreground italic transition-opacity duration-500 px-2">
                         "{softTexts[currentTextIndex]}"
                       </p>
                     </div>
 
-                    <div className="bg-muted/50 rounded-lg p-4 space-y-2 text-sm">
+                    <div className="bg-muted/50 rounded-lg p-3 md:p-4 space-y-2 text-xs md:text-sm">
                       <div className="flex items-center gap-2">
-                        <Eye className="h-4 w-4 text-primary" />
+                        <Eye className="h-3 w-3 md:h-4 md:w-4 text-primary flex-shrink-0" />
                         <span>Start with blur enabled for comfort</span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <MicOff className="h-4 w-4 text-primary" />
+                        <MicOff className="h-3 w-3 md:h-4 md:w-4 text-primary flex-shrink-0" />
                         <span>Toggle to audio-only anytime</span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <Phone className="h-4 w-4 text-primary" />
+                        <Phone className="h-3 w-3 md:h-4 md:w-4 text-primary flex-shrink-0" />
                         <span>Exit whenever you need to</span>
                       </div>
                     </div>
@@ -216,55 +216,60 @@ const VideoCallModal = ({ isOpen, onClose, matchName, onCallStart }: VideoCallMo
           </div>
 
           {/* Controls */}
-          <div className="mt-6 flex items-center justify-center gap-4">
+          <div className="mt-4 md:mt-6 flex items-center justify-center gap-3 md:gap-4 pb-2">
             {isCallActive ? (
               <>
                 <Button
                   variant={isVideoEnabled ? "secondary" : "destructive"}
                   size="lg"
                   onClick={toggleVideo}
-                  className="rounded-full w-14 h-14"
+                  className="rounded-full w-12 h-12 md:w-14 md:h-14 touch-manipulation"
                 >
-                  {isVideoEnabled ? <Video className="h-5 w-5" /> : <VideoOff className="h-5 w-5" />}
+                  {isVideoEnabled ? <Video className="h-4 w-4 md:h-5 md:w-5" /> : <VideoOff className="h-4 w-4 md:h-5 md:w-5" />}
                 </Button>
 
                 <Button
                   variant={isAudioEnabled ? "secondary" : "destructive"}
                   size="lg"
                   onClick={toggleAudio}
-                  className="rounded-full w-14 h-14"
+                  className="rounded-full w-12 h-12 md:w-14 md:h-14 touch-manipulation"
                 >
-                  {isAudioEnabled ? <Mic className="h-5 w-5" /> : <MicOff className="h-5 w-5" />}
+                  {isAudioEnabled ? <Mic className="h-4 w-4 md:h-5 md:w-5" /> : <MicOff className="h-4 w-4 md:h-5 md:w-5" />}
                 </Button>
 
                 <Button
                   variant={isBlurred ? "secondary" : "outline"}
                   size="lg"
                   onClick={toggleBlur}
-                  className="rounded-full w-14 h-14"
+                  className="rounded-full w-12 h-12 md:w-14 md:h-14 touch-manipulation"
                 >
-                  {isBlurred ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                  {isBlurred ? <EyeOff className="h-4 w-4 md:h-5 md:w-5" /> : <Eye className="h-4 w-4 md:h-5 md:w-5" />}
                 </Button>
 
                 <Button
                   variant="destructive"
                   size="lg"
                   onClick={endCall}
-                  className="rounded-full w-14 h-14"
+                  className="rounded-full w-12 h-12 md:w-14 md:h-14 touch-manipulation"
                 >
-                  <Phone className="h-5 w-5 rotate-135" />
+                  <Phone className="h-4 w-4 md:h-5 md:w-5 rotate-135" />
                 </Button>
               </>
             ) : (
-              <div className="flex gap-4">
-                <Button variant="outline" onClick={onClose} size="lg">
+              <div className="flex flex-col sm:flex-row gap-3 md:gap-4 w-full max-w-sm">
+                <Button 
+                  variant="outline" 
+                  onClick={onClose} 
+                  size="lg"
+                  className="flex-1 min-h-[48px] touch-manipulation"
+                >
                   Maybe later
                 </Button>
                 <Button 
                   onClick={startCountdown} 
                   disabled={isCountingDown}
                   size="lg"
-                  className="bg-gradient-to-r from-primary to-secondary hover:opacity-90"
+                  className="flex-1 bg-gradient-to-r from-primary to-secondary hover:opacity-90 min-h-[48px] touch-manipulation"
                 >
                   {isCountingDown ? "Starting..." : "Start video call"}
                 </Button>
