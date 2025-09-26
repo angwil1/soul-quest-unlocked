@@ -76,6 +76,7 @@ const SampleUserProfile = () => {
                             alt={profile.name}
                             className="w-full h-full object-cover object-center"
                             loading="eager"
+                            style={{ aspectRatio: '4/5' }}
                           />
                           <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
                             <Eye className="h-4 w-4 text-white opacity-0 group-hover:opacity-80 transition-opacity" />
@@ -98,12 +99,13 @@ const SampleUserProfile = () => {
                       <div key={index} className="aspect-square rounded-md overflow-hidden bg-muted">
                         <Dialog>
                           <DialogTrigger asChild>
-                            <div className="relative cursor-pointer group">
+                            <div className="relative cursor-pointer group h-full">
                               <img 
                                 src={photo} 
                                 alt={`${profile.name} photo ${index + 2}`}
                                 className="w-full h-full object-cover object-center"
                                 loading="lazy"
+                                style={{ aspectRatio: '1/1' }}
                               />
                               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
                                 <Eye className="h-2 w-2 text-white opacity-0 group-hover:opacity-80 transition-opacity" />
