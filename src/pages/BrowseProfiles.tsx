@@ -5,6 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Input } from '@/components/ui/input';
+import { Slider } from '@/components/ui/slider';
 import { ArrowLeft, Heart, MapPin, Briefcase, Sparkles, Eye, Bookmark, Zap, ArrowUp, Filter } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { founderCuratedProfiles, browseProfiles, SampleProfile } from '@/data/sampleProfiles';
@@ -23,6 +24,7 @@ const BrowseProfiles = () => {
   const [myGender, setMyGender] = useState<'men' | 'women' | 'non-binary'>('women');
   const [lookingFor, setLookingFor] = useState<'men' | 'women' | 'non-binary' | 'casual-friends' | 'anyone'>('men');
   const [zipCode, setZipCode] = useState<string>('');
+  const [distancePreference, setDistancePreference] = useState<number>(50);
   const [filteredProfiles, setFilteredProfiles] = useState<SampleProfile[]>(browseProfiles);
 
   // Handle zip code update with debouncing
@@ -34,6 +36,19 @@ const BrowseProfiles = () => {
       setTimeout(() => {
         updateProfile({ zip_code: value });
       }, 1000);
+    }
+  };
+
+  // Handle distance preference update
+  const handleDistanceChange = (value: number[]) => {
+    const newDistance = value[0];
+    setDistancePreference(newDistance);
+    
+    // Auto-save distance preference to profile
+    if (profile) {
+      setTimeout(() => {
+        updateProfile({ distance_preference: newDistance });
+      }, 500);
     }
   };
 
@@ -54,6 +69,9 @@ const BrowseProfiles = () => {
       
       // Set zip code from profile
       if (profile.zip_code) setZipCode(profile.zip_code);
+      
+      // Set distance preference from profile
+      if (profile.distance_preference) setDistancePreference(profile.distance_preference);
     }
   }, [profile]);
 
@@ -200,14 +218,22 @@ const BrowseProfiles = () => {
                     </SelectContent>
                   </Select>
                 </div>
-                {profile?.distance_preference && (
+                <div className="flex items-center gap-3">
+                  <span className="text-sm text-muted-foreground">Within:</span>
                   <div className="flex items-center gap-2">
-                    <span className="text-sm text-muted-foreground">Within:</span>
-                    <Badge variant="secondary" className="text-xs">
-                      {profile.distance_preference} miles
+                    <Slider
+                      value={[distancePreference]}
+                      onValueChange={handleDistanceChange}
+                      max={100}
+                      min={5}
+                      step={5}
+                      className="w-20"
+                    />
+                    <Badge variant="secondary" className="text-xs min-w-[60px] text-center">
+                      {distancePreference} miles
                     </Badge>
                   </div>
-                )}
+                </div>
                 <div className="flex items-center gap-2">
                   <label htmlFor="zip-code" className="text-sm text-muted-foreground">Zip Code:</label>
                   <Input
