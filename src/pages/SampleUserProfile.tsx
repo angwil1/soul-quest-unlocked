@@ -66,8 +66,8 @@ const SampleUserProfile = () => {
             <Card>
               <CardContent className="p-6">
                 <div className="space-y-4">
-                   {/* Main Photo - Smaller, more realistic size */}
-                  <div className="w-48 h-64 mx-auto rounded-lg overflow-hidden bg-muted">
+                   {/* Main Photo - Wallet-sized */}
+                  <div className="w-32 h-40 mx-auto rounded-lg overflow-hidden bg-muted">
                     <Dialog>
                       <DialogTrigger asChild>
                         <div className="relative cursor-pointer group">
@@ -78,7 +78,7 @@ const SampleUserProfile = () => {
                             loading="eager"
                           />
                           <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
-                            <Eye className="h-6 w-6 text-white opacity-0 group-hover:opacity-80 transition-opacity" />
+                            <Eye className="h-4 w-4 text-white opacity-0 group-hover:opacity-80 transition-opacity" />
                           </div>
                         </div>
                       </DialogTrigger>
@@ -93,9 +93,9 @@ const SampleUserProfile = () => {
                   </div>
                   
                   {/* Additional Photos - Smaller Grid */}
-                  <div className="grid grid-cols-3 gap-2 w-48 mx-auto">
+                  <div className="grid grid-cols-3 gap-1 w-32 mx-auto">
                     {profile.photos.slice(1).map((photo, index) => (
-                      <div key={index} className="aspect-square rounded-lg overflow-hidden bg-muted">
+                      <div key={index} className="aspect-square rounded-md overflow-hidden bg-muted">
                         <Dialog>
                           <DialogTrigger asChild>
                             <div className="relative cursor-pointer group">
@@ -106,7 +106,7 @@ const SampleUserProfile = () => {
                                 loading="lazy"
                               />
                               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
-                                <Eye className="h-3 w-3 text-white opacity-0 group-hover:opacity-80 transition-opacity" />
+                                <Eye className="h-2 w-2 text-white opacity-0 group-hover:opacity-80 transition-opacity" />
                               </div>
                             </div>
                           </DialogTrigger>
