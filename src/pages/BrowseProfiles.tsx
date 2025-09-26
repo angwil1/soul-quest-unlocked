@@ -121,7 +121,7 @@ const BrowseProfiles = () => {
         
         {/* Profiles Grid */}
         <section 
-          className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
+          className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
           role="region"
           aria-labelledby="profiles-grid-title"
         >

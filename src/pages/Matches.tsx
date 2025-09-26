@@ -112,7 +112,7 @@ const Matches = () => {
 
         {/* Matches Grid */}
         <section 
-          className="grid gap-6 md:grid-cols-2" 
+          className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" 
           aria-labelledby="matches-grid-title"
           role="region"
         >
