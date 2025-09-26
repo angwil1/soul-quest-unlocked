@@ -524,7 +524,7 @@ export const ProfileSetupFlow: React.FC = () => {
         return (
           <div className="space-y-6">
             <div className="text-center mb-6">
-              <h2 className="text-2xl font-bold mb-2">Show your best self</h2>
+              <h2 className="text-xl sm:text-2xl font-bold mb-2 leading-tight">Show your best self</h2>
               <p className="text-muted-foreground">Add at least 2 photos (up to 6)</p>
             </div>
 
