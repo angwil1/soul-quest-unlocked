@@ -55,12 +55,6 @@ const SampleUserProfile = () => {
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Browse
           </Button>
-          <div className="flex items-center gap-2">
-            <Badge variant="secondary" className="bg-green-100 text-green-800">
-              <Shield className="h-3 w-3 mr-1" />
-              Sample Profile
-            </Badge>
-          </div>
         </div>
       </div>
 
@@ -156,16 +150,12 @@ const SampleUserProfile = () => {
                       type="match"
                       data={{
                         matched_user_id: profile.id,
-                        notes: `${profile.name} - Sample Profile`,
-                        tags: ['sample-profile', 'viewed']
+                        notes: `${profile.name} - ${profile.vibeTag}`,
+                        tags: ['discovered-profile', 'viewed']
                       }}
                       variant="outline"
                       size="sm"
                     />
-                    <Badge variant="secondary" className="bg-green-100 text-green-800 whitespace-nowrap">
-                      <Shield className="h-3 w-3 mr-1" />
-                      Sample Profile
-                    </Badge>
                   </div>
                 </div>
               </CardHeader>
