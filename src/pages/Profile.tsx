@@ -137,7 +137,7 @@ const Profile = () => {
               size="sm"
               onClick={() => navigate('/browse')}
               className="flex items-center gap-2 focus:ring-2 focus:ring-primary focus:ring-offset-2 flex-1"
-              aria-label="Browse sample profiles"
+              aria-label="Browse and discover people"
             >
               <Eye className="h-4 w-4" aria-hidden="true" />
               Browse
@@ -211,7 +211,7 @@ const Profile = () => {
                   size="sm"
                   onClick={() => navigate('/browse')}
                   className="flex items-center gap-2 focus:ring-2 focus:ring-primary focus:ring-offset-2"
-                  aria-label="Browse sample profiles"
+                  aria-label="Browse and discover people"
                 >
                   <Eye className="h-4 w-4" aria-hidden="true" />
                   Browse Profiles
