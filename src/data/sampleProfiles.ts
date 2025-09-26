@@ -15,6 +15,8 @@ export interface SampleProfile {
   aestheticPreference: string;
   personalityType: string;
   loveLanguage: string;
+  gender: 'men' | 'women' | 'non-binary';
+  lookingFor: 'men' | 'women' | 'non-binary' | 'casual-friends' | 'anyone';
   vibeGallery: {
     mood: string;
     description: string;
@@ -41,6 +43,8 @@ export const founderCuratedProfiles: SampleProfile[] = [
     aestheticPreference: "",
     personalityType: "",
     loveLanguage: "",
+    gender: "women",
+    lookingFor: "men",
     vibeGallery: []
   },
   {
@@ -60,6 +64,8 @@ export const founderCuratedProfiles: SampleProfile[] = [
     aestheticPreference: "",
     personalityType: "",
     loveLanguage: "",
+    gender: "women",
+    lookingFor: "anyone",
     vibeGallery: []
   },
   {
@@ -79,6 +85,8 @@ export const founderCuratedProfiles: SampleProfile[] = [
     aestheticPreference: "",
     personalityType: "",
     loveLanguage: "",
+    gender: "women",
+    lookingFor: "women",
     vibeGallery: []
   },
   {
@@ -98,6 +106,8 @@ export const founderCuratedProfiles: SampleProfile[] = [
     aestheticPreference: "",
     personalityType: "",
     loveLanguage: "",
+    gender: "non-binary",
+    lookingFor: "anyone",
     vibeGallery: []
   },
   {
@@ -117,6 +127,8 @@ export const founderCuratedProfiles: SampleProfile[] = [
     aestheticPreference: "",
     personalityType: "",
     loveLanguage: "",
+    gender: "women",
+    lookingFor: "casual-friends",
     vibeGallery: []
   },
   {
@@ -136,6 +148,8 @@ export const founderCuratedProfiles: SampleProfile[] = [
     aestheticPreference: "",
     personalityType: "",
     loveLanguage: "",
+    gender: "women",
+    lookingFor: "men",
     vibeGallery: []
   },
   {
@@ -155,6 +169,8 @@ export const founderCuratedProfiles: SampleProfile[] = [
     aestheticPreference: "",
     personalityType: "",
     loveLanguage: "",
+    gender: "men",
+    lookingFor: "women",
     vibeGallery: []
   },
   {
@@ -174,6 +190,8 @@ export const founderCuratedProfiles: SampleProfile[] = [
     aestheticPreference: "",
     personalityType: "",
     loveLanguage: "",
+    gender: "men",
+    lookingFor: "women",
     vibeGallery: []
   },
   {
@@ -193,6 +211,8 @@ export const founderCuratedProfiles: SampleProfile[] = [
     aestheticPreference: "",
     personalityType: "",
     loveLanguage: "",
+    gender: "women",
+    lookingFor: "men",
     vibeGallery: []
   },
   {
@@ -212,6 +232,8 @@ export const founderCuratedProfiles: SampleProfile[] = [
     aestheticPreference: "",
     personalityType: "",
     loveLanguage: "",
+    gender: "men",
+    lookingFor: "anyone",
     vibeGallery: []
   },
   {
@@ -231,6 +253,8 @@ export const founderCuratedProfiles: SampleProfile[] = [
     aestheticPreference: "",
     personalityType: "",
     loveLanguage: "",
+    gender: "women",
+    lookingFor: "women",
     vibeGallery: []
   },
   {
@@ -250,6 +274,8 @@ export const founderCuratedProfiles: SampleProfile[] = [
     aestheticPreference: "",
     personalityType: "",
     loveLanguage: "",
+    gender: "men",
+    lookingFor: "men",
     vibeGallery: []
   },
   {
@@ -269,6 +295,8 @@ export const founderCuratedProfiles: SampleProfile[] = [
     aestheticPreference: "",
     personalityType: "",
     loveLanguage: "",
+    gender: "non-binary",
+    lookingFor: "casual-friends",
     vibeGallery: []
   },
   {
@@ -288,6 +316,8 @@ export const founderCuratedProfiles: SampleProfile[] = [
     aestheticPreference: "",
     personalityType: "",
     loveLanguage: "",
+    gender: "women",
+    lookingFor: "men",
     vibeGallery: []
   }
 ];
@@ -310,6 +340,8 @@ export const browseProfiles: SampleProfile[] = [
     aestheticPreference: "",
     personalityType: "",
     loveLanguage: "",
+    gender: "women",
+    lookingFor: "men",
     vibeGallery: []
   },
   {
@@ -329,6 +361,8 @@ export const browseProfiles: SampleProfile[] = [
     aestheticPreference: "",
     personalityType: "",
     loveLanguage: "",
+    gender: "women",
+    lookingFor: "women",
     vibeGallery: []
   },
   {
@@ -348,6 +382,8 @@ export const browseProfiles: SampleProfile[] = [
     aestheticPreference: "",
     personalityType: "",
     loveLanguage: "",
+    gender: "men",
+    lookingFor: "women",
     vibeGallery: []
   },
   {
@@ -367,6 +403,8 @@ export const browseProfiles: SampleProfile[] = [
     aestheticPreference: "",
     personalityType: "",
     loveLanguage: "",
+    gender: "women",
+    lookingFor: "casual-friends",
     vibeGallery: []
   },
   {
@@ -386,6 +424,8 @@ export const browseProfiles: SampleProfile[] = [
     aestheticPreference: "",
     personalityType: "",
     loveLanguage: "",
+    gender: "men",
+    lookingFor: "men",
     vibeGallery: []
   },
   {
@@ -405,9 +445,10 @@ export const browseProfiles: SampleProfile[] = [
     aestheticPreference: "",
     personalityType: "",
     loveLanguage: "",
+    gender: "men",
+    lookingFor: "anyone",
     vibeGallery: []
   },
-  // Include a few from the original set to provide variety
   {
     id: "browse-7",
     name: "Ember",
@@ -425,6 +466,8 @@ export const browseProfiles: SampleProfile[] = [
     aestheticPreference: "",
     personalityType: "",
     loveLanguage: "",
+    gender: "women",
+    lookingFor: "men",
     vibeGallery: []
   },
   {
@@ -444,6 +487,8 @@ export const browseProfiles: SampleProfile[] = [
     aestheticPreference: "",
     personalityType: "",
     loveLanguage: "",
+    gender: "non-binary",
+    lookingFor: "non-binary",
     vibeGallery: []
   }
 ];

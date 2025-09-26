@@ -3,9 +3,10 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { ArrowLeft, Heart, MapPin, Briefcase, Sparkles, Eye, Bookmark, Zap, ArrowUp } from 'lucide-react';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { ArrowLeft, Heart, MapPin, Briefcase, Sparkles, Eye, Bookmark, Zap, ArrowUp, Filter } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { founderCuratedProfiles, browseProfiles } from '@/data/sampleProfiles';
+import { founderCuratedProfiles, browseProfiles, SampleProfile } from '@/data/sampleProfiles';
 import { SaveToVaultButton } from '@/components/SaveToVaultButton';
 import { useAuth } from '@/hooks/useAuth';
 
@@ -14,6 +15,11 @@ const BrowseProfiles = () => {
   const { user, loading } = useAuth();
   const [likedProfiles, setLikedProfiles] = useState<Set<string>>(new Set());
   const [visibleProfiles, setVisibleProfiles] = useState(6);
+  
+  // Filter states
+  const [myGender, setMyGender] = useState<'men' | 'women' | 'non-binary'>('women');
+  const [lookingFor, setLookingFor] = useState<'men' | 'women' | 'non-binary' | 'casual-friends' | 'anyone'>('men');
+  const [filteredProfiles, setFilteredProfiles] = useState<SampleProfile[]>(browseProfiles);
 
   // Only redirect if user is not authenticated AND this is not a sample profile viewing session
   useEffect(() => {
@@ -23,12 +29,33 @@ const BrowseProfiles = () => {
     }
   }, [user, loading]);
 
+  // Filter profiles based on preferences
+  useEffect(() => {
+    const filtered = browseProfiles.filter(profile => {
+      // If someone is looking for casual friends, show those who want casual friends
+      if (lookingFor === 'casual-friends') {
+        return profile.lookingFor === 'casual-friends';
+      }
+      
+      // If looking for anyone, show profiles that want anyone or match the specific gender
+      if (lookingFor === 'anyone') {
+        return profile.lookingFor === 'anyone' || profile.lookingFor === myGender;
+      }
+      
+      // Standard matching: show profiles that match what I'm looking for AND who are looking for my gender
+      return profile.gender === lookingFor && (profile.lookingFor === myGender || profile.lookingFor === 'anyone');
+    });
+    
+    setFilteredProfiles(filtered);
+    setVisibleProfiles(6); // Reset visible count when filters change
+  }, [myGender, lookingFor]);
+
   const handleLike = (profileId: string) => {
     setLikedProfiles(prev => new Set([...prev, profileId]));
   };
 
   const handleBrowseMore = () => {
-    setVisibleProfiles(prev => Math.min(prev + 6, browseProfiles.length));
+    setVisibleProfiles(prev => Math.min(prev + 6, filteredProfiles.length));
   };
 
   const scrollToTop = () => {
@@ -109,6 +136,51 @@ const BrowseProfiles = () => {
             </Button>
           </div>
         </div>
+        
+        {/* Filter Section */}
+        <div className="border-t bg-muted/30">
+          <div className="max-w-6xl mx-auto px-4 py-3">
+            <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center">
+              <div className="flex items-center gap-2 text-sm font-medium">
+                <Filter className="h-4 w-4" />
+                <span>Filters:</span>
+              </div>
+              <div className="flex flex-wrap gap-3">
+                <div className="flex items-center gap-2">
+                  <label htmlFor="my-gender" className="text-sm text-muted-foreground">I am:</label>
+                  <Select value={myGender} onValueChange={(value: 'men' | 'women' | 'non-binary') => setMyGender(value)}>
+                    <SelectTrigger id="my-gender" className="w-32 h-8 text-xs">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="women">Woman</SelectItem>
+                      <SelectItem value="men">Man</SelectItem>
+                      <SelectItem value="non-binary">Non-binary</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="flex items-center gap-2">
+                  <label htmlFor="looking-for" className="text-sm text-muted-foreground">Looking for:</label>
+                  <Select value={lookingFor} onValueChange={(value: 'men' | 'women' | 'non-binary' | 'casual-friends' | 'anyone') => setLookingFor(value)}>
+                    <SelectTrigger id="looking-for" className="w-36 h-8 text-xs">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="men">Men</SelectItem>
+                      <SelectItem value="women">Women</SelectItem>
+                      <SelectItem value="non-binary">Non-binary</SelectItem>
+                      <SelectItem value="casual-friends">Casual Friends</SelectItem>
+                      <SelectItem value="anyone">Anyone</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+              <div className="text-xs text-muted-foreground ml-auto">
+                Showing {Math.min(visibleProfiles, filteredProfiles.length)} of {filteredProfiles.length} profiles
+              </div>
+            </div>
+          </div>
+        </div>
       </header>
 
       <main 
@@ -127,7 +199,7 @@ const BrowseProfiles = () => {
         >
           <h3 id="profiles-grid-title" className="sr-only">Available Sample Profiles</h3>
           
-          {browseProfiles.slice(0, visibleProfiles).map((profile) => {
+          {filteredProfiles.slice(0, visibleProfiles).map((profile) => {
             const matchScore = calculateMatchScore();
             const isLiked = likedProfiles.has(profile.id);
             
@@ -264,7 +336,7 @@ const BrowseProfiles = () => {
         </section>
 
         {/* Browse More Button */}
-        {visibleProfiles < browseProfiles.length && (
+        {visibleProfiles < filteredProfiles.length && (
           <section className="text-center mt-8" role="region" aria-labelledby="browse-more-section">
             <h3 id="browse-more-section" className="sr-only">Load More Profiles</h3>
             <Button 
@@ -274,7 +346,7 @@ const BrowseProfiles = () => {
               className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
               aria-label="Browse more profiles to see additional matches"
             >
-              Browse More Profiles ({browseProfiles.length - visibleProfiles} remaining)
+              Browse More Profiles ({filteredProfiles.length - visibleProfiles} remaining)
             </Button>
           </section>
         )}
