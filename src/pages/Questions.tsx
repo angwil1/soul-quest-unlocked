@@ -132,10 +132,13 @@ const Questions = () => {
         </div>
 
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold mb-4">Compatibility Quiz</h1>
-          <p className="text-xl text-muted-foreground">
-            Answer questions to build your compatibility profile and discover meaningful matches
+          <h1 className="text-4xl font-bold mb-4">Questions Moved!</h1>
+          <p className="text-xl text-muted-foreground mb-6">
+            The compatibility quiz is now part of the profile setup process for a better experience.
           </p>
+          <Button onClick={() => navigate('/profile/setup')} size="lg">
+            Complete Profile & Quiz
+          </Button>
         </div>
 
         <div className="space-y-6">

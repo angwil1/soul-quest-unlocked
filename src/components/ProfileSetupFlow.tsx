@@ -49,6 +49,8 @@ export const ProfileSetupFlow: React.FC = () => {
   });
   const [loading, setLoading] = useState(false);
   const [uploadingPhotos, setUploadingPhotos] = useState(false);
+  const [compatibilityQuestions, setCompatibilityQuestions] = useState<any[]>([]);
+  const [compatibilityAnswers, setCompatibilityAnswers] = useState<Record<number, string>>({});
   const [hasCompletedMainQuiz, setHasCompletedMainQuiz] = useState(false);
   const [showCamera, setShowCamera] = useState(false);
   const { user } = useAuth();
@@ -57,6 +59,30 @@ export const ProfileSetupFlow: React.FC = () => {
 
   // Check if user completed main compatibility quiz and skip personality step
   useEffect(() => {
+    const fetchCompatibilityQuestions = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('questions')
+          .select('*')
+          .order('id');
+
+        if (error) {
+          console.error('Error fetching questions:', error);
+        } else {
+          const formattedQuestions = (data || []).map(q => ({
+            ...q,
+            question_type: q.question_type as 'likert' | 'singleSelect',
+            options: Array.isArray(q.options) ? q.options as string[] : undefined
+          }));
+          setCompatibilityQuestions(formattedQuestions);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
+    fetchCompatibilityQuestions();
+
     const checkQuizCompletion = async () => {
       if (!user) return;
 
@@ -88,7 +114,7 @@ export const ProfileSetupFlow: React.FC = () => {
     checkQuizCompletion();
   }, [currentStep, user, toast]);
 
-  const totalSteps = 6;
+  const totalSteps = 7;
   const progress = (currentStep / totalSteps) * 100;
 
   const interestOptions = [
@@ -287,6 +313,13 @@ export const ProfileSetupFlow: React.FC = () => {
     }));
   };
 
+  const handleCompatibilityAnswer = (questionId: number, value: string) => {
+    setCompatibilityAnswers(prev => ({
+      ...prev,
+      [questionId]: value
+    }));
+  };
+
   const validateStep = () => {
     const isValid = (() => {
       switch (currentStep) {
@@ -301,8 +334,8 @@ export const ProfileSetupFlow: React.FC = () => {
         case 5:
           // If user completed main quiz, personality questions are optional
           return hasCompletedMainQuiz || Object.keys(profileData.personality).length >= personalityQuestions.length;
-        case 6:
-          return profileData.values.length >= 3;
+      case 7:
+        return Object.keys(compatibilityAnswers).length === compatibilityQuestions.length;
         default:
           return true;
       }
@@ -697,6 +730,69 @@ export const ProfileSetupFlow: React.FC = () => {
             <div className="text-center text-sm text-muted-foreground">
               Selected: {profileData.values.length} values (need at least 3)
             </div>
+          </div>
+        );
+
+      case 7:
+        return (
+          <div className="space-y-6">
+            <div className="text-center mb-6">
+              <h2 className="text-2xl font-bold mb-2">Compatibility Quiz</h2>
+              <p className="text-muted-foreground">Answer these questions to build your compatibility profile</p>
+            </div>
+
+            <div className="space-y-6">
+              {compatibilityQuestions.length === 0 ? (
+                <div className="text-center text-muted-foreground">
+                  <p>Loading compatibility questions...</p>
+                </div>
+              ) : (
+                compatibilityQuestions.map((question, index) => (
+                  <div key={question.id} className="space-y-4 p-4 border rounded-lg">
+                    <h3 className="font-medium text-lg">
+                      {index + 1}. {question.Text}
+                    </h3>
+                    
+                    <div className="space-y-2">
+                      {question.question_type === 'likert' ? (
+                        // Likert scale options
+                        ['strongly_disagree', 'disagree', 'neutral', 'agree', 'strongly_agree'].map((value, optionIndex) => {
+                          const labels = ['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'];
+                          return (
+                            <Button
+                              key={value}
+                              variant={compatibilityAnswers[question.id] === value ? "default" : "outline"}
+                              className="w-full justify-start text-left h-auto py-3 px-4"
+                              onClick={() => handleCompatibilityAnswer(question.id, value)}
+                            >
+                              {labels[optionIndex]}
+                            </Button>
+                          );
+                        })
+                      ) : (
+                        // Multiple choice options
+                        question.options?.map((option, optionIndex) => (
+                          <Button
+                            key={optionIndex}
+                            variant={compatibilityAnswers[question.id] === option ? "default" : "outline"}
+                            className="w-full justify-start text-left h-auto py-3 px-4"
+                            onClick={() => handleCompatibilityAnswer(question.id, option)}
+                          >
+                            {option}
+                          </Button>
+                        ))
+                      )}
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+
+            {compatibilityQuestions.length > 0 && (
+              <div className="text-center text-sm text-muted-foreground">
+                Answered: {Object.keys(compatibilityAnswers).length} of {compatibilityQuestions.length} questions
+              </div>
+            )}
           </div>
         );
 
