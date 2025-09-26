@@ -1,5 +1,5 @@
-import { serve } from "serve";
-import { createClient } from 'supabase';
+import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.52.1';
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -81,8 +81,8 @@ serve(async (req) => {
     const cleanZip2 = zipCode2.replace(/[^0-9]/g, '').substring(0, 5);
 
     // Get coordinates for both zip codes
-    let coords1 = zipCodeCoordinates[cleanZip1];
-    let coords2 = zipCodeCoordinates[cleanZip2];
+    let coords1: { lat: number, lon: number } | null = zipCodeCoordinates[cleanZip1];
+    let coords2: { lat: number, lon: number } | null = zipCodeCoordinates[cleanZip2];
 
     // If not in our database, try the API
     if (!coords1) {
@@ -123,7 +123,7 @@ serve(async (req) => {
   } catch (error) {
     console.error('Error calculating distance:', error)
     return new Response(
-      JSON.stringify({ error: 'An unexpected error occurred', details: error.message }),
+      JSON.stringify({ error: 'An unexpected error occurred', details: error instanceof Error ? error.message : 'Unknown error' }),
       { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 500 }
     )
   }

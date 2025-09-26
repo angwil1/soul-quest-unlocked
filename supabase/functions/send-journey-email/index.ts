@@ -1,6 +1,6 @@
-import { serve } from "serve";
-import { Resend } from "resend";
-import { createClient } from 'supabase';
+import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
+import { Resend } from "npm:resend@2.0.0";
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.52.1';
 
 const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
 const supabase = createClient(
@@ -58,7 +58,7 @@ const handler = async (req: Request): Promise<Response> => {
         let matchesHtml = '';
         if (matches && matches.length > 0) {
           matchesHtml = matches.map((match, index) => {
-            const profile = match.profiles;
+            const profile = Array.isArray(match.profiles) ? match.profiles[0] : match.profiles;
             const interests = Array.isArray(profile?.interests) ? profile.interests.slice(0, 2) : [];
             
             return `

@@ -1,6 +1,6 @@
-import "xhr";
-import { serve } from "serve";
-import { createClient } from 'supabase';
+import "https://deno.land/x/xhr@0.1.0/mod.ts";
+import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.52.1';
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -196,7 +196,7 @@ The compatibility_score should be between 1-100. Focus on genuine compatibility 
     console.error('Error in ai-matching function:', error);
     return new Response(JSON.stringify({ 
       error: 'Internal server error',
-      details: error.message 
+      details: error instanceof Error ? error.message : 'Unknown error'
     }), {
       status: 500,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },

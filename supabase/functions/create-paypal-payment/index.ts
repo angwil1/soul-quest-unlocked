@@ -1,5 +1,5 @@
-import { serve } from "serve";
-import { createClient } from 'supabase';
+import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.52.1';
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -171,7 +171,7 @@ serve(async (req) => {
     console.error('PayPal payment error:', error);
     return new Response(
       JSON.stringify({ 
-        error: error.message || 'An unexpected error occurred' 
+        error: error instanceof Error ? error.message : 'An unexpected error occurred'
       }),
       {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
