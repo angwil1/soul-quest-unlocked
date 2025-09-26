@@ -217,16 +217,15 @@ const ProfileEdit = () => {
 
       <div className="max-w-4xl mx-auto px-4 py-8">
         {/* Age Verification Modal for New Users */}
-        {showAgeVerification && (
-          <div className="mb-8">
-            <AgeVerification 
-              forceOpen={true}
-              onVerificationComplete={() => {
-                setShowAgeVerification(false);
-              }}
-            />
-          </div>
-        )}
+          {showAgeVerification && (
+            <div className="mb-8">
+              <AgeVerification 
+                onVerificationComplete={() => {
+                  setShowAgeVerification(false);
+                }}
+              />
+            </div>
+          )}
 
         <form id="profile-form" onSubmit={handleSubmit} className="space-y-8">
           
