@@ -104,38 +104,62 @@ const MemoryVault = () => {
     {
       id: '1',
       moment_type: 'reflection',
-      title: 'our first kiss',
-      description: 'It happened at the coffee shop during our third date. Everything felt perfect.',
+      title: 'Finally got a good profile pic',
+      description: 'Took forever but I actually like how this one turned out. Natural lighting at the park worked way better than my bathroom mirror attempts.',
       content: {},
       notes: '',
-      tags: ['romance', 'milestone'],
-      is_favorite: true,
+      tags: ['profile', 'photos'],
+      is_favorite: false,
       saved_at: '2024-01-14T20:30:00Z',
       moment_date: '2024-01-14T20:30:00Z'
     },
     {
       id: '2',
-      moment_type: 'milestone',
-      title: 'First Match Connection',
-      description: 'Had my first really meaningful conversation on the app today. We talked for hours about travel dreams and life goals.',
+      moment_type: 'insight',
+      title: 'Learned to spot red flags early',
+      description: 'If someone only talks about themselves for the first 20 minutes, that\'s probably not going to change. Trust your gut.',
       content: {},
-      notes: 'Remember to ask about their trip to New Zealand next time',
-      tags: ['first-match', 'meaningful', 'travel'],
+      notes: 'Save time by being more selective',
+      tags: ['dating-tips', 'boundaries'],
       is_favorite: true,
-      saved_at: '2024-01-14T20:30:00Z',
-      moment_date: '2024-01-14T20:30:00Z'
+      saved_at: '2024-01-12T15:20:00Z',
+      moment_date: '2024-01-12T15:20:00Z'
     },
     {
       id: '3',
-      moment_type: 'insight',
-      title: 'Dating App Breakthrough',
-      description: 'Realized I was focusing too much on perfect messages. Started being more genuine and conversations became so much more natural.',
+      moment_type: 'milestone',
+      title: 'First decent coffee date',
+      description: 'Actually had good conversation flow without any awkward silences. We both liked the same weird documentaries.',
       content: {},
-      notes: 'Authenticity > perfection',
-      tags: ['insight', 'authenticity', 'breakthrough'],
+      notes: 'Coffee dates > dinner dates for first meets',
+      tags: ['first-date', 'coffee'],
+      is_favorite: false,
+      saved_at: '2024-01-08T11:45:00Z',
+      moment_date: '2024-01-08T11:45:00Z'
+    },
+    {
+      id: '4',
+      moment_type: 'insight',
+      title: 'Dating app fatigue is real',
+      description: 'Taking a week break helped me remember what I actually want instead of just swiping mindlessly.',
+      content: {},
+      notes: 'Breaks are healthy',
+      tags: ['self-care', 'boundaries'],
       is_favorite: true,
-      saved_at: '2024-01-02T13:45:00Z',
-      moment_date: '2024-01-02T13:45:00Z'
+      saved_at: '2024-01-05T09:30:00Z',
+      moment_date: '2024-01-05T09:30:00Z'
+    },
+    {
+      id: '5',
+      moment_type: 'reflection',
+      title: 'Realized I have a type',
+      description: 'Keep matching with people who work in creative fields. Not sure if that\'s good or bad but it\'s definitely a pattern.',
+      content: {},
+      notes: '',
+      tags: ['patterns', 'preferences'],
+      is_favorite: false,
+      saved_at: '2024-01-02T16:15:00Z',
+      moment_date: '2024-01-02T16:15:00Z'
     }
   ]);
   const [loading, setLoading] = useState(true);
