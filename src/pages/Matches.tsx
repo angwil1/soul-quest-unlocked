@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Navbar } from '@/components/Navbar';
-import { Heart, Settings, MapPin, Briefcase, Sparkles, ArrowLeft, Users } from 'lucide-react';
+import { Heart, Settings, MapPin, Briefcase, Sparkles, ArrowLeft, Users, ArrowUp } from 'lucide-react';
 import { founderCuratedProfiles } from '@/data/sampleProfiles';
 import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/integrations/supabase/client';
@@ -34,6 +34,13 @@ const Matches = () => {
 
   const handleDiscoverMore = () => {
     setVisibleMatches(prev => Math.min(prev + 6, founderCuratedProfiles.length));
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   };
 
   const calculateMatchScore = () => Math.floor(Math.random() * 20) + 80; // 80-99% match
@@ -247,6 +254,20 @@ const Matches = () => {
             </Button>
           </section>
         )}
+
+        {/* Scroll to Top Button */}
+        <section className="text-center mt-12" role="region" aria-labelledby="scroll-top-section">
+          <h2 id="scroll-top-section" className="sr-only">Navigation Helper</h2>
+          <Button 
+            variant="outline"
+            onClick={scrollToTop}
+            className="focus:ring-2 focus:ring-primary focus:ring-offset-2 hover-scale"
+            aria-label="Scroll back to top of matches"
+          >
+            <ArrowUp className="h-4 w-4 mr-2" aria-hidden="true" />
+            Back to Top
+          </Button>
+        </section>
 
         {/* Accessibility Information */}
         <section className="mt-16 p-6 bg-muted/50 rounded-lg" aria-labelledby="accessibility-info">
