@@ -34,7 +34,7 @@ export const founderCuratedProfiles: SampleProfile[] = [
     occupation: "Yoga Instructor",
     emotionalSoundtrack: "",
     tiktokUrl: "",
-    photos: ["/src/assets/luna-profile-1.jpg"],
+    photos: ["/src/assets/luna-realistic-profile.jpg"],
     interests: ["Yoga", "Meditation", "Gardening"],
     conversationStarters: [],
     poeticMicrocopy: "",
