@@ -236,29 +236,6 @@ const ProfileEdit = () => {
                       Take Picture
                     </label>
                   </Button>
-                  <Button 
-                    variant="default" 
-                    size="sm" 
-                    type="button"
-                    className="flex-1 sm:flex-none"
-                    onClick={() => {
-                      console.log('📱 Simple camera button clicked!');
-                      const input = document.createElement('input');
-                      input.type = 'file';
-                      input.accept = 'image/*';
-                      input.capture = 'user';
-                      input.onchange = async (e) => {
-                        const file = (e.target as HTMLInputElement).files?.[0];
-                        if (file) {
-                          console.log('📱 File captured:', file.name);
-                          await addPhoto(file);
-                        }
-                      };
-                      input.click();
-                    }}
-                  >
-                    📱 Camera (Simple)
-                  </Button>
                 </div>
                 
                 <input
