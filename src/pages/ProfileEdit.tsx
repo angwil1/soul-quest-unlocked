@@ -638,15 +638,7 @@ const ProfileEdit = () => {
                   className="flex items-center gap-2"
                 >
                   <Search className="h-4 w-4" />
-                  Find Matches
-                </Button>
-                <Button 
-                  type="button" 
-                  variant="outline"
-                  onClick={() => window.location.href = '/#/swipe'}
-                  className="flex items-center gap-2"
-                >
-                  Swipe Mode
+                  Find My Matches
                 </Button>
               </div>
             </CardContent>
