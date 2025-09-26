@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -10,7 +10,7 @@ import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
 import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/integrations/supabase/client';
-import { Camera, Upload, Heart, Star, MapPin, Calendar, ArrowLeft, ArrowRight, CheckCircle } from 'lucide-react';
+import { Camera, Upload, Heart } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { CameraCapture } from '@/components/CameraCapture';
 
@@ -22,7 +22,7 @@ interface ProfileData {
   education: string;
   bio: string;
   interests: string[];
-  photos: string[];  // Changed from File[] to string[] for photo URLs
+  photos: string[];
   lookingFor: string;
   ageRange: { min: number; max: number };
   distance: number;
@@ -31,7 +31,6 @@ interface ProfileData {
 }
 
 export const ProfileSetupFlow: React.FC = () => {
-  const [currentStep, setCurrentStep] = useState(1);
   const [profileData, setProfileData] = useState<ProfileData>({
     name: '',
     age: '',
@@ -51,13 +50,11 @@ export const ProfileSetupFlow: React.FC = () => {
   const [uploadingPhotos, setUploadingPhotos] = useState(false);
   const [compatibilityQuestions, setCompatibilityQuestions] = useState<any[]>([]);
   const [compatibilityAnswers, setCompatibilityAnswers] = useState<Record<number, string>>({});
-  const [hasCompletedMainQuiz, setHasCompletedMainQuiz] = useState(false);
   const [showCamera, setShowCamera] = useState(false);
   const { user } = useAuth();
   const { toast } = useToast();
   const navigate = useNavigate();
 
-  // Check if user completed main compatibility quiz and skip personality step
   useEffect(() => {
     const fetchCompatibilityQuestions = async () => {
       try {
@@ -82,40 +79,9 @@ export const ProfileSetupFlow: React.FC = () => {
     };
 
     fetchCompatibilityQuestions();
+  }, []);
 
-    const checkQuizCompletion = async () => {
-      if (!user) return;
-
-      try {
-        // Check if user has completed the main compatibility quiz
-        const { data: quizData } = await supabase
-          .from('user_events')
-          .select('*')
-          .eq('user_id', user.id)
-          .eq('event_type', 'quiz_completed')
-          .limit(1);
-        
-        const hasCompletedQuiz = quizData && quizData.length > 0;
-        setHasCompletedMainQuiz(hasCompletedQuiz);
-        
-        // If user has completed the quiz, skip the personality step (step 5)
-        if (hasCompletedQuiz && currentStep === 5) {
-          setCurrentStep(6); // Skip to values step
-          toast({
-            title: "Personality questions skipped",
-            description: "Since you already completed the compatibility quiz, we'll use those results for your personality profile!",
-          });
-        }
-      } catch (error) {
-        console.error('Error checking quiz completion:', error);
-      }
-    };
-
-    checkQuizCompletion();
-  }, [currentStep, user, toast]);
-
-  const totalSteps = 7;
-  const progress = (currentStep / totalSteps) * 100;
+  const progress = 50; // Static progress since it's one unified form
 
   const interestOptions = [
     'Travel', 'Photography', 'Cooking', 'Fitness', 'Reading', 'Music',
@@ -172,18 +138,6 @@ export const ProfileSetupFlow: React.FC = () => {
     'Health & Wellness', 'Spirituality', 'Education', 'Community', 
     'Environmental Care', 'Honesty', 'Loyalty', 'Independence', 'Tradition'
   ];
-
-  const handleNext = () => {
-    if (currentStep < totalSteps) {
-      setCurrentStep(currentStep + 1);
-    }
-  };
-
-  const handleBack = () => {
-    if (currentStep > 1) {
-      setCurrentStep(currentStep - 1);
-    }
-  };
 
   const handleInterestToggle = (interest: string) => {
     setProfileData(prev => ({
@@ -320,46 +274,32 @@ export const ProfileSetupFlow: React.FC = () => {
     }));
   };
 
-  const validateStep = () => {
-    const isValid = (() => {
-      switch (currentStep) {
-        case 1:
-          return profileData.name && profileData.age && profileData.location && profileData.occupation && profileData.education;
-        case 2:
-          return profileData.bio.length >= 10;
-        case 3:
-          return profileData.interests.length >= 3;
-        case 4:
-          return profileData.photos.length >= 2;
-        case 5:
-          // If user completed main quiz, personality questions are optional
-          return hasCompletedMainQuiz || Object.keys(profileData.personality).length >= personalityQuestions.length;
-      case 7:
-        return Object.keys(compatibilityAnswers).length === compatibilityQuestions.length;
-        default:
-          return true;
-      }
-    })();
-    
-    // Debug logging
-    console.log('Profile Setup Debug:', {
-      currentStep,
-      isValid,
-      hasCompletedMainQuiz,
-      profileData: {
-        bioLength: profileData.bio.length,
-        interestsCount: profileData.interests.length,
-        photosCount: profileData.photos.length,
-        personalityAnswers: Object.keys(profileData.personality).length,
-        valuesCount: profileData.values.length
-      }
-    });
-    
-    return isValid;
+  const validateForm = () => {
+    return (
+      profileData.name && 
+      profileData.age && 
+      profileData.location && 
+      profileData.occupation && 
+      profileData.education &&
+      profileData.bio.length >= 10 &&
+      profileData.interests.length >= 3 &&
+      profileData.photos.length >= 2 &&
+      Object.keys(profileData.personality).length >= personalityQuestions.length &&
+      profileData.values.length >= 2 &&
+      Object.keys(compatibilityAnswers).length === compatibilityQuestions.length
+    );
   };
 
   const handleComplete = async () => {
     if (!user) return;
+    if (!validateForm()) {
+      toast({
+        title: "Please complete all fields",
+        description: "Fill out all required fields to complete your profile setup.",
+        variant: "destructive"
+      });
+      return;
+    }
 
     setLoading(true);
     try {
@@ -383,15 +323,30 @@ export const ProfileSetupFlow: React.FC = () => {
           personality_type: JSON.stringify(profileData.personality),
           communication_style: profileData.personality.communication_style || 'friendly',
           avatar_url: profileData.photos[0] || '', // Set first photo as avatar
+          values: profileData.values,
           created_at: new Date().toISOString()
         });
 
        if (error) throw error;
 
-      console.log('✅ Profile setup saved');
+      // Save quiz answers and mark quiz as completed
+      if (compatibilityAnswers && Object.keys(compatibilityAnswers).length > 0) {
+        await supabase
+          .from('user_events')
+          .insert({
+            user_id: user.id,
+            event_type: 'quiz_completed',
+            event_data: compatibilityAnswers
+          });
+      }
 
-      // Navigate to matches page after profile completion
-      navigate('/matches');
+      toast({
+        title: "Profile completed! 🎉",
+        description: "Your profile and compatibility quiz are complete!",
+      });
+
+      // Navigate to quiz results page
+      navigate('/quiz-results');
     } catch (error: any) {
       toast({
         title: "Error",
@@ -403,474 +358,385 @@ export const ProfileSetupFlow: React.FC = () => {
     }
   };
 
-  const renderStep = () => {
-    switch (currentStep) {
-      case 1:
-        return (
-          <div className="space-y-6">
-            <div className="text-center mb-6">
-              <h2 className="text-2xl font-bold mb-2">Let's start with the basics</h2>
-              <p className="text-muted-foreground">Tell us a little about yourself</p>
-            </div>
-
-            <div className="space-y-4">
-              <div>
-                <Label htmlFor="name">Your Name</Label>
-                <Input
-                  id="name"
-                  value={profileData.name}
-                  onChange={(e) => setProfileData(prev => ({ ...prev, name: e.target.value }))}
-                  placeholder="What should we call you?"
-                  className="mt-1"
-                />
-              </div>
-
-              <div>
-                <Label htmlFor="age">Age</Label>
-                <Select onValueChange={(value) => setProfileData(prev => ({ ...prev, age: value }))}>
-                  <SelectTrigger className="mt-1">
-                    <SelectValue placeholder="Select your age" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {Array.from({ length: 62 }, (_, i) => i + 18).map(age => (
-                      <SelectItem key={age} value={age.toString()}>{age}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div>
-                <Label htmlFor="location">Location</Label>
-                <Input
-                  id="location"
-                  value={profileData.location}
-                  onChange={(e) => setProfileData(prev => ({ ...prev, location: e.target.value }))}
-                  placeholder="City, State"
-                  className="mt-1"
-                />
-              </div>
-
-              <div>
-                <Label htmlFor="occupation">Occupation</Label>
-                <Select onValueChange={(value) => setProfileData(prev => ({ ...prev, occupation: value }))}>
-                  <SelectTrigger className="mt-1">
-                    <SelectValue placeholder="Select your occupation" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {occupationOptions.map(occupation => (
-                      <SelectItem key={occupation} value={occupation}>{occupation}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div>
-                <Label htmlFor="education">Education</Label>
-                <Select onValueChange={(value) => setProfileData(prev => ({ ...prev, education: value }))}>
-                  <SelectTrigger className="mt-1">
-                    <SelectValue placeholder="Select your education level" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {educationOptions.map(education => (
-                      <SelectItem key={education} value={education}>{education}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-          </div>
-        );
-
-      case 2:
-        return (
-          <div className="space-y-6">
-            <div className="text-center mb-6">
-              <h2 className="text-2xl font-bold mb-2">Tell your story</h2>
-              <p className="text-muted-foreground">Share what makes you unique</p>
-            </div>
-
-            <div>
-              <Label htmlFor="bio">About You</Label>
-              <Textarea
-                id="bio"
-                value={profileData.bio}
-                onChange={(e) => setProfileData(prev => ({ ...prev, bio: e.target.value }))}
-                placeholder="Tell us a little about yourself - your interests, what makes you unique..."
-                className="mt-1 min-h-[120px]"
-                maxLength={500}
-              />
-              <div className="text-right text-sm mt-1">
-                <span className={profileData.bio.length >= 10 ? "text-green-600" : "text-muted-foreground"}>
-                  {profileData.bio.length}/500 characters (minimum 10 required)
-                </span>
-              </div>
-            </div>
-
-            <div>
-              <Label htmlFor="looking-for">Looking For</Label>
-              <Select 
-                value={profileData.lookingFor}
-                onValueChange={(value) => setProfileData(prev => ({ ...prev, lookingFor: value }))}
-              >
-                <SelectTrigger className="mt-1">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="serious-relationship">Serious Relationship</SelectItem>
-                  <SelectItem value="casual-dating">Casual Dating</SelectItem>
-                  <SelectItem value="friendship">Friendship First</SelectItem>
-                  <SelectItem value="open-to-all">Open to All</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-        );
-
-      case 3:
-        return (
-          <div className="space-y-6">
-            <div className="text-center mb-6">
-              <h2 className="text-2xl font-bold mb-2">What do you love?</h2>
-              <p className="text-muted-foreground">Choose at least 3 interests</p>
-            </div>
-
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-              {interestOptions.map(interest => (
-                <Badge
-                  key={interest}
-                  variant={profileData.interests.includes(interest) ? "default" : "outline"}
-                  className="cursor-pointer p-3 text-center hover:scale-105 transition-transform"
-                  onClick={() => handleInterestToggle(interest)}
-                >
-                  {interest}
-                </Badge>
-              ))}
-            </div>
-
-            <div className="text-center text-sm text-muted-foreground">
-              Selected: {profileData.interests.length} (need at least 3)
-            </div>
-          </div>
-        );
-
-      case 4:
-        return (
-          <div className="space-y-6">
-            <div className="text-center mb-6">
-              <h2 className="text-xl sm:text-2xl font-bold mb-2 leading-tight">Show your best self</h2>
-              <p className="text-muted-foreground">Add at least 2 photos (up to 6)</p>
-            </div>
-
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              {Array.from({ length: 6 }).map((_, index) => (
-                <div key={index} className="aspect-square border-2 border-dashed border-muted rounded-lg flex items-center justify-center relative">
-                  {profileData.photos[index] ? (
-                    <>
-                      <img
-                        src={profileData.photos[index]}
-                        alt={`Profile ${index + 1}`}
-                        className="w-full h-full object-cover rounded-lg"
-                      />
-                      <button
-                        onClick={() => {
-                          setProfileData(prev => ({
-                            ...prev,
-                            photos: prev.photos.filter((_, i) => i !== index)
-                          }));
-                        }}
-                        className="absolute top-2 right-2 bg-red-500 text-white rounded-full p-1 w-6 h-6 flex items-center justify-center text-xs hover:bg-red-600"
-                      >
-                        ×
-                      </button>
-                      {index === 0 && (
-                        <div className="absolute bottom-2 left-2 bg-primary text-primary-foreground text-xs px-2 py-1 rounded-full">
-                          Main
-                        </div>
-                      )}
-                    </>
-                  ) : (
-                    <div className="flex flex-col items-center gap-1 sm:gap-3 p-2 sm:p-4 w-full h-full justify-center">
-                      {uploadingPhotos ? (
-                        <div className="text-center">
-                          <Upload className="h-6 w-6 sm:h-8 sm:w-8 text-primary animate-pulse mx-auto mb-1 sm:mb-2" />
-                          <span className="text-xs sm:text-sm text-muted-foreground">Uploading...</span>
-                        </div>
-                      ) : (
-                        <>
-                          <Camera className="h-8 w-8 sm:h-12 sm:w-12 text-muted-foreground mb-1 sm:mb-2" />
-                          <span className="text-xs sm:text-sm text-muted-foreground text-center">Add Photo</span>
-                          <div className="flex flex-col gap-1 sm:gap-2 w-full">
-                            <Button
-                              variant="default"
-                              size="sm"
-                              type="button"
-                              onClick={(e) => {
-                                e.preventDefault();
-                                e.stopPropagation();
-                                console.log('Camera button clicked!');
-                                console.log('Navigator.mediaDevices available:', !!navigator.mediaDevices);
-                                console.log('getUserMedia available:', !!navigator.mediaDevices?.getUserMedia);
-                                console.log('Current protocol:', window.location.protocol);
-                                if (false) {
-                                  setShowCamera(true);
-                                } else {
-                                  const input = document.getElementById(`photo-upload-${index}`) as HTMLInputElement | null;
-                                  if (input) {
-                                    input.setAttribute('capture', 'environment');
-                                    input.click();
-                                  }
-                                }
-                              }}
-                              disabled={uploadingPhotos}
-                              className="w-full text-xs sm:text-sm py-1 sm:py-2 h-7 sm:h-9"
-                            >
-                              <Camera className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
-                              Take Photo
-                            </Button>
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              type="button"
-                              onClick={(e) => {
-                                e.preventDefault();
-                                e.stopPropagation();
-                                console.log('Upload button clicked!');
-                                document.getElementById(`photo-upload-${index}`)?.click();
-                              }}
-                              disabled={uploadingPhotos}
-                              className="w-full text-xs sm:text-sm py-1 sm:py-2 h-7 sm:h-9"
-                            >
-                              <Upload className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
-                              Upload File
-                            </Button>
-                            <Button
-                              variant="secondary"
-                              size="sm"
-                              asChild
-                              disabled={uploadingPhotos}
-                              className="w-full text-xs sm:text-sm py-1 sm:py-2 h-7 sm:h-9"
-                            >
-                              <label htmlFor={`photo-upload-${index}`} className="cursor-pointer">📷 Open Camera</label>
-                            </Button>
-                          </div>
-                        </>
-                      )}
-                      <input
-                        id={`photo-upload-${index}`}
-                        type="file"
-                        accept="image/*"
-                        capture="environment"
-                        onChange={handlePhotoUpload}
-                        className="hidden"
-                        disabled={uploadingPhotos}
-                      />
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-
-            <div className="text-center text-sm text-muted-foreground">
-              Photos: {profileData.photos.length}/6 (need at least 2)
-            </div>
-          </div>
-        );
-
-      case 5:
-        return (
-          <div className="space-y-6">
-            <div className="text-center mb-6">
-              <h2 className="text-2xl font-bold mb-2">Let's understand you better</h2>
-              <p className="text-muted-foreground">Answer these quick questions</p>
-            </div>
-
-            <div className="space-y-6">
-              {personalityQuestions.map((question, index) => (
-                <div key={question.id} className="space-y-3">
-                  <h3 className="font-medium">{index + 1}. {question.question}</h3>
-                  <div className="space-y-2">
-                    {question.options.map(option => (
-                      <Button
-                        key={option.value}
-                        variant={profileData.personality[question.id] === option.value ? "default" : "outline"}
-                        className="w-full justify-start text-left h-auto py-3 px-4"
-                        onClick={() => handlePersonalityAnswer(question.id, option.value)}
-                      >
-                        {option.label}
-                      </Button>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        );
-
-      case 6:
-        return (
-          <div className="space-y-6">
-            <div className="text-center mb-6">
-              <h2 className="text-2xl font-bold mb-2">What matters to you?</h2>
-              <p className="text-muted-foreground">Choose your core values (select at least 3)</p>
-            </div>
-
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-              {valueOptions.map(value => (
-                <Badge
-                  key={value}
-                  variant={profileData.values.includes(value) ? "default" : "outline"}
-                  className="cursor-pointer p-3 text-center hover:scale-105 transition-transform"
-                  onClick={() => handleValueToggle(value)}
-                >
-                  {value}
-                </Badge>
-              ))}
-            </div>
-
-            <div className="text-center text-sm text-muted-foreground">
-              Selected: {profileData.values.length} values (need at least 3)
-            </div>
-          </div>
-        );
-
-      case 7:
-        return (
-          <div className="space-y-6">
-            <div className="text-center mb-6">
-              <h2 className="text-2xl font-bold mb-2">Compatibility Quiz</h2>
-              <p className="text-muted-foreground">Answer these questions to build your compatibility profile</p>
-            </div>
-
-            <div className="space-y-6">
-              {compatibilityQuestions.length === 0 ? (
-                <div className="text-center text-muted-foreground">
-                  <p>Loading compatibility questions...</p>
-                </div>
-              ) : (
-                compatibilityQuestions.map((question, index) => (
-                  <div key={question.id} className="space-y-4 p-4 border rounded-lg">
-                    <h3 className="font-medium text-lg">
-                      {index + 1}. {question.Text}
-                    </h3>
-                    
-                    <div className="space-y-2">
-                      {question.question_type === 'likert' ? (
-                        // Likert scale options
-                        ['strongly_disagree', 'disagree', 'neutral', 'agree', 'strongly_agree'].map((value, optionIndex) => {
-                          const labels = ['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'];
-                          return (
-                            <Button
-                              key={value}
-                              variant={compatibilityAnswers[question.id] === value ? "default" : "outline"}
-                              className="w-full justify-start text-left h-auto py-3 px-4"
-                              onClick={() => handleCompatibilityAnswer(question.id, value)}
-                            >
-                              {labels[optionIndex]}
-                            </Button>
-                          );
-                        })
-                      ) : (
-                        // Multiple choice options
-                        question.options?.map((option, optionIndex) => (
-                          <Button
-                            key={optionIndex}
-                            variant={compatibilityAnswers[question.id] === option ? "default" : "outline"}
-                            className="w-full justify-start text-left h-auto py-3 px-4"
-                            onClick={() => handleCompatibilityAnswer(question.id, option)}
-                          >
-                            {option}
-                          </Button>
-                        ))
-                      )}
-                    </div>
-                  </div>
-                ))
-              )}
-            </div>
-
-            {compatibilityQuestions.length > 0 && (
-              <div className="text-center text-sm text-muted-foreground">
-                Answered: {Object.keys(compatibilityAnswers).length} of {compatibilityQuestions.length} questions
-              </div>
-            )}
-          </div>
-        );
-
-      default:
-        return null;
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-muted/5 to-background py-8">
-      <div className="max-w-2xl mx-auto px-4">
-        <Card>
-          <CardHeader className="text-center pb-4">
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-2 mb-3">
-              <Heart className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
-              <CardTitle className="text-lg sm:text-xl">Complete Your Profile</CardTitle>
-            </div>
-            <Progress value={progress} className="w-full mb-2" />
-            <p className="text-xs sm:text-sm text-muted-foreground">
-              Step {currentStep} of {totalSteps}
-            </p>
-          </CardHeader>
+    <div className="min-h-screen bg-background">
+      <div className="max-w-4xl mx-auto p-4 pt-8">
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold mb-4">Complete Your Profile</h1>
+          <p className="text-xl text-muted-foreground mb-6">
+            Fill out all sections below to create your complete profile and compatibility quiz
+          </p>
+          <Progress value={progress} className="w-full max-w-md mx-auto" />
+        </div>
 
-          <CardContent>
-            {renderStep()}
+        <div className="space-y-8">
+          {/* Basic Information */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Heart className="h-5 w-5" />
+                Basic Information
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="grid md:grid-cols-2 gap-4">
+                <div>
+                  <Label htmlFor="name">Your Name *</Label>
+                  <Input
+                    id="name"
+                    value={profileData.name}
+                    onChange={(e) => setProfileData(prev => ({ ...prev, name: e.target.value }))}
+                    placeholder="What should we call you?"
+                    className="mt-1"
+                  />
+                </div>
 
-            <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mt-8">
-              <Button
-                variant="outline"
-                onClick={handleBack}
-                disabled={currentStep === 1}
-                className="w-full sm:w-auto"
-              >
-                <ArrowLeft className="h-4 w-4 mr-2" />
-                Back
-              </Button>
+                <div>
+                  <Label htmlFor="age">Age *</Label>
+                  <Select onValueChange={(value) => setProfileData(prev => ({ ...prev, age: value }))}>
+                    <SelectTrigger className="mt-1">
+                      <SelectValue placeholder="Select your age" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {Array.from({ length: 62 }, (_, i) => i + 18).map(age => (
+                        <SelectItem key={age} value={age.toString()}>{age}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
 
-              <div className="flex flex-col items-center sm:items-end">
-                {currentStep === totalSteps ? (
-                  <Button
-                    onClick={handleComplete}
-                    disabled={!validateStep() || loading || uploadingPhotos}
-                    className="bg-primary hover:bg-primary/90 w-full sm:w-auto"
-                  >
-                    {loading ? (
-                      "Saving..."
-                    ) : uploadingPhotos ? (
-                      "Uploading Photos..."
-                    ) : (
-                      <>
-                        Complete Profile
-                        <CheckCircle className="h-4 w-4 ml-2" />
-                      </>
-                    )}
-                  </Button>
-                ) : (
-                  <Button
-                    onClick={handleNext}
-                    disabled={!validateStep()}
-                    className="w-full sm:w-auto"
-                  >
-                    Next
-                    <ArrowRight className="h-4 w-4 ml-2" />
-                  </Button>
-                )}
-                <p className="text-xs text-muted-foreground mt-1 text-center sm:text-right">
-                  All fields required to save
+                <div>
+                  <Label htmlFor="location">Location *</Label>
+                  <Input
+                    id="location"
+                    value={profileData.location}
+                    onChange={(e) => setProfileData(prev => ({ ...prev, location: e.target.value }))}
+                    placeholder="City, State"
+                    className="mt-1"
+                  />
+                </div>
+
+                <div>
+                  <Label htmlFor="occupation">Occupation *</Label>
+                  <Select onValueChange={(value) => setProfileData(prev => ({ ...prev, occupation: value }))}>
+                    <SelectTrigger className="mt-1">
+                      <SelectValue placeholder="Select your occupation" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {occupationOptions.map(occupation => (
+                        <SelectItem key={occupation} value={occupation}>{occupation}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div className="md:col-span-2">
+                  <Label htmlFor="education">Education *</Label>
+                  <Select onValueChange={(value) => setProfileData(prev => ({ ...prev, education: value }))}>
+                    <SelectTrigger className="mt-1">
+                      <SelectValue placeholder="Select your education level" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {educationOptions.map(education => (
+                        <SelectItem key={education} value={education}>{education}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* About You */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Tell Your Story</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div>
+                <Label htmlFor="bio">About You * (minimum 10 characters)</Label>
+                <Textarea
+                  id="bio"
+                  value={profileData.bio}
+                  onChange={(e) => setProfileData(prev => ({ ...prev, bio: e.target.value }))}
+                  placeholder="Tell us about yourself - your interests, what makes you unique..."
+                  className="mt-1 min-h-[120px]"
+                  maxLength={500}
+                />
+                <p className="text-sm text-muted-foreground mt-1">
+                  {profileData.bio.length}/500 characters
                 </p>
               </div>
-            </div>
-          </CardContent>
-        </Card>
-        
-        <CameraCapture
-          isOpen={showCamera}
-          onClose={() => setShowCamera(false)}
-          onCapture={handleCameraCapture}
-        />
+
+              <div className="mt-6">
+                <Label htmlFor="lookingFor">What are you looking for?</Label>
+                <Select value={profileData.lookingFor} onValueChange={(value) => setProfileData(prev => ({ ...prev, lookingFor: value }))}>
+                  <SelectTrigger className="mt-1">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="serious-relationship">Serious Relationship</SelectItem>
+                    <SelectItem value="casual-dating">Casual Dating</SelectItem>
+                    <SelectItem value="friendship">Friendship</SelectItem>
+                    <SelectItem value="not-sure">Not Sure Yet</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Interests */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Your Interests</CardTitle>
+              <CardDescription>Select at least 3 things you love (select up to 10)</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="flex flex-wrap gap-2">
+                {interestOptions.map(interest => (
+                  <Badge
+                    key={interest}
+                    variant={profileData.interests.includes(interest) ? "default" : "outline"}
+                    className="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors"
+                    onClick={() => handleInterestToggle(interest)}
+                  >
+                    {interest}
+                  </Badge>
+                ))}
+              </div>
+              <p className="text-sm text-muted-foreground mt-4">
+                Selected: {profileData.interests.length}/10
+              </p>
+            </CardContent>
+          </Card>
+
+          {/* Photos */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Camera className="h-5 w-5" />
+                Add Your Photos
+              </CardTitle>
+              <CardDescription>Add at least 2 photos (up to 6 total)</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                {profileData.photos.map((photo, index) => (
+                  <div key={index} className="aspect-square bg-muted rounded-lg overflow-hidden">
+                    <img src={photo} alt={`Profile ${index + 1}`} className="w-full h-full object-cover" />
+                  </div>
+                ))}
+                
+                {profileData.photos.length < 6 && (
+                  <>
+                    <div className="aspect-square border-2 border-dashed border-muted-foreground/25 rounded-lg flex flex-col items-center justify-center cursor-pointer hover:border-primary/50 transition-colors">
+                      <input
+                        type="file"
+                        accept="image/*"
+                        multiple
+                        onChange={handlePhotoUpload}
+                        className="hidden"
+                        id="photo-upload"
+                        disabled={uploadingPhotos}
+                      />
+                      <label htmlFor="photo-upload" className="cursor-pointer text-center p-2">
+                        <Upload className="h-4 w-4 mx-auto mb-1 text-muted-foreground" />
+                        <p className="text-xs text-muted-foreground text-center">Upload Photos</p>
+                      </label>
+                    </div>
+
+                    <div className="aspect-square border-2 border-dashed border-muted-foreground/25 rounded-lg flex flex-col items-center justify-center cursor-pointer hover:border-primary/50 transition-colors">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => setShowCamera(true)}
+                        className="h-full w-full flex-col gap-1"
+                        disabled={uploadingPhotos}
+                      >
+                        <Camera className="h-4 w-4 text-muted-foreground" />
+                        <p className="text-xs text-muted-foreground text-center">Take Photo</p>
+                      </Button>
+                    </div>
+                  </>
+                )}
+              </div>
+              
+              {uploadingPhotos && (
+                <div className="mt-4 text-center text-sm text-muted-foreground">
+                  Uploading photos...
+                </div>
+              )}
+
+              <p className="text-sm text-muted-foreground mt-4">
+                Added: {profileData.photos.length}/6 photos
+              </p>
+            </CardContent>
+          </Card>
+
+          {/* Personality Questions */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Personality Questions</CardTitle>
+              <CardDescription>Help us understand your personality</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              {personalityQuestions.map(question => (
+                <div key={question.id} className="space-y-3">
+                  <Label className="text-base font-medium">{question.question}</Label>
+                  <div className="space-y-2">
+                    {question.options.map(option => (
+                      <label
+                        key={option.value}
+                        className="flex items-center space-x-2 cursor-pointer p-3 rounded-lg border hover:bg-muted/50 transition-colors"
+                      >
+                        <input
+                          type="radio"
+                          name={question.id}
+                          value={option.value}
+                          checked={profileData.personality[question.id] === option.value}
+                          onChange={(e) => handlePersonalityAnswer(question.id, e.target.value)}
+                          className="sr-only"
+                        />
+                        <div className={`w-4 h-4 rounded-full border-2 ${
+                          profileData.personality[question.id] === option.value
+                            ? 'bg-primary border-primary'
+                            : 'border-muted-foreground'
+                        }`} />
+                        <span className="text-sm">{option.label}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+
+          {/* Values */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Your Values</CardTitle>
+              <CardDescription>Select at least 2 values that are important to you</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="flex flex-wrap gap-2">
+                {valueOptions.map(value => (
+                  <Badge
+                    key={value}
+                    variant={profileData.values.includes(value) ? "default" : "outline"}
+                    className="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors"
+                    onClick={() => handleValueToggle(value)}
+                  >
+                    {value}
+                  </Badge>
+                ))}
+              </div>
+              <p className="text-sm text-muted-foreground mt-4">
+                Selected: {profileData.values.length} values
+              </p>
+            </CardContent>
+          </Card>
+
+          {/* Compatibility Quiz */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Compatibility Quiz</CardTitle>
+              <CardDescription>Answer these questions to help us find your best matches</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              {compatibilityQuestions.map((question, index) => (
+                <div key={question.id} className="space-y-3">
+                  <Label className="text-base font-medium">
+                    Question {index + 1}: {question.Text}
+                  </Label>
+                  <div className="space-y-2">
+                    {question.question_type === 'likert' ? (
+                      // Likert scale options
+                      <>
+                        {[
+                          { value: 'strongly_disagree', label: 'Strongly Disagree' },
+                          { value: 'disagree', label: 'Disagree' },
+                          { value: 'neutral', label: 'Neutral' },
+                          { value: 'agree', label: 'Agree' },
+                          { value: 'strongly_agree', label: 'Strongly Agree' }
+                        ].map(option => (
+                          <label
+                            key={option.value}
+                            className="flex items-center space-x-2 cursor-pointer p-3 rounded-lg border hover:bg-muted/50 transition-colors"
+                          >
+                            <input
+                              type="radio"
+                              name={`question_${question.id}`}
+                              value={option.value}
+                              checked={compatibilityAnswers[question.id] === option.value}
+                              onChange={(e) => handleCompatibilityAnswer(question.id, e.target.value)}
+                              className="sr-only"
+                            />
+                            <div className={`w-4 h-4 rounded-full border-2 ${
+                              compatibilityAnswers[question.id] === option.value
+                                ? 'bg-primary border-primary'
+                                : 'border-muted-foreground'
+                            }`} />
+                            <span className="text-sm">{option.label}</span>
+                          </label>
+                        ))}
+                      </>
+                    ) : (
+                      // Multiple choice options
+                      question.options?.map((option, optionIndex) => (
+                        <label
+                          key={optionIndex}
+                          className="flex items-center space-x-2 cursor-pointer p-3 rounded-lg border hover:bg-muted/50 transition-colors"
+                        >
+                          <input
+                            type="radio"
+                            name={`question_${question.id}`}
+                            value={option}
+                            checked={compatibilityAnswers[question.id] === option}
+                            onChange={(e) => handleCompatibilityAnswer(question.id, e.target.value)}
+                            className="sr-only"
+                          />
+                          <div className={`w-4 h-4 rounded-full border-2 ${
+                            compatibilityAnswers[question.id] === option
+                              ? 'bg-primary border-primary'
+                              : 'border-muted-foreground'
+                          }`} />
+                          <span className="text-sm">{option}</span>
+                        </label>
+                      ))
+                    )}
+                  </div>
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+
+          {/* Submit Button */}
+          <div className="text-center py-8">
+            <Button 
+              size="lg" 
+              onClick={handleComplete}
+              disabled={loading || !validateForm()}
+              className="px-8"
+            >
+              {loading ? 'Completing Profile...' : 'Complete Profile & Quiz'}
+            </Button>
+            
+            {!validateForm() && (
+              <p className="text-sm text-muted-foreground mt-2">
+                Please complete all required fields above
+              </p>
+            )}
+          </div>
+        </div>
+
+        {/* Camera Modal */}
+        {showCamera && (
+          <CameraCapture
+            isOpen={showCamera}
+            onCapture={handleCameraCapture}
+            onClose={() => setShowCamera(false)}
+          />
+        )}
       </div>
     </div>
   );
