@@ -141,14 +141,14 @@ const BrowseProfiles = () => {
                 aria-describedby={`profile-description-${profile.id}`}
               >
                 <div className="relative overflow-hidden">
-                  <div className="aspect-[4/3] bg-gradient-to-br from-primary/10 to-secondary/10">
+                  <div className="aspect-[3/4] bg-gradient-to-br from-primary/10 to-secondary/10">
                     <Avatar className="w-full h-full rounded-none">
                       <AvatarImage 
                         src={profile.photos[0]} 
                         alt={`${profile.name}'s profile photo showing ${profile.vibeTag} personality`}
-                        className="object-cover blur-sm group-hover:blur-none transition-all duration-500"
+                        className="object-cover"
                       />
-                      <AvatarFallback className="w-full h-full rounded-none text-4xl">
+                      <AvatarFallback className="w-full h-full rounded-none text-2xl">
                         {profile.name.split(' ').map(n => n[0]).join('')}
                       </AvatarFallback>
                     </Avatar>
