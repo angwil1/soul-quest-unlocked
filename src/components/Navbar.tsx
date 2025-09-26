@@ -106,6 +106,7 @@ export const Navbar = () => {
     { name: "Matches", href: "/matches" },  
     { name: "Messages", href: "/messages" },
     { name: "Memory Vault", href: "/memory-vault" },
+    { name: "Dating Tips", href: "/dating-tips" },
     { name: "Pricing", href: "/pricing" },
     { name: "FAQ", href: "/faq" },
   ];

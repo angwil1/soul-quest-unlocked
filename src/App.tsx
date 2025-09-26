@@ -41,6 +41,7 @@ import SafetyCenter from "./pages/SafetyCenter";
 import SampleUserProfile from "./pages/SampleUserProfile";
 import TestQuietStart from "./pages/TestQuietStart";
 import TestSubscriptionFeatures from "./pages/TestSubscriptionFeatures";
+import DatingTips from "./pages/DatingTips";
 import NotFound from "./pages/NotFound";
 import ResetPassword from "./pages/ResetPassword";
 import PaymentSuccess from "./pages/PaymentSuccess";
@@ -191,6 +192,7 @@ const App = () => {
               <Route path="/feature-test" element={<FeatureTest />} />
               <Route path="/test-quiet-start" element={<TestQuietStart />} />
               <Route path="/test-subscription-features" element={<TestSubscriptionFeatures />} />
+              <Route path="/dating-tips" element={<DatingTips />} />
               <Route path="/safety" element={<SafetyCenter />} />
               <Route path="/sample-user-profile/:profileId" element={<SampleUserProfile />} />
               <Route path="*" element={<NotFound />} />
