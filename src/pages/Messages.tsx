@@ -430,25 +430,41 @@ const Messages = () => {
           </div>
         </div>
 
-        <div className={`grid gap-6 h-[600px] ${showAIDigest ? 'grid-cols-1 md:grid-cols-4' : 'grid-cols-1 md:grid-cols-3'}`}>
+        <div className={`grid gap-6 h-[600px] animate-fade-in ${showAIDigest ? 'grid-cols-1 md:grid-cols-4' : 'grid-cols-1 md:grid-cols-3'}`}>
           {/* Matches List */}
           <Card 
-            className="md:col-span-1"
+            className="md:col-span-1 bg-gradient-to-br from-background via-background to-muted/20 border-muted/40 shadow-lg hover:shadow-xl transition-all duration-300"
             role="region"
             aria-labelledby="matches-list-title"
           >
-            <CardHeader>
-              <CardTitle id="matches-list-title">Your Matches</CardTitle>
+            <CardHeader className="border-b border-muted/30 bg-gradient-to-r from-primary/5 to-transparent">
+              <CardTitle id="matches-list-title" className="text-foreground font-semibold flex items-center gap-2">
+                <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+                  <div className="w-3 h-3 rounded-full bg-primary animate-pulse"></div>
+                </div>
+                Your Matches
+              </CardTitle>
             </CardHeader>
             <CardContent className="p-0">
               <ScrollArea className="h-[500px]">
                 {loading ? (
-                  <div className="p-4 text-center text-muted-foreground" role="status" aria-live="polite">
-                    Loading matches...
+                  <div className="p-6 text-center text-muted-foreground animate-pulse" role="status" aria-live="polite">
+                    <div className="flex items-center justify-center space-x-2">
+                      <div className="w-2 h-2 bg-primary rounded-full animate-bounce"></div>
+                      <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
+                      <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
+                    </div>
+                    <p className="mt-2">Loading matches...</p>
                   </div>
                 ) : matches.length === 0 ? (
-                  <div className="p-4 text-center text-muted-foreground space-y-4" role="region" aria-label="No matches available">
-                    <p>No matches yet. Start matching to begin chatting!</p>
+                  <div className="p-6 text-center text-muted-foreground space-y-4 animate-fade-in" role="region" aria-label="No matches available">
+                    <div className="w-16 h-16 mx-auto rounded-full bg-muted/30 flex items-center justify-center">
+                      <div className="text-2xl">💫</div>
+                    </div>
+                    <div>
+                      <p className="font-medium">No matches yet</p>
+                      <p className="text-sm text-muted-foreground/70">Start matching to begin chatting!</p>
+                    </div>
                   </div>
                 ) : (
                   <div role="listbox" aria-label="Your matches" aria-activedescendant={selectedMatch ? `match-${selectedMatch}` : undefined}>
@@ -459,8 +475,10 @@ const Messages = () => {
                         role="option"
                         tabIndex={0}
                         aria-selected={selectedMatch === match.id}
-                        className={`p-4 border-b cursor-pointer hover:bg-muted/50 transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-inset ${
-                          selectedMatch === match.id ? 'bg-muted' : ''
+                        className={`group p-4 border-b border-muted/20 cursor-pointer transition-all duration-200 hover:bg-gradient-to-r hover:from-primary/5 hover:to-transparent focus:outline-none focus:ring-2 focus:ring-primary/20 focus:ring-inset hover-scale ${
+                          selectedMatch === match.id 
+                            ? 'bg-gradient-to-r from-primary/10 to-primary/5 border-l-4 border-l-primary shadow-sm' 
+                            : 'hover:shadow-sm'
                         }`}
                         onClick={() => handleMatchSelect(match.id)}
                         onKeyDown={(e) => {
@@ -470,12 +488,21 @@ const Messages = () => {
                           }
                         }}
                       >
-                        <div className="font-medium">{match.other_user.name}</div>
-                        <div className="text-sm text-muted-foreground truncate">
-                          {match.latest_message}
-                        </div>
-                        <div className="text-xs text-muted-foreground mt-1">
-                          {format(new Date(match.created_at), 'MMM d, h:mm a')}
+                        <div className="flex items-center space-x-3">
+                          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center font-medium text-primary group-hover:scale-110 transition-transform duration-200">
+                            {match.other_user.name?.charAt(0) || '?'}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="font-medium text-foreground group-hover:text-primary transition-colors duration-200">
+                              {match.other_user.name}
+                            </div>
+                            <div className="text-sm text-muted-foreground truncate">
+                              {match.latest_message}
+                            </div>
+                            <div className="text-xs text-muted-foreground/60 mt-1">
+                              {format(new Date(match.created_at), 'MMM d, h:mm a')}
+                            </div>
+                          </div>
                         </div>
                       </div>
                     ))}
@@ -487,44 +514,64 @@ const Messages = () => {
 
           {/* Chat Area */}
           <Card 
-            className={`${showAIDigest ? 'md:col-span-2' : 'md:col-span-2'}`}
+            className={`${showAIDigest ? 'md:col-span-2' : 'md:col-span-2'} bg-gradient-to-br from-background via-background to-muted/10 border-muted/40 shadow-lg hover:shadow-xl transition-all duration-300`}
             role="region"
             aria-labelledby="chat-area-title"
           >
-            <CardHeader>
-              <CardTitle id="chat-area-title">
-                {selectedMatch 
-                  ? matches.find(m => m.id === selectedMatch)?.other_user.name 
-                  : 'Select a match to chat'}
+            <CardHeader className="border-b border-muted/30 bg-gradient-to-r from-primary/5 to-transparent">
+              <CardTitle id="chat-area-title" className="text-foreground font-semibold flex items-center gap-3">
+                {selectedMatch ? (
+                  <>
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center font-medium text-primary">
+                      {matches.find(m => m.id === selectedMatch)?.other_user.name?.charAt(0) || '?'}
+                    </div>
+                    <div>
+                      <div>{matches.find(m => m.id === selectedMatch)?.other_user.name}</div>
+                      <div className="text-xs text-muted-foreground font-normal">Online now</div>
+                    </div>
+                  </>
+                ) : (
+                  <div className="flex items-center gap-2">
+                    <div className="w-8 h-8 rounded-full bg-muted/30 flex items-center justify-center">
+                      <div className="text-lg">💬</div>
+                    </div>
+                    Select a match to chat
+                  </div>
+                )}
               </CardTitle>
             </CardHeader>
-            <CardContent className="flex flex-col h-[500px]">
+            <CardContent className="flex flex-col h-[500px] p-0">
               {selectedMatch ? (
                 <>
                   {/* Messages */}
                   <ScrollArea 
-                    className="flex-1 mb-4"
+                    className="flex-1 p-4"
                     role="log"
                     aria-label="Chat messages"
                     aria-live="polite"
                   >
-                    <div className="space-y-4 p-4">
-                      {messages.map((message) => (
+                    <div className="space-y-4">
+                      {messages.map((message, index) => (
                         <div
                           key={message.id}
-                          className={`flex ${message.sender_id === user.id ? 'justify-end' : 'justify-start'}`}
+                          className={`flex animate-fade-in ${message.sender_id === user.id ? 'justify-end' : 'justify-start'}`}
                           role="group"
                           aria-label={`Message from ${message.sender_id === user.id ? 'you' : matches.find(m => m.id === selectedMatch)?.other_user.name || 'other user'} at ${format(new Date(message.created_at), 'h:mm a')}`}
+                          style={{animationDelay: `${index * 0.05}s`}}
                         >
                           <div
-                            className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
+                            className={`max-w-xs lg:max-w-md px-4 py-3 rounded-2xl shadow-sm transition-all duration-200 hover:shadow-md ${
                               message.sender_id === user.id
-                                ? 'bg-primary text-primary-foreground'
-                                : 'bg-muted'
+                                ? 'bg-gradient-to-br from-primary to-primary/90 text-primary-foreground ml-12'
+                                : 'bg-gradient-to-br from-muted/80 to-muted mr-12 border border-muted/40'
                             }`}
                           >
-                            <div>{message.message_text}</div>
-                            <div className="text-xs opacity-70 mt-1">
+                            <div className="leading-relaxed">{message.message_text}</div>
+                            <div className={`text-xs mt-2 ${
+                              message.sender_id === user.id 
+                                ? 'text-primary-foreground/70' 
+                                : 'text-muted-foreground/70'
+                            }`}>
                               {format(new Date(message.created_at), 'h:mm a')}
                             </div>
                           </div>
@@ -534,85 +581,95 @@ const Messages = () => {
                   </ScrollArea>
 
                    {/* Message Input */}
-                   <div className="flex gap-2" role="group" aria-label="Send message">
-                     <Input
-                       value={newMessage}
-                       onChange={(e) => setNewMessage(e.target.value)}
-                       placeholder={
-                         !canSendMessage 
-                           ? "Daily message limit reached - Upgrade to Premium"
-                           : "Type a message..."
-                       }
-                       onKeyPress={(e) => {
-                         if (e.key === 'Enter' && !e.shiftKey) {
-                           e.preventDefault();
-                           sendMessage();
+                   <div className="p-4 border-t border-muted/30 bg-gradient-to-r from-transparent to-muted/5">
+                     <div className="flex gap-3" role="group" aria-label="Send message">
+                       <Input
+                         value={newMessage}
+                         onChange={(e) => setNewMessage(e.target.value)}
+                         placeholder={
+                           !canSendMessage 
+                             ? "Daily message limit reached - Upgrade to Premium"
+                             : "Type a message..."
                          }
-                       }}
-                       disabled={!canSendMessage}
-                       className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
-                       aria-label="Type your message"
-                       aria-describedby="send-button"
-                     />
-                     <Button 
-                       onClick={generateAIEmojis}
-                       disabled={!canSendMessage || !newMessage.trim() || isGeneratingEmojis}
-                       variant="outline"
-                       size="icon"
-                       className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
-                       aria-label="Generate AI emoji"
-                       title="Add AI-generated emoji"
-                     >
-                       <Sparkles className={`h-4 w-4 ${isGeneratingEmojis ? 'animate-spin' : ''}`} aria-hidden="true" />
-                     </Button>
-                     <Button 
-                       id="send-button"
-                       onClick={sendMessage} 
-                       disabled={!canSendMessage || !newMessage.trim()}
-                       className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
-                       aria-label="Send message"
-                     >
-                       <Send className="h-4 w-4" aria-hidden="true" />
-                     </Button>
+                         onKeyPress={(e) => {
+                           if (e.key === 'Enter' && !e.shiftKey) {
+                             e.preventDefault();
+                             sendMessage();
+                           }
+                         }}
+                         disabled={!canSendMessage}
+                         className="flex-1 rounded-xl border-muted/40 bg-background/50 backdrop-blur-sm focus:ring-2 focus:ring-primary/20 focus:border-primary/40 transition-all duration-200 hover:border-primary/30"
+                         aria-label="Type your message"
+                         aria-describedby="send-button"
+                       />
+                       <Button 
+                         onClick={generateAIEmojis}
+                         disabled={!canSendMessage || !newMessage.trim() || isGeneratingEmojis}
+                         variant="outline"
+                         size="icon"
+                         className="rounded-xl border-muted/40 bg-background/50 backdrop-blur-sm hover:bg-primary/10 hover:border-primary/40 focus:ring-2 focus:ring-primary/20 transition-all duration-200 hover-scale"
+                         aria-label="Generate AI emoji"
+                         title="Add AI-generated emoji"
+                       >
+                         <Sparkles className={`h-4 w-4 ${isGeneratingEmojis ? 'animate-spin text-primary' : 'text-muted-foreground hover:text-primary'} transition-colors duration-200`} aria-hidden="true" />
+                       </Button>
+                       <Button 
+                         id="send-button"
+                         onClick={sendMessage} 
+                         disabled={!canSendMessage || !newMessage.trim()}
+                         className="rounded-xl bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200 hover-scale shadow-lg hover:shadow-xl"
+                         aria-label="Send message"
+                       >
+                         <Send className="h-4 w-4" aria-hidden="true" />
+                       </Button>
+                     </div>
                    </div>
                 </>
               ) : (
                 <>
                   <div 
-                    className="flex-1 flex items-center justify-center text-muted-foreground"
+                    className="flex-1 flex flex-col items-center justify-center text-muted-foreground space-y-4 animate-fade-in"
                     role="status"
                   >
-                    Select a match to start messaging
+                    <div className="w-24 h-24 rounded-full bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center">
+                      <div className="text-4xl">💬</div>
+                    </div>
+                    <div className="text-center">
+                      <p className="font-medium text-foreground">Ready to chat?</p>
+                      <p className="text-sm">Select a match to start messaging</p>
+                    </div>
                   </div>
-                  
+                   
                    {/* Message Input - Always Show */}
-                   <div className="flex gap-2" role="group" aria-label="Message input (disabled)">
-                     <Input
-                       value={newMessage}
-                       onChange={(e) => setNewMessage(e.target.value)}
-                       placeholder="Select a match first to send a message..."
-                       disabled={true}
-                       className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
-                       aria-label="Message input - select a match first"
-                     />
-                     <Button 
-                       onClick={generateAIEmojis}
-                       disabled={true}
-                       variant="outline"
-                       size="icon"
-                       className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
-                       aria-label="Generate AI emoji (disabled - select a match first)"
-                       title="Add AI-generated emoji (select a match first)"
-                     >
-                       <Sparkles className="h-4 w-4" aria-hidden="true" />
-                     </Button>
-                     <Button 
-                       disabled={true}
-                       className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
-                       aria-label="Send message (disabled - select a match first)"
-                     >
-                       <Send className="h-4 w-4" aria-hidden="true" />
-                     </Button>
+                   <div className="p-4 border-t border-muted/30 bg-gradient-to-r from-transparent to-muted/5">
+                     <div className="flex gap-3" role="group" aria-label="Message input (disabled)">
+                       <Input
+                         value={newMessage}
+                         onChange={(e) => setNewMessage(e.target.value)}
+                         placeholder="Select a match first to send a message..."
+                         disabled={true}
+                         className="flex-1 rounded-xl border-muted/40 bg-muted/30 backdrop-blur-sm"
+                         aria-label="Message input - select a match first"
+                       />
+                       <Button 
+                         onClick={generateAIEmojis}
+                         disabled={true}
+                         variant="outline"
+                         size="icon"
+                         className="rounded-xl border-muted/40 bg-muted/30"
+                         aria-label="Generate AI emoji (disabled - select a match first)"
+                         title="Add AI-generated emoji (select a match first)"
+                       >
+                         <Sparkles className="h-4 w-4 text-muted-foreground/50" aria-hidden="true" />
+                       </Button>
+                       <Button 
+                         disabled={true}
+                         className="rounded-xl bg-muted/30"
+                         aria-label="Send message (disabled - select a match first)"
+                       >
+                         <Send className="h-4 w-4 text-muted-foreground/50" aria-hidden="true" />
+                       </Button>
+                     </div>
                    </div>
                 </>
               )}
@@ -622,7 +679,7 @@ const Messages = () => {
           {/* AI Digest Sidebar */}
           {showAIDigest && (
             <Card 
-              className="md:col-span-1"
+              className="md:col-span-1 bg-gradient-to-br from-background via-background to-muted/20 border-muted/40 shadow-lg hover:shadow-xl transition-all duration-300 animate-slide-in-right"
               role="complementary"
               aria-labelledby="ai-digest-title"
             >
