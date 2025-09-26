@@ -8,15 +8,15 @@ import { BlockUser } from '@/components/BlockUser';
 import { SaveToVaultButton } from '@/components/SaveToVaultButton';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ArrowLeft, MessageCircle, Heart, Shield, MapPin, Briefcase, Eye } from 'lucide-react';
-import { founderCuratedProfiles } from '@/data/sampleProfiles';
+import { founderCuratedProfiles, browseProfiles } from '@/data/sampleProfiles';
 
 const SampleUserProfile = () => {
   const navigate = useNavigate();
   const { profileId } = useParams();
   const [isLiked, setIsLiked] = useState(false);
 
-  // Find the profile from the sample data
-  const profile = founderCuratedProfiles.find(p => p.id === profileId);
+  // Find the profile from both sample data arrays
+  const profile = founderCuratedProfiles.find(p => p.id === profileId) || browseProfiles.find(p => p.id === profileId);
 
   // Fallback if profile not found
   if (!profile) {
