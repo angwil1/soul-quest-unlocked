@@ -112,7 +112,7 @@ const Matches = () => {
 
         {/* Matches Grid */}
         <section 
-          className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" 
+          className="grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6" 
           aria-labelledby="matches-grid-title"
           role="region"
         >
@@ -133,36 +133,37 @@ const Matches = () => {
               >
                 <div className="relative">
                   <div className="aspect-[3/4] bg-gradient-to-br from-primary/20 to-secondary/20">
-                    <Avatar className="w-full h-full rounded-none">
+                    <Avatar className="w-full h-full rounded-lg">
                       <AvatarImage 
                         src={profile.photos[0]} 
                         alt={`${profile.name}'s profile photo - ${profile.vibeTag} vibe`}
                         className="object-cover"
                       />
-                      <AvatarFallback className="w-full h-full rounded-none text-2xl">
+                      <AvatarFallback className="w-full h-full rounded-lg text-sm">
                         {profile.name.split(' ').map(n => n[0]).join('')}
                       </AvatarFallback>
                     </Avatar>
                   </div>
                   <Badge 
-                    className="absolute top-3 right-3 bg-primary text-primary-foreground"
+                    className="absolute top-2 right-2 bg-primary text-primary-foreground text-xs px-1.5 py-0.5"
                     aria-label={`${matchScore} percent compatibility match`}
                   >
-                    <Sparkles className="h-3 w-3 mr-1" aria-hidden="true" />
-                    {matchScore}% Match
+                    <Sparkles className="h-2 w-2 mr-1" aria-hidden="true" />
+                    {matchScore}%
                   </Badge>
                 </div>
                 
-                <CardHeader className="pb-3">
+                <CardHeader className="pb-2 px-3 pt-3">
                   <div className="flex items-center justify-between">
                     <CardTitle 
                       id={`profile-name-${profile.id}`}
-                      className="text-xl"
+                      className="text-sm font-semibold"
                     >
                       {profile.name}, {profile.age}
                     </CardTitle>
                     <Badge 
                       variant="outline"
+                      className="text-xs px-1.5 py-0.5"
                       aria-label={`${profile.vibeTag} personality vibe`}
                     >
                       {profile.vibeTag}
@@ -170,39 +171,39 @@ const Matches = () => {
                   </div>
                   <div 
                     id={`profile-info-${profile.id}`}
-                    className="space-y-1 text-sm text-muted-foreground"
+                    className="space-y-1 text-xs text-muted-foreground"
                     role="group"
                     aria-label="Profile details"
                   >
                     <div className="flex items-center gap-1" role="group" aria-label="Location">
-                      <MapPin className="h-3 w-3" aria-hidden="true" />
-                      <span>{profile.location}</span>
+                      <MapPin className="h-2 w-2" aria-hidden="true" />
+                      <span className="truncate">{profile.location}</span>
                     </div>
                     <div className="flex items-center gap-1" role="group" aria-label="Occupation">
-                      <Briefcase className="h-3 w-3" aria-hidden="true" />
-                      <span>{profile.occupation}</span>
+                      <Briefcase className="h-2 w-2" aria-hidden="true" />
+                      <span className="truncate">{profile.occupation}</span>
                     </div>
                   </div>
                 </CardHeader>
                 
-                <CardContent className="pt-0">
+                <CardContent className="pt-0 px-3 pb-3">
                   <p 
-                    className="text-sm text-muted-foreground line-clamp-3 mb-4"
+                    className="text-xs text-muted-foreground line-clamp-2 mb-2"
                     aria-label={`Biography: ${profile.bio}`}
                   >
                     {profile.bio}
                   </p>
                   
                   <div 
-                    className="flex gap-2 mb-4"
+                    className="flex gap-1 mb-3"
                     role="group"
-                    aria-label={`Interests: ${profile.interests.slice(0, 3).join(', ')}`}
+                    aria-label={`Interests: ${profile.interests.slice(0, 2).join(', ')}`}
                   >
-                    {profile.interests.slice(0, 3).map((interest) => (
+                    {profile.interests.slice(0, 2).map((interest) => (
                       <Badge 
                         key={interest} 
                         variant="secondary" 
-                        className="text-xs focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                        className="text-xs px-1 py-0.5 text-[10px]"
                         tabIndex={0}
                       >
                         {interest}
@@ -210,25 +211,25 @@ const Matches = () => {
                     ))}
                   </div>
                   
-                  <div className="flex gap-2" role="group" aria-label="Profile actions">
+                  <div className="flex gap-1" role="group" aria-label="Profile actions">
                     <Button
                       variant="outline"
                       size="sm"
-                      className="flex-1 focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                      className="flex-1 text-xs px-2 py-1 h-7"
                       onClick={() => navigate(`/sample-user-profile/${profile.id}`)}
                       aria-label={`View full profile for ${profile.name}`}
                     >
-                      View Profile
+                      View
                     </Button>
                     <Button
                       size="sm"
-                      className="flex-1 focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                      className="flex-1 text-xs px-2 py-1 h-7"
                       onClick={() => handleLike(profile.id)}
                       disabled={isLiked}
                       aria-label={isLiked ? `Already liked ${profile.name}` : `Like ${profile.name}'s profile`}
                     >
                       <Heart 
-                        className={`h-4 w-4 mr-1 ${isLiked ? 'fill-current' : ''}`} 
+                        className={`h-3 w-3 mr-1 ${isLiked ? 'fill-current' : ''}`} 
                         aria-hidden="true"
                       />
                       {isLiked ? 'Liked' : 'Like'}

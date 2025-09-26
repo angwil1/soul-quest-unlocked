@@ -121,7 +121,7 @@ const BrowseProfiles = () => {
         
         {/* Profiles Grid */}
         <section 
-          className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+          className="grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6"
           role="region"
           aria-labelledby="profiles-grid-title"
         >
@@ -134,7 +134,7 @@ const BrowseProfiles = () => {
             return (
               <Card 
                 key={profile.id} 
-                className="overflow-hidden hover:shadow-xl transition-all duration-300 hover:scale-[1.02] group focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                className="overflow-hidden hover:shadow-lg transition-all duration-200 hover:scale-[1.02] group"
                 tabIndex={0}
                 role="article"
                 aria-labelledby={`profile-title-${profile.id}`}
@@ -142,40 +142,29 @@ const BrowseProfiles = () => {
               >
                 <div className="relative overflow-hidden">
                   <div className="aspect-[3/4] bg-gradient-to-br from-primary/10 to-secondary/10">
-                    <Avatar className="w-full h-full rounded-none">
+                    <Avatar className="w-full h-full rounded-lg">
                       <AvatarImage 
                         src={profile.photos[0]} 
                         alt={`${profile.name}'s profile photo showing ${profile.vibeTag} personality`}
                         className="object-cover"
                       />
-                      <AvatarFallback className="w-full h-full rounded-none text-2xl">
+                      <AvatarFallback className="w-full h-full rounded-lg text-sm">
                         {profile.name.split(' ').map(n => n[0]).join('')}
                       </AvatarFallback>
                     </Avatar>
                   </div>
                   
-                  {/* Soft overlay */}
-                  <div className="absolute inset-0 bg-black/15 group-hover:bg-black/5 transition-colors duration-300" />
-                  
-                  {/* Gradient overlay for text readability */}
-                  <div className="absolute bottom-0 left-0 right-0 h-2/3 bg-gradient-to-t from-black/40 via-black/10 to-transparent" />
-                  
-                  {/* Compatibility Score - More Subtle */}
-                  <div className="absolute top-3 right-3">
-                    <div 
-                      className="bg-background/90 backdrop-blur-md border border-border/50 rounded-full px-3 py-1.5 shadow-sm"
-                      role="status"
-                      aria-label={`${matchScore} percent compatibility match with ${profile.name}`}
-                    >
-                      <div className="flex items-center gap-1.5 text-sm font-medium">
-                        <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" aria-hidden="true"></div>
-                        <span className="text-foreground">{matchScore}% match</span>
-                      </div>
-                    </div>
-                  </div>
+                  {/* Compatibility Score - Small */}
+                  <Badge 
+                    className="absolute top-2 right-2 bg-primary text-primary-foreground text-xs px-1.5 py-0.5"
+                    aria-label={`${matchScore} percent compatibility match with ${profile.name}`}
+                  >
+                    <div className="w-1.5 h-1.5 rounded-full bg-green-400 mr-1" aria-hidden="true"></div>
+                    {matchScore}%
+                  </Badge>
 
-                  {/* Save for Later - Improved Design */}
-                  <div className="absolute top-3 left-3">
+                  {/* Save for Later - Small */}
+                  <div className="absolute top-2 left-2">
                     <SaveToVaultButton
                       type="match"
                       data={{
@@ -186,55 +175,55 @@ const BrowseProfiles = () => {
                       variant="ghost"
                       size="sm"
                       iconOnly={true}
-                      className="bg-background/90 backdrop-blur-md hover:bg-background/95 border border-border/40 rounded-full h-9 w-9 p-0 shadow-sm hover:shadow-md transition-all duration-200 focus:ring-2 focus:ring-primary focus:ring-offset-2 hover:scale-105"
+                      className="bg-background/80 backdrop-blur-sm hover:bg-background/90 border border-border/40 rounded-full h-6 w-6 p-0 shadow-sm"
                     />
                   </div>
                 </div>
                 
-                <CardHeader className="pb-3">
+                <CardHeader className="pb-2 px-3 pt-3">
                   <div className="flex items-center justify-between">
                     <CardTitle 
                       id={`profile-title-${profile.id}`}
-                      className="text-xl group-hover:text-primary transition-colors"
+                      className="text-sm font-semibold truncate"
                     >
                       {profile.name}, {profile.age}
                     </CardTitle>
                   </div>
                   <div 
-                    className="space-y-1 text-sm text-muted-foreground"
+                    className="space-y-1 text-xs text-muted-foreground"
                     role="group"
                     aria-label="Profile location and occupation"
                   >
                     <div className="flex items-center gap-1">
-                      <MapPin className="h-3 w-3 text-muted-foreground/60" aria-hidden="true" />
-                      <span>{profile.location}</span>
+                      <MapPin className="h-2 w-2 text-muted-foreground/60" aria-hidden="true" />
+                      <span className="truncate">{profile.location}</span>
                     </div>
                     <div className="flex items-center gap-1">
-                      <Briefcase className="h-3 w-3 text-muted-foreground/60" aria-hidden="true" />
-                      <span>{profile.occupation}</span>
+                      <Briefcase className="h-2 w-2 text-muted-foreground/60" aria-hidden="true" />
+                      <span className="truncate">{profile.occupation}</span>
                     </div>
                   </div>
                 </CardHeader>
                 
-                <CardContent className="pt-0">
+                <CardContent className="pt-0 px-3 pb-3">
                   <p 
                     id={`profile-description-${profile.id}`}
-                    className="text-sm text-muted-foreground line-clamp-3 mb-4 leading-relaxed"
+                    className="text-xs text-muted-foreground line-clamp-2 mb-2"
                     aria-label={`Biography: ${profile.bio}`}
                   >
                     {profile.bio}
                   </p>
                   
                   <div 
-                    className="flex gap-2 mb-6"
+                    className="flex gap-1 mb-3"
                     role="group"
-                    aria-label={`Interests include: ${profile.interests.slice(0, 3).join(', ')}`}
+                    aria-label={`Interests include: ${profile.interests.slice(0, 2).join(', ')}`}
                   >
-                    {profile.interests.slice(0, 3).map((interest) => (
+                    {profile.interests.slice(0, 2).map((interest) => (
                       <Badge 
                         key={interest} 
                         variant="secondary" 
-                        className="text-xs px-2 py-1 bg-secondary/60 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                        className="text-xs px-1 py-0.5 text-[10px]"
                         tabIndex={0}
                       >
                         {interest}
@@ -242,27 +231,27 @@ const BrowseProfiles = () => {
                     ))}
                   </div>
                   
-                  <div className="flex gap-2" role="group" aria-label="Profile actions">
+                  <div className="flex gap-1" role="group" aria-label="Profile actions">
                     <Button
                       variant="outline"
                       size="sm"
-                      className="flex-1 hover:bg-primary hover:text-primary-foreground hover:border-primary hover:scale-[1.02] transition-all duration-200 group/btn focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                      className="flex-1 text-xs px-2 py-1 h-7"
                       onClick={() => navigate(`/sample-user-profile/${profile.id}`)}
                       aria-label={`View full detailed profile for ${profile.name}`}
                     >
-                      <Eye className="h-4 w-4 mr-1.5 group-hover/btn:rotate-12 transition-transform duration-200" aria-hidden="true" />
-                      View Full Profile
+                      <Eye className="h-3 w-3 mr-1" aria-hidden="true" />
+                      View
                     </Button>
                     <Button
                       size="sm"
-                      className="flex-1 hover:scale-[1.02] transition-all duration-200 focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                      className="flex-1 text-xs px-2 py-1 h-7"
                       onClick={() => handleLike(profile.id)}
                       disabled={isLiked}
                       variant={isLiked ? "secondary" : "default"}
                       aria-label={isLiked ? `You have liked ${profile.name}'s profile` : `Like ${profile.name}'s profile`}
                     >
                       <Heart 
-                        className={`h-4 w-4 mr-1.5 transition-all duration-200 ${isLiked ? 'fill-current scale-110 text-red-500' : 'hover:scale-110'}`} 
+                        className={`h-3 w-3 mr-1 ${isLiked ? 'fill-current scale-110 text-red-500' : ''}`} 
                         aria-hidden="true"
                       />
                       {isLiked ? 'Liked' : 'Like'}
