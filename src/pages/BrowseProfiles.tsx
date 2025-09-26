@@ -27,29 +27,17 @@ const BrowseProfiles = () => {
   const [distancePreference, setDistancePreference] = useState<number>(50);
   const [filteredProfiles, setFilteredProfiles] = useState<SampleProfile[]>(browseProfiles);
 
-  // Handle zip code update with debouncing
+  // Handle zip code update (local only, doesn't save to profile)
   const handleZipCodeChange = (value: string) => {
     setZipCode(value);
-    
-    // Auto-save zip code to profile after user stops typing (debounced)
-    if (profile && value.length === 5 && /^\d{5}$/.test(value)) {
-      setTimeout(() => {
-        updateProfile({ zip_code: value });
-      }, 1000);
-    }
+    // Note: This is just for local filtering, doesn't update the profile
   };
 
-  // Handle distance preference update
+  // Handle distance preference update (local only, doesn't save to profile)
   const handleDistanceChange = (value: number[]) => {
     const newDistance = value[0];
     setDistancePreference(newDistance);
-    
-    // Auto-save distance preference to profile
-    if (profile) {
-      setTimeout(() => {
-        updateProfile({ distance_preference: newDistance });
-      }, 500);
-    }
+    // Note: This is just for local filtering, doesn't update the profile
   };
 
   // Initialize filters from user profile
