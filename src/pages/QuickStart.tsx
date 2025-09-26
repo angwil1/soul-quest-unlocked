@@ -25,6 +25,8 @@ const QuickStart = () => {
   // More realistic completeness check - just need name and basic preferences
   const isProfileComplete = profile?.name && profile?.gender && profile?.looking_for;
   const canTakeQuiz = user && isProfileComplete;
+  // Check if user has completed the quiz/onboarding
+  const hasCompletedQuiz = profile?.interests?.length > 0 || profile?.bio;
 
   const handleStepClick = (step: number) => {
     console.log('Step clicked:', step, { user: !!user, isProfileComplete });
@@ -222,52 +224,68 @@ const QuickStart = () => {
                    </div>
                  </div>
 
-                 {/* Step 3 */}
-                 <div className="bg-gradient-to-r from-pink-500/5 to-primary/5 border-2 border-pink-500/20 rounded-xl p-4 md:p-6 hover:shadow-lg transition-all duration-300">
-                   <div className="flex flex-col sm:flex-row items-start gap-4 md:gap-6">
-                     <div className="flex-shrink-0 self-center sm:self-start">
-                       <div className="relative">
-                         <div className={`w-12 h-12 md:w-16 md:h-16 rounded-full text-white flex items-center justify-center text-lg md:text-2xl font-bold shadow-lg ${
-                           canTakeQuiz 
-                             ? "bg-gradient-to-r from-pink-500 to-primary" 
-                             : "bg-muted text-muted-foreground"
-                         }`}>
-                           {canTakeQuiz ? "3" : <Lock className="h-6 w-6 md:h-8 md:w-8" />}
-                         </div>
-                       </div>
-                     </div>
-                      <div className="flex-grow min-w-0 text-center sm:text-left">
-                        <h3 className="font-bold text-lg md:text-xl mb-2 text-foreground">Complete Onboarding Quiz</h3>
-                        <p className="text-muted-foreground mb-4 text-sm leading-relaxed">
-                          Take our one-time personality quiz to set up your compatibility profile and enable AI matching
-                        </p>
-                       <div className="flex items-center justify-center sm:justify-start gap-2 mb-4">
-                         {canTakeQuiz ? (
-                           <div className="flex items-center gap-2">
-                             <Brain className="h-4 w-4 text-pink-500" />
-                             <span className="text-sm text-pink-500 font-medium">Ready to begin</span>
-                           </div>
-                         ) : (
-                           <div className="flex items-center gap-2">
-                             <Lock className="h-4 w-4 text-muted-foreground" />
-                             <span className="text-sm text-muted-foreground font-medium">Complete Steps 1 & 2</span>
-                           </div>
-                         )}
-                       </div>
-                       <Button 
-                         onClick={() => handleStepClick(3)}
-                         className={`w-full sm:w-auto min-w-0 text-sm ${
-                           canTakeQuiz 
-                             ? "bg-gradient-to-r from-pink-500 to-primary hover:from-pink-600 hover:to-primary/90 text-white"
-                             : "bg-muted text-muted-foreground cursor-not-allowed"
-                         }`}
-                         disabled={!canTakeQuiz}
-                       >
-                         {canTakeQuiz ? "Start Quiz" : "Complete Previous Steps"}
-                       </Button>
-                     </div>
-                   </div>
-                 </div>
+                  {/* Step 3 */}
+                  <div className={`bg-gradient-to-r from-pink-500/5 to-primary/5 border-2 rounded-xl p-4 md:p-6 hover:shadow-lg transition-all duration-300 ${
+                    hasCompletedQuiz ? "border-green-500/20" : "border-pink-500/20"
+                  }`}>
+                    <div className="flex flex-col sm:flex-row items-start gap-4 md:gap-6">
+                      <div className="flex-shrink-0 self-center sm:self-start">
+                        <div className="relative">
+                          <div className={`w-12 h-12 md:w-16 md:h-16 rounded-full text-white flex items-center justify-center text-lg md:text-2xl font-bold shadow-lg ${
+                            hasCompletedQuiz
+                              ? "bg-gradient-to-r from-green-500 to-green-600"
+                              : canTakeQuiz 
+                                ? "bg-gradient-to-r from-pink-500 to-primary" 
+                                : "bg-muted text-muted-foreground"
+                          }`}>
+                            {hasCompletedQuiz ? <CheckCircle className="h-6 w-6 md:h-8 md:w-8" /> : canTakeQuiz ? "3" : <Lock className="h-6 w-6 md:h-8 md:w-8" />}
+                          </div>
+                          {hasCompletedQuiz && (
+                            <div className="absolute -top-2 -right-2 w-5 h-5 md:w-6 md:h-6 rounded-full bg-green-500 flex items-center justify-center">
+                              <CheckCircle className="h-3 w-3 md:h-4 md:w-4 text-white" />
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                       <div className="flex-grow min-w-0 text-center sm:text-left">
+                         <h3 className="font-bold text-lg md:text-xl mb-2 text-foreground">Complete Onboarding Quiz</h3>
+                         <p className="text-muted-foreground mb-4 text-sm leading-relaxed">
+                           Take our one-time personality quiz to set up your compatibility profile and enable AI matching
+                         </p>
+                        <div className="flex items-center justify-center sm:justify-start gap-2 mb-4">
+                          {hasCompletedQuiz ? (
+                            <div className="flex items-center gap-2">
+                              <CheckCircle className="h-4 w-4 text-green-500" />
+                              <span className="text-sm text-green-600 font-medium">✓ Complete</span>
+                            </div>
+                          ) : canTakeQuiz ? (
+                            <div className="flex items-center gap-2">
+                              <Brain className="h-4 w-4 text-pink-500" />
+                              <span className="text-sm text-pink-500 font-medium">Ready to begin</span>
+                            </div>
+                          ) : (
+                            <div className="flex items-center gap-2">
+                              <Lock className="h-4 w-4 text-muted-foreground" />
+                              <span className="text-sm text-muted-foreground font-medium">Complete Steps 1 & 2</span>
+                            </div>
+                          )}
+                        </div>
+                        <Button 
+                          onClick={() => handleStepClick(3)}
+                          className={`w-full sm:w-auto min-w-0 text-sm ${
+                            hasCompletedQuiz
+                              ? "bg-green-500 hover:bg-green-600 text-white"
+                              : canTakeQuiz 
+                                ? "bg-gradient-to-r from-pink-500 to-primary hover:from-pink-600 hover:to-primary/90 text-white"
+                                : "bg-muted text-muted-foreground cursor-not-allowed"
+                          }`}
+                          disabled={!canTakeQuiz || !!hasCompletedQuiz}
+                        >
+                          {hasCompletedQuiz ? "✓ Quiz Complete" : canTakeQuiz ? "Start Quiz" : "Complete Previous Steps"}
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
               </div>
             </CardContent>
           </Card>
