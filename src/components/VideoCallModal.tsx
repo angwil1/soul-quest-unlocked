@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Video, VideoOff, Mic, MicOff, Phone, Eye, EyeOff } from 'lucide-react';
+import { Video, VideoOff, Mic, MicOff, Phone, Eye, EyeOff, Sparkles, Palette } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 interface VideoCallModalProps {
@@ -20,8 +20,19 @@ const VideoCallModal = ({ isOpen, onClose, matchName, onCallStart }: VideoCallMo
   const [isAudioEnabled, setIsAudioEnabled] = useState(true);
   const [isBlurred, setIsBlurred] = useState(true);
   const [isCountingDown, setIsCountingDown] = useState(false);
+  const [currentFilter, setCurrentFilter] = useState('none');
   const videoRef = useRef<HTMLVideoElement>(null);
   const [stream, setStream] = useState<MediaStream | null>(null);
+
+  const videoFilters = [
+    { name: 'None', value: 'none', css: '' },
+    { name: 'Warm', value: 'warm', css: 'sepia(0.3) saturate(1.2) contrast(1.1)' },
+    { name: 'Cool', value: 'cool', css: 'hue-rotate(10deg) saturate(1.1) brightness(1.1)' },
+    { name: 'Vintage', value: 'vintage', css: 'sepia(0.5) contrast(1.2) brightness(0.9)' },
+    { name: 'Soft', value: 'soft', css: 'contrast(0.9) brightness(1.1) saturate(0.9)' },
+    { name: 'Dramatic', value: 'dramatic', css: 'contrast(1.3) saturate(1.3) brightness(0.95)' },
+    { name: 'Glow', value: 'glow', css: 'brightness(1.2) contrast(0.9) saturate(1.1)' }
+  ];
 
   const softTexts = [
     "Not here to impress. Just here.",
@@ -127,6 +138,28 @@ const VideoCallModal = ({ isOpen, onClose, matchName, onCallStart }: VideoCallMo
     setIsBlurred(!isBlurred);
   };
 
+  const cycleFilter = () => {
+    const currentIndex = videoFilters.findIndex(f => f.value === currentFilter);
+    const nextIndex = (currentIndex + 1) % videoFilters.length;
+    setCurrentFilter(videoFilters[nextIndex].value);
+    
+    toast({
+      title: "Filter changed",
+      description: `Applied ${videoFilters[nextIndex].name} filter`,
+    });
+  };
+
+  const getVideoStyle = () => {
+    const filter = videoFilters.find(f => f.value === currentFilter);
+    let style = filter?.css || '';
+    
+    if (isBlurred) {
+      style += style ? ' blur(8px)' : 'blur(8px)';
+    }
+    
+    return style;
+  };
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="w-[95vw] max-w-4xl h-[90vh] md:h-[80vh] bg-background/95 backdrop-blur-sm border-primary/20 p-3 md:p-6">
@@ -145,9 +178,8 @@ const VideoCallModal = ({ isOpen, onClose, matchName, onCallStart }: VideoCallMo
                   ref={videoRef}
                   autoPlay
                   muted
-                  className={`w-full h-full object-cover ${
-                    isBlurred ? 'blur-md' : ''
-                  } ${!isVideoEnabled ? 'hidden' : ''}`}
+                  className={`w-full h-full object-cover transition-all duration-300 ${!isVideoEnabled ? 'hidden' : ''}`}
+                  style={{ filter: getVideoStyle() }}
                 />
                 
                 {!isVideoEnabled && (
@@ -169,13 +201,21 @@ const VideoCallModal = ({ isOpen, onClose, matchName, onCallStart }: VideoCallMo
                   </div>
                 )}
 
-                {/* Blur indicator */}
-                {isBlurred && isCallActive && (
-                  <div className="absolute top-2 left-2 md:top-4 md:left-4">
-                    <Badge variant="secondary" className="bg-white/20 text-white text-xs">
-                      <Eye className="h-3 w-3 mr-1" />
-                      Blurred
-                    </Badge>
+                {/* Filter and Blur indicators */}
+                {(isBlurred || currentFilter !== 'none') && isCallActive && (
+                  <div className="absolute top-2 left-2 md:top-4 md:left-4 flex gap-2">
+                    {isBlurred && (
+                      <Badge variant="secondary" className="bg-white/20 text-white text-xs">
+                        <Eye className="h-3 w-3 mr-1" />
+                        Blurred
+                      </Badge>
+                    )}
+                    {currentFilter !== 'none' && (
+                      <Badge variant="secondary" className="bg-white/20 text-white text-xs">
+                        <Sparkles className="h-3 w-3 mr-1" />
+                        {videoFilters.find(f => f.value === currentFilter)?.name}
+                      </Badge>
+                    )}
                   </div>
                 )}
               </div>
@@ -197,6 +237,10 @@ const VideoCallModal = ({ isOpen, onClose, matchName, onCallStart }: VideoCallMo
 
                     <div className="bg-muted/50 rounded-lg p-3 md:p-4 space-y-2 text-xs md:text-sm">
                       <div className="flex items-center gap-2">
+                        <Sparkles className="h-3 w-3 md:h-4 md:w-4 text-primary flex-shrink-0" />
+                        <span>Tap through beautiful filters</span>
+                      </div>
+                      <div className="flex items-center gap-2">
                         <Eye className="h-3 w-3 md:h-4 md:w-4 text-primary flex-shrink-0" />
                         <span>Start with blur enabled for comfort</span>
                       </div>
@@ -216,43 +260,52 @@ const VideoCallModal = ({ isOpen, onClose, matchName, onCallStart }: VideoCallMo
           </div>
 
           {/* Controls */}
-          <div className="mt-4 md:mt-6 flex items-center justify-center gap-3 md:gap-4 pb-2">
+          <div className="mt-4 md:mt-6 flex items-center justify-center gap-2 md:gap-3 pb-2">
             {isCallActive ? (
               <>
                 <Button
                   variant={isVideoEnabled ? "secondary" : "destructive"}
                   size="lg"
                   onClick={toggleVideo}
-                  className="rounded-full w-12 h-12 md:w-14 md:h-14 touch-manipulation"
+                  className="rounded-full w-10 h-10 md:w-12 md:h-12 touch-manipulation"
                 >
-                  {isVideoEnabled ? <Video className="h-4 w-4 md:h-5 md:w-5" /> : <VideoOff className="h-4 w-4 md:h-5 md:w-5" />}
+                  {isVideoEnabled ? <Video className="h-3 w-3 md:h-4 md:w-4" /> : <VideoOff className="h-3 w-3 md:h-4 md:w-4" />}
                 </Button>
 
                 <Button
                   variant={isAudioEnabled ? "secondary" : "destructive"}
                   size="lg"
                   onClick={toggleAudio}
-                  className="rounded-full w-12 h-12 md:w-14 md:h-14 touch-manipulation"
+                  className="rounded-full w-10 h-10 md:w-12 md:h-12 touch-manipulation"
                 >
-                  {isAudioEnabled ? <Mic className="h-4 w-4 md:h-5 md:w-5" /> : <MicOff className="h-4 w-4 md:h-5 md:w-5" />}
+                  {isAudioEnabled ? <Mic className="h-3 w-3 md:h-4 md:w-4" /> : <MicOff className="h-3 w-3 md:h-4 md:w-4" />}
                 </Button>
 
                 <Button
                   variant={isBlurred ? "secondary" : "outline"}
                   size="lg"
                   onClick={toggleBlur}
-                  className="rounded-full w-12 h-12 md:w-14 md:h-14 touch-manipulation"
+                  className="rounded-full w-10 h-10 md:w-12 md:h-12 touch-manipulation"
                 >
-                  {isBlurred ? <EyeOff className="h-4 w-4 md:h-5 md:w-5" /> : <Eye className="h-4 w-4 md:h-5 md:w-5" />}
+                  {isBlurred ? <EyeOff className="h-3 w-3 md:h-4 md:w-4" /> : <Eye className="h-3 w-3 md:h-4 md:w-4" />}
+                </Button>
+
+                <Button
+                  variant={currentFilter !== 'none' ? "secondary" : "outline"}
+                  size="lg"
+                  onClick={cycleFilter}
+                  className="rounded-full w-10 h-10 md:w-12 md:h-12 touch-manipulation"
+                >
+                  <Palette className="h-3 w-3 md:h-4 md:w-4" />
                 </Button>
 
                 <Button
                   variant="destructive"
                   size="lg"
                   onClick={endCall}
-                  className="rounded-full w-12 h-12 md:w-14 md:h-14 touch-manipulation"
+                  className="rounded-full w-10 h-10 md:w-12 md:h-12 touch-manipulation"
                 >
-                  <Phone className="h-4 w-4 md:h-5 md:w-5 rotate-135" />
+                  <Phone className="h-3 w-3 md:h-4 md:w-4 rotate-135" />
                 </Button>
               </>
             ) : (
