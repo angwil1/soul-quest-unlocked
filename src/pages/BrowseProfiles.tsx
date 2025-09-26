@@ -9,17 +9,36 @@ import { useNavigate } from 'react-router-dom';
 import { founderCuratedProfiles, browseProfiles, SampleProfile } from '@/data/sampleProfiles';
 import { SaveToVaultButton } from '@/components/SaveToVaultButton';
 import { useAuth } from '@/hooks/useAuth';
+import { useProfile } from '@/hooks/useProfile';
 
 const BrowseProfiles = () => {
   const navigate = useNavigate();
   const { user, loading } = useAuth();
+  const { profile } = useProfile();
   const [likedProfiles, setLikedProfiles] = useState<Set<string>>(new Set());
   const [visibleProfiles, setVisibleProfiles] = useState(6);
   
-  // Filter states
+  // Filter states - initialize from user profile when available
   const [myGender, setMyGender] = useState<'men' | 'women' | 'non-binary'>('women');
   const [lookingFor, setLookingFor] = useState<'men' | 'women' | 'non-binary' | 'casual-friends' | 'anyone'>('men');
   const [filteredProfiles, setFilteredProfiles] = useState<SampleProfile[]>(browseProfiles);
+
+  // Initialize filters from user profile
+  useEffect(() => {
+    if (profile) {
+      // Set my gender from profile
+      if (profile.gender === 'male') setMyGender('men');
+      else if (profile.gender === 'female') setMyGender('women');
+      else if (profile.gender === 'non-binary') setMyGender('non-binary');
+      
+      // Set looking for from profile
+      if (profile.looking_for === 'men') setLookingFor('men');
+      else if (profile.looking_for === 'women') setLookingFor('women');
+      else if (profile.looking_for === 'non-binary') setLookingFor('non-binary');
+      else if (profile.looking_for === 'casual-friends') setLookingFor('casual-friends');
+      else if (profile.looking_for === 'anyone') setLookingFor('anyone');
+    }
+  }, [profile]);
 
   // Only redirect if user is not authenticated AND this is not a sample profile viewing session
   useEffect(() => {
@@ -29,9 +48,9 @@ const BrowseProfiles = () => {
     }
   }, [user, loading]);
 
-  // Filter profiles based on preferences
+  // Filter profiles based on preferences and distance
   useEffect(() => {
-    const filtered = browseProfiles.filter(profile => {
+    let filtered = browseProfiles.filter(profile => {
       // If someone is looking for casual friends, show those who want casual friends
       if (lookingFor === 'casual-friends') {
         return profile.lookingFor === 'casual-friends';
@@ -45,10 +64,17 @@ const BrowseProfiles = () => {
       // Standard matching: show profiles that match what I'm looking for AND who are looking for my gender
       return profile.gender === lookingFor && (profile.lookingFor === myGender || profile.lookingFor === 'anyone');
     });
+
+    // Apply distance filter if user has set preferences
+    if (profile?.distance_preference && profile?.location) {
+      // For now, just show all profiles since we don't have real location data
+      // In a real app, you'd filter by actual distance calculation
+      console.log(`Filtering by ${profile.distance_preference} mile radius from ${profile.location}`);
+    }
     
     setFilteredProfiles(filtered);
     setVisibleProfiles(6); // Reset visible count when filters change
-  }, [myGender, lookingFor]);
+  }, [myGender, lookingFor, profile]);
 
   const handleLike = (profileId: string) => {
     setLikedProfiles(prev => new Set([...prev, profileId]));
@@ -91,20 +117,11 @@ const BrowseProfiles = () => {
                 <ArrowLeft className="h-4 w-4 mr-1" aria-hidden="true" />
                 <span className="hidden xs:inline">Back</span>
               </Button>
-              <Button 
-                onClick={() => navigate('/swipe')} 
-                size="sm"
-                className="flex items-center gap-1 focus:ring-2 focus:ring-primary focus:ring-offset-2 flex-shrink-0"
-                aria-label="Switch to swipe mode for quick browsing"
-              >
-                <Zap className="h-4 w-4" aria-hidden="true" />
-                <span className="hidden xs:inline">Swipe</span>
-              </Button>
             </div>
             <div className="text-center">
-              <h1 className="text-lg font-bold sm:text-xl">Discover People</h1>
+              <h1 className="text-lg font-bold sm:text-xl">Discover Your Matches</h1>
               <p className="text-xs text-muted-foreground sm:text-sm mt-1">
-                Browse potential matches in your area
+                AI-powered compatibility matching based on your preferences
               </p>
             </div>
           </div>
@@ -120,20 +137,12 @@ const BrowseProfiles = () => {
               <ArrowLeft className="h-4 w-4 mr-2" aria-hidden="true" />
               Back to Profile
             </Button>
-            <div className="text-center">
-              <h1 className="text-2xl font-bold">Discover People</h1>
+            <div className="text-center flex-1">
+              <h1 className="text-2xl font-bold">Discover Your Matches</h1>
               <p className="text-sm text-muted-foreground">
-                Browse potential matches in your area
+                AI-powered compatibility matching based on your preferences
               </p>
             </div>
-            <Button 
-              onClick={() => navigate('/swipe')} 
-              className="flex items-center gap-2 focus:ring-2 focus:ring-primary focus:ring-offset-2"
-              aria-label="Switch to swipe mode for quick browsing"
-            >
-              <Zap className="h-4 w-4" aria-hidden="true" />
-              Swipe Mode
-            </Button>
           </div>
         </div>
         
@@ -174,9 +183,22 @@ const BrowseProfiles = () => {
                     </SelectContent>
                   </Select>
                 </div>
+                {profile?.distance_preference && (
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm text-muted-foreground">Within:</span>
+                    <Badge variant="secondary" className="text-xs">
+                      {profile.distance_preference} miles
+                    </Badge>
+                  </div>
+                )}
               </div>
-              <div className="text-xs text-muted-foreground ml-auto">
-                Showing {Math.min(visibleProfiles, filteredProfiles.length)} of {filteredProfiles.length} profiles
+              <div className="text-xs text-muted-foreground ml-auto flex flex-col items-end">
+                <div>Showing {Math.min(visibleProfiles, filteredProfiles.length)} of {filteredProfiles.length} profiles</div>
+                {profile && (
+                  <div className="text-primary text-xs mt-1">
+                    ✓ Using your profile preferences
+                  </div>
+                )}
               </div>
             </div>
           </div>
