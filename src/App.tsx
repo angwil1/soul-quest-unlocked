@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { HashRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AppWrapper } from "@/components/AppWrapper";
 import { AgeGate } from "@/components/AgeGate";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
@@ -198,6 +198,7 @@ const App = () => {
               <Route path="/dating-tips" element={<DatingTips />} />
               <Route path="/safety" element={<SafetyCenter />} />
               <Route path="/sample-user-profile/:profileId" element={<SampleUserProfile />} />
+              <Route path="/." element={<Navigate to="/" replace />} />
               <Route path="*" element={<NotFound />} />
               </Routes>
             </AppWrapper>
