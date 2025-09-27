@@ -10,7 +10,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import SearchFilters from "@/components/SearchFilters";
 import { supabase } from "@/integrations/supabase/client";
 import { useMemoryVault } from "@/hooks/useMemoryVault";
-import logoImage from "@/assets/logo-new.png";
+import logoImage from "@/assets/logo-transparent-new.png";
 import {
   DropdownMenu,
   DropdownMenuContent,
