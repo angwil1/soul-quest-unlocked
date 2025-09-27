@@ -278,9 +278,9 @@ body {
   
               /* Quiet Start keepsake styles - refined visual treatment */
               .quiet-start-card {
-                background: #fdf6f2;
-                border: 2px solid hsl(var(--gold) / 0.5);
-                box-shadow: 0 12px 40px hsl(var(--gold) / 0.15);
+                background: transparent;
+                border: none;
+                box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
               }
               
               .keepsake-heading {

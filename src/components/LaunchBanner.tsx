@@ -118,7 +118,7 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
   return (
     <>
       <TooltipProvider>
-      <Card className={`relative overflow-hidden quiet-start-card rounded-2xl ${className}`}>
+      <Card className={`relative overflow-hidden quiet-start-card border-0 bg-transparent shadow-none drop-shadow-sm ${className}`}>
         {showDismiss && (
           <Button
             variant="ghost"
@@ -130,7 +130,7 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
           </Button>
         )}
         
-        <CardContent className="p-6 md:p-8">
+        <CardContent className="p-2 md:p-4">
           {/* Centered Logo */}
           <div className="flex justify-center mb-2">
             <img 
