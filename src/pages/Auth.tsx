@@ -11,7 +11,7 @@ import { SignupFlow } from '@/components/SignupFlow';
 import { supabase } from '@/integrations/supabase/client';
 import { ArrowLeft, UserPlus, LogIn } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
-import logoImage from "@/assets/logo.png";
+import logoImage from "@/assets/logo-transparent.png";
 
 const Auth = () => {
   const [email, setEmail] = useState('');
