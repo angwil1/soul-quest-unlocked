@@ -496,16 +496,26 @@ const Pricing = () => {
                   </div>
                   
                   <div className="space-y-4">
-                    <h3 className="font-serif text-2xl font-medium leading-relaxed" 
+                    <h3 className="font-serif text-lg font-light leading-relaxed tracking-wide" 
                         style={{ color: 'hsl(var(--alt-offer-brown))' }}>
                       If you missed Quiet Start, you'll still receive 30 days of Complete Premium free
                     </h3>
                     
-                    <p className="text-lg leading-relaxed" 
+                    <p className="text-base leading-relaxed" 
                        style={{ color: 'hsl(var(--alt-offer-brown) / 0.75)' }}>
                       After your trial, you'll be automatically enrolled in Complete Plus ($12/month) unless you choose a different plan. 
                       You can upgrade to Premium or downgrade to Basic anytime.
                     </p>
+
+                    <div className="pt-2">
+                      <a 
+                        href="/#/faq" 
+                        className="text-sm font-medium hover:underline transition-colors duration-200"
+                        style={{ color: 'hsl(var(--gold))' }}
+                      >
+                        Learn more about billing details →
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
