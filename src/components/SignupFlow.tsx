@@ -306,7 +306,7 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
         existingAddress.shipping_address_line1?.toLowerCase() === address1.toLowerCase() ||
         existingAddress.shipping_postal_code === postalCode
       )) {
-        throw new Error('You have already submitted an address for your wellness kit.');
+        throw new Error('You have already submitted an address for your keepsake.');
       }
     }
 
@@ -363,7 +363,7 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
       if (existingClaim) {
         toast({
           title: "Already Claimed",
-          description: `You've already claimed your wellness kit #${existingClaim.kit_number}!`,
+          description: `You've already claimed your keepsake #${existingClaim.kit_number}!`,
           variant: "destructive"
         });
         setCurrentStep('complete');
@@ -377,7 +377,7 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
       if (kitNumber === null) {
         toast({
           title: "Offer Expired",
-          description: "Sorry, all 200 wellness kits have been claimed.",
+          description: "Sorry, all 200 keepsakes have been claimed.",
           variant: "destructive"
         });
         // Still mark as complete but without physical benefits
@@ -435,7 +435,7 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
       
       toast({
         title: "Benefits claimed!",
-        description: `You're Quiet Start user #${kitNumber}! Your wellness kit will be shipped to your address.`,
+        description: `You're Quiet Start user #${kitNumber}! Your keepsake will be shipped to your address.`,
       });
       
       setCurrentStep('complete');
@@ -474,7 +474,7 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
             </div>
             <Progress value={getProgressPercentage()} className="h-2" />
             <p className="text-xs text-muted-foreground text-center">
-              Complete all steps to claim your 3 months free + wellness kit
+              Complete all steps to claim your 3 months free + keepsake
             </p>
           </div>
         </CardContent>
@@ -489,7 +489,7 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
               Begin Your Soul Quest
             </CardTitle>
             <CardDescription>
-              Create your account to join the first 500 Soul Questers
+              Create your account to join the first 200 Soul Questers
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -539,7 +539,7 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
                 </h4>
                 <ul className="text-xs text-emerald-700 space-y-1">
                   <li>• 3 months of Complete Plus (premium features)</li>
-                  <li>• Mini wellness kit delivered to your door</li>
+                  <li>• Mini keepsake delivered to your door</li>
                   <li>• Priority matching and enhanced connection tools</li>
                 </ul>
               </div>
@@ -654,10 +654,10 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Gift className="h-5 w-5 text-primary" />
-              Wellness Kit Address
+              Keepsake Address
             </CardTitle>
             <CardDescription>
-              We'll send your wellness kit after you've been actively connected for 3 months. This ensures it's a meaningful keepsake of your journey.
+              We'll send your keepsake after you've been actively connected for 3 months. This ensures it's a meaningful keepsake of your journey.
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -751,7 +751,7 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
                     <div className="text-muted-foreground">Complete Plus</div>
                   </div>
                   <div className="bg-white/70 rounded p-2 text-center">
-                    <div className="font-semibold text-purple-600">Wellness Kit</div>
+                    <div className="font-semibold text-purple-600">Keepsake</div>
                     <div className="text-muted-foreground">Shipped free</div>
                   </div>
                 </div>
@@ -765,7 +765,7 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
                 className="w-full h-12 text-lg font-semibold bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700" 
                 disabled={isLoading}
               >
-                {isLoading ? 'Claiming your wellness kit...' : 'Complete & Claim Benefits 🎁'}
+                {isLoading ? 'Claiming your keepsake...' : 'Complete & Claim Benefits 🎁'}
               </Button>
             </form>
           </CardContent>
