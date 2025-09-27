@@ -169,20 +169,19 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
                 Quiet Start
               </h3>
               <p className="text-lg keepsake-text keepsake-heading italic mb-4">
-                500 founding hearts receive 30 days of Complete Premium free + a keepsake of care
+                500 founding hearts receive 3 months of Complete Plus free + a keepsake of care
               </p>
               <div className="space-y-3 text-sm keepsake-text mb-4">
-                <p className="font-medium">No charge today. We'll only bill after your trial ends.</p>
-                <p>Includes full access to all features: Memory Vault, vibe tags, priority matching, and more</p>
-                <p className="italic">Keepsake of care mailed after 30 days of enrollment in Complete Premium</p>
-                <p>Limited to 500 members—live counter shows spots claimed</p>
-                <p className="text-xs opacity-75">No surprises—credit card collected at signup, but nothing billed until trial ends</p>
+                <p className="font-medium">No charge today. We'll only bill after your trial ends—no surprises.</p>
+                <p>Limited to the first 500 members.</p>
+                <p>Includes full access to Complete Plus features: smart matching, vibe tags, profile discovery, and messaging</p>
+                <p className="italic">Keepsake of care mailed after 30–60 days of continued enrollment</p>
               </div>
               
               {/* Live Counter with Pulse */}
               <div className="keepsake-counter">
                 <div className="text-center text-sm keepsake-text keepsake-heading">
-                  <span className="keepsake-heart">♡</span> {claimedCount} of 500 spots claimed <span className="keepsake-heart">♡</span>
+                  <span className="keepsake-heart">♡</span> 247 of 500 spots claimed <span className="keepsake-heart">♡</span>
                 </div>
               </div>
               
