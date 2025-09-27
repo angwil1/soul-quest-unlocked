@@ -183,8 +183,107 @@ export const Navbar = () => {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navigation.map((item) => (
+          <div className="hidden lg:flex items-center">
+            <div className="flex items-center bg-muted/30 rounded-full px-2 py-1.5 gap-1">
+              {/* Core Features */}
+              <div className="flex items-center gap-1">
+                <Link
+                  to="/quick-start"
+                  className={`px-4 py-2 text-sm font-medium rounded-full transition-all duration-200 ${
+                    isActive("/quick-start")
+                      ? "bg-primary text-primary-foreground shadow-sm"
+                      : "text-foreground hover:bg-background hover:shadow-sm"
+                  }`}
+                >
+                  Discover
+                </Link>
+                <Link
+                  to="/browse"
+                  className={`px-4 py-2 text-sm font-medium rounded-full transition-all duration-200 ${
+                    isActive("/browse")
+                      ? "bg-primary text-primary-foreground shadow-sm"
+                      : "text-foreground hover:bg-background hover:shadow-sm"
+                  }`}
+                >
+                  Browse
+                </Link>
+                <Link
+                  to="/matches"
+                  className={`px-4 py-2 text-sm font-medium rounded-full transition-all duration-200 ${
+                    isActive("/matches")
+                      ? "bg-primary text-primary-foreground shadow-sm"
+                      : "text-foreground hover:bg-background hover:shadow-sm"
+                  }`}
+                >
+                  Matches
+                </Link>
+                <Link
+                  to="/messages"
+                  className={`px-4 py-2 text-sm font-medium rounded-full transition-all duration-200 ${
+                    isActive("/messages")
+                      ? "bg-primary text-primary-foreground shadow-sm"
+                      : "text-foreground hover:bg-background hover:shadow-sm"
+                  }`}
+                >
+                  Messages
+                </Link>
+              </div>
+
+              {/* Separator */}
+              <div className="w-px h-6 bg-border mx-2" />
+
+              {/* Premium Features */}
+              <div className="flex items-center gap-1">
+                <Link
+                  to="/memory-vault"
+                  className={`relative px-4 py-2 text-sm font-medium rounded-full transition-all duration-200 ${
+                    isActive("/memory-vault")
+                      ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-sm"
+                      : "text-foreground hover:bg-background hover:shadow-sm"
+                  }`}
+                >
+                  Memory Vault
+                  {newMemoriesCount > 0 && (
+                    <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-red-500 text-xs text-white flex items-center justify-center text-[10px]">
+                      {newMemoriesCount > 9 ? '9+' : newMemoriesCount}
+                    </span>
+                  )}
+                </Link>
+              </div>
+            </div>
+
+            {/* Secondary Navigation */}
+            <div className="flex items-center ml-6 gap-6">
+              <Link
+                to="/dating-tips"
+                className={`text-sm font-medium transition-colors hover:text-primary ${
+                  isActive("/dating-tips") ? "text-primary" : "text-muted-foreground"
+                }`}
+              >
+                Tips
+              </Link>
+              <Link
+                to="/pricing"
+                className={`text-sm font-medium transition-colors hover:text-primary ${
+                  isActive("/pricing") ? "text-primary" : "text-muted-foreground"
+                }`}
+              >
+                Pricing
+              </Link>
+              <Link
+                to="/faq"
+                className={`text-sm font-medium transition-colors hover:text-primary ${
+                  isActive("/faq") ? "text-primary" : "text-muted-foreground"
+                }`}
+              >
+                FAQ
+              </Link>
+            </div>
+          </div>
+
+          {/* Compact Navigation for medium screens */}
+          <div className="hidden md:flex lg:hidden items-center space-x-4">
+            {navigation.slice(0, 4).map((item) => (
               <Link
                 key={item.name}
                 to={item.href}
@@ -194,9 +293,9 @@ export const Navbar = () => {
                     : "text-muted-foreground"
                 } ${item.name === "Memory Vault" ? "relative" : ""}`}
               >
-                {item.name}
+                {item.name === "Browse Profiles" ? "Browse" : item.name}
                 {item.name === "Memory Vault" && newMemoriesCount > 0 && (
-                  <span className="absolute -top-2 -right-2 h-5 w-5 rounded-full bg-primary text-xs text-white flex items-center justify-center">
+                  <span className="absolute -top-2 -right-2 h-4 w-4 rounded-full bg-primary text-xs text-white flex items-center justify-center text-[10px]">
                     {newMemoriesCount > 9 ? '9+' : newMemoriesCount}
                   </span>
                 )}
