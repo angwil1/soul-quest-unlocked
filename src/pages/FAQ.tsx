@@ -38,7 +38,7 @@ const FAQ = () => {
     },
     {
       question: "What is the Quiet Start offer?",
-      answer: "Quiet Start is a limited invitation for the first 500 founding hearts. Eligible members receive 3 months of Complete Plus free and a keepsake of care. We collect payment info at signup, but your card won't be charged until the trial ends. Cancel anytime before day 90—no surprises."
+      answer: "Quiet Start is a limited invitation for the first 200 founding hearts. Eligible members receive 3 months of Complete Plus free and a keepsake of care. We collect payment info at signup, but your card won't be charged until the trial ends. Cancel anytime before day 90—no surprises."
     },
     {
       question: "What happens after Quiet Start fills up?",
@@ -50,7 +50,7 @@ const FAQ = () => {
     },
     {
       question: "Is the keepsake included in the 30-day trial?",
-      answer: "No. Keepsakes are reserved for Quiet Start members only. If you're one of the first 500 founding hearts, your keepsake will be mailed within 30–60 days of continued enrollment."
+      answer: "No. Keepsakes are reserved for Quiet Start members only. If you're one of the first 200 founding hearts, your keepsake will be mailed within 30–60 days of continued enrollment."
     },
     {
       question: "How do I delete my account?",
