@@ -38,15 +38,19 @@ const FAQ = () => {
     },
     {
       question: "What is the Quiet Start offer?",
-      answer: "Quiet Start is a limited-time invitation for the first 500 founding hearts. Eligible members receive 3 months of Complete Plus free and a keepsake of care. No payment is required at signup—we'll only bill after your trial ends."
+      answer: "Quiet Start is a limited invitation for the first 500 founding hearts. Eligible members receive 3 months of Complete Plus free and a keepsake of care. We collect payment info at signup, but your card won't be charged until the trial ends. Cancel anytime before day 90—no surprises."
     },
     {
-      question: "Will I be charged automatically?",
-      answer: "Yes. We collect payment info at signup to reserve your Quiet Start spot, but you won't be charged until your 3-month trial ends. No surprises—cancel anytime before then."
+      question: "What happens after Quiet Start fills up?",
+      answer: "If you missed Quiet Start, you'll still receive 30 days of Complete Premium free. After your trial, you'll be automatically enrolled in Complete Plus ($12/month) unless you choose a different plan. You can upgrade to Premium or downgrade to Basic anytime."
     },
     {
-      question: "When will I receive the keepsake?",
-      answer: "Keepsakes are mailed within 30–60 days of enrollment in Complete Plus. We'll reach out to eligible members to confirm mailing details. It's a quiet celebration of your beginning."
+      question: "Do I need to enter payment info for the trial?",
+      answer: "Yes. We collect payment info at signup to activate your trial. Your card won't be charged until the trial ends. Cancel anytime before your trial ends—no surprises."
+    },
+    {
+      question: "Is the keepsake included in the 30-day trial?",
+      answer: "No. Keepsakes are reserved for Quiet Start members only. If you're one of the first 500 founding hearts, your keepsake will be mailed within 30–60 days of continued enrollment."
     },
     {
       question: "How do I delete my account?",
