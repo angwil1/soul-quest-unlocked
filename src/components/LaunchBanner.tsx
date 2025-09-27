@@ -132,7 +132,7 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
         
         <CardContent className="p-6 md:p-8">
           {/* Centered Logo */}
-          <div className="flex justify-center mb-6">
+          <div className="flex justify-center mb-2">
             <img 
               src={logoImage} 
               alt="AI Complete Me" 
@@ -141,7 +141,7 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
           </div>
           
           {/* App Name */}
-          <div className="text-center mt-2 mb-4">
+          <div className="text-center mb-6">
             <p className="text-sm font-serif text-[#3c2f2f] opacity-80">
               AI Complete Me
             </p>
