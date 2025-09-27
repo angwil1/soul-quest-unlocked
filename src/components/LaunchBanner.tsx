@@ -140,6 +140,13 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
             />
           </div>
           
+          {/* App Name */}
+          <div className="text-center mt-2 mb-4">
+            <p className="text-sm font-serif text-[#3c2f2f] opacity-80">
+              AI Complete Me
+            </p>
+          </div>
+          
           {/* Main Content */}
           <div className="text-center space-y-8">
             {/* Poetic Tagline - Positioned prominently */}
