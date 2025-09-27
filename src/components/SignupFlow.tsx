@@ -377,7 +377,7 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
       if (kitNumber === null) {
         toast({
           title: "Offer Expired",
-          description: "Sorry, all 500 wellness kits have been claimed.",
+          description: "Sorry, all 200 wellness kits have been claimed.",
           variant: "destructive"
         });
         // Still mark as complete but without physical benefits

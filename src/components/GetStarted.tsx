@@ -25,7 +25,7 @@ export const GetStarted = () => {
           </h2>
           
           <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-            First 500 users get 3 months Complete Plus free + mini wellness kit. Join the quiet start revolution.
+            First 200 users get 3 months Complete Plus free + mini wellness kit. Join the quiet start revolution.
           </p>
           
           <Card className="p-8 max-w-md mx-auto bg-gradient-to-br from-background to-muted/5 border-primary/10 backdrop-blur-sm">
@@ -55,7 +55,7 @@ export const GetStarted = () => {
               </Button>
               
               <p className="text-xs text-muted-foreground">
-                Limited to first 500 users • Create profile in under 2 minutes
+                Limited to first 200 users • Create profile in under 2 minutes
               </p>
             </div>
           </Card>
