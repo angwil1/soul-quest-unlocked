@@ -37,6 +37,10 @@ const FAQ = () => {
       answer: "Yes, you can cancel your subscription at any time through your account settings or billing portal. You'll continue to have access to premium features until your current billing period ends."
     },
     {
+      question: "How does billing work with Quiet Start?",
+      answer: "We collect payment info at signup to reserve your Quiet Start spot. You won't be charged until your 30-day trial ends. No surprises—just clarity."
+    },
+    {
       question: "How do I delete my account?",
       answer: "You can delete your account through your profile settings. This action is permanent and will remove all your data from our servers."
     },
