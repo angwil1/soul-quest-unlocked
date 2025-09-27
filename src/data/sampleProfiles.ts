@@ -490,6 +490,27 @@ export const browseProfiles: SampleProfile[] = [
     gender: "non-binary",
     lookingFor: "non-binary",
     vibeGallery: []
+  },
+  {
+    id: "browse-9",
+    name: "Quinn",
+    age: 27,
+    bio: "Digital artist and community organizer who believes in the power of creative expression. Love hosting inclusive art workshops and exploring the intersection of technology and humanity.",
+    vibeTag: "Creative Activist",
+    location: "Portland, OR",
+    occupation: "Digital Artist",
+    emotionalSoundtrack: "",
+    tiktokUrl: "",
+    photos: ["/src/assets/non-binary-portrait-realistic.jpg"],
+    interests: ["Digital Art", "Community Organizing", "LGBTQ+ Advocacy"],
+    conversationStarters: [],
+    poeticMicrocopy: "",
+    aestheticPreference: "",
+    personalityType: "",
+    loveLanguage: "",
+    gender: "non-binary",
+    lookingFor: "anyone",
+    vibeGallery: []
   }
 ];
 
