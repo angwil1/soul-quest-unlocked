@@ -165,9 +165,19 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
 
             {/* Offer Box */}
             <div className="offer-box p-6 max-w-md mx-auto">
-              <p className="text-lg md:text-xl keepsake-text keepsake-heading italic mb-4">
-                Founding hearts receive 3 months free + a keepsake of care
+              <h3 className="text-xl md:text-2xl keepsake-text keepsake-heading font-medium mb-4">
+                Quiet Start
+              </h3>
+              <p className="text-lg keepsake-text keepsake-heading italic mb-4">
+                500 founding hearts receive 30 days of Complete Premium free + a keepsake of care
               </p>
+              <div className="space-y-3 text-sm keepsake-text mb-4">
+                <p className="font-medium">No charge today. We'll only bill after your trial ends.</p>
+                <p>Includes full access to all features: Memory Vault, vibe tags, priority matching, and more</p>
+                <p className="italic">Keepsake of care mailed after 30 days of enrollment in Complete Premium</p>
+                <p>Limited to 500 members—live counter shows spots claimed</p>
+                <p className="text-xs opacity-75">No surprises—credit card collected at signup, but nothing billed until trial ends</p>
+              </div>
               
               {/* Live Counter with Pulse */}
               <div className="keepsake-counter">
