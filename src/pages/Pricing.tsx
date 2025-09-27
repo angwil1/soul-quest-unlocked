@@ -509,7 +509,7 @@ const Pricing = () => {
 
                     <div className="pt-2">
                       <a 
-                        href="/#/faq" 
+                        href="/#/faq#quiet-start-billing" 
                         className="text-sm font-medium hover:underline transition-colors duration-200"
                         style={{ color: 'hsl(var(--gold))' }}
                       >

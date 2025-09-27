@@ -313,6 +313,7 @@ const FAQ = () => {
                     <AccordionItem 
                       key={index} 
                       value={`item-${index}`}
+                      id={faq.question === "What happens after Quiet Start fills up?" ? "quiet-start-billing" : undefined}
                       className="border-b border-border"
                     >
                       <AccordionTrigger 
