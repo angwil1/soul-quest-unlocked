@@ -156,19 +156,6 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
               </h2>
             </div>
 
-            {/* Keepsake Preview */}
-            <div className="keepsake-preview max-w-sm mx-auto">
-              <div className="flex items-center justify-center space-x-3 mb-3">
-                <div className="w-8 h-1 bg-gold-gradient rounded-full"></div>
-                <span className="keepsake-heart text-lg">✦</span>
-                <div className="w-8 h-1 bg-gold-gradient rounded-full"></div>
-              </div>
-              <p className="text-sm keepsake-text keepsake-heading italic">
-                Your spot is saved. A keepsake of care is on its way.
-              </p>
-              <div className="mt-2 text-xs keepsake-text opacity-75">
-              </div>
-            </div>
 
             {/* Offer Box */}
             <div className="offer-box p-6 max-w-md mx-auto">
