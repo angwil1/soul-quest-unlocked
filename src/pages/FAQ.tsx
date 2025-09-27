@@ -37,8 +37,16 @@ const FAQ = () => {
       answer: "Yes, you can cancel your subscription at any time through your account settings or billing portal. You'll continue to have access to premium features until your current billing period ends."
     },
     {
-      question: "How does billing work with Quiet Start?",
-      answer: "We collect payment info at signup to reserve your Quiet Start spot. You won't be charged until your 30-day trial ends. No surprises—just clarity."
+      question: "What is the Quiet Start offer?",
+      answer: "Quiet Start is a limited-time invitation for the first 500 founding hearts. Eligible members receive 3 months of Complete Plus free and a keepsake of care. No payment is required at signup—we'll only bill after your trial ends."
+    },
+    {
+      question: "Will I be charged automatically?",
+      answer: "Yes. We collect payment info at signup to reserve your Quiet Start spot, but you won't be charged until your 3-month trial ends. No surprises—cancel anytime before then."
+    },
+    {
+      question: "When will I receive the keepsake?",
+      answer: "Keepsakes are mailed within 30–60 days of enrollment in Complete Plus. We'll reach out to eligible members to confirm mailing details. It's a quiet celebration of your beginning."
     },
     {
       question: "How do I delete my account?",
