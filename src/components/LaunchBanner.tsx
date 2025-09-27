@@ -103,7 +103,7 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
             variant="ghost"
             size="sm"
             onClick={handleDismiss}
-            className="absolute top-3 right-3 h-7 w-7 p-0 text-amber-700/60 hover:text-amber-800 hover:bg-amber-100/30 z-10 rounded-full"
+            className="absolute top-3 right-3 h-7 w-7 p-0 keepsake-text hover:keepsake-heart hover:bg-gold/10 z-10 rounded-full"
           >
             <X className="h-4 w-4" />
           </Button>
@@ -123,23 +123,23 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
           <div className="text-center space-y-6">
             {/* Poetic Headline */}
             <div className="space-y-2">
-              <h2 className="text-2xl md:text-3xl font-light text-amber-900 keepsake-heading">
+              <h2 className="text-2xl md:text-3xl font-light keepsake-heading">
                 Begin quietly. Connect deeply.
               </h2>
-              <p className="text-lg md:text-xl text-amber-800/80 keepsake-heading italic">
+              <p className="text-lg md:text-xl keepsake-text keepsake-heading italic">
                 Founding hearts receive 3 months free + a keepsake of care
               </p>
             </div>
             {/* Gentle Progress Indicator */}
             <div className="w-full max-w-md space-y-4">
-              <div className="text-center text-sm text-amber-800/70 keepsake-heading">
-                <span className="heart-accent">♡</span> Wellness Kits Claimed: {claimedCount} of 500 <span className="heart-accent">♡</span>
+              <div className="text-center text-sm keepsake-text keepsake-heading">
+                <span className="keepsake-heart">♡</span> Wellness Kits Claimed: {claimedCount} of 500 <span className="keepsake-heart">♡</span>
               </div>
               <Progress 
                 value={(claimedCount / 500) * 100} 
-                className="h-2 bg-amber-100/50 [&>div]:bg-gradient-to-r [&>div]:from-gold [&>div]:to-gold-light" 
+                className="h-2 keepsake-progress [&>div]:bg-gold-gradient" 
               />
-              <div className="text-center text-sm text-amber-700 keepsake-heading italic">
+              <div className="text-center text-sm keepsake-text keepsake-heading italic">
                 {claimedCount === 0 
                   ? "Your journey awaits..." 
                   : claimedCount < 50 
@@ -150,8 +150,8 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
             </div>
 
             {/* Poetic Countdown */}
-            <div className="flex items-center gap-2 text-amber-700 text-center">
-              <Clock className="h-4 w-4 heart-accent" />
+            <div className="flex items-center gap-2 keepsake-text text-center">
+              <Clock className="h-4 w-4 keepsake-heart" />
               <div className="text-sm keepsake-heading italic">
                 {poeticPhrase}
               </div>
@@ -163,11 +163,11 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
                 onClick={handleQuizStart}
                 variant="secondary"
                 size="lg"
-                className="shimmer-button bg-white/80 text-amber-900 hover:bg-white border-2 border-gold/30 hover:border-gold/60 font-medium keepsake-heading px-8 py-3 rounded-xl"
+                className="keepsake-button font-medium keepsake-heading px-8 py-3 rounded-xl"
               >
-                <span className="heart-accent mr-2">♡</span>
+                <span className="keepsake-heart mr-2">♡</span>
                 Begin Your Journey
-                <span className="heart-accent ml-2">♡</span>
+                <span className="keepsake-heart ml-2">♡</span>
               </Button>
             )}
           </div>
