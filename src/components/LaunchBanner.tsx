@@ -7,7 +7,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 import { Sparkles, Clock, Users, Heart, X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useQuietStartProgress } from '@/hooks/useQuietStartProgress';
-import logoImage from "@/assets/logo-transparent.png";
+import logoImage from "@/assets/logo-new.png";
 
 interface LaunchBannerProps {
   className?: string;
