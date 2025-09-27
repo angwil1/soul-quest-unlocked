@@ -136,35 +136,6 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Fallback Offer Section */}
-        <section 
-          className="py-8 relative overflow-hidden"
-          role="region"
-          aria-label="Alternative trial offer"
-        >
-          {/* Ambient background with sunflower blush gradient */}
-          <div className="absolute inset-0 opacity-60" style={{ background: 'var(--gradient-sunflower-blush)' }}></div>
-          <div className="absolute inset-0 bg-gradient-to-br from-background/20 to-background/40"></div>
-          
-          <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
-            <div className="backdrop-blur-sm bg-background/80 border border-border/30 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-[1.02]">
-              <div className="inline-flex items-center gap-2 mb-4">
-                <div className="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
-                <span className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Alternative Offer</span>
-                <div className="w-2 h-2 rounded-full bg-primary animate-pulse" style={{ animationDelay: '0.5s' }}></div>
-              </div>
-              
-              <p className="text-foreground leading-relaxed text-lg">
-                <span className="font-semibold text-primary">If you missed Quiet Start</span>, you'll still receive{' '}
-                <span className="font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">30 days of Complete Premium free</span>. 
-              </p>
-              <p className="text-muted-foreground mt-3 leading-relaxed">
-                After your trial, you'll be automatically enrolled in Complete Plus ($12/month) unless you choose a different plan. 
-                You can upgrade to Premium or downgrade to Basic anytime.
-              </p>
-            </div>
-          </div>
-        </section>
         
         <main id="main-content" role="main">
           {/* EMOTIONALLY INTELLIGENT HERO DESIGN */}
