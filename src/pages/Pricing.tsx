@@ -465,30 +465,48 @@ const Pricing = () => {
 
             {/* Alternative Offer Section */}
             <section 
-              className="py-8 mt-12 relative overflow-hidden"
+              className="py-16 mt-16 relative"
               role="region"
               aria-label="Alternative trial offer"
             >
-              {/* Ambient background with sunflower blush gradient */}
-              <div className="absolute inset-0 opacity-60" style={{ background: 'var(--gradient-sunflower-blush)' }}></div>
-              <div className="absolute inset-0 bg-gradient-to-br from-background/20 to-background/40"></div>
-              
-              <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
-                <div className="backdrop-blur-sm bg-background/80 border border-border/30 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-[1.02]">
-                  <div className="inline-flex items-center gap-2 mb-4">
-                    <div className="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
-                    <span className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Alternative Offer</span>
-                    <div className="w-2 h-2 rounded-full bg-primary animate-pulse" style={{ animationDelay: '0.5s' }}></div>
+              <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
+                <div className="relative p-12 rounded-3xl border-2 transition-all duration-300" 
+                     style={{ 
+                       backgroundColor: 'hsl(var(--alt-offer-brown) / 0.04)',
+                       borderColor: 'hsl(var(--alt-offer-brown) / 0.15)',
+                       boxShadow: '0 8px 32px hsl(var(--alt-offer-brown) / 0.08)'
+                     }}>
+                  
+                  {/* Soft gold heart icon */}
+                  <div className="inline-flex items-center justify-center w-12 h-12 mb-6 rounded-full"
+                       style={{ backgroundColor: 'hsl(var(--gold) / 0.15)' }}>
+                    <svg 
+                      width="20" 
+                      height="18" 
+                      viewBox="0 0 20 18" 
+                      fill="none" 
+                      xmlns="http://www.w3.org/2000/svg"
+                      style={{ color: 'hsl(var(--gold))' }}
+                    >
+                      <path 
+                        d="M17.367 2.133a4.89 4.89 0 00-6.934 0L10 2.567l-.433-.434a4.89 4.89 0 00-6.934 6.934L10 16.433l7.367-7.366a4.89 4.89 0 000-6.934z" 
+                        fill="currentColor"
+                      />
+                    </svg>
                   </div>
                   
-                  <p className="text-foreground leading-relaxed text-lg">
-                    <span className="font-semibold text-primary">If you missed Quiet Start</span>, you'll still receive{' '}
-                    <span className="font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">30 days of Complete Premium free</span>. 
-                  </p>
-                  <p className="text-muted-foreground mt-3 leading-relaxed">
-                    After your trial, you'll be automatically enrolled in Complete Plus ($12/month) unless you choose a different plan. 
-                    You can upgrade to Premium or downgrade to Basic anytime.
-                  </p>
+                  <div className="space-y-4">
+                    <h3 className="font-serif text-2xl font-medium leading-relaxed" 
+                        style={{ color: 'hsl(var(--alt-offer-brown))' }}>
+                      If you missed Quiet Start, you'll still receive 30 days of Complete Premium free
+                    </h3>
+                    
+                    <p className="text-lg leading-relaxed" 
+                       style={{ color: 'hsl(var(--alt-offer-brown) / 0.75)' }}>
+                      After your trial, you'll be automatically enrolled in Complete Plus ($12/month) unless you choose a different plan. 
+                      You can upgrade to Premium or downgrade to Basic anytime.
+                    </p>
+                  </div>
                 </div>
               </div>
             </section>

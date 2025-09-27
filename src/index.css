@@ -53,6 +53,7 @@ All colors MUST be HSL.
     --gold-light: 45 89% 70%;
     --gold-dark: 42 55% 47%;
     --deep-brown: 15 26% 24%;
+    --alt-offer-brown: 15 20% 24%; /* #3c2f2f equivalent in HSL */
     --gold-gradient: linear-gradient(135deg, hsl(42 62% 57%) 0%, hsl(45 89% 70%) 100%);
     --quiet-start-bg: #fdf6f2;
     
