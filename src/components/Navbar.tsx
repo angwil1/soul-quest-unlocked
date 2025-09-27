@@ -173,17 +173,16 @@ export const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="flex justify-between items-center h-16 w-full">
           <div className="flex items-center">
-            <Link to="/" className="flex items-center gap-3 group">
+            <Link to="/" className="flex flex-col items-center gap-1 group">
               <img 
                 src={logoImage} 
                 alt="AI Complete Me Logo" 
                 className="h-8 w-8 lg:h-10 lg:w-10 transition-all duration-300 group-hover:scale-105"
               />
-              <div className="hidden sm:flex items-center">
-                <span className="text-base lg:text-lg font-bold bg-gradient-to-r from-primary via-purple-600 to-pink-600 bg-clip-text text-transparent group-hover:from-primary/80 group-hover:via-purple-600/80 group-hover:to-pink-600/80 transition-all duration-300">
+              <div className="flex items-center">
+                <span className="text-xs lg:text-sm font-medium bg-gradient-to-r from-gold via-gold-light to-gold-dark bg-clip-text text-transparent group-hover:from-gold/80 group-hover:via-gold-light/80 group-hover:to-gold-dark/80 transition-all duration-300">
                   AI Complete Me
                 </span>
-                <div className="w-1.5 h-1.5 bg-gradient-to-r from-primary to-purple-600 rounded-full ml-1 group-hover:scale-125 transition-transform duration-300"></div>
               </div>
             </Link>
           </div>
