@@ -194,38 +194,47 @@ const Profile = () => {
               Back
             </Button>
             
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2">
+            <div className="flex items-center gap-6">
+              {/* Navigation Buttons */}
+              <nav className="flex items-center gap-3" role="navigation" aria-label="Profile navigation">
                 <Button 
                   variant="outline" 
-                  size="sm"
                   onClick={() => navigate('/matches')}
-                  className="flex items-center gap-2 focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                  className="flex items-center gap-2 focus:ring-2 focus:ring-primary focus:ring-offset-2 min-w-[120px]"
                   aria-label="View your matches"
                 >
                   <Users className="h-4 w-4" aria-hidden="true" />
-                  My Matches
+                  Matches
                 </Button>
                 
                 <Button 
                   variant="outline" 
-                  size="sm"
                   onClick={() => navigate('/browse')}
-                  className="flex items-center gap-2 focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                  className="flex items-center gap-2 focus:ring-2 focus:ring-primary focus:ring-offset-2 min-w-[120px]"
                   aria-label="Browse and discover people"
                 >
                   <Eye className="h-4 w-4" aria-hidden="true" />
-                  Browse Profiles
+                  Browse
                 </Button>
-              </div>
+              </nav>
               
-              <div className="flex items-center gap-2">
+              {/* Profile Actions */}
+              <div className="flex items-center gap-2 border-l border-border pl-6" role="group" aria-label="Profile actions">
+                <Button 
+                  onClick={() => navigate('/profile/edit')}
+                  className="focus:ring-2 focus:ring-primary focus:ring-offset-2 min-w-[110px]"
+                  aria-label="Edit your profile information"
+                >
+                  <Edit className="h-4 w-4 mr-2" aria-hidden="true" />
+                  Edit Profile
+                </Button>
+                
                 <DropdownMenu open={isShareMenuOpen} onOpenChange={setIsShareMenuOpen}>
                   <DropdownMenuTrigger asChild>
                     <Button 
                       variant="outline"
-                      size="sm" 
-                      className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                      size="icon"
+                      className="focus:ring-2 focus:ring-primary focus:ring-offset-2 shrink-0"
                       aria-label="More profile options"
                       aria-expanded={isShareMenuOpen}
                     >
@@ -256,15 +265,6 @@ const Profile = () => {
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
-                
-                <Button 
-                  onClick={() => navigate('/profile/edit')}
-                  className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
-                  aria-label="Edit your profile information"
-                >
-                  <Edit className="h-4 w-4 mr-2" aria-hidden="true" />
-                  Edit Profile
-                </Button>
               </div>
             </div>
           </div>
