@@ -157,10 +157,9 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
                 <div className="w-8 h-1 bg-gold-gradient rounded-full"></div>
               </div>
               <p className="text-sm keepsake-text keepsake-heading italic">
-                A keepsake of care to mark your beginning.
+                Your spot is saved. A keepsake of care is on its way.
               </p>
               <div className="mt-2 text-xs keepsake-text opacity-75">
-                Your spot is saved. A keepsake of care is on its way.
               </div>
             </div>
 
