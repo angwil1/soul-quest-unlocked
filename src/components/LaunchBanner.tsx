@@ -120,26 +120,47 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
           </div>
           
           {/* Main Content */}
-          <div className="text-center space-y-6">
-            {/* Poetic Headline */}
-            <div className="space-y-2">
-              <h2 className="text-2xl md:text-3xl font-light keepsake-heading">
+          <div className="text-center space-y-8">
+            {/* Poetic Tagline - Positioned prominently */}
+            <div className="space-y-3">
+              <h2 className="text-2xl md:text-4xl lg:text-5xl font-light keepsake-heading keepsake-tagline tracking-wide">
                 Begin quietly. Connect deeply.
               </h2>
-              <p className="text-lg md:text-xl keepsake-text keepsake-heading italic">
+            </div>
+
+            {/* Keepsake Preview */}
+            <div className="keepsake-preview max-w-sm mx-auto">
+              <div className="flex items-center justify-center space-x-3 mb-3">
+                <div className="w-8 h-1 bg-gold-gradient rounded-full"></div>
+                <span className="keepsake-heart text-lg">✦</span>
+                <div className="w-8 h-1 bg-gold-gradient rounded-full"></div>
+              </div>
+              <p className="text-sm keepsake-text keepsake-heading italic">
+                A keepsake of care to mark your beginning.
+              </p>
+              <div className="mt-2 text-xs keepsake-text opacity-75">
+                Handwritten wellness card + mindful pen
+              </div>
+            </div>
+
+            {/* Offer Box */}
+            <div className="offer-box p-6 max-w-md mx-auto">
+              <p className="text-lg md:text-xl keepsake-text keepsake-heading italic mb-4">
                 Founding hearts receive 3 months free + a keepsake of care
               </p>
-            </div>
-            {/* Gentle Progress Indicator */}
-            <div className="w-full max-w-md space-y-4">
-              <div className="text-center text-sm keepsake-text keepsake-heading">
-                <span className="keepsake-heart">♡</span> Wellness Kits Claimed: {claimedCount} of 500 <span className="keepsake-heart">♡</span>
+              
+              {/* Live Counter with Pulse */}
+              <div className="keepsake-counter">
+                <div className="text-center text-sm keepsake-text keepsake-heading">
+                  <span className="keepsake-heart">♡</span> {claimedCount} of 500 spots claimed <span className="keepsake-heart">♡</span>
+                </div>
               </div>
+              
               <Progress 
                 value={(claimedCount / 500) * 100} 
-                className="h-2 keepsake-progress [&>div]:bg-gold-gradient" 
+                className="h-2 keepsake-progress [&>div]:bg-gold-gradient mt-3" 
               />
-              <div className="text-center text-sm keepsake-text keepsake-heading italic">
+              <div className="text-center text-sm keepsake-text keepsake-heading italic mt-2">
                 {claimedCount === 0 
                   ? "Your journey awaits..." 
                   : claimedCount < 50 

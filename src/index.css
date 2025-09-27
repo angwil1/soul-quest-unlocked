@@ -258,7 +258,7 @@ body {
               }
               
               .keepsake-heading {
-                font-family: 'Georgia', 'Times New Roman', serif;
+                font-family: 'Playfair Display', 'Georgia', 'Times New Roman', serif;
                 letter-spacing: 0.02em;
                 color: #3c2f2f;
               }
@@ -288,11 +288,48 @@ body {
                 background: hsl(var(--gold) / 0.2);
               }
               
+              .keepsake-counter {
+                animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+              }
+              
+              .keepsake-preview {
+                background: linear-gradient(145deg, #fdf6f2 0%, #f9f0e8 100%);
+                border: 1px solid hsl(var(--gold) / 0.3);
+                border-radius: 12px;
+                padding: 1rem;
+                margin: 1.5rem 0;
+              }
+              
               .offer-box {
                 background: #fdf6f2;
                 border: 2px solid hsl(var(--gold) / 0.4);
                 box-shadow: 0 8px 32px rgba(212, 162, 79, 0.1);
                 border-radius: 16px;
+              }
+              
+              /* Responsive Typography */
+              @media (min-width: 768px) {
+                .keepsake-heading {
+                  line-height: 1.2;
+                  letter-spacing: 0.03em;
+                }
+                
+                .keepsake-tagline {
+                  font-size: 1.375rem;
+                  line-height: 1.3;
+                }
+              }
+              
+              @media (min-width: 1024px) {
+                .keepsake-heading {
+                  line-height: 1.1;
+                  letter-spacing: 0.04em;
+                }
+                
+                .keepsake-tagline {
+                  font-size: 1.5rem;
+                  line-height: 1.25;
+                }
               }
               
               .heart-accent {
