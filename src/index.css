@@ -255,6 +255,27 @@ body {
     to { opacity: 1; transform: translateY(0); }
   }
   
+  @keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  
+  /* Heartbeat shimmer animation for Quiet Start button */
+  @keyframes heartbeat-shimmer {
+    0%, 100% {
+      box-shadow: 0 0 0 0 hsl(var(--gold) / 0.4);
+      border-color: hsl(var(--gold) / 0.7);
+    }
+    50% {
+      box-shadow: 0 0 0 8px hsl(var(--gold) / 0.1);
+      border-color: hsl(var(--gold) / 1);
+    }
+  }
+
+  .heartbeat-shimmer {
+    animation: heartbeat-shimmer 2.5s ease-in-out infinite;
+  }
+  
               /* Quiet Start keepsake styles - refined visual treatment */
               .quiet-start-card {
                 background: #fdf6f2;

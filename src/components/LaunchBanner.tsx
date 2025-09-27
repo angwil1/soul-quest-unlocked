@@ -213,7 +213,7 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
                 onClick={handleQuizStart}
                 variant="secondary"
                 size="lg"
-                className="keepsake-button font-medium keepsake-heading px-8 py-3 rounded-xl"
+                className="keepsake-button font-medium keepsake-heading px-8 py-3 rounded-xl heartbeat-shimmer"
               >
                 <span className="keepsake-heart mr-2">♡</span>
                 Claim Your Spot
