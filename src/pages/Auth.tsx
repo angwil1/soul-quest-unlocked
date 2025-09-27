@@ -11,6 +11,7 @@ import { SignupFlow } from '@/components/SignupFlow';
 import { supabase } from '@/integrations/supabase/client';
 import { ArrowLeft, UserPlus, LogIn } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import logoImage from "@/assets/logo.png";
 
 const Auth = () => {
   const [email, setEmail] = useState('');
@@ -337,13 +338,22 @@ const Auth = () => {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                <div className="bg-gradient-to-r from-amber-50/50 to-yellow-50 border border-amber-200/50 rounded-lg p-4 text-center space-y-3" style={{ background: 'var(--blush-to-gold)' }}
+                <div className="quiet-start-card rounded-lg p-4 text-center space-y-3"
                   role="region"
                   aria-labelledby="offer-title"
                 >
+                  {/* Centered Logo */}
+                  <div className="flex justify-center mb-3">
+                    <img 
+                      src={logoImage} 
+                      alt="AI Complete Me" 
+                      className="h-10 w-10 md:h-12 md:w-12"
+                    />
+                  </div>
+                  
                   <div className="flex items-center justify-center gap-2">
                     <span className="gold-badge px-3 py-1 rounded-full text-sm font-medium">🎁</span>
-                    <h3 id="offer-title" className="font-semibold text-amber-800">Quiet Start Offer</h3>
+                    <h3 id="offer-title" className="font-semibold text-amber-800 serif-heading">Quiet Start Offer</h3>
                   </div>
                   <p className="text-sm text-amber-800/80">
                     Join the first 500 Soul Questers and receive:

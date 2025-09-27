@@ -7,6 +7,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 import { Sparkles, Clock, Users, Heart, X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useQuietStartProgress } from '@/hooks/useQuietStartProgress';
+import logoImage from "@/assets/logo.png";
 
 interface LaunchBannerProps {
   className?: string;
@@ -96,32 +97,41 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
   return (
     <>
       <TooltipProvider>
-      <Card className={`relative overflow-hidden bg-gradient-to-r from-pink-100/80 to-yellow-100 border-gold-light/30 shadow-launch dark:from-pink-900/40 dark:to-yellow-900/40 ${className}`} style={{ background: 'var(--blush-to-gold)' }}>
+      <Card className={`relative overflow-hidden quiet-start-card shadow-lg ${className}`}>
         {showDismiss && (
           <Button
             variant="ghost"
             size="sm"
             onClick={handleDismiss}
-            className="absolute top-2 right-2 h-6 w-6 p-0 text-white/80 hover:text-white hover:bg-white/20 z-10"
+            className="absolute top-2 right-2 h-6 w-6 p-0 text-amber-700/80 hover:text-amber-800 hover:bg-amber-100/20 z-10"
           >
             <X className="h-3 w-3" />
           </Button>
         )}
         
         <CardContent className="p-3 md:p-4 lg:p-6">
+          {/* Centered Logo */}
+          <div className="flex justify-center mb-4">
+            <img 
+              src={logoImage} 
+              alt="AI Complete Me" 
+              className="h-12 w-12 md:h-16 md:w-16"
+            />
+          </div>
+          
           <div className="flex flex-col md:flex-row items-center justify-between gap-3 md:gap-4">
             {/* Left side - Main message */}
             <div className="text-center md:text-left flex-1">
-              <h3 className="text-base md:text-lg lg:text-xl font-bold text-amber-800 mb-1 md:mb-2 flex items-center gap-2">
+              <h3 className="text-base md:text-lg lg:text-xl font-bold text-amber-800 mb-1 md:mb-2 flex items-center justify-center gap-2 serif-heading">
                 <span className="gold-badge px-3 py-1 rounded-full text-sm font-medium">🎁</span>
                 Quiet Start Offer
               </h3>
               
-              <p className="text-amber-800/80 text-xs md:text-sm lg:text-base mb-2 md:mb-3 leading-tight max-w-2xl">
+              <p className="text-amber-800/80 text-xs md:text-sm lg:text-base mb-2 md:mb-3 leading-tight max-w-2xl text-center">
                 The first 500 Soul Questers receive 3 months of Complete Plus + a mini wellness keepsake. Kits also available for referrers—until all 500 are claimed.
               </p>
               
-              <div className="space-y-1 text-amber-800/70 text-xs md:text-sm">
+              <div className="space-y-1 text-amber-800/70 text-xs md:text-sm text-center">
                 <div>
                   🤝 Referral Rewards: Invite someone to join. Earn bonus months, unlock badges, and receive more gifts—while supplies last
                 </div>
