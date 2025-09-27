@@ -47,15 +47,15 @@ All colors MUST be HSL.
 
     --radius: 0.75rem;
 
-    /* Gold gradients from logo - more subtle */
+    /* Refined Quiet Start colors */
+    --soft-blush: 25 29% 97%;
     --gold: 45 63% 62%;
     --gold-light: 45 71% 69%;
     --gold-dark: 45 55% 52%;
     --sunflower: 48 96% 89%;
     --terracotta: 16 77% 88%;
-    --soft-blush: 15 100% 97%;
     --gold-gradient: linear-gradient(135deg, hsl(45 55% 52%) 0%, hsl(45 71% 69%) 100%);
-    --quiet-start-bg: linear-gradient(135deg, hsl(15 100% 97%) 0%, hsl(48 96% 89%) 50%, hsl(16 77% 88%) 100%);
+    --quiet-start-bg: hsl(25 29% 97%);
     
     /* AI Dating gradients */
     --gradient-primary: linear-gradient(135deg, hsl(250 40% 35%), hsl(260 50% 50%));
@@ -251,15 +251,41 @@ body {
     to { opacity: 1; transform: translateY(0); }
   }
   
-              /* Serif font for headings to match logo */
-              .serif-heading {
-                font-family: 'Georgia', 'Times New Roman', serif;
-              }
-              
-              /* Quiet Start specific styles */
+              /* Quiet Start keepsake styles */
               .quiet-start-card {
                 background: var(--quiet-start-bg);
-                border: 1px solid hsl(var(--gold) / 0.2);
+                border: 2px solid hsl(var(--gold) / 0.3);
+                box-shadow: 0 8px 32px hsl(var(--gold) / 0.1);
+              }
+              
+              .keepsake-heading {
+                font-family: 'Georgia', 'Times New Roman', serif;
+                letter-spacing: 0.02em;
+              }
+              
+              .heart-accent {
+                color: hsl(var(--gold-dark));
+                filter: drop-shadow(0 2px 4px hsl(var(--gold) / 0.2));
+              }
+              
+              .shimmer-button {
+                position: relative;
+                overflow: hidden;
+              }
+              
+              .shimmer-button::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, hsl(var(--gold-light) / 0.3), transparent);
+                transition: left 0.6s ease;
+              }
+              
+              .shimmer-button:hover::before {
+                left: 100%;
               }
               
               /* Button hover gold accent */

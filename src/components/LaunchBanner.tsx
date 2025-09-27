@@ -97,125 +97,79 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
   return (
     <>
       <TooltipProvider>
-      <Card className={`relative overflow-hidden quiet-start-card shadow-lg ${className}`}>
+      <Card className={`relative overflow-hidden quiet-start-card rounded-2xl ${className}`}>
         {showDismiss && (
           <Button
             variant="ghost"
             size="sm"
             onClick={handleDismiss}
-            className="absolute top-2 right-2 h-6 w-6 p-0 text-amber-700/80 hover:text-amber-800 hover:bg-amber-100/20 z-10"
+            className="absolute top-3 right-3 h-7 w-7 p-0 text-amber-700/60 hover:text-amber-800 hover:bg-amber-100/30 z-10 rounded-full"
           >
-            <X className="h-3 w-3" />
+            <X className="h-4 w-4" />
           </Button>
         )}
         
-        <CardContent className="p-3 md:p-4 lg:p-6">
+        <CardContent className="p-6 md:p-8">
           {/* Centered Logo */}
-          <div className="flex justify-center mb-4">
+          <div className="flex justify-center mb-6">
             <img 
               src={logoImage} 
               alt="AI Complete Me" 
-              className="h-12 w-12 md:h-16 md:w-16"
+              className="h-16 w-16 md:h-20 md:w-20 opacity-90"
             />
           </div>
           
-          <div className="flex flex-col md:flex-row items-center justify-between gap-3 md:gap-4">
-            {/* Left side - Main message */}
-            <div className="text-center md:text-left flex-1">
-              <h3 className="text-base md:text-lg lg:text-xl font-bold text-amber-800 mb-1 md:mb-2 flex items-center justify-center gap-2 serif-heading">
-                <span className="gold-badge px-3 py-1 rounded-full text-sm font-medium">🎁</span>
-                Quiet Start Offer
-              </h3>
-              
-              <p className="text-amber-800/80 text-xs md:text-sm lg:text-base mb-2 md:mb-3 leading-tight max-w-2xl text-center">
-                The first 500 Soul Questers receive 3 months of Complete Plus + a mini wellness keepsake. Kits also available for referrers—until all 500 are claimed.
+          {/* Main Content */}
+          <div className="text-center space-y-6">
+            {/* Poetic Headline */}
+            <div className="space-y-2">
+              <h2 className="text-2xl md:text-3xl font-light text-amber-900 keepsake-heading">
+                Begin quietly. Connect deeply.
+              </h2>
+              <p className="text-lg md:text-xl text-amber-800/80 keepsake-heading italic">
+                Founding hearts receive 3 months free + a keepsake of care
               </p>
-              
-              <div className="space-y-1 text-amber-800/70 text-xs md:text-sm text-center">
-                <div>
-                  🤝 Referral Rewards: Invite someone to join. Earn bonus months, unlock badges, and receive more gifts—while supplies last
-                </div>
-                
-                <div>
-                  ⏳ Limited to First 500 Users: Quiet window closes soon. You're invited.
-                </div>
+            </div>
+            {/* Gentle Progress Indicator */}
+            <div className="w-full max-w-md space-y-4">
+              <div className="text-center text-sm text-amber-800/70 keepsake-heading">
+                <span className="heart-accent">♡</span> Wellness Kits Claimed: {claimedCount} of 500 <span className="heart-accent">♡</span>
+              </div>
+              <Progress 
+                value={(claimedCount / 500) * 100} 
+                className="h-2 bg-amber-100/50 [&>div]:bg-gradient-to-r [&>div]:from-gold [&>div]:to-gold-light" 
+              />
+              <div className="text-center text-sm text-amber-700 keepsake-heading italic">
+                {claimedCount === 0 
+                  ? "Your journey awaits..." 
+                  : claimedCount < 50 
+                    ? "Among the first to connect..." 
+                    : `${500 - claimedCount} keepsakes remain`
+                }
               </div>
             </div>
 
-            {/* Right side - Features and countdown */}
-            <div className="flex flex-col items-center gap-2 md:gap-3 lg:gap-4 min-w-0 w-full sm:w-auto md:w-64 lg:w-auto">
-              {/* Poetic Countdown */}
-              <div className="flex flex-col sm:flex-row md:flex-col lg:flex-row items-center gap-1 sm:gap-2 text-amber-800 text-center">
-                <Clock className="h-3 w-3 md:h-4 md:w-4 animate-pulse flex-shrink-0 text-amber-700" />
-                <div className="text-xs md:text-sm font-medium italic text-center leading-tight">
-                  {poeticPhrase}
-                </div>
+            {/* Poetic Countdown */}
+            <div className="flex items-center gap-2 text-amber-700 text-center">
+              <Clock className="h-4 w-4 heart-accent" />
+              <div className="text-sm keepsake-heading italic">
+                {poeticPhrase}
               </div>
-
-              {/* Claimed Progress Bar */}
-              <div className="w-full max-w-60 sm:max-w-56 md:max-w-60 lg:max-w-48 space-y-2">
-                <div className="text-center text-xs md:text-sm text-amber-800/70">
-                  <span>Wellness Kits Claimed: {claimedCount} of 500</span>
-                </div>
-                <Progress 
-                  value={(claimedCount / 500) * 100} 
-                  className="h-2 md:h-3 bg-white/20 [&>div]:bg-gradient-to-r [&>div]:from-emerald-400/80 [&>div]:to-emerald-300/60 [&>div]:animate-pulse" 
-                />
-                <div className="text-center text-xs md:text-sm text-emerald-700 font-medium leading-tight">
-                  {claimedCount === 0 
-                    ? "The journey begins now." 
-                    : claimedCount < 50 
-                      ? "You're part of the first wave of connection." 
-                      : `${500 - claimedCount} spots remaining`
-                  }
-                </div>
-              </div>
-
-              {/* Features with Mobile-Optimized Tooltips */}
-              <div className="flex flex-wrap justify-center gap-1 md:gap-2 text-xs md:text-sm text-amber-800/90">
-                {/* On mobile, show simple text without tooltips */}
-                <div className="sm:hidden flex flex-wrap justify-center gap-2 text-xs">
-                  <span>🎁 3 Months Free</span>
-                  <span>🤝 Referral Rewards</span>
-                </div>
-                
-                {/* On tablet and larger screens, show tooltips */}
-                <div className="hidden sm:flex flex-wrap justify-center gap-1 md:gap-2">
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <div className="flex items-center gap-1 cursor-help hover-scale px-1 py-0.5 rounded hover:bg-amber-100/20 transition-colors">
-                        <span>🎁 3 Months Free</span>
-                      </div>
-                    </TooltipTrigger>
-                    <TooltipContent side="top" className="max-w-xs">
-                      <p>Complete Plus membership with all premium features</p>
-                    </TooltipContent>
-                  </Tooltip>
-                  
-                  
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <span className="cursor-help hover-scale px-1 py-0.5 rounded hover:bg-amber-100/20 transition-colors">🤝 Referral Rewards</span>
-                    </TooltipTrigger>
-                    <TooltipContent side="top" className="max-w-xs">
-                      <p>Earn bonus months and unlock special badges</p>
-                    </TooltipContent>
-                  </Tooltip>
-                </div>
-              </div>
-
-              {/* CTA Button */}
-              {variant === 'homepage' && (
-                <Button 
-                  onClick={handleQuizStart}
-                  variant="secondary"
-                  size="sm"
-                  className="bg-white text-black hover:bg-white/90 font-medium text-xs md:text-sm px-2 sm:px-3 md:px-4 py-1.5 hover-scale animate-pulse w-full sm:w-auto md:w-full lg:w-auto"
-                >
-                  See How It Works ✨
-                </Button>
-              )}
             </div>
+
+            {/* Call to Action */}
+            {variant === 'homepage' && (
+              <Button 
+                onClick={handleQuizStart}
+                variant="secondary"
+                size="lg"
+                className="shimmer-button bg-white/80 text-amber-900 hover:bg-white border-2 border-gold/30 hover:border-gold/60 font-medium keepsake-heading px-8 py-3 rounded-xl"
+              >
+                <span className="heart-accent mr-2">♡</span>
+                Begin Your Journey
+                <span className="heart-accent ml-2">♡</span>
+              </Button>
+            )}
           </div>
         </CardContent>
       </Card>

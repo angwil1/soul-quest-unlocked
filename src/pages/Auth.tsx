@@ -338,38 +338,52 @@ const Auth = () => {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                <div className="quiet-start-card rounded-lg p-4 text-center space-y-3"
+                <div className="quiet-start-card rounded-2xl p-6 text-center space-y-4"
                   role="region"
                   aria-labelledby="offer-title"
                 >
                   {/* Centered Logo */}
-                  <div className="flex justify-center mb-3">
+                  <div className="flex justify-center mb-4">
                     <img 
                       src={logoImage} 
                       alt="AI Complete Me" 
-                      className="h-10 w-10 md:h-12 md:w-12"
+                      className="h-12 w-12 md:h-16 md:w-16 opacity-90"
                     />
                   </div>
                   
-                  <div className="flex items-center justify-center gap-2">
-                    <span className="gold-badge px-3 py-1 rounded-full text-sm font-medium">🎁</span>
-                    <h3 id="offer-title" className="font-semibold text-amber-800 serif-heading">Quiet Start Offer</h3>
+                  <div className="space-y-3">
+                    <h3 id="offer-title" className="text-xl md:text-2xl font-light text-amber-900 keepsake-heading">
+                      Begin quietly. Connect deeply.
+                    </h3>
+                    <div className="flex items-center justify-center gap-2 text-amber-800/80">
+                      <span className="heart-accent">♡</span>
+                      <span className="keepsake-heading italic">Founding hearts receive 3 months free + a keepsake of care</span>
+                      <span className="heart-accent">♡</span>
+                    </div>
                   </div>
-                  <p className="text-sm text-amber-800/80">
-                    Join the first 500 Soul Questers and receive:
+                  <p className="text-sm text-amber-800/70 keepsake-heading">
+                    Join the first 500 founding members:
                   </p>
-                  <ul className="space-y-1 text-xs text-amber-800/70" role="list">
-                    <li>✨ 3 months of Complete Plus free</li>
-                    <li>🎯 Priority matching & premium features</li>
+                  <ul className="space-y-2 text-sm text-amber-800/80 keepsake-heading" role="list">
+                    <li className="flex items-center justify-center gap-2">
+                      <span className="heart-accent">♡</span>
+                      <span>3 months of Complete Plus free</span>
+                    </li>
+                    <li className="flex items-center justify-center gap-2">
+                      <span className="heart-accent">♡</span>
+                      <span>Priority matching & premium features</span>
+                    </li>
                   </ul>
                 </div>
                 
                 <Button 
                   onClick={handleStartSignup}
-                  className="w-full h-12 text-lg font-semibold bg-gradient-to-r from-primary to-purple-600 hover:from-primary/90 hover:to-purple-600/90 focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                  className="shimmer-button w-full h-12 text-lg font-medium keepsake-heading bg-white/80 text-amber-900 hover:bg-white border-2 border-gold/30 hover:border-gold/60 rounded-xl"
                   aria-describedby="signup-description"
                 >
-                  Start Your Soul Quest Journey
+                  <span className="heart-accent mr-2">♡</span>
+                  Begin Your Soul Quest Journey
+                  <span className="heart-accent ml-2">♡</span>
                 </Button>
                 
                 <p id="signup-description" className="text-xs text-muted-foreground text-center">
