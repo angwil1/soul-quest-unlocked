@@ -134,6 +134,9 @@ const App = () => {
   }
 
   console.log('🚀 Rendering main app');
+  console.log('🔍 Current URL:', window.location.href);
+  console.log('🔍 Current pathname:', window.location.pathname);
+  console.log('🔍 Current hash:', window.location.hash);
 
   return (
     <QueryClientProvider client={queryClient}>
