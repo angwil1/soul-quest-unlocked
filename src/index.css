@@ -47,14 +47,14 @@ All colors MUST be HSL.
 
     --radius: 0.75rem;
 
-    /* Refined Quiet Start colors - blush canvas with gold accents */
+    /* Refined Quiet Start colors - exact specifications */
     --soft-blush: 25 50% 97%;
     --gold: 42 62% 57%;
     --gold-light: 45 89% 70%;
     --gold-dark: 42 55% 47%;
-    --deep-brown: 0 13% 21%;
+    --deep-brown: 15 26% 24%;
     --gold-gradient: linear-gradient(135deg, hsl(42 62% 57%) 0%, hsl(45 89% 70%) 100%);
-    --quiet-start-bg: hsl(25 50% 97%);
+    --quiet-start-bg: #fdf6f2;
     
     /* AI Dating gradients */
     --gradient-primary: linear-gradient(135deg, hsl(250 40% 35%), hsl(260 50% 50%));
@@ -250,32 +250,34 @@ body {
     to { opacity: 1; transform: translateY(0); }
   }
   
-              /* Quiet Start keepsake styles - blush canvas with gold accents */
+              /* Quiet Start keepsake styles - refined visual treatment */
               .quiet-start-card {
-                background: var(--quiet-start-bg);
-                border: 2px solid hsl(var(--gold) / 0.4);
-                box-shadow: 0 8px 32px hsl(var(--gold) / 0.15);
+                background: #fdf6f2;
+                border: 2px solid hsl(var(--gold) / 0.5);
+                box-shadow: 0 12px 40px hsl(var(--gold) / 0.15);
               }
               
               .keepsake-heading {
                 font-family: 'Georgia', 'Times New Roman', serif;
                 letter-spacing: 0.02em;
-                color: hsl(var(--deep-brown));
+                color: #3c2f2f;
               }
               
               .keepsake-text {
-                color: hsl(var(--deep-brown) / 0.8);
+                color: hsl(15 26% 24% / 0.8);
               }
               
               .keepsake-button {
-                background: hsl(var(--soft-blush));
-                border: 2px solid hsl(var(--gold) / 0.6);
-                color: hsl(var(--deep-brown));
+                background: #fdf6f2;
+                border: 2px solid hsl(var(--gold) / 0.7);
+                color: #3c2f2f;
+                transition: all 0.3s ease;
               }
               
               .keepsake-button:hover {
                 background: hsl(var(--gold) / 0.1);
                 border-color: hsl(var(--gold));
+                box-shadow: 0 0 20px hsl(var(--gold) / 0.3);
               }
               
               .keepsake-heart {
@@ -284,6 +286,13 @@ body {
               
               .keepsake-progress {
                 background: hsl(var(--gold) / 0.2);
+              }
+              
+              .offer-box {
+                background: #fdf6f2;
+                border: 2px solid hsl(var(--gold) / 0.4);
+                box-shadow: 0 8px 32px rgba(212, 162, 79, 0.1);
+                border-radius: 16px;
               }
               
               .heart-accent {

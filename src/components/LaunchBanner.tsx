@@ -166,7 +166,7 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
                 className="keepsake-button font-medium keepsake-heading px-8 py-3 rounded-xl"
               >
                 <span className="keepsake-heart mr-2">♡</span>
-                Begin Your Journey
+                Claim Your Spot
                 <span className="keepsake-heart ml-2">♡</span>
               </Button>
             )}
