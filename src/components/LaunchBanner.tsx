@@ -80,6 +80,11 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
     localStorage.setItem('launchBannerDismissed', 'true');
   };
 
+  const handleReopen = () => {
+    setIsDismissed(false);
+    localStorage.removeItem('launchBannerDismissed');
+  };
+
   // Check if banner was previously dismissed
   useEffect(() => {
     if (showDismiss) {
@@ -95,10 +100,16 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
   if (isDismissed) {
     return (
       <div className={`relative overflow-hidden rounded-2xl ${className}`}>
-        <div className="h-24 md:h-32 bg-[#fdf6f2] opacity-40 border border-gold/20 rounded-2xl flex items-center justify-center">
+        <div className="h-32 md:h-40 bg-[#fdf6f2] opacity-40 border border-gold/20 rounded-2xl flex flex-col items-center justify-center space-y-3">
           <div className="text-center keepsake-text text-sm opacity-60">
             <span className="keepsake-heart">♡</span> Offer closed - thank you for visiting <span className="keepsake-heart">♡</span>
           </div>
+          <button
+            onClick={handleReopen}
+            className="text-xs keepsake-heading border border-gold/40 hover:border-gold/60 px-3 py-1 rounded-full keepsake-text hover:bg-gold/10 transition-all duration-300"
+          >
+            Reopen Quiet Start
+          </button>
         </div>
       </div>
     );
