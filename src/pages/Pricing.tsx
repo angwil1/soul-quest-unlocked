@@ -463,63 +463,6 @@ const Pricing = () => {
               })}
             </div>
 
-            {/* Alternative Offer Section */}
-            <section 
-              className="py-16 mt-16 relative"
-              role="region"
-              aria-label="Alternative trial offer"
-            >
-              <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
-                <div className="relative p-12 rounded-3xl border-2 transition-all duration-300" 
-                     style={{ 
-                       backgroundColor: 'hsl(var(--alt-offer-brown) / 0.04)',
-                       borderColor: 'hsl(var(--alt-offer-brown) / 0.15)',
-                       boxShadow: '0 8px 32px hsl(var(--alt-offer-brown) / 0.08)'
-                     }}>
-                  
-                  {/* Soft gold heart icon */}
-                  <div className="inline-flex items-center justify-center w-12 h-12 mb-6 rounded-full"
-                       style={{ backgroundColor: 'hsl(var(--gold) / 0.15)' }}>
-                    <svg 
-                      width="20" 
-                      height="18" 
-                      viewBox="0 0 20 18" 
-                      fill="none" 
-                      xmlns="http://www.w3.org/2000/svg"
-                      style={{ color: 'hsl(var(--gold))' }}
-                    >
-                      <path 
-                        d="M17.367 2.133a4.89 4.89 0 00-6.934 0L10 2.567l-.433-.434a4.89 4.89 0 00-6.934 6.934L10 16.433l7.367-7.366a4.89 4.89 0 000-6.934z" 
-                        fill="currentColor"
-                      />
-                    </svg>
-                  </div>
-                  
-                  <div className="space-y-4">
-                    <h3 className="font-serif text-lg font-light leading-relaxed tracking-wide" 
-                        style={{ color: 'hsl(var(--alt-offer-brown))' }}>
-                      If you missed Quiet Start, you'll still receive 30 days of Complete Premium free
-                    </h3>
-                    
-                    <p className="text-base leading-relaxed" 
-                       style={{ color: 'hsl(var(--alt-offer-brown) / 0.75)' }}>
-                      After your trial, you'll be automatically enrolled in Complete Plus ($12/month) unless you choose a different plan. 
-                      You can upgrade to Premium or downgrade to Basic anytime.
-                    </p>
-
-                    <div className="pt-2">
-                      <a 
-                        href="/#/faq#quiet-start-billing" 
-                        className="text-sm font-medium hover:underline transition-colors duration-200"
-                        style={{ color: 'hsl(var(--gold))' }}
-                      >
-                        Learn more about billing details →
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
 
             <div className="text-center mt-12">
               <p className="text-sm text-gray-600 dark:text-gray-400">
