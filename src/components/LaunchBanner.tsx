@@ -160,7 +160,7 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
                 A keepsake of care to mark your beginning.
               </p>
               <div className="mt-2 text-xs keepsake-text opacity-75">
-                Handwritten wellness card + mindful pen
+                Your spot is saved. A keepsake of care is on its way.
               </div>
             </div>
 
