@@ -20,6 +20,7 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline hover:text-primary-glow",
         premium: "bg-gradient-launch text-white hover:shadow-launch hover:scale-[1.02] active:scale-[0.98] shadow-primary border border-primary-glow/20",
         hero: "bg-gradient-hero text-white hover:shadow-launch hover:scale-[1.02] active:scale-[0.98] shadow-primary border border-primary-glow/30 backdrop-blur-sm",
+        gold: "btn-gold-hover border border-gold-light/30 bg-gradient-to-r from-gold-light to-gold hover:from-gold hover:to-gold-dark transition-all duration-300 text-primary-foreground",
       },
       size: {
         default: "h-11 px-6 py-3 rounded-lg",

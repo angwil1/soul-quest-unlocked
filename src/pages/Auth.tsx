@@ -337,16 +337,18 @@ const Auth = () => {
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                <div 
-                  className="bg-gradient-to-r from-primary/5 to-purple-600/5 border border-primary/20 rounded-lg p-4 text-center space-y-3"
+                <div className="bg-gradient-to-r from-amber-50/50 to-yellow-50 border border-amber-200/50 rounded-lg p-4 text-center space-y-3" style={{ background: 'var(--blush-to-gold)' }}
                   role="region"
                   aria-labelledby="offer-title"
                 >
-                  <h3 id="offer-title" className="font-semibold text-primary">🎁 Quiet Start Offer</h3>
-                  <p className="text-sm text-muted-foreground">
+                  <div className="flex items-center justify-center gap-2">
+                    <span className="gold-badge px-3 py-1 rounded-full text-sm font-medium">🎁</span>
+                    <h3 id="offer-title" className="font-semibold text-amber-800">Quiet Start Offer</h3>
+                  </div>
+                  <p className="text-sm text-amber-800/80">
                     Join the first 500 Soul Questers and receive:
                   </p>
-                  <ul className="space-y-1 text-xs text-muted-foreground" role="list">
+                  <ul className="space-y-1 text-xs text-amber-800/70" role="list">
                     <li>✨ 3 months of Complete Plus free</li>
                     <li>🎯 Priority matching & premium features</li>
                   </ul>
