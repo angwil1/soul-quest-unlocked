@@ -201,7 +201,7 @@ const FAQ = () => {
               <Button 
                 variant="outline" 
                 size="sm"
-                onClick={() => navigate('/contact')}
+                onClick={() => window.location.href = 'mailto:support@aicompleteme.com'}
                 className="flex items-center gap-2 focus:ring-2 focus:ring-primary focus:ring-offset-2 w-full xs:w-auto justify-center"
                 aria-label="Contact support for additional help"
               >
@@ -364,6 +364,7 @@ const FAQ = () => {
               <Button 
                 variant="outline"
                 size="lg"
+                onClick={() => window.location.href = 'mailto:support@aicompleteme.com'}
                 className="focus:ring-2 focus:ring-primary focus:ring-offset-2 px-8 sm:px-12 py-3 sm:py-4 text-base sm:text-lg"
                 aria-label="Contact our support team for help with questions not covered in the FAQ"
               >
