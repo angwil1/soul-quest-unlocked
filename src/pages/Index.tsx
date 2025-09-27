@@ -135,6 +135,24 @@ const Index = () => {
             <LaunchBanner showDismiss={true} variant="homepage" />
           </div>
         </section>
+
+        {/* Fallback Offer Section */}
+        <section 
+          className="py-6 bg-gradient-to-br from-muted/10 to-background border-b border-border/20"
+          role="region"
+          aria-label="Alternative trial offer"
+        >
+          <div className="max-w-4xl mx-auto px-4 text-center">
+            <div className="bg-card border border-border/30 rounded-xl p-6 shadow-sm">
+              <p className="text-foreground leading-relaxed">
+                <span className="font-medium">If you missed Quiet Start</span>, you'll still receive{' '}
+                <span className="font-semibold text-primary">30 days of Complete Premium free</span>. 
+                After your trial, you'll be automatically enrolled in Complete Plus ($12/month) unless you choose a different plan. 
+                You can upgrade to Premium or downgrade to Basic anytime.
+              </p>
+            </div>
+          </div>
+        </section>
         
         <main id="main-content" role="main">
           {/* EMOTIONALLY INTELLIGENT HERO DESIGN */}
