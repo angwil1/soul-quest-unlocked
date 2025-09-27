@@ -92,7 +92,17 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
     }
   }, [showDismiss]);
 
-  if (isDismissed) return null;
+  if (isDismissed) {
+    return (
+      <div className={`relative overflow-hidden rounded-2xl ${className}`}>
+        <div className="h-24 md:h-32 bg-[#fdf6f2] opacity-40 border border-gold/20 rounded-2xl flex items-center justify-center">
+          <div className="text-center keepsake-text text-sm opacity-60">
+            <span className="keepsake-heart">♡</span> Offer closed - thank you for visiting <span className="keepsake-heart">♡</span>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
