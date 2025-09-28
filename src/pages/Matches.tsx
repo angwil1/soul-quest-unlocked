@@ -235,8 +235,8 @@ const Matches = () => {
         {/* Search Results Status */}
         {isSearchActive && (
           <section className="mb-6">
-            <div className="text-center p-4 bg-muted/30 rounded-lg">
-              <p className="text-sm text-muted-foreground">
+            <div className="text-center p-6 bg-muted/30 rounded-lg">
+              <p className="text-sm text-muted-foreground mb-4">
                 {filteredProfiles.length > 0 
                   ? `Found ${filteredProfiles.length} matches in ${searchZipCode}`
                   : (() => {
@@ -254,6 +254,31 @@ const Matches = () => {
                     })()
                 }
               </p>
+              
+              {filteredProfiles.length === 0 && (
+                <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    onClick={() => setIsSearchActive(false)}
+                    className="text-xs"
+                  >
+                    Want to explore Quiet Start while we grow?
+                  </Button>
+                  <Button 
+                    variant="ghost" 
+                    size="sm"
+                    onClick={() => {
+                      setSearchAgeRange('18-65');
+                      setSearchGenderPreference('everyone');
+                      setSearchDistance('unlimited');
+                    }}
+                    className="text-xs"
+                  >
+                    Try adjusting your filters
+                  </Button>
+                </div>
+              )}
             </div>
           </section>
         )}
