@@ -333,57 +333,50 @@ const QuizResults = () => {
         {/* Match Previews */}
         <div className="mb-8">
           <h2 className="text-2xl font-semibold mb-4 text-center">Your Top Compatibility Matches</h2>
-          <div className="grid gap-3 md:grid-cols-3">
+          <div className="grid gap-2 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 max-w-4xl mx-auto">
             {matchPreviews.map((match, index) => (
               <Card 
                 key={match.id} 
-                className="overflow-hidden hover:shadow-lg transition-all duration-300 border-primary/10 cursor-pointer hover:border-primary/30"
+                className="overflow-hidden hover:shadow-lg transition-all duration-200 hover:scale-[1.02] cursor-pointer"
                 onClick={() => handleMatchClick(match, index)}
               >
                 <div className="relative">
-                  <div className="aspect-[3/2] bg-gradient-to-br from-primary/20 to-secondary/20">
-                    <Avatar className="w-full h-full rounded-none">
+                  <div className="aspect-[3/4] bg-gradient-to-br from-primary/10 to-secondary/10">
+                    <Avatar className="w-full h-full rounded-lg">
                       <AvatarImage 
                         src={match.blurredPhoto} 
                         alt={`${match.name}'s profile photo`}
                         className="object-cover"
                       />
-                      <AvatarFallback className="w-full h-full rounded-none text-lg">
+                      <AvatarFallback className="w-full h-full rounded-lg text-sm">
                         {match.name.split(' ').map(n => n[0]).join('')}
                       </AvatarFallback>
                     </Avatar>
                   </div>
                   
                   {index === 0 && (
-                    <Badge className="absolute top-1 left-1 bg-green-600 text-white text-xs px-1.5 py-0.5">
-                      Top Match!
+                    <Badge className="absolute top-1.5 left-1.5 bg-green-600 text-white text-xs px-1 py-0.5">
+                      Top!
                     </Badge>
                   )}
                   
                   <Badge 
-                    className="absolute top-1 right-1 bg-primary text-primary-foreground text-xs px-1.5 py-0.5"
+                    className="absolute top-1.5 right-1.5 bg-primary text-primary-foreground text-xs px-1 py-0.5"
                   >
-                    <Sparkles className="h-2 w-2 mr-1" />
                     {match.compatibility}%
                   </Badge>
                 </div>
                 
-                <CardHeader className="pb-2 px-3 pt-3">
-                  <CardTitle className="text-sm font-semibold">
-                    {match.name}, {match.age}
-                  </CardTitle>
-                </CardHeader>
-                
-                <CardContent className="pt-0 px-3 pb-3">
-                  <div className="flex items-center justify-center gap-1 mb-2">
-                    <Heart className="h-3 w-3 text-red-500" />
-                    <span className="text-xs font-medium">{match.compatibility}% Match</span>
+                <CardContent className="p-2">
+                  <div className="text-center mb-2">
+                    <p className="text-xs font-medium leading-tight">
+                      {match.name}, {match.age}
+                    </p>
                   </div>
-                  <Progress value={match.compatibility} className="h-1 mb-2" />
                   
-                  <div className="flex flex-wrap gap-1 justify-center mb-3">
-                    {match.commonInterests.slice(0, 2).map((interest) => (
-                      <Badge key={interest} variant="outline" className="text-xs px-1 py-0.5">
+                  <div className="flex flex-wrap gap-0.5 justify-center mb-2">
+                    {match.commonInterests.slice(0, 1).map((interest) => (
+                      <Badge key={interest} variant="outline" className="text-xs px-1 py-0">
                         {interest}
                       </Badge>
                     ))}
@@ -391,14 +384,14 @@ const QuizResults = () => {
                   
                   <Button 
                     size="sm" 
-                    className="w-full h-7 text-xs"
+                    className="w-full h-6 text-xs p-1"
                     onClick={(e) => {
                       e.stopPropagation();
                       handleMatchClick(match, index);
                     }}
                   >
-                    <MessageCircle className="h-3 w-3 mr-1" />
-                    Message
+                    <MessageCircle className="h-2.5 w-2.5 mr-1" />
+                    Chat
                   </Button>
                 </CardContent>
               </Card>
