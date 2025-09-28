@@ -10,7 +10,7 @@ import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useAuth } from '@/hooks/useAuth';
 import { useProfile, Profile } from '@/hooks/useProfile';
-import { AgeVerification } from '@/components/AgeVerification';
+
 import { CameraCapture } from '@/components/CameraCapture';
 import { ArrowLeft, Upload, X, Camera, MapPin, Search } from 'lucide-react';
 
@@ -40,25 +40,10 @@ const ProfileEdit = () => {
   const [formData, setFormData] = useState<Partial<Profile>>({});
   const [newInterest, setNewInterest] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [showAgeVerification, setShowAgeVerification] = useState(false);
+  
   const [showCamera, setShowCamera] = useState(false);
 
-  // Check if user needs age verification
-  useEffect(() => {
-    const checkAgeVerification = () => {
-      const ageVerified = localStorage.getItem('ageVerified') === 'true';
-      const hasDateOfBirth = !!profile?.date_of_birth; // Check if already has DOB
-      const isNewUser = !profile?.name; // Assume new user if no name set
-      
-      // Toggle visibility based on current state
-      const shouldShow = isNewUser && !ageVerified && !hasDateOfBirth;
-      setShowAgeVerification(shouldShow);
-    };
-
-    if (user && !profileLoading) {
-      checkAgeVerification();
-    }
-  }, [user, profile, profileLoading]);
+  // Age verification is handled during initial signup only
 
   useEffect(() => {
     if (profile) {
@@ -79,7 +64,7 @@ const ProfileEdit = () => {
         gender: profile.gender || '',
         location: profile.location || '',
         interests: profile.interests || [],
-        date_of_birth: profile.date_of_birth || '',
+        
         height: profile.height || undefined,
         occupation: profile.occupation || '',
         education: profile.education || '',
@@ -233,16 +218,7 @@ const ProfileEdit = () => {
       </div>
 
       <div className="max-w-4xl mx-auto px-4 py-8">
-        {/* Age Verification Modal for New Users */}
-          {showAgeVerification && (
-            <div className="mb-8">
-              <AgeVerification 
-                onVerificationComplete={() => {
-                  setShowAgeVerification(false);
-                }}
-              />
-            </div>
-          )}
+        {/* Age verification is handled during initial signup only */}
 
         <form id="profile-form" onSubmit={handleSubmit} className="space-y-8">
           
@@ -411,19 +387,21 @@ const ProfileEdit = () => {
                     placeholder="Your name"
                   />
                 </div>
-                
-                {/* Show DOB only if not already provided or verified */}
-                {!(profile?.date_of_birth || (typeof window !== 'undefined' && localStorage.getItem('ageVerified') === 'true')) && (
+
+                {/* Age display (calculated from date of birth during signup) */}
+                {profile?.age && (
                   <div>
-                    <Label htmlFor="date_of_birth">Date of Birth</Label>
-                    <Input
-                      id="date_of_birth"
-                      type="date"
-                      value={formData.date_of_birth || ''}
-                      onChange={(e) => handleInputChange('date_of_birth', e.target.value)}
-                    />
+                    <Label>Age</Label>
+                    <div className="px-3 py-2 bg-muted rounded-md text-sm text-muted-foreground">
+                      {profile.age} years old
+                    </div>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      Age calculated from date of birth provided during signup
+                    </p>
                   </div>
                 )}
+
+                {/* Date of birth is collected during signup only */}
 
                 <div>
                   <Label htmlFor="gender">Gender</Label>

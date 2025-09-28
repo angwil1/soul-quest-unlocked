@@ -11,6 +11,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { WelcomeConfirmation } from '@/components/WelcomeConfirmation';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+import { calculateAge } from '@/lib/ageUtils';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 export type SignupStep = 'details' | 'email-confirmation' | 'complete-profile' | 'shipping-address' | 'complete';
@@ -56,20 +57,42 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
   // Store age verification when user is confirmed
   useEffect(() => {
     const storeAgeVerification = async () => {
+      // Store date of birth in profiles table with calculated age
       if (user && dateOfBirth && !isEmailConfirmed) {
         try {
-          console.log('🔒 Storing age verification in database');
-          const { error } = await supabase.rpc('verify_user_age', {
+          console.log('🔒 Storing age verification and profile data');
+          
+          // First verify age in age_verifications table
+          const { error: ageError } = await supabase.rpc('verify_user_age', {
             p_date_of_birth: dateOfBirth
           });
           
-          if (error) {
-            console.error('Age verification storage error:', error);
+          if (ageError) {
+            console.error('Age verification storage error:', ageError);
           } else {
             console.log('✅ Age verification stored successfully');
           }
+
+          // Then store in profiles table with calculated age
+          const age = calculateAge(dateOfBirth);
+          const { error: profileError } = await supabase
+            .from('profiles')
+            .upsert({ 
+              id: user.id,
+              date_of_birth: dateOfBirth,
+              age: age,
+              updated_at: new Date().toISOString()
+            }, { 
+              onConflict: 'id' 
+            });
+          
+          if (profileError) {
+            console.error('Profile date of birth storage error:', profileError);
+          } else {
+            console.log('✅ Date of birth and age stored in profile successfully');
+          }
         } catch (error) {
-          console.error('Age verification storage error:', error);
+          console.error('Age/profile storage error:', error);
         }
       }
     };
@@ -192,18 +215,6 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
     }
   };
 
-  const calculateAge = (birthDate: string): number => {
-    const today = new Date();
-    const birth = new Date(birthDate);
-    let age = today.getFullYear() - birth.getFullYear();
-    const monthDiff = today.getMonth() - birth.getMonth();
-    
-    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
-      age--;
-    }
-    
-    return age;
-  };
 
   const handleEmailSignup = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -246,12 +257,13 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
       const result = await signUp(email, password);
       
       if (!result?.error) {
-        // Store the lookingFor preference in user metadata
+        // Also store date_of_birth in user metadata and calculate age
         try {
           const { error: updateError } = await supabase.auth.updateUser({
             data: { 
               looking_for: lookingFor,
-              date_of_birth: dateOfBirth 
+              date_of_birth: dateOfBirth,
+              age: calculateAge(dateOfBirth)
             }
           });
           

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/hooks/useAuth';
 import { useToast } from '@/hooks/use-toast';
+import { calculateAge } from '@/lib/ageUtils';
 
 export interface Profile {
   id: string;
@@ -69,7 +70,24 @@ export const useProfile = () => {
         return;
       }
       
-      setProfile(data as Profile);
+      // Calculate age if date_of_birth exists but age is missing
+      let profileData = data as Profile;
+      if (profileData.date_of_birth && !profileData.age) {
+        const calculatedAge = calculateAge(profileData.date_of_birth);
+        
+        // Update the profile with calculated age
+        const { error: updateError } = await supabase
+          .from('profiles')
+          .update({ age: calculatedAge, updated_at: new Date().toISOString() })
+          .eq('id', user?.id);
+          
+        if (!updateError) {
+          profileData.age = calculatedAge;
+          console.log('✅ Age calculated and updated for existing profile:', calculatedAge);
+        }
+      }
+      
+      setProfile(profileData);
     } catch (error) {
       console.error('Error fetching profile:', error);
       toast({
