@@ -328,9 +328,10 @@ const QuizResults = () => {
                       <AvatarImage 
                         src={match.blurredPhoto} 
                         alt={`${match.name}'s profile photo`}
-                        className="object-cover"
+                        className="object-cover w-full h-full"
+                        style={{ aspectRatio: '3/4' }}
                       />
-                      <AvatarFallback className="w-full h-full rounded-lg text-sm">
+                      <AvatarFallback className="w-full h-full rounded-lg text-sm bg-gradient-to-br from-primary/20 to-secondary/20">
                         {match.name.split(' ').map(n => n[0]).join('')}
                       </AvatarFallback>
                     </Avatar>

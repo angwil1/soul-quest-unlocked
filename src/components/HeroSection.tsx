@@ -62,7 +62,7 @@ const HeroSection = () => {
   return (
     <section className="relative overflow-hidden min-h-[100vh] min-h-[100dvh] bg-gradient-to-br from-background via-muted/20 to-background">
       
-      {/* Original rotating background images - Full screen */}
+      {/* Original rotating background images - Full screen with proper aspect ratio */}
       <div className="absolute inset-0 z-0">
         {heroImages.map((image, index) => (
           <div
@@ -75,6 +75,9 @@ const HeroSection = () => {
               src={image}
               alt="Loving couples celebrating authentic connections"
               className="w-full h-full object-cover object-center"
+              style={{ 
+                minHeight: '100dvh'
+              }}
               loading={index === 0 ? "eager" : "lazy"}
             />
           </div>

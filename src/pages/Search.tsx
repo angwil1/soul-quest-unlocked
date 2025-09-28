@@ -536,16 +536,15 @@ const Search = () => {
                               <AvatarImage 
                                 src={profile.photos[0]} 
                                 alt={`${profile.name}'s profile photo - ${profile.vibeTag} vibe`}
-                                className="object-cover blur-sm"
+                                className="object-cover blur-sm w-full h-full"
+                                style={{ aspectRatio: '3/4' }}
                               />
-                              <AvatarFallback className="w-full h-full rounded-lg text-sm">
-                                <AvatarFallback className="w-full h-full rounded-lg text-lg">
-                                  {profile.name?.split(' ')[0]?.charAt(0) || 'N'}
-                                </AvatarFallback>
-                              </AvatarFallback>
-                            </Avatar>
-                          </div>
-                          <Badge 
+                               <AvatarFallback className="w-full h-full rounded-lg text-lg bg-gradient-to-br from-primary/30 to-secondary/30">
+                                 {profile.name?.split(' ')[0]?.charAt(0) || 'N'}
+                               </AvatarFallback>
+                             </Avatar>
+                           </div>
+                           <Badge
                             className="absolute top-2 right-2 bg-primary text-primary-foreground text-xs px-1.5 py-0.5"
                             aria-label={`${matchScore} percent compatibility match`}
                           >

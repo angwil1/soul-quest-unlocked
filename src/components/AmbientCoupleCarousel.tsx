@@ -79,8 +79,9 @@ export const AmbientCoupleCarousel = () => {
                    <img
                      src={image.src}
                      alt={image.alt}
-                     className="w-full h-48 xs:h-56 sm:h-64 md:h-72 lg:h-80 object-cover transition-all duration-500 group-hover:scale-105"
+                     className="w-full h-48 xs:h-56 sm:h-64 md:h-80 lg:h-96 xl:h-[28rem] object-cover transition-all duration-500 group-hover:scale-105"
                      loading="lazy"
+                     style={{ aspectRatio: '4/3' }}
                    />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <div className="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">

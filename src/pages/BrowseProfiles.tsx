@@ -304,9 +304,10 @@ const BrowseProfiles = () => {
                       <AvatarImage 
                         src={profile.photos[0]} 
                         alt={`${profile.name}'s profile photo showing ${profile.vibeTag} personality`}
-                        className="object-cover"
+                        className="object-cover w-full h-full"
+                        style={{ aspectRatio: '3/4' }}
                       />
-                      <AvatarFallback className="w-full h-full rounded-lg text-sm">
+                      <AvatarFallback className="w-full h-full rounded-lg text-sm bg-gradient-to-br from-primary/20 to-secondary/20">
                         {profile.name.split(' ').map(n => n[0]).join('')}
                       </AvatarFallback>
                     </Avatar>

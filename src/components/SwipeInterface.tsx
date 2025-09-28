@@ -151,15 +151,16 @@ export const SwipeInterface = ({ profiles, onSwipe, onProfilesExhausted }: Swipe
         whileTap={{ scale: 0.95 }}
       >
         <Card className="overflow-hidden shadow-xl">
-          {/* Photo Section */}
-          <div className="relative aspect-[3/4] overflow-hidden">
+          {/* Photo Section - Consistent aspect ratio */}
+          <div className="relative aspect-[3/4] overflow-hidden bg-muted">
             <Avatar className="w-full h-full rounded-none">
               <AvatarImage 
                 src={currentProfile.photos[0]} 
                 alt={currentProfile.name}
                 className="object-cover w-full h-full"
+                style={{ aspectRatio: '3/4' }}
               />
-              <AvatarFallback className="w-full h-full rounded-none text-4xl">
+              <AvatarFallback className="w-full h-full rounded-none text-4xl bg-gradient-to-br from-primary/20 to-secondary/20">
                 {currentProfile.name.charAt(0)}
               </AvatarFallback>
             </Avatar>

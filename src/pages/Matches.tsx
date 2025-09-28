@@ -150,14 +150,15 @@ const Matches = () => {
                   onClick={() => navigate(`/sample-user-profile/${match.profile.id}`)}
                 >
                   <div className="relative">
-                    <div className="aspect-[4/3] bg-gradient-to-br from-primary/20 to-secondary/20">
+                    <div className="aspect-[3/4] bg-gradient-to-br from-primary/20 to-secondary/20">
                       <Avatar className="w-full h-full rounded-lg">
                         <AvatarImage 
                           src={match.profile.avatar_url || match.profile.photos?.[0]} 
                           alt={`${match.profile.name}'s profile photo`}
-                          className="object-cover"
+                          className="object-cover w-full h-full"
+                          style={{ aspectRatio: '3/4' }}
                         />
-                        <AvatarFallback className="w-full h-full rounded-lg text-lg">
+                        <AvatarFallback className="w-full h-full rounded-lg text-lg bg-gradient-to-br from-primary/30 to-secondary/30">
                           {match.profile.name?.split(' ').map(n => n[0]).join('') || 'N/A'}
                         </AvatarFallback>
                       </Avatar>
