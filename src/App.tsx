@@ -20,6 +20,7 @@ import Profile from "./pages/Profile";
 import ProfileEdit from "./pages/ProfileEdit";
 import ProfileSetup from "./pages/ProfileSetup";
 import Matches from "./pages/Matches";
+import Search from "./pages/Search";
 import Messages from "./pages/Messages";
 import BrowseProfiles from "./pages/BrowseProfiles";
 import SwipeMode from "./pages/SwipeMode";
@@ -189,6 +190,11 @@ const App = () => {
               <Route path="/matches" element={
                 <ProtectedRoute>
                   <Matches />
+                </ProtectedRoute>
+              } />
+              <Route path="/search" element={
+                <ProtectedRoute>
+                  <Search />
                 </ProtectedRoute>
               } />
               <Route path="/messages" element={

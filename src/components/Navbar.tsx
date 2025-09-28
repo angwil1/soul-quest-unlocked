@@ -7,7 +7,6 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent } from "@/components/ui/card";
-import SearchFilters from "@/components/SearchFilters";
 import { supabase } from "@/integrations/supabase/client";
 import { useMemoryVault } from "@/hooks/useMemoryVault";
 import logoImage from "@/assets/logo-transparent-new.png";
@@ -526,21 +525,68 @@ export const Navbar = () => {
             <div className="bg-muted/30 rounded-lg p-4 space-y-4">
               <h3 className="font-semibold text-base flex items-center gap-2">
                 <Filter className="h-4 w-4" />
-                Refine Your Search
+                Quick Search Options
               </h3>
               
-              <SearchFilters
-                onFiltersChange={handleFiltersChange}
-                onPreferenceChange={handlePreferenceChange}
-                onZipCodeChange={handleZipCodeChange}
-              />
+              <div className="grid grid-cols-2 gap-2">
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  onClick={() => {
+                    setShowSearchModal(false);
+                    navigate('/search?age=25-35&looking=everyone');
+                  }}
+                  className="h-10"
+                >
+                  Young Professionals
+                </Button>
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={() => {
+                    setShowSearchModal(false);
+                    navigate('/search?age=35-45&looking=everyone');
+                  }}
+                  className="h-10"
+                >
+                  Career-Focused
+                </Button>
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={() => {
+                    setShowSearchModal(false);
+                    navigate('/search?looking=activity-partners');
+                  }}
+                  className="h-10"
+                >
+                  Activity Partners
+                </Button>
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={() => {
+                    setShowSearchModal(false);
+                    navigate('/search?looking=casual-friends');
+                  }}
+                  className="h-10"
+                >
+                  Casual Friends
+                </Button>
+              </div>
             </div>
 
             {/* Action Buttons */}
             <div className="flex flex-col gap-3 pt-2">
-              <Button onClick={handleSearch} className="w-full h-12 text-base font-semibold">
+              <Button 
+                onClick={() => {
+                  setShowSearchModal(false);
+                  navigate('/search');
+                }} 
+                className="w-full h-12 text-base font-semibold"
+              >
                 <Search className="h-4 w-4 mr-2" />
-                Find Matches
+                Go to Advanced Search
               </Button>
               <Button 
                 variant="outline" 
