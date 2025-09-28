@@ -163,13 +163,13 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
                 Quiet Start
               </h3>
               <p className="text-lg keepsake-text keepsake-heading italic mb-4">
-                We're just beginning. You're invited to grow with us.
-                Explore freely for 60 days with full access to Complete Plus features.
+                We're just beginning. You're invited to grow with us. 
+                Explore freely for 60 days—with full access to Complete Plus.
               </p>
                <div className="space-y-3 text-sm keepsake-text mb-4">
-                 <p className="font-medium">No charge today. We'll only bill after your trial ends—no surprises.</p>
-                 <p>Free for 60 days with full access to Complete Plus features.</p>
-                 <p>Includes smart matching, vibe tags, profile discovery, and messaging</p>
+                 <p className="font-medium">✓ No charge today—only billed if you choose to stay</p>
+                 <p>✓ Full access to every feature, every moment</p>
+                 <p>✓ Cancel anytime—quietly, easily, no surprises</p>
                </div>
               
                {/* Progress removed since no longer limited to 200 */}

@@ -79,7 +79,7 @@ export const ProfileSetupModal: React.FC<ProfileSetupModalProps> = ({ isOpen, on
                 🌱 60-Day Free Trial
               </p>
               <p className="text-xs text-muted-foreground leading-relaxed">
-                We're just beginning. You're invited to grow with us and explore freely for 60 days.
+                We're just beginning. You're invited to grow with us. Explore freely for 60 days—with full access to Complete Plus.
               </p>
             </div>
           </div>

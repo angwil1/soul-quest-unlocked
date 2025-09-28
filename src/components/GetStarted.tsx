@@ -25,7 +25,7 @@ export const GetStarted = () => {
           </h2>
           
           <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-            We're just beginning. You're invited to grow with us. Explore freely for 60 days.
+            We're just beginning. You're invited to grow with us. Explore freely for 60 days—with full access to Complete Plus.
           </p>
           
           <Card className="p-8 max-w-md mx-auto bg-gradient-to-br from-background to-muted/5 border-primary/10 backdrop-blur-sm">

@@ -599,9 +599,9 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
                   Your 60-Day Free Trial
                 </h4>
                 <ul className="text-xs text-emerald-700 space-y-1">
-                  <li>• 60 days of Complete Plus features</li>
-                  <li>• Full access to premium matching and connection tools</li>
-                  <li>• No charge until your trial ends</li>
+                  <li>• No charge today—only billed if you choose to stay</li>
+                  <li>• Full access to every feature, every moment</li>
+                  <li>• Cancel anytime—quietly, easily, no surprises</li>
                 </ul>
               </div>
 

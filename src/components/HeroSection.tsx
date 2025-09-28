@@ -117,15 +117,15 @@ const HeroSection = () => {
                 </h2>
                 
                 <p className="text-base sm:text-lg text-white/90 leading-relaxed drop-shadow-sm px-2 sm:px-0">
-                  We're just beginning. You're invited to grow with us.
-                  Explore freely for 60 days with full access to Complete Plus features.
+                  We're just beginning. You're invited to grow with us. 
+                  Explore freely for 60 days—with full access to Complete Plus.
                 </p>
                 
                 {/* Benefits */}
                 <div className="space-y-1 sm:space-y-2 text-xs sm:text-sm text-white/90 px-2 sm:px-0">
-                  <p>✓ No charge today—we'll only bill after your trial ends</p>
-                  <p>✓ Full access to Complete Plus features for 60 days</p>
-                  <p>✓ Cancel anytime—no surprises</p>
+                  <p>✓ No charge today—only billed if you choose to stay</p>
+                  <p>✓ Full access to every feature, every moment</p>
+                  <p>✓ Cancel anytime—quietly, easily, no surprises</p>
                 </div>
               </div>
             </div>
