@@ -4,21 +4,17 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ShippingProgressTracker } from '@/components/ShippingProgressTracker';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, Edit, MapPin, Briefcase, Heart, Settings, Share2, Eye, Users, MoreVertical } from 'lucide-react';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import { ArrowLeft, Edit, MapPin, Briefcase, Heart } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
 import profileSilhouette from '@/assets/profile-silhouette.jpg';
 import { useProfile } from '@/hooks/useProfile';
 import { PageLoadingSkeleton } from '@/components/LoadingSkeleton';
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
-import { useToast } from '@/hooks/use-toast';
 const Profile = () => {
   const navigate = useNavigate();
   const { user, loading: authLoading } = useAuth();
   const { profile, loading } = useProfile();
-  const [isShareMenuOpen, setIsShareMenuOpen] = useState(false);
-  const { toast } = useToast();
 
   // Redirect to auth if not logged in
   useEffect(() => {
@@ -42,31 +38,6 @@ const Profile = () => {
     if (profile.photos?.length || profile.avatar_url) completed++;
     
     return Math.round((completed / totalFields) * 100);
-  };
-
-  const handleShareProfile = async () => {
-    console.log('Share Profile clicked');
-    if (navigator.share) {
-      console.log('Using native share API');
-      try {
-        await navigator.share({
-          title: `${profile?.name || 'User'}'s Profile - AI Complete Me`,
-          text: `Check out ${profile?.name || 'this user'}'s profile on AI Complete Me`,
-          url: window.location.href,
-        });
-        toast({ description: 'Share dialog opened' });
-      } catch (err) {
-        console.log('Share canceled or failed', err);
-      }
-    } else {
-      console.log('Using clipboard fallback');
-      try {
-        await navigator.clipboard.writeText(window.location.href);
-        toast({ description: 'Profile link copied to clipboard' });
-      } catch (e) {
-        toast({ variant: 'destructive', description: 'Could not copy link' });
-      }
-    }
   };
 
   if (authLoading || loading) {
@@ -122,65 +93,19 @@ const Profile = () => {
               <span className="hidden xs:inline">Back</span>
             </Button>
             
-              <div className="flex items-center gap-1">
-                <Button 
-                  onClick={() => {
-                    console.log('Edit Profile button clicked - navigating to /profile/edit');
-                    navigate('/profile/edit');
-                  }}
-                  size="sm"
-                  className="focus:ring-2 focus:ring-primary focus:ring-offset-2 px-2"
-                  aria-label="Edit your profile information"
-                >
-                  <Edit className="h-4 w-4 xs:mr-1" aria-hidden="true" />
-                  <span className="hidden xs:inline">Edit</span>
-                </Button>
-              
-              <DropdownMenu open={isShareMenuOpen} onOpenChange={setIsShareMenuOpen}>
-                <DropdownMenuTrigger asChild>
-                  <Button 
-                    variant="outline"
-                    size="sm" 
-                    className="focus:ring-2 focus:ring-primary focus:ring-offset-2 px-2"
-                    aria-label="More profile options"
-                    aria-expanded={isShareMenuOpen}
-                  >
-                    <MoreVertical className="h-4 w-4" aria-hidden="true" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-48">
-                  <DropdownMenuItem 
-                    onSelect={() => {
-                      console.log('Mobile Share Profile selected');
-                      handleShareProfile();
-                    }}
-                    className="flex items-center gap-2 focus:bg-muted cursor-pointer"
-                  >
-                    <Share2 className="h-4 w-4" aria-hidden="true" />
-                    Share Profile
-                  </DropdownMenuItem>
-                  <DropdownMenuItem 
-                    onSelect={() => {
-                      console.log('Mobile Privacy Settings selected - navigating to /privacy');
-                      navigate('/privacy');
-                    }}
-                    className="flex items-center gap-2 focus:bg-muted cursor-pointer"
-                  >
-                    <Settings className="h-4 w-4" aria-hidden="true" />
-                    Privacy Settings
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem 
-                    onSelect={() => {
-                      console.log('Mobile Help & FAQ selected - navigating to /faq');
-                      navigate('/faq');
-                    }}
-                    className="flex items-center gap-2 focus:bg-muted cursor-pointer"
-                  >
-                    Help & FAQ
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+            <div className="flex items-center gap-1">
+              <Button 
+                onClick={() => {
+                  console.log('Edit Profile button clicked - navigating to /profile/edit');
+                  navigate('/profile/edit');
+                }}
+                size="sm"
+                className="focus:ring-2 focus:ring-primary focus:ring-offset-2 px-2"
+                aria-label="Edit your profile information"
+              >
+                <Edit className="h-4 w-4 xs:mr-1" aria-hidden="true" />
+                <span className="hidden xs:inline">Edit</span>
+              </Button>
             </div>
           </div>
           
@@ -210,52 +135,6 @@ const Profile = () => {
                   <Edit className="h-4 w-4 mr-2" aria-hidden="true" />
                   Edit Profile
                 </Button>
-                
-                <DropdownMenu open={isShareMenuOpen} onOpenChange={setIsShareMenuOpen}>
-                  <DropdownMenuTrigger asChild>
-                    <Button 
-                      variant="outline"
-                      size="icon"
-                      className="focus:ring-2 focus:ring-primary focus:ring-offset-2 shrink-0"
-                      aria-label="More profile options"
-                      aria-expanded={isShareMenuOpen}
-                    >
-                      <MoreVertical className="h-4 w-4" aria-hidden="true" />
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end" className="w-48">
-                    <DropdownMenuItem 
-                      onSelect={() => {
-                        console.log('Desktop Share Profile selected');
-                        handleShareProfile();
-                      }}
-                      className="flex items-center gap-2 focus:bg-muted cursor-pointer"
-                    >
-                      <Share2 className="h-4 w-4" aria-hidden="true" />
-                      Share Profile
-                    </DropdownMenuItem>
-                    <DropdownMenuItem 
-                      onSelect={() => {
-                        console.log('Desktop Privacy Settings selected - navigating to /privacy');
-                        navigate('/privacy');
-                      }}
-                      className="flex items-center gap-2 focus:bg-muted cursor-pointer"
-                    >
-                      <Settings className="h-4 w-4" aria-hidden="true" />
-                      Privacy Settings
-                    </DropdownMenuItem>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem 
-                      onSelect={() => {
-                        console.log('Desktop Help & FAQ selected - navigating to /faq');
-                        navigate('/faq');
-                      }}
-                      className="flex items-center gap-2 focus:bg-muted cursor-pointer"
-                    >
-                      Help & FAQ
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
               </div>
             </div>
           </div>
