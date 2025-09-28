@@ -155,9 +155,9 @@ const Matches = () => {
     setTimeout(() => {
       const resultsSection = document.querySelector('[data-search-results]');
       if (resultsSection) {
-        resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        resultsSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
-    }, 100);
+    }, 50);
   };
 
   const handleResetFilters = () => {
