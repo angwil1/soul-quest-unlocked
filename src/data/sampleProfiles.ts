@@ -29,28 +29,6 @@ export interface SampleProfile {
 
 export const founderCuratedProfiles: SampleProfile[] = [
   {
-    id: "sample-1",
-    name: "Luna",
-    age: 26,
-    bio: "Yoga instructor and plant mom who believes in mindful living. Seeking someone who values inner growth and authentic conversations.",
-    vibeTag: "Mindful",
-    location: "Seattle, WA",
-    zipCode: "98101",
-    occupation: "Yoga Instructor",
-    emotionalSoundtrack: "",
-    tiktokUrl: "",
-    photos: ["/src/assets/luna-natural-background.jpg"],
-    interests: ["Yoga", "Meditation", "Gardening"],
-    conversationStarters: [],
-    poeticMicrocopy: "",
-    aestheticPreference: "",
-    personalityType: "",
-    loveLanguage: "",
-    gender: "women",
-    lookingFor: "men",
-    vibeGallery: []
-  },
-  {
     id: "sample-2",
     name: "Jordan",
     age: 25,
