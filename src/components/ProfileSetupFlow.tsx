@@ -265,7 +265,7 @@ export const ProfileSetupFlow: React.FC = () => {
     if (newPhotoUrls.length > 0) {
       setProfileData(prev => ({
         ...prev,
-        photos: [...prev.photos, ...newPhotoUrls].slice(0, 6)
+        photos: newPhotoUrls.slice(0, 1) // Only keep the first photo
       }));
       
       toast({
@@ -279,10 +279,10 @@ export const ProfileSetupFlow: React.FC = () => {
 
   const handleCameraCapture = async (file: File) => {
     console.log('Camera capture received file:', file);
-    if (profileData.photos.length >= 6) {
+    if (profileData.photos.length >= 1) {
       toast({
-        title: "Too many photos",
-        description: "Maximum 6 photos allowed.",
+        title: "Photo limit reached",
+        description: "Only 1 photo allowed. Remove existing photo first.",
         variant: "destructive",
       });
       return;
@@ -295,7 +295,7 @@ export const ProfileSetupFlow: React.FC = () => {
       console.log('Photo uploaded successfully:', photoUrl);
       setProfileData(prev => ({
         ...prev,
-        photos: [...prev.photos, photoUrl].slice(0, 6)
+        photos: [photoUrl] // Replace existing photo
       }));
       
       toast({
@@ -639,7 +639,7 @@ export const ProfileSetupFlow: React.FC = () => {
               )}
 
               <p className="text-sm text-muted-foreground mt-4">
-                Added: {profileData.photos.length}/6 photos
+                Photo: {profileData.photos.length}/1 added
               </p>
             </CardContent>
           </Card>
