@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -12,13 +12,16 @@ import { supabase } from '@/integrations/supabase/client';
 
 const Matches = () => {
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
   const { user } = useAuth();
   const [likedProfiles, setLikedProfiles] = useState<Set<string>>(new Set());
   const [visibleMatches, setVisibleMatches] = useState(6);
-  const [searchZipCode, setSearchZipCode] = useState('');
-  const [searchDistance, setSearchDistance] = useState('25');
-  const [searchAgeRange, setSearchAgeRange] = useState('25-35');
-  const [searchGenderPreference, setSearchGenderPreference] = useState('everyone');
+  
+  // Initialize from URL parameters or defaults
+  const [searchZipCode, setSearchZipCode] = useState(searchParams.get('zip') || '');
+  const [searchDistance, setSearchDistance] = useState(searchParams.get('distance') || '25');
+  const [searchAgeRange, setSearchAgeRange] = useState(searchParams.get('age') || '25-35');
+  const [searchGenderPreference, setSearchGenderPreference] = useState(searchParams.get('looking') || 'everyone');
   const [filteredProfiles, setFilteredProfiles] = useState(founderCuratedProfiles);
   const [isSearchActive, setIsSearchActive] = useState(false);
 
@@ -33,6 +36,23 @@ const Matches = () => {
 
     return () => clearTimeout(timer);
   }, [user, navigate]);
+
+  // Restore search state from URL on page load
+  useEffect(() => {
+    const hasParams = searchParams.get('zip') || searchParams.get('distance') || 
+                     searchParams.get('age') || searchParams.get('looking');
+    
+    if (hasParams) {
+      setIsSearchActive(true);
+      // Trigger search with URL parameters
+      filterProfiles(
+        searchParams.get('zip') || '',
+        searchParams.get('distance') || '25',
+        searchParams.get('age') || '25-35',
+        searchParams.get('looking') || 'everyone'
+      );
+    }
+  }, []); // Run once on mount
 
   const handleLike = (profileId: string) => {
     setLikedProfiles(prev => new Set([...prev, profileId]));
@@ -51,14 +71,11 @@ const Matches = () => {
 
   const calculateMatchScore = () => Math.floor(Math.random() * 20) + 80; // 80-99% match
 
-  const handleSearch = () => {
-    if (!searchZipCode.trim()) {
-      alert('Please enter a zip code to search');
-      return;
-    }
+  const filterProfiles = (zipCode: string, distance: string, ageRange: string, genderPref: string) => {
+    if (!zipCode.trim()) return founderCuratedProfiles;
 
     // Filter profiles based on age range and gender
-    const [minAge, maxAge] = searchAgeRange.split('-').map(age => 
+    const [minAge, maxAge] = ageRange.split('-').map(age => 
       age === '55+' ? [55, 100] : [parseInt(age), parseInt(age)]
     ).flat();
 
@@ -66,7 +83,7 @@ const Matches = () => {
       // Age filtering
       const profileAge = profile.age;
       let ageMatch = false;
-      if (searchAgeRange === '55+') {
+      if (ageRange === '55+') {
         ageMatch = profileAge >= 55;
       } else {
         ageMatch = profileAge >= minAge && profileAge <= maxAge;
@@ -74,13 +91,13 @@ const Matches = () => {
 
       // Gender filtering - expanded options for inclusivity
       let genderMatch = true;
-      if (searchGenderPreference !== 'everyone') {
+      if (genderPref !== 'everyone') {
         // For demo purposes, we'll use profile name/characteristics to simulate different preferences
         // In a real app, you'd filter by actual profile.gender and preference data
         const profileName = profile.name.toLowerCase();
         const profileIdHash = profile.id.length;
         
-        switch (searchGenderPreference) {
+        switch (genderPref) {
           case 'women':
           case 'transgender-women':
             genderMatch = profileIdHash % 2 === 0;
@@ -103,9 +120,27 @@ const Matches = () => {
       return ageMatch && genderMatch;
     });
 
+    return filtered;
+  };
+
+  const handleSearch = () => {
+    if (!searchZipCode.trim()) {
+      alert('Please enter a zip code to search');
+      return;
+    }
+
+    const filtered = filterProfiles(searchZipCode, searchDistance, searchAgeRange, searchGenderPreference);
     setFilteredProfiles(filtered);
     setIsSearchActive(true);
     setVisibleMatches(6); // Reset visible matches
+
+    // Update URL parameters to preserve search state
+    const params = new URLSearchParams();
+    params.set('zip', searchZipCode);
+    params.set('distance', searchDistance);
+    params.set('age', searchAgeRange);
+    params.set('looking', searchGenderPreference);
+    setSearchParams(params);
   };
 
   const handleResetFilters = () => {
@@ -116,6 +151,9 @@ const Matches = () => {
     setFilteredProfiles(founderCuratedProfiles);
     setIsSearchActive(false);
     setVisibleMatches(6);
+    
+    // Clear URL parameters
+    setSearchParams({});
   };
 
   return (
