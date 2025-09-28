@@ -89,28 +89,29 @@ const Matches = () => {
         ageMatch = profileAge >= minAge && profileAge <= maxAge;
       }
 
-      // Gender filtering - expanded options for inclusivity
+      // Gender filtering - use actual profile data
       let genderMatch = true;
       if (genderPref !== 'everyone') {
-        // For demo purposes, we'll use profile name/characteristics to simulate different preferences
-        // In a real app, you'd filter by actual profile.gender and preference data
-        const profileName = profile.name.toLowerCase();
-        const profileIdHash = profile.id.length;
-        
         switch (genderPref) {
           case 'women':
-          case 'transgender-women':
-            genderMatch = profileIdHash % 2 === 0;
+            genderMatch = profile.gender === 'women';
             break;
           case 'men':
-          case 'transgender-men':
-            genderMatch = profileIdHash % 2 === 1;
+            genderMatch = profile.gender === 'men';
             break;
           case 'non-binary':
+            genderMatch = profile.gender === 'non-binary';
+            break;
+          case 'transgender-women':
+          case 'transgender-men':
           case 'lgbtq-community':
+            // For now, include non-binary profiles for LGBTQ+ searches
+            genderMatch = profile.gender === 'non-binary' || profile.gender === 'women' || profile.gender === 'men';
+            break;
           case 'activity-partners':
           case 'travel-buddies':
-            genderMatch = profileIdHash % 3 === 0;
+            // For activity-based matching, gender doesn't matter as much
+            genderMatch = true;
             break;
           default:
             genderMatch = true;
@@ -119,6 +120,14 @@ const Matches = () => {
 
       return ageMatch && genderMatch;
     });
+
+    console.log(`Filtering: ${founderCuratedProfiles.length} total profiles`);
+    console.log(`Age range ${ageRange}: ${founderCuratedProfiles.filter(p => {
+      const profileAge = p.age;
+      if (ageRange === '55+') return profileAge >= 55;
+      return profileAge >= minAge && profileAge <= maxAge;
+    }).length} matches`);
+    console.log(`Gender ${genderPref}: ${filtered.length} final matches`);
 
     return filtered;
   };
@@ -223,7 +232,19 @@ const Matches = () => {
           </div>
         </section>
 
-        {/* Search/Filter Box */}
+        {/* Search Results Status */}
+        {isSearchActive && (
+          <section className="mb-6">
+            <div className="text-center p-4 bg-muted/30 rounded-lg">
+              <p className="text-sm text-muted-foreground">
+                {filteredProfiles.length > 0 
+                  ? `Found ${filteredProfiles.length} matches in ${searchZipCode}`
+                  : `No matches found in ${searchZipCode} for your criteria. Try adjusting your filters.`
+                }
+              </p>
+            </div>
+          </section>
+        )}
         <section className="mb-8">
           <Card className="bg-card border">
             <CardHeader className="pb-4">
