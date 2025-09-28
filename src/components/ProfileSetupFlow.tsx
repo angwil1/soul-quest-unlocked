@@ -81,7 +81,7 @@ export const ProfileSetupFlow: React.FC = () => {
     fetchCompatibilityQuestions();
   }, []);
 
-  // Initialize profile data from user metadata
+  // Initialize profile data from user metadata and age verification
   useEffect(() => {
     const initializeProfileData = async () => {
       if (!user) return;
@@ -99,8 +99,34 @@ export const ProfileSetupFlow: React.FC = () => {
             lookingFor: metadata.looking_for || prev.lookingFor
           }));
         }
+
+        // Fetch age from date of birth in age verification
+        const { data: ageVerification } = await supabase
+          .from('age_verifications')
+          .select('date_of_birth')
+          .eq('user_id', user.id)
+          .eq('is_verified', true)
+          .single();
+
+        if (ageVerification?.date_of_birth) {
+          // Calculate age from date of birth
+          const birthDate = new Date(ageVerification.date_of_birth);
+          const today = new Date();
+          let age = today.getFullYear() - birthDate.getFullYear();
+          const monthDiff = today.getMonth() - birthDate.getMonth();
+          
+          if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+          }
+
+          // Pre-populate age
+          setProfileData(prev => ({
+            ...prev,
+            age: age.toString()
+          }));
+        }
       } catch (error) {
-        console.error('Error loading user metadata:', error);
+        console.error('Error loading user data:', error);
       }
     };
 
@@ -419,9 +445,12 @@ export const ProfileSetupFlow: React.FC = () => {
 
                 <div>
                   <Label htmlFor="age">Age *</Label>
-                  <Select onValueChange={(value) => setProfileData(prev => ({ ...prev, age: value }))}>
+                  <Select 
+                    value={profileData.age} 
+                    onValueChange={(value) => setProfileData(prev => ({ ...prev, age: value }))}
+                  >
                     <SelectTrigger className="mt-1">
-                      <SelectValue placeholder="Select your age" />
+                      <SelectValue placeholder={profileData.age || "Select your age"} />
                     </SelectTrigger>
                     <SelectContent>
                       {Array.from({ length: 62 }, (_, i) => i + 18).map(age => (
@@ -429,6 +458,11 @@ export const ProfileSetupFlow: React.FC = () => {
                       ))}
                     </SelectContent>
                   </Select>
+                  {profileData.age && (
+                    <p className="text-xs text-muted-foreground mt-1">
+                      Auto-filled from your date of birth
+                    </p>
+                  )}
                 </div>
 
                 <div>
