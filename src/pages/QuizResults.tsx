@@ -370,7 +370,7 @@ const QuizResults = () => {
                 <CardContent className="p-2">
                   <div className="text-center mb-2">
                     <p className="text-xs font-medium leading-tight">
-                      {match.name}, {match.age}
+                      {match.name.split(' ')[0]}, {match.age}
                     </p>
                   </div>
                   
