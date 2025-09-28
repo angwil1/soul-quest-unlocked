@@ -5,12 +5,14 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Navbar } from '@/components/Navbar';
-import { Heart, Settings, MapPin, Briefcase, Sparkles, ArrowLeft, Search, Users2, Clock } from 'lucide-react';
+import { Heart, Settings, MapPin, Briefcase, Sparkles, ArrowLeft, Search, Users2, Clock, Loader2 } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
+import { useAIMatching } from '@/hooks/useAIMatching';
 
 const Matches = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
+  const { matches, loading, error, generateAIMatches } = useAIMatching();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -22,37 +24,11 @@ const Matches = () => {
     return () => clearTimeout(timer);
   }, [user, navigate]);
 
-  // Mock data for user's matches
-  const userMatches = [
-    {
-      id: 'sample-5',
-      name: 'Sage',
-      age: 29,
-      bio: 'Making documentaries about stuff I find interesting.',
-      vibeTag: 'Storyteller',
-      location: 'Hartford, CT',
-      occupation: 'Filmmaker',
-      photo: '/src/assets/sage-natural-background.jpg',
-      matchScore: 94,
-      isNewMatch: true,
-      matchedAt: '2 hours ago',
-      lastActive: 'Active now'
-    },
-    {
-      id: 'sample-7', 
-      name: 'Dev',
-      age: 28,
-      bio: 'Code by day, cricket by weekend.',
-      vibeTag: 'Cultural Bridge',
-      location: 'Stamford, CT',
-      occupation: 'Software Engineer',
-      photo: '/src/assets/dev-realistic-new.jpg',
-      matchScore: 89,
-      isNewMatch: false,
-      matchedAt: '1 day ago',
-      lastActive: '2 hours ago'
+  useEffect(() => {
+    if (user && matches.length === 0 && !loading) {
+      generateAIMatches();
     }
-  ];
+  }, [user, matches.length, loading, generateAIMatches]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -96,7 +72,31 @@ const Matches = () => {
       
       <main className="max-w-7xl mx-auto px-4 py-8">
 
-        {userMatches.length === 0 ? (
+        {loading ? (
+          <Card className="text-center py-12">
+            <CardContent>
+              <Loader2 className="h-12 w-12 text-primary mx-auto mb-4 animate-spin" />
+              <h3 className="text-lg font-semibold mb-2">Generating AI Matches</h3>
+              <p className="text-muted-foreground">
+                Analyzing your quiz results to find compatible matches...
+              </p>
+            </CardContent>
+          </Card>
+        ) : error ? (
+          <Card className="text-center py-12">
+            <CardContent>
+              <Heart className="h-12 w-12 text-destructive mx-auto mb-4" />
+              <h3 className="text-lg font-semibold mb-2">Error Loading Matches</h3>
+              <p className="text-muted-foreground mb-6">
+                {error}
+              </p>
+              <Button onClick={() => generateAIMatches()}>
+                <Sparkles className="h-4 w-4 mr-2" />
+                Try Again
+              </Button>
+            </CardContent>
+          </Card>
+        ) : matches.length === 0 ? (
           <Card className="text-center py-12">
             <CardContent>
               <Heart className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
@@ -104,87 +104,107 @@ const Matches = () => {
               <p className="text-muted-foreground mb-6">
                 Start browsing profiles to find your perfect match
               </p>
-              <Button onClick={() => navigate('/search')}>
-                <Search className="h-4 w-4 mr-2" />
-                Start Searching
-              </Button>
+              <div className="flex gap-3 justify-center">
+                <Button onClick={() => generateAIMatches()}>
+                  <Sparkles className="h-4 w-4 mr-2" />
+                  Generate AI Matches
+                </Button>
+                <Button variant="outline" onClick={() => navigate('/search')}>
+                  <Search className="h-4 w-4 mr-2" />
+                  Browse Profiles
+                </Button>
+              </div>
             </CardContent>
           </Card>
         ) : (
           <section className="space-y-4">
             <div className="flex items-center justify-between">
-              <h2 className="text-xl font-semibold">Recent Matches</h2>
-              <Badge variant="secondary">
-                {userMatches.length} {userMatches.length === 1 ? 'match' : 'matches'}
-              </Badge>
+              <h2 className="text-xl font-semibold">AI-Generated Matches</h2>
+              <div className="flex items-center gap-2">
+                <Badge variant="secondary">
+                  {matches.length} {matches.length === 1 ? 'match' : 'matches'}
+                </Badge>
+                <Button 
+                  size="sm" 
+                  variant="outline" 
+                  onClick={() => generateAIMatches()}
+                  disabled={loading}
+                >
+                  <Sparkles className="h-4 w-4 mr-2" />
+                  Refresh Matches
+                </Button>
+              </div>
             </div>
             
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-              {userMatches.map((match) => (
+              {matches.map((match) => (
                 <Card 
-                  key={match.id} 
+                  key={match.profile.id} 
                   className="overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
-                  onClick={() => navigate(`/sample-user-profile/${match.id}`)}
+                  onClick={() => navigate(`/sample-user-profile/${match.profile.id}`)}
                 >
                   <div className="relative">
                     <div className="aspect-[4/3] bg-gradient-to-br from-primary/20 to-secondary/20">
                       <Avatar className="w-full h-full rounded-lg">
                         <AvatarImage 
-                          src={match.photo} 
-                          alt={`${match.name}'s profile photo`}
+                          src={match.profile.avatar_url || match.profile.photos?.[0]} 
+                          alt={`${match.profile.name}'s profile photo`}
                           className="object-cover"
                         />
                         <AvatarFallback className="w-full h-full rounded-lg text-lg">
-                          {match.name.split(' ').map(n => n[0]).join('')}
+                          {match.profile.name?.split(' ').map(n => n[0]).join('') || 'N/A'}
                         </AvatarFallback>
                       </Avatar>
                     </div>
                     
-                    {match.isNewMatch && (
-                      <Badge className="absolute top-2 left-2 bg-green-600 text-white text-xs">
-                        New Match!
-                      </Badge>
-                    )}
+                    <Badge className="absolute top-2 left-2 bg-green-600 text-white text-xs">
+                      AI Match!
+                    </Badge>
                     
                     <Badge 
                       className="absolute top-2 right-2 bg-primary text-primary-foreground text-xs px-1.5 py-0.5"
                     >
                       <Sparkles className="h-2 w-2 mr-1" />
-                      {match.matchScore}%
+                      {Math.round(match.compatibility_score)}%
                     </Badge>
                   </div>
                   
                   <CardHeader className="pb-2">
                     <div className="flex items-center justify-between">
                       <CardTitle className="text-lg font-semibold">
-                        {match.name}, {match.age}
+                        {match.profile.name}, {match.profile.age}
                       </CardTitle>
                       <Badge variant="outline" className="text-xs">
-                        {match.vibeTag}
+                        AI Matched
                       </Badge>
                     </div>
                     
                     <div className="space-y-1 text-sm text-muted-foreground">
                       <div className="flex items-center gap-1">
                         <MapPin className="h-3 w-3" />
-                        <span>{match.location}</span>
+                        <span>{match.profile.location || 'Location not set'}</span>
                       </div>
                       <div className="flex items-center gap-1">
                         <Briefcase className="h-3 w-3" />
-                        <span>{match.occupation}</span>
+                        <span>{match.profile.occupation || 'Occupation not set'}</span>
                       </div>
                     </div>
                   </CardHeader>
                   
                   <CardContent className="pt-0">
                     <p className="text-sm text-muted-foreground line-clamp-2 mb-3">
-                      {match.bio}
+                      {match.explanation}
                     </p>
                     
-                    <div className="flex items-center justify-between text-xs text-muted-foreground">
-                      <span>Matched {match.matchedAt}</span>
-                      <span>{match.lastActive}</span>
-                    </div>
+                    {match.shared_interests?.length > 0 && (
+                      <div className="flex flex-wrap gap-1 mb-3">
+                        {match.shared_interests.slice(0, 3).map((interest, idx) => (
+                          <Badge key={idx} variant="secondary" className="text-xs">
+                            {interest}
+                          </Badge>
+                        ))}
+                      </div>
+                    )}
                     
                     <div className="flex gap-2 mt-3">
                       <Button 
@@ -203,7 +223,7 @@ const Matches = () => {
                         className="flex-1"
                         onClick={(e) => {
                           e.stopPropagation();
-                          navigate(`/sample-user-profile/${match.id}`);
+                          navigate(`/sample-user-profile/${match.profile.id}`);
                         }}
                       >
                         View Profile
