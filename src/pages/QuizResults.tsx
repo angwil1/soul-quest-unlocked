@@ -37,7 +37,9 @@ const QuizResults = () => {
   const [resending, setResending] = useState(false);
 
   useEffect(() => {
-    loadMatchPreviews();
+    if (user && !profileLoading) {
+      loadMatchPreviews();
+    }
     
     // Show success toast when results are ready
     toast({
@@ -45,14 +47,115 @@ const QuizResults = () => {
       description: "Discover your personalized compatibility matches below",
       duration: 4000,
     });
-  }, [toast]);
+  }, [user, profileLoading, toast]);
 
 
   const loadMatchPreviews = async () => {
+    if (!user) {
+      setLoading(false);
+      return;
+    }
+
     try {
-      // Create engaging placeholder profiles with different types
+      // Get current user's profile
+      const { data: currentProfile } = await supabase
+        .from('profiles')
+        .select('interests, personality_type, age')
+        .eq('id', user.id)
+        .single();
+
+      // Get other profiles to match with
+      const { data: profiles, error } = await supabase
+        .from('profiles')
+        .select('id, name, age, personality_type, interests, photos')
+        .neq('id', user.id)
+        .not('personality_type', 'is', null)
+        .not('name', 'is', null)
+        .limit(10);
+
+      if (error) {
+        console.error('Error loading profiles:', error);
+        throw error;
+      }
+
+      if (!profiles || profiles.length === 0) {
+        // Show placeholder if no real profiles exist
+        const placeholderPreviews: MatchPreview[] = [
+          {
+            id: 'sample-1',
+            name: 'Alex',
+            age: 28,
+            compatibility: 94,
+            commonInterests: ['Photography', 'Hiking'],
+            blurredPhoto: 'https://images.unsplash.com/photo-1581092795360-fd1ca04f0952'
+          }
+        ];
+        setMatchPreviews(placeholderPreviews);
+        setLoading(false);
+        return;
+      }
+
+      // Calculate compatibility scores based on interests and personality
+      const matchedProfiles = profiles
+        .map(profile => {
+          let compatibilityScore = 50; // base score
+          
+          // Add points for shared interests
+          if (currentProfile?.interests && profile.interests) {
+            const userInterests = currentProfile.interests || [];
+            const profileInterests = profile.interests || [];
+            const sharedInterests = userInterests.filter(interest => 
+              profileInterests.includes(interest)
+            );
+            compatibilityScore += Math.min(sharedInterests.length * 10, 30);
+          }
+          
+          // Add points for similar personality type
+          if (currentProfile?.personality_type && profile.personality_type) {
+            if (currentProfile.personality_type === profile.personality_type) {
+              compatibilityScore += 15;
+            }
+          }
+          
+          // Add points for similar age
+          if (currentProfile?.age && profile.age) {
+            const ageDiff = Math.abs(currentProfile.age - profile.age);
+            if (ageDiff <= 2) compatibilityScore += 10;
+            else if (ageDiff <= 5) compatibilityScore += 5;
+          }
+          
+          // Ensure score is within range
+          compatibilityScore = Math.min(Math.max(compatibilityScore, 60), 98);
+          
+          // Get common interests for display
+          const userInterests = currentProfile?.interests || [];
+          const profileInterests = profile.interests || [];
+          const commonInterests = userInterests.filter(interest => 
+            profileInterests.includes(interest)
+          ).slice(0, 3);
+          
+          // If no common interests, show some of their interests
+          const displayInterests = commonInterests.length > 0 
+            ? commonInterests 
+            : (profileInterests || []).slice(0, 2);
+          
+          return {
+            id: profile.id,
+            name: profile.name || 'Anonymous',
+            age: profile.age || 25,
+            compatibility: compatibilityScore,
+            commonInterests: displayInterests,
+            blurredPhoto: profile.photos?.[0] || undefined
+          };
+        })
+        .sort((a, b) => b.compatibility - a.compatibility) // Sort by compatibility
+        .slice(0, 3); // Take top 3
+
+      setMatchPreviews(matchedProfiles);
+    } catch (error) {
+      console.error('Error loading match previews:', error);
+      // Fallback to placeholder
       const placeholderPreviews: MatchPreview[] = [
-        // Sample Match - builds trust with full details
         {
           id: 'sample-1',
           name: 'Alex',
@@ -60,30 +163,9 @@ const QuizResults = () => {
           compatibility: 94,
           commonInterests: ['Photography', 'Hiking'],
           blurredPhoto: 'https://images.unsplash.com/photo-1581092795360-fd1ca04f0952'
-        },
-        // Mystery Match - creates intrigue
-        {
-          id: 'mystery-1', 
-          name: 'SoulQuest Explorer',
-          age: 26,
-          compatibility: 89,
-          commonInterests: ['Adventure', 'Art'],
-          blurredPhoto: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e'
-        },
-        // Blurred Preview - teases insights
-        {
-          id: 'blurred-1',
-          name: 'Creative Spirit',
-          age: 30,
-          compatibility: 92,
-          commonInterests: ['Music', 'Travel'],
-          blurredPhoto: 'https://images.unsplash.com/photo-1500673922987-e212871c6c22'
         }
       ];
-
       setMatchPreviews(placeholderPreviews);
-    } catch (error) {
-      console.error('Error loading match previews:', error);
     } finally {
       setLoading(false);
     }
