@@ -372,6 +372,46 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
     }
   };
 
+  const handleSkipPayment = async () => {
+    setIsLoading(true);
+    
+    try {
+      // Mark trial as started without payment info (for testing)
+      await supabase
+        .from('user_events')
+        .insert({
+          user_id: user.id,
+          event_type: 'trial_started',
+          event_data: {
+            email: user.email,
+            trial_start_date: new Date().toISOString(),
+            trial_end_date: new Date(Date.now() + 60 * 24 * 60 * 60 * 1000).toISOString(), // 60 days from now
+            plan: 'complete_plus',
+            payment_info_collected: false,
+            testing_bypass: true
+          }
+        });
+      
+      toast({
+        title: "Welcome to AI Complete Me! 🎉",
+        description: "Your 60-day free trial has started (testing mode). Enjoy exploring!",
+      });
+      
+      setCurrentStep('complete');
+      setShowWelcome(true);
+      
+    } catch (error) {
+      console.error('Testing bypass error:', error);
+      toast({
+        title: "Setup failed",
+        description: "Please try again or contact support.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const handlePaymentInfo = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -767,6 +807,16 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
                 disabled={isLoading}
               >
                 {isLoading ? 'Securing your trial...' : 'Start My 60-Day Free Trial 🚀'}
+              </Button>
+
+              <Button 
+                type="button"
+                variant="outline"
+                onClick={handleSkipPayment}
+                className="w-full h-12 text-lg font-semibold border-2 border-dashed border-orange-300 text-orange-600 hover:bg-orange-50" 
+                disabled={isLoading}
+              >
+                Skip Payment (Testing Only) ⚡
               </Button>
 
               <p className="text-xs text-center text-muted-foreground">
