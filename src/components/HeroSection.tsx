@@ -13,14 +13,6 @@ import coupleHeroMobile3 from '@/assets/couple-hero-mobile-3.jpg';
 import coupleLgbtqMobile1 from '@/assets/couple-hero-mobile-lgbtq-1.jpg';
 import coupleLgbtqHispanicRomantic from '@/assets/couple-hero-mobile-lgbtq-hispanic-romantic.jpg';
 
-// Import ambient couple images for the right side carousel
-import coupleAmbientClear from '@/assets/couple-ambient-clear.jpg';
-import coupleHero1 from '@/assets/couple-hero-1.jpg';
-import coupleLgbtqAmbient from '@/assets/couple-lgbtq-ambient.jpg';
-import coupleHero2 from '@/assets/couple-hero-2.jpg';
-import coupleDigital from '@/assets/couple-digital.jpg';
-import couplePoetic from '@/assets/couple-poetic-inclusive.jpg';
-
 // Original rotating background images
 const heroImages = [
   coupleHeroMobile1,
@@ -30,38 +22,9 @@ const heroImages = [
   coupleLgbtqHispanicRomantic
 ];
 
-// Ambient images for right side carousel
-const ambientImages = [
-  {
-    src: coupleAmbientClear,
-    caption: "In quiet moments, hearts speak loudest"
-  },
-  {
-    src: coupleHero1,
-    caption: "Love finds us in the spaces between words"
-  },
-  {
-    src: coupleLgbtqAmbient,
-    caption: "Every love story is beautifully unique"
-  },
-  {
-    src: coupleHero2,
-    caption: "Where vulnerability meets trust, magic happens"
-  },
-  {
-    src: coupleDigital,
-    caption: "Real connection transcends the digital noise"
-  },
-  {
-    src: couplePoetic,
-    caption: "Love is the poetry written in shared silences"
-  }
-];
-
 const HeroSection = () => {
   const navigate = useNavigate();
   const [currentHeroImageIndex, setCurrentHeroImageIndex] = useState(0);
-  const [currentAmbientIndex, setCurrentAmbientIndex] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
   const { claimedCount } = useQuietStartProgress();
 
@@ -72,17 +35,6 @@ const HeroSection = () => {
         (prevIndex + 1) % heroImages.length
       );
     }, 8000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  // Right side ambient carousel effect
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentAmbientIndex((prevIndex) => 
-        (prevIndex + 1) % ambientImages.length
-      );
-    }, 5000);
 
     return () => clearInterval(interval);
   }, []);
@@ -132,8 +84,8 @@ const HeroSection = () => {
       {/* Mobile-First Responsive Layout */}
       <div className="flex flex-col lg:flex-row min-h-[100vh] min-h-[100dvh] relative z-10">
         
-        {/* Left Side - Quiet Start Offer */}
-        <div className="flex-1 lg:flex-[0.6] flex items-center justify-center p-4 sm:p-6 lg:p-12 relative z-20">
+        {/* Center - Quiet Start Offer */}
+        <div className="flex-1 flex items-center justify-center p-4 sm:p-6 lg:p-12 relative z-20">
           <div className="max-w-md lg:max-w-lg w-full space-y-6 lg:space-y-8 animate-fade-in-delayed">
             
             {/* Logo and branding */}
@@ -219,49 +171,6 @@ const HeroSection = () => {
                 Already have an account? Log in
               </Button>
             </div>
-          </div>
-        </div>
-        
-        {/* Right Side - Ambient Photo Carousel */}
-        <div className="flex-1 lg:flex-[0.4] relative overflow-hidden min-h-[40vh] sm:min-h-[50vh] lg:min-h-auto">
-          {/* Ambient carousel images */}
-          <div className="absolute inset-0">
-            {ambientImages.map((image, index) => (
-              <div
-                key={index}
-                className={`absolute inset-0 transition-opacity duration-1000 ${
-                  index === currentAmbientIndex ? 'opacity-100' : 'opacity-0'
-                }`}
-              >
-                <img
-                  src={image.src}
-                  alt={image.caption}
-                  className="w-full h-full object-cover object-center"
-                  loading={index === 0 ? "eager" : "lazy"}
-                />
-                <div className="absolute inset-0 bg-gradient-to-l from-black/20 via-black/5 to-transparent" />
-              </div>
-            ))}
-          </div>
-          
-          {/* Caption overlay */}
-          <div className="absolute bottom-6 sm:bottom-8 left-4 sm:left-8 right-4 sm:right-8 text-center">
-            <p className="text-white text-sm sm:text-base lg:text-lg font-light drop-shadow-lg">
-              {ambientImages[currentAmbientIndex].caption}
-            </p>
-          </div>
-          
-          {/* Image indicators */}
-          <div className="absolute bottom-2 sm:bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-            {ambientImages.map((_, index) => (
-              <button
-                key={index}
-                className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full transition-colors ${
-                  index === currentAmbientIndex ? 'bg-white' : 'bg-white/40'
-                }`}
-                onClick={() => setCurrentAmbientIndex(index)}
-              />
-            ))}
           </div>
         </div>
       </div>

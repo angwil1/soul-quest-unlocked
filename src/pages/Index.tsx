@@ -133,6 +133,17 @@ const Index = () => {
             <HowItWorks />
           </section>
 
+          {/* Ambient Couple Carousel Section */}
+          <section 
+            className="py-20 bg-gradient-to-br from-muted/20 to-background"
+            aria-labelledby="couples-section"
+          >
+            <h2 id="couples-section" className="sr-only">
+              Inspiring couple connections showcase
+            </h2>
+            <AmbientCoupleCarousel />
+          </section>
+
           {/* Testimonials Section */}
           <Testimonials />
 
