@@ -12,6 +12,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { useEmailJourneys } from '@/hooks/useEmailJourneys';
 import { useToast } from '@/hooks/use-toast';
 import { InviteKindredSoul } from '@/components/InviteKindredSoul';
+import { Navbar } from '@/components/Navbar';
 
 interface MatchPreview {
   id: string;
@@ -200,6 +201,7 @@ const QuizResults = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-secondary/5">
+      <Navbar />
       <div className="container mx-auto px-4 py-8 max-w-4xl">
         {/* Celebration Header */}
         <div className="text-center mb-8">
