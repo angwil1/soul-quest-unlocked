@@ -336,11 +336,6 @@ const Profile = () => {
               <CardHeader>
                 <CardTitle id="basic-info-title" className="flex items-center gap-2 flex-wrap">
                   {profile.name || 'Your Profile'}{profile.age ? `, ${profile.age}` : ''}
-                  {profile.age && (
-                    <span className="text-xs text-muted-foreground font-normal ml-2">
-                      (Age only—birthdate never shown)
-                    </span>
-                  )}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
