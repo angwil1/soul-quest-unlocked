@@ -65,6 +65,7 @@ const BrowseProfiles = () => {
 
   // Require authentication to access browse matches
   useEffect(() => {
+    console.log('BrowseProfiles: Auth check - loading:', loading, 'user:', !!user, 'pathname:', window.location.pathname);
     if (!loading && !user) {
       console.log('User not authenticated, redirecting to auth page');
       navigate('/auth?redirect=browse');

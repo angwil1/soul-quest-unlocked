@@ -175,7 +175,12 @@ const App = () => {
               <Route path="/profile/setup" element={<ProfileSetup />} />
               <Route path="/matches" element={<Matches />} />
               <Route path="/messages" element={<Messages />} />
-              <Route path="/browse" element={<Navigate to="/auth" replace />} />
+              <Route path="/browse" element={
+                (() => {
+                  console.log('Browse route accessed, redirecting to /auth');
+                  return <Navigate to="/auth" replace />;
+                })()
+              } />
               <Route path="/swipe" element={<SwipeMode />} />
               <Route path="/questions" element={<Questions />} />
               <Route path="/quiz-results" element={<QuizResults />} />
