@@ -45,12 +45,20 @@ const Matches = () => {
     if (hasParams) {
       setIsSearchActive(true);
       // Trigger search with URL parameters
-      filterProfiles(
-        searchParams.get('zip') || '',
-        searchParams.get('distance') || '25',
-        searchParams.get('age') || '25-35',
-        searchParams.get('looking') || 'everyone'
-      );
+      const performSearch = async () => {
+        try {
+          const filtered = await filterProfiles(
+            searchParams.get('zip') || '',
+            searchParams.get('distance') || '25',
+            searchParams.get('age') || '25-35',
+            searchParams.get('looking') || 'everyone'
+          );
+          setFilteredProfiles(filtered);
+        } catch (error) {
+          console.error('Initial search error:', error);
+        }
+      };
+      performSearch();
     }
   }, []); // Run once on mount
 
@@ -71,7 +79,7 @@ const Matches = () => {
 
   const calculateMatchScore = () => Math.floor(Math.random() * 20) + 80; // 80-99% match
 
-  const filterProfiles = (zipCode: string, distance: string, ageRange: string, genderPref: string) => {
+  const filterProfiles = async (zipCode: string, distance: string, ageRange: string, genderPref: string) => {
     if (!zipCode.trim()) return founderCuratedProfiles;
 
     // Filter profiles based on age range and gender
@@ -79,7 +87,7 @@ const Matches = () => {
       age === '55+' ? [55, 100] : [parseInt(age), parseInt(age)]
     ).flat();
 
-    const filtered = founderCuratedProfiles.filter(profile => {
+    let filtered = founderCuratedProfiles.filter(profile => {
       // Age filtering
       const profileAge = profile.age;
       let ageMatch = false;
@@ -121,25 +129,64 @@ const Matches = () => {
       return ageMatch && genderMatch;
     });
 
+    // Add distance calculation to each profile
+    const distanceLimit = parseInt(distance);
+    const profilesWithDistance = [];
+    
+    for (const profile of filtered) {
+      try {
+        const result = await supabase.functions.invoke('calculate-distance', {
+          body: { zipCode1: zipCode, zipCode2: profile.zipCode }
+        });
+        
+        if (result.data && result.data.distance <= distanceLimit) {
+          profilesWithDistance.push({
+            ...profile,
+            distance: result.data.distance
+          });
+        }
+      } catch (error) {
+        console.error('Distance calculation error for profile:', profile.name, error);
+        // Include profile without distance if calculation fails
+        profilesWithDistance.push({
+          ...profile,
+          distance: undefined
+        });
+      }
+    }
+
+    // Sort by distance (closest first)
+    profilesWithDistance.sort((a, b) => {
+      if (a.distance === undefined) return 1;
+      if (b.distance === undefined) return -1;
+      return a.distance - b.distance;
+    });
+
     console.log(`Filtering: ${founderCuratedProfiles.length} total profiles`);
     console.log(`Age range ${ageRange}: ${founderCuratedProfiles.filter(p => {
       const profileAge = p.age;
       if (ageRange === '55+') return profileAge >= 55;
       return profileAge >= minAge && profileAge <= maxAge;
     }).length} matches`);
-    console.log(`Gender ${genderPref}: ${filtered.length} final matches`);
+    console.log(`Within ${distance} miles: ${profilesWithDistance.length} final matches`);
 
-    return filtered;
+    return profilesWithDistance;
   };
 
-  const handleSearch = () => {
+  const handleSearch = async () => {
     if (!searchZipCode.trim()) {
       alert('Please enter a zip code to search');
       return;
     }
 
-    const filtered = filterProfiles(searchZipCode, searchDistance, searchAgeRange, searchGenderPreference);
-    setFilteredProfiles(filtered);
+    try {
+      const filtered = await filterProfiles(searchZipCode, searchDistance, searchAgeRange, searchGenderPreference);
+      setFilteredProfiles(filtered);
+    } catch (error) {
+      console.error('Search error:', error);
+      alert('Error searching for matches. Please try again.');
+      return;
+    }
     setIsSearchActive(true);
     setVisibleMatches(6); // Reset visible matches
 
@@ -451,6 +498,14 @@ const Matches = () => {
                     <div className="flex items-center gap-1" role="group" aria-label="Location">
                       <MapPin className="h-2 w-2" aria-hidden="true" />
                       <span className="truncate">{profile.location}</span>
+                      {profile.distance !== undefined && (
+                        <Badge variant="outline" className="text-xs ml-1">
+                          {profile.distance < 1 
+                            ? `${(profile.distance * 5280).toFixed(0)} ft`
+                            : `${profile.distance.toFixed(1)} mi`
+                          }
+                        </Badge>
+                      )}
                     </div>
                     <div className="flex items-center gap-1" role="group" aria-label="Occupation">
                       <Briefcase className="h-2 w-2" aria-hidden="true" />
