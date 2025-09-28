@@ -32,12 +32,8 @@ export const GetStarted = () => {
             <div className="space-y-6">
               <div className="flex items-center justify-center space-x-4 text-sm text-muted-foreground">
                 <div className="flex items-center">
-                  <Heart className="h-4 w-4 mr-1 text-red-500" />
-                  <span>3 months free</span>
-                </div>
-                <div className="flex items-center">
                   <Sparkles className="h-4 w-4 mr-1 text-primary" />
-                  <span>Wellness kit</span>
+                  <span>Keepsake 3 months free</span>
                 </div>
                 <div className="flex items-center">
                   <Users className="h-4 w-4 mr-1 text-purple-500" />
