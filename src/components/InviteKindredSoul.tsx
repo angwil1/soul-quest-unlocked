@@ -5,8 +5,8 @@ import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 
 export const InviteKindredSoul = () => {
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
@@ -34,8 +34,8 @@ export const InviteKindredSoul = () => {
         description: `Your invitation has been sent to ${email}`,
       });
       
-      setEmail('');
-      setMessage('');
+      setEmail("");
+      setMessage("");
     } catch (error) {
       toast({
         title: "Failed to send quiet invite",
@@ -84,7 +84,7 @@ export const InviteKindredSoul = () => {
             disabled={isLoading}
             className="w-full bg-gradient-to-r from-primary to-secondary hover:opacity-90"
           >
-            {isLoading ? 'Sending...' : 'Send quiet invite'}
+            {isLoading ? "Sending..." : "Send quiet invite"}
           </Button>
         </div>
       </CardContent>
