@@ -103,7 +103,7 @@ export const Navbar = () => {
 
   const navigation = [
     { name: "Discover", href: "/quick-start" },
-    { name: "Discover Matches", href: "/auth", requiresSignup: true },
+    { name: "Join Now", href: "/auth", requiresSignup: true },
     { name: "Matches", href: "/matches" },  
     { name: "Messages", href: "/messages" },
     { name: "Memory Vault", href: "/memory-vault" },
@@ -209,7 +209,7 @@ export const Navbar = () => {
                     : "text-foreground hover:bg-background hover:shadow-sm"
                 }`}
               >
-                Join & Discover
+                Join Now
               </Link>
               <Link
                 to="/matches"
