@@ -29,14 +29,15 @@ const Auth = () => {
     // Don't redirect if we're on a password reset flow
     const urlParams = new URLSearchParams(window.location.search);
     const isPasswordReset = urlParams.get('type') === 'recovery';
+    const redirectPath = urlParams.get('redirect');
     
-    console.log('Auth page - user exists:', !!user, 'showSignupFlow:', showSignupFlow, 'isPasswordReset:', isPasswordReset);
+    console.log('Auth page - user exists:', !!user, 'showSignupFlow:', showSignupFlow, 'isPasswordReset:', isPasswordReset, 'redirectPath:', redirectPath);
     
     if (user && !showSignupFlow && !isPasswordReset) {
-      // Simplified: if user is logged in, go to home page
-      // Let the AppWrapper handle profile setup modal
-      console.log('User authenticated, redirecting to home');
-      navigate('/');
+      // If there's a redirect parameter, go there, otherwise go to home
+      const targetPath = redirectPath === 'browse' ? '/browse' : '/';
+      console.log('User authenticated, redirecting to:', targetPath);
+      navigate(targetPath);
     }
   }, [user, navigate, showSignupFlow]);
 

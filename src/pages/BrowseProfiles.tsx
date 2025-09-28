@@ -63,13 +63,30 @@ const BrowseProfiles = () => {
     }
   }, [profile]);
 
-  // Only redirect if user is not authenticated AND this is not a sample profile viewing session
+  // Require authentication to access browse matches
   useEffect(() => {
     if (!loading && !user) {
-      // Allow viewing sample profiles without authentication
-      console.log('User not authenticated, but allowing sample profile browsing');
+      console.log('User not authenticated, redirecting to auth page');
+      navigate('/auth?redirect=browse');
     }
-  }, [user, loading]);
+  }, [user, loading, navigate]);
+
+  // Show loading state while checking authentication
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-muted-foreground">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // If user is not authenticated, don't render the content (redirect will happen)
+  if (!user) {
+    return null;
+  }
 
   // Filter profiles based on preferences and distance
   useEffect(() => {
