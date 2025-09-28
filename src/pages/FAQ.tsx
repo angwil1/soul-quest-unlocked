@@ -30,7 +30,7 @@ const FAQ = () => {
     },
     {
       question: "How much does AI Complete Me cost?",
-      answer: "We offer a Quiet Start tier with basic features, and paid plans starting at $12/month for advanced features like video chat, read receipts, and priority matching."
+      answer: "We offer 60 days free with access to all Complete Plus features, then paid plans starting at $12/month for continued access to advanced features like video chat, read receipts, and priority matching."
     },
     {
       question: "Can I cancel my subscription anytime?",
@@ -38,19 +38,15 @@ const FAQ = () => {
     },
     {
       question: "What is the Quiet Start offer?",
-      answer: "Quiet Start is a limited invitation for the first 200 founding hearts. Eligible members receive 3 months of Complete Plus free and a keepsake of care. We collect payment info at signup, but your card won't be charged until the trial ends. Cancel anytime before day 90—no surprises."
+      answer: "Quiet Start is our 60-day free trial. We're just beginning, and you're invited to grow with us. Explore freely for 60 days with full access to Complete Plus features. No charge today—only billed if you choose to stay. Cancel anytime—quietly, easily, no surprises."
     },
     {
-      question: "What happens after Quiet Start fills up?",
-      answer: "If you missed Quiet Start, you'll still receive 30 days of Complete Premium free. After your trial, you'll be automatically enrolled in Complete Plus ($12/month) unless you choose a different plan. You can upgrade to Premium or downgrade to Basic anytime."
+      question: "How long is the free trial?",
+      answer: "Everyone gets 60 days free with full access to Complete Plus features. After your trial, you'll be automatically enrolled in Complete Plus ($12/month) unless you choose a different plan. You can upgrade to Beyond or cancel anytime."
     },
     {
-      question: "Do I need to enter payment info for the trial?",
-      answer: "Yes. We collect payment info at signup to activate your trial. Your card won't be charged until the trial ends. Cancel anytime before your trial ends—no surprises."
-    },
-    {
-      question: "Is the keepsake included in the 30-day trial?",
-      answer: "No. Keepsakes are reserved for Quiet Start members only. If you're one of the first 200 founding hearts, your keepsake will be mailed within 30–60 days of continued enrollment."
+      question: "How does billing work during the trial?",
+      answer: "We collect payment info at signup to activate your 60-day trial. Your card won't be charged until the trial ends. Cancel anytime before your trial ends—no surprises, no hassle."
     },
     {
       question: "How do I delete my account?",
