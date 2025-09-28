@@ -112,6 +112,72 @@ const Matches = () => {
           </div>
         </section>
 
+        {/* Search/Filter Box */}
+        <section className="mb-8">
+          <Card className="bg-card border">
+            <CardHeader className="pb-4">
+              <CardTitle className="text-lg">Find Your Perfect Match</CardTitle>
+              <CardDescription>
+                Use your location and preferences to discover compatible people nearby
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid gap-4 md:grid-cols-3">
+                <div className="space-y-2">
+                  <label htmlFor="zip-code" className="text-sm font-medium">
+                    Zip Code
+                  </label>
+                  <input
+                    id="zip-code"
+                    type="text"
+                    placeholder="Enter your zip code"
+                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    maxLength={5}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label htmlFor="distance" className="text-sm font-medium">
+                    Distance (miles)
+                  </label>
+                  <select
+                    id="distance"
+                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                  >
+                    <option value="10">Within 10 miles</option>
+                    <option value="25">Within 25 miles</option>
+                    <option value="50">Within 50 miles</option>
+                    <option value="100">Within 100 miles</option>
+                    <option value="unlimited">Unlimited distance</option>
+                  </select>
+                </div>
+                <div className="space-y-2">
+                  <label htmlFor="age-range" className="text-sm font-medium">
+                    Age Range
+                  </label>
+                  <select
+                    id="age-range"
+                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                  >
+                    <option value="18-25">18-25 years</option>
+                    <option value="25-35">25-35 years</option>
+                    <option value="35-45">35-45 years</option>
+                    <option value="45-55">45-55 years</option>
+                    <option value="55+">55+ years</option>
+                  </select>
+                </div>
+              </div>
+              <div className="flex gap-2 mt-4">
+                <Button className="flex-1">
+                  Search Matches
+                </Button>
+                <Button variant="outline">
+                  Reset Filters
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </section>
+
         {/* Matches Grid */}
         <section 
           className="grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6" 
