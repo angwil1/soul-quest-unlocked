@@ -150,10 +150,9 @@ const Profile = () => {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-48">
                   <DropdownMenuItem 
-                    onClick={() => {
-                      console.log('Mobile Share Profile clicked');
+                    onSelect={() => {
+                      console.log('Mobile Share Profile selected');
                       handleShareProfile();
-                      setIsShareMenuOpen(false);
                     }}
                     className="flex items-center gap-2 focus:bg-muted cursor-pointer"
                   >
@@ -161,9 +160,8 @@ const Profile = () => {
                     Share Profile
                   </DropdownMenuItem>
                   <DropdownMenuItem 
-                    onClick={() => {
-                      console.log('Mobile Privacy Settings clicked - navigating to /privacy');
-                      setIsShareMenuOpen(false);
+                    onSelect={() => {
+                      console.log('Mobile Privacy Settings selected - navigating to /privacy');
                       navigate('/privacy');
                     }}
                     className="flex items-center gap-2 focus:bg-muted cursor-pointer"
@@ -173,9 +171,8 @@ const Profile = () => {
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem 
-                    onClick={() => {
-                      console.log('Mobile Help & FAQ clicked - navigating to /faq');
-                      setIsShareMenuOpen(false);
+                    onSelect={() => {
+                      console.log('Mobile Help & FAQ selected - navigating to /faq');
                       navigate('/faq');
                     }}
                     className="flex items-center gap-2 focus:bg-muted cursor-pointer"
@@ -228,10 +225,9 @@ const Profile = () => {
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end" className="w-48">
                     <DropdownMenuItem 
-                      onClick={() => {
-                        console.log('Desktop Share Profile clicked');
+                      onSelect={() => {
+                        console.log('Desktop Share Profile selected');
                         handleShareProfile();
-                        setIsShareMenuOpen(false);
                       }}
                       className="flex items-center gap-2 focus:bg-muted cursor-pointer"
                     >
@@ -239,9 +235,8 @@ const Profile = () => {
                       Share Profile
                     </DropdownMenuItem>
                     <DropdownMenuItem 
-                      onClick={() => {
-                        console.log('Desktop Privacy Settings clicked - navigating to /privacy');
-                        setIsShareMenuOpen(false);
+                      onSelect={() => {
+                        console.log('Desktop Privacy Settings selected - navigating to /privacy');
                         navigate('/privacy');
                       }}
                       className="flex items-center gap-2 focus:bg-muted cursor-pointer"
@@ -251,9 +246,8 @@ const Profile = () => {
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem 
-                      onClick={() => {
-                        console.log('Desktop Help & FAQ clicked - navigating to /faq');
-                        setIsShareMenuOpen(false);
+                      onSelect={() => {
+                        console.log('Desktop Help & FAQ selected - navigating to /faq');
                         navigate('/faq');
                       }}
                       className="flex items-center gap-2 focus:bg-muted cursor-pointer"
