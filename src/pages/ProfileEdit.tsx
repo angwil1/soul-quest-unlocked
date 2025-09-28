@@ -630,11 +630,11 @@ const ProfileEdit = () => {
               <div className="flex gap-2 pt-4">
                 <Button 
                   type="button" 
-                  onClick={() => window.location.href = '/#/auth'}
+                  onClick={() => navigate('/search')}
                   className="flex items-center gap-2"
                 >
                   <Search className="h-4 w-4" />
-                  Join & Find Matches
+                  Find Matches
                 </Button>
               </div>
             </CardContent>
