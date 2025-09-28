@@ -152,7 +152,7 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
             {/* Poetic Tagline - Positioned prominently */}
             <div className="space-y-3">
               <h2 className="text-2xl md:text-4xl lg:text-5xl font-light keepsake-heading keepsake-tagline tracking-wide">
-                Begin quietly. Connect deeply.
+                Begin quietly. Explore freely for 60 days.
               </h2>
             </div>
 
@@ -163,6 +163,7 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
                 Quiet Start
               </h3>
               <p className="text-lg keepsake-text keepsake-heading italic mb-4">
+                We're just beginning. You're invited to grow with us.
                 200 founding hearts receive 3 months of Complete Plus free + a keepsake of care
               </p>
               <div className="space-y-3 text-sm keepsake-text mb-4">

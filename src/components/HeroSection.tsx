@@ -101,7 +101,7 @@ const HeroSection = () => {
               </div>
               <div className="space-y-1 lg:space-y-2">
                 <h1 className="text-2xl sm:text-3xl lg:text-4xl font-light text-white font-serif tracking-wide drop-shadow-lg">
-                  Begin quietly. Connect deeply.
+                  Begin quietly. Explore freely for 60 days.
                 </h1>
                 <p className="text-xs sm:text-sm text-white/90 font-serif drop-shadow-md">
                   AI Complete Me
@@ -117,6 +117,7 @@ const HeroSection = () => {
                 </h2>
                 
                 <p className="text-base sm:text-lg text-white/90 leading-relaxed drop-shadow-sm px-2 sm:px-0">
+                  We're just beginning. You're invited to grow with us.
                   The first 200 founding hearts receive 3 months of Complete Plus free, 
                   plus a keepsake of care to honor your beginning.
                 </p>
