@@ -584,162 +584,187 @@ const Matches = () => {
           </section>
         )}
 
-        {/* Matches Grid */}
-        <section 
-          className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6" 
-          aria-labelledby="matches-grid-title"
-          role="region"
-        >
-          <h2 id="matches-grid-title" className="sr-only">Available Matches</h2>
-          
-          {filteredProfiles.slice(0, visibleMatches).map((profile) => {
-            const matchScore = calculateMatchScore();
-            const isLiked = likedProfiles.has(profile.id);
-            
-            return (
-              <Card 
-                key={profile.id} 
-                className="overflow-hidden hover:shadow-lg transition-shadow focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-                tabIndex={0}
-                role="article"
-                aria-labelledby={`profile-name-${profile.id}`}
-                aria-describedby={`profile-info-${profile.id}`}
-              >
-                <div className="relative">
-                  <div className="aspect-[3/4] bg-gradient-to-br from-primary/20 to-secondary/20">
-                    <Avatar className="w-full h-full rounded-lg">
-                      <AvatarImage 
-                        src={profile.photos[0]} 
-                        alt={`${profile.name}'s profile photo - ${profile.vibeTag} vibe`}
-                        className="object-cover blur-sm"
-                      />
-                      <AvatarFallback className="w-full h-full rounded-lg text-sm">
-                        {profile.name.split(' ').map(n => n[0]).join('')}
-                      </AvatarFallback>
-                    </Avatar>
-                  </div>
-                  <Badge 
-                    className="absolute top-2 right-2 bg-primary text-primary-foreground text-xs px-1.5 py-0.5"
-                    aria-label={`${matchScore} percent compatibility match`}
-                  >
-                    <Sparkles className="h-2 w-2 mr-1" aria-hidden="true" />
-                    {matchScore}%
+        {/* Matches by State */}
+        {(() => {
+          // Group profiles by state
+          const profilesByState = filteredProfiles.slice(0, visibleMatches).reduce((acc, profile) => {
+            const state = profile.location.split(', ').pop() || 'Unknown';
+            if (!acc[state]) {
+              acc[state] = [];
+            }
+            acc[state].push(profile);
+            return acc;
+          }, {} as Record<string, typeof filteredProfiles>);
+
+          return Object.entries(profilesByState)
+            .sort(([a], [b]) => a.localeCompare(b))
+            .map(([state, stateProfiles]) => (
+              <section key={state} className="mb-8">
+                <div className="flex items-center gap-2 mb-4">
+                  <h2 className="text-xl font-semibold text-foreground">{state}</h2>
+                  <Badge variant="secondary" className="text-sm">
+                    {stateProfiles.length} {stateProfiles.length === 1 ? 'match' : 'matches'}
                   </Badge>
                 </div>
                 
-                {/* Looking For Section */}
-                <div className="absolute bottom-2 left-2 right-2">
-                  <div className="bg-background/90 backdrop-blur-sm rounded-md px-2 py-1">
-                    <p className="text-xs text-muted-foreground text-center">
-                      Looking for: <span className="font-medium text-foreground">
-                        {profile.lookingFor === 'men' ? 'Men' : 
-                         profile.lookingFor === 'women' ? 'Women' :
-                         profile.lookingFor === 'anyone' ? 'Anyone' :
-                         profile.lookingFor === 'non-binary' ? 'Non-binary' :
-                         profile.lookingFor === 'casual-friends' ? 'Friends' :
-                         profile.lookingFor === 'activity-partners' ? 'Activity Partners' :
-                         profile.lookingFor === 'travel-buddies' ? 'Travel Buddies' :
-                         'Connection'}
-                      </span>
-                    </p>
-                  </div>
-                </div>
-                
-                <CardHeader className="pb-2 px-3 pt-3">
-                  <div className="flex items-center justify-between">
-                    <CardTitle 
-                      id={`profile-name-${profile.id}`}
-                      className="text-sm font-semibold"
-                    >
-                      {profile.name}, {profile.age}
-                    </CardTitle>
-                    <Badge 
-                      variant="outline"
-                      className="text-xs px-1.5 py-0.5"
-                      aria-label={`${profile.vibeTag} personality vibe`}
-                    >
-                      {profile.vibeTag}
-                    </Badge>
-                  </div>
-                  <div 
-                    id={`profile-info-${profile.id}`}
-                    className="space-y-1 text-xs text-muted-foreground"
-                    role="group"
-                    aria-label="Profile details"
-                  >
-                    <div className="flex items-center gap-1" role="group" aria-label="Location">
-                      <MapPin className="h-2 w-2" aria-hidden="true" />
-                      <span className="truncate">{profile.location}</span>
-                      {profile.distance !== undefined && (
-                        <Badge variant="outline" className="text-xs ml-1">
-                          {profile.distance < 1 
-                            ? `${(profile.distance * 5280).toFixed(0)} ft`
-                            : `${profile.distance.toFixed(1)} mi`
-                          }
-                        </Badge>
-                      )}
-                    </div>
-                    <div className="flex items-center gap-1" role="group" aria-label="Occupation">
-                      <Briefcase className="h-2 w-2" aria-hidden="true" />
-                      <span className="truncate">{profile.occupation}</span>
-                    </div>
-                  </div>
-                </CardHeader>
-                
-                <CardContent className="pt-0 px-3 pb-3">
-                  <p 
-                    className="text-xs text-muted-foreground line-clamp-2 mb-2"
-                    aria-label={`Biography: ${profile.bio}`}
-                  >
-                    {profile.bio}
-                  </p>
+                <div 
+                  className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6"
+                  aria-labelledby={`matches-${state}-title`}
+                  role="region"
+                >
+                  <h3 id={`matches-${state}-title`} className="sr-only">Matches in {state}</h3>
                   
-                  <div 
-                    className="flex gap-1 mb-3"
-                    role="group"
-                    aria-label={`Interests: ${profile.interests.slice(0, 2).join(', ')}`}
-                  >
-                    {profile.interests.slice(0, 2).map((interest) => (
-                      <Badge 
-                        key={interest} 
-                        variant="secondary" 
-                        className="text-xs px-1 py-0.5 text-[10px]"
+                  {stateProfiles.map((profile) => {
+                    const matchScore = calculateMatchScore();
+                    const isLiked = likedProfiles.has(profile.id);
+                    
+                    return (
+                      <Card 
+                        key={profile.id} 
+                        className="overflow-hidden hover:shadow-lg transition-shadow focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
                         tabIndex={0}
+                        role="article"
+                        aria-labelledby={`profile-name-${profile.id}`}
+                        aria-describedby={`profile-info-${profile.id}`}
                       >
-                        {interest}
-                      </Badge>
-                    ))}
-                  </div>
-                  
-                  <div className="flex gap-1" role="group" aria-label="Profile actions">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="flex-1 text-xs px-2 py-1 h-7"
-                      onClick={() => navigate(`/sample-user-profile/${profile.id}`)}
-                      aria-label={`View full profile for ${profile.name}`}
-                    >
-                      View
-                    </Button>
-                    <Button
-                      size="sm"
-                      className="flex-1 text-xs px-2 py-1 h-7"
-                      onClick={() => handleLike(profile.id)}
-                      disabled={isLiked}
-                      aria-label={isLiked ? `Already liked ${profile.name}` : `Like ${profile.name}'s profile`}
-                    >
-                      <Heart 
-                        className={`h-3 w-3 mr-1 ${isLiked ? 'fill-current' : ''}`} 
-                        aria-hidden="true"
-                      />
-                      {isLiked ? 'Liked' : 'Like'}
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            );
-          })}
-        </section>
+                        <div className="relative">
+                          <div className="aspect-[3/4] bg-gradient-to-br from-primary/20 to-secondary/20">
+                            <Avatar className="w-full h-full rounded-lg">
+                              <AvatarImage 
+                                src={profile.photos[0]} 
+                                alt={`${profile.name}'s profile photo - ${profile.vibeTag} vibe`}
+                                className="object-cover blur-sm"
+                              />
+                              <AvatarFallback className="w-full h-full rounded-lg text-sm">
+                                {profile.name.split(' ').map(n => n[0]).join('')}
+                              </AvatarFallback>
+                            </Avatar>
+                          </div>
+                          <Badge 
+                            className="absolute top-2 right-2 bg-primary text-primary-foreground text-xs px-1.5 py-0.5"
+                            aria-label={`${matchScore} percent compatibility match`}
+                          >
+                            <Sparkles className="h-2 w-2 mr-1" aria-hidden="true" />
+                            {matchScore}%
+                          </Badge>
+                          
+                          {/* Looking For Section */}
+                          <div className="absolute bottom-2 left-2 right-2">
+                            <div className="bg-background/90 backdrop-blur-sm rounded-md px-2 py-1">
+                              <p className="text-xs text-muted-foreground text-center">
+                                Looking for: <span className="font-medium text-foreground">
+                                  {profile.lookingFor === 'men' ? 'Men' : 
+                                   profile.lookingFor === 'women' ? 'Women' :
+                                   profile.lookingFor === 'anyone' ? 'Anyone' :
+                                   profile.lookingFor === 'non-binary' ? 'Non-binary' :
+                                   profile.lookingFor === 'casual-friends' ? 'Friends' :
+                                   profile.lookingFor === 'activity-partners' ? 'Activity Partners' :
+                                   profile.lookingFor === 'travel-buddies' ? 'Travel Buddies' :
+                                   'Connection'}
+                                </span>
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <CardHeader className="pb-2 px-3 pt-3">
+                          <div className="flex items-center justify-between">
+                            <CardTitle 
+                              id={`profile-name-${profile.id}`}
+                              className="text-sm font-semibold"
+                            >
+                              {profile.name}, {profile.age}
+                            </CardTitle>
+                            <Badge 
+                              variant="outline"
+                              className="text-xs px-1.5 py-0.5"
+                              aria-label={`${profile.vibeTag} personality vibe`}
+                            >
+                              {profile.vibeTag}
+                            </Badge>
+                          </div>
+                          <div 
+                            id={`profile-info-${profile.id}`}
+                            className="space-y-1 text-xs text-muted-foreground"
+                            role="group"
+                            aria-label="Profile details"
+                          >
+                            <div className="flex items-center gap-1" role="group" aria-label="Location">
+                              <MapPin className="h-2 w-2" aria-hidden="true" />
+                              <span className="truncate">{profile.location}</span>
+                              {profile.distance !== undefined && (
+                                <Badge variant="outline" className="text-xs ml-1">
+                                  {profile.distance < 1 
+                                    ? `${(profile.distance * 5280).toFixed(0)} ft`
+                                    : `${profile.distance.toFixed(1)} mi`
+                                  }
+                                </Badge>
+                              )}
+                            </div>
+                            <div className="flex items-center gap-1" role="group" aria-label="Occupation">
+                              <Briefcase className="h-2 w-2" aria-hidden="true" />
+                              <span className="truncate">{profile.occupation}</span>
+                            </div>
+                          </div>
+                        </CardHeader>
+                        
+                        <CardContent className="pt-0 px-3 pb-3">
+                          <p 
+                            className="text-xs text-muted-foreground line-clamp-2 mb-2"
+                            aria-label={`Biography: ${profile.bio}`}
+                          >
+                            {profile.bio}
+                          </p>
+                          
+                          <div 
+                            className="flex gap-1 mb-3"
+                            role="group"
+                            aria-label={`Interests: ${profile.interests.slice(0, 2).join(', ')}`}
+                          >
+                            {profile.interests.slice(0, 2).map((interest) => (
+                              <Badge 
+                                key={interest} 
+                                variant="secondary" 
+                                className="text-xs px-1 py-0.5 text-[10px]"
+                                tabIndex={0}
+                              >
+                                {interest}
+                              </Badge>
+                            ))}
+                          </div>
+                          
+                          <div className="flex gap-1" role="group" aria-label="Profile actions">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="flex-1 text-xs px-2 py-1 h-7"
+                              onClick={() => navigate(`/sample-user-profile/${profile.id}`)}
+                              aria-label={`View full profile for ${profile.name}`}
+                            >
+                              View
+                            </Button>
+                            <Button
+                              size="sm"
+                              className="flex-1 text-xs px-2 py-1 h-7"
+                              onClick={() => handleLike(profile.id)}
+                              disabled={isLiked}
+                              aria-label={isLiked ? `Already liked ${profile.name}` : `Like ${profile.name}'s profile`}
+                            >
+                              <Heart 
+                                className={`h-3 w-3 mr-1 ${isLiked ? 'fill-current' : ''}`} 
+                                aria-hidden="true"
+                              />
+                              {isLiked ? 'Liked' : 'Like'}
+                            </Button>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    );
+                  })}
+                </div>
+              </section>
+            ));
+        })()}
 
         {/* Load More */}
         {visibleMatches < filteredProfiles.length && (
