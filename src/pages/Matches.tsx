@@ -72,16 +72,42 @@ const Matches = () => {
         ageMatch = profileAge >= minAge && profileAge <= maxAge;
       }
 
-      // Gender filtering - assuming profiles have a gender field
+      // Gender filtering - expanded options for inclusivity
       let genderMatch = true;
       if (searchGenderPreference !== 'everyone') {
-        // For demo purposes, we'll randomly assign genders since sample data doesn't have gender
-        // In a real app, you'd filter by profile.gender
-        const profileIdHash = profile.id.length; // Use string length for demo
-        if (searchGenderPreference === 'women') {
-          genderMatch = profileIdHash % 2 === 0; // Even lengths = women for demo
-        } else if (searchGenderPreference === 'men') {
-          genderMatch = profileIdHash % 2 === 1; // Odd lengths = men for demo
+        // For demo purposes, we'll use profile name/characteristics to simulate different preferences
+        // In a real app, you'd filter by actual profile.gender and preference data
+        const profileName = profile.name.toLowerCase();
+        const profileIdHash = profile.id.length;
+        
+        switch (searchGenderPreference) {
+          case 'women':
+          case 'transgender-women':
+            genderMatch = profileIdHash % 2 === 0;
+            break;
+          case 'men':
+          case 'transgender-men':
+            genderMatch = profileIdHash % 2 === 1;
+            break;
+          case 'non-binary':
+          case 'genderfluid':
+          case 'agender':
+          case 'gender-nonconforming':
+          case 'two-spirit':
+            genderMatch = profileIdHash % 3 === 0;
+            break;
+          case 'queer':
+          case 'questioning':
+          case 'pansexual':
+          case 'polyamorous':
+            genderMatch = profileIdHash % 4 === 0;
+            break;
+          case 'demisexual':
+          case 'asexual':
+            genderMatch = profileIdHash % 5 === 0;
+            break;
+          default:
+            genderMatch = true;
         }
       }
 
@@ -208,7 +234,19 @@ const Matches = () => {
                     <option value="everyone">Everyone</option>
                     <option value="women">Women</option>
                     <option value="men">Men</option>
-                    <option value="non-binary">Non-binary</option>
+                    <option value="non-binary">Non-binary people</option>
+                    <option value="transgender-women">Transgender women</option>
+                    <option value="transgender-men">Transgender men</option>
+                    <option value="genderfluid">Genderfluid people</option>
+                    <option value="agender">Agender people</option>
+                    <option value="demisexual">Demisexual connections</option>
+                    <option value="pansexual">Pansexual connections</option>
+                    <option value="queer">Queer community</option>
+                    <option value="questioning">People questioning</option>
+                    <option value="two-spirit">Two-spirit people</option>
+                    <option value="gender-nonconforming">Gender non-conforming</option>
+                    <option value="polyamorous">Polyamorous connections</option>
+                    <option value="asexual">Asexual spectrum</option>
                   </select>
                 </div>
                 <div className="space-y-2">
