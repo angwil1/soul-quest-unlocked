@@ -18,6 +18,7 @@ const Matches = () => {
   const [searchZipCode, setSearchZipCode] = useState('');
   const [searchDistance, setSearchDistance] = useState('25');
   const [searchAgeRange, setSearchAgeRange] = useState('25-35');
+  const [searchGenderPreference, setSearchGenderPreference] = useState('everyone');
   const [filteredProfiles, setFilteredProfiles] = useState(founderCuratedProfiles);
   const [isSearchActive, setIsSearchActive] = useState(false);
 
@@ -56,7 +57,7 @@ const Matches = () => {
       return;
     }
 
-    // Filter profiles based on age range
+    // Filter profiles based on age range and gender
     const [minAge, maxAge] = searchAgeRange.split('-').map(age => 
       age === '55+' ? [55, 100] : [parseInt(age), parseInt(age)]
     ).flat();
@@ -64,10 +65,27 @@ const Matches = () => {
     const filtered = founderCuratedProfiles.filter(profile => {
       // Age filtering
       const profileAge = profile.age;
+      let ageMatch = false;
       if (searchAgeRange === '55+') {
-        return profileAge >= 55;
+        ageMatch = profileAge >= 55;
+      } else {
+        ageMatch = profileAge >= minAge && profileAge <= maxAge;
       }
-      return profileAge >= minAge && profileAge <= maxAge;
+
+      // Gender filtering - assuming profiles have a gender field
+      let genderMatch = true;
+      if (searchGenderPreference !== 'everyone') {
+        // For demo purposes, we'll randomly assign genders since sample data doesn't have gender
+        // In a real app, you'd filter by profile.gender
+        const profileIdHash = profile.id.length; // Use string length for demo
+        if (searchGenderPreference === 'women') {
+          genderMatch = profileIdHash % 2 === 0; // Even lengths = women for demo
+        } else if (searchGenderPreference === 'men') {
+          genderMatch = profileIdHash % 2 === 1; // Odd lengths = men for demo
+        }
+      }
+
+      return ageMatch && genderMatch;
     });
 
     setFilteredProfiles(filtered);
@@ -79,6 +97,7 @@ const Matches = () => {
     setSearchZipCode('');
     setSearchDistance('25');
     setSearchAgeRange('25-35');
+    setSearchGenderPreference('everyone');
     setFilteredProfiles(founderCuratedProfiles);
     setIsSearchActive(false);
     setVisibleMatches(6);
@@ -161,7 +180,7 @@ const Matches = () => {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="grid gap-4 md:grid-cols-3">
+              <div className="grid gap-4 md:grid-cols-4">
                 <div className="space-y-2">
                   <label htmlFor="zip-code" className="text-sm font-medium">
                     Zip Code
@@ -175,6 +194,22 @@ const Matches = () => {
                     className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                     maxLength={5}
                   />
+                </div>
+                <div className="space-y-2">
+                  <label htmlFor="gender-preference" className="text-sm font-medium">
+                    I'm looking for
+                  </label>
+                  <select
+                    id="gender-preference"
+                    value={searchGenderPreference}
+                    onChange={(e) => setSearchGenderPreference(e.target.value)}
+                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                  >
+                    <option value="everyone">Everyone</option>
+                    <option value="women">Women</option>
+                    <option value="men">Men</option>
+                    <option value="non-binary">Non-binary</option>
+                  </select>
                 </div>
                 <div className="space-y-2">
                   <label htmlFor="distance" className="text-sm font-medium">
