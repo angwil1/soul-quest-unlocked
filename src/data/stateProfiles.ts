@@ -36,7 +36,7 @@ export const stateProfiles: SampleProfile[] = [
     occupation: "Elementary Teacher",
     emotionalSoundtrack: "",
     tiktokUrl: "",
-    photos: ["/src/assets/sage-profile-1.jpg"],
+    photos: ["/src/assets/profile-silhouette.jpg"],
     interests: ["Teaching", "Gardening", "Reading"],
     conversationStarters: ["What's your favorite book?", "Do you have a green thumb?"],
     poeticMicrocopy: "",
