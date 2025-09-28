@@ -14,7 +14,7 @@ const FAQ = () => {
   const faqs = [
     {
       question: "What's included in each tier?",
-      answer: "Quiet Start: A gentle beginning. You get access to basic matching, public prompts, and core connection tools—with no pressure.\n\nComplete Plus: Everything in Quiet Start, plus deeper compatibility quizzes, private Match Memory, and early access to new features. You're signaling you're ready for more emotional texture.\n\nComplete Beyond: A full emotional toolkit. Includes everything above—plus Memory Vault to save connection moments, Connection DNA for deep emotional mirroring, and poetic onboarding overlays for when you need a fresh start."
+      answer: "Quiet Start: A gentle beginning. You get 60 days free with access to basic matching, public prompts, and core connection tools—with no pressure.\n\nComplete Plus: Everything in Quiet Start, plus deeper compatibility quizzes, private Match Memory, and early access to new features. You're signaling you're ready for more emotional texture.\n\nComplete Beyond: A full emotional toolkit. Includes everything above—plus Memory Vault to save connection moments, Connection DNA for deep emotional mirroring, and poetic onboarding overlays for when you need a fresh start."
     },
     {
       question: "How does AI Complete Me work?",
@@ -33,20 +33,24 @@ const FAQ = () => {
       answer: "We offer 60 days free with access to all Complete Plus features, then paid plans starting at $12/month for continued access to advanced features like video chat, read receipts, and priority matching."
     },
     {
+      question: "When will I be charged?",
+      answer: "You won't be charged for 60 days. After your 60-day free trial ends, you'll automatically be enrolled in Complete Plus at $12/month unless you cancel or choose a different plan. You can cancel anytime during the 60-day trial period with no charge."
+    },
+    {
       question: "Can I cancel my subscription anytime?",
-      answer: "Yes, you can cancel your subscription at any time through your account settings or billing portal. You'll continue to have access to premium features until your current billing period ends."
+      answer: "Yes, you can cancel your subscription at any time during your 60-day free trial or after. If you cancel during the trial, you won't be charged anything. If you cancel after the trial, you'll continue to have access to premium features until your current billing period ends."
     },
     {
       question: "What is the Quiet Start offer?",
       answer: "Quiet Start is our 60-day free trial. We're just beginning, and you're invited to grow with us. Explore freely for 60 days with full access to Complete Plus features. No charge today—only billed if you choose to stay. Cancel anytime—quietly, easily, no surprises."
     },
     {
-      question: "How long is the free trial?",
-      answer: "Everyone gets 60 days free with full access to Complete Plus features. After your trial, you'll be automatically enrolled in Complete Plus ($12/month) unless you choose a different plan. You can upgrade to Beyond or cancel anytime."
+      question: "What happens after my 60-day trial?",
+      answer: "After your 60-day free trial ends, you'll automatically continue with Complete Plus at $12/month unless you cancel or choose Complete Beyond ($39/year). You can change plans or cancel anytime through your account settings."
     },
     {
-      question: "How does billing work during the trial?",
-      answer: "We collect payment info at signup to activate your 60-day trial. Your card won't be charged until the trial ends. Cancel anytime before your trial ends—no surprises, no hassle."
+      question: "How long is the free trial and when do I get charged?",
+      answer: "You get 60 days completely free with full access to Complete Plus features. Your card will only be charged after the 60-day trial period ends, at which point you'll be billed $12/month for Complete Plus unless you cancel or choose a different plan."
     },
     {
       question: "How do I delete my account?",
