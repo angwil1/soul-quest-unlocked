@@ -12,6 +12,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { useProfile, Profile } from '@/hooks/useProfile';
 
 import { CameraCapture } from '@/components/CameraCapture';
+import { PrivacyNote } from '@/components/PrivacyNote';
 import { ArrowLeft, Upload, X, Camera, MapPin, Search } from 'lucide-react';
 
 // Helper functions for height conversion
@@ -395,9 +396,7 @@ const ProfileEdit = () => {
                     <div className="px-3 py-2 bg-muted rounded-md text-sm text-muted-foreground">
                       {profile.age} years old
                     </div>
-                    <p className="text-xs text-muted-foreground mt-1">
-                      Age calculated from date of birth provided during signup
-                    </p>
+                    <PrivacyNote type="age" className="mt-1" />
                   </div>
                 )}
 
