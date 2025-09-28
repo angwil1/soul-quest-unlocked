@@ -133,7 +133,7 @@ const HeroSection = () => {
             {/* Call to Action */}
             <div className="space-y-3 sm:space-y-4">
               <Button 
-                onClick={user ? () => navigate('/matches') : handleGetStarted}
+                onClick={user ? () => navigate('/search') : handleGetStarted}
                 className="hero-cta-button w-full px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-medium bg-primary text-white hover:bg-primary/90"
                 size="lg"
               >

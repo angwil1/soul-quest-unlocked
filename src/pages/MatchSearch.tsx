@@ -155,7 +155,7 @@ const MatchSearch = () => {
       {/* Header */}
       <div className="bg-card border-b">
         <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
-          <Button variant="ghost" onClick={() => navigate('/matches')}>
+          <Button variant="ghost" onClick={() => navigate('/search')}>
             <Search className="h-4 w-4 mr-2" />
             Find Matches
           </Button>
