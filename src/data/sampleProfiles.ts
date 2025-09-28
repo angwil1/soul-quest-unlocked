@@ -162,7 +162,7 @@ export const founderCuratedProfiles: SampleProfile[] = [
   },
   {
     id: "sample-12",
-    name: "Blake",
+    name: "Marcus",
     age: 32,
     bio: "Fitness trainer and wellness coach who believes in balanced living. Help people find strength in body and mind through holistic fitness.",
     vibeTag: "Wellness Focused",
@@ -171,7 +171,7 @@ export const founderCuratedProfiles: SampleProfile[] = [
     occupation: "Personal Trainer",
     emotionalSoundtrack: "",
     tiktokUrl: "",
-    photos: ["/src/assets/blake-realistic-new.jpg"],
+    photos: ["/src/assets/profile-silhouette.jpg"],
     interests: ["Fitness", "Wellness", "Beach Sports"],
     conversationStarters: [],
     poeticMicrocopy: "",
