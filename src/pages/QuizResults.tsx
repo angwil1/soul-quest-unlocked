@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
-import { Sparkles, Heart, Crown, MessageCircle, Eye, EyeOff, Mail, RefreshCw } from 'lucide-react';
+import { Sparkles, Heart, Crown, MessageCircle, Eye, EyeOff, Mail, RefreshCw, MapPin, Briefcase } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { supabase } from '@/integrations/supabase/client';
 import { useEmailJourneys } from '@/hooks/useEmailJourneys';
@@ -22,6 +22,9 @@ interface MatchPreview {
   compatibility: number;
   commonInterests: string[];
   blurredPhoto?: string;
+  location?: string;
+  occupation?: string;
+  bio?: string;
 }
 
 const QuizResults = () => {
@@ -68,7 +71,7 @@ const QuizResults = () => {
       // Get other profiles to match with
       const { data: profiles, error } = await supabase
         .from('profiles')
-        .select('id, name, age, personality_type, interests, photos')
+        .select('id, name, age, personality_type, interests, photos, location, occupation, bio')
         .neq('id', user.id)
         .not('personality_type', 'is', null)
         .not('name', 'is', null)
@@ -88,7 +91,10 @@ const QuizResults = () => {
             age: 28,
             compatibility: 94,
             commonInterests: ['Photography', 'Hiking'],
-            blurredPhoto: 'https://images.unsplash.com/photo-1581092795360-fd1ca04f0952'
+            blurredPhoto: 'https://images.unsplash.com/photo-1581092795360-fd1ca04f0952',
+            location: 'San Francisco, CA',
+            occupation: 'Software Developer',
+            bio: 'Adventure seeker who loves capturing moments through photography and exploring new trails.'
           }
         ];
         setMatchPreviews(placeholderPreviews);
@@ -146,7 +152,10 @@ const QuizResults = () => {
             age: profile.age || 25,
             compatibility: compatibilityScore,
             commonInterests: displayInterests,
-            blurredPhoto: profile.photos?.[0] || undefined
+            blurredPhoto: profile.photos?.[0] || undefined,
+            location: profile.location || undefined,
+            occupation: profile.occupation || undefined,
+            bio: profile.bio || undefined
           };
         })
         .sort((a, b) => b.compatibility - a.compatibility) // Sort by compatibility
@@ -156,16 +165,19 @@ const QuizResults = () => {
     } catch (error) {
       console.error('Error loading match previews:', error);
       // Fallback to placeholder
-      const placeholderPreviews: MatchPreview[] = [
-        {
-          id: 'sample-1',
-          name: 'Alex',
-          age: 28,
-          compatibility: 94,
-          commonInterests: ['Photography', 'Hiking'],
-          blurredPhoto: 'https://images.unsplash.com/photo-1581092795360-fd1ca04f0952'
-        }
-      ];
+        const placeholderPreviews: MatchPreview[] = [
+          {
+            id: 'sample-1',
+            name: 'Alex',
+            age: 28,
+            compatibility: 94,
+            commonInterests: ['Photography', 'Hiking'],
+            blurredPhoto: 'https://images.unsplash.com/photo-1581092795360-fd1ca04f0952',
+            location: 'San Francisco, CA',
+            occupation: 'Software Developer',
+            bio: 'Adventure seeker who loves capturing moments through photography and exploring new trails.'
+          }
+        ];
       setMatchPreviews(placeholderPreviews);
     } finally {
       setLoading(false);
@@ -303,7 +315,7 @@ const QuizResults = () => {
         {/* Match Previews */}
         <div className="mb-8">
           <h2 className="text-2xl font-semibold mb-4 text-center">Your Top Compatibility Matches</h2>
-          <div className="grid gap-2 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 max-w-4xl mx-auto">
+          <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 max-w-6xl mx-auto">
             {matchPreviews.map((match, index) => (
               <Card 
                 key={match.id} 
@@ -325,28 +337,52 @@ const QuizResults = () => {
                   </div>
                   
                   {index === 0 && (
-                    <Badge className="absolute top-1.5 left-1.5 bg-green-600 text-white text-xs px-1 py-0.5">
-                      Top!
+                    <Badge className="absolute top-2 left-2 bg-green-600 text-white text-xs px-2 py-1">
+                      Top Match!
                     </Badge>
                   )}
                   
                   <Badge 
-                    className="absolute top-1.5 right-1.5 bg-primary text-primary-foreground text-xs px-1 py-0.5"
+                    className="absolute top-2 right-2 bg-primary text-primary-foreground text-xs px-2 py-1"
                   >
-                    {match.compatibility}%
+                    {match.compatibility}% Match
                   </Badge>
                 </div>
                 
-                <CardContent className="p-2">
-                  <div className="text-center mb-2">
-                    <p className="text-xs font-medium leading-tight">
+                <CardHeader className="pb-2 px-3 pt-3">
+                  <div className="flex items-center justify-between">
+                    <CardTitle className="text-sm font-semibold truncate">
                       {match.name.split(' ')[0]}, {match.age}
-                    </p>
+                    </CardTitle>
                   </div>
+                  {(match.location || match.occupation) && (
+                    <div className="space-y-1 text-xs text-muted-foreground">
+                      {match.location && (
+                        <div className="flex items-center gap-1">
+                          <MapPin className="h-2.5 w-2.5 text-muted-foreground/60" />
+                          <span className="truncate">{match.location}</span>
+                        </div>
+                      )}
+                      {match.occupation && (
+                        <div className="flex items-center gap-1">
+                          <Briefcase className="h-2.5 w-2.5 text-muted-foreground/60" />
+                          <span className="truncate">{match.occupation}</span>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </CardHeader>
+                
+                <CardContent className="pt-0 px-3 pb-3">
+                  {match.bio && (
+                    <p className="text-xs text-muted-foreground line-clamp-2 mb-2">
+                      {match.bio}
+                    </p>
+                  )}
                   
-                  <div className="flex flex-wrap gap-0.5 justify-center mb-2">
-                    {match.commonInterests.slice(0, 1).map((interest) => (
-                      <Badge key={interest} variant="outline" className="text-xs px-1 py-0">
+                  <div className="flex flex-wrap gap-1 mb-3">
+                    {match.commonInterests.slice(0, 2).map((interest) => (
+                      <Badge key={interest} variant="secondary" className="text-xs px-1.5 py-0.5">
                         {interest}
                       </Badge>
                     ))}
@@ -354,14 +390,14 @@ const QuizResults = () => {
                   
                   <Button 
                     size="sm" 
-                    className="w-full h-6 text-xs p-1"
+                    className="w-full h-7 text-xs"
                     onClick={(e) => {
                       e.stopPropagation();
                       handleMatchClick(match, index);
                     }}
                   >
-                    <MessageCircle className="h-2.5 w-2.5 mr-1" />
-                    Chat
+                    <MessageCircle className="h-3 w-3 mr-1" />
+                    View Profile
                   </Button>
                 </CardContent>
               </Card>
