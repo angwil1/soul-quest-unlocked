@@ -159,7 +159,7 @@ const HeroSection = () => {
                 size="lg"
               >
                 <Heart className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
-                Claim Your Spot
+                Join
                 <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 ml-2" />
               </Button>
               
