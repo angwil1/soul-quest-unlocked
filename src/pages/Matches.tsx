@@ -104,8 +104,11 @@ const Matches = () => {
               <Heart className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
               <h3 className="text-lg font-semibold mb-2">No quiet matches just yet.</h3>
               <p className="text-base font-medium text-foreground mb-2">We're still listening. Your presence matters.</p>
-              <p className="text-muted-foreground mb-6 break-words">
+              <p className="text-muted-foreground mb-4 break-words">
                 Our AI hasn't found a resonant connection yet—but that doesn't mean you're alone. We're growing gently. New profiles are arriving soon.
+              </p>
+              <p className="text-sm text-muted-foreground/80 mb-6 break-words">
+                In the meantime, explore your profile, update your preferences, or simply stay present. Sometimes connection takes time.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <Button onClick={() => navigate('/search')} className="w-full sm:w-auto">
