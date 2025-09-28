@@ -6,7 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Navbar } from '@/components/Navbar';
 import { Heart, Settings, MapPin, Briefcase, Sparkles, ArrowLeft, Users, ArrowUp } from 'lucide-react';
-import { founderCuratedProfiles } from '@/data/sampleProfiles';
+import { founderCuratedProfiles, SampleProfile } from '@/data/sampleProfiles';
 import { stateProfiles } from '@/data/stateProfiles';
 import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/integrations/supabase/client';
@@ -80,7 +80,7 @@ const Search = () => {
   const [searchDistance, setSearchDistance] = useState(searchParams.get('distance') || '25');
   const [searchAgeRange, setSearchAgeRange] = useState(searchParams.get('age') || '25-35');
   const [searchGenderPreference, setSearchGenderPreference] = useState(searchParams.get('looking') || 'everyone');
-  const [filteredProfiles, setFilteredProfiles] = useState(founderCuratedProfiles);
+  const [filteredProfiles, setFilteredProfiles] = useState<SampleProfile[]>([]);
   const [isSearchActive, setIsSearchActive] = useState(false);
   const [isRegionalSearch, setIsRegionalSearch] = useState(false);
 
@@ -342,7 +342,7 @@ const Search = () => {
     setSearchDistance('25');
     setSearchAgeRange('25-35');
     setSearchGenderPreference('everyone');
-    setFilteredProfiles(founderCuratedProfiles);
+    setFilteredProfiles([]);
     setIsSearchActive(false);
     setVisibleMatches(6);
     
@@ -482,7 +482,7 @@ const Search = () => {
             }
             acc[state].push(profile);
             return acc;
-          }, {} as Record<string, typeof filteredProfiles>);
+          }, {} as Record<string, SampleProfile[]>);
 
           return Object.entries(profilesByState)
             .sort(([a], [b]) => a.localeCompare(b))
