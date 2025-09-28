@@ -76,10 +76,10 @@ export const ProfileSetupModal: React.FC<ProfileSetupModalProps> = ({ isOpen, on
             </p>
             <div className="bg-primary/5 border border-primary/20 rounded-lg p-3">
               <p className="text-xs text-primary font-medium mb-1">
-                🎁 Quiet Start Gift
+                🌱 60-Day Free Trial
               </p>
               <p className="text-xs text-muted-foreground leading-relaxed">
-                As part of our Quiet Start, you'll receive a keepsake of care. We'll ask for your shipping info after signup.
+                We're just beginning. You're invited to grow with us and explore freely for 60 days.
               </p>
             </div>
           </div>

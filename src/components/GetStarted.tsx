@@ -25,7 +25,7 @@ export const GetStarted = () => {
           </h2>
           
           <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-            First 200 users get 3 months Complete Plus free + mini wellness kit. Join the quiet start revolution.
+            We're just beginning. You're invited to grow with us. Explore freely for 60 days.
           </p>
           
           <Card className="p-8 max-w-md mx-auto bg-gradient-to-br from-background to-muted/5 border-primary/10 backdrop-blur-sm">
@@ -33,11 +33,11 @@ export const GetStarted = () => {
               <div className="flex items-center justify-center space-x-4 text-sm text-muted-foreground">
                 <div className="flex items-center">
                   <Heart className="h-4 w-4 mr-1 text-red-500" />
-                  <span>3 months free</span>
+                  <span>60 days free</span>
                 </div>
                 <div className="flex items-center">
                   <Sparkles className="h-4 w-4 mr-1 text-primary" />
-                  <span>Keepsake</span>
+                  <span>Full features</span>
                 </div>
                 <div className="flex items-center">
                   <Users className="h-4 w-4 mr-1 text-purple-500" />
@@ -55,7 +55,7 @@ export const GetStarted = () => {
               </Button>
               
               <p className="text-xs text-muted-foreground">
-                Limited to first 200 users • Create profile in under 2 minutes
+                Free for 60 days • Create profile in under 2 minutes
               </p>
             </div>
           </Card>

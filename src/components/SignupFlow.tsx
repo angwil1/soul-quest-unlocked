@@ -475,7 +475,7 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
       
       toast({
         title: "Benefits claimed!",
-        description: `You're Quiet Start user #${kitNumber}! Your keepsake will be shipped to your address.`,
+        description: `You're enrolled in the 60-day free trial! Welcome to AI Complete Me.`,
       });
       
       setCurrentStep('complete');
@@ -514,7 +514,7 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
             </div>
             <Progress value={getProgressPercentage()} className="h-2" />
             <p className="text-xs text-muted-foreground text-center">
-              Complete all steps to claim your 3 months free + keepsake
+              Complete all steps to start your 60-day free trial
             </p>
           </div>
         </CardContent>
@@ -596,12 +596,12 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
               <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-3 space-y-2">
                 <h4 className="text-sm font-semibold text-emerald-800 flex items-center gap-2">
                   <Gift className="h-4 w-4" />
-                  Your Quiet Start Benefits
+                  Your 60-Day Free Trial
                 </h4>
                 <ul className="text-xs text-emerald-700 space-y-1">
-                  <li>• 3 months of Complete Plus (premium features)</li>
-                  <li>• Mini keepsake delivered to your door</li>
-                  <li>• Priority matching and enhanced connection tools</li>
+                  <li>• 60 days of Complete Plus features</li>
+                  <li>• Full access to premium matching and connection tools</li>
+                  <li>• No charge until your trial ends</li>
                 </ul>
               </div>
 

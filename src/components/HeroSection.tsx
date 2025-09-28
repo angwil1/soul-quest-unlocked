@@ -118,38 +118,14 @@ const HeroSection = () => {
                 
                 <p className="text-base sm:text-lg text-white/90 leading-relaxed drop-shadow-sm px-2 sm:px-0">
                   We're just beginning. You're invited to grow with us.
-                  The first 200 founding hearts receive 3 months of Complete Plus free, 
-                  plus a keepsake of care to honor your beginning.
+                  Explore freely for 60 days with full access to Complete Plus features.
                 </p>
                 
-                {/* Progress indicator */}
-                <div className="space-y-3">
-                  <div className="text-center text-sm text-white/90">
-                    <Heart className="inline h-4 w-4 mr-1 text-pink-300" />
-                    {claimedCount} of 200 spots claimed
-                    <Heart className="inline h-4 w-4 ml-1 text-pink-300" />
-                  </div>
-                  
-                  <Progress 
-                    value={(claimedCount / 200) * 100} 
-                    className="h-2 hero-progress bg-white/20" 
-                  />
-                  
-                  <p className="text-xs text-white/80 italic">
-                    {claimedCount === 0 
-                      ? "Your journey awaits..." 
-                      : claimedCount < 50 
-                        ? "Among the first to connect..." 
-                        : `${200 - claimedCount} keepsakes remain`
-                    }
-                  </p>
-                </div>
-
                 {/* Benefits */}
                 <div className="space-y-1 sm:space-y-2 text-xs sm:text-sm text-white/90 px-2 sm:px-0">
                   <p>✓ No charge today—we'll only bill after your trial ends</p>
-                  <p>✓ Full access to Complete Plus features</p>
-                  <p>✓ Keepsake mailed after 30–60 days of enrollment</p>
+                  <p>✓ Full access to Complete Plus features for 60 days</p>
+                  <p>✓ Cancel anytime—no surprises</p>
                 </div>
               </div>
             </div>

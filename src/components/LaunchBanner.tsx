@@ -164,34 +164,18 @@ export const LaunchBanner: React.FC<LaunchBannerProps> = ({
               </h3>
               <p className="text-lg keepsake-text keepsake-heading italic mb-4">
                 We're just beginning. You're invited to grow with us.
-                200 founding hearts receive 3 months of Complete Plus free + a keepsake of care
+                Explore freely for 60 days with full access to Complete Plus features.
               </p>
-              <div className="space-y-3 text-sm keepsake-text mb-4">
-                <p className="font-medium">No charge today. We'll only bill after your trial ends—no surprises.</p>
-                <p>Limited to the first 200 members.</p>
-                <p>Includes full access to Complete Plus features: smart matching, vibe tags, profile discovery, and messaging</p>
-                <p className="italic">Keepsake of care mailed after 30–60 days of continued enrollment</p>
-              </div>
+               <div className="space-y-3 text-sm keepsake-text mb-4">
+                 <p className="font-medium">No charge today. We'll only bill after your trial ends—no surprises.</p>
+                 <p>Free for 60 days with full access to Complete Plus features.</p>
+                 <p>Includes smart matching, vibe tags, profile discovery, and messaging</p>
+               </div>
               
-              {/* Live Counter with Pulse */}
-              <div className="keepsake-counter">
-                <div className="text-center text-sm keepsake-text keepsake-heading">
-                  <span className="keepsake-heart">♡</span> 147 of 200 spots claimed <span className="keepsake-heart">♡</span>
-                </div>
-              </div>
-              
-              <Progress 
-                value={(claimedCount / 200) * 100} 
-                className="h-2 keepsake-progress [&>div]:bg-gold-gradient mt-3" 
-              />
-              <div className="text-center text-sm keepsake-text keepsake-heading italic mt-2">
-                {claimedCount === 0 
-                  ? "Your journey awaits..." 
-                  : claimedCount < 50 
-                    ? "Among the first to connect..." 
-                    : `${200 - claimedCount} keepsakes remain`
-                }
-              </div>
+               {/* Progress removed since no longer limited to 200 */}
+               <div className="text-center text-sm keepsake-text keepsake-heading italic">
+                 Your journey awaits...
+               </div>
             </div>
 
             {/* Poetic Countdown */}
