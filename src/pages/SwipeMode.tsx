@@ -112,9 +112,9 @@ const SwipeMode = () => {
       <div className="container max-w-2xl mx-auto px-4 py-8">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
-          <Button variant="ghost" onClick={() => navigate('/browse')}>
+          <Button variant="ghost" onClick={() => navigate('/auth')}>
             <ArrowLeft className="h-4 w-4 mr-2" />
-            Back to Browse
+            Join & Discover
           </Button>
           <div className="text-center">
             <h1 className="text-2xl font-bold">Discover</h1>

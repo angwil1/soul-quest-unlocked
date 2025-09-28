@@ -74,12 +74,12 @@ const Matches = () => {
               <Button 
                 variant="outline" 
                 size="sm"
-                onClick={() => navigate('/browse')}
+                onClick={() => navigate('/auth')}
                 className="flex items-center gap-2 focus:ring-2 focus:ring-primary focus:ring-offset-2 w-full sm:w-auto justify-center"
-                aria-label="Browse sample profiles to see examples"
+                aria-label="Join and start discovering matches"
               >
                 <Users className="h-4 w-4" aria-hidden="true" />
-                Browse Profiles
+                Join & Discover
               </Button>
               <Button 
                 onClick={() => navigate('/profile/edit')}

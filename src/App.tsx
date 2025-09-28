@@ -175,7 +175,7 @@ const App = () => {
               <Route path="/profile/setup" element={<ProfileSetup />} />
               <Route path="/matches" element={<Matches />} />
               <Route path="/messages" element={<Messages />} />
-              <Route path="/browse" element={<BrowseProfiles />} />
+              <Route path="/browse" element={<Navigate to="/auth" replace />} />
               <Route path="/swipe" element={<SwipeMode />} />
               <Route path="/questions" element={<Questions />} />
               <Route path="/quiz-results" element={<QuizResults />} />

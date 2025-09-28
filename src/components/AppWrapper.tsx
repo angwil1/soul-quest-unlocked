@@ -39,7 +39,7 @@ export const AppWrapper: React.FC<AppWrapperProps> = ({ children }) => {
     
     if (!authLoading && !profileLoading && user && profile && !hasShownModal) {
       // Only show modal immediately after login/signup on the main pages
-      const isMainAppPage = ['/matches', '/browse', '/messages'].includes(location.pathname);
+      const isMainAppPage = ['/matches', '/messages'].includes(location.pathname);
       
       if (isMainAppPage) {
         const needsProfileSetup = !profile.gender || !profile.looking_for || !profile.location;

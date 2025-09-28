@@ -103,7 +103,7 @@ export const Navbar = () => {
 
   const navigation = [
     { name: "Discover", href: "/quick-start" },
-    { name: "Browse Profiles", href: "/browse" },
+    { name: "Discover Matches", href: "/auth", requiresSignup: true },
     { name: "Matches", href: "/matches" },  
     { name: "Messages", href: "/messages" },
     { name: "Memory Vault", href: "/memory-vault" },
@@ -202,14 +202,14 @@ export const Navbar = () => {
                 Discover
               </Link>
               <Link
-                to="/browse"
+                to="/auth"
                 className={`px-4 py-2 text-sm font-medium rounded-full transition-all duration-200 ${
-                  isActive("/browse")
+                  isActive("/auth")
                     ? "bg-primary text-primary-foreground shadow-sm"
                     : "text-foreground hover:bg-background hover:shadow-sm"
                 }`}
               >
-                Browse Profiles
+                Join & Discover
               </Link>
               <Link
                 to="/matches"
@@ -303,8 +303,8 @@ export const Navbar = () => {
 
           {/* Desktop Auth Buttons */}
           <div className="hidden md:flex items-center space-x-4">
-            {/* Only show search on matches/browse pages */}
-            {user && hasCompletedQuiz && (location.pathname === '/matches' || location.pathname === '/browse') && (
+            {/* Only show search on matches pages */}
+            {user && hasCompletedQuiz && (location.pathname === '/matches') && (
               <Button
                 variant="ghost"
                 size="sm"
@@ -399,8 +399,8 @@ export const Navbar = () => {
                   </div>
                 </Link>
               ))}
-              {/* Only show search on matches/browse pages - Android optimized */}
-              {user && hasCompletedQuiz && (location.pathname === '/matches' || location.pathname === '/browse') && (
+              {/* Only show search on matches pages - Android optimized */}
+              {user && hasCompletedQuiz && (location.pathname === '/matches') && (
                 <div className="px-4 py-3 border-t border-border mt-3">
                   <Button
                     variant="ghost"

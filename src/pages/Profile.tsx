@@ -125,12 +125,12 @@ const Profile = () => {
               <Button 
                 variant="outline" 
                 size="sm"
-                onClick={() => navigate('/browse')}
+                onClick={() => navigate('/auth')}
                 className="focus:ring-2 focus:ring-primary focus:ring-offset-2 px-2"
-                aria-label="Browse and discover people"
+                aria-label="Join and start discovering people"
               >
                 <Eye className="h-4 w-4 xs:mr-1" aria-hidden="true" />
-                <span className="hidden xs:inline">Browse</span>
+                <span className="hidden xs:inline">Join</span>
               </Button>
               
               <Button 
@@ -209,12 +209,12 @@ const Profile = () => {
                 
                 <Button 
                   variant="outline" 
-                  onClick={() => navigate('/browse')}
+                  onClick={() => navigate('/auth')}
                   className="flex items-center gap-2 focus:ring-2 focus:ring-primary focus:ring-offset-2 min-w-[120px]"
-                  aria-label="Browse and discover people"
+                  aria-label="Join and start discovering people"
                 >
                   <Eye className="h-4 w-4" aria-hidden="true" />
-                  Browse
+                  Join & Discover
                 </Button>
               </nav>
               
@@ -453,12 +453,12 @@ const Profile = () => {
                 </Button>
                 
                 <Button 
-                  onClick={() => navigate('/browse')} 
+                  onClick={() => navigate('/auth')} 
                   variant="outline" 
                   className="w-full focus:ring-2 focus:ring-primary focus:ring-offset-2"
-                  aria-label="Discover community features and connect with others"
+                  aria-label="Join and start discovering matches"
                 >
-                  Explore Community Features
+                  Join & Start Discovering
                 </Button>
               </CardContent>
             </Card>
