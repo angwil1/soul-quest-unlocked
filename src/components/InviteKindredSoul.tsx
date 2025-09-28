@@ -52,7 +52,7 @@ export const InviteKindredSoul = () => {
       <CardHeader>
         <CardTitle className="flex items-center gap-3 text-center">
           <span className="text-2xl">💌</span>
-          Send a Quiet Invite
+          Send a quiet invite
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
@@ -84,7 +84,7 @@ export const InviteKindredSoul = () => {
             disabled={isLoading}
             className="w-full bg-gradient-to-r from-primary to-secondary hover:opacity-90"
           >
-            {isLoading ? 'Sending...' : 'Send Quiet Invite'}
+            {isLoading ? 'Sending...' : 'Send quiet invite'}
           </Button>
         </div>
       </CardContent>
