@@ -216,10 +216,10 @@ export const ProfileSetupFlow: React.FC = () => {
     const files = Array.from(event.target.files || []);
     if (files.length === 0) return;
 
-    if (profileData.photos.length + files.length > 6) {
+    if (profileData.photos.length + files.length > 1) {
       toast({
         title: "Too many photos",
-        description: "Maximum 6 photos allowed.",
+        description: "Only 1 photo allowed.",
         variant: "destructive",
       });
       return;
@@ -553,13 +553,13 @@ export const ProfileSetupFlow: React.FC = () => {
                   </div>
                 ))}
                 
-                {profileData.photos.length < 6 && (
+                {profileData.photos.length < 1 && (
                   <>
                     <div className="aspect-square border-2 border-dashed border-muted-foreground/25 rounded-lg flex flex-col items-center justify-center cursor-pointer hover:border-primary/50 transition-colors">
                       <input
                         type="file"
                         accept="image/*"
-                        multiple
+                        
                         onChange={handlePhotoUpload}
                         className="hidden"
                         id="photo-upload"
@@ -567,7 +567,7 @@ export const ProfileSetupFlow: React.FC = () => {
                       />
                       <label htmlFor="photo-upload" className="cursor-pointer text-center p-2">
                         <Upload className="h-4 w-4 mx-auto mb-1 text-muted-foreground" />
-                        <p className="text-xs text-muted-foreground text-center">Upload Photos</p>
+                        <p className="text-xs text-muted-foreground text-center">Upload Photo</p>
                       </label>
                     </div>
 

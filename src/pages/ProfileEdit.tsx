@@ -288,8 +288,8 @@ const ProfileEdit = () => {
                 />
               </div>
 
-              {/* Additional Photos - only show as grid if more than one photo */}
-              {profile?.photos && profile.photos.length > 1 && (
+              {/* Additional Photos - disabled since only 1 photo allowed */}
+              {false && profile?.photos && profile.photos.length > 1 && (
                 <div>
                   <h4 className="font-medium mb-2">Additional Photos</h4>
                   <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">

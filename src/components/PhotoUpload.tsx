@@ -15,7 +15,7 @@ interface PhotoUploadProps {
   maxPhotos?: number;
 }
 
-export const PhotoUpload = ({ photos, onPhotosChange, maxPhotos = 6 }: PhotoUploadProps) => {
+export const PhotoUpload = ({ photos, onPhotosChange, maxPhotos = 1 }: PhotoUploadProps) => {
   const { user } = useAuth();
   const { toast } = useToast();
   const [uploading, setUploading] = useState(false);
@@ -177,7 +177,7 @@ export const PhotoUpload = ({ photos, onPhotosChange, maxPhotos = 6 }: PhotoUplo
       {/* Upload Instructions */}
       <div className="text-center space-y-2">
         <p className="text-sm text-muted-foreground">
-          Add up to {maxPhotos} photos. First photo will be your main profile picture.
+          Add your profile picture.
         </p>
         <p className="text-xs text-muted-foreground">
           Drag and drop or click to upload. Supports JPG, PNG, WebP.
