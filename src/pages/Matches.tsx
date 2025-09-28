@@ -96,7 +96,7 @@ const Matches = () => {
           case 'two-spirit':
             genderMatch = profileIdHash % 3 === 0;
             break;
-          case 'queer':
+          case 'lgbtq-community':
           case 'questioning':
           case 'pansexual':
           case 'polyamorous':
@@ -241,7 +241,7 @@ const Matches = () => {
                     <option value="agender">Agender people</option>
                     <option value="demisexual">Demisexual connections</option>
                     <option value="pansexual">Pansexual connections</option>
-                    <option value="queer">Queer community</option>
+                    <option value="lgbtq-community">LGBTQ+ community</option>
                     <option value="questioning">People questioning</option>
                     <option value="two-spirit">Two-spirit people</option>
                     <option value="gender-nonconforming">Gender non-conforming</option>
