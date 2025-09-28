@@ -12,12 +12,13 @@ import { useProfile } from '@/hooks/useProfile';
 import { PageLoadingSkeleton } from '@/components/LoadingSkeleton';
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/hooks/useAuth';
-
+import { useToast } from '@/hooks/use-toast';
 const Profile = () => {
   const navigate = useNavigate();
   const { user, loading: authLoading } = useAuth();
   const { profile, loading } = useProfile();
   const [isShareMenuOpen, setIsShareMenuOpen] = useState(false);
+  const { toast } = useToast();
 
   // Redirect to auth if not logged in
   useEffect(() => {
@@ -43,19 +44,28 @@ const Profile = () => {
     return Math.round((completed / totalFields) * 100);
   };
 
-  const handleShareProfile = () => {
+  const handleShareProfile = async () => {
     console.log('Share Profile clicked');
     if (navigator.share) {
       console.log('Using native share API');
-      navigator.share({
-        title: `${profile?.name || 'User'}'s Profile - AI Complete Me`,
-        text: `Check out ${profile?.name || 'this user'}'s profile on AI Complete Me`,
-        url: window.location.href,
-      });
+      try {
+        await navigator.share({
+          title: `${profile?.name || 'User'}'s Profile - AI Complete Me`,
+          text: `Check out ${profile?.name || 'this user'}'s profile on AI Complete Me`,
+          url: window.location.href,
+        });
+        toast({ description: 'Share dialog opened' });
+      } catch (err) {
+        console.log('Share canceled or failed', err);
+      }
     } else {
       console.log('Using clipboard fallback');
-      navigator.clipboard.writeText(window.location.href);
-      // Could add toast notification here
+      try {
+        await navigator.clipboard.writeText(window.location.href);
+        toast({ description: 'Profile link copied to clipboard' });
+      } catch (e) {
+        toast({ variant: 'destructive', description: 'Could not copy link' });
+      }
     }
   };
 
@@ -112,7 +122,7 @@ const Profile = () => {
               <span className="hidden xs:inline">Back</span>
             </Button>
             
-            <div className="flex items-center gap-1">
+              <div className="flex items-center gap-1">
                 <Button 
                   onClick={() => {
                     console.log('Edit Profile button clicked - navigating to /profile/edit');
@@ -143,6 +153,7 @@ const Profile = () => {
                     onClick={() => {
                       console.log('Mobile Share Profile clicked');
                       handleShareProfile();
+                      setIsShareMenuOpen(false);
                     }}
                     className="flex items-center gap-2 focus:bg-muted cursor-pointer"
                   >
@@ -152,6 +163,7 @@ const Profile = () => {
                   <DropdownMenuItem 
                     onClick={() => {
                       console.log('Mobile Privacy Settings clicked - navigating to /privacy');
+                      setIsShareMenuOpen(false);
                       navigate('/privacy');
                     }}
                     className="flex items-center gap-2 focus:bg-muted cursor-pointer"
@@ -163,6 +175,7 @@ const Profile = () => {
                   <DropdownMenuItem 
                     onClick={() => {
                       console.log('Mobile Help & FAQ clicked - navigating to /faq');
+                      setIsShareMenuOpen(false);
                       navigate('/faq');
                     }}
                     className="flex items-center gap-2 focus:bg-muted cursor-pointer"
@@ -218,6 +231,7 @@ const Profile = () => {
                       onClick={() => {
                         console.log('Desktop Share Profile clicked');
                         handleShareProfile();
+                        setIsShareMenuOpen(false);
                       }}
                       className="flex items-center gap-2 focus:bg-muted cursor-pointer"
                     >
@@ -227,6 +241,7 @@ const Profile = () => {
                     <DropdownMenuItem 
                       onClick={() => {
                         console.log('Desktop Privacy Settings clicked - navigating to /privacy');
+                        setIsShareMenuOpen(false);
                         navigate('/privacy');
                       }}
                       className="flex items-center gap-2 focus:bg-muted cursor-pointer"
@@ -238,6 +253,7 @@ const Profile = () => {
                     <DropdownMenuItem 
                       onClick={() => {
                         console.log('Desktop Help & FAQ clicked - navigating to /faq');
+                        setIsShareMenuOpen(false);
                         navigate('/faq');
                       }}
                       className="flex items-center gap-2 focus:bg-muted cursor-pointer"
