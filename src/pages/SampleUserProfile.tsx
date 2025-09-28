@@ -25,8 +25,8 @@ const SampleUserProfile = () => {
         <Card className="p-8 text-center">
           <h2 className="text-2xl font-semibold mb-4">Profile Not Found</h2>
           <p className="text-muted-foreground mb-4">The profile you're looking for doesn't exist.</p>
-          <Button onClick={() => navigate('/auth')}>
-            Join & Discover
+          <Button onClick={() => navigate('/matches')}>
+            Back to Matches
           </Button>
         </Card>
       </div>
@@ -43,7 +43,7 @@ const SampleUserProfile = () => {
   };
 
   const handleBlock = () => {
-    navigate('/auth');
+    navigate('/matches');
   };
 
   return (
@@ -51,9 +51,9 @@ const SampleUserProfile = () => {
       {/* Header */}
       <div className="bg-card border-b">
         <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
-          <Button variant="ghost" onClick={() => navigate('/auth')}>
+          <Button variant="ghost" onClick={() => navigate('/matches')}>
             <ArrowLeft className="h-4 w-4 mr-2" />
-            Join & Discover
+            Back to Matches
           </Button>
         </div>
       </div>
