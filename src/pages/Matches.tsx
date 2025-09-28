@@ -241,11 +241,14 @@ const Matches = () => {
                   ? `Found ${filteredProfiles.length} matches in ${searchZipCode}`
                   : (() => {
                       const messages = [
-                        "No matches just yet—but connection takes time.",
-                        "Nothing here now, but someone might be searching for you too.",
-                        "Stillness isn't emptiness. Your match may be just around the corner.",
-                        "No one matched today. That's okay. We're still listening.",
-                        "Quiet moments are part of the journey. We'll keep looking."
+                        "We're just getting started—more matches are arriving soon.",
+                        "It's quiet now, but connection is growing here.",
+                        "You're early—and that's a beautiful place to be.",
+                        "This space is new, and so are the possibilities.",
+                        "No matches yet, but you're helping shape something real.",
+                        "We're building this together—your presence matters.",
+                        "Quiet for now. But every connection starts somewhere.",
+                        "You're one of the first to show up. That's powerful."
                       ];
                       return messages[Math.floor(Math.random() * messages.length)];
                     })()
