@@ -8,6 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Sparkles, Heart, Crown, MessageCircle, Eye, EyeOff, Mail, RefreshCw } from 'lucide-react';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { supabase } from '@/integrations/supabase/client';
 import { useEmailJourneys } from '@/hooks/useEmailJourneys';
 import { useToast } from '@/hooks/use-toast';
@@ -336,66 +337,69 @@ const QuizResults = () => {
             {matchPreviews.map((match, index) => (
               <Card 
                 key={match.id} 
-                className="relative overflow-hidden hover:shadow-lg transition-all duration-300 border-primary/10 cursor-pointer hover:border-primary/30"
+                className="overflow-hidden hover:shadow-lg transition-all duration-300 border-primary/10 cursor-pointer hover:border-primary/30"
                 onClick={() => handleMatchClick(match, index)}
               >
-                <CardContent className="p-4">
-                   <div className="relative mb-3">
-                     {/* Avatar with beautiful gradient background */}
-                     <div className="w-20 h-20 rounded-full mx-auto relative overflow-hidden">
-                       {match.blurredPhoto ? (
-                          <img 
-                            src={match.blurredPhoto} 
-                            alt={match.name} 
-                            className="w-full h-full object-cover"
-                          />
-                        ) : (
-                          <div className={`w-full h-full flex items-center justify-center text-white font-bold text-2xl
-                            ${index === 0 ? 'bg-gradient-to-br from-purple-500 to-pink-500' : 
-                              index === 1 ? 'bg-gradient-to-br from-blue-500 to-cyan-500' : 
-                              'bg-gradient-to-br from-green-500 to-emerald-500'}`}>
-                            {match.name.charAt(0)}
-                          </div>
-                        )}
-                     </div>
-                    {index === 0 && (
-                      <Badge variant="secondary" className="absolute -top-2 -right-2">
-                        <Crown className="h-3 w-3 mr-1" />
-                        Top Match
-                      </Badge>
-                    )}
+                <div className="relative">
+                  <div className="aspect-[4/3] bg-gradient-to-br from-primary/20 to-secondary/20">
+                    <Avatar className="w-full h-full rounded-lg">
+                      <AvatarImage 
+                        src={match.blurredPhoto} 
+                        alt={`${match.name}'s profile photo`}
+                        className="object-cover"
+                      />
+                      <AvatarFallback className="w-full h-full rounded-lg text-lg">
+                        {match.name.split(' ').map(n => n[0]).join('')}
+                      </AvatarFallback>
+                    </Avatar>
                   </div>
                   
-                   <div className="text-center">
-                      {/* All matches are accessible during free 60-day period */}
-                      <h3 className="font-semibold">{match.name}</h3>
-                      <p className="text-sm text-muted-foreground">Age: {match.age}</p>
-                      <div className="my-3">
-                        <div className="flex items-center justify-center gap-1 mb-1">
-                          <Heart className="h-4 w-4 text-red-500" />
-                          <span className="text-sm font-medium">{match.compatibility}% Match</span>
-                        </div>
-                        <Progress value={match.compatibility} className="h-2" />
-                      </div>
-                      <div className="flex flex-wrap gap-1 justify-center mb-3">
-                        {match.commonInterests.map((interest) => (
-                          <Badge key={interest} variant="outline" className="text-xs">
-                            {interest}
-                          </Badge>
-                        ))}
-                      </div>
-                      <Button 
-                        size="sm" 
-                        className="w-full"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleMatchClick(match, index);
-                        }}
-                      >
-                        <MessageCircle className="h-4 w-4 mr-2" />
-                        Message {match.name}
-                       </Button>
-                    </div>
+                  {index === 0 && (
+                    <Badge className="absolute top-2 left-2 bg-green-600 text-white text-xs">
+                      Top Match!
+                    </Badge>
+                  )}
+                  
+                  <Badge 
+                    className="absolute top-2 right-2 bg-primary text-primary-foreground text-xs px-1.5 py-0.5"
+                  >
+                    <Sparkles className="h-3 w-3 mr-1" />
+                    {match.compatibility}%
+                  </Badge>
+                </div>
+                
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-lg font-semibold">
+                    {match.name}, {match.age}
+                  </CardTitle>
+                </CardHeader>
+                
+                <CardContent className="pt-0">
+                  <div className="flex items-center justify-center gap-1 mb-3">
+                    <Heart className="h-4 w-4 text-red-500" />
+                    <span className="text-sm font-medium">{match.compatibility}% Match</span>
+                  </div>
+                  <Progress value={match.compatibility} className="h-2 mb-3" />
+                  
+                  <div className="flex flex-wrap gap-1 justify-center mb-4">
+                    {match.commonInterests.map((interest) => (
+                      <Badge key={interest} variant="outline" className="text-xs">
+                        {interest}
+                      </Badge>
+                    ))}
+                  </div>
+                  
+                  <Button 
+                    size="sm" 
+                    className="w-full"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleMatchClick(match, index);
+                    }}
+                  >
+                    <MessageCircle className="h-4 w-4 mr-2" />
+                    Message {match.name}
+                  </Button>
                 </CardContent>
               </Card>
             ))}
