@@ -430,7 +430,7 @@ const Profile = () => {
               </CardHeader>
               <CardContent className="space-y-3">
                 <Button 
-                  onClick={() => navigate('/matches')} 
+                  onClick={() => navigate('/search')} 
                   className="w-full focus:ring-2 focus:ring-primary focus:ring-offset-2"
                   aria-label="Find and browse potential matches"
                 >
