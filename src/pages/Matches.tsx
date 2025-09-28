@@ -239,7 +239,7 @@ const Matches = () => {
               <p className="text-sm text-muted-foreground">
                 {filteredProfiles.length > 0 
                   ? `Found ${filteredProfiles.length} matches in ${searchZipCode}`
-                  : `No matches found in ${searchZipCode} for your criteria. Try adjusting your filters.`
+                  : "Quiet moments are part of the journey. We'll keep looking."
                 }
               </p>
             </div>
