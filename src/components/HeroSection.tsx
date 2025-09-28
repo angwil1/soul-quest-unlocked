@@ -6,7 +6,14 @@ import { Heart, Users, ArrowRight, ChevronDown } from 'lucide-react';
 import { useQuietStartProgress } from '@/hooks/useQuietStartProgress';
 import logoImage from "@/assets/logo-transparent-new.png";
 
-// Import ambient couple images for the carousel
+// Import original rotating hero images
+import coupleHeroMobile1 from '@/assets/couple-hero-mobile-1.jpg';
+import coupleHeroMobile2 from '@/assets/couple-hero-mobile-2.jpg';
+import coupleHeroMobile3 from '@/assets/couple-hero-mobile-3.jpg';
+import coupleLgbtqMobile1 from '@/assets/couple-hero-mobile-lgbtq-1.jpg';
+import coupleLgbtqHispanicRomantic from '@/assets/couple-hero-mobile-lgbtq-hispanic-romantic.jpg';
+
+// Import ambient couple images for the right side carousel
 import coupleAmbientClear from '@/assets/couple-ambient-clear.jpg';
 import coupleHero1 from '@/assets/couple-hero-1.jpg';
 import coupleLgbtqAmbient from '@/assets/couple-lgbtq-ambient.jpg';
@@ -14,6 +21,16 @@ import coupleHero2 from '@/assets/couple-hero-2.jpg';
 import coupleDigital from '@/assets/couple-digital.jpg';
 import couplePoetic from '@/assets/couple-poetic-inclusive.jpg';
 
+// Original rotating background images
+const heroImages = [
+  coupleHeroMobile1,
+  coupleHeroMobile2, 
+  coupleHeroMobile3,
+  coupleLgbtqMobile1,
+  coupleLgbtqHispanicRomantic
+];
+
+// Ambient images for right side carousel
 const ambientImages = [
   {
     src: coupleAmbientClear,
@@ -43,14 +60,26 @@ const ambientImages = [
 
 const HeroSection = () => {
   const navigate = useNavigate();
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [currentHeroImageIndex, setCurrentHeroImageIndex] = useState(0);
+  const [currentAmbientIndex, setCurrentAmbientIndex] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
   const { claimedCount } = useQuietStartProgress();
 
-  // Auto-rotating carousel effect
+  // Original rotating background images effect
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => 
+      setCurrentHeroImageIndex((prevIndex) => 
+        (prevIndex + 1) % heroImages.length
+      );
+    }, 8000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  // Right side ambient carousel effect
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentAmbientIndex((prevIndex) => 
         (prevIndex + 1) % ambientImages.length
       );
     }, 5000);
@@ -79,8 +108,29 @@ const HeroSection = () => {
   return (
     <section className="relative overflow-hidden min-h-[100vh] min-h-[100dvh] bg-gradient-to-br from-background via-muted/20 to-background">
       
+      {/* Original rotating background images - Full screen */}
+      <div className="absolute inset-0 z-0">
+        {heroImages.map((image, index) => (
+          <div
+            key={index}
+            className={`absolute inset-0 transition-opacity duration-1000 ${
+              index === currentHeroImageIndex ? 'opacity-100' : 'opacity-0'
+            }`}
+          >
+            <img
+              src={image}
+              alt="Loving couples celebrating authentic connections"
+              className="w-full h-full object-cover object-center"
+              loading={index === 0 ? "eager" : "lazy"}
+            />
+          </div>
+        ))}
+        {/* Overlay for better text readability */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-black/40" />
+      </div>
+
       {/* Horizontal Split Layout */}
-      <div className="flex flex-col lg:flex-row min-h-[100vh] min-h-[100dvh]">
+      <div className="flex flex-col lg:flex-row min-h-[100vh] min-h-[100dvh] relative z-10">
         
         {/* Left Side - Quiet Start Offer */}
         <div className="flex-1 lg:flex-[0.6] flex items-center justify-center p-6 lg:p-12 relative z-20">
@@ -96,41 +146,41 @@ const HeroSection = () => {
                 />
               </div>
               <div className="space-y-2">
-                <h1 className="text-3xl lg:text-4xl font-light text-foreground font-serif tracking-wide">
+                <h1 className="text-3xl lg:text-4xl font-light text-white font-serif tracking-wide drop-shadow-lg">
                   Begin quietly. Connect deeply.
                 </h1>
-                <p className="text-sm text-muted-foreground font-serif">
+                <p className="text-sm text-white/90 font-serif drop-shadow-md">
                   AI Complete Me
                 </p>
               </div>
             </div>
 
             {/* Quiet Start Offer */}
-            <div className="hero-quiet-start-card">
+            <div className="hero-quiet-start-card backdrop-blur-md bg-white/10 border-white/20">
               <div className="space-y-6 text-center">
-                <h2 className="text-2xl font-medium text-foreground/90 font-serif">
+                <h2 className="text-2xl font-medium text-white font-serif drop-shadow-md">
                   Quiet Start
                 </h2>
                 
-                <p className="text-lg text-muted-foreground leading-relaxed">
+                <p className="text-lg text-white/90 leading-relaxed drop-shadow-sm">
                   The first 200 founding hearts receive 3 months of Complete Plus free, 
                   plus a keepsake of care to honor your beginning.
                 </p>
                 
                 {/* Progress indicator */}
                 <div className="space-y-3">
-                  <div className="text-center text-sm text-muted-foreground">
-                    <Heart className="inline h-4 w-4 mr-1 text-primary/60" />
+                  <div className="text-center text-sm text-white/90">
+                    <Heart className="inline h-4 w-4 mr-1 text-pink-300" />
                     {claimedCount} of 200 spots claimed
-                    <Heart className="inline h-4 w-4 ml-1 text-primary/60" />
+                    <Heart className="inline h-4 w-4 ml-1 text-pink-300" />
                   </div>
                   
                   <Progress 
                     value={(claimedCount / 200) * 100} 
-                    className="h-2 hero-progress" 
+                    className="h-2 hero-progress bg-white/20" 
                   />
                   
-                  <p className="text-xs text-muted-foreground italic">
+                  <p className="text-xs text-white/80 italic">
                     {claimedCount === 0 
                       ? "Your journey awaits..." 
                       : claimedCount < 50 
@@ -141,7 +191,7 @@ const HeroSection = () => {
                 </div>
 
                 {/* Benefits */}
-                <div className="space-y-2 text-sm text-muted-foreground">
+                <div className="space-y-2 text-sm text-white/90">
                   <p>✓ No charge today—we'll only bill after your trial ends</p>
                   <p>✓ Full access to Complete Plus features</p>
                   <p>✓ Keepsake mailed after 30–60 days of enrollment</p>
@@ -153,7 +203,7 @@ const HeroSection = () => {
             <div className="space-y-4">
               <Button 
                 onClick={handleGetStarted}
-                className="hero-cta-button w-full px-8 py-4 text-base font-medium"
+                className="hero-cta-button w-full px-8 py-4 text-base font-medium bg-white text-primary hover:bg-white/90"
                 size="lg"
               >
                 <Heart className="h-5 w-5 mr-2" />
@@ -164,7 +214,7 @@ const HeroSection = () => {
               <Button 
                 variant="ghost" 
                 onClick={() => navigate('/auth')}
-                className="w-full text-sm text-muted-foreground hover:text-foreground"
+                className="w-full text-sm text-white/90 hover:text-white hover:bg-white/10"
               >
                 Already have an account? Log in
               </Button>
@@ -174,13 +224,13 @@ const HeroSection = () => {
         
         {/* Right Side - Ambient Photo Carousel */}
         <div className="flex-1 lg:flex-[0.4] relative overflow-hidden">
-          {/* Rotating background images */}
+          {/* Ambient carousel images */}
           <div className="absolute inset-0">
             {ambientImages.map((image, index) => (
               <div
                 key={index}
                 className={`absolute inset-0 transition-opacity duration-1000 ${
-                  index === currentImageIndex ? 'opacity-100' : 'opacity-0'
+                  index === currentAmbientIndex ? 'opacity-100' : 'opacity-0'
                 }`}
               >
                 <img
@@ -197,7 +247,7 @@ const HeroSection = () => {
           {/* Caption overlay */}
           <div className="absolute bottom-8 left-8 right-8 text-center">
             <p className="text-white text-lg font-light drop-shadow-lg">
-              {ambientImages[currentImageIndex].caption}
+              {ambientImages[currentAmbientIndex].caption}
             </p>
           </div>
           
@@ -207,9 +257,9 @@ const HeroSection = () => {
               <button
                 key={index}
                 className={`w-2 h-2 rounded-full transition-colors ${
-                  index === currentImageIndex ? 'bg-white' : 'bg-white/40'
+                  index === currentAmbientIndex ? 'bg-white' : 'bg-white/40'
                 }`}
-                onClick={() => setCurrentImageIndex(index)}
+                onClick={() => setCurrentAmbientIndex(index)}
               />
             ))}
           </div>
@@ -221,7 +271,7 @@ const HeroSection = () => {
         <Button
           variant="ghost"
           onClick={scrollToNext}
-          className="text-muted-foreground hover:text-foreground bg-background/80 hover:bg-background/90 backdrop-blur-sm rounded-full p-3 animate-bounce"
+          className="text-white/80 hover:text-white bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full p-3 animate-bounce"
         >
           <ChevronDown className="h-5 w-5" />
         </Button>
