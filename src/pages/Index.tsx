@@ -8,7 +8,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { FloatingQuizButton } from '@/components/FloatingQuizButton';
-import { LaunchBanner } from '@/components/LaunchBanner';
+import { QuietStartBanner } from '@/components/QuietStartBanner';
 import SearchFilters from '@/components/SearchFilters';
 import { AmbientCoupleCarousel } from '@/components/AmbientCoupleCarousel';
 import { SoulfulInvitation } from '@/components/SoulfulInvitation';
@@ -125,16 +125,8 @@ const Index = () => {
         
         <Navbar />
         
-        {/* Launch Banner Section - Mobile optimized */}
-        <section 
-          className="py-4 md:py-6 bg-gradient-to-br from-primary/5 to-purple-500/5"
-          role="banner"
-          aria-label="Launch announcement banner"
-        >
-          <div className="max-w-2xl mx-auto px-4 md:max-w-full md:px-6 lg:px-8 mobile-card">
-            <LaunchBanner showDismiss={true} variant="homepage" />
-          </div>
-        </section>
+        {/* Gentle Quiet Start Banner - Appears softly after 2 seconds */}
+        <QuietStartBanner />
 
         
         <main id="main-content" role="main">
