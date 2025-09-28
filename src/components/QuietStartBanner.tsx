@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
-import { X, Heart } from 'lucide-react';
+import { X, Heart, ChevronDown } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useQuietStartProgress } from '@/hooks/useQuietStartProgress';
 import logoImage from "@/assets/logo-transparent-new.png";
@@ -19,7 +19,7 @@ export const QuietStartBanner: React.FC<QuietStartBannerProps> = ({
   const [isDismissed, setIsDismissed] = useState(false);
   const { claimedCount } = useQuietStartProgress();
 
-  // Gentle appearance after 2 seconds
+  // Gentle appearance after 3 seconds, positioned over ambient photos
   useEffect(() => {
     const dismissed = localStorage.getItem('quietStartBannerDismissed');
     if (dismissed === 'true') {
@@ -29,7 +29,7 @@ export const QuietStartBanner: React.FC<QuietStartBannerProps> = ({
 
     const timer = setTimeout(() => {
       setIsVisible(true);
-    }, 2000);
+    }, 3000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -47,113 +47,114 @@ export const QuietStartBanner: React.FC<QuietStartBannerProps> = ({
     }, 300);
   };
 
+  const scrollToCouples = () => {
+    const couplesSection = document.querySelector('[aria-labelledby="couples-section"]');
+    if (couplesSection) {
+      couplesSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   if (isDismissed) {
     return null;
   }
 
   return (
     <div 
-      className={`fixed inset-0 z-50 flex items-center justify-center p-4 ${
+      className={`fixed inset-0 z-40 flex flex-col items-center justify-center p-4 ${
         isVisible ? 'animate-fade-in' : 'opacity-0 pointer-events-none'
-      } transition-all duration-500 ease-out ${className}`}
+      } transition-all duration-700 ease-out ${className}`}
     >
-      {/* Soft backdrop */}
+      {/* Soft backdrop that preserves ambient photos */}
       <div 
-        className="absolute inset-0 bg-black/20 backdrop-blur-sm"
+        className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/5 to-transparent backdrop-blur-[2px]"
         onClick={handleDismiss}
       />
       
-      {/* Banner container - 60-70% viewport height */}
-      <Card className="relative w-full max-w-2xl max-h-[70vh] overflow-y-auto quiet-start-elegant animate-scale-in">
+      {/* Floating offer card - positioned to not dominate */}
+      <Card className="relative w-full max-w-lg quiet-start-floating animate-scale-in">
         {/* Dismiss button */}
         <Button
           variant="ghost"
           size="sm"
           onClick={handleDismiss}
-          className="absolute top-4 right-4 h-8 w-8 p-0 text-muted-foreground hover:text-foreground z-10 rounded-full bg-background/80 backdrop-blur-sm"
+          className="absolute top-3 right-3 h-7 w-7 p-0 text-muted-foreground hover:text-foreground z-10 rounded-full bg-background/90 backdrop-blur-sm border border-border/20"
         >
-          <X className="h-4 w-4" />
+          <X className="h-3 w-3" />
         </Button>
         
-        <CardContent className="p-8 md:p-12 text-center space-y-8">
-          {/* Gentle logo */}
-          <div className="flex justify-center opacity-80">
+        <CardContent className="p-6 text-center space-y-6">
+          {/* Compact logo */}
+          <div className="flex justify-center">
             <img 
               src={logoImage} 
               alt="AI Complete Me" 
-              className="h-16 w-16 md:h-20 md:w-20"
+              className="h-12 w-12 opacity-80"
             />
           </div>
           
-          {/* Poetic tagline */}
-          <div className="space-y-2">
-            <h1 className="text-2xl md:text-3xl font-light text-foreground/90 font-serif tracking-wide">
+          {/* Poetic tagline - more compact */}
+          <div className="space-y-1">
+            <h1 className="text-xl font-light text-foreground/90 font-serif tracking-wide">
               Begin quietly. Connect deeply.
             </h1>
-            <p className="text-sm text-muted-foreground font-serif">
-              AI Complete Me
-            </p>
           </div>
 
-          {/* Soft breathing space */}
-          <div className="quiet-start-offer-gentle">
-            <div className="space-y-6">
-              <h2 className="text-xl md:text-2xl font-medium text-foreground/80 font-serif">
+          {/* Compact offer */}
+          <div className="quiet-start-offer-compact">
+            <div className="space-y-4">
+              <h2 className="text-lg font-medium text-foreground/80 font-serif">
                 Quiet Start
               </h2>
               
-              <p className="text-lg text-muted-foreground leading-relaxed max-w-md mx-auto">
-                The first 200 founding hearts receive 3 months of Complete Plus free, 
-                plus a keepsake of care to honor your beginning.
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                First 200 founding hearts: 3 months Complete Plus free + keepsake of care
               </p>
               
-              {/* Gentle progress indicator */}
-              <div className="space-y-3">
-                <div className="text-center text-sm text-muted-foreground">
-                  <Heart className="inline h-4 w-4 mr-1 text-primary/60" />
+              {/* Minimal progress */}
+              <div className="space-y-2">
+                <div className="text-xs text-muted-foreground">
+                  <Heart className="inline h-3 w-3 mr-1 text-primary/60" />
                   {claimedCount} of 200 spots claimed
-                  <Heart className="inline h-4 w-4 ml-1 text-primary/60" />
                 </div>
                 
                 <Progress 
                   value={(claimedCount / 200) * 100} 
-                  className="h-2 quiet-start-progress-gentle" 
+                  className="h-1.5 quiet-start-progress-minimal" 
                 />
-                
-                <p className="text-xs text-muted-foreground italic">
-                  {claimedCount === 0 
-                    ? "Your journey awaits..." 
-                    : claimedCount < 50 
-                      ? "Among the first to connect..." 
-                      : `${200 - claimedCount} keepsakes remain`
-                  }
-                </p>
               </div>
 
-              {/* Gentle details */}
-              <div className="space-y-2 text-sm text-muted-foreground max-w-sm mx-auto">
-                <p>✓ No charge today—we'll only bill after your trial ends</p>
-                <p>✓ Full access to Complete Plus features</p>
-                <p>✓ Keepsake mailed after 30–60 days of enrollment</p>
+              {/* Compact details */}
+              <div className="text-xs text-muted-foreground space-y-1">
+                <p>✓ No charge today—bill after trial</p>
+                <p>✓ Full Complete Plus access</p>
               </div>
             </div>
           </div>
 
-          {/* Soft call to action */}
+          {/* Gentle CTA */}
           <Button 
             onClick={handleQuizStart}
-            className="quiet-start-button-gentle px-8 py-3 text-base font-medium"
-            size="lg"
+            className="quiet-start-button-subtle px-6 py-2 text-sm font-medium"
+            size="sm"
           >
-            <Heart className="h-4 w-4 mr-2" />
-            Claim Your Spot Gently
+            <Heart className="h-3 w-3 mr-2" />
+            Claim Your Spot
           </Button>
-          
-          <p className="text-xs text-muted-foreground">
-            A moment of quiet intention before connecting
-          </p>
         </CardContent>
       </Card>
+
+      {/* Scroll cue to encourage exploration below */}
+      <Button
+        variant="ghost"
+        onClick={scrollToCouples}
+        className="mt-4 text-white/80 hover:text-white bg-black/20 hover:bg-black/30 backdrop-blur-sm rounded-full p-2 animate-bounce"
+      >
+        <ChevronDown className="h-5 w-5" />
+      </Button>
+      
+      <p className="text-xs text-white/60 mt-2 font-light">
+        See inspiring connections below
+      </p>
     </div>
   );
 };
