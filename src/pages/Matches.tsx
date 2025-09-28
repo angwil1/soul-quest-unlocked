@@ -90,21 +90,8 @@ const Matches = () => {
             genderMatch = profileIdHash % 2 === 1;
             break;
           case 'non-binary':
-          case 'genderfluid':
-          case 'agender':
-          case 'gender-nonconforming':
-          case 'two-spirit':
-            genderMatch = profileIdHash % 3 === 0;
-            break;
           case 'lgbtq-community':
-          case 'questioning':
-          case 'pansexual':
-          case 'polyamorous':
-            genderMatch = profileIdHash % 4 === 0;
-            break;
-          case 'demisexual':
-          case 'asexual':
-            genderMatch = profileIdHash % 5 === 0;
+            genderMatch = profileIdHash % 3 === 0;
             break;
           default:
             genderMatch = true;
@@ -237,16 +224,7 @@ const Matches = () => {
                     <option value="non-binary">Non-binary people</option>
                     <option value="transgender-women">Transgender women</option>
                     <option value="transgender-men">Transgender men</option>
-                    <option value="genderfluid">Genderfluid people</option>
-                    <option value="agender">Agender people</option>
-                    <option value="demisexual">Demisexual connections</option>
-                    <option value="pansexual">Pansexual connections</option>
                     <option value="lgbtq-community">LGBTQ+ community</option>
-                    <option value="questioning">People questioning</option>
-                    <option value="two-spirit">Two-spirit people</option>
-                    <option value="gender-nonconforming">Gender non-conforming</option>
-                    <option value="polyamorous">Polyamorous connections</option>
-                    <option value="asexual">Asexual spectrum</option>
                   </select>
                 </div>
                 <div className="space-y-2">
