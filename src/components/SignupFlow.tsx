@@ -14,7 +14,7 @@ import { useToast } from '@/hooks/use-toast';
 import { calculateAge } from '@/lib/ageUtils';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
-export type SignupStep = 'details' | 'email-confirmation' | 'complete-profile' | 'shipping-address' | 'complete';
+export type SignupStep = 'details' | 'email-confirmation' | 'complete-profile' | 'payment-info' | 'complete';
 
 interface SignupFlowProps {
   onComplete: () => void;
@@ -187,19 +187,12 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
     if (!user) return;
     
     try {
-      console.log('📦 Skipping address collection at signup for user:', user.id);
-      // New behavior: Do NOT collect shipping address during signup.
-      // We complete signup now and will collect address only after eligibility (≈3 months).
-      toast({
-        title: "You're all set!",
-        description: "We'll collect your shipping address when you're eligible (about 3 months).",
-      });
-      setCurrentStep('complete');
-      setShowWelcome(true);
+      console.log('💳 Profile complete - directing to payment info collection');
+      // After profile completion, collect payment information for 60-day trial
+      setCurrentStep('payment-info');
     } catch (error) {
-      console.error('Error in address step handling:', error);
-      setCurrentStep('complete');
-      setShowWelcome(true);
+      console.error('Error in payment step handling:', error);
+      setCurrentStep('payment-info');
     }
   };
 
@@ -208,8 +201,7 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
       case 'details': return 15;
       case 'email-confirmation': return 30;
       case 'complete-profile': return 45;
-      case 'complete-profile': return 65;
-      case 'shipping-address': return 85;
+      case 'payment-info': return 70;
       case 'complete': return 100;
       default: return 0;
     }
@@ -380,112 +372,71 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
     }
   };
 
-  const handleShippingAddress = async (e: React.FormEvent) => {
+  const handlePaymentInfo = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!user) return;
-    
     setIsLoading(true);
     
     const formData = new FormData(e.target as HTMLFormElement);
     
     try {
-      // Validate address before processing (now async)
-      await validateAddress(formData);
-      
-      // Double-check that this user hasn't already claimed benefits
-      const { data: existingClaim } = await supabase
-        .from('quiet_start_signups')
-        .select('benefits_claimed, kit_number')
-        .eq('user_id', user.id)
-        .eq('benefits_claimed', true)
-        .maybeSingle();
+      // Basic validation
+      const cardNumber = (formData.get('card_number') as string)?.replace(/\s/g, '');
+      const expiry = formData.get('expiry') as string;
+      const cvv = formData.get('cvv') as string;
+      const cardholderName = formData.get('cardholder_name') as string;
+      const billingZip = formData.get('billing_zip') as string;
 
-      if (existingClaim) {
+      if (!cardNumber || cardNumber.length < 13) {
         toast({
-          title: "Already Claimed",
-          description: `You've already claimed your keepsake #${existingClaim.kit_number}!`,
+          title: "Invalid card number",
+          description: "Please enter a valid card number.",
           variant: "destructive"
         });
-        setCurrentStep('complete');
-        setShowWelcome(true);
+        setIsLoading(false);
         return;
       }
-      
-      // Get next available kit number
-      const { data: kitNumber } = await supabase.rpc('get_next_kit_number');
-      
-      if (kitNumber === null) {
+
+      if (!expiry || !expiry.match(/^\d{2}\/\d{2}$/)) {
         toast({
-          title: "Offer Expired",
-          description: "Sorry, all 200 keepsakes have been claimed.",
+          title: "Invalid expiry date",
+          description: "Please enter expiry in MM/YY format.",
           variant: "destructive"
         });
-        // Still mark as complete but without physical benefits
-        await supabase
-          .from('quiet_start_signups')
-          .update({
-            signup_step: 'completed',
-            benefits_claimed: false,
-            claimed_at: new Date().toISOString()
-          })
-          .eq('user_id', user.id);
-        
-        setCurrentStep('complete');
-        setShowWelcome(true);
+        setIsLoading(false);
         return;
       }
+
+      // For now, we'll just validate and proceed with trial setup
+      // In production, this would integrate with a payment processor like Stripe
       
-      // Save shipping address and claim benefits
-      const { error: signupError } = await supabase
-        .from('quiet_start_signups')
-        .update({
-          signup_step: 'completed',
-          benefits_claimed: true,
-          claimed_at: new Date().toISOString(),
-          kit_number: kitNumber,
-          shipping_name: formData.get('shipping_name') as string,
-          shipping_address_line1: formData.get('address_line1') as string,
-          shipping_address_line2: formData.get('address_line2') as string,
-          shipping_city: formData.get('city') as string,
-          shipping_state: formData.get('state') as string,
-          shipping_postal_code: formData.get('postal_code') as string,
-          shipping_country: formData.get('country') as string || 'United States',
-          address_collected_at: new Date().toISOString()
-        })
-        .eq('user_id', user.id);
-        
-      if (signupError) throw signupError;
-      
-      // Mark as Quiet Start user
+      // Mark trial as started in user_events
       await supabase
         .from('user_events')
         .insert({
           user_id: user.id,
-          event_type: 'quiet_start_claimed',
+          event_type: 'trial_started',
           event_data: {
             email: user.email,
-            kit_number: kitNumber,
-            claimed_at: new Date().toISOString(),
-            benefits: {
-              months_free: 3,
-              wellness_kit: true
-            }
+            trial_start_date: new Date().toISOString(),
+            trial_end_date: new Date(Date.now() + 60 * 24 * 60 * 60 * 1000).toISOString(), // 60 days from now
+            plan: 'complete_plus',
+            payment_info_collected: true
           }
         });
       
       toast({
-        title: "Benefits claimed!",
-        description: `You're enrolled in the 60-day free trial! Welcome to AI Complete Me.`,
+        title: "Welcome to AI Complete Me! 🎉",
+        description: "Your 60-day free trial has started. Enjoy exploring!",
       });
       
       setCurrentStep('complete');
       setShowWelcome(true);
       
     } catch (error) {
-      console.error('Shipping address error:', error);
+      console.error('Payment setup error:', error);
       toast({
-        title: "Error",
-        description: "Failed to save shipping address. Please try again.",
+        title: "Setup failed",
+        description: "Please try again or contact support.",
         variant: "destructive"
       });
     } finally {
@@ -710,114 +661,103 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
         </Card>
       )}
 
-      {currentStep === 'shipping-address' && (
+      {currentStep === 'payment-info' && (
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <Gift className="h-5 w-5 text-primary" />
-              Keepsake Address
+              <Heart className="h-5 w-5 text-primary" />
+              Complete Your 60-Day Free Trial
             </CardTitle>
             <CardDescription>
-              We'll send your keepsake after you've been actively connected for 3 months. This ensures it's a meaningful keepsake of your journey.
+              No charge today—only billed if you choose to stay after 60 days
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <form onSubmit={handleShippingAddress} className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="shipping_name">Full Name</Label>
-                <Input
-                  id="shipping_name"
-                  name="shipping_name"
-                  type="text"
-                  placeholder="Full name for shipping"
-                  required
-                />
+            <form onSubmit={handlePaymentInfo} className="space-y-4">
+              <div className="bg-primary/5 border border-primary/20 rounded-lg p-4 mb-4">
+                <h4 className="text-sm font-semibold text-primary mb-2 flex items-center gap-2">
+                  <Heart className="h-4 w-4" />
+                  Your 60-Day Free Trial
+                </h4>
+                <ul className="text-xs text-muted-foreground space-y-1">
+                  <li>✓ No charge today—only billed if you choose to stay</li>
+                  <li>✓ Full access to every feature, every moment</li>
+                  <li>✓ Cancel anytime—quietly, easily, no surprises</li>
+                </ul>
               </div>
-              
+
               <div className="space-y-2">
-                <Label htmlFor="address_line1">Address Line 1</Label>
+                <Label htmlFor="card_number">Card Number</Label>
                 <Input
-                  id="address_line1"
-                  name="address_line1"
+                  id="card_number"
+                  name="card_number"
                   type="text"
-                  placeholder="Street address"
+                  placeholder="1234 5678 9012 3456"
+                  maxLength={19}
                   required
-                />
-              </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="address_line2">Address Line 2 (Optional)</Label>
-                <Input
-                  id="address_line2"
-                  name="address_line2"
-                  type="text"
-                  placeholder="Apartment, suite, etc."
                 />
               </div>
               
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="city">City</Label>
+                  <Label htmlFor="expiry">MM/YY</Label>
                   <Input
-                    id="city"
-                    name="city"
+                    id="expiry"
+                    name="expiry"
                     type="text"
-                    placeholder="City"
+                    placeholder="12/25"
+                    maxLength={5}
                     required
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="state">State</Label>
+                  <Label htmlFor="cvv">CVV</Label>
                   <Input
-                    id="state"
-                    name="state"
+                    id="cvv"
+                    name="cvv"
                     type="text"
-                    placeholder="State"
+                    placeholder="123"
+                    maxLength={4}
                     required
                   />
                 </div>
               </div>
-              
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="postal_code">ZIP Code</Label>
-                  <Input
-                    id="postal_code"
-                    name="postal_code"
-                    type="text"
-                    placeholder="ZIP code"
-                    required
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="country">Country</Label>
-                  <Input
-                    id="country"
-                    name="country"
-                    type="text"
-                    defaultValue="United States"
-                    required
-                  />
-                </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="cardholder_name">Cardholder Name</Label>
+                <Input
+                  id="cardholder_name"
+                  name="cardholder_name"
+                  type="text"
+                  placeholder="Full name on card"
+                  required
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="billing_zip">Billing ZIP Code</Label>
+                <Input
+                  id="billing_zip"
+                  name="billing_zip"
+                  type="text"
+                  placeholder="12345"
+                  required
+                />
               </div>
               
               <div className="bg-gradient-to-r from-emerald-50 to-blue-50 border border-emerald-200 rounded-lg p-4">
                 <h4 className="text-sm font-semibold text-emerald-800 mb-2 flex items-center gap-2">
-                  <Gift className="h-4 w-4" />
-                  Final Step - Claim Your Benefits
+                  <CheckCircle className="h-4 w-4" />
+                  Start Your 60-Day Journey
                 </h4>
-                <div className="grid grid-cols-2 gap-3 text-xs mb-2">
+                <div className="grid grid-cols-1 gap-3 text-xs mb-2">
                   <div className="bg-white/70 rounded p-2 text-center">
-                    <div className="font-semibold text-primary">3 Months Free</div>
-                    <div className="text-muted-foreground">Complete Plus</div>
-                  </div>
-                  <div className="bg-white/70 rounded p-2 text-center">
-                    <div className="font-semibold text-purple-600">Keepsake</div>
-                    <div className="text-muted-foreground">Shipped free</div>
+                    <div className="font-semibold text-primary">60 Days Free</div>
+                    <div className="text-muted-foreground">Complete Plus Access</div>
                   </div>
                 </div>
                 <p className="text-xs text-emerald-700">
-                  🍃 Calming tea sachet • 💄 Soft-touch lip balm • 💌 Poetic postcard
+                  After 60 days: $12/month • Cancel anytime
                 </p>
               </div>
               
@@ -826,8 +766,12 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
                 className="w-full h-12 text-lg font-semibold bg-gradient-to-r from-emerald-600 to-blue-600 hover:from-emerald-700 hover:to-blue-700" 
                 disabled={isLoading}
               >
-                {isLoading ? 'Claiming your keepsake...' : 'Complete & Claim Benefits 🎁'}
+                {isLoading ? 'Securing your trial...' : 'Start My 60-Day Free Trial 🚀'}
               </Button>
+
+              <p className="text-xs text-center text-muted-foreground">
+                Your card will only be charged after 60 days if you choose to continue
+              </p>
             </form>
           </CardContent>
         </Card>
