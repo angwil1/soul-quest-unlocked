@@ -358,7 +358,7 @@ const Auth = () => {
                     </h3>
                     <div className="flex items-center justify-center gap-2 text-amber-800/80">
                       <span className="heart-accent">♡</span>
-                      <span className="keepsake-heading italic">Founding hearts receive 3 months free + a keepsake of care</span>
+                      <span className="keepsake-heading italic">Founding hearts receive 60 days free + a keepsake of care</span>
                       <span className="heart-accent">♡</span>
                     </div>
                   </div>
@@ -368,7 +368,7 @@ const Auth = () => {
                   <ul className="space-y-2 text-sm text-amber-800/80 keepsake-heading" role="list">
                     <li className="flex items-center justify-center gap-2">
                       <span className="heart-accent">♡</span>
-                      <span>3 months of Complete Plus free</span>
+                      <span>60 days of Complete Plus free</span>
                     </li>
                     <li className="flex items-center justify-center gap-2">
                       <span className="heart-accent">♡</span>
