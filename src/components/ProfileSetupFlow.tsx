@@ -81,6 +81,32 @@ export const ProfileSetupFlow: React.FC = () => {
     fetchCompatibilityQuestions();
   }, []);
 
+  // Initialize profile data from user metadata
+  useEffect(() => {
+    const initializeProfileData = async () => {
+      if (!user) return;
+      
+      try {
+        // Get user metadata from auth
+        const { data: { user: authUser } } = await supabase.auth.getUser();
+        
+        if (authUser?.user_metadata) {
+          const metadata = authUser.user_metadata;
+          
+          // Update profile data with stored preferences
+          setProfileData(prev => ({
+            ...prev,
+            lookingFor: metadata.looking_for || prev.lookingFor
+          }));
+        }
+      } catch (error) {
+        console.error('Error loading user metadata:', error);
+      }
+    };
+
+    initializeProfileData();
+  }, [user]);
+
   const progress = 50; // Static progress since it's one unified form
 
   const interestOptions = [

@@ -24,6 +24,7 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [dateOfBirth, setDateOfBirth] = useState('');
+  const [lookingFor, setLookingFor] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [showWelcome, setShowWelcome] = useState(false);
   const [isEmailConfirmed, setIsEmailConfirmed] = useState(false);
@@ -220,6 +221,17 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
         return;
       }
 
+      // Validate looking for selection
+      if (!lookingFor) {
+        toast({
+          title: "Please select what you're looking for",
+          description: "This helps us show you better matches.",
+          variant: "destructive"
+        });
+        setIsLoading(false);
+        return;
+      }
+
       const age = calculateAge(dateOfBirth);
       if (age < 18) {
         toast({
@@ -234,6 +246,22 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
       const result = await signUp(email, password);
       
       if (!result?.error) {
+        // Store the lookingFor preference in user metadata
+        try {
+          const { error: updateError } = await supabase.auth.updateUser({
+            data: { 
+              looking_for: lookingFor,
+              date_of_birth: dateOfBirth 
+            }
+          });
+          
+          if (updateError) {
+            console.error('Error updating user metadata:', updateError);
+          }
+        } catch (error) {
+          console.error('Error updating user metadata:', error);
+        }
+        
         toast({
           title: "Account created!",
           description: "Please check your email to verify your account.",
@@ -529,6 +557,27 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
                 />
                 <p className="text-xs text-muted-foreground">
                   Must be 18 or older. Your age will be calculated from this date.
+                </p>
+              </div>
+              
+              <div className="space-y-2">
+                <Label htmlFor="lookingFor">What are you hoping to find?</Label>
+                <Select value={lookingFor} onValueChange={setLookingFor} required>
+                  <SelectTrigger id="lookingFor">
+                    <SelectValue placeholder="Select what you're looking for" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="men">Men</SelectItem>
+                    <SelectItem value="women">Women</SelectItem>
+                    <SelectItem value="anyone">Anyone</SelectItem>
+                    <SelectItem value="non-binary">Non-binary people</SelectItem>
+                    <SelectItem value="casual-friends">Casual friends</SelectItem>
+                    <SelectItem value="activity-partners">Activity partners</SelectItem>
+                    <SelectItem value="travel-buddies">Travel buddies</SelectItem>
+                  </SelectContent>
+                </Select>
+                <p className="text-xs text-muted-foreground">
+                  This helps us show you better matches
                 </p>
               </div>
               
