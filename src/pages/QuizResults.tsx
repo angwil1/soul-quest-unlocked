@@ -344,11 +344,11 @@ const QuizResults = () => {
                      {/* Avatar with beautiful gradient background */}
                      <div className="w-20 h-20 rounded-full mx-auto relative overflow-hidden">
                        {match.blurredPhoto ? (
-                         <img 
-                           src={match.blurredPhoto} 
-                           alt={match.name} 
-                           className={`w-full h-full object-cover ${index > 0 ? 'blur-sm' : ''}`}
-                         />
+                          <img 
+                            src={match.blurredPhoto} 
+                            alt={match.name} 
+                            className="w-full h-full object-cover"
+                          />
                         ) : (
                           <div className={`w-full h-full flex items-center justify-center text-white font-bold text-2xl
                             ${index === 0 ? 'bg-gradient-to-br from-purple-500 to-pink-500' : 
