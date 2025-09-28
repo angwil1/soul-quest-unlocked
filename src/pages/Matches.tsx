@@ -13,6 +13,7 @@ const Matches = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const { matches, loading, error, generateAIMatches } = useAIMatching();
+  const [hasRequested, setHasRequested] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -25,10 +26,11 @@ const Matches = () => {
   }, [user, navigate]);
 
   useEffect(() => {
-    if (user && matches.length === 0 && !loading && !error) {
+    if (user && !hasRequested && matches.length === 0 && !loading && !error) {
+      setHasRequested(true);
       generateAIMatches();
     }
-  }, [user, matches.length, loading, error]); // Removed generateAIMatches from dependencies
+  }, [user, hasRequested, matches.length, loading, error]); // call once per mount
 
   return (
     <div className="min-h-screen bg-background">
