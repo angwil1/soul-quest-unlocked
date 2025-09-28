@@ -84,7 +84,7 @@ export const InviteKindredSoul = () => {
             disabled={isLoading}
             className="w-full bg-gradient-to-r from-primary to-secondary hover:opacity-90"
           >
-            {isLoading ? "Sending..." : "Send quiet invite"}
+            {isLoading ? "Sending..." : "Send a quiet invite"}
           </Button>
         </div>
       </CardContent>
