@@ -315,7 +315,7 @@ const QuizResults = () => {
         {/* Match Previews */}
         <div className="mb-8">
           <h2 className="text-2xl font-semibold mb-4 text-center">Your Top Compatibility Matches</h2>
-          <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 max-w-6xl mx-auto">
+          <div className="grid gap-3 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 max-w-4xl mx-auto">
             {matchPreviews.map((match, index) => (
               <Card 
                 key={match.id} 
@@ -337,52 +337,44 @@ const QuizResults = () => {
                   </div>
                   
                   {index === 0 && (
-                    <Badge className="absolute top-2 left-2 bg-green-600 text-white text-xs px-2 py-1">
-                      Top Match!
+                    <Badge className="absolute top-1.5 left-1.5 bg-green-600 text-white text-xs px-1 py-0.5">
+                      Top!
                     </Badge>
                   )}
                   
                   <Badge 
-                    className="absolute top-2 right-2 bg-primary text-primary-foreground text-xs px-2 py-1"
+                    className="absolute top-1.5 right-1.5 bg-primary text-primary-foreground text-xs px-1 py-0.5"
                   >
-                    {match.compatibility}% Match
+                    {match.compatibility}%
                   </Badge>
                 </div>
                 
-                <CardHeader className="pb-2 px-3 pt-3">
-                  <div className="flex items-center justify-between">
-                    <CardTitle className="text-sm font-semibold truncate">
+                <CardContent className="p-2">
+                  <div className="text-center mb-2">
+                    <p className="text-xs font-medium leading-tight">
                       {match.name.split(' ')[0]}, {match.age}
-                    </CardTitle>
-                  </div>
-                  {(match.location || match.occupation) && (
-                    <div className="space-y-1 text-xs text-muted-foreground">
-                      {match.location && (
-                        <div className="flex items-center gap-1">
-                          <MapPin className="h-2.5 w-2.5 text-muted-foreground/60" />
-                          <span className="truncate">{match.location}</span>
-                        </div>
-                      )}
-                      {match.occupation && (
-                        <div className="flex items-center gap-1">
-                          <Briefcase className="h-2.5 w-2.5 text-muted-foreground/60" />
-                          <span className="truncate">{match.occupation}</span>
-                        </div>
-                      )}
-                    </div>
-                  )}
-                </CardHeader>
-                
-                <CardContent className="pt-0 px-3 pb-3">
-                  {match.bio && (
-                    <p className="text-xs text-muted-foreground line-clamp-2 mb-2">
-                      {match.bio}
                     </p>
-                  )}
+                    {(match.location || match.occupation) && (
+                      <div className="space-y-0.5 text-[10px] text-muted-foreground mt-1">
+                        {match.location && (
+                          <div className="flex items-center justify-center gap-0.5">
+                            <MapPin className="h-2 w-2" />
+                            <span className="truncate">{match.location.split(',')[0]}</span>
+                          </div>
+                        )}
+                        {match.occupation && (
+                          <div className="flex items-center justify-center gap-0.5">
+                            <Briefcase className="h-2 w-2" />
+                            <span className="truncate">{match.occupation}</span>
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </div>
                   
-                  <div className="flex flex-wrap gap-1 mb-3">
-                    {match.commonInterests.slice(0, 2).map((interest) => (
-                      <Badge key={interest} variant="secondary" className="text-xs px-1.5 py-0.5">
+                  <div className="flex flex-wrap gap-0.5 justify-center mb-2">
+                    {match.commonInterests.slice(0, 1).map((interest) => (
+                      <Badge key={interest} variant="outline" className="text-[10px] px-1 py-0">
                         {interest}
                       </Badge>
                     ))}
@@ -390,14 +382,14 @@ const QuizResults = () => {
                   
                   <Button 
                     size="sm" 
-                    className="w-full h-7 text-xs"
+                    className="w-full h-6 text-xs p-1"
                     onClick={(e) => {
                       e.stopPropagation();
                       handleMatchClick(match, index);
                     }}
                   >
-                    <MessageCircle className="h-3 w-3 mr-1" />
-                    View Profile
+                    <Eye className="h-2.5 w-2.5 mr-1" />
+                    View
                   </Button>
                 </CardContent>
               </Card>
