@@ -403,10 +403,28 @@ const Search = () => {
       
       <main 
         id="main-content" 
-        className="max-w-7xl mx-auto px-4 py-8"
+        className="relative max-w-7xl mx-auto px-4 py-8"
         role="main"
         aria-labelledby="search-heading"
       >
+        {/* Animated Background Effects */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {/* Heart Pulse Animation */}
+          <div className="absolute top-20 left-1/4 w-6 h-6 text-pink-200/20 animate-[heartPulse_4s_ease-in-out_infinite]">
+            <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+          </div>
+          
+          {/* Sparkle Trail Animation */}
+          <div className="absolute top-32 right-1/3 w-2 h-2 bg-purple-200/30 rounded-full animate-[sparkleFloat_6s_ease-in-out_infinite]"></div>
+          <div className="absolute top-16 right-1/4 w-1 h-1 bg-pink-300/40 rounded-full animate-[sparkleFloat_4s_ease-in-out_infinite_1s]"></div>
+          <div className="absolute top-40 left-1/3 w-1.5 h-1.5 bg-purple-300/25 rounded-full animate-[sparkleFloat_5s_ease-in-out_infinite_2s]"></div>
+          
+          {/* Gentle Pulse Rings */}
+          <div className="absolute top-24 left-1/2 w-16 h-16 border border-pink-200/10 rounded-full animate-[gentlePulse_8s_ease-in-out_infinite]"></div>
+          <div className="absolute top-36 right-1/2 w-12 h-12 border border-purple-200/15 rounded-full animate-[gentlePulse_6s_ease-in-out_infinite_2s]"></div>
+        </div>
         {/* Header */}
         <section className="mb-8">
           <h1 id="search-heading" className="text-3xl font-bold mb-2">Search for Matches</h1>

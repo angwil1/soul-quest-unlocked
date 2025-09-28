@@ -145,6 +145,40 @@ export default {
 				'float': {
 					'0%, 100%': { transform: 'translateY(0px)' },
 					'50%': { transform: 'translateY(-10px)' }
+				},
+				'heartPulse': {
+					'0%, 100%': { 
+						transform: 'scale(1)', 
+						opacity: '0.2' 
+					},
+					'50%': { 
+						transform: 'scale(1.1)', 
+						opacity: '0.4' 
+					}
+				},
+				'sparkleFloat': {
+					'0%': { 
+						transform: 'translateY(0px) translateX(0px)', 
+						opacity: '0' 
+					},
+					'50%': { 
+						transform: 'translateY(-20px) translateX(10px)', 
+						opacity: '1' 
+					},
+					'100%': { 
+						transform: 'translateY(-40px) translateX(-5px)', 
+						opacity: '0' 
+					}
+				},
+				'gentlePulse': {
+					'0%, 100%': { 
+						transform: 'scale(1)', 
+						opacity: '0.1' 
+					},
+					'50%': { 
+						transform: 'scale(1.2)', 
+						opacity: '0.3' 
+					}
 				}
 			},
 			animation: {
@@ -155,7 +189,10 @@ export default {
 				'fade-in': 'fadeIn 0.6s ease-out',
 				'slide-up': 'slideUp 0.6s ease-out',
 				'scale-in': 'scale-in 0.2s ease-out',
-				'float': 'float 3s ease-in-out infinite'
+				'float': 'float 3s ease-in-out infinite',
+				'heartPulse': 'heartPulse 4s ease-in-out infinite',
+				'sparkleFloat': 'sparkleFloat 6s ease-in-out infinite',
+				'gentlePulse': 'gentlePulse 8s ease-in-out infinite'
 			}
 		}
 	},
