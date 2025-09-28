@@ -123,17 +123,6 @@ const Profile = () => {
               </Button>
               
               <Button 
-                variant="outline" 
-                size="sm"
-                onClick={() => navigate('/auth')}
-                className="focus:ring-2 focus:ring-primary focus:ring-offset-2 px-2"
-                aria-label="Join and start discovering people"
-              >
-                <Eye className="h-4 w-4 xs:mr-1" aria-hidden="true" />
-                <span className="hidden xs:inline">Join</span>
-              </Button>
-              
-              <Button 
                 onClick={() => navigate('/profile/edit')}
                 size="sm"
                 className="focus:ring-2 focus:ring-primary focus:ring-offset-2 px-2"
@@ -207,15 +196,7 @@ const Profile = () => {
                   Matches
                 </Button>
                 
-                <Button 
-                  variant="outline" 
-                  onClick={() => navigate('/auth')}
-                  className="flex items-center gap-2 focus:ring-2 focus:ring-primary focus:ring-offset-2 min-w-[120px]"
-                  aria-label="Join and start discovering people"
-                >
-                  <Eye className="h-4 w-4" aria-hidden="true" />
-                  Join & Discover
-                </Button>
+                {/* Hide Join button for authenticated users with profile */}
               </nav>
               
               {/* Profile Actions */}
