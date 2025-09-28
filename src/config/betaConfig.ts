@@ -4,7 +4,7 @@
 export const BETA_CONFIG = {
   businessName: "AI Complete Me", // Your registered business name
   buildVersion: "2.0.0-BETA", 
-  isTestBuild: true, // Enable for closed testing
+  isTestBuild: false, // Enable for closed testing
   testerId: "BETA-TESTER", // Beta testing identifier
   
   // Watermark settings
