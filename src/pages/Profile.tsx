@@ -112,17 +112,6 @@ const Profile = () => {
             
             <div className="flex items-center gap-1">
               <Button 
-                variant="outline" 
-                size="sm"
-                onClick={() => navigate('/matches')}
-                className="focus:ring-2 focus:ring-primary focus:ring-offset-2 px-2"
-                aria-label="View your matches"
-              >
-                <Users className="h-4 w-4 xs:mr-1" aria-hidden="true" />
-                <span className="hidden xs:inline">Matches</span>
-              </Button>
-              
-              <Button 
                 onClick={() => navigate('/profile/edit')}
                 size="sm"
                 className="focus:ring-2 focus:ring-primary focus:ring-offset-2 px-2"
@@ -184,23 +173,8 @@ const Profile = () => {
             </Button>
             
             <div className="flex items-center gap-6">
-              {/* Navigation Buttons */}
-              <nav className="flex items-center gap-3" role="navigation" aria-label="Profile navigation">
-                <Button 
-                  variant="outline" 
-                  onClick={() => navigate('/matches')}
-                  className="flex items-center gap-2 focus:ring-2 focus:ring-primary focus:ring-offset-2 min-w-[120px]"
-                  aria-label="View your matches"
-                >
-                  <Users className="h-4 w-4" aria-hidden="true" />
-                  Matches
-                </Button>
-                
-                {/* Hide Join button for authenticated users with profile */}
-              </nav>
-              
               {/* Profile Actions */}
-              <div className="flex items-center gap-2 border-l border-border pl-6" role="group" aria-label="Profile actions">
+              <div className="flex items-center gap-2" role="group" aria-label="Profile actions">
                 <Button 
                   onClick={() => navigate('/profile/edit')}
                   className="focus:ring-2 focus:ring-primary focus:ring-offset-2 min-w-[110px]"
