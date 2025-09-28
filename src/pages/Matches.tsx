@@ -172,7 +172,7 @@ const Matches = () => {
                   <CardHeader className="pb-2">
                     <div className="flex items-center justify-between">
                       <CardTitle className="text-lg font-semibold">
-                        {match.profile.name}, {match.profile.age}
+                        {match.profile.name?.split(' ')[0]}, {match.profile.age}
                       </CardTitle>
                       <Badge variant="outline" className="text-xs">
                         AI Matched

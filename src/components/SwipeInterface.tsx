@@ -197,7 +197,7 @@ export const SwipeInterface = ({ profiles, onSwipe, onProfilesExhausted }: Swipe
             <div className="space-y-3">
               <div>
                 <h3 className="text-2xl font-bold">
-                  {currentProfile.name}, {currentProfile.age}
+                  {currentProfile.name?.split(' ')[0]}, {currentProfile.age}
                 </h3>
                 <div className="flex items-center gap-4 text-sm text-muted-foreground mt-1">
                   <div className="flex items-center gap-1">

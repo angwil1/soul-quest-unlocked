@@ -524,7 +524,9 @@ const Search = () => {
                                 className="object-cover blur-sm"
                               />
                               <AvatarFallback className="w-full h-full rounded-lg text-sm">
-                                {profile.name.split(' ').map(n => n[0]).join('')}
+                                <AvatarFallback className="w-full h-full rounded-lg text-lg">
+                                  {profile.name?.split(' ')[0]?.charAt(0) || 'N'}
+                                </AvatarFallback>
                               </AvatarFallback>
                             </Avatar>
                           </div>
@@ -561,7 +563,7 @@ const Search = () => {
                               id={`profile-name-${profile.id}`}
                               className="text-sm font-semibold"
                             >
-                              {profile.name}, {profile.age}
+                              {profile.name?.split(' ')[0]}, {profile.age}
                             </CardTitle>
                             <Badge 
                               variant="outline"

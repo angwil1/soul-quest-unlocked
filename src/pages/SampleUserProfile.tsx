@@ -138,7 +138,7 @@ const SampleUserProfile = () => {
               <CardHeader>
                 <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
                   <div className="flex-1">
-                    <CardTitle className="text-2xl">{profile.name}, {profile.age}</CardTitle>
+                    <CardTitle className="text-2xl">{profile.name?.split(' ')[0]}, {profile.age}</CardTitle>
                     <div className="flex flex-wrap items-center gap-4 text-muted-foreground mt-2">
                       <div className="flex items-center gap-1">
                         <MapPin className="h-4 w-4" />

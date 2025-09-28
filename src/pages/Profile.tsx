@@ -335,7 +335,7 @@ const Profile = () => {
             <Card role="region" aria-labelledby="basic-info-title">
               <CardHeader>
                 <CardTitle id="basic-info-title" className="flex items-center gap-2 flex-wrap">
-                  {profile.name || 'Your Profile'}{profile.age ? `, ${profile.age}` : ''}
+                  {profile.name?.split(' ')[0] || 'Your Profile'}{profile.age ? `, ${profile.age}` : ''}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
