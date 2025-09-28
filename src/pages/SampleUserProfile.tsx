@@ -9,14 +9,17 @@ import { SaveToVaultButton } from '@/components/SaveToVaultButton';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ArrowLeft, MessageCircle, Heart, Shield, MapPin, Briefcase, Eye } from 'lucide-react';
 import { founderCuratedProfiles, browseProfiles } from '@/data/sampleProfiles';
+import { stateProfiles } from '@/data/stateProfiles';
 
 const SampleUserProfile = () => {
   const navigate = useNavigate();
   const { profileId } = useParams();
   const [isLiked, setIsLiked] = useState(false);
 
-  // Find the profile from both sample data arrays
-  const profile = founderCuratedProfiles.find(p => p.id === profileId) || browseProfiles.find(p => p.id === profileId);
+  // Find the profile from all sample data arrays
+  const profile = founderCuratedProfiles.find(p => p.id === profileId) || 
+                  browseProfiles.find(p => p.id === profileId) ||
+                  stateProfiles.find(p => p.id === profileId);
 
   // Fallback if profile not found
   if (!profile) {
