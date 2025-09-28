@@ -49,6 +49,7 @@ const US_STATES = [
   { code: 'OK', name: 'Oklahoma', sampleZips: ['73102', '74101', '73701'] },
   { code: 'OR', name: 'Oregon', sampleZips: ['97201', '97301', '97401'] },
   { code: 'PA', name: 'Pennsylvania', sampleZips: ['19102', '19103', '15213'] },
+  { code: 'PR', name: 'Puerto Rico', sampleZips: ['00901', '00725', '00617'] },
   { code: 'RI', name: 'Rhode Island', sampleZips: ['02901', '02840', '02886'] },
   { code: 'SC', name: 'South Carolina', sampleZips: ['29201', '29401', '29601'] },
   { code: 'SD', name: 'South Dakota', sampleZips: ['57101', '57701', '57501'] },
