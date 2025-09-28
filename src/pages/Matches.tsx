@@ -150,6 +150,14 @@ const Matches = () => {
     params.set('age', searchAgeRange);
     params.set('looking', searchGenderPreference);
     setSearchParams(params);
+    
+    // Scroll to results section for immediate feedback
+    setTimeout(() => {
+      const resultsSection = document.querySelector('[data-search-results]');
+      if (resultsSection) {
+        resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 100);
   };
 
   const handleResetFilters = () => {
@@ -234,7 +242,7 @@ const Matches = () => {
 
         {/* Search Results Status */}
         {isSearchActive && (
-          <section className="mb-6">
+          <section className="mb-6" data-search-results>
             <div className="text-center p-6 bg-muted/30 rounded-lg">
               <p className="text-sm text-muted-foreground mb-4">
                 {filteredProfiles.length > 0 
