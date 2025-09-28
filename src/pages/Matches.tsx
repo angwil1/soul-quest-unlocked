@@ -91,7 +91,6 @@ const Matches = () => {
             break;
           case 'non-binary':
           case 'lgbtq-community':
-          case 'casual-friends':
           case 'activity-partners':
           case 'travel-buddies':
             genderMatch = profileIdHash % 3 === 0;
@@ -228,7 +227,6 @@ const Matches = () => {
                     <option value="transgender-women">Transgender women</option>
                     <option value="transgender-men">Transgender men</option>
                     <option value="lgbtq-community">LGBTQ+ community</option>
-                    <option value="casual-friends">Casual friends</option>
                     <option value="activity-partners">Activity partners</option>
                     <option value="travel-buddies">Travel buddies</option>
                   </select>
