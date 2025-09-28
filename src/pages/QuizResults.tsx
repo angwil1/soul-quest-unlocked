@@ -190,43 +190,13 @@ const QuizResults = () => {
       return;
     }
 
-    // All matches are accessible during the free 60-day period
-    // Check if user can send messages
-    if (!canSendMessage) {
-      toast({
-        title: "Message limit reached",
-        description: `You have ${remainingMessages} messages left today. Upgrade to Premium for unlimited messaging!`,
-        variant: "destructive",
-        action: (
-          <Button 
-            size="sm" 
-            onClick={upgradePrompt}
-            className="ml-2"
-          >
-            Upgrade
-          </Button>
-        ),
-      });
-      return;
-    }
-
-    // Create or find existing match in database and navigate to messages
-    try {
-      // For demo purposes, we'll create a demo match
-      // In a real app, this would be handled differently
-      toast({
-        title: "Match Connected! 💫",
-        description: `You can now message ${match.name}. Start a conversation!`,
-      });
-      navigate('/messages');
-    } catch (error) {
-      console.error('Error connecting to match:', error);
-      toast({
-        title: "Connection Error",
-        description: "Unable to connect with this match. Please try again.",
-        variant: "destructive",
-      });
-    }
+    // Navigate to view the match's profile
+    navigate(`/profile/${match.id}`, { 
+      state: { 
+        profileData: match,
+        fromQuizResults: true 
+      } 
+    });
   };
 
   const handleResendEmail = async () => {
