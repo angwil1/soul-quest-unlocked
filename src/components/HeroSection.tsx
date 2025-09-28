@@ -134,7 +134,7 @@ const HeroSection = () => {
         
         {/* Left Side - Quiet Start Offer */}
         <div className="flex-1 lg:flex-[0.6] flex items-center justify-center p-6 lg:p-12 relative z-20">
-          <div className="max-w-lg w-full space-y-8 animate-fade-in">
+          <div className="max-w-lg w-full space-y-8 animate-fade-in-delayed">
             
             {/* Logo and branding */}
             <div className="text-center space-y-4">
