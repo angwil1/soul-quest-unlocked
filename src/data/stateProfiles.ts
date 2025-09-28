@@ -14,7 +14,7 @@ export const stateProfiles: SampleProfile[] = [
     occupation: "Software Engineer",
     emotionalSoundtrack: "",
     tiktokUrl: "",
-    photos: ["/src/assets/marcus-profile-main.jpg"],
+    photos: ["/src/assets/profile-silhouette.jpg"],
     interests: ["Football", "BBQ", "Music"],
     conversationStarters: ["What's your favorite SEC team?", "Best BBQ spot in your city?"],
     poeticMicrocopy: "",
