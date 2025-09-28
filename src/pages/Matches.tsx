@@ -240,56 +240,6 @@ const Matches = () => {
           </div>
         </section>
 
-        {/* Search Results Status */}
-        {isSearchActive && (
-          <section className="mb-6" data-search-results>
-            <div className="text-center p-6 bg-muted/30 rounded-lg">
-              <p className="text-sm text-muted-foreground mb-4">
-                {filteredProfiles.length > 0 
-                  ? `Found ${filteredProfiles.length} matches in ${searchZipCode}`
-                  : (() => {
-                      const messages = [
-                        "We're just getting started—more matches are arriving soon.",
-                        "It's quiet now, but connection is growing here.",
-                        "You're early—and that's a beautiful place to be.",
-                        "This space is new, and so are the possibilities.",
-                        "No matches yet, but you're helping shape something real.",
-                        "We're building this together—your presence matters.",
-                        "Quiet for now. But every connection starts somewhere.",
-                        "You're one of the first to show up. That's powerful."
-                      ];
-                      return messages[Math.floor(Math.random() * messages.length)];
-                    })()
-                }
-              </p>
-              
-              {filteredProfiles.length === 0 && (
-                <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
-                  <Button 
-                    variant="outline" 
-                    size="sm"
-                    onClick={() => setIsSearchActive(false)}
-                    className="text-xs"
-                  >
-                    Want to explore Quiet Start while we grow?
-                  </Button>
-                  <Button 
-                    variant="ghost" 
-                    size="sm"
-                    onClick={() => {
-                      setSearchAgeRange('18-65');
-                      setSearchGenderPreference('everyone');
-                      setSearchDistance('unlimited');
-                    }}
-                    className="text-xs"
-                  >
-                    Try adjusting your filters
-                  </Button>
-                </div>
-              )}
-            </div>
-          </section>
-        )}
         <section className="mb-8">
           <Card className="bg-card border">
             <CardHeader className="pb-4">
@@ -381,6 +331,57 @@ const Matches = () => {
             </CardContent>
           </Card>
         </section>
+
+        {/* Search Results Status */}
+        {isSearchActive && (
+          <section className="mb-6" data-search-results>
+            <div className="text-center p-6 bg-muted/30 rounded-lg">
+              <p className="text-sm text-muted-foreground mb-4">
+                {filteredProfiles.length > 0 
+                  ? `Found ${filteredProfiles.length} matches in ${searchZipCode}`
+                  : (() => {
+                      const messages = [
+                        "We're just getting started—more matches are arriving soon.",
+                        "It's quiet now, but connection is growing here.",
+                        "You're early—and that's a beautiful place to be.",
+                        "This space is new, and so are the possibilities.",
+                        "No matches yet, but you're helping shape something real.",
+                        "We're building this together—your presence matters.",
+                        "Quiet for now. But every connection starts somewhere.",
+                        "You're one of the first to show up. That's powerful."
+                      ];
+                      return messages[Math.floor(Math.random() * messages.length)];
+                    })()
+                }
+              </p>
+              
+              {filteredProfiles.length === 0 && (
+                <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    onClick={() => setIsSearchActive(false)}
+                    className="text-xs"
+                  >
+                    Want to explore Quiet Start while we grow?
+                  </Button>
+                  <Button 
+                    variant="ghost" 
+                    size="sm"
+                    onClick={() => {
+                      setSearchAgeRange('18-65');
+                      setSearchGenderPreference('everyone');
+                      setSearchDistance('unlimited');
+                    }}
+                    className="text-xs"
+                  >
+                    Try adjusting your filters
+                  </Button>
+                </div>
+              )}
+            </div>
+          </section>
+        )}
 
         {/* Matches Grid */}
         <section 
