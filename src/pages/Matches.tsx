@@ -15,6 +15,11 @@ const Matches = () => {
   const { user } = useAuth();
   const [likedProfiles, setLikedProfiles] = useState<Set<string>>(new Set());
   const [visibleMatches, setVisibleMatches] = useState(6);
+  const [searchZipCode, setSearchZipCode] = useState('');
+  const [searchDistance, setSearchDistance] = useState('25');
+  const [searchAgeRange, setSearchAgeRange] = useState('25-35');
+  const [filteredProfiles, setFilteredProfiles] = useState(founderCuratedProfiles);
+  const [isSearchActive, setIsSearchActive] = useState(false);
 
   // Check if user is authenticated and redirect if not
   useEffect(() => {
@@ -33,7 +38,7 @@ const Matches = () => {
   };
 
   const handleDiscoverMore = () => {
-    setVisibleMatches(prev => Math.min(prev + 6, founderCuratedProfiles.length));
+    setVisibleMatches(prev => Math.min(prev + 6, filteredProfiles.length));
   };
 
   const scrollToTop = () => {
@@ -44,6 +49,40 @@ const Matches = () => {
   };
 
   const calculateMatchScore = () => Math.floor(Math.random() * 20) + 80; // 80-99% match
+
+  const handleSearch = () => {
+    if (!searchZipCode.trim()) {
+      alert('Please enter a zip code to search');
+      return;
+    }
+
+    // Filter profiles based on age range
+    const [minAge, maxAge] = searchAgeRange.split('-').map(age => 
+      age === '55+' ? [55, 100] : [parseInt(age), parseInt(age)]
+    ).flat();
+
+    const filtered = founderCuratedProfiles.filter(profile => {
+      // Age filtering
+      const profileAge = profile.age;
+      if (searchAgeRange === '55+') {
+        return profileAge >= 55;
+      }
+      return profileAge >= minAge && profileAge <= maxAge;
+    });
+
+    setFilteredProfiles(filtered);
+    setIsSearchActive(true);
+    setVisibleMatches(6); // Reset visible matches
+  };
+
+  const handleResetFilters = () => {
+    setSearchZipCode('');
+    setSearchDistance('25');
+    setSearchAgeRange('25-35');
+    setFilteredProfiles(founderCuratedProfiles);
+    setIsSearchActive(false);
+    setVisibleMatches(6);
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -131,6 +170,8 @@ const Matches = () => {
                     id="zip-code"
                     type="text"
                     placeholder="Enter your zip code"
+                    value={searchZipCode}
+                    onChange={(e) => setSearchZipCode(e.target.value)}
                     className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                     maxLength={5}
                   />
@@ -141,6 +182,8 @@ const Matches = () => {
                   </label>
                   <select
                     id="distance"
+                    value={searchDistance}
+                    onChange={(e) => setSearchDistance(e.target.value)}
                     className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                   >
                     <option value="10">Within 10 miles</option>
@@ -156,6 +199,8 @@ const Matches = () => {
                   </label>
                   <select
                     id="age-range"
+                    value={searchAgeRange}
+                    onChange={(e) => setSearchAgeRange(e.target.value)}
                     className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                   >
                     <option value="18-25">18-25 years</option>
@@ -167,10 +212,10 @@ const Matches = () => {
                 </div>
               </div>
               <div className="flex gap-2 mt-4">
-                <Button className="flex-1">
+                <Button className="flex-1" onClick={handleSearch}>
                   Search Matches
                 </Button>
-                <Button variant="outline">
+                <Button variant="outline" onClick={handleResetFilters}>
                   Reset Filters
                 </Button>
               </div>
@@ -186,7 +231,7 @@ const Matches = () => {
         >
           <h2 id="matches-grid-title" className="sr-only">Available Matches</h2>
           
-          {founderCuratedProfiles.slice(0, visibleMatches).map((profile) => {
+          {filteredProfiles.slice(0, visibleMatches).map((profile) => {
             const matchScore = calculateMatchScore();
             const isLiked = likedProfiles.has(profile.id);
             
@@ -310,7 +355,7 @@ const Matches = () => {
         </section>
 
         {/* Load More */}
-        {visibleMatches < founderCuratedProfiles.length && (
+        {visibleMatches < filteredProfiles.length && (
           <section className="text-center mt-8" role="region" aria-labelledby="load-more-section">
             <h2 id="load-more-section" className="sr-only">Load More Matches</h2>
             <Button 
@@ -319,7 +364,7 @@ const Matches = () => {
               className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
               aria-label="Discover more compatible matches"
             >
-              Discover More Matches ({founderCuratedProfiles.length - visibleMatches} remaining)
+              Discover More Matches ({filteredProfiles.length - visibleMatches} remaining)
             </Button>
           </section>
         )}
