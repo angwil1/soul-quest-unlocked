@@ -466,7 +466,7 @@ const BrowseProfiles = () => {
             if (isProfileComplete) {
               return (
                 <Button 
-                  onClick={() => navigate('/matches')} 
+                  onClick={() => navigate('/search')} 
                   size="lg"
                   className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
                   aria-label="Find AI-powered matches tailored to your preferences"
