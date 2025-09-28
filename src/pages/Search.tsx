@@ -376,16 +376,6 @@ const Search = () => {
             </Button>
             
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3 w-full sm:w-auto">
-              <Button 
-                variant="outline" 
-                size="sm"
-                onClick={() => navigate('/matches')}
-                className="flex items-center gap-2 focus:ring-2 focus:ring-primary focus:ring-offset-2 w-full sm:w-auto justify-center"
-                aria-label="View your matches"
-              >
-                <Heart className="h-4 w-4" aria-hidden="true" />
-                My Matches
-              </Button>
               {!user && (
                 <Button 
                   variant="outline" 
