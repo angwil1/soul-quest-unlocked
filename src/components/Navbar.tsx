@@ -103,7 +103,6 @@ export const Navbar = () => {
   const navigation = [
     { name: "Discover", href: "/quick-start" },
     { name: "Join Now", href: "/quick-start", requiresSignup: true },
-    { name: "Matches", href: "/matches" },  
     { name: "Messages", href: "/messages" },
     { name: "Memory Vault", href: "/memory-vault" },
     { name: "Dating Tips", href: "/dating-tips" },
@@ -212,16 +211,6 @@ export const Navbar = () => {
                   Join Now
                 </Link>
               )}
-              <Link
-                to="/matches"
-                className={`px-4 py-2 text-sm font-medium rounded-full transition-all duration-200 ${
-                  isActive("/matches")
-                    ? "bg-primary text-primary-foreground shadow-sm"
-                    : "text-foreground hover:bg-background hover:shadow-sm"
-                }`}
-              >
-                Matches
-              </Link>
               <Link
                 to="/messages"
                 className={`px-4 py-2 text-sm font-medium rounded-full transition-all duration-200 ${
