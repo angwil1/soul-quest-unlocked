@@ -242,10 +242,10 @@ export const ProfileSetupFlow: React.FC = () => {
     const files = Array.from(event.target.files || []);
     if (files.length === 0) return;
 
-    if (profileData.photos.length + files.length > 1) {
+    if (profileData.photos.length + files.length > 6) {
       toast({
         title: "Too many photos",
-        description: "Only 1 photo allowed.",
+        description: "Maximum 6 photos allowed.",
         variant: "destructive",
       });
       return;
@@ -265,7 +265,7 @@ export const ProfileSetupFlow: React.FC = () => {
     if (newPhotoUrls.length > 0) {
       setProfileData(prev => ({
         ...prev,
-        photos: newPhotoUrls.slice(0, 1) // Only keep the first photo
+        photos: [...prev.photos, ...newPhotoUrls].slice(0, 6)
       }));
       
       toast({
@@ -279,10 +279,10 @@ export const ProfileSetupFlow: React.FC = () => {
 
   const handleCameraCapture = async (file: File) => {
     console.log('Camera capture received file:', file);
-    if (profileData.photos.length >= 1) {
+    if (profileData.photos.length >= 6) {
       toast({
-        title: "Photo limit reached",
-        description: "Only 1 photo allowed. Remove existing photo first.",
+        title: "Too many photos",
+        description: "Maximum 6 photos allowed.",
         variant: "destructive",
       });
       return;
@@ -295,7 +295,7 @@ export const ProfileSetupFlow: React.FC = () => {
       console.log('Photo uploaded successfully:', photoUrl);
       setProfileData(prev => ({
         ...prev,
-        photos: [photoUrl] // Replace existing photo
+        photos: [...prev.photos, photoUrl].slice(0, 6)
       }));
       
       toast({
@@ -598,7 +598,7 @@ export const ProfileSetupFlow: React.FC = () => {
                   </div>
                 ))}
                 
-                {profileData.photos.length < 1 && (
+                {profileData.photos.length < 6 && (
                   <>
                     <div className="aspect-square border-2 border-dashed border-muted-foreground/25 rounded-lg flex flex-col items-center justify-center cursor-pointer hover:border-primary/50 transition-colors">
                       <input
@@ -639,7 +639,7 @@ export const ProfileSetupFlow: React.FC = () => {
               )}
 
               <p className="text-sm text-muted-foreground mt-4">
-                Photo: {profileData.photos.length}/1 added
+                Added: {profileData.photos.length}/6 photos (minimum 1 required)
               </p>
             </CardContent>
           </Card>
