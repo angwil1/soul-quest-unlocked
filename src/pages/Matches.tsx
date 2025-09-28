@@ -7,6 +7,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Navbar } from '@/components/Navbar';
 import { Heart, Settings, MapPin, Briefcase, Sparkles, ArrowLeft, Users, ArrowUp } from 'lucide-react';
 import { founderCuratedProfiles } from '@/data/sampleProfiles';
+import { stateProfiles } from '@/data/stateProfiles';
 import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/integrations/supabase/client';
 
@@ -157,6 +158,9 @@ const Matches = () => {
   const calculateMatchScore = () => Math.floor(Math.random() * 20) + 80; // 80-99% match
 
   const filterProfiles = async (zipCode: string, distance: string, ageRange: string, genderPref: string, selectedState?: string) => {
+    // Combine all available profiles
+    const allProfiles = [...founderCuratedProfiles, ...stateProfiles];
+    
     // If no zip code but state is selected, use all sample zips from that state
     let searchZips: string[] = [];
     
@@ -166,7 +170,7 @@ const Matches = () => {
       const state = US_STATES.find(s => s.code === selectedState);
       searchZips = state ? state.sampleZips : [];
     } else {
-      return founderCuratedProfiles; // No location criteria
+      return allProfiles; // No location criteria
     }
 
     // Filter profiles based on age range and gender
