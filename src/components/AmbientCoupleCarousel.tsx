@@ -22,14 +22,14 @@ const ambientCoupleImages: CoupleImage[] = [
     src: coupleAmbientClear,
     caption: "In quiet moments, hearts speak loudest",
     alt: "Couple sharing an intimate, peaceful moment together",
-    focusDesktop: 'center 12%',
+    focusDesktop: 'center 0%',
     focusMobile: 'center 22%'
   },
   {
     src: coupleHero1,
     caption: "Love finds us in the spaces between words",
     alt: "Two people connecting deeply in natural light",
-    focusDesktop: 'center 12%',
+    focusDesktop: 'center 0%',
     focusMobile: 'center 20%'
   },
   {
@@ -43,21 +43,21 @@ const ambientCoupleImages: CoupleImage[] = [
     src: coupleHero2,
     caption: "Where vulnerability meets trust, magic happens",
     alt: "Couple in an authentic moment of connection",
-    focusDesktop: 'center 10%',
+    focusDesktop: 'center 0%',
     focusMobile: 'center 18%'
   },
   {
     src: coupleDigital,
     caption: "Real connection transcends the digital noise",
     alt: "Modern couple finding genuine connection",
-    focusDesktop: 'center 15%',
+    focusDesktop: 'center 0%',
     focusMobile: 'center 25%'
   },
   {
     src: couplePoetic,
     caption: "Love is the poetry written in shared silences",
     alt: "Artistic representation of inclusive love and connection",
-    focusDesktop: 'center 8%',   // two women — nudge up on desktop
+    focusDesktop: 'center 0%',   // two women — keep heads fully in frame on desktop
     focusMobile: 'center 20%'
   }
 ];
@@ -104,12 +104,12 @@ export const AmbientCoupleCarousel = () => {
                      alt={image.alt}
                      className="w-full h-48 xs:h-56 sm:h-64 md:h-80 lg:h-96 xl:h-[28rem] object-cover transition-all duration-500 group-hover:scale-105"
                      loading="lazy"
-                     style={{ 
-                       aspectRatio: '4/3', 
-                       objectPosition: isDesktop 
-                         ? (image.focusDesktop ?? image.focus ?? 'center 15%') 
-                         : (image.focusMobile ?? image.focus ?? 'center 22%')
-                     }}
+                      style={{ 
+                        aspectRatio: '4/3', 
+                        objectPosition: isDesktop 
+                          ? (image.focusDesktop ?? image.focus ?? 'center 0%') 
+                          : (image.focusMobile ?? image.focus ?? 'center 22%')
+                      }}
                    />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <div className="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
