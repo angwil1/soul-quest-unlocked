@@ -155,7 +155,7 @@ const HeroSection = () => {
             <div className="space-y-3 sm:space-y-4">
               <Button 
                 onClick={handleGetStarted}
-                className="hero-cta-button w-full px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-medium bg-white text-primary hover:bg-white/90"
+                className="hero-cta-button w-full px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-medium bg-primary text-white hover:bg-primary/90"
                 size="lg"
               >
                 <Heart className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
