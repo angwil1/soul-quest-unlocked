@@ -104,16 +104,16 @@ const Matches = () => {
               <Heart className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
               <h3 className="text-lg font-semibold mb-2">No matches yet</h3>
               <p className="text-muted-foreground mb-6">
-                Start browsing profiles to find your perfect match
+                Complete your quiz and browse profiles to find your perfect match
               </p>
               <div className="flex gap-3 justify-center">
-                <Button onClick={() => generateAIMatches()}>
-                  <Sparkles className="h-4 w-4 mr-2" />
-                  Generate AI Matches
-                </Button>
-                <Button variant="outline" onClick={() => navigate('/search')}>
+                <Button onClick={() => navigate('/search')}>
                   <Search className="h-4 w-4 mr-2" />
                   Browse Profiles
+                </Button>
+                <Button variant="outline" onClick={() => generateAIMatches()}>
+                  <Sparkles className="h-4 w-4 mr-2" />
+                  Find AI Matches
                 </Button>
               </div>
             </CardContent>
