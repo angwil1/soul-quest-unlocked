@@ -40,7 +40,7 @@ export const ProfileSetupFlow: React.FC = () => {
     bio: '',
     interests: [],
     photos: [],
-    lookingFor: 'serious-relationship',
+    lookingFor: 'men',
     ageRange: { min: 18, max: 35 },
     distance: 25,
     personality: {},
@@ -535,12 +535,23 @@ export const ProfileSetupFlow: React.FC = () => {
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="serious-relationship">Serious Relationship</SelectItem>
-                    <SelectItem value="casual-dating">Casual Dating</SelectItem>
-                    <SelectItem value="friendship">Friendship</SelectItem>
-                    <SelectItem value="not-sure">Not Sure Yet</SelectItem>
+                    <SelectItem value="men">Men</SelectItem>
+                    <SelectItem value="women">Women</SelectItem>
+                    <SelectItem value="anyone">Anyone</SelectItem>
+                    <SelectItem value="non-binary">Non-binary people</SelectItem>
+                    <SelectItem value="transgender-women">Transgender Women</SelectItem>
+                    <SelectItem value="transgender-men">Transgender Men</SelectItem>
+                    <SelectItem value="lgbtq-community">LGBTQ+ Community</SelectItem>
+                    <SelectItem value="casual-friends">Casual friends</SelectItem>
+                    <SelectItem value="activity-partners">Activity partners</SelectItem>
+                    <SelectItem value="travel-buddies">Travel buddies</SelectItem>
+                    <SelectItem value="serious-relationship">Serious relationship</SelectItem>
+                    <SelectItem value="casual-dating">Casual dating</SelectItem>
                   </SelectContent>
                 </Select>
+                <p className="text-xs text-muted-foreground mt-1">
+                  This helps us find your ideal matches
+                </p>
               </div>
             </CardContent>
           </Card>
