@@ -9,6 +9,25 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Sparkles, Crown, ArrowRight, Settings, MapPin, Heart, Filter } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 
+// US States with major zip code ranges for easier searching
+const US_STATES = [
+  { code: 'CA', name: 'California', sampleZips: ['90210', '94102', '95014'] },
+  { code: 'NY', name: 'New York', sampleZips: ['10001', '10013', '10019'] },
+  { code: 'TX', name: 'Texas', sampleZips: ['73301', '75201', '77001'] },
+  { code: 'FL', name: 'Florida', sampleZips: ['33101', '32801', '33602'] },
+  { code: 'PA', name: 'Pennsylvania', sampleZips: ['19102', '19103', '15213'] },
+  { code: 'MA', name: 'Massachusetts', sampleZips: ['02101', '02115', '02139'] },
+  { code: 'CT', name: 'Connecticut', sampleZips: ['06511', '06902', '06106'] },
+  { code: 'NJ', name: 'New Jersey', sampleZips: ['07030', '08540', '07002'] },
+  { code: 'NH', name: 'New Hampshire', sampleZips: ['03101', '03060', '03801'] },
+  { code: 'VT', name: 'Vermont', sampleZips: ['05401', '05602', '05701'] },
+  { code: 'WA', name: 'Washington', sampleZips: ['98101', '98052', '99201'] },
+  { code: 'OR', name: 'Oregon', sampleZips: ['97201', '97301', '97401'] },
+  { code: 'CO', name: 'Colorado', sampleZips: ['80201', '80301', '80401'] },
+  { code: 'IL', name: 'Illinois', sampleZips: ['60601', '60101', '61801'] },
+  { code: 'MI', name: 'Michigan', sampleZips: ['48201', '49503', '48104'] },
+];
+
 interface SearchFiltersProps {
   onFiltersChange?: (filters: string[]) => void;
   onUpgradePrompt?: () => void;
@@ -22,6 +41,7 @@ const SearchFilters = ({ onFiltersChange, onUpgradePrompt, onPreferenceChange, o
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
   const [searchPreference, setSearchPreference] = useState('');
   const [zipCode, setZipCode] = useState('');
+  const [selectedState, setSelectedState] = useState('');
 
   const identityOptions: { id: string; label: string }[] = [];
 
@@ -54,6 +74,39 @@ const SearchFilters = ({ onFiltersChange, onUpgradePrompt, onPreferenceChange, o
       return;
     }
     // For authenticated users, handle normally
+  };
+
+  const handleStateChange = (stateCode: string) => {
+    if (!user) {
+      handleLocationClick();
+      return;
+    }
+    
+    setSelectedState(stateCode);
+    
+    // Auto-populate with a sample zip code from the selected state
+    if (stateCode) {
+      const state = US_STATES.find(s => s.code === stateCode);
+      if (state && state.sampleZips.length > 0) {
+        const sampleZip = state.sampleZips[0]; // Use first sample zip
+        setZipCode(sampleZip);
+        onZipCodeChange?.(sampleZip);
+      }
+    }
+  };
+
+  const handleZipCodeChange = (value: string) => {
+    if (!user) {
+      handleLocationClick();
+      return;
+    }
+    setZipCode(value);
+    onZipCodeChange?.(value);
+    
+    // Clear state selection when manually entering zip
+    if (value !== zipCode) {
+      setSelectedState('');
+    }
   };
 
   return (
@@ -111,18 +164,35 @@ const SearchFilters = ({ onFiltersChange, onUpgradePrompt, onPreferenceChange, o
             <MapPin className="h-4 w-4 text-primary" />
             Location
           </label>
+          
+          {/* State Selection */}
+          <Select 
+            value={selectedState} 
+            onValueChange={handleStateChange}
+            onOpenChange={(open) => {
+              if (open && !user) {
+                handleLocationClick();
+              }
+            }}
+          >
+            <SelectTrigger className="w-full h-10 bg-background">
+              <SelectValue placeholder={user ? "Choose state (optional)" : "Sign up to set location"} />
+            </SelectTrigger>
+            <SelectContent className="bg-background border border-border shadow-lg z-50 max-h-48 overflow-y-auto">
+              {US_STATES.map((state) => (
+                <SelectItem key={state.code} value={state.code}>
+                  {state.name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          
+          {/* Zip Code Input */}
           <Input
             type="text"
-            placeholder={user ? "Enter zip code" : "Sign up to set location"}
+            placeholder={user ? "Or enter specific zip code" : "Sign up to set location"}
             value={zipCode}
-            onChange={(e) => {
-              if (!user) {
-                handleLocationClick();
-                return;
-              }
-              setZipCode(e.target.value);
-              onZipCodeChange?.(e.target.value);
-            }}
+            onChange={(e) => handleZipCodeChange(e.target.value)}
             onClick={() => {
               if (!user) {
                 handleLocationClick();
@@ -132,6 +202,12 @@ const SearchFilters = ({ onFiltersChange, onUpgradePrompt, onPreferenceChange, o
             maxLength={10}
             className={`w-full h-10 bg-background ${!user ? 'cursor-pointer' : ''}`}
           />
+          
+          {selectedState && (
+            <p className="text-xs text-muted-foreground">
+              Using {US_STATES.find(s => s.code === selectedState)?.name}. You can still enter a specific zip code above.
+            </p>
+          )}
         </div>
       </div>
       
