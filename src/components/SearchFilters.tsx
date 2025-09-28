@@ -57,114 +57,99 @@ const SearchFilters = ({ onFiltersChange, onUpgradePrompt, onPreferenceChange, o
   };
 
   return (
-    <div className="space-y-5">
-      <Card className="border-2 border-primary/20 bg-gradient-to-r from-primary/5 to-secondary/5 shadow-lg">
-        <CardHeader className="px-6 py-4">
-          <div className="space-y-3">
-            <div className="flex items-center gap-2 mb-2">
-              <div className="h-2 w-2 rounded-full bg-primary animate-pulse"></div>
-              <span className="text-xs font-medium text-primary uppercase tracking-wider">Inclusive Space</span>
-            </div>
-            <p className="text-base font-medium leading-relaxed text-foreground">
-              Welcome to AI Complete Me - a space where all identities, orientations, and expressions are celebrated. 
-              Whether you&apos;re LGBTQ+, questioning, or exploring - <span className="font-semibold text-primary">you belong here</span>.
-            </p>
-            <div className="flex items-center gap-2">
-              <Button 
-                variant="outline" 
-                size="sm" 
-                onClick={() => {/* Navigate to visibility settings */}}
-                className="text-xs h-8"
-              >
-                <Settings className="h-3 w-3 mr-1" />
-                Privacy Settings
-              </Button>
-            </div>
+    <div className="space-y-4">
+      {/* Simplified Welcome Section */}
+      <div className="bg-gradient-to-r from-primary/10 to-secondary/10 rounded-lg p-4 border border-primary/20">
+        <div className="flex items-center gap-2 mb-2">
+          <Heart className="h-4 w-4 text-primary" />
+          <span className="text-sm font-semibold text-primary">All identities welcome</span>
+        </div>
+        <p className="text-sm text-muted-foreground">
+          Find meaningful connections in our inclusive community
+        </p>
+      </div>
+
+      {/* Filters Grid */}
+      <div className="grid gap-4">
+        {/* Gender Preference */}
+        <div className="space-y-2">
+          <label className="text-sm font-medium flex items-center gap-2">
+            <Heart className="h-4 w-4 text-primary" />
+            Looking for
+          </label>
+          <Select 
+            value={searchPreference} 
+            onValueChange={(value) => {
+              if (!user) {
+                handleLookingForClick();
+                return;
+              }
+              setSearchPreference(value);
+              onPreferenceChange?.(value);
+            }}
+            onOpenChange={(open) => {
+              if (open && !user) {
+                handleLookingForClick();
+              }
+            }}
+          >
+            <SelectTrigger className="w-full h-10 bg-background">
+              <SelectValue placeholder={user ? "Choose preference" : "Sign up to filter"} />
+            </SelectTrigger>
+            <SelectContent className="bg-background border border-border shadow-lg z-50">
+              <SelectItem value="men">Men</SelectItem>
+              <SelectItem value="women">Women</SelectItem>
+              <SelectItem value="non-binary">Non-binary folks</SelectItem>
+              <SelectItem value="all">Everyone</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+        
+        {/* Location Input */}
+        <div className="space-y-2">
+          <label className="text-sm font-medium flex items-center gap-2">
+            <MapPin className="h-4 w-4 text-primary" />
+            Location
+          </label>
+          <Input
+            type="text"
+            placeholder={user ? "Enter zip code" : "Sign up to set location"}
+            value={zipCode}
+            onChange={(e) => {
+              if (!user) {
+                handleLocationClick();
+                return;
+              }
+              setZipCode(e.target.value);
+              onZipCodeChange?.(e.target.value);
+            }}
+            onClick={() => {
+              if (!user) {
+                handleLocationClick();
+              }
+            }}
+            readOnly={!user}
+            maxLength={10}
+            className={`w-full h-10 bg-background ${!user ? 'cursor-pointer' : ''}`}
+          />
+        </div>
+      </div>
+      
+      {selectedFilters.length > 0 && (
+        <div className="pt-2">
+          <p className="text-xs text-muted-foreground mb-2">Active filters:</p>
+          <div className="flex flex-wrap gap-1">
+            {selectedFilters.map((filterId) => {
+              const option = identityOptions.find(opt => opt.id === filterId);
+              return (
+                <Badge key={filterId} variant="secondary" className="text-xs">
+                  {option?.label}
+                </Badge>
+              );
+            })}
           </div>
-        </CardHeader>
-        <CardContent className="px-0 space-y-4">
-          <div className="grid gap-4">
-            {/* Gender Preference */}
-            <div className="space-y-2">
-              <label className="text-sm font-semibold flex items-center gap-2">
-                <Heart className="h-4 w-4 text-primary" />
-                I'm looking for
-              </label>
-              <Select 
-                value={searchPreference} 
-                onValueChange={(value) => {
-                  if (!user) {
-                    handleLookingForClick();
-                    return;
-                  }
-                  setSearchPreference(value);
-                  onPreferenceChange?.(value);
-                }}
-                onOpenChange={(open) => {
-                  if (open && !user) {
-                    handleLookingForClick();
-                  }
-                }}
-              >
-                <SelectTrigger className="w-full h-11">
-                  <SelectValue placeholder={user ? "Choose your preference" : "Create account to start matching"} />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="men">Men</SelectItem>
-                  <SelectItem value="women">Women</SelectItem>
-                  <SelectItem value="non-binary">Non-binary folks</SelectItem>
-                  <SelectItem value="all">Everyone</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            
-            {/* Location Input */}
-            <div className="space-y-2">
-              <label className="text-sm font-semibold flex items-center gap-2">
-                <MapPin className="h-4 w-4 text-primary" />
-                Location
-              </label>
-              <Input
-                type="text"
-                placeholder={user ? "Enter zip code (e.g., 10001)" : "Sign up to start matching"}
-                value={zipCode}
-                onChange={(e) => {
-                  if (!user) {
-                    handleLocationClick();
-                    return;
-                  }
-                  setZipCode(e.target.value);
-                  onZipCodeChange?.(e.target.value);
-                }}
-                onClick={() => {
-                  if (!user) {
-                    handleLocationClick();
-                  }
-                }}
-                readOnly={!user}
-                maxLength={10}
-                className={`w-full h-11 ${!user ? 'cursor-pointer' : ''}`}
-              />
-            </div>
-          </div>
-          
-          {selectedFilters.length > 0 && (
-            <div className="pt-2">
-              <p className="text-xs text-muted-foreground mb-2">Selected filters:</p>
-              <div className="flex flex-wrap gap-1">
-                {selectedFilters.map((filterId) => {
-                  const option = identityOptions.find(opt => opt.id === filterId);
-                  return (
-                    <Badge key={filterId} variant="secondary" className="text-xs">
-                      {option?.label}
-                    </Badge>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-        </CardContent>
-      </Card>
+        </div>
+      )}
     </div>
   );
 };
