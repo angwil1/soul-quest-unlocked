@@ -39,7 +39,7 @@ export const founderCuratedProfiles: SampleProfile[] = [
     occupation: "Graphic Designer",
     emotionalSoundtrack: "",
     tiktokUrl: "",
-    photos: ["/src/assets/jordan-natural-background.jpg"],
+    photos: ["/src/assets/jordan-realistic-updated.jpg"],
     interests: ["Art", "Coffee", "Music"],
     conversationStarters: [],
     poeticMicrocopy: "",
