@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 
@@ -27,7 +27,7 @@ export const useAIMatching = () => {
   const [error, setError] = useState<string | null>(null);
   const { toast } = useToast();
 
-  const generateAIMatches = async () => {
+  const generateAIMatches = useCallback(async () => {
     setLoading(true);
     setError(null);
 
@@ -75,7 +75,7 @@ export const useAIMatching = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [toast]);
 
   return {
     matches,

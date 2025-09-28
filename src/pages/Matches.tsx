@@ -25,10 +25,10 @@ const Matches = () => {
   }, [user, navigate]);
 
   useEffect(() => {
-    if (user && matches.length === 0 && !loading) {
+    if (user && matches.length === 0 && !loading && !error) {
       generateAIMatches();
     }
-  }, [user, matches.length, loading, generateAIMatches]);
+  }, [user, matches.length, loading, error]); // Removed generateAIMatches from dependencies
 
   return (
     <div className="min-h-screen bg-background">
