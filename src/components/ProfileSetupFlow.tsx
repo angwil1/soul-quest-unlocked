@@ -588,7 +588,7 @@ export const ProfileSetupFlow: React.FC = () => {
                 <Camera className="h-5 w-5" />
                 Add Your Photos
               </CardTitle>
-              <CardDescription>Add at least 2 photos (up to 6 total)</CardDescription>
+              <CardDescription>Add at least 1 photo (up to 6 total)</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4">

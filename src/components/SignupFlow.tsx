@@ -673,7 +673,7 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
                   Add photos, write your bio, and share your interests to get better matches.
                 </p>
                 <ul className="text-xs text-purple-600 space-y-1">
-                  <li>• Add at least 2 photos</li>
+                  <li>• Add at least 1 photo</li>
                   <li>• Write a compelling bio</li>
                   <li>• Select your interests</li>
                   <li>• Set your preferences</li>
