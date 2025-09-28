@@ -189,59 +189,41 @@ const QuizResults = () => {
       return;
     }
 
-    // Only the first match (index 0) is clickable for free users
-    if (index === 0) {
-      // Check if user can send messages
-      if (!canSendMessage) {
-        toast({
-          title: "Message limit reached",
-          description: `You have ${remainingMessages} messages left today. Upgrade to Premium for unlimited messaging!`,
-          variant: "destructive",
-          action: (
-            <Button 
-              size="sm" 
-              onClick={upgradePrompt}
-              className="ml-2"
-            >
-              Upgrade
-            </Button>
-          ),
-        });
-        return;
-      }
-
-      // Create or find existing match in database and navigate to messages
-      try {
-        // For demo purposes, we'll create a demo match
-        // In a real app, this would be handled differently
-        toast({
-          title: "Match Connected! 💫",
-          description: `You can now message ${match.name}. Start a conversation!`,
-        });
-        navigate('/messages');
-      } catch (error) {
-        console.error('Error connecting to match:', error);
-        toast({
-          title: "Connection Error",
-          description: "Unable to connect with this match. Please try again.",
-          variant: "destructive",
-        });
-      }
-    } else {
-      // Premium required for other matches
+    // All matches are accessible during the free 60-day period
+    // Check if user can send messages
+    if (!canSendMessage) {
       toast({
-        title: "Premium Required",
-        description: "Upgrade to Premium to message all your compatibility matches!",
+        title: "Message limit reached",
+        description: `You have ${remainingMessages} messages left today. Upgrade to Premium for unlimited messaging!`,
+        variant: "destructive",
         action: (
           <Button 
             size="sm" 
-            onClick={handleUpgradeToPremium}
+            onClick={upgradePrompt}
             className="ml-2"
           >
-            <Crown className="h-4 w-4 mr-1" />
             Upgrade
           </Button>
         ),
+      });
+      return;
+    }
+
+    // Create or find existing match in database and navigate to messages
+    try {
+      // For demo purposes, we'll create a demo match
+      // In a real app, this would be handled differently
+      toast({
+        title: "Match Connected! 💫",
+        description: `You can now message ${match.name}. Start a conversation!`,
+      });
+      navigate('/messages');
+    } catch (error) {
+      console.error('Error connecting to match:', error);
+      toast({
+        title: "Connection Error",
+        description: "Unable to connect with this match. Please try again.",
+        variant: "destructive",
       });
     }
   };
@@ -354,9 +336,7 @@ const QuizResults = () => {
             {matchPreviews.map((match, index) => (
               <Card 
                 key={match.id} 
-                className={`relative overflow-hidden hover:shadow-lg transition-all duration-300 border-primary/10 ${
-                  index === 0 ? 'cursor-pointer hover:border-primary/30' : 'cursor-not-allowed opacity-75'
-                }`}
+                className="relative overflow-hidden hover:shadow-lg transition-all duration-300 border-primary/10 cursor-pointer hover:border-primary/30"
                 onClick={() => handleMatchClick(match, index)}
               >
                 <CardContent className="p-4">
@@ -369,19 +349,14 @@ const QuizResults = () => {
                            alt={match.name} 
                            className={`w-full h-full object-cover ${index > 0 ? 'blur-sm' : ''}`}
                          />
-                       ) : (
-                         <div className={`w-full h-full flex items-center justify-center text-white font-bold text-2xl
-                           ${index === 0 ? 'bg-gradient-to-br from-purple-500 to-pink-500' : 
-                             index === 1 ? 'bg-gradient-to-br from-blue-500 to-cyan-500' : 
-                             'bg-gradient-to-br from-green-500 to-emerald-500'}`}>
-                           {match.name.charAt(0)}
-                         </div>
-                       )}
-                       {index > 0 && (
-                         <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
-                           <EyeOff className="h-6 w-6 text-white" />
-                         </div>
-                       )}
+                        ) : (
+                          <div className={`w-full h-full flex items-center justify-center text-white font-bold text-2xl
+                            ${index === 0 ? 'bg-gradient-to-br from-purple-500 to-pink-500' : 
+                              index === 1 ? 'bg-gradient-to-br from-blue-500 to-cyan-500' : 
+                              'bg-gradient-to-br from-green-500 to-emerald-500'}`}>
+                            {match.name.charAt(0)}
+                          </div>
+                        )}
                      </div>
                     {index === 0 && (
                       <Badge variant="secondary" className="absolute -top-2 -right-2">
@@ -392,70 +367,34 @@ const QuizResults = () => {
                   </div>
                   
                    <div className="text-center">
-                      {/* Different display logic for each match position */}
-                      {index === 0 ? (
-                        // First Match - Full details shown (free access)
-                        <>
-                          <h3 className="font-semibold">{match.name}</h3>
-                          <p className="text-sm text-muted-foreground">Age: {match.age}</p>
-                          <div className="my-3">
-                            <div className="flex items-center justify-center gap-1 mb-1">
-                              <Heart className="h-4 w-4 text-red-500" />
-                              <span className="text-sm font-medium">{match.compatibility}% Match</span>
-                            </div>
-                            <Progress value={match.compatibility} className="h-2" />
-                          </div>
-                           <div className="flex flex-wrap gap-1 justify-center mb-3">
-                             {match.commonInterests.map((interest) => (
-                               <Badge key={interest} variant="outline" className="text-xs">
-                                 {interest}
-                               </Badge>
-                             ))}
-                           </div>
-                           <Button 
-                             size="sm" 
-                             className="w-full"
-                             onClick={(e) => {
-                               e.stopPropagation();
-                               handleMatchClick(match, index);
-                             }}
-                           >
-                             <MessageCircle className="h-4 w-4 mr-2" />
-                             Message {match.name}
-                           </Button>
-                        </>
-                      ) : (
-                        // Premium Matches - Partially blurred content
-                        <>
-                          <h3 className="font-semibold">{match.name}</h3>
-                          <p className="text-sm text-muted-foreground">Age: {match.age}</p>
-                          <div className="my-3">
-                            <div className="flex items-center justify-center gap-1 mb-1">
-                              <Heart className="h-4 w-4 text-red-500" />
-                              <span className="text-sm font-medium">{match.compatibility}% Match</span>
-                            </div>
-                            <Progress value={match.compatibility} className="h-2" />
-                          </div>
-                          <div className="flex flex-wrap gap-1 justify-center mb-3">
-                            {match.commonInterests.slice(0, 1).map((interest) => (
-                              <Badge key={interest} variant="outline" className="text-xs opacity-60">
-                                {interest}
-                              </Badge>
-                            ))}
-                            {match.commonInterests.length > 1 && (
-                              <Badge variant="outline" className="text-xs opacity-60">
-                                +{match.commonInterests.length - 1} more
-                              </Badge>
-                            )}
-                          </div>
-                          <div className="mt-2 p-2 bg-accent/20 rounded-lg border border-accent/30">
-                            <p className="text-xs text-accent-foreground font-medium">
-                              <Crown className="h-3 w-3 inline mr-1" />
-                              Premium required to message
-                            </p>
-                          </div>
-                        </>
-                      )}
+                      {/* All matches are accessible during free 60-day period */}
+                      <h3 className="font-semibold">{match.name}</h3>
+                      <p className="text-sm text-muted-foreground">Age: {match.age}</p>
+                      <div className="my-3">
+                        <div className="flex items-center justify-center gap-1 mb-1">
+                          <Heart className="h-4 w-4 text-red-500" />
+                          <span className="text-sm font-medium">{match.compatibility}% Match</span>
+                        </div>
+                        <Progress value={match.compatibility} className="h-2" />
+                      </div>
+                      <div className="flex flex-wrap gap-1 justify-center mb-3">
+                        {match.commonInterests.map((interest) => (
+                          <Badge key={interest} variant="outline" className="text-xs">
+                            {interest}
+                          </Badge>
+                        ))}
+                      </div>
+                      <Button 
+                        size="sm" 
+                        className="w-full"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleMatchClick(match, index);
+                        }}
+                      >
+                        <MessageCircle className="h-4 w-4 mr-2" />
+                        Message {match.name}
+                       </Button>
                     </div>
                 </CardContent>
               </Card>
