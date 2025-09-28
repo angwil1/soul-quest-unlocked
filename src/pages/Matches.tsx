@@ -102,9 +102,10 @@ const Matches = () => {
           <Card className="text-center py-12">
             <CardContent className="px-6">
               <Heart className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-              <h3 className="text-lg font-semibold mb-2">No matches yet</h3>
+              <h3 className="text-lg font-semibold mb-2">No quiet matches just yet.</h3>
+              <p className="text-base font-medium text-foreground mb-2">We're still listening. Your presence matters.</p>
               <p className="text-muted-foreground mb-6 break-words">
-                Complete your quiz and browse profiles to find your perfect match
+                Our AI hasn't found a resonant connection yet—but that doesn't mean you're alone. We're growing gently. New profiles are arriving soon.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <Button onClick={() => navigate('/search')} className="w-full sm:w-auto">
