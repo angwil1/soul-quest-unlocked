@@ -81,6 +81,7 @@ const Matches = () => {
   const [searchGenderPreference, setSearchGenderPreference] = useState(searchParams.get('looking') || 'everyone');
   const [filteredProfiles, setFilteredProfiles] = useState(founderCuratedProfiles);
   const [isSearchActive, setIsSearchActive] = useState(false);
+  const [isRegionalSearch, setIsRegionalSearch] = useState(false);
 
   const handleStateChange = (stateCode: string) => {
     setSelectedState(stateCode);
@@ -178,7 +179,7 @@ const Matches = () => {
       age === '55+' ? [55, 100] : [parseInt(age), parseInt(age)]
     ).flat();
 
-    let filtered = founderCuratedProfiles.filter(profile => {
+    let filtered = allProfiles.filter(profile => {
       // Age filtering
       const profileAge = profile.age;
       let ageMatch = false;
@@ -220,9 +221,9 @@ const Matches = () => {
       return ageMatch && genderMatch;
     });
 
-    // Add distance calculation to each profile
+    // First try original distance
     const distanceLimit = parseInt(distance);
-    const profilesWithDistance = [];
+    let profilesWithDistance = [];
     
     for (const profile of filtered) {
       try {
@@ -247,12 +248,42 @@ const Matches = () => {
         }
       } catch (error) {
         console.error('Distance calculation error for profile:', profile.name, error);
-        // Include profile without distance if calculation fails
-        profilesWithDistance.push({
-          ...profile,
-          distance: undefined
-        });
       }
+    }
+
+    // If no matches found in original distance and distance is not unlimited, try regional search (200 miles)
+    if (profilesWithDistance.length === 0 && distanceLimit < 200) {
+      setIsRegionalSearch(true);
+      console.log('No close matches found, searching regionally within 200 miles...');
+      
+      for (const profile of filtered) {
+        try {
+          let minDistance = Infinity;
+          
+          // Calculate distance from each search zip code and take the minimum
+          for (const searchZip of searchZips) {
+            const result = await supabase.functions.invoke('calculate-distance', {
+              body: { zipCode1: searchZip, zipCode2: profile.zipCode }
+            });
+            
+            if (result.data && result.data.distance < minDistance) {
+              minDistance = result.data.distance;
+            }
+          }
+          
+          if (minDistance <= 200) {
+            profilesWithDistance.push({
+              ...profile,
+              distance: minDistance,
+              isRegionalMatch: true
+            });
+          }
+        } catch (error) {
+          console.error('Distance calculation error for profile:', profile.name, error);
+        }
+      }
+    } else {
+      setIsRegionalSearch(false);
     }
 
     // Sort by distance (closest first)
@@ -262,13 +293,8 @@ const Matches = () => {
       return a.distance - b.distance;
     });
 
-    console.log(`Filtering: ${founderCuratedProfiles.length} total profiles`);
-    console.log(`Age range ${ageRange}: ${founderCuratedProfiles.filter(p => {
-      const profileAge = p.age;
-      if (ageRange === '55+') return profileAge >= 55;
-      return profileAge >= minAge && profileAge <= maxAge;
-    }).length} matches`);
-    console.log(`Within ${distance} miles: ${profilesWithDistance.length} final matches`);
+    const searchType = isRegionalSearch ? 'regional' : 'local';
+    console.log(`${searchType} search: ${profilesWithDistance.length} matches found`);
 
     return profilesWithDistance;
   };
@@ -281,6 +307,7 @@ const Matches = () => {
     }
 
     try {
+      setIsRegionalSearch(false); // Reset regional search state
       const filtered = await filterProfiles(searchZipCode, searchDistance, searchAgeRange, searchGenderPreference, selectedState);
       setFilteredProfiles(filtered);
     } catch (error) {
@@ -509,7 +536,10 @@ const Matches = () => {
             <div className="text-center p-6 bg-muted/30 rounded-lg">
               <p className="text-sm text-muted-foreground mb-4">
                 {filteredProfiles.length > 0 
-                  ? `Found ${filteredProfiles.length} matches in ${searchZipCode}`
+                  ? (isRegionalSearch 
+                      ? `No one nearby just yet—but here's ${filteredProfiles.length === 1 ? 'someone' : `${filteredProfiles.length} people`} in your region who's also looking`
+                      : `Found ${filteredProfiles.length} matches ${searchZipCode ? `near ${searchZipCode}` : 'in your area'}`
+                    )
                   : (() => {
                       const messages = [
                         "We're just getting started—more matches are arriving soon.",
