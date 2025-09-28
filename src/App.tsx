@@ -10,6 +10,7 @@ import ScrollToTop from "@/components/ScrollToTop";
 import { BetaWatermark } from "@/components/BetaWatermark";
 import { VersionTracker } from "@/components/VersionTracker";
 import { BetaProtection } from "@/components/BetaProtection";
+import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { BETA_CONFIG } from "@/config/betaConfig";
 
 // Page imports
@@ -170,26 +171,69 @@ const App = () => {
               <Route path="/" element={<Index />} />
               <Route path="/auth" element={<Auth />} />
               <Route path="/reset-password" element={<ResetPassword />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/profile/edit" element={<ProfileEdit />} />
-              <Route path="/profile/setup" element={<ProfileSetup />} />
-              <Route path="/matches" element={<Matches />} />
-              <Route path="/messages" element={<Messages />} />
-              <Route path="/browse" element={
-                (() => {
-                  console.log('Browse route accessed, redirecting to /auth');
-                  return <Navigate to="/auth" replace />;
-                })()
+              <Route path="/profile" element={
+                <ProtectedRoute>
+                  <Profile />
+                </ProtectedRoute>
               } />
-              <Route path="/swipe" element={<SwipeMode />} />
-              <Route path="/questions" element={<Questions />} />
-              <Route path="/quiz-results" element={<QuizResults />} />
+              <Route path="/profile/edit" element={
+                <ProtectedRoute>
+                  <ProfileEdit />
+                </ProtectedRoute>
+              } />
+              <Route path="/profile/setup" element={
+                <ProtectedRoute>
+                  <ProfileSetup />
+                </ProtectedRoute>
+              } />
+              <Route path="/matches" element={
+                <ProtectedRoute>
+                  <Matches />
+                </ProtectedRoute>
+              } />
+              <Route path="/messages" element={
+                <ProtectedRoute>
+                  <Messages />
+                </ProtectedRoute>
+              } />
+              <Route path="/browse" element={<Navigate to="/auth" replace />} />
+              <Route path="/swipe" element={
+                <ProtectedRoute>
+                  <SwipeMode />
+                </ProtectedRoute>
+              } />
+              <Route path="/questions" element={
+                <ProtectedRoute>
+                  <Questions />
+                </ProtectedRoute>
+              } />
+              <Route path="/quiz-results" element={
+                <ProtectedRoute>
+                  <QuizResults />
+                </ProtectedRoute>
+              } />
               <Route path="/pricing" element={<Pricing />} />
               <Route path="/payment-success" element={<PaymentSuccess />} />
-              <Route path="/premium-dashboard" element={<PremiumDashboard />} />
-              <Route path="/connection-dna" element={<ConnectionDNA />} />
-              <Route path="/memory-vault" element={<MemoryVault />} />
-              <Route path="/ai-digest" element={<AIDigest />} />
+              <Route path="/premium-dashboard" element={
+                <ProtectedRoute>
+                  <PremiumDashboard />
+                </ProtectedRoute>
+              } />
+              <Route path="/connection-dna" element={
+                <ProtectedRoute>
+                  <ConnectionDNA />
+                </ProtectedRoute>
+              } />
+              <Route path="/memory-vault" element={
+                <ProtectedRoute>
+                  <MemoryVault />
+                </ProtectedRoute>
+              } />
+              <Route path="/ai-digest" element={
+                <ProtectedRoute>
+                  <AIDigest />
+                </ProtectedRoute>
+              } />
               <Route path="/mission" element={<Mission />} />
               <Route path="/faq" element={<FAQ />} />
               <Route path="/quick-start" element={<QuickStart />} />
