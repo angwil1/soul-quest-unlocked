@@ -11,7 +11,6 @@ import { stateProfiles } from '@/data/stateProfiles';
 import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/integrations/supabase/client';
 import SearchFilters from '@/components/SearchFilters';
-import searchBackgroundCouples from '@/assets/search-background-couples.jpg';
 
 // All 50 US States with sample zip codes for easier searching
 const US_STATES = [
@@ -404,26 +403,10 @@ const Search = () => {
       
       <main 
         id="main-content" 
-        className="relative max-w-7xl mx-auto px-4 py-8"
+        className="max-w-7xl mx-auto px-4 py-8"
         role="main"
         aria-labelledby="search-heading"
       >
-        {/* Background Image with Overlays */}
-        <div 
-          className="absolute inset-0 -mx-4 -my-8 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${searchBackgroundCouples})` }}
-        />
-        
-        {/* Gradient and Floral Overlays */}
-        <div className="absolute inset-0 -mx-4 -my-8 bg-gradient-to-br from-orange-200/30 via-pink-100/20 to-purple-200/30" />
-        <div className="absolute inset-0 -mx-4 -my-8 bg-gradient-to-t from-background/80 via-background/40 to-transparent" />
-        <div className="absolute inset-0 -mx-4 -my-8 backdrop-blur-sm" />
-        
-        {/* Sunflower Blush and Hydrangea Mist Overlay */}
-        <div className="absolute inset-0 -mx-4 -my-8 bg-gradient-to-r from-yellow-100/10 via-transparent to-blue-100/10" />
-        
-        {/* Content Container */}
-        <div className="relative z-10 bg-background/70 backdrop-blur-md rounded-lg p-6 shadow-lg border border-white/20">
         {/* Header */}
         <section className="mb-8">
           <h1 id="search-heading" className="text-3xl font-bold mb-2">Search for Matches</h1>
@@ -691,7 +674,6 @@ const Search = () => {
             Back to Top
           </Button>
         </section>
-        </div>
       </main>
     </div>
   );
