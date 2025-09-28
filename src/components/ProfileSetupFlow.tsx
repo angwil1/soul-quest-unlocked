@@ -381,8 +381,47 @@ export const ProfileSetupFlow: React.FC = () => {
 
        if (error) throw error;
 
-      // Save quiz answers and mark quiz as completed
+      // Process and save structured quiz results
       if (compatibilityAnswers && Object.keys(compatibilityAnswers).length > 0) {
+        // Structure quiz results for better AI matching
+        const quizResults = {
+          user_id: user.id,
+          personality_scores: {
+            communication_style: compatibilityAnswers[1] || null,
+            social_energy: compatibilityAnswers[6] || null,
+            stress_handling: compatibilityAnswers[3] || null,
+            life_planning: compatibilityAnswers[8] || null
+          },
+          compatibility_factors: {
+            relationship_values: compatibilityAnswers[4] || null,
+            conflict_resolution: compatibilityAnswers[5] || null,
+            personal_growth: compatibilityAnswers[7] || null,
+            quality_time: compatibilityAnswers[2] || null
+          },
+          love_languages: {
+            primary: compatibilityAnswers[9] || null
+          },
+          relationship_goals: {
+            family_importance: compatibilityAnswers[10] || null
+          },
+          lifestyle_preferences: profileData.personality || {},
+          communication_style: {
+            preference: compatibilityAnswers[1] || null,
+            conflict_approach: compatibilityAnswers[5] || null
+          },
+          completed_at: new Date().toISOString()
+        };
+
+        // Save to quiz_results table
+        const { error: quizError } = await supabase
+          .from('quiz_results')
+          .upsert(quizResults);
+
+        if (quizError) {
+          console.error('Error saving quiz results:', quizError);
+        }
+
+        // Also save to user_events for tracking
         await supabase
           .from('user_events')
           .insert({
