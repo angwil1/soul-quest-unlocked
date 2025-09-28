@@ -49,6 +49,10 @@ npx cap add android
 
 ### 2. Production Build
 ```bash
+# IMPORTANT: Remove dev server URL from capacitor.config.ts first!
+# Change: server: { url: "...", cleartext: true, androidScheme: 'https' }
+# To: server: { cleartext: true }
+
 # Build for production
 npm run build
 
