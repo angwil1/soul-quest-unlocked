@@ -175,9 +175,9 @@ const Matches = () => {
     }
 
     // Filter profiles based on age range and gender
-    const [minAge, maxAge] = ageRange.split('-').map(age => 
-      age === '55+' ? [55, 100] : [parseInt(age), parseInt(age)]
-    ).flat();
+    const [minAge, maxAge] = ageRange === '55+' 
+      ? [55, 100] 
+      : ageRange.split('-').map(age => parseInt(age));
 
     let filtered = allProfiles.filter(profile => {
       // Age filtering
