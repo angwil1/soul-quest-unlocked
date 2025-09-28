@@ -611,7 +611,7 @@ const Matches = () => {
                       <AvatarImage 
                         src={profile.photos[0]} 
                         alt={`${profile.name}'s profile photo - ${profile.vibeTag} vibe`}
-                        className="object-cover"
+                        className="object-cover blur-sm"
                       />
                       <AvatarFallback className="w-full h-full rounded-lg text-sm">
                         {profile.name.split(' ').map(n => n[0]).join('')}
