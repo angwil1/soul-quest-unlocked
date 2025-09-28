@@ -216,10 +216,10 @@ export const ProfileSetupFlow: React.FC = () => {
     const files = Array.from(event.target.files || []);
     if (files.length === 0) return;
 
-    if (profileData.photos.length + files.length > 1) {
+    if (profileData.photos.length + files.length > 2) {
       toast({
         title: "Too many photos",
-        description: "Only 1 photo allowed.",
+        description: "Maximum 2 photos allowed.",
         variant: "destructive",
       });
       return;
