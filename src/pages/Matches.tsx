@@ -95,15 +95,6 @@ const Matches = () => {
       </header>
       
       <main className="max-w-7xl mx-auto px-4 py-8">
-        <section className="mb-8">
-          <h1 className="text-3xl font-bold mb-2 flex items-center gap-2">
-            <Heart className="h-8 w-8 text-primary" />
-            Your Matches
-          </h1>
-          <p className="text-muted-foreground">
-            People who liked you back and your saved connections
-          </p>
-        </section>
 
         {userMatches.length === 0 ? (
           <Card className="text-center py-12">
