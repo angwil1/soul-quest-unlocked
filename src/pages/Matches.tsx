@@ -127,7 +127,8 @@ const Matches = () => {
             searchParams.get('zip') || '',
             searchParams.get('distance') || '25',
             searchParams.get('age') || '25-35',
-            searchParams.get('looking') || 'everyone'
+            searchParams.get('looking') || 'everyone',
+            searchParams.get('state') || ''
           );
           setFilteredProfiles(filtered);
         } catch (error) {
@@ -155,8 +156,18 @@ const Matches = () => {
 
   const calculateMatchScore = () => Math.floor(Math.random() * 20) + 80; // 80-99% match
 
-  const filterProfiles = async (zipCode: string, distance: string, ageRange: string, genderPref: string) => {
-    if (!zipCode.trim()) return founderCuratedProfiles;
+  const filterProfiles = async (zipCode: string, distance: string, ageRange: string, genderPref: string, selectedState?: string) => {
+    // If no zip code but state is selected, use all sample zips from that state
+    let searchZips: string[] = [];
+    
+    if (zipCode.trim()) {
+      searchZips = [zipCode.trim()];
+    } else if (selectedState) {
+      const state = US_STATES.find(s => s.code === selectedState);
+      searchZips = state ? state.sampleZips : [];
+    } else {
+      return founderCuratedProfiles; // No location criteria
+    }
 
     // Filter profiles based on age range and gender
     const [minAge, maxAge] = ageRange.split('-').map(age => 
@@ -211,14 +222,23 @@ const Matches = () => {
     
     for (const profile of filtered) {
       try {
-        const result = await supabase.functions.invoke('calculate-distance', {
-          body: { zipCode1: zipCode, zipCode2: profile.zipCode }
-        });
+        let minDistance = Infinity;
         
-        if (result.data && result.data.distance <= distanceLimit) {
+        // Calculate distance from each search zip code and take the minimum
+        for (const searchZip of searchZips) {
+          const result = await supabase.functions.invoke('calculate-distance', {
+            body: { zipCode1: searchZip, zipCode2: profile.zipCode }
+          });
+          
+          if (result.data && result.data.distance < minDistance) {
+            minDistance = result.data.distance;
+          }
+        }
+        
+        if (minDistance <= distanceLimit) {
           profilesWithDistance.push({
             ...profile,
-            distance: result.data.distance
+            distance: minDistance
           });
         }
       } catch (error) {
@@ -250,13 +270,14 @@ const Matches = () => {
   };
 
   const handleSearch = async () => {
-    if (!searchZipCode.trim()) {
-      alert('Please enter a zip code to search');
+    // Allow search if either zip code OR state is selected
+    if (!searchZipCode.trim() && !selectedState) {
+      alert('Please select a state or enter a zip code to search');
       return;
     }
 
     try {
-      const filtered = await filterProfiles(searchZipCode, searchDistance, searchAgeRange, searchGenderPreference);
+      const filtered = await filterProfiles(searchZipCode, searchDistance, searchAgeRange, searchGenderPreference, selectedState);
       setFilteredProfiles(filtered);
     } catch (error) {
       console.error('Search error:', error);
@@ -393,12 +414,12 @@ const Matches = () => {
                 </div>
                 <div className="space-y-2">
                   <label htmlFor="zip-code" className="text-sm font-medium">
-                    Zip Code
+                    Zip Code (optional if state selected)
                   </label>
                   <input
                     id="zip-code"
                     type="text"
-                    placeholder="Enter zip code"
+                    placeholder="Enter zip code (optional)"
                     value={searchZipCode}
                     onChange={(e) => handleZipCodeChange(e.target.value)}
                     className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
@@ -406,7 +427,7 @@ const Matches = () => {
                   />
                   {selectedState && (
                     <p className="text-xs text-muted-foreground">
-                      Using {US_STATES.find(s => s.code === selectedState)?.name}
+                      Searching {US_STATES.find(s => s.code === selectedState)?.name}. Leave zip code blank to search the entire state.
                     </p>
                   )}
                 </div>
