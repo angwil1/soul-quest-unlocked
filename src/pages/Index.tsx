@@ -8,7 +8,6 @@ import { supabase } from '@/integrations/supabase/client';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { FloatingQuizButton } from '@/components/FloatingQuizButton';
-import { QuietStartBanner } from '@/components/QuietStartBanner';
 import SearchFilters from '@/components/SearchFilters';
 import { AmbientCoupleCarousel } from '@/components/AmbientCoupleCarousel';
 import { SoulfulInvitation } from '@/components/SoulfulInvitation';
@@ -125,16 +124,14 @@ const Index = () => {
         
         <Navbar />
         
-        {/* Gentle Quiet Start Banner - Appears softly after 2 seconds */}
-        <QuietStartBanner />
-
-        
         <main id="main-content" role="main">
-          {/* EMOTIONALLY INTELLIGENT HERO DESIGN */}
+          {/* SPLIT HERO - Quiet Start + Ambient Photos */}
           <HeroSection />
 
           {/* How It Works Section */}
-          <HowItWorks />
+          <section id="how-it-works">
+            <HowItWorks />
+          </section>
 
           {/* Ambient Couple Carousel Section */}
           <section 
