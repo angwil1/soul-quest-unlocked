@@ -86,10 +86,10 @@ const Matches = () => {
           </Card>
         ) : error ? (
           <Card className="text-center py-12">
-            <CardContent>
+            <CardContent className="px-6">
               <Heart className="h-12 w-12 text-destructive mx-auto mb-4" />
               <h3 className="text-lg font-semibold mb-2">Error Loading Matches</h3>
-              <p className="text-muted-foreground mb-6">
+              <p className="text-muted-foreground mb-6 break-words">
                 {error}
               </p>
               <Button onClick={() => generateAIMatches()}>
@@ -100,18 +100,18 @@ const Matches = () => {
           </Card>
         ) : matches.length === 0 ? (
           <Card className="text-center py-12">
-            <CardContent>
+            <CardContent className="px-6">
               <Heart className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
               <h3 className="text-lg font-semibold mb-2">No matches yet</h3>
-              <p className="text-muted-foreground mb-6">
+              <p className="text-muted-foreground mb-6 break-words">
                 Complete your quiz and browse profiles to find your perfect match
               </p>
-              <div className="flex gap-3 justify-center">
-                <Button onClick={() => navigate('/search')}>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <Button onClick={() => navigate('/search')} className="w-full sm:w-auto">
                   <Search className="h-4 w-4 mr-2" />
                   Browse Profiles
                 </Button>
-                <Button variant="outline" onClick={() => generateAIMatches()}>
+                <Button variant="outline" onClick={() => generateAIMatches()} className="w-full sm:w-auto">
                   <Sparkles className="h-4 w-4 mr-2" />
                   Find AI Matches
                 </Button>
@@ -173,28 +173,28 @@ const Matches = () => {
                   
                   <CardHeader className="pb-2">
                     <div className="flex items-center justify-between">
-                      <CardTitle className="text-lg font-semibold">
+                      <CardTitle className="text-lg font-semibold truncate pr-2">
                         {match.profile.name?.split(' ')[0]}, {match.profile.age}
                       </CardTitle>
-                      <Badge variant="outline" className="text-xs">
+                      <Badge variant="outline" className="text-xs flex-shrink-0">
                         AI Matched
                       </Badge>
                     </div>
                     
                     <div className="space-y-1 text-sm text-muted-foreground">
                       <div className="flex items-center gap-1">
-                        <MapPin className="h-3 w-3" />
-                        <span>{match.profile.location || 'Location not set'}</span>
+                        <MapPin className="h-3 w-3 flex-shrink-0" />
+                        <span className="truncate">{match.profile.location || 'Location not set'}</span>
                       </div>
                       <div className="flex items-center gap-1">
-                        <Briefcase className="h-3 w-3" />
-                        <span>{match.profile.occupation || 'Occupation not set'}</span>
+                        <Briefcase className="h-3 w-3 flex-shrink-0" />
+                        <span className="truncate">{match.profile.occupation || 'Occupation not set'}</span>
                       </div>
                     </div>
                   </CardHeader>
                   
-                  <CardContent className="pt-0">
-                    <p className="text-sm text-muted-foreground line-clamp-2 mb-3">
+                  <CardContent className="pt-0 px-4">
+                    <p className="text-sm text-muted-foreground line-clamp-2 mb-3 break-words">
                       {match.explanation}
                     </p>
                     
@@ -208,7 +208,7 @@ const Matches = () => {
                       </div>
                     )}
                     
-                    <div className="flex gap-2 mt-3">
+                    <div className="flex flex-col sm:flex-row gap-2 mt-3">
                       <Button 
                         size="sm" 
                         className="flex-1"
