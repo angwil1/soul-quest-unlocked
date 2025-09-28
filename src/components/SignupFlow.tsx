@@ -520,7 +520,7 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
               Begin Your Soul Quest
             </CardTitle>
             <CardDescription>
-              Create your account to join the first 200 Soul Questers
+              Create your account to join the founding Soul Questers
             </CardDescription>
           </CardHeader>
           <CardContent>

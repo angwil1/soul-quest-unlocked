@@ -248,7 +248,7 @@ const TestSubscriptionFeatures = () => {
                 <div className="flex items-center justify-between p-3 border rounded-lg">
                   <div className="flex items-center gap-3">
                     <Package className="h-5 w-5 text-green-500" />
-                    <span>Quiet Start Wellness Kit (first 200)</span>
+                    <span>Quiet Start Wellness Kit (founding members)</span>
                   </div>
                   <Badge className="bg-green-100 text-green-800">✅ Active</Badge>
                 </div>

@@ -339,7 +339,7 @@ const QuickStart = () => {
                   </div>
                   <div className="p-3 rounded-lg bg-muted/30 border border-muted">
                     <p className="text-sm font-medium mb-1">Claim Your Quiet Start</p>
-                    <p className="text-xs text-muted-foreground leading-relaxed">First 200 users get 60 days free</p>
+                    <p className="text-xs text-muted-foreground leading-relaxed">Founding members get 60 days free</p>
                   </div>
                 </div>
               </CardContent>

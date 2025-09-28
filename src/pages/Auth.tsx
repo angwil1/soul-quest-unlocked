@@ -363,7 +363,7 @@ const Auth = () => {
                     </div>
                   </div>
                   <p className="text-sm text-amber-800/70 keepsake-heading">
-                    Join the first 200 founding members:
+                    Join the founding members:
                   </p>
                   <ul className="space-y-2 text-sm text-amber-800/80 keepsake-heading" role="list">
                     <li className="flex items-center justify-center gap-2">
