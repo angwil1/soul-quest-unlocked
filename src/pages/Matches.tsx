@@ -10,6 +10,60 @@ import { founderCuratedProfiles } from '@/data/sampleProfiles';
 import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/integrations/supabase/client';
 
+// All 50 US States with sample zip codes for easier searching
+const US_STATES = [
+  { code: 'AL', name: 'Alabama', sampleZips: ['35203', '36101', '35801'] },
+  { code: 'AK', name: 'Alaska', sampleZips: ['99501', '99701', '99801'] },
+  { code: 'AZ', name: 'Arizona', sampleZips: ['85001', '85701', '86001'] },
+  { code: 'AR', name: 'Arkansas', sampleZips: ['72201', '71601', '72701'] },
+  { code: 'CA', name: 'California', sampleZips: ['90210', '94102', '95014'] },
+  { code: 'CO', name: 'Colorado', sampleZips: ['80201', '80301', '80401'] },
+  { code: 'CT', name: 'Connecticut', sampleZips: ['06511', '06902', '06106'] },
+  { code: 'DE', name: 'Delaware', sampleZips: ['19901', '19801', '19702'] },
+  { code: 'FL', name: 'Florida', sampleZips: ['33101', '32801', '33602'] },
+  { code: 'GA', name: 'Georgia', sampleZips: ['30303', '31401', '30901'] },
+  { code: 'HI', name: 'Hawaii', sampleZips: ['96801', '96720', '96766'] },
+  { code: 'ID', name: 'Idaho', sampleZips: ['83702', '83201', '83814'] },
+  { code: 'IL', name: 'Illinois', sampleZips: ['60601', '60101', '61801'] },
+  { code: 'IN', name: 'Indiana', sampleZips: ['46201', '47901', '46601'] },
+  { code: 'IA', name: 'Iowa', sampleZips: ['50309', '52240', '51501'] },
+  { code: 'KS', name: 'Kansas', sampleZips: ['66101', '67501', '66801'] },
+  { code: 'KY', name: 'Kentucky', sampleZips: ['40202', '41701', '42101'] },
+  { code: 'LA', name: 'Louisiana', sampleZips: ['70112', '70801', '71101'] },
+  { code: 'ME', name: 'Maine', sampleZips: ['04101', '04401', '04240'] },
+  { code: 'MD', name: 'Maryland', sampleZips: ['21201', '20850', '21742'] },
+  { code: 'MA', name: 'Massachusetts', sampleZips: ['02101', '02115', '02139'] },
+  { code: 'MI', name: 'Michigan', sampleZips: ['48201', '49503', '48104'] },
+  { code: 'MN', name: 'Minnesota', sampleZips: ['55401', '55801', '56601'] },
+  { code: 'MS', name: 'Mississippi', sampleZips: ['39201', '38601', '39401'] },
+  { code: 'MO', name: 'Missouri', sampleZips: ['63101', '64108', '65201'] },
+  { code: 'MT', name: 'Montana', sampleZips: ['59101', '59701', '59801'] },
+  { code: 'NE', name: 'Nebraska', sampleZips: ['68102', '69101', '68501'] },
+  { code: 'NV', name: 'Nevada', sampleZips: ['89101', '89501', '89701'] },
+  { code: 'NH', name: 'New Hampshire', sampleZips: ['03101', '03060', '03801'] },
+  { code: 'NJ', name: 'New Jersey', sampleZips: ['07030', '08540', '07002'] },
+  { code: 'NM', name: 'New Mexico', sampleZips: ['87101', '88001', '87401'] },
+  { code: 'NY', name: 'New York', sampleZips: ['10001', '10013', '10019'] },
+  { code: 'NC', name: 'North Carolina', sampleZips: ['28202', '27401', '28801'] },
+  { code: 'ND', name: 'North Dakota', sampleZips: ['58102', '58501', '58701'] },
+  { code: 'OH', name: 'Ohio', sampleZips: ['43215', '44101', '45202'] },
+  { code: 'OK', name: 'Oklahoma', sampleZips: ['73102', '74101', '73701'] },
+  { code: 'OR', name: 'Oregon', sampleZips: ['97201', '97301', '97401'] },
+  { code: 'PA', name: 'Pennsylvania', sampleZips: ['19102', '19103', '15213'] },
+  { code: 'RI', name: 'Rhode Island', sampleZips: ['02901', '02840', '02886'] },
+  { code: 'SC', name: 'South Carolina', sampleZips: ['29201', '29401', '29601'] },
+  { code: 'SD', name: 'South Dakota', sampleZips: ['57101', '57701', '57501'] },
+  { code: 'TN', name: 'Tennessee', sampleZips: ['37201', '38103', '37902'] },
+  { code: 'TX', name: 'Texas', sampleZips: ['73301', '75201', '77001'] },
+  { code: 'UT', name: 'Utah', sampleZips: ['84101', '84601', '84321'] },
+  { code: 'VT', name: 'Vermont', sampleZips: ['05401', '05602', '05701'] },
+  { code: 'VA', name: 'Virginia', sampleZips: ['23219', '22401', '24016'] },
+  { code: 'WA', name: 'Washington', sampleZips: ['98101', '98052', '99201'] },
+  { code: 'WV', name: 'West Virginia', sampleZips: ['25301', '26101', '25401'] },
+  { code: 'WI', name: 'Wisconsin', sampleZips: ['53202', '54901', '53706'] },
+  { code: 'WY', name: 'Wyoming', sampleZips: ['82001', '82601', '83001'] }
+];
+
 const Matches = () => {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -19,13 +73,34 @@ const Matches = () => {
   
   // Initialize from URL parameters or defaults
   const [searchZipCode, setSearchZipCode] = useState(searchParams.get('zip') || '');
+  const [selectedState, setSelectedState] = useState('');
   const [searchDistance, setSearchDistance] = useState(searchParams.get('distance') || '25');
   const [searchAgeRange, setSearchAgeRange] = useState(searchParams.get('age') || '25-35');
   const [searchGenderPreference, setSearchGenderPreference] = useState(searchParams.get('looking') || 'everyone');
   const [filteredProfiles, setFilteredProfiles] = useState(founderCuratedProfiles);
   const [isSearchActive, setIsSearchActive] = useState(false);
 
-  // Check if user is authenticated and redirect if not
+  const handleStateChange = (stateCode: string) => {
+    setSelectedState(stateCode);
+    
+    // Auto-populate with a sample zip code from the selected state
+    if (stateCode) {
+      const state = US_STATES.find(s => s.code === stateCode);
+      if (state && state.sampleZips.length > 0) {
+        const sampleZip = state.sampleZips[0]; // Use first sample zip
+        setSearchZipCode(sampleZip);
+      }
+    }
+  };
+
+  const handleZipCodeChange = (value: string) => {
+    setSearchZipCode(value);
+    
+    // Clear state selection when manually entering zip
+    if (value !== searchZipCode) {
+      setSelectedState('');
+    }
+  };
   useEffect(() => {
     // Only redirect to auth if we're sure there's no user and not just loading
     const timer = setTimeout(() => {
@@ -296,7 +371,25 @@ const Matches = () => {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div className="grid gap-4 md:grid-cols-4">
+              <div className="grid gap-4 md:grid-cols-5">
+                <div className="space-y-2">
+                  <label htmlFor="state-select" className="text-sm font-medium">
+                    State (optional)
+                  </label>
+                  <select
+                    id="state-select"
+                    value={selectedState}
+                    onChange={(e) => handleStateChange(e.target.value)}
+                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                  >
+                    <option value="">Choose state...</option>
+                    {US_STATES.map((state) => (
+                      <option key={state.code} value={state.code}>
+                        {state.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
                 <div className="space-y-2">
                   <label htmlFor="zip-code" className="text-sm font-medium">
                     Zip Code
@@ -304,12 +397,17 @@ const Matches = () => {
                   <input
                     id="zip-code"
                     type="text"
-                    placeholder="Enter your zip code"
+                    placeholder="Enter zip code"
                     value={searchZipCode}
-                    onChange={(e) => setSearchZipCode(e.target.value)}
+                    onChange={(e) => handleZipCodeChange(e.target.value)}
                     className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                    maxLength={5}
+                    maxLength={10}
                   />
+                  {selectedState && (
+                    <p className="text-xs text-muted-foreground">
+                      Using {US_STATES.find(s => s.code === selectedState)?.name}
+                    </p>
+                  )}
                 </div>
                 <div className="space-y-2">
                   <label htmlFor="gender-preference" className="text-sm font-medium">
