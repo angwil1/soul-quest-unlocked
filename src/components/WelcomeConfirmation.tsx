@@ -35,7 +35,7 @@ export const WelcomeConfirmation: React.FC<WelcomeConfirmationProps> = ({ isOpen
             </div>
 
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Welcome to a space where authentic connections flourish. Your wellness kit is a keepsake of your journey to meaningful relationships.
+              Welcome to a space where authentic connections flourish. Your wellness kit supports your journey to meaningful relationships.
             </p>
           </div>
 

@@ -358,7 +358,7 @@ const Auth = () => {
                     </h3>
                     <div className="flex items-center justify-center gap-2 text-amber-800/80">
                       <span className="heart-accent">♡</span>
-                      <span className="keepsake-heading italic">Founding hearts receive 60 days free + a keepsake of care</span>
+                      <span className="keepsake-heading italic">Founding hearts receive 60 days free</span>
                       <span className="heart-accent">♡</span>
                     </div>
                   </div>

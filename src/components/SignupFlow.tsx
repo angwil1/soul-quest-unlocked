@@ -338,7 +338,7 @@ export const SignupFlow: React.FC<SignupFlowProps> = ({ onComplete }) => {
         existingAddress.shipping_address_line1?.toLowerCase() === address1.toLowerCase() ||
         existingAddress.shipping_postal_code === postalCode
       )) {
-        throw new Error('You have already submitted an address for your keepsake.');
+        throw new Error('You have already submitted an address for your wellness kit.');
       }
     }
 

@@ -33,8 +33,8 @@ export const ShippingProgressTracker: React.FC = () => {
             <h3 className="font-semibold text-foreground">Wellness Kit Progress</h3>
             <p className="text-sm text-muted-foreground">
               {isEligible 
-                ? "Your keepsake is ready to ship! 🎉" 
-                : `Your keepsake of care will ship after 90 days of active membership. You're ${daysCompleted} days in.`
+                ? "Your wellness kit is ready to ship! 🎉" 
+                : `Your wellness kit will ship after 90 days of active membership. You're ${daysCompleted} days in.`
               }
             </p>
           </div>
