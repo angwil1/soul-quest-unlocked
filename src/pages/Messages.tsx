@@ -285,9 +285,9 @@ const Messages = () => {
                 <Button 
                   variant="ghost" 
                   size="sm"
-                  onClick={() => navigate('/')}
+                  onClick={() => navigate('/matches')}
                   className="focus:ring-2 focus:ring-primary focus:ring-offset-2 p-2"
-                  aria-label="Go back to homepage"
+                  aria-label="Go back to matches"
                 >
                   <ArrowLeft className="h-4 w-4" aria-hidden="true" />
                 </Button>
@@ -359,9 +359,9 @@ const Messages = () => {
             <div className="flex items-center gap-4">
               <Button 
                 variant="ghost" 
-                onClick={() => navigate('/')}
+                onClick={() => navigate('/matches')}
                 className="focus:ring-2 focus:ring-primary focus:ring-offset-2"
-                aria-label="Go back to homepage"
+                aria-label="Go back to matches"
               >
                 <ArrowLeft className="h-4 w-4" aria-hidden="true" />
               </Button>
