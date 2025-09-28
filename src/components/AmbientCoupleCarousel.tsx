@@ -98,11 +98,11 @@ export const AmbientCoupleCarousel = () => {
           {ambientCoupleImages.map((image, index) => (
             <CarouselItem key={index} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
               <Card className="border-0 bg-transparent group cursor-pointer">
-                <div className="relative overflow-hidden rounded-2xl">
+                <div className="relative overflow-hidden rounded-2xl bg-muted/20">
                    <img
                      src={image.src}
                      alt={image.alt}
-                     className="w-full h-48 xs:h-56 sm:h-64 md:h-80 lg:h-96 xl:h-[28rem] object-cover transition-all duration-500 group-hover:scale-105"
+                     className="w-full h-48 xs:h-56 sm:h-64 md:h-96 lg:h-[34rem] xl:h-[40rem] object-cover lg:object-contain xl:object-contain transition-transform duration-500 group-hover:scale-105 lg:group-hover:scale-100"
                      loading="lazy"
                       style={{ 
                         aspectRatio: '4/3', 
