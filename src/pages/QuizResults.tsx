@@ -392,76 +392,71 @@ const QuizResults = () => {
                   </div>
                   
                    <div className="text-center">
-                     {/* Different display logic for each placeholder type */}
-                     {index === 0 ? (
-                       // Sample Match - Full details shown
-                       <>
-                         <h3 className="font-semibold">{match.name}</h3>
-                         <p className="text-sm text-muted-foreground">Age: {match.age}</p>
-                         <div className="my-3">
-                           <div className="flex items-center justify-center gap-1 mb-1">
-                             <Heart className="h-4 w-4 text-red-500" />
-                             <span className="text-sm font-medium">{match.compatibility}% Match</span>
+                      {/* Different display logic for each match position */}
+                      {index === 0 ? (
+                        // First Match - Full details shown (free access)
+                        <>
+                          <h3 className="font-semibold">{match.name}</h3>
+                          <p className="text-sm text-muted-foreground">Age: {match.age}</p>
+                          <div className="my-3">
+                            <div className="flex items-center justify-center gap-1 mb-1">
+                              <Heart className="h-4 w-4 text-red-500" />
+                              <span className="text-sm font-medium">{match.compatibility}% Match</span>
+                            </div>
+                            <Progress value={match.compatibility} className="h-2" />
+                          </div>
+                           <div className="flex flex-wrap gap-1 justify-center mb-3">
+                             {match.commonInterests.map((interest) => (
+                               <Badge key={interest} variant="outline" className="text-xs">
+                                 {interest}
+                               </Badge>
+                             ))}
                            </div>
-                           <Progress value={match.compatibility} className="h-2" />
-                         </div>
+                           <Button 
+                             size="sm" 
+                             className="w-full"
+                             onClick={(e) => {
+                               e.stopPropagation();
+                               handleMatchClick(match, index);
+                             }}
+                           >
+                             <MessageCircle className="h-4 w-4 mr-2" />
+                             Message {match.name}
+                           </Button>
+                        </>
+                      ) : (
+                        // Premium Matches - Partially blurred content
+                        <>
+                          <h3 className="font-semibold">{match.name}</h3>
+                          <p className="text-sm text-muted-foreground">Age: {match.age}</p>
+                          <div className="my-3">
+                            <div className="flex items-center justify-center gap-1 mb-1">
+                              <Heart className="h-4 w-4 text-red-500" />
+                              <span className="text-sm font-medium">{match.compatibility}% Match</span>
+                            </div>
+                            <Progress value={match.compatibility} className="h-2" />
+                          </div>
                           <div className="flex flex-wrap gap-1 justify-center mb-3">
-                            {match.commonInterests.map((interest) => (
-                              <Badge key={interest} variant="outline" className="text-xs">
+                            {match.commonInterests.slice(0, 1).map((interest) => (
+                              <Badge key={interest} variant="outline" className="text-xs opacity-60">
                                 {interest}
                               </Badge>
                             ))}
+                            {match.commonInterests.length > 1 && (
+                              <Badge variant="outline" className="text-xs opacity-60">
+                                +{match.commonInterests.length - 1} more
+                              </Badge>
+                            )}
                           </div>
-                          <Button 
-                            size="sm" 
-                            className="w-full"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleMatchClick(match, index);
-                            }}
-                          >
-                            <MessageCircle className="h-4 w-4 mr-2" />
-                            Message {match.name}
-                          </Button>
-                       </>
-                     ) : index === 1 ? (
-                       // Mystery Match - Narrative style
-                       <>
-                         <h3 className="font-semibold text-primary">Meet {match.name}</h3>
-                         <p className="text-xs text-muted-foreground italic">Age: ••</p>
-                         <div className="my-3">
-                           <div className="flex items-center justify-center gap-1 mb-1">
-                             <Sparkles className="h-4 w-4 text-primary" />
-                             <span className="text-sm font-medium">{match.compatibility}% Match</span>
-                           </div>
-                           <Progress value={match.compatibility} className="h-2" />
-                         </div>
-                         <div className="mt-2 p-2 bg-primary/5 rounded-lg border border-primary/20">
-                           <p className="text-xs text-primary font-medium">
-                             🔮 Complete their story
-                           </p>
-                         </div>
-                       </>
-                     ) : (
-                       // Blurred Preview - Teases insights
-                       <>
-                         <h3 className="font-semibold blur-sm">{match.name}</h3>
-                         <p className="text-sm text-muted-foreground">Age: ••</p>
-                         <div className="my-3">
-                           <div className="flex items-center justify-center gap-1 mb-1">
-                             <Heart className="h-4 w-4 text-red-500" />
-                             <span className="text-sm font-medium">{match.compatibility}% Match</span>
-                           </div>
-                           <Progress value={match.compatibility} className="h-2" />
-                         </div>
-                         <div className="mt-2 p-2 bg-muted/50 rounded-lg">
-                           <p className="text-xs text-muted-foreground">
-                             💫 Deep compatibility insights await
-                           </p>
-                         </div>
-                       </>
-                     )}
-                   </div>
+                          <div className="mt-2 p-2 bg-accent/20 rounded-lg border border-accent/30">
+                            <p className="text-xs text-accent-foreground font-medium">
+                              <Crown className="h-3 w-3 inline mr-1" />
+                              Premium required to message
+                            </p>
+                          </div>
+                        </>
+                      )}
+                    </div>
                 </CardContent>
               </Card>
             ))}
