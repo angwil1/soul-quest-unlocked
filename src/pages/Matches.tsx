@@ -71,16 +71,18 @@ const Matches = () => {
             </Button>
             
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3 w-full sm:w-auto">
-              <Button 
-                variant="outline" 
-                size="sm"
-                onClick={() => navigate('/auth')}
-                className="flex items-center gap-2 focus:ring-2 focus:ring-primary focus:ring-offset-2 w-full sm:w-auto justify-center"
-                aria-label="Join and start discovering matches"
-              >
-                <Users className="h-4 w-4" aria-hidden="true" />
-                Join & Discover
-              </Button>
+              {!user && (
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={() => navigate('/auth')}
+                  className="flex items-center gap-2 focus:ring-2 focus:ring-primary focus:ring-offset-2 w-full sm:w-auto justify-center"
+                  aria-label="Join and start discovering matches"
+                >
+                  <Users className="h-4 w-4" aria-hidden="true" />
+                  Join & Discover
+                </Button>
+              )}
               <Button 
                 onClick={() => navigate('/profile/edit')}
                 className="focus:ring-2 focus:ring-primary focus:ring-offset-2 w-full sm:w-auto justify-center"
