@@ -104,6 +104,7 @@ const Matches = () => {
       setSelectedState('');
     }
   };
+  
   useEffect(() => {
     // Only redirect to auth if we're sure there's no user and not just loading
     const timer = setTimeout(() => {
@@ -361,7 +362,7 @@ const Matches = () => {
       
       {/* Header with Back Button and Actions */}
       <header className="bg-card border-b" role="banner">
-        <div className="max-w-4xl mx-auto px-4 py-4">
+        <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
             <Button 
               variant="ghost" 
@@ -401,20 +402,29 @@ const Matches = () => {
       
       <main 
         id="main-content" 
-        className="flex-1"
+        className="max-w-7xl mx-auto px-4 py-8"
         role="main"
         aria-labelledby="matches-heading"
       >
-        <div className="flex min-h-screen bg-background">
-          {/* Left Sidebar - Search Filters */}
-          <aside className="w-80 border-r border-border bg-card/50 p-6" role="complementary" aria-labelledby="search-filters-heading">
-            <div className="sticky top-6">
-              <h2 id="search-filters-heading" className="text-lg font-semibold mb-4">Find Your Match</h2>
-              <p className="text-sm text-muted-foreground mb-6">
+        {/* Header */}
+        <section className="mb-8">
+          <h1 id="matches-heading" className="text-3xl font-bold mb-2">Your Matches</h1>
+          <p className="text-muted-foreground">
+            Discover compatible people through AI-powered matching
+          </p>
+        </section>
+
+        {/* Search Filters Card */}
+        <section className="mb-8">
+          <Card className="bg-card border">
+            <CardHeader className="pb-4">
+              <CardTitle className="text-lg">Find Your Perfect Match</CardTitle>
+              <CardDescription>
                 Use your location and preferences to discover compatible people nearby
-              </p>
-              
-              <div className="space-y-4">
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
                 <div className="space-y-2">
                   <label htmlFor="state-select" className="text-sm font-medium">
                     State (optional)
@@ -433,7 +443,6 @@ const Matches = () => {
                     ))}
                   </select>
                 </div>
-                
                 <div className="space-y-2">
                   <label htmlFor="zip-code" className="text-sm font-medium">
                     Zip Code (optional if state selected)
@@ -453,7 +462,6 @@ const Matches = () => {
                     </p>
                   )}
                 </div>
-                
                 <div className="space-y-2">
                   <label htmlFor="gender-preference" className="text-sm font-medium">
                     I'm looking for
@@ -475,7 +483,6 @@ const Matches = () => {
                     <option value="travel-buddies">Travel buddies</option>
                   </select>
                 </div>
-                
                 <div className="space-y-2">
                   <label htmlFor="distance" className="text-sm font-medium">
                     Distance (miles)
@@ -493,7 +500,6 @@ const Matches = () => {
                     <option value="unlimited">Unlimited distance</option>
                   </select>
                 </div>
-                
                 <div className="space-y-2">
                   <label htmlFor="age-range" className="text-sm font-medium">
                     Age Range
@@ -511,28 +517,18 @@ const Matches = () => {
                     <option value="55+">55+ years</option>
                   </select>
                 </div>
-                
-                <div className="flex flex-col gap-2 mt-6">
-                  <Button className="w-full" onClick={handleSearch}>
-                    Search Matches
-                  </Button>
-                  <Button variant="outline" className="w-full" onClick={handleResetFilters}>
-                    Reset Filters
-                  </Button>
-                </div>
               </div>
-            </div>
-          </aside>
-
-          {/* Right Content Area - Match Results */}
-          <div className="flex-1 p-6">
-            {/* Header */}
-            <section className="mb-6">
-              <h1 id="matches-heading" className="text-3xl font-bold mb-2">Your Matches</h1>
-              <p className="text-muted-foreground">
-                Discover compatible people through AI-powered matching
-              </p>
-            </section>
+              <div className="flex gap-2 mt-4">
+                <Button className="flex-1" onClick={handleSearch}>
+                  Search Matches
+                </Button>
+                <Button variant="outline" onClick={handleResetFilters}>
+                  Reset Filters
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </section>
 
         {/* Search Results Status */}
         {isSearchActive && (
@@ -590,7 +586,7 @@ const Matches = () => {
 
         {/* Matches Grid */}
         <section 
-          className="grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6" 
+          className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6" 
           aria-labelledby="matches-grid-title"
           role="region"
         >
@@ -755,32 +751,6 @@ const Matches = () => {
             Back to Top
           </Button>
         </section>
-
-        {/* Accessibility Information */}
-        <section className="mt-16 p-6 bg-muted/50 rounded-lg" aria-labelledby="accessibility-info">
-          <h2 id="accessibility-info" className="text-xl font-semibold mb-3 text-foreground">
-            Accessibility Features
-          </h2>
-          <p className="text-muted-foreground mb-4 leading-relaxed">
-            This matches page is fully accessible with screen reader support, keyboard navigation, and proper labeling for all profile information.
-          </p>
-          <div className="grid gap-3 text-sm text-muted-foreground">
-            <div className="flex items-start gap-2">
-              <span className="font-medium min-w-0 flex-shrink-0">Navigation:</span>
-              <span>Use Tab to browse matches, Enter/Space to interact with buttons</span>
-            </div>
-            <div className="flex items-start gap-2">
-              <span className="font-medium min-w-0 flex-shrink-0">Profile Cards:</span>
-              <span>Each match includes comprehensive information about compatibility, location, and interests</span>
-            </div>
-            <div className="flex items-start gap-2">
-              <span className="font-medium min-w-0 flex-shrink-0">Images:</span>
-              <span>All profile photos have descriptive alternative text including personality vibes</span>
-            </div>
-          </div>
-        </section>
-          </div>
-        </div>
       </main>
     </div>
   );
