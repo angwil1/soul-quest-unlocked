@@ -44,14 +44,16 @@ const Profile = () => {
   };
 
   const handleShareProfile = () => {
+    console.log('Share Profile clicked');
     if (navigator.share) {
+      console.log('Using native share API');
       navigator.share({
         title: `${profile?.name || 'User'}'s Profile - AI Complete Me`,
         text: `Check out ${profile?.name || 'this user'}'s profile on AI Complete Me`,
         url: window.location.href,
       });
     } else {
-      // Fallback: copy to clipboard
+      console.log('Using clipboard fallback');
       navigator.clipboard.writeText(window.location.href);
       // Could add toast notification here
     }
@@ -111,15 +113,18 @@ const Profile = () => {
             </Button>
             
             <div className="flex items-center gap-1">
-              <Button 
-                onClick={() => navigate('/profile/edit')}
-                size="sm"
-                className="focus:ring-2 focus:ring-primary focus:ring-offset-2 px-2"
-                aria-label="Edit your profile information"
-              >
-                <Edit className="h-4 w-4 xs:mr-1" aria-hidden="true" />
-                <span className="hidden xs:inline">Edit</span>
-              </Button>
+                <Button 
+                  onClick={() => {
+                    console.log('Edit Profile button clicked - navigating to /profile/edit');
+                    navigate('/profile/edit');
+                  }}
+                  size="sm"
+                  className="focus:ring-2 focus:ring-primary focus:ring-offset-2 px-2"
+                  aria-label="Edit your profile information"
+                >
+                  <Edit className="h-4 w-4 xs:mr-1" aria-hidden="true" />
+                  <span className="hidden xs:inline">Edit</span>
+                </Button>
               
               <DropdownMenu open={isShareMenuOpen} onOpenChange={setIsShareMenuOpen}>
                 <DropdownMenuTrigger asChild>
@@ -135,14 +140,20 @@ const Profile = () => {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-48">
                   <DropdownMenuItem 
-                    onClick={handleShareProfile}
+                    onClick={() => {
+                      console.log('Mobile Share Profile clicked');
+                      handleShareProfile();
+                    }}
                     className="flex items-center gap-2 focus:bg-muted cursor-pointer"
                   >
                     <Share2 className="h-4 w-4" aria-hidden="true" />
                     Share Profile
                   </DropdownMenuItem>
                   <DropdownMenuItem 
-                    onClick={() => navigate('/privacy')}
+                    onClick={() => {
+                      console.log('Mobile Privacy Settings clicked - navigating to /privacy');
+                      navigate('/privacy');
+                    }}
                     className="flex items-center gap-2 focus:bg-muted cursor-pointer"
                   >
                     <Settings className="h-4 w-4" aria-hidden="true" />
@@ -150,7 +161,10 @@ const Profile = () => {
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem 
-                    onClick={() => navigate('/faq')}
+                    onClick={() => {
+                      console.log('Mobile Help & FAQ clicked - navigating to /faq');
+                      navigate('/faq');
+                    }}
                     className="flex items-center gap-2 focus:bg-muted cursor-pointer"
                   >
                     Help & FAQ
@@ -176,7 +190,10 @@ const Profile = () => {
               {/* Profile Actions */}
               <div className="flex items-center gap-2" role="group" aria-label="Profile actions">
                 <Button 
-                  onClick={() => navigate('/profile/edit')}
+                  onClick={() => {
+                    console.log('Desktop Edit Profile button clicked - navigating to /profile/edit');
+                    navigate('/profile/edit');
+                  }}
                   className="focus:ring-2 focus:ring-primary focus:ring-offset-2 min-w-[110px]"
                   aria-label="Edit your profile information"
                 >
@@ -198,14 +215,20 @@ const Profile = () => {
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end" className="w-48">
                     <DropdownMenuItem 
-                      onClick={handleShareProfile}
+                      onClick={() => {
+                        console.log('Desktop Share Profile clicked');
+                        handleShareProfile();
+                      }}
                       className="flex items-center gap-2 focus:bg-muted cursor-pointer"
                     >
                       <Share2 className="h-4 w-4" aria-hidden="true" />
                       Share Profile
                     </DropdownMenuItem>
                     <DropdownMenuItem 
-                      onClick={() => navigate('/privacy')}
+                      onClick={() => {
+                        console.log('Desktop Privacy Settings clicked - navigating to /privacy');
+                        navigate('/privacy');
+                      }}
                       className="flex items-center gap-2 focus:bg-muted cursor-pointer"
                     >
                       <Settings className="h-4 w-4" aria-hidden="true" />
@@ -213,7 +236,10 @@ const Profile = () => {
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem 
-                      onClick={() => navigate('/faq')}
+                      onClick={() => {
+                        console.log('Desktop Help & FAQ clicked - navigating to /faq');
+                        navigate('/faq');
+                      }}
                       className="flex items-center gap-2 focus:bg-muted cursor-pointer"
                     >
                       Help & FAQ
