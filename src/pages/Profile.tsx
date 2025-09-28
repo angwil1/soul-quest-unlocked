@@ -433,14 +433,6 @@ const Profile = () => {
                   Find Matches
                 </Button>
                 
-                <Button 
-                  onClick={() => navigate('/auth')} 
-                  variant="outline" 
-                  className="w-full focus:ring-2 focus:ring-primary focus:ring-offset-2"
-                  aria-label="Join and start discovering matches"
-                >
-                  Join & Start Discovering
-                </Button>
               </CardContent>
             </Card>
           </section>
