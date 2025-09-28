@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Heart, Users, ArrowRight, ChevronDown } from 'lucide-react';
 import { useQuietStartProgress } from '@/hooks/useQuietStartProgress';
+import { useAuth } from '@/hooks/useAuth';
 import logoImage from "@/assets/logo-transparent-new.png";
 
 // Import original rotating hero images
@@ -27,6 +28,7 @@ const HeroSection = () => {
   const [currentHeroImageIndex, setCurrentHeroImageIndex] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
   const { claimedCount } = useQuietStartProgress();
+  const { user } = useAuth();
 
   // Original rotating background images effect
   useEffect(() => {
@@ -154,22 +156,24 @@ const HeroSection = () => {
             {/* Call to Action */}
             <div className="space-y-3 sm:space-y-4">
               <Button 
-                onClick={handleGetStarted}
+                onClick={user ? () => navigate('/matches') : handleGetStarted}
                 className="hero-cta-button w-full px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-medium bg-primary text-white hover:bg-primary/90"
                 size="lg"
               >
                 <Heart className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
-                Join
+                {user ? 'Find Matches' : 'Join'}
                 <ArrowRight className="h-4 w-4 sm:h-5 sm:w-5 ml-2" />
               </Button>
               
-              <Button 
-                variant="ghost" 
-                onClick={() => navigate('/auth')}
-                className="w-full text-xs sm:text-sm text-white/90 hover:text-white hover:bg-white/10 py-2 sm:py-3"
-              >
-                Already have an account? Log in
-              </Button>
+              {!user && (
+                <Button 
+                  variant="ghost" 
+                  onClick={() => navigate('/auth')}
+                  className="w-full text-xs sm:text-sm text-white/90 hover:text-white hover:bg-white/10 py-2 sm:py-3"
+                >
+                  Already have an account? Log in
+                </Button>
+              )}
             </div>
           </div>
         </div>
