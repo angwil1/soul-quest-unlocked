@@ -401,30 +401,20 @@ const Matches = () => {
       
       <main 
         id="main-content" 
-        className="max-w-4xl mx-auto px-4 py-8"
+        className="flex-1"
         role="main"
         aria-labelledby="matches-heading"
       >
-        {/* Header */}
-        <section className="mb-8">
-          <div>
-            <h1 id="matches-heading" className="text-3xl font-bold">Your Matches</h1>
-            <p className="text-muted-foreground">
-              Discover compatible people through AI-powered matching
-            </p>
-          </div>
-        </section>
-
-        <section className="mb-8">
-          <Card className="bg-card border">
-            <CardHeader className="pb-4">
-              <CardTitle className="text-lg">Find Your Perfect Match</CardTitle>
-              <CardDescription>
+        <div className="flex min-h-screen bg-background">
+          {/* Left Sidebar - Search Filters */}
+          <aside className="w-80 border-r border-border bg-card/50 p-6" role="complementary" aria-labelledby="search-filters-heading">
+            <div className="sticky top-6">
+              <h2 id="search-filters-heading" className="text-lg font-semibold mb-4">Find Your Match</h2>
+              <p className="text-sm text-muted-foreground mb-6">
                 Use your location and preferences to discover compatible people nearby
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="grid gap-4 md:grid-cols-5">
+              </p>
+              
+              <div className="space-y-4">
                 <div className="space-y-2">
                   <label htmlFor="state-select" className="text-sm font-medium">
                     State (optional)
@@ -443,6 +433,7 @@ const Matches = () => {
                     ))}
                   </select>
                 </div>
+                
                 <div className="space-y-2">
                   <label htmlFor="zip-code" className="text-sm font-medium">
                     Zip Code (optional if state selected)
@@ -462,6 +453,7 @@ const Matches = () => {
                     </p>
                   )}
                 </div>
+                
                 <div className="space-y-2">
                   <label htmlFor="gender-preference" className="text-sm font-medium">
                     I'm looking for
@@ -483,6 +475,7 @@ const Matches = () => {
                     <option value="travel-buddies">Travel buddies</option>
                   </select>
                 </div>
+                
                 <div className="space-y-2">
                   <label htmlFor="distance" className="text-sm font-medium">
                     Distance (miles)
@@ -500,6 +493,7 @@ const Matches = () => {
                     <option value="unlimited">Unlimited distance</option>
                   </select>
                 </div>
+                
                 <div className="space-y-2">
                   <label htmlFor="age-range" className="text-sm font-medium">
                     Age Range
@@ -517,18 +511,28 @@ const Matches = () => {
                     <option value="55+">55+ years</option>
                   </select>
                 </div>
+                
+                <div className="flex flex-col gap-2 mt-6">
+                  <Button className="w-full" onClick={handleSearch}>
+                    Search Matches
+                  </Button>
+                  <Button variant="outline" className="w-full" onClick={handleResetFilters}>
+                    Reset Filters
+                  </Button>
+                </div>
               </div>
-              <div className="flex gap-2 mt-4">
-                <Button className="flex-1" onClick={handleSearch}>
-                  Search Matches
-                </Button>
-                <Button variant="outline" onClick={handleResetFilters}>
-                  Reset Filters
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        </section>
+            </div>
+          </aside>
+
+          {/* Right Content Area - Match Results */}
+          <div className="flex-1 p-6">
+            {/* Header */}
+            <section className="mb-6">
+              <h1 id="matches-heading" className="text-3xl font-bold mb-2">Your Matches</h1>
+              <p className="text-muted-foreground">
+                Discover compatible people through AI-powered matching
+              </p>
+            </section>
 
         {/* Search Results Status */}
         {isSearchActive && (
@@ -775,6 +779,8 @@ const Matches = () => {
             </div>
           </div>
         </section>
+          </div>
+        </div>
       </main>
     </div>
   );
