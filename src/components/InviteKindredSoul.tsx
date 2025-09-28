@@ -10,7 +10,7 @@ export const InviteKindredSoul = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
-  const defaultMessage = "Hey, I found this emotionally intelligent dating platform. It's still forming, and I thought of you.";
+  const defaultMessage = "I found this quiet space for meaningful connections. Thought you might appreciate it too.";
 
   const handleInvite = async () => {
     if (!email.trim()) {
@@ -25,12 +25,12 @@ export const InviteKindredSoul = () => {
     setIsLoading(true);
     
     try {
-      // Here you would implement the actual invitation logic
-      // For now, we'll just show a success message
-      await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API call
+      // TODO: Implement actual email sending via Supabase Edge Function
+      // For now, we'll simulate the API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
       
       toast({
-        title: "Invitation sent",
+        title: "Quiet invite sent",
         description: `Your invitation has been sent to ${email}`,
       });
       
@@ -38,7 +38,7 @@ export const InviteKindredSoul = () => {
       setMessage('');
     } catch (error) {
       toast({
-        title: "Failed to send invitation",
+        title: "Failed to send quiet invite",
         description: "Please try again later.",
         variant: "destructive"
       });
@@ -51,16 +51,16 @@ export const InviteKindredSoul = () => {
     <Card className="border-primary/20 bg-gradient-to-br from-primary/5 to-background">
       <CardHeader>
         <CardTitle className="flex items-center gap-3 text-center">
-          <span className="text-2xl">💝</span>
-          Invite a Kindred Soul
+          <span className="text-2xl">💌</span>
+          Send a Quiet Invite
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
         <p className="text-muted-foreground text-center leading-relaxed">
-          Every story begins with a second heartbeat.
+          Share this quiet space with someone special.
         </p>
         <p className="text-muted-foreground text-center text-sm">
-          Invite someone whose journey to find their perfect match mirrors your own.
+          Send a gentle invitation to someone who values authentic connections.
         </p>
         
         <div className="space-y-3">
@@ -84,7 +84,7 @@ export const InviteKindredSoul = () => {
             disabled={isLoading}
             className="w-full bg-gradient-to-r from-primary to-secondary hover:opacity-90"
           >
-            {isLoading ? 'Sending...' : 'Send Invitation'}
+            {isLoading ? 'Sending...' : 'Send Quiet Invite'}
           </Button>
         </div>
       </CardContent>
