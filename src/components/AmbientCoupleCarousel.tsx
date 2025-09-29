@@ -26,6 +26,15 @@ interface CoupleImage {
 
 const ambientCoupleImages: CoupleImage[] = [
   {
+    src: coupleLgbtqMaleCultural,
+    srcDesktop: coupleLgbtqMaleCultural,
+    srcMobile: coupleHeroMobile2,
+    caption: "Real connection transcends the digital noise",
+    alt: "Modern couple finding genuine connection",
+    focusDesktop: 'center 0%',
+    focusMobile: 'center 22%'
+  },
+  {
     src: coupleLgbtqMaleDiverse,
     srcDesktop: coupleLgbtqMaleDiverse,
     srcMobile: coupleHeroMobileLgbtq1,
@@ -54,15 +63,6 @@ const ambientCoupleImages: CoupleImage[] = [
     alt: "Couple in an authentic moment of connection",
     focusDesktop: 'center 0%',
     focusMobile: 'center 18%'
-  },
-  {
-    src: coupleLgbtqMaleCultural,
-    srcDesktop: coupleLgbtqMaleCultural,
-    srcMobile: coupleHeroMobile2,
-    caption: "Real connection transcends the digital noise",
-    alt: "Modern couple finding genuine connection",
-    focusDesktop: 'center 0%',
-    focusMobile: 'center 22%'
   },
   {
     src: coupleHeroOptimized,
