@@ -1,15 +1,17 @@
 import { useState, useEffect } from 'react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import { Card } from '@/components/ui/card';
-import coupleHeroCoolTones from '@/assets/couple-hero-cool-tones.jpg';
-import coupleLgbtqHispanicRomantic from '@/assets/couple-hero-mobile-lgbtq-hispanic-romantic.jpg';
+import coupleHero1 from '@/assets/couple-hero-1.jpg';
+import coupleHero2 from '@/assets/couple-hero-2.jpg';
 import coupleAmbientClear from '@/assets/couple-ambient-clear.jpg';
+import coupleLgbtqAmbient from '@/assets/couple-lgbtq-ambient.jpg';
 import coupleLgbtqMaleCultural from '@/assets/couple-lgbtq-male-cultural.jpg';
 import coupleLgbtqMaleDiverse from '@/assets/couple-lgbtq-male-diverse.jpg';
 import coupleHeroOptimized from '@/assets/couple-hero-optimized.jpg';
 import coupleHeroMobile2 from '@/assets/couple-hero-mobile-2.jpg';
 import coupleHeroMobile3 from '@/assets/couple-hero-mobile-3.jpg';
 import coupleHeroMobileLgbtq1 from '@/assets/couple-hero-mobile-lgbtq-1.jpg';
+import coupleHeroMobileLgbtqHispanic from '@/assets/couple-hero-mobile-lgbtq-hispanic-romantic.jpg';
 
 interface CoupleImage {
   src: string;
@@ -24,11 +26,11 @@ interface CoupleImage {
 
 const ambientCoupleImages: CoupleImage[] = [
   {
-    src: coupleHeroCoolTones,
+    src: coupleHero1,
     caption: "American love - where dreams and hearts align",
     alt: "American couple sharing an intimate moment together",
-    focusDesktop: 'center 5%',
-    focusMobile: 'center 12%'
+    focusDesktop: 'center 0%',
+    focusMobile: 'center 20%'
   },
   {
     src: coupleLgbtqMaleCultural,
@@ -36,8 +38,8 @@ const ambientCoupleImages: CoupleImage[] = [
     srcMobile: coupleHeroMobile2,
     caption: "Cultural heritage meets modern love",
     alt: "Asian couple connecting deeply in natural light",
-    focusDesktop: 'center 8%',
-    focusMobile: 'center 15%'
+    focusDesktop: 'center 0%',
+    focusMobile: 'center 22%'
   },
   {
     src: coupleLgbtqMaleDiverse,
@@ -45,17 +47,15 @@ const ambientCoupleImages: CoupleImage[] = [
     srcMobile: coupleHeroMobileLgbtq1,
     caption: "Love transcends all boundaries and backgrounds",
     alt: "Indian couple embracing in soft, warm lighting",
-    focusDesktop: 'center 6%',
-    focusMobile: 'center 12%'
+    focusDesktop: 'center 0%',
+    focusMobile: 'center 18%'
   },
   {
-    src: coupleLgbtqHispanicRomantic,
-    srcDesktop: coupleLgbtqHispanicRomantic,
-    srcMobile: coupleLgbtqHispanicRomantic,
+    src: coupleHeroMobileLgbtqHispanic,
     caption: "Hispanic love - passion meets tenderness",
     alt: "Hispanic couple in an authentic moment of connection",
-    focusDesktop: 'center 12%',
-    focusMobile: 'center 15%'
+    focusDesktop: 'center 0%',
+    focusMobile: 'center 18%'
   },
   {
     src: coupleAmbientClear,
