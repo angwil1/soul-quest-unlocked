@@ -9,9 +9,8 @@ import logoImage from "@/assets/logo-transparent-new.png";
 
 // Import original rotating hero images
 import coupleHeroMobile1 from '@/assets/couple-hero-mobile-1.jpg';
-import coupleHeroMobile2 from '@/assets/couple-hero-mobile-2.jpg';
 import coupleHeroMobile3 from '@/assets/couple-hero-mobile-3.jpg';
-import coupleLgbtqMobile1 from '@/assets/couple-hero-mobile-lgbtq-1.jpg';
+import coupleLgbtqAmbient from '@/assets/couple-lgbtq-ambient.jpg';
 import coupleLgbtqHispanicRomantic from '@/assets/couple-hero-mobile-lgbtq-hispanic-romantic.jpg';
 import coupleHeroOptimized from '@/assets/couple-hero-optimized.jpg';
 
@@ -20,7 +19,7 @@ const heroImages = [
   coupleHeroMobile1,
   coupleHeroOptimized, 
   coupleHeroMobile3,
-  coupleLgbtqMobile1,
+  coupleLgbtqAmbient,
   coupleLgbtqHispanicRomantic
 ];
 
