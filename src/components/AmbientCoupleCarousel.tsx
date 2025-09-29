@@ -56,18 +56,20 @@ export const AmbientCoupleCarousel = () => {
   useEffect(() => {
     if (!api) return;
 
-    console.log('Carousel API initialized:', api);
-    console.log('Can scroll prev:', api.canScrollPrev());
-    console.log('Can scroll next:', api.canScrollNext());
-
     api.on('select', () => {
       setCurrent(api.selectedScrollSnap());
-      console.log('Current slide:', api.selectedScrollSnap());
     });
+
+    // Ensure carousel is properly initialized
+    const timer = setTimeout(() => {
+      api.reInit();
+    }, 100);
+
+    return () => clearTimeout(timer);
   }, [api]);
 
   return (
-    <div className="w-full max-w-4xl mx-auto px-4">
+    <div className="w-full max-w-6xl mx-auto px-4">
       <div className="text-center mb-8">
         <h3 className="text-2xl sm:text-3xl font-light text-foreground mb-4">
           Love in all its forms
@@ -77,48 +79,72 @@ export const AmbientCoupleCarousel = () => {
         </p>
       </div>
       
-      <Carousel setApi={setApi} className="w-full relative">
-        <CarouselContent className="-ml-2 md:-ml-4">
-          {ambientCoupleImages.map((image, index) => (
-            <CarouselItem key={index} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
-              <Card className="border-0 bg-transparent group cursor-pointer">
-                <div className="relative overflow-hidden rounded-2xl bg-muted/20">
-                   <img
-                     src={isDesktop ? (image.srcDesktop ?? image.src) : (image.srcMobile ?? image.src)}
-                     alt={image.alt}
-                     className="w-full h-48 xs:h-56 sm:h-64 md:h-96 lg:h-[34rem] xl:h-[40rem] object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                     loading="lazy"
-                      style={{ 
-                        aspectRatio: '4/3', 
-                        objectPosition: isDesktop 
-                          ? (image.focusDesktop ?? image.focus ?? 'center 0%') 
-                          : (image.focusMobile ?? image.focus ?? 'center 22%')
-                      }}
-                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <div className="absolute bottom-0 left-0 right-0 p-4 text-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                    <p className="text-sm font-light leading-relaxed">
-                      {image.caption}
-                    </p>
+      <div className="relative">
+        <Carousel 
+          setApi={setApi} 
+          className="w-full" 
+          opts={{
+            align: "start",
+            loop: true,
+            dragFree: true,
+          }}
+        >
+          <CarouselContent className="-ml-2 md:-ml-4">
+            {ambientCoupleImages.map((image, index) => (
+              <CarouselItem key={index} className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
+                <Card className="border-0 bg-transparent group cursor-pointer">
+                  <div className="relative overflow-hidden rounded-2xl bg-muted/20">
+                     <img
+                       src={image.src}
+                       alt={image.alt}
+                       className="w-full h-64 sm:h-72 md:h-80 lg:h-96 xl:h-[28rem] object-cover transition-transform duration-500 group-hover:scale-105"
+                       loading="lazy"
+                        style={{ 
+                          objectPosition: isDesktop 
+                            ? (image.focusDesktop ?? 'center center') 
+                            : (image.focusMobile ?? 'center center')
+                        }}
+                     />
                   </div>
-                </div>
-              </Card>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        <CarouselPrevious className="hidden sm:flex -left-8 lg:-left-12" />
-        <CarouselNext className="hidden sm:flex -right-8 lg:-right-12" />
-      </Carousel>
+                </Card>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          
+          {/* Desktop Navigation Arrows */}
+          <CarouselPrevious className="hidden md:flex -left-6 lg:-left-12 xl:-left-16 bg-background/80 backdrop-blur-sm border-border/50 hover:bg-background text-foreground hover:text-foreground" />
+          <CarouselNext className="hidden md:flex -right-6 lg:-right-12 xl:-right-16 bg-background/80 backdrop-blur-sm border-border/50 hover:bg-background text-foreground hover:text-foreground" />
+        </Carousel>
+      </div>
       
-      {/* Mobile dots indicator */}
-      <div className="flex justify-center mt-6 sm:hidden">
+      {/* Mobile Navigation Dots */}
+      <div className="flex justify-center mt-6 md:hidden">
         {ambientCoupleImages.map((_, index) => (
           <button
             key={index}
-            className={`w-2 h-2 rounded-full mx-1 transition-colors ${
-              index === current ? 'bg-primary' : 'bg-muted'
+            className={`w-2 h-2 rounded-full mx-1 transition-all duration-300 ${
+              index === current 
+                ? 'bg-primary w-6' 
+                : 'bg-muted-foreground/30 hover:bg-muted-foreground/50'
             }`}
             onClick={() => api?.scrollTo(index)}
+            aria-label={`Go to slide ${index + 1}`}
+          />
+        ))}
+      </div>
+
+      {/* Tablet Navigation Dots */}
+      <div className="hidden md:flex lg:hidden justify-center mt-6">
+        {ambientCoupleImages.map((_, index) => (
+          <button
+            key={index}
+            className={`w-3 h-3 rounded-full mx-1.5 transition-all duration-300 ${
+              index === current 
+                ? 'bg-primary' 
+                : 'bg-muted-foreground/30 hover:bg-muted-foreground/50'
+            }`}
+            onClick={() => api?.scrollTo(index)}
+            aria-label={`Go to slide ${index + 1}`}
           />
         ))}
       </div>
