@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import { Card } from '@/components/ui/card';
-import coupleHeroCoolTones from '@/assets/couple-hero-cool-tones.jpg';
-import coupleHeroOptimized from '@/assets/couple-hero-optimized.jpg';
 import coupleHeroMobile1 from '@/assets/couple-hero-mobile-1.jpg';
 import coupleHeroMobile3 from '@/assets/couple-hero-mobile-3.jpg';
 
@@ -19,20 +17,6 @@ interface CoupleImage {
 }
 
 const ambientCoupleImages: CoupleImage[] = [
-  {
-    src: coupleHeroCoolTones,
-    caption: "Timeless love, beautifully real",
-    alt: "Couple in cool tones sharing a natural moment",
-    focusDesktop: 'center 5%',
-    focusMobile: 'center 15%'
-  },
-  {
-    src: coupleHeroOptimized,
-    caption: "Close, present, connected",
-    alt: "Nose-touching couple in an intimate, real moment",
-    focusDesktop: 'center 0%',
-    focusMobile: 'center 0%'
-  },
   {
     src: coupleHeroMobile1,
     caption: "Everyday light, everyday love",
