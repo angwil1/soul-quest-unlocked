@@ -56,8 +56,13 @@ export const AmbientCoupleCarousel = () => {
   useEffect(() => {
     if (!api) return;
 
+    console.log('Carousel API initialized:', api);
+    console.log('Can scroll prev:', api.canScrollPrev());
+    console.log('Can scroll next:', api.canScrollNext());
+
     api.on('select', () => {
       setCurrent(api.selectedScrollSnap());
+      console.log('Current slide:', api.selectedScrollSnap());
     });
   }, [api]);
 
@@ -72,7 +77,7 @@ export const AmbientCoupleCarousel = () => {
         </p>
       </div>
       
-      <Carousel setApi={setApi} className="w-full">
+      <Carousel setApi={setApi} className="w-full relative">
         <CarouselContent className="-ml-2 md:-ml-4">
           {ambientCoupleImages.map((image, index) => (
             <CarouselItem key={index} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
@@ -101,8 +106,8 @@ export const AmbientCoupleCarousel = () => {
             </CarouselItem>
           ))}
         </CarouselContent>
-        <CarouselPrevious className="hidden sm:flex" />
-        <CarouselNext className="hidden sm:flex" />
+        <CarouselPrevious className="hidden sm:flex -left-8 lg:-left-12" />
+        <CarouselNext className="hidden sm:flex -right-8 lg:-right-12" />
       </Carousel>
       
       {/* Mobile dots indicator */}
