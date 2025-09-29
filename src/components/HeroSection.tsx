@@ -25,19 +25,19 @@ const heroImages = [
 
 // Per-image focal points (top bias) to keep heads visible
 const heroPositionsDesktop = [
-  'center 10%', // image 1
-  'center 8%',  // image 2
-  'center 12%', // image 3
+  'center 2%', // image 1
+  'center 0%',  // image 2
+  'center 2%', // image 3
   'center 4%',  // lgbtq 1
   'center 6%',  // lgbtq hispanic romantic
 ];
 
 const heroPositionsMobile = [
-  'center 18%', // image 1
-  'center 16%', // image 2
-  'center 20%', // image 3
+  'center 8%', // image 1
+  'center 6%', // image 2
+  'center 10%', // image 3
   'center 10%', // lgbtq 1
-  'center 14%', // lgbtq hispanic romantic
+  'center 12%', // lgbtq hispanic romantic
 ];
 
 const HeroSection = () => {
