@@ -14,6 +14,7 @@ ext {
     cordovaAndroidVersion = '10.1.1'
     kotlinVersion = '1.9.25'
     androidxAppCompatVersion = '1.6.1'
-    // Fix for Kotlin stdlib version conflicts
+    // Fix for Kotlin stdlib version conflicts - use unified version
     kotlinBomVersion = '1.9.25'
+    kotlinStdlibVersion = '1.9.25'
 }
