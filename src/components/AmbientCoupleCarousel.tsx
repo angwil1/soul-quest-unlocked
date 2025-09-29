@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import { Card } from '@/components/ui/card';
-import coupleHeroMobile1 from '@/assets/couple-hero-mobile-1.jpg';
 import coupleHeroMobile3 from '@/assets/couple-hero-mobile-3.jpg';
 import coupleIndianRomantic from '@/assets/couple-indian-romantic.jpg';
+import coupleBlackRomantic from '@/assets/couple-black-romantic.jpg';
 
 
 interface CoupleImage {
@@ -19,11 +19,11 @@ interface CoupleImage {
 
 const ambientCoupleImages: CoupleImage[] = [
   {
-    src: coupleHeroMobile1,
-    caption: "Everyday light, everyday love",
-    alt: "Couple in natural lighting, candid and warm",
-    focusDesktop: 'center 2%',
-    focusMobile: 'center 8%'
+    src: coupleBlackRomantic,
+    caption: "Pure connection, beautiful souls",
+    alt: "Beautiful Black couple sharing a romantic moment",
+    focusDesktop: 'center 0%',
+    focusMobile: 'center 0%'
   },
   {
     src: coupleHeroMobile3,
