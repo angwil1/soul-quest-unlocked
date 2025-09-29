@@ -4,11 +4,7 @@ const config: CapacitorConfig = {
   appId: 'com.aicompleteme.app',
   appName: 'AI Complete Me',
   webDir: 'dist',
-  // server: {
-  //   url: "https://65aad2fc-5b33-4030-8f73-3783f744043f.lovableproject.com?forceHideBadge=true",
-  //   cleartext: true,
-  //   androidScheme: 'https'
-  // },
+  // No server config - forces local bundle loading
   plugins: {
     SplashScreen: {
       launchShowDuration: 2000,
@@ -32,9 +28,9 @@ const config: CapacitorConfig = {
   android: {
     backgroundColor: '#8B5CF6',
     themeColor: '#8B5CF6',
-    versionCode: 2,
-    versionName: "2.0.0",
-    allowMixedContent: true,
+    versionCode: 3,
+    versionName: "3.0.0",
+    allowMixedContent: false,
     captureInput: true,
     webContentsDebuggingEnabled: false
   }
