@@ -1,13 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import { Card } from '@/components/ui/card';
-import coupleHero1 from '@/assets/couple-hero-1.jpg';
-import coupleHero2 from '@/assets/couple-hero-2.jpg';
-import coupleAmbientClear from '@/assets/couple-ambient-clear.jpg';
+import couplePoetic from '@/assets/couple-poetic-inclusive.jpg';
 import coupleLgbtqAmbient from '@/assets/couple-lgbtq-ambient.jpg';
-import coupleLgbtqMaleCultural from '@/assets/couple-lgbtq-male-cultural.jpg';
-import coupleLgbtqMaleDiverse from '@/assets/couple-lgbtq-male-diverse.jpg';
-import coupleHeroOptimized from '@/assets/couple-hero-optimized.jpg';
+import coupleDigital from '@/assets/couple-digital.jpg';
 import coupleHeroMobile2 from '@/assets/couple-hero-mobile-2.jpg';
 import coupleHeroMobile3 from '@/assets/couple-hero-mobile-3.jpg';
 import coupleHeroMobileLgbtq1 from '@/assets/couple-hero-mobile-lgbtq-1.jpg';
@@ -26,34 +22,34 @@ interface CoupleImage {
 
 const ambientCoupleImages: CoupleImage[] = [
   {
-    src: coupleAmbientClear,
-    caption: "In quiet moments, hearts speak loudest",
-    alt: "Couple sharing an intimate, peaceful moment together",
-    focusDesktop: 'center 0%',
-    focusMobile: 'center 22%'
+    src: couplePoetic,
+    caption: "Poetry in motion, love in every glance",
+    alt: "Artistic couple sharing a poetic moment together",
+    focusDesktop: 'center 2%',
+    focusMobile: 'center 15%'
   },
   {
-    src: coupleHero1,
-    caption: "Love finds us in the spaces between words",
-    alt: "Two people connecting deeply in natural light",
+    src: coupleLgbtqAmbient,
+    caption: "Love knows no boundaries, only hearts that understand",
+    alt: "LGBTQ couple in an ambient, loving embrace",
+    focusDesktop: 'center 0%',
+    focusMobile: 'center 18%'
+  },
+  {
+    src: coupleDigital,
+    caption: "Modern love, timeless connection",
+    alt: "Contemporary couple finding connection in the digital age",
+    focusDesktop: 'center 0%',
+    focusMobile: 'center 12%'
+  },
+  {
+    src: coupleHeroMobile2,
+    srcDesktop: coupleHeroMobile2,
+    srcMobile: coupleHeroMobile3,
+    caption: "When souls recognize their match across time",
+    alt: "Couple sharing an intimate moment of recognition",
     focusDesktop: 'center 0%',
     focusMobile: 'center 20%'
-  },
-  {
-    src: coupleHero2,
-    caption: "Where vulnerability meets trust, magic happens",
-    alt: "Couple in an authentic moment of connection",
-    focusDesktop: 'center 0%',
-    focusMobile: 'center 18%'
-  },
-  {
-    src: coupleHeroOptimized,
-    srcDesktop: coupleHeroOptimized,
-    srcMobile: coupleHeroMobile3,
-    caption: "Love is the poetry written in shared silences",
-    alt: "Artistic representation of inclusive love and connection",
-    focusDesktop: 'center 0%',
-    focusMobile: 'center 18%'
   }
 ];
 
