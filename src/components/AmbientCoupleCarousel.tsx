@@ -3,6 +3,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { Card } from '@/components/ui/card';
 import coupleHeroMobile1 from '@/assets/couple-hero-mobile-1.jpg';
 import coupleHeroMobile3 from '@/assets/couple-hero-mobile-3.jpg';
+import coupleIndianRomantic from '@/assets/couple-indian-romantic.jpg';
 
 
 interface CoupleImage {
@@ -30,6 +31,13 @@ const ambientCoupleImages: CoupleImage[] = [
     alt: "Candid couple smiling together",
     focusDesktop: 'center 0%',
     focusMobile: 'center 18%'
+  },
+  {
+    src: coupleIndianRomantic,
+    caption: "Love transcends all boundaries",
+    alt: "Beautiful Indian couple sharing a romantic moment",
+    focusDesktop: 'center 0%',
+    focusMobile: 'center 0%'
   }
 ];
 
