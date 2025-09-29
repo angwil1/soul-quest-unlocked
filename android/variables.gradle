@@ -12,9 +12,10 @@ ext {
     androidxJunitVersion = '1.2.1'
     androidxEspressoCoreVersion = '3.6.1'
     cordovaAndroidVersion = '10.1.1'
+    // Use latest Kotlin version to fix stdlib conflicts
     kotlinVersion = '1.9.25'
     androidxAppCompatVersion = '1.6.1'
-    // Fix for Kotlin stdlib version conflicts - use unified version
+    // Fix for Kotlin stdlib version conflicts - use unified BOM version
     kotlinBomVersion = '1.9.25'
     kotlinStdlibVersion = '1.9.25'
 }
