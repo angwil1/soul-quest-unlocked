@@ -102,7 +102,7 @@ export const AmbientCoupleCarousel = () => {
                    <img
                      src={image.src}
                      alt={image.alt}
-                     className="w-full h-48 xs:h-56 sm:h-64 md:h-96 lg:h-[34rem] xl:h-[40rem] object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                     className="w-full h-48 xs:h-56 sm:h-64 md:h-96 lg:h-[34rem] xl:h-[40rem] object-contain object-top transition-transform duration-500 group-hover:scale-105"
                      loading="lazy"
                       style={{ 
                         aspectRatio: '4/3', 
