@@ -13,11 +13,12 @@ import coupleHeroMobile2 from '@/assets/couple-hero-mobile-2.jpg';
 import coupleHeroMobile3 from '@/assets/couple-hero-mobile-3.jpg';
 import coupleLgbtqMobile1 from '@/assets/couple-hero-mobile-lgbtq-1.jpg';
 import coupleLgbtqHispanicRomantic from '@/assets/couple-hero-mobile-lgbtq-hispanic-romantic.jpg';
+import coupleHeroOptimized from '@/assets/couple-hero-optimized.jpg';
 
 // Original rotating background images
 const heroImages = [
   coupleHeroMobile1,
-  coupleHeroMobile2, 
+  coupleHeroOptimized, 
   coupleHeroMobile3,
   coupleLgbtqMobile1,
   coupleLgbtqHispanicRomantic
