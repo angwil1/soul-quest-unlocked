@@ -9,7 +9,7 @@ import logoImage from "@/assets/logo-transparent-new.png";
 
 // Import original rotating hero images
 import coupleHeroMobile1 from '@/assets/couple-hero-mobile-1.jpg';
-import coupleHeroMobile3 from '@/assets/couple-hero-mobile-3.jpg';
+import coupleHero2 from '@/assets/couple-hero-2.jpg';
 import coupleLgbtqAmbient from '@/assets/couple-lgbtq-ambient.jpg';
 import coupleLgbtqHispanicRomantic from '@/assets/couple-hero-mobile-lgbtq-hispanic-romantic.jpg';
 import coupleHeroOptimized from '@/assets/couple-hero-optimized.jpg';
@@ -18,7 +18,7 @@ import coupleHeroOptimized from '@/assets/couple-hero-optimized.jpg';
 const heroImages = [
   coupleHeroMobile1,
   coupleHeroOptimized, 
-  coupleHeroMobile3,
+  coupleHero2,
   coupleLgbtqAmbient,
   coupleLgbtqHispanicRomantic
 ];
@@ -27,7 +27,7 @@ const heroImages = [
 const heroPositionsDesktop = [
   'center 2%', // image 1
   'center 0%',  // image 2
-  'center 2%', // image 3
+  'center 0%', // image 3
   'center 4%',  // lgbtq 1
   'center 6%',  // lgbtq hispanic romantic
 ];
@@ -35,7 +35,7 @@ const heroPositionsDesktop = [
 const heroPositionsMobile = [
   'center 8%', // image 1
   'center 0%', // image 2 (nose-touching couple) – keep at absolute top
-  'center 10%', // image 3
+  'center 0%', // image 3
   'center 10%', // lgbtq 1
   'center 12%', // lgbtq hispanic romantic
 ];
