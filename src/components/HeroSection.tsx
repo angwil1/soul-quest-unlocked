@@ -74,7 +74,7 @@ const HeroSection = () => {
             <img
               src={image}
               alt="Loving couples celebrating authentic connections"
-              className="w-full h-full object-cover object-center"
+              className="w-full h-full object-cover object-top"
               style={{ 
                 minHeight: '100dvh'
               }}
