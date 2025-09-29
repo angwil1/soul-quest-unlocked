@@ -11,7 +11,7 @@ import logoImage from "@/assets/logo-transparent-new.png";
 import coupleHeroMobile1 from '@/assets/couple-hero-mobile-1.jpg';
 import coupleAmbientClear from '@/assets/couple-ambient-clear.jpg';
 import coupleLgbtqMobile1 from '@/assets/couple-hero-mobile-lgbtq-1.jpg';
-import coupleLgbtqHispanicRomantic from '@/assets/couple-hero-mobile-lgbtq-hispanic-romantic.jpg';
+import couplePoeticInclusive from '@/assets/couple-poetic-inclusive.jpg';
 import coupleHeroOptimized from '@/assets/couple-hero-optimized.jpg';
 
 // Original rotating background images
@@ -20,7 +20,7 @@ const heroImages = [
   coupleHeroOptimized, 
   coupleAmbientClear,
   coupleLgbtqMobile1,
-  coupleLgbtqHispanicRomantic
+  couplePoeticInclusive
 ];
 
 // Per-image focal points (top bias) to keep heads visible
@@ -29,7 +29,7 @@ const heroPositionsDesktop = [
   'center 0%',  // image 2
   'center 0%', // image 3
   'center 4%',  // lgbtq 1
-  'center 6%',  // lgbtq hispanic romantic
+  'center 2%',  // poetic inclusive
 ];
 
 const heroPositionsMobile = [
@@ -37,7 +37,7 @@ const heroPositionsMobile = [
   'center 0%', // image 2 (nose-touching couple) – keep at absolute top
   'center 0%', // image 3
   'center 10%', // lgbtq 1
-  'center 12%', // lgbtq hispanic romantic
+  'center 8%', // poetic inclusive
 ];
 
 const HeroSection = () => {
