@@ -13,12 +13,16 @@ import coupleHeroOptimized from '@/assets/couple-hero-optimized.jpg';
 import coupleAmbientClear from '@/assets/couple-ambient-clear.jpg';
 import coupleHeroMobileLgbtq1 from '@/assets/couple-hero-mobile-lgbtq-1.jpg';
 import coupleLgbtqHispanicRomantic from '@/assets/couple-hero-mobile-lgbtq-hispanic-romantic.jpg';
+import coupleYoungModern1 from '@/assets/couple-young-modern-1.jpg';
+import coupleYoungModern2 from '@/assets/couple-young-modern-2.jpg';
 
 // Original rotating background images
 const heroImages = [
   coupleHeroCoolTones,
   coupleHeroOptimized, 
+  coupleYoungModern1,
   coupleAmbientClear,
+  coupleYoungModern2,
   coupleHeroMobileLgbtq1,
   coupleLgbtqHispanicRomantic
 ];
@@ -27,7 +31,9 @@ const heroImages = [
 const heroPositionsDesktop = [
   'center 8%', // hero cool tones - adjusted for better head positioning
   'center 0%',  // optimized (nose-touching) - keep at top
+  'center 30%', // young modern 1 - centered on couple
   'center 5%', // ambient clear couple - centered positioning
+  'center 30%', // young modern 2 - centered on couple
   'center 6%',  // hero mobile lgbtq 1 - optimal head visibility
   'center 10%',  // hispanic romantic - adjusted for composition
 ];
@@ -35,7 +41,9 @@ const heroPositionsDesktop = [
 const heroPositionsMobile = [
   'center 15%', // hero cool tones - better mobile framing
   'center 0%', // optimized – keep at absolute top
+  'center 35%', // young modern 1 - mobile optimized
   'center 20%', // ambient clear couple - better mobile crop
+  'center 35%', // young modern 2 - mobile optimized
   'center 12%', // hero mobile lgbtq 1 - mobile optimized
   'center 18%', // hispanic romantic - mobile adjusted
 ];
