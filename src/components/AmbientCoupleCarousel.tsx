@@ -7,11 +7,19 @@ import coupleAmbientClear from '@/assets/couple-ambient-clear.jpg';
 import coupleLgbtqAmbient from '@/assets/couple-lgbtq-ambient.jpg';
 import coupleDigital from '@/assets/couple-digital.jpg';
 import couplePoetic from '@/assets/couple-poetic-inclusive.jpg';
+import coupleHeroMobile2 from '@/assets/couple-hero-mobile-2.jpg';
+import coupleHeroMobile3 from '@/assets/couple-hero-mobile-3.jpg';
+import coupleHeroMobileLgbtq1 from '@/assets/couple-hero-mobile-lgbtq-1.jpg';
+import coupleLgbtqMaleCultural from '@/assets/couple-lgbtq-male-cultural.jpg';
+import coupleLgbtqMaleDiverse from '@/assets/couple-lgbtq-male-diverse.jpg';
+import coupleHeroOptimized from '@/assets/couple-hero-optimized.jpg';
 
 interface CoupleImage {
   src: string;
   caption: string;
   alt: string;
+  srcDesktop?: string;
+  srcMobile?: string;
   focus?: string;
   focusDesktop?: string;
   focusMobile?: string;
@@ -33,10 +41,12 @@ const ambientCoupleImages: CoupleImage[] = [
     focusMobile: 'center 20%'
   },
   {
-    src: coupleLgbtqAmbient,
+    src: coupleLgbtqMaleDiverse,
+    srcDesktop: coupleLgbtqMaleDiverse,
+    srcMobile: coupleHeroMobileLgbtq1,
     caption: "Every love story is beautifully unique",
     alt: "LGBTQ+ couple embracing in soft, warm lighting",
-    focusDesktop: 'center 0%',  // keep heads fully in frame on desktop
+    focusDesktop: 'center 0%',
     focusMobile: 'center 18%'
   },
   {
@@ -47,18 +57,22 @@ const ambientCoupleImages: CoupleImage[] = [
     focusMobile: 'center 18%'
   },
   {
-    src: coupleDigital,
+    src: coupleLgbtqMaleCultural,
+    srcDesktop: coupleLgbtqMaleCultural,
+    srcMobile: coupleHeroMobile2,
     caption: "Real connection transcends the digital noise",
     alt: "Modern couple finding genuine connection",
     focusDesktop: 'center 0%',
-    focusMobile: 'center 25%'
+    focusMobile: 'center 22%'
   },
   {
-    src: couplePoetic,
+    src: coupleHeroOptimized,
+    srcDesktop: coupleHeroOptimized,
+    srcMobile: coupleHeroMobile3,
     caption: "Love is the poetry written in shared silences",
     alt: "Artistic representation of inclusive love and connection",
-    focusDesktop: 'center 0%',   // two women — keep heads fully in frame on desktop
-    focusMobile: 'center 20%'
+    focusDesktop: 'center 0%',
+    focusMobile: 'center 18%'
   }
 ];
 
@@ -100,9 +114,9 @@ export const AmbientCoupleCarousel = () => {
               <Card className="border-0 bg-transparent group cursor-pointer">
                 <div className="relative overflow-hidden rounded-2xl bg-muted/20">
                    <img
-                     src={image.src}
+                     src={isDesktop ? (image.srcDesktop ?? image.src) : (image.srcMobile ?? image.src)}
                      alt={image.alt}
-                     className="w-full h-48 xs:h-56 sm:h-64 md:h-96 lg:h-[34rem] xl:h-[40rem] object-contain object-top transition-transform duration-500 group-hover:scale-105"
+                     className="w-full h-48 xs:h-56 sm:h-64 md:h-96 lg:h-[34rem] xl:h-[40rem] object-cover object-top transition-transform duration-500 group-hover:scale-105"
                      loading="lazy"
                       style={{ 
                         aspectRatio: '4/3', 
