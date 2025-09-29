@@ -11,7 +11,7 @@ import coupleHeroOptimized from '@/assets/couple-hero-optimized.jpg';
 import coupleHeroMobile2 from '@/assets/couple-hero-mobile-2.jpg';
 import coupleHeroMobile3 from '@/assets/couple-hero-mobile-3.jpg';
 import coupleHeroMobileLgbtq1 from '@/assets/couple-hero-mobile-lgbtq-1.jpg';
-import coupleHeroMobileLgbtqHispanic from '@/assets/couple-hero-mobile-lgbtq-hispanic-romantic.jpg';
+
 
 interface CoupleImage {
   src: string;
@@ -26,41 +26,41 @@ interface CoupleImage {
 
 const ambientCoupleImages: CoupleImage[] = [
   {
-    src: coupleHero1,
-    caption: "American love - where dreams and hearts align",
-    alt: "American couple sharing an intimate moment together",
-    focusDesktop: 'center 0%',
-    focusMobile: 'center 20%'
-  },
-  {
-    src: coupleLgbtqMaleCultural,
-    srcDesktop: coupleLgbtqMaleCultural,
-    srcMobile: coupleHeroMobile2,
-    caption: "Real connection transcends all boundaries",
-    alt: "Male couple finding genuine connection",
+    src: coupleAmbientClear,
+    caption: "In quiet moments, hearts speak loudest",
+    alt: "Couple sharing an intimate, peaceful moment together",
     focusDesktop: 'center 0%',
     focusMobile: 'center 22%'
+  },
+  {
+    src: coupleHero1,
+    caption: "Love finds us in the spaces between words",
+    alt: "Two people connecting deeply in natural light",
+    focusDesktop: 'center 0%',
+    focusMobile: 'center 20%'
   },
   {
     src: coupleLgbtqMaleDiverse,
     srcDesktop: coupleLgbtqMaleDiverse,
     srcMobile: coupleHeroMobileLgbtq1,
-    caption: "Love transcends all boundaries and backgrounds",
-    alt: "Indian couple embracing in soft, warm lighting",
+    caption: "Every love story is beautifully unique",
+    alt: "LGBTQ+ couple embracing in soft, warm lighting",
     focusDesktop: 'center 0%',
     focusMobile: 'center 18%'
   },
   {
-    src: coupleHeroMobileLgbtqHispanic,
-    caption: "Hispanic love - passion meets tenderness",
-    alt: "Hispanic couple in an authentic moment of connection",
+    src: coupleHero2,
+    caption: "Where vulnerability meets trust, magic happens",
+    alt: "Couple in an authentic moment of connection",
     focusDesktop: 'center 0%',
     focusMobile: 'center 18%'
   },
   {
-    src: coupleAmbientClear,
-    caption: "Every culture brings its own beauty to love",
-    alt: "Diverse couple finding genuine connection",
+    src: coupleLgbtqMaleCultural,
+    srcDesktop: coupleLgbtqMaleCultural,
+    srcMobile: coupleHeroMobile2,
+    caption: "Real connection transcends the digital noise",
+    alt: "Modern couple finding genuine connection",
     focusDesktop: 'center 0%',
     focusMobile: 'center 22%'
   },
@@ -68,8 +68,8 @@ const ambientCoupleImages: CoupleImage[] = [
     src: coupleHeroOptimized,
     srcDesktop: coupleHeroOptimized,
     srcMobile: coupleHeroMobile3,
-    caption: "Universal love - one heart, many stories",
-    alt: "Multi-cultural representation of love and connection",
+    caption: "Love is the poetry written in shared silences",
+    alt: "Artistic representation of inclusive love and connection",
     focusDesktop: 'center 0%',
     focusMobile: 'center 18%'
   }
