@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import { Card } from '@/components/ui/card';
-import coupleAmbientClear from '@/assets/couple-ambient-clear.jpg';
-import coupleHero1 from '@/assets/couple-hero-1.jpg';
-import coupleHero2 from '@/assets/couple-hero-2.jpg';
-import coupleHeroCool2 from '@/assets/couple-hero-cool-2.jpg';
+import coupleHeroCoolTones from '@/assets/couple-hero-cool-tones.jpg';
+import coupleHeroOptimized from '@/assets/couple-hero-optimized.jpg';
+import coupleHeroMobile1 from '@/assets/couple-hero-mobile-1.jpg';
+import coupleHeroMobile3 from '@/assets/couple-hero-mobile-3.jpg';
 
 
 interface CoupleImage {
@@ -20,30 +20,30 @@ interface CoupleImage {
 
 const ambientCoupleImages: CoupleImage[] = [
   {
-    src: coupleAmbientClear,
-    caption: "In quiet moments, hearts speak loudest",
-    alt: "Couple sharing an intimate, peaceful moment together",
+    src: coupleHeroCoolTones,
+    caption: "Timeless love, beautifully real",
+    alt: "Couple in cool tones sharing a natural moment",
+    focusDesktop: 'center 5%',
+    focusMobile: 'center 15%'
+  },
+  {
+    src: coupleHeroOptimized,
+    caption: "Close, present, connected",
+    alt: "Nose-touching couple in an intimate, real moment",
     focusDesktop: 'center 0%',
-    focusMobile: 'center 22%'
+    focusMobile: 'center 0%'
   },
   {
-    src: coupleHero1,
-    caption: "Natural connection, authentic moments",
-    alt: "Two people connecting deeply in natural light",
-    focusDesktop: 'center 4%',
-    focusMobile: 'center 12%'
-  },
-  {
-    src: coupleHero2,
-    caption: "Where vulnerability meets trust",
-    alt: "Couple in an authentic moment of connection",
+    src: coupleHeroMobile1,
+    caption: "Everyday light, everyday love",
+    alt: "Couple in natural lighting, candid and warm",
     focusDesktop: 'center 2%',
-    focusMobile: 'center 10%'
+    focusMobile: 'center 8%'
   },
   {
-    src: coupleHeroCool2,
-    caption: "Love is the poetry written in shared silences",
-    alt: "Couple sharing a quiet, genuine moment",
+    src: coupleHeroMobile3,
+    caption: "Genuine smiles, genuine feelings",
+    alt: "Candid couple smiling together",
     focusDesktop: 'center 0%',
     focusMobile: 'center 18%'
   }
