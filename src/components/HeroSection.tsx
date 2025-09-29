@@ -10,33 +10,33 @@ import logoImage from "@/assets/logo-transparent-new.png";
 // Import diverse couple images
 import coupleHeroCoolTones from '@/assets/couple-hero-cool-tones.jpg';
 import coupleHeroOptimized from '@/assets/couple-hero-optimized.jpg';
-import coupleLgbtqMaleCultural from '@/assets/couple-lgbtq-male-cultural.jpg';
-import coupleLgbtqMaleDiverse from '@/assets/couple-lgbtq-male-diverse.jpg';
+import coupleHero1 from '@/assets/couple-hero-1.jpg';
+import coupleHero2 from '@/assets/couple-hero-2.jpg';
 import coupleLgbtqHispanicRomantic from '@/assets/couple-hero-mobile-lgbtq-hispanic-romantic.jpg';
 
 // Original rotating background images
 const heroImages = [
   coupleHeroCoolTones,
   coupleHeroOptimized, 
-  coupleLgbtqMaleCultural,
-  coupleLgbtqMaleDiverse,
+  coupleHero1,
+  coupleHero2,
   coupleLgbtqHispanicRomantic
 ];
 
 // Per-image focal points (top bias) to keep heads visible
 const heroPositionsDesktop = [
-  'center 5%', // hero cool tones (American)
+  'center 5%', // hero cool tones
   'center 0%',  // optimized (nose-touching)
-  'center 8%', // lgbtq male cultural (Chinese)
-  'center 6%',  // lgbtq male diverse (Indian)
+  'center 4%', // couple hero 1
+  'center 2%',  // couple hero 2
   'center 12%',  // hispanic romantic
 ];
 
 const heroPositionsMobile = [
-  'center 12%', // hero cool tones (American)
+  'center 12%', // hero cool tones
   'center 0%', // optimized – keep at absolute top
-  'center 15%', // lgbtq male cultural (Chinese)
-  'center 12%', // lgbtq male diverse (Indian)
+  'center 10%', // couple hero 1
+  'center 8%', // couple hero 2
   'center 15%', // hispanic romantic
 ];
 
