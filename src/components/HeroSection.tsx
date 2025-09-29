@@ -25,19 +25,19 @@ const heroImages = [
 
 // Per-image focal points (top bias) to keep heads visible
 const heroPositionsDesktop = [
-  'center 0%', // hero cool tones
+  'center 5%', // hero cool tones
   'center 0%',  // image 2
-  'center 0%', // image 3
+  'center 10%', // ambient clear
   'center 4%',  // lgbtq 1
-  'center 0%',  // hero cool 2
+  'center 8%',  // hero cool 2
 ];
 
 const heroPositionsMobile = [
-  'center 0%', // hero cool tones
+  'center 12%', // hero cool tones
   'center 0%', // image 2 (nose-touching couple) – keep at absolute top
-  'center 0%', // image 3
+  'center 15%', // ambient clear
   'center 10%', // lgbtq 1
-  'center 0%', // hero cool 2
+  'center 8%', // hero cool 2
 ];
 
 const HeroSection = () => {
