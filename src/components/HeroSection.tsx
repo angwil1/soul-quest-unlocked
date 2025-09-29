@@ -23,12 +23,30 @@ const heroImages = [
   coupleLgbtqHispanicRomantic
 ];
 
+// Per-image focal points (top bias) to keep heads visible
+const heroPositionsDesktop = [
+  'center 10%', // image 1
+  'center 8%',  // image 2
+  'center 12%', // image 3
+  'center 4%',  // lgbtq 1
+  'center 6%',  // lgbtq hispanic romantic
+];
+
+const heroPositionsMobile = [
+  'center 18%', // image 1
+  'center 16%', // image 2
+  'center 20%', // image 3
+  'center 10%', // lgbtq 1
+  'center 14%', // lgbtq hispanic romantic
+];
+
 const HeroSection = () => {
   const navigate = useNavigate();
   const [currentHeroImageIndex, setCurrentHeroImageIndex] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
   const { claimedCount } = useQuietStartProgress();
   const { user } = useAuth();
+  const [isDesktop, setIsDesktop] = useState(false);
 
   // Original rotating background images effect
   useEffect(() => {
@@ -41,11 +59,19 @@ const HeroSection = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Loading animation
-  useEffect(() => {
-    const timer = setTimeout(() => setIsLoaded(true), 100);
-    return () => clearTimeout(timer);
-  }, []);
+// Loading animation
+useEffect(() => {
+  const timer = setTimeout(() => setIsLoaded(true), 100);
+  return () => clearTimeout(timer);
+}, []);
+
+// Track desktop vs mobile to tweak focal points
+useEffect(() => {
+  const update = () => setIsDesktop(window.innerWidth >= 1024);
+  update();
+  window.addEventListener('resize', update);
+  return () => window.removeEventListener('resize', update);
+}, []);
 
   const handleGetStarted = () => {
     navigate('/quick-start');
@@ -74,9 +100,10 @@ const HeroSection = () => {
             <img
               src={image}
               alt="Loving couples celebrating authentic connections"
-              className="w-full h-full object-cover object-top"
+              className="w-full h-full object-cover"
               style={{ 
-                minHeight: '100dvh'
+                minHeight: '100dvh',
+                objectPosition: (isDesktop ? heroPositionsDesktop[index] : heroPositionsMobile[index]) ?? 'center 10%'
               }}
               loading={index === 0 ? "eager" : "lazy"}
             />
