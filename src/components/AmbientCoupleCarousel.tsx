@@ -4,6 +4,8 @@ import { Card } from '@/components/ui/card';
 import coupleIndianRomantic from '@/assets/couple-indian-romantic.jpg';
 import coupleBlackRomantic from '@/assets/couple-black-romantic.jpg';
 import coupleWhiteNatural from '@/assets/couple-white-natural.jpg';
+import coupleYoungModern1 from '@/assets/couple-young-modern-1.jpg';
+import coupleYoungModern2 from '@/assets/couple-young-modern-2.jpg';
 
 
 interface CoupleImage {
@@ -26,11 +28,25 @@ const ambientCoupleImages: CoupleImage[] = [
     focusMobile: 'center 0%'
   },
   {
+    src: coupleYoungModern1,
+    caption: "Young love, endless possibilities",
+    alt: "Beautiful young couple sharing a joyful moment",
+    focusDesktop: 'center 30%',
+    focusMobile: 'center 30%'
+  },
+  {
     src: coupleWhiteNatural,
     caption: "Natural love, timeless moments",
     alt: "Beautiful white couple in natural romantic moment",
     focusDesktop: 'center 0%',
     focusMobile: 'center 0%'
+  },
+  {
+    src: coupleYoungModern2,
+    caption: "Modern romance, authentic connection",
+    alt: "Beautiful young diverse couple in a candid moment",
+    focusDesktop: 'center 30%',
+    focusMobile: 'center 30%'
   },
   {
     src: coupleIndianRomantic,
