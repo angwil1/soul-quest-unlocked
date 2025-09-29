@@ -35,15 +35,6 @@ const ambientCoupleImages: CoupleImage[] = [
     focusMobile: 'center 22%'
   },
   {
-    src: coupleLgbtqMaleDiverse,
-    srcDesktop: coupleLgbtqMaleDiverse,
-    srcMobile: coupleHeroMobileLgbtq1,
-    caption: "Every love story is beautifully unique",
-    alt: "LGBTQ+ couple embracing in soft, warm lighting",
-    focusDesktop: 'center 0%',
-    focusMobile: 'center 18%'
-  },
-  {
     src: coupleAmbientClear,
     caption: "In quiet moments, hearts speak loudest",
     alt: "Couple sharing an intimate, peaceful moment together",
