@@ -7,37 +7,37 @@ import { useQuietStartProgress } from '@/hooks/useQuietStartProgress';
 import { useAuth } from '@/hooks/useAuth';
 import logoImage from "@/assets/logo-transparent-new.png";
 
-// Import original rotating hero images
+// Import diverse couple images
 import coupleHeroCoolTones from '@/assets/couple-hero-cool-tones.jpg';
-import coupleAmbientClear from '@/assets/couple-ambient-clear.jpg';
-import coupleLgbtqMobile1 from '@/assets/couple-hero-mobile-lgbtq-1.jpg';
-import coupleHeroCool2 from '@/assets/couple-hero-cool-2.jpg';
 import coupleHeroOptimized from '@/assets/couple-hero-optimized.jpg';
+import coupleLgbtqMaleCultural from '@/assets/couple-lgbtq-male-cultural.jpg';
+import coupleLgbtqMaleDiverse from '@/assets/couple-lgbtq-male-diverse.jpg';
+import coupleLgbtqHispanicRomantic from '@/assets/couple-hero-mobile-lgbtq-hispanic-romantic.jpg';
 
 // Original rotating background images
 const heroImages = [
   coupleHeroCoolTones,
   coupleHeroOptimized, 
-  coupleAmbientClear,
-  coupleLgbtqMobile1,
-  coupleHeroCool2
+  coupleLgbtqMaleCultural,
+  coupleLgbtqMaleDiverse,
+  coupleLgbtqHispanicRomantic
 ];
 
 // Per-image focal points (top bias) to keep heads visible
 const heroPositionsDesktop = [
-  'center 5%', // hero cool tones
-  'center 0%',  // image 2
-  'center 10%', // ambient clear
-  'center 4%',  // lgbtq 1
-  'center 8%',  // hero cool 2
+  'center 5%', // hero cool tones (American)
+  'center 0%',  // optimized (nose-touching)
+  'center 8%', // lgbtq male cultural (Chinese)
+  'center 6%',  // lgbtq male diverse (Indian)
+  'center 12%',  // hispanic romantic
 ];
 
 const heroPositionsMobile = [
-  'center 12%', // hero cool tones
-  'center 0%', // image 2 (nose-touching couple) – keep at absolute top
-  'center 15%', // ambient clear
-  'center 10%', // lgbtq 1
-  'center 8%', // hero cool 2
+  'center 12%', // hero cool tones (American)
+  'center 0%', // optimized – keep at absolute top
+  'center 15%', // lgbtq male cultural (Chinese)
+  'center 12%', // lgbtq male diverse (Indian)
+  'center 15%', // hispanic romantic
 ];
 
 const HeroSection = () => {
