@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import { Card } from '@/components/ui/card';
 import coupleIndianRomantic from '@/assets/couple-indian-romantic.jpg';
-import coupleBlackRomantic from '@/assets/couple-black-romantic.jpg';
 import coupleWhiteNatural from '@/assets/couple-white-natural.jpg';
 import coupleYoungJoyful1 from '@/assets/couple-young-joyful-1.jpg';
 import coupleYoungJoyful2 from '@/assets/couple-young-joyful-2.jpg';
+import coupleYoungBlonde from '@/assets/couple-young-blonde.jpg';
 
 
 interface CoupleImage {
@@ -21,11 +21,11 @@ interface CoupleImage {
 
 const ambientCoupleImages: CoupleImage[] = [
   {
-    src: coupleBlackRomantic,
-    caption: "Pure connection, beautiful souls",
-    alt: "Beautiful Black couple sharing a romantic moment",
-    focusDesktop: 'center 0%',
-    focusMobile: 'center 0%'
+    src: coupleYoungBlonde,
+    caption: "Young love, golden moments",
+    alt: "Beautiful young blonde couple sharing a romantic moment",
+    focusDesktop: 'center 30%',
+    focusMobile: 'center 30%'
   },
   {
     src: coupleYoungJoyful1,
