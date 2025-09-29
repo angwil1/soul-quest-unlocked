@@ -8,7 +8,7 @@ import { useAuth } from '@/hooks/useAuth';
 import logoImage from "@/assets/logo-transparent-new.png";
 
 // Import original rotating hero images
-import coupleHeroMobile1 from '@/assets/couple-hero-mobile-1.jpg';
+import coupleHeroCoolTones from '@/assets/couple-hero-cool-tones.jpg';
 import coupleAmbientClear from '@/assets/couple-ambient-clear.jpg';
 import coupleLgbtqMobile1 from '@/assets/couple-hero-mobile-lgbtq-1.jpg';
 import coupleHeroCool2 from '@/assets/couple-hero-cool-2.jpg';
@@ -16,7 +16,7 @@ import coupleHeroOptimized from '@/assets/couple-hero-optimized.jpg';
 
 // Original rotating background images
 const heroImages = [
-  coupleHeroMobile1,
+  coupleHeroCoolTones,
   coupleHeroOptimized, 
   coupleAmbientClear,
   coupleLgbtqMobile1,
@@ -25,7 +25,7 @@ const heroImages = [
 
 // Per-image focal points (top bias) to keep heads visible
 const heroPositionsDesktop = [
-  'center 2%', // image 1
+  'center 0%', // hero cool tones
   'center 0%',  // image 2
   'center 0%', // image 3
   'center 4%',  // lgbtq 1
@@ -33,7 +33,7 @@ const heroPositionsDesktop = [
 ];
 
 const heroPositionsMobile = [
-  'center 8%', // image 1
+  'center 0%', // hero cool tones
   'center 0%', // image 2 (nose-touching couple) – keep at absolute top
   'center 0%', // image 3
   'center 10%', // lgbtq 1
