@@ -9,6 +9,8 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 8080,
   },
+  // Use relative base in production so assets load correctly in Capacitor WebView
+  base: mode === 'production' ? './' : '/',
   plugins: [
     react(),
     mode === 'development' && componentTagger(),
