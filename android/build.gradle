@@ -24,16 +24,26 @@ allprojects {
         mavenCentral()
     }
     
-    // Force all Kotlin dependencies to use the same version
+    // Force all Kotlin dependencies to use the same version and exclude conflicting JDK modules
     configurations.all {
         resolutionStrategy.eachDependency { DependencyResolveDetails details ->
             if (details.requested.group == 'org.jetbrains.kotlin') {
                 // Force all Kotlin dependencies to use the same version
                 if (details.requested.name.startsWith('kotlin-stdlib')) {
-                    details.useVersion rootProject.ext.kotlinStdlibVersion
+                    // For Kotlin 1.9+, use only kotlin-stdlib (jdk7/jdk8 are built-in)
+                    if (details.requested.name == 'kotlin-stdlib-jdk7' || 
+                        details.requested.name == 'kotlin-stdlib-jdk8') {
+                        details.useTarget group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: rootProject.ext.kotlinStdlibVersion
+                    } else {
+                        details.useVersion rootProject.ext.kotlinStdlibVersion
+                    }
                 }
             }
         }
+        
+        // Exclude problematic duplicate modules entirely
+        exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jdk7'
+        exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jdk8'
     }
 }
 
