@@ -10,7 +10,7 @@ import logoImage from "@/assets/logo-transparent-new.png";
 // Import diverse couple images
 import coupleHeroCoolTones from '@/assets/couple-hero-cool-tones.jpg';
 import coupleHeroOptimized from '@/assets/couple-hero-optimized.jpg';
-import coupleHero1 from '@/assets/couple-hero-1.jpg';
+import coupleAmbientClear from '@/assets/couple-ambient-clear.jpg';
 import coupleHero2 from '@/assets/couple-hero-2.jpg';
 import coupleLgbtqHispanicRomantic from '@/assets/couple-hero-mobile-lgbtq-hispanic-romantic.jpg';
 
@@ -18,7 +18,7 @@ import coupleLgbtqHispanicRomantic from '@/assets/couple-hero-mobile-lgbtq-hispa
 const heroImages = [
   coupleHeroCoolTones,
   coupleHeroOptimized, 
-  coupleHero1,
+  coupleAmbientClear,
   coupleHero2,
   coupleLgbtqHispanicRomantic
 ];
@@ -27,7 +27,7 @@ const heroImages = [
 const heroPositionsDesktop = [
   'center 5%', // hero cool tones
   'center 0%',  // optimized (nose-touching)
-  'center 4%', // couple hero 1
+  'center 0%', // ambient clear couple
   'center 2%',  // couple hero 2
   'center 12%',  // hispanic romantic
 ];
@@ -35,7 +35,7 @@ const heroPositionsDesktop = [
 const heroPositionsMobile = [
   'center 12%', // hero cool tones
   'center 0%', // optimized – keep at absolute top
-  'center 10%', // couple hero 1
+  'center 22%', // ambient clear couple
   'center 8%', // couple hero 2
   'center 15%', // hispanic romantic
 ];
