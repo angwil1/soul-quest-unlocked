@@ -38,6 +38,14 @@ repositories {
     }
 }
 
+// Exclude legacy Kotlin JDK7/JDK8 stdlib variants at module level to prevent duplicate classes
+configurations {
+    all {
+        exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jdk7'
+        exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jdk8'
+    }
+}
+
 dependencies {
     // Fix Kotlin dependency conflicts by using BOM
     implementation platform("org.jetbrains.kotlin:kotlin-bom:${rootProject.ext.kotlinBomVersion}")
