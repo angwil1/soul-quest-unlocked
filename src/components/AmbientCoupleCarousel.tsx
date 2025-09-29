@@ -33,11 +33,13 @@ const ambientCoupleImages: CoupleImage[] = [
     focusMobile: 'center 20%'
   },
   {
-    src: coupleHero2,
-    caption: "Where vulnerability meets trust, magic happens",
-    alt: "Couple connecting deeply in natural light",
+    src: coupleLgbtqMaleCultural,
+    srcDesktop: coupleLgbtqMaleCultural,
+    srcMobile: coupleHeroMobile2,
+    caption: "Real connection transcends all boundaries",
+    alt: "Male couple finding genuine connection",
     focusDesktop: 'center 0%',
-    focusMobile: 'center 18%'
+    focusMobile: 'center 22%'
   },
   {
     src: coupleLgbtqMaleDiverse,
