@@ -3,7 +3,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { Card } from '@/components/ui/card';
 import coupleIndianRomantic from '@/assets/couple-indian-romantic.jpg';
 import coupleBlackRomantic from '@/assets/couple-black-romantic.jpg';
-import coupleWhiteSexy from '@/assets/couple-white-sexy.jpg';
+import coupleWhiteNatural from '@/assets/couple-white-natural.jpg';
 
 
 interface CoupleImage {
@@ -26,9 +26,9 @@ const ambientCoupleImages: CoupleImage[] = [
     focusMobile: 'center 0%'
   },
   {
-    src: coupleWhiteSexy,
-    caption: "Passion ignites connection",
-    alt: "Attractive white couple in intimate embrace",
+    src: coupleWhiteNatural,
+    caption: "Natural love, timeless moments",
+    alt: "Beautiful white couple in natural romantic moment",
     focusDesktop: 'center 0%',
     focusMobile: 'center 0%'
   },
