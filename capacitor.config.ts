@@ -32,7 +32,7 @@ const config: CapacitorConfig = {
     versionName: "3.0.0",
     allowMixedContent: false,
     captureInput: true,
-    webContentsDebuggingEnabled: false
+    webContentsDebuggingEnabled: true
   }
 };
 
