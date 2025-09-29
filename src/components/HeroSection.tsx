@@ -23,21 +23,21 @@ const heroImages = [
   coupleLgbtqHispanicRomantic
 ];
 
-// Per-image focal points (top bias) to keep heads visible
+// Per-image focal points optimized for both desktop and mobile
 const heroPositionsDesktop = [
-  'center 5%', // hero cool tones
-  'center 0%',  // optimized (nose-touching)
-  'center 0%', // ambient clear couple
-  'center 4%',  // hero mobile lgbtq 1
-  'center 12%',  // hispanic romantic
+  'center 8%', // hero cool tones - adjusted for better head positioning
+  'center 0%',  // optimized (nose-touching) - keep at top
+  'center 5%', // ambient clear couple - centered positioning
+  'center 6%',  // hero mobile lgbtq 1 - optimal head visibility
+  'center 10%',  // hispanic romantic - adjusted for composition
 ];
 
 const heroPositionsMobile = [
-  'center 12%', // hero cool tones
+  'center 15%', // hero cool tones - better mobile framing
   'center 0%', // optimized – keep at absolute top
-  'center 22%', // ambient clear couple
-  'center 10%', // hero mobile lgbtq 1
-  'center 15%', // hispanic romantic
+  'center 20%', // ambient clear couple - better mobile crop
+  'center 12%', // hero mobile lgbtq 1 - mobile optimized
+  'center 18%', // hispanic romantic - mobile adjusted
 ];
 
 const HeroSection = () => {
